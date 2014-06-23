@@ -1,0 +1,10 @@
+<line class="x-axis-line" {{bind-attr x1=xAxisLine.x1 y1=xAxisLine.y1 x2=xAxisLine.x2 y2=xAxisLine.y2 }}> </line>
+
+
+{{#each tick in ticks}}
+  <g class="tick">
+  	{{view 'graph-tick-label' tagName="text" template=template context=tick x=tick.x y=tick.labely}}
+    <line {{bind-attr x1=tick.x y1=tick.y1 x2=tick.x y2=tick.y2}}>
+    </line>
+  </g>
+{{/each}}

@@ -1,0 +1,27 @@
+<rect x=0 y=0 class="background" {{bind-attr width=width height=height}}></rect>
+
+{{#if graph.hasRendered}}
+  {{#if graph.hasData}}
+    {{#if graph.showLanes}}
+      <g class="grid-lanes">
+        {{#each lane in gridLanes}}
+          <rect class="grid-lane" {{bind-attr x=lane.x y=lane.y width=width height=lane.height }}></rect>
+        {{/each}}
+      </g>
+
+      {{#if graph.showXAxis}}
+        <g class="x-ticks">
+          {{#each tick in graph.xAxis.ticks}}
+            <line class="x-tick" {{bind-attr x1=tick.x y1="0" x2=tick.x y2=height}}></line>
+          {{/each}}
+        </g>
+      {{/if}}
+    {{/if}}
+  {{/if}}
+
+  {{#unless graph.hasData}}
+    <text x=0 y=0>No data</text>
+  {{/unless}}
+{{/if}}
+
+{{yield}}

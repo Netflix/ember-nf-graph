@@ -1,0 +1,12 @@
+<svg class="graph-container" {{bind-attr width=width height=height}}>
+  <rect x=0 y=0 class="background" {{bind-attr width=width height=height}}></rect>
+  {{yield}}
+
+
+</svg>
+
+{{#if debug}}
+<div style="position:relative">
+	<pre style="position:absolute; z-index:1000">{{debugInfo}}</pre>
+</div>
+{{/if}}
