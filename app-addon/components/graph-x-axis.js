@@ -3,7 +3,7 @@ import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
 
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
-  templateName: 'ember-cli-ember-dvc/components/graph-x-axis',
+  // templateName: 'ember-cli-ember-dvc/components/graph-x-axis',
 
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],

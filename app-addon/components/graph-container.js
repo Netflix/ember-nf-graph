@@ -10,7 +10,7 @@ var SCALE_TYPES = {
 
 export default Ember.Component.extend({
   tagName: 'div',
-  templateName: 'ember-cli-ember-dvc/components/graph-container',
+  // templateName: 'ember-cli-ember-dvc/components/graph-container',
   
   isGraph: true,
   hasRendered: false,

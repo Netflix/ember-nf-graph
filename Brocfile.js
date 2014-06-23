@@ -3,21 +3,20 @@
 
 var mergeTrees = require('broccoli-merge-trees');
 
-var appTree    = mergeTrees(['app', 'app-addon'], { overwrite: true });
+var appTree    = mergeTrees(['app-addon', 'app'], { overwrite: true });
 var vendorTree = mergeTrees(['vendor', 'vendor-addon']);
-
 
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 
 var app = new EmberApp({
 	trees: {
 		vendor: vendorTree,
-		app: appTree
+		app: appTree,
+		styles: 'app-addon/styles'
 	}
 });
 
 app.import('vendor/d3/d3.js');
-
 
 
 // Use `app.import` to add additional libraries to the generated

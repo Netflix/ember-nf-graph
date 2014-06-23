@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
 	tagName: 'g',
-  templateName: 'ember-cli-ember-dvc/components/graph-right-tick',
+  // templateName: 'ember-cli-ember-dvc/components/graph-right-tick',
 	
 	transition: 500,
 

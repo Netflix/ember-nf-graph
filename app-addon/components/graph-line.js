@@ -10,7 +10,7 @@ import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-wit
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
   DataPositionUtils, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
   tagName: 'g',
-  templateName: 'ember-cli-ember-dvc/components/graph-line',
+  // templateName: 'ember-cli-ember-dvc/components/graph-line',
 
   interpolator: 'linear',
   classNames: ['graph-line'],

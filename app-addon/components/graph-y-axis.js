@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'g',
-  templateName: 'ember-cli-ember-dvc/components/graph-y-axis',
+  // templateName: 'ember-cli-ember-dvc/components/graph-y-axis',
 
   attributeBindings: ['transform'],
 

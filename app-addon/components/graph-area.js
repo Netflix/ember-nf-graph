@@ -11,7 +11,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   Selectable, AreaUtils, GraphicWithTrackingDot, DataPositionUtils, {    
 
     tagName: 'g',
-    templateName: 'ember-cli-ember-dvc/components/graph-area',
+    // templateName: 'ember-cli-ember-dvc/components/graph-area',
     
     classNameBindings: [':graph-area', 'isSelected:selected', 'selectable'],
 
