@@ -1,0 +1,10 @@
+app/
+vendor/
+tests/
+public/
+config/
+.ember-cli
+.gitignore
+.jshintrc
+Brocfile.js
+testem.json
