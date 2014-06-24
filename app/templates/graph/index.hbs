@@ -13,3 +13,21 @@
 		{{graph-line data=lineData}}
 	{{/graph-content}}
 {{/graph-container}}
+
+<pre>
+
+\{{#graph-container width="500" height="300"}}
+	\{{#graph-x-axis}}
+		\{{value}}
+	\{{/graph-x-axis}}
+
+	\{{#graph-y-axis}}
+		\{{value}}
+	\{{/graph-y-axis}}
+
+	\{{#graph-content}}
+		\{{graph-line data=lineData}}
+	\{{/graph-content}}
+\{{/graph-container}}
+
+</pre>

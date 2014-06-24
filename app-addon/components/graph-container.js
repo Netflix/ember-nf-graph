@@ -18,7 +18,7 @@ export default Ember.Component.extend({
   width: 300,
   height: 100,
 
-  paddingTop: 5,
+  paddingTop: 0,
   paddingLeft: 0,
   paddingRight: 0,
   paddingBottom: 0,
