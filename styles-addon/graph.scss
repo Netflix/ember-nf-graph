@@ -1,0 +1,256 @@
+/* color palette - Visual Design Guidelines, page 40  */
+/* https://www.dropbox.com/sh/y07t0dtnv0np7tt/yBzMfmBJzq/NFLX_03_VisualDesignGuidelines_LATEST.pdf */
+/* variables are color names for design reference
+/* primary */
+$white:        #ffffff;
+$pale-blue:    #eef9ff;
+$light-gray:   #d3dbdd;
+$pale-gray:    #f5f6f7;
+$dark-gray:    #3e3e3e;
+$gray:         #999999;
+$light-blue:   #6baed6;
+$blue:         #344da1;
+$light-blue-rgba: rgba(107, 174, 214, 0);
+$white-rgba:      rgba(255, 255, 255, 0);
+
+
+/* secondary */
+$green:        #009900;
+$red:          #ca0000;
+$yellow:       #f5b300;
+$light-blue2:  #6699cc;
+$orange:       #ff6600;
+$purple:       #855b9e;
+$blue2:        #3333ff;
+$light-red:    #ca9999;
+
+/* muted text */
+$muted-black:  #a3abad;
+$muted-green:  #aaccaa;
+$muted-red:    #dbaaaa;
+
+// /* latency, sampled from design comp */
+// $p995:         #6f82bc;
+// $p99:          #8292c5;
+// $p90:          #a8b3d7;
+// $p75:          #c8b3d7;
+// $p50:          #dde1ee;
+// $p10:          #eef0f6;
+// $p995-dark:    #4f629c;
+// $p99-dark:     #6272a5;
+// $p90-dark:     #8893b7;
+// $p50-dark:     #bdc1ce;
+// $p10-dark:     #ced0d6;
+
+// /* other colors */
+// $light-border: #aaaaaa;
+// $light-green:  #00dd00;
+// $brown:        #574b3f;
+// $black:        #000000;
+// $black-rgba: rgba(0, 0, 0, 0);
+
+// $diff-green-fill: #cdeacd;
+// $diff-green-text: #39a43a;
+
+// $diff-red-fill: #f3cccd;
+// $diff-red-text: #c80813;
+
+// /* font family */
+// $font-regular:  "Source-Sans-Pro-Regular";
+// $font-semibold: "Source-Sans-Pro-Semibold";
+// $font-bold:     "Source-Sans-Pro-Bold";
+
+
+.graph-container {
+  > .background {
+    fill: $pale-gray;
+  }
+
+  .graph {
+    > .background {
+      fill: white;
+    }
+  }
+
+  .grid-lanes {
+    .grid-lane {
+      fill: $pale-gray;
+    }
+  }
+
+  .x-axis {
+    g.tick {
+      text {
+        dominant-baseline: text-before-edge;
+        text-anchor: middle;
+      }
+
+      line {
+        stroke: $light-gray;
+        stroke-width: 1;
+      }
+    }
+
+    &.orient-top {
+      g.tick {
+        text {
+          dominant-baseline: auto;
+        }
+      }
+    }
+  }
+
+  .x-ticks {
+    line {
+      stroke: $light-gray;
+      stroke-width: .5;
+    }
+  }
+
+  .y-axis {
+    .tick {
+      text {
+        dominant-baseline: central;
+        text-anchor: end;
+      }
+
+      line {
+        stroke: $light-gray;
+        stroke-width: 1;
+      }
+    }
+
+    &.orient-right {
+      g.tick {
+        text {
+          text-anchor: start;
+        }
+      }
+    }
+  }
+
+  .y-axis-line, .x-axis-line {
+    stroke: $light-gray;
+    stroke-width: 1;
+  }
+
+  .graph-line {
+    .graph-line-line {
+      stroke-width: 1;
+      fill: none;
+      cursor: default; //HACK: because of global cursor:pointer setting all all graph paths in vis.scss
+      stroke: red;
+      
+      &.selected {
+        stroke-width: 2;
+      }
+    }
+
+    .graph-line-mask {
+      fill: none;
+      stroke: transparent;
+      stroke-width: 15;
+      cursor: pointer;
+    }
+  }
+
+  .graph-area {
+    .graph-area-path {
+      fill: rgba(255,0,0,.5);
+      stroke: none;
+      stroke-width: 0;
+    }
+
+    .graph-area-line {
+      stroke-width: 1px;
+      stroke: red;
+      fill: none;
+    }
+
+    &.selected {
+      .graph-area-line {
+        stroke-width: 2px;
+      }
+
+      .graph-area-path {
+        fill: rgba(0,0,255,.5);
+      }
+    }
+
+    &.selectable {
+      cursor: pointer;
+    }
+  }
+  
+  .message {
+    font-size: 2em;
+    dominant-baseline: central;
+    text-anchor: middle;
+  }
+
+  .graph-tracking-dot {
+    visibility: visible; //HACK: because of global visibility hiding in vis.scss
+    cursor: default; //HACK: because of global cursor: pointer setting on all graph circles in vis.scss
+
+    &.selectable {
+      cursor: pointer;
+    }
+  }
+
+  .graph-crosshair {
+    .vertical {
+      stroke: $light-gray;
+      stroke-width: 1px;
+      visibility: visible; //HACK: b/c global blah blah same as above.
+    }
+
+    .horizontal {
+      stroke: $light-gray;
+      stroke-width: 1px;
+      visibility: visible; //HACK: curse you, Jeff! :P
+    }
+  }
+
+  .graph-selection-box {
+    fill: none;
+    stroke: $gray;
+    stroke-width: 1;
+  }
+
+  .graph-right-tick {
+    fill: white;
+    stroke: $gray;
+    stroke-width: 1;
+  }
+
+  .graph-right-tick-line {
+    stroke: $gray;
+    stroke-width: 1;
+  }
+
+  .graph-y-diff {
+    &.positive {
+      rect {
+        fill: lime;
+      }
+
+      text {
+        fill: black;
+      }
+    }
+
+    &.negative {
+      rect {
+        fill: red;
+      }
+
+      text {
+        fill: white;
+      }
+    }
+
+    &.orient-right text {
+      text-anchor: end;
+    }
+  }
+}
