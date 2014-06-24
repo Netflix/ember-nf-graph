@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import parsePropertyExpr from 'ember-cli-ember-dvc/utils/parse-property-expression';
+import parsePropertyExpr from '../utils/parse-property-expression';
 
 export default Ember.Mixin.create({
 	isDataGraphic: true,
