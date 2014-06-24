@@ -7,6 +7,9 @@
     "doc": "doc",
     "test": "test"
   },
+  "keywords": [
+    "ember-addon"
+  ],
   "scripts": {
     "start": "ember server",
     "build": "ember build",
