@@ -6,10 +6,10 @@ A data visualization component library for Ember 1.7+ and Ember-CLI
 ## Installation
 
 1. Create an Ember application with Ember-Cli 0.0.36 or later (needed for add-ons)
-2. `npm install -S https://github.com/netflix/ember-cli-ember-dvc.git` to install the add-on
+2. `npm install -S git+ssh://git@github.com:Netflix/ember-cli-ember-dvc.git` to install the add-on
 3. Upgrade Ember:  `bower install -S ember#canary`
 3. Install ember-handlebars-svg: `bower install -S ember-handlebars-svg`
-4. Add `app.import('vendory/ember-handlebars-svg/dist/ember-handlebars-svg.js')` to your `Brocfile.js`
+4. Add `app.import('vendor/ember-handlebars-svg/dist/ember-handlebars-svg.js')` to your `Brocfile.js`
 
 ## Component List
 
