@@ -25,7 +25,7 @@ EmberCLIEmberDVC.prototype.treeFor = function treeFor(name) {
 
 EmberCLIEmberDVC.prototype.included = function included(app) {
   this.app = app;
-  app.include('vendor/ember-cli-ember-dvc/ember-cli-ember-dvc.css');
+  app.import('vendor/ember-cli-ember-dvc/ember-cli-ember-dvc.css');
 };
 
 module.exports = EmberCLIEmberDVC;
