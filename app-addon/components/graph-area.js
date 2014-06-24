@@ -1,11 +1,11 @@
 import Ember from 'ember';
-import Selectable from 'ember-cli-ember-dvc/mixins/graph-selectable-graphic';
-import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import RegisteredGraphic from 'ember-cli-ember-dvc/mixins/graph-registered-graphic';
-import DataGraphic from 'ember-cli-ember-dvc/mixins/graph-data-graphic';
-import AreaUtils from 'ember-cli-ember-dvc/mixins/graph-area-utils';
-import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-with-tracking-dot';
-import DataPositionUtils from 'ember-cli-ember-dvc/mixins/graph-data-position-utils';
+import Selectable from '../mixins/graph-selectable-graphic';
+import HasGraphParent from '../mixins/graph-has-graph-parent';
+import RegisteredGraphic from '../mixins/graph-registered-graphic';
+import DataGraphic from '../mixins/graph-data-graphic';
+import AreaUtils from '../mixins/graph-area-utils';
+import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
+import DataPositionUtils from '../mixins/graph-data-position-utils';
 
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
   Selectable, AreaUtils, GraphicWithTrackingDot, DataPositionUtils, {    

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import HasGraphParent from '../mixins/graph-has-graph-parent';
 
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
