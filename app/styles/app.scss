@@ -1,1 +1,20 @@
 //HACK: nice;
+
+body {
+	font-family: Helvetica, Arial, Sans-Serif;
+	font-size: 14px;
+	color: #333;
+}
+
+nav.navbar {
+	ul {
+		margin: 0;
+		padding: 0;
+
+		li {
+			list-style: none;
+			display: inline-block;
+			margin: 10px;
+		}
+	}
+}
