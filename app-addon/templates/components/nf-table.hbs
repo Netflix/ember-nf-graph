@@ -2,13 +2,15 @@
   <thead>
     <tr>
       {{#each column in columns}}
-        {{view Ember.View tagName="th" controller=parentController template=column.header.template}}
+        <th {{action 'sort' column}}>
+          {{view Ember.View tagName="div" controller=parentController template=column.header.template}}
+        </th>
       {{/each}}
     </tr>
   </thead>
 
   <tbody>
-    {{#each row in rows}}
+    {{#each row in sortedRows}}
       <tr>
         {{#each column in columns}}
           {{view Ember.View tagName="td" controller=parentController template=column.cell.template}}

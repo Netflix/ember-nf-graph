@@ -2,7 +2,7 @@
   "name": "ember-cli-ember-dvc",
   "dependencies": {
     "handlebars": "~1.3.0",
-    "jquery": "^1.11.1",
+    "jquery": "2.X",
     "qunit": "~1.12.0",
     "ember-qunit": "~0.1.5",
     "ember": "canary",
@@ -13,10 +13,10 @@
     "ember-qunit-notifications": "^0.0.1",
     "ember-cli-test-loader": "rjackson/ember-cli-test-loader#0.0.2",
     "d3": "~3.4.8",
-    "ember-handlebars-svg": "~0.0.2"
+    "ember-handlebars-svg": "~0.2.0"
   },
   "devDependencies": {
-    "ember-handlebars-svg": "~0.2.0",
-    "svg": "https://github.com/kbwood/svg.git"
+    "svg": "https://github.com/kbwood/svg.git",
+    "jquery": "2.X"
   }
 }

@@ -1,7 +1,7 @@
 <h2>nf-table</h2>
 
 {{#nf-table rows=myData}}
-	{{#nf-column}}
+	{{#nf-column sortBy="row.foo"}}
 		{{#nf-header}}
 			Foo {{nf-sort-arrow}}
 		{{/nf-header}}
@@ -10,7 +10,7 @@
 		{{/nf-cell}}
 	{{/nf-column}}
 
-	{{#nf-column}}
+	{{#nf-column sortBy="row.bar"}}
 		{{#nf-header}}
 			Bar
 		{{/nf-header}}
