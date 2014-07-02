@@ -36,15 +36,11 @@ export default Ember.Component.extend({
 
 	parentController: Ember.computed.alias('templateData.view.controller'),
 
-	sortedRows: function(){
-
-	}.property('rows', 'sortedColumn'),
-	
 	actions: {
 		sort: function(sortedColumn) {
 			var columns = this.get('columns');
 			columns.filter(function(column) {
-				return column != sortedColumn;
+				return column !== sortedColumn;
 			}).forEach(function(column) {
 				column.unsort();
 			});

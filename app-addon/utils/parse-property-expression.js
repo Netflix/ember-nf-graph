@@ -32,7 +32,7 @@ export default function parsePropertyExpression(expr) {
     for(i = 1; i < tokens.length; i++) {
       next = result[tokens[i]];
       if(typeof next !== 'object') {
-        break;
+        return next;
       }
       result = next;
     }
