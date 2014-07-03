@@ -96,3 +96,6 @@
   fill: white; }
 .graph-container .graph-y-diff.orient-right text {
   text-anchor: end; }
+
+.special-test {
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII="); }

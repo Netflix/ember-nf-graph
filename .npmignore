@@ -3,6 +3,7 @@ vendor/
 tests/
 public/
 config/
+images/
 .ember-cli
 .gitignore
 .jshintrc

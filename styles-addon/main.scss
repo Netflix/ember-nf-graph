@@ -1,2 +1,8 @@
+@import './compiled-images';
+
 @import './components/nf-sort-arrow';
 @import './graph';
+
+.special-test {
+	background-image: url($icon_column_order0_11x11);
+}

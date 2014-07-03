@@ -4,10 +4,18 @@ var scssCompile = require('broccoli-sass');
 var EmberApp = require('ember-cli/lib/broccoli/ember-app');
 var exportTree = require('broccoli-export-tree');
 var pickFiles = require('broccoli-static-compiler');
+var sassImageCompiler = require('broccoli-sass-image-compiler');
 
-var appTree    = mergeTrees(['app', 'app-addon'], { overwrite: true });
+var appTree = mergeTrees(['app', 'app-addon'], { overwrite: true });
 
-var compiledCss = scssCompile(['styles-addon'], 'main.scss', 'ember-cli-ember-dvc.css');
+var imageTree = sassImageCompiler('images', {
+	inputFiles: ['*.png'],
+	outputFile: '/compiled-images.scss'
+});
+
+var stylesTree = mergeTrees(['styles-addon', imageTree]);
+
+var compiledCss = scssCompile([stylesTree], 'main.scss', 'ember-cli-ember-dvc.css');
 
 var exportedCss = exportTree(compiledCss, {
 	destDir: 'vendor-addon/ember-cli-ember-dvc', 
