@@ -36,7 +36,5 @@ var app = new EmberApp({
 app.import('vendor/d3/d3.js');
 app.import('vendor/ember-cli-ember-dvc/ember-cli-ember-dvc.css');
 app.import('vendor/ember-handlebars-svg/ember-handlebars-svg.js');
-app.import('vendor/svg/jquery.svg.js');
-app.import('vendor/svg/jquery.svgdom.js');
 
 module.exports = mergeTrees([exportedCss, app.toTree()]);

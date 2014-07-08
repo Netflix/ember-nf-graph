@@ -1,0 +1,22 @@
+
+.nf-table {
+	.nf-sort-none {
+		.nf-sort-arrow {
+			visibility: hidden;
+		}
+	}
+
+	.nf-sort-ascending {
+		.nf-sort-arrow {
+			@extend .nf-icon.arrow-asc;
+			visibility: visible;
+		}
+	}
+
+	.nf-sort-descending {
+		.nf-sort-arrow {
+			@extend .nf-icon.arrow-desc;
+			visibility: visible;
+		}
+	}
+}

@@ -6,6 +6,7 @@ export default Ember.Component.extend({
 	isDataTable: true,
 	tagName: 'table',
 	rows: null,
+	classNames: ['nf-table'],
 	
 	sortType: SORTTYPE_SINGLE,
 

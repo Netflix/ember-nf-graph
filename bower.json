@@ -13,7 +13,7 @@
     "ember-qunit-notifications": "^0.0.1",
     "ember-cli-test-loader": "rjackson/ember-cli-test-loader#0.0.2",
     "d3": "~3.4.8",
-    "ember-handlebars-svg": "~0.2.0"
+    "ember-handlebars-svg": "0.X"
   },
   "devDependencies": {
     "svg": "https://github.com/kbwood/svg.git",

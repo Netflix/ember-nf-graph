@@ -2,7 +2,7 @@
   <thead>
     <tr>
       {{#each column in columns}}
-        <th {{action 'sort' column}}>
+        <th {{action 'sort' column}} {{bind-attr class="column.sortClass"}}>
           {{view Ember.View tagName="div" controller=parentController template=column.header.template}}
         </th>
       {{/each}}
