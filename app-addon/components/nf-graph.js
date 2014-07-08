@@ -5,7 +5,8 @@ var SCALE_TYPES = {
   'power': function () {
     return d3.scale.pow().exponent(3);
   },
-  'log': d3.scale.log
+  'log': d3.scale.log,
+  'ordinal': d3.scale.ordinal
 };
 
 export default Ember.Component.extend({
@@ -208,6 +209,8 @@ export default Ember.Component.extend({
     var domain = this.get('xDomain');
     var range = this.get('xRange');
     var type = this.get('xScaleType');
+    var ordinalPadding = this.get('xOrdinalPadding');
+    var ordinalOuterPadding = this.get('xOrdinalOuterPadding');
     
     if (type === 'log') {
       if (domain[0] <= 0) {
@@ -218,14 +221,20 @@ export default Ember.Component.extend({
       }
     }
 
+    if(type === 'ordinal') {
+      return scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+    }
+
     return scale.domain(domain).range(range);
-  }.property('xScaleFactory', 'xRange', 'xDomain', 'xScaleType', 'xTickCount'),
+  }.property('xScaleFactory', 'xRange', 'xDomain', 'xScaleType', 'xTickCount', 'xOrdinalPadding', 'xOrdinalOuterPadding'),
 
   yScale: function () {
     var scale = this.get('yScaleFactory')();
     var domain = this.get('yDomain');
     var range = this.get('yRange');
     var type = this.get('yScaleType');
+    var ordinalPadding = this.get('yOrdinalPadding');
+    var ordinalOuterPadding = this.get('yOrdinalOuterPadding');
     var niceArg;
 
     if (type === 'log') {
@@ -238,10 +247,12 @@ export default Ember.Component.extend({
       niceArg = this.get('yTickCount');
     }
 
-    var result = scale.domain(domain).range(range).nice(niceArg);
-    console.log('yScale', result, domain, range);
-    return result;
-  }.property('yScaleFactory', 'yRange', 'yDomain', 'yScaleType', 'yTickCount'),
+    if(type === 'ordinal') {
+      return scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+    }
+    
+    return scale.domain(domain).range(range).nice(niceArg);
+  }.property('yScaleFactory', 'yRange', 'yDomain', 'yScaleType', 'yTickCount', 'yOrdinalPadding', 'yOrdinalOuterPadding'),
 
   // used to register lines, areas, etc.
   registerGraphic: function (graphic) {
