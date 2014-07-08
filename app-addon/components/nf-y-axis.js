@@ -8,6 +8,15 @@ export default Ember.Component.extend({
 
   classNameBindings: ['class'],
 
+  _tickFilter: null,
+
+  tickFilter: function(name, value) {
+    if(arguments.length > 1) {
+      this._tickFilter = value;
+    }
+    return this._tickFilter;
+  }.property(),
+
   'class': function(){
     var orient = this.get('orient');
     return orient === 'left' ? 'y-axis' : 'y-axis orient-right';
@@ -49,7 +58,7 @@ export default Ember.Component.extend({
     var axisLineX = this.get('axisLineX');
     var tickLength = this.get('tickLength');
     var orient = this.get('orient');
-
+    var tickFilter = this.get('tickFilter');
     var ticks = yScale.ticks(tickCount);
 
     if (scaleType === 'log') {
@@ -59,16 +68,19 @@ export default Ember.Component.extend({
       });
     }
 
-    var result = ticks.map(function (tick, i) {
+    var result = ticks.map(function (tick) {
       return {
         value: tick,
-        index: i,
         y: yScale(tick),
         x1: axisLineX + tickLength,
         x2: axisLineX,
         labelx: orient === 'right' ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding),
       };
     });
+
+    if(tickFilter) {
+      result = result.filter(tickFilter);
+    }
 
     return result;
   }.property('graph.yScale', 'tickCount', 'graph.yScaleType',

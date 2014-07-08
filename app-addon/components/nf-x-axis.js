@@ -15,6 +15,15 @@ export default Ember.Component.extend(HasGraphParent, {
   tickPadding: 5,
   orient: 'bottom',  
   
+  _tickFilter: null,
+
+  tickFilter: function(name, value) {
+    if(arguments.length > 1) {
+      this._tickFilter = value;
+    }
+    return this._tickFilter;
+  }.property(),
+
   orientClass: function(){
     return 'orient-' + this.get('orient');
   }.property('orient'),
@@ -32,12 +41,13 @@ export default Ember.Component.extend(HasGraphParent, {
     var paddingBottom = this.get('graph.paddingBottom');
     var paddingTop = this.get('graph.paddingTop');
     var y;
+    
     if(orient === 'bottom') {
       y = graphHeight - paddingBottom - height;
     } else {
       y = paddingTop;
     }
-    console.log(graphHeight, paddingBottom, height, y);
+
     return y || 0;
   }.property('orient', 'graph.paddingTop', 'graph.paddingBottom', 'graph.height', 'height'),
 
@@ -61,37 +71,26 @@ export default Ember.Component.extend(HasGraphParent, {
     var tickPadding = this.get('tickPadding');
     var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);    
     var result = [];
-    
-    result = ticks.reduce(function (result, tick, i) {
-      var prev = result[result.length - 1];
-      if(prev) {
-        prev.nextValue = tick;
-      }
+    var tickFilter = this.get('tickFilter');
 
-      result.push({
-        prevValue: prev ? prev.value : null,
+    result = ticks.map(function (tick) {
+      return {
         value: tick,
-        index: i,
         x: xScale(tick),
         y1: y1,
         y2: y2,
         labely: labely
-      });
-
-      return result;
-    }, result);
-
-    result.forEach(function(tick) {
-      var last = result[result.length - 1];
-      var first = result[0];
-      tick.lastValue = last.value;
-      tick.firstValue = first.value;
-      tick.tickCount = tickCount;
+      };
     });
+
+
+    if(tickFilter) {
+      result = result.filter(tickFilter);
+    }
 
     return result;
 
-  }.property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient'),
+  }.property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter'),
 
   getScaleTicks: function(scale, count){
     return scale.ticks(count);
