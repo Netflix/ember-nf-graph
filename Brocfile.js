@@ -10,7 +10,10 @@ var appTree = mergeTrees(['app', 'app-addon'], { overwrite: true });
 
 var imageTree = sassImageCompiler('images', {
 	inputFiles: ['*.png'],
-	outputFile: '/compiled-images.scss'
+	outputFile: '/compiled-images.scss',
+	iconClass: 'nf-icon',
+	size: true,
+	icon: true
 });
 
 var stylesTree = mergeTrees(['styles-addon', imageTree]);

@@ -1,3 +1,42 @@
+.nf-icon.arrow-asc, .nf-sort-arrow.nf-sort-arrow-ascending {
+  background-repeat: once;
+  display: inline-block;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII=");
+  background-repeat: once;
+  width: 11px;
+  height: 11px; }
+
+.nf-icon.arrow-desc, .nf-sort-arrow.nf-sort-arrow-descending {
+  background-repeat: once;
+  display: inline-block;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD1JREFUeNpi/P//PwOxgAmbYFNTE1YTGEkxmQWfqXV1dYzUMRmbW5FNJ89kXCGAbDrpJuMzFdl0kkwGCDAAz0okjPDgwbIAAAAASUVORK5CYII=");
+  background-repeat: once;
+  width: 11px;
+  height: 11px; }
+
+.nf-icon.arrow-asc, .nf-sort-arrow.nf-sort-arrow-ascending {
+  background-repeat: once;
+  display: inline-block;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII=");
+  background-repeat: once;
+  width: 11px;
+  height: 11px; }
+
+.nf-icon.arrow-desc, .nf-sort-arrow.nf-sort-arrow-descending {
+  background-repeat: once;
+  display: inline-block;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD1JREFUeNpi/P//PwOxgAmbYFNTE1YTGEkxmQWfqXV1dYzUMRmbW5FNJ89kXCGAbDrpJuMzFdl0kkwGCDAAz0okjPDgwbIAAAAASUVORK5CYII=");
+  background-repeat: once;
+  width: 11px;
+  height: 11px; }
+
+.nf-sort-arrow.nf-sort-arrow-ascending {
+  visibility: visible; }
+.nf-sort-arrow.nf-sort-arrow-descending {
+  visibility: visible; }
+.nf-sort-arrow.nf-sort-arrow-none {
+  visibility: hidden; }
+
 /* color palette - Visual Design Guidelines, page 40  */
 /* https://www.dropbox.com/sh/y07t0dtnv0np7tt/yBzMfmBJzq/NFLX_03_VisualDesignGuidelines_LATEST.pdf */
 /* variables are color names for design reference
@@ -96,6 +135,3 @@
   fill: white; }
 .graph-container .graph-y-diff.orient-right text {
   text-anchor: end; }
-
-.special-test {
-  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII="); }

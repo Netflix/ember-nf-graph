@@ -35,6 +35,6 @@
     "broccoli-export-tree": "^0.3.2",
     "broccoli-static-compiler": "^0.1.4",
     "broccoli-merge-trees": "^0.1.4",
-    "broccoli-sass-image-compiler": "0.0.3"
+    "broccoli-sass-image-compiler": "^0.1.4"
   }
 }
