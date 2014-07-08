@@ -1,0 +1,33 @@
+<h1>Graph - Basics</h1>
+
+{{#nf-graph width="500" height="300"}}
+	{{#nf-x-axis}}
+		{{value}}
+	{{/nf-x-axis}}
+
+	{{#nf-y-axis}}
+		{{value}}
+	{{/nf-y-axis}}
+
+	{{#nf-graph-content}}
+		{{nf-line data=lineData}}
+	{{/nf-graph-content}}
+{{/nf-graph}}
+
+<pre>
+
+\{{#nf-graph width="500" height="300"}}
+	\{{#nf-x-axis}}
+		\{{value}}
+	\{{/nf-x-axis}}
+
+	\{{#nf-y-axis}}
+		\{{value}}
+	\{{/nf-y-axis}}
+
+	\{{#nf-graph-content}}
+		\{{nf-line data=lineData}}
+	\{{/nf-graph-content}}
+\{{/nf-graph}}
+
+</pre>
