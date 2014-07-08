@@ -2,11 +2,11 @@
 
 {{#nf-graph width="500" height="300"}}
 	{{#nf-x-axis}}
-		{{value}}
+		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
 	{{#nf-y-axis}}
-		{{value}}
+		<text>{{tick.value}}</text>
 	{{/nf-y-axis}}
 
 	{{#nf-graph-content}}
@@ -18,11 +18,11 @@
 
 \{{#nf-graph width="500" height="300"}}
 	\{{#nf-x-axis}}
-		\{{value}}
+		&lt;text&gt;\{{tick.value}}&lt;/text&gt;
 	\{{/nf-x-axis}}
 
 	\{{#nf-y-axis}}
-		\{{value}}
+		&lt;text&gt;\{{tick.value}}&lt;/text&gt;
 	\{{/nf-y-axis}}
 
 	\{{#nf-graph-content}}

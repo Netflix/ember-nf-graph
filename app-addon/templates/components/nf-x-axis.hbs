@@ -3,7 +3,7 @@
 
 {{#each tick in ticks}}
   <g class="tick">
-  	{{view 'graph-tick-label' tagName="text" template=template context=tick x=tick.x y=tick.labely}}
+  	{{view 'nf-tick-label' controller=graph.parentController template=template x=tick.x y=tick.labely}}
     <line {{bind-attr x1=tick.x y1=tick.y1 x2=tick.x y2=tick.y2}}>
     </line>
   </g>

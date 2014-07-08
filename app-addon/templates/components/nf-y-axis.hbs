@@ -2,7 +2,7 @@
 
 {{#each tick in ticks}}
   <g class="tick">
-  	{{view 'graph-tick-label' tagName="text" template=template context=tick x=tick.labelx y=tick.y}}
+  	{{view 'nf-tick-label' controller=graph.parentController template=template x=tick.labelx y=tick.y}}
     <line {{bind-attr x1=tick.x1 y1=tick.y x2=tick.x2 y2=tick.y}}></line>
   </g>
 {{/each}}

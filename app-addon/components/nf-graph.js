@@ -388,25 +388,5 @@ export default Ember.Component.extend({
     return [ e.clientX - rect.left - container.clientLeft, e.clientY - rect.top - container.clientTop ];
   },
 
-  debug: false,
-
-  debugInfo: function(){
-    if(this.get('debug')) {
-      var info = {
-        name: this.get('name'),
-        xMin: this.get('xMin'),
-        xMax: this.get('xMax'),
-        yMin: this.get('yMin'),
-        yMax: this.get('yMax'),
-        dataDomainExtent: this.get('dataDomainExtent'),
-        domainExtent: this.get('domainExtent'),
-        graphicsLength: this.get('graphics.length'),
-        xScale: [this.get('xScale').range(), this.get('xScale').domain()],
-        yScale: [this.get('yScale').range(), this.get('yScale').domain()]
-      };
-
-      console.log('DEBUG: ', info);
-      return JSON.stringify(info, null, '  ');
-    }
-  }.property('debug', 'xMin', 'xMax', 'yMin', 'yMax', 'dataDomainExtent', 'domainExtent', 'graphics.length', 'name', 'xScale', 'yScale')
+  parentController: Ember.computed.alias('templateData.view.controller'),
 });
