@@ -1,0 +1,15 @@
+<h2>nf-bars</h2>
+
+{{#nf-graph width="500" height="300"}}
+	{{#nf-x-axis tickFilter=xTickFilter}}
+		<text>{{tick.value}}</text>
+	{{/nf-x-axis}}
+
+	{{#nf-y-axis}}
+		<text>{{tick.value}}</text>
+	{{/nf-y-axis}}
+
+	{{#nf-graph-content}}
+		{{nf-bars data=data}}
+	{{/nf-graph-content}}
+{{/nf-graph}}
