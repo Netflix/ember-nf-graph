@@ -18,5 +18,6 @@
   "devDependencies": {
     "svg": "https://github.com/kbwood/svg.git",
     "jquery": "2.X"
-  }
+  },
+  "version": "0.1.0"
 }
