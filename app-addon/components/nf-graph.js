@@ -40,13 +40,7 @@ var domainProperty = function(axis) {
 
 var scaleProperty = function(axis) {
   return property(
-    axis + 'ScaleFactory', 
-    axis + 'Range', 
-    axis + 'Domain', 
-    axis + 'ScaleType', 
-    axis + 'TickCount', 
-    axis + 'OrdinalPadding', 
-    axis + 'OrdinalOuterPadding',
+    axis + 'ScaleFactory', axis + 'Range', axis + 'Domain', axis + 'ScaleType', axis + 'TickCount', axis + 'OrdinalPadding', axis + 'OrdinalOuterPadding',
     function(scaleFactory, range, domain, scaleType, tickCount, ordinalPadding, ordinalOuterPadding) {
       var scale = scaleFactory();
 
