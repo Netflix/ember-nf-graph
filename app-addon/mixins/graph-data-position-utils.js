@@ -1,8 +1,15 @@
 import Ember from 'ember';
 export default Ember.Mixin.create({
 	getNearestDataToXPosition: function(rangeX, sortedData, xScale) {
-		var domainX = xScale.invert(rangeX);
-		return this.getNearestDataToXValue(domainX, sortedData);
+		if(xScale.invert) {
+			var domainX = xScale.invert(rangeX);
+			return this.getNearestDataToXValue(domainX, sortedData);
+		}
+
+		// it's ordinal
+		var range = xScale.range();
+		var index = Math.round((rangeX - range[0]) / (range[1] - range[0]));
+		return xScale.domain()[index];
 	},
 
 	getNearestDataToXValue: function(xValue, sortedData) {

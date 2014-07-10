@@ -1,4 +1,63 @@
 import Ember from 'ember';
+import { property, observer } from '../utils/computed-property-helpers';
+
+var computedAlias = Ember.computed.alias;
+var computedBool = Ember.computed.bool;
+
+var scaleFactoryProperty = function(axis) {
+  return property(axis + 'ScaleType', function (type) {
+    var factory = SCALE_TYPES[type];
+    if (!factory) {
+      throw new Error('invalid scale type: ' + type);
+    }
+    return factory;
+  });
+};
+
+var domainProperty = function(axis) {
+  return property(
+    axis + 'Data', axis + 'DomainMode', axis + 'Min', axis + 'Max', axis + 'ScaleType',
+    function(data, domainMode, min, max, scaleType) {
+      var extent = [min, max];
+      if(domainMode === 'auto') {
+        extent = d3.extent(data);
+        this.set(axis + 'Min', extent[0]);
+        this.set(axis + 'Max', extent[1]);
+      }
+
+      if(scaleType == 'log') {
+        if (extent[0] <= 0) {
+          extent[0] = 1;
+        }
+        if (domain[1] <= 0) {
+          extent[1] = 1;
+        }
+      }
+      return extent;
+    }
+  );
+};
+
+var scaleProperty = function(axis) {
+  return property(
+    axis + 'ScaleFactory', 
+    axis + 'Range', 
+    axis + 'Domain', 
+    axis + 'ScaleType', 
+    axis + 'TickCount', 
+    axis + 'OrdinalPadding', 
+    axis + 'OrdinalOuterPadding',
+    function(scaleFactory, range, domain, scaleType, tickCount, ordinalPadding, ordinalOuterPadding) {
+      var scale = scaleFactory();
+
+      if(scaleType === 'ordinal') {
+        return scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+      }
+      
+      return scale.domain(domain).range(range);
+    }
+  );
+};
 
 var SCALE_TYPES = {
   'linear': d3.scale.linear,
@@ -11,7 +70,6 @@ var SCALE_TYPES = {
 
 export default Ember.Component.extend({
   tagName: 'div',
-  // templateName: 'ember-cli-ember-dvc/components/graph-container',
   
   isGraph: true,
   hasRendered: false,
@@ -29,234 +87,53 @@ export default Ember.Component.extend({
   xDomainMode: 'auto',
   yDomainMode: 'auto',
 
-  _updateDomainExtent: function(){
-    var xMin = this.get('xMin');
-    var xMax = this.get('xMax');
-    var yMin = this.get('yMin');
-    var yMax = this.get('yMax');
-
-    this.set('domainExtent', {
-      xMin: xMin,
-      xMax: xMax,
-      yMin: yMin,
-      yMax: yMax
-    });
-
-    this.set('xDomain', [xMin, xMax]);
-    this.set('yDomain', [yMin, yMax]);
-  }.observes('xMin', 'xMax', 'yMin', 'yMax').on('init'),
-
-  dataDomainExtent: function(){
-    var graphics = this.get('graphics');
-    var extent = {};
-
-    if(!graphics) {
-      return extent;
-    }
-
-    var result = graphics.reduce(function(extent, graphic) {
-      var sortedData = graphic.get('sortedData');
-      
-      if(!sortedData || sortedData.length === 0) {
-        return extent;
-      }
-
-      var gxMin = sortedData[0][0];
-      var gxMax = sortedData[sortedData.length - 1][0];
-
-      var resortedData = sortedData.slice().sort(function(a, b) {
-        return a[1] - b[1];
-      });
-      var gyMin = resortedData[0][1];
-      var gyMax = resortedData[resortedData.length - 1][1];
-
-      if(typeof extent.xMin === 'undefined' || extent.xMin > gxMin) {
-        extent.xMin = gxMin;
-      }
-      
-      if(typeof extent.xMax === 'undefined' || extent.xMax < gxMax) {
-        extent.xMax = gxMax;
-      }
-
-      if(typeof extent.yMin === 'undefined' || extent.yMin > gyMin) {
-        extent.yMin = gyMin;
-      }
-
-      if(typeof extent.yMax === 'undefined' || extent.yMax < gyMax) {
-        extent.yMax = gyMax;
-      }
-
-      return extent;
-    }, extent);
-
-    return result;
-  }.property('graphics.@each.sortedData', 'xDomainMode', 'yDomainMode'),
-
-  _xMin: 0,
-  _xMax: 1,
-  _yMin: 0,
-  _yMax: 1,
-
-   xMin: function(name, value) {
-    if(arguments.length > 1) {
-      this._xMin = value;
-    }
-
-    var yDomainMode = this.get('yDomainMode');
-    var dataDomainExtent = this.get('dataDomainExtent');
-
-    if(yDomainMode === 'fit' || (yDomainMode === 'auto' && dataDomainExtent.xMin < this._xMin)) {
-      this._xMin = dataDomainExtent.xMin;
-    }
-
-    return this._xMin;
-  }.property('dataDomainExtent', 'yDomainMode'),
-
-   xMax: function(name, value) {
-    if(arguments.length > 1) {
-      this._xMax = value;
-    }
-
-    var yDomainMode = this.get('yDomainMode');
-    var dataDomainExtent = this.get('dataDomainExtent');
-
-    if(yDomainMode === 'fit' || (yDomainMode === 'auto' && dataDomainExtent.xMax > this._xMax)) {
-      this._xMax = dataDomainExtent.xMax;
-    }
-
-    return this._xMax;
-  }.property('dataDomainExtent', 'yDomainMode'),
-
-  yMin: function(name, value) {
-    if(arguments.length > 1) {
-      this._yMin = value;
-    }
-
-    var yDomainMode = this.get('yDomainMode');
-    var dataDomainExtent = this.get('dataDomainExtent');
-    
-    if(yDomainMode === 'fit' || (yDomainMode === 'auto' && dataDomainExtent.yMin < this._yMin)) {
-      this._yMin = dataDomainExtent.yMin;
-    }
-
-    return this.get('_yMin');
-  }.property('dataDomainExtent', 'yDomainMode'),
-
-  yMax: function(name, value) {
-    if(arguments.length > 1) {
-      this._yMax = value;
-    }
-
-    var yDomainMode = this.get('yDomainMode');
-    var dataDomainExtent = this.get('dataDomainExtent');
-
-    if(yDomainMode === 'fit' || (yDomainMode === 'auto' && dataDomainExtent.yMax > this._yMax)) {
-      this._yMax = dataDomainExtent.yMax;
-    }
-
-    return this._yMax;
-  }.property('dataDomainExtent', 'yDomainMode'),
-
   xScaleType: 'linear',
   yScaleType: 'linear',
-
-  _graphics: null,
-
-  graphics: function(key, value) {
-    if(arguments.length > 1) {
-      this.set('_graphics', value);
-    }
-
-    if(!this.get('_graphics')) {
-      this.set('_graphics', []);
-    }
-
-    return this.get('_graphics');
-  }.property('_graphics'),
+  
+  xOrdinalPadding: 5,
+  xOrdinalOuterPadding: 5,
 
   yAxis: null,
   xAxis: null,
 
+  _xMin: 0,
+  _xMax: 1,
+  _yMin: 0,
+  _yMax: 1,  
 
-  showYAxis: function () {
-    return !!this.get('yAxis');
-  }.property('yAxis'),
+  xMin: computedAlias('_xMin'),
+  xMax: computedAlias('_xMax'),
+  yMin: computedAlias('_yMin'),
+  yMax: computedAlias('_yMax'),
 
-  showXAxis: function () {
-    return !!this.get('xAxis');
-  }.property('xAxis'),
+  graphics: computedAlias('_graphics'),
+  showYAxis: computedBool('yAxis'),
+  showXAxis: computedBool('xAxis'),
 
-  xScaleFactory: function () {
-    var type = this.get('xScaleType');
-    var factory = SCALE_TYPES[type];
-    if (!factory) {
-      throw new Error('invalid scale type: ' + type);
+  _graphicsSortedDataChanged: observer(
+    'graphics.@each.sortedData', 
+    function(graphics){
+      var all = graphics.reduce(function(all, graphic) {
+        all = all.concat(graphic.get('sortedData') || []);
+        return all;
+      }, []);
+
+      this.set('xData', all.map(function(d) { return d[0]; }));
+      this.set('yData', all.map(function(d) { return d[1]; }));
     }
-    return factory;
-  }.property('xScaleType'),
+  ),
 
-  yScaleFactory: function () {
-    var type = this.get('yScaleType');
-    var factory = SCALE_TYPES[type];
-    if (!factory) {
-      throw new Error('invalid scale type: ' + type);
-    }
-    return factory;
-  }.property('yScaleType'),
+  xScaleFactory: scaleFactoryProperty('x'),
+  yScaleFactory: scaleFactoryProperty('y'),
 
-  xScale: function () {
-    var scale = this.get('xScaleFactory')();
-    var domain = this.get('xDomain');
-    var range = this.get('xRange');
-    var type = this.get('xScaleType');
-    var ordinalPadding = this.get('xOrdinalPadding');
-    var ordinalOuterPadding = this.get('xOrdinalOuterPadding');
-    
-    if (type === 'log') {
-      if (domain[0] <= 0) {
-        domain[0] = 1;
-      }
-      if (domain[1] <= 0) {
-        domain[1] = 1;
-      }
-    }
+  xDomain: domainProperty('x'),
+  yDomain: domainProperty('y'),
 
-    if(type === 'ordinal') {
-      return scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
-    }
-
-    return scale.domain(domain).range(range);
-  }.property('xScaleFactory', 'xRange', 'xDomain', 'xScaleType', 'xTickCount', 'xOrdinalPadding', 'xOrdinalOuterPadding'),
-
-  yScale: function () {
-    var scale = this.get('yScaleFactory')();
-    var domain = this.get('yDomain');
-    var range = this.get('yRange');
-    var type = this.get('yScaleType');
-    var ordinalPadding = this.get('yOrdinalPadding');
-    var ordinalOuterPadding = this.get('yOrdinalOuterPadding');
-    var niceArg;
-
-    if (type === 'log') {
-      if (domain[0] <= 0) {
-        domain[0] = 1;
-      }
-      if (domain[1] <= 0) {
-        domain[1] = 1;
-      }
-      niceArg = this.get('yTickCount');
-    }
-
-    if(type === 'ordinal') {
-      return scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
-    }
-    
-    return scale.domain(domain).range(range).nice(niceArg);
-  }.property('yScaleFactory', 'yRange', 'yDomain', 'yScaleType', 'yTickCount', 'yOrdinalPadding', 'yOrdinalOuterPadding'),
+  xScale: scaleProperty('x'),
+  yScale: scaleProperty('y'),
 
   // used to register lines, areas, etc.
   registerGraphic: function (graphic) {
-    console.log('register', this.blah);
     var graphics = this.get('graphics');
     graphics.pushObject(graphic);
   },
@@ -268,18 +145,14 @@ export default Ember.Component.extend({
 
   onDidGraphHoverChange: function (e, mouseX, mouseY) {
     var graphics = this.get('graphics');
+    
     if (!graphics) {
       return;
     }
 
-    var xScale = this.get('xScale');
-    var yScale = this.get('yScale');
-
     var data = {
       x: mouseX,
-      y: mouseY,
-      xValue: xScale.invert(mouseX),
-      yValue: yScale.invert(mouseY)
+      y: mouseY
     };
 
     graphics.forEach(function (g) {
@@ -302,66 +175,59 @@ export default Ember.Component.extend({
     });
   },
 
-  yRange: function () {
-    var max = this.get('graphHeight');
-    return [max, 0];
-  }.property('graphHeight'),
+  yRange: property('graphHeight', function (graphHeight) {
+    return [graphHeight, 0];
+  }),
 
-  xRange: function () {
-    var max = this.get('graphWidth');
-    return [0, max];
-  }.property('graphWidth'),
+  xRange: property('graphWidth', function (graphWidth) {
+    return [0, graphWidth];
+  }),
 
-  hasData: function () {
-    var graphics = this.get('graphics');
+  hasData: property('graphics', function(graphics) {
     return graphics && graphics.length > 0;
-  }.property('graphics'),
+  }),
 
-  graphX: function () {
-    var paddingLeft = this.get('paddingLeft');
-    var yAxisWidth = this.get('yAxis.width');
-    var yAxisOrient = this.get('yAxis.orient');
-
-    if(yAxisOrient === 'right') {
-      return paddingLeft;
+  graphX: property(
+    'paddingLeft', 'yAxis.width', 'yAxis.orient', 
+    function (paddingLeft, yAxisWidth, yAxisOrient) {
+      if(yAxisOrient === 'right') {
+        return paddingLeft;
+      }
+      return paddingLeft + yAxisWidth;
     }
+  ),
 
-    return paddingLeft + yAxisWidth;
-  }.property('paddingLeft', 'yAxis.width', 'yAxis.orient'),
+  graphY: property('paddingTop', 'xAxis.orient', 'xAxis.height', 
+    function (xAxisOrient, xAxisHeight, paddingTop) {
+      if(xAxisOrient === 'top') {
+        return xAxisHeight + paddingTop;
+      }
 
-  graphY: function () {
-    var xAxisOrient = this.get('xAxis.orient');
-    var xAxisHeight = this.get('xAxis.height');
-    var paddingTop = this.get('paddingTop');
-
-    if(xAxisOrient === 'top') {
-      return xAxisHeight + paddingTop;
+      return paddingTop;
     }
+  ),
 
-    return paddingTop;
-  }.property('paddingTop', 'xAxis.orient', 'xAxis.height'),
+  graphWidth: property('width', 'paddingRight', 'paddingLeft', 'yAxis.width',
+    function (width, paddingLeft, paddingRight, yAxisWidth) {
+      paddingRight = paddingRight || 0;
+      paddingLeft = paddingLeft || 0;
+      yAxisWidth = yAxisWidth || 0;
+      return width - paddingRight - paddingLeft - yAxisWidth;
+    }
+  ),
 
-  graphWidth: function () {
-    var width = this.get('width');
-    var paddingLeft = this.get('paddingLeft') || 0;
-    var paddingRight = this.get('paddingRight') || 0;
-    var yAxisWidth = this.get('yAxis.width') || 0;
-    return width - paddingRight - paddingLeft - yAxisWidth;
-  }.property('width', 'paddingRight', 'paddingLeft', 'yAxis.width'),
+  graphHeight: property('height', 'paddingType', 'paddingBottom', 'xAxis.height',
+    function (height, paddingTop, paddingBottom, xAxisHeight) {
+      paddingTop = paddingTop || 0;
+      paddingBottom = paddingBottom || 0;
+      xAxisHeight = xAxisHeight || 0;
+      return height - paddingTop - paddingBottom - xAxisHeight;
+    }
+  ),
 
-  graphHeight: function () {
-    var height = this.get('height');
-    var paddingTop = this.get('paddingTop') || 0;
-    var paddingBottom = this.get('paddingBottom') || 0;
-    var xAxisHeight = this.get('xAxis.height') || 0;
-    return height - paddingTop - paddingBottom - xAxisHeight;
-  }.property('graphY', 'height', 'paddingBottom', 'xAxis.height'),
-
-  graphTransform: function () {
-    var graphX = this.get('graphX');
-    var graphY = this.get('graphY');
+  graphTransform: property('graphX', 'graphY', function (graphX, graphY) {
     return 'translate(%@, %@)'.fmt(graphX, graphY);
-  }.property('graphX', 'graphY'),
+  }),
 
   willInsertElement: function () {
     this.set('hasRendered', true);
@@ -400,4 +266,8 @@ export default Ember.Component.extend({
   },
 
   parentController: Ember.computed.alias('templateData.view.controller'),
+
+  _setup: function(){
+    this.set('graphics', []);
+  }.on('init')
 });

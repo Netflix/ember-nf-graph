@@ -1,0 +1,4 @@
+<text>{{bars.length}}</text>
+{{#each bar in bars}}
+	<rect class="nf-bar" {{bind-attr x=bar.x y=bar.y width=bar.width height=bar.height}}></rect>
+{{/each}}

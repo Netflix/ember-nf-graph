@@ -2,13 +2,16 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 	data: function() {
-		var p = { y: 0 }
-		return d3.range(100).map(function(p, n) {
-			var y = p.y + Math.max(0, (Math.random() * 300)  - 150);
-			return p = {
-				x: n,
-				y: y
-			};
-		});
+		var arr = [];
+		var str = 'abcdefg';
+		
+		for(var i = 0, len = str.length; i < len; i++) {
+			arr.push({
+				x: str[i],
+				y: (i+1) * 100
+			});
+		}
+
+		return arr;
 	}.property()
 });

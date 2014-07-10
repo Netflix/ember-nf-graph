@@ -93,6 +93,19 @@ export default Ember.Component.extend(HasGraphParent, {
   }.property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter'),
 
   getScaleTicks: function(scale, count){
+    var xScaleType = this.get('graph.xScaleType');
+
+    if(xScaleType === 'ordinal') {
+      var visibleData = this.get('visibleData');
+      if(visibleData) {
+        var xScale = this.get('graph.xScale');
+        return visibleData.map(function(d) {
+          return xScale(d[0]);
+        });
+      }
+      return [];
+    }
+
     return scale.ticks(count);
   },
 

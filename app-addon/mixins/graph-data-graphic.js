@@ -19,6 +19,7 @@ export default Ember.Mixin.create({
     var data = this.get('data');
     var xPropFn = this.get('xPropFn');
     var yPropFn = this.get('yPropFn');
+    var xScaleType = this.get('xScaleType');
 
     if(!data) {
       return null;
@@ -31,10 +32,14 @@ export default Ember.Mixin.create({
     	return item;
     });
 
-    mapped.sort(function(a, b) {
-    	return a[0] - b[0];
-    });
-
+    if(xScaleType !== 'ordinal') {
+      mapped.sort(function(a, b) {
+      	var ax = a[0];
+        var bx = b[0];
+        return ax === bx ? 0 : (ax > bx) ? 1 : -1;
+      });
+    }
+    
     return mapped;
   }.property('data', 'xPropFn', 'yPropFn'),
 
