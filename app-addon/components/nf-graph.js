@@ -198,11 +198,10 @@ export default Ember.Component.extend({
   ),
 
   graphY: property('paddingTop', 'xAxis.orient', 'xAxis.height', 
-    function (xAxisOrient, xAxisHeight, paddingTop) {
+    function (paddingTop, xAxisOrient, xAxisHeight) {
       if(xAxisOrient === 'top') {
         return xAxisHeight + paddingTop;
       }
-
       return paddingTop;
     }
   ),
