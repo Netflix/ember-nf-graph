@@ -2,6 +2,12 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 	xTickFilter: function(tick) {
-		return tick.value % 3 === 0;
+		return true;
+	},
+
+	xTickFactory: function(xScale, tickCount, xData, xScaleType) {
+		var ticks = [1, 10, 30, 50, 80, 99];
+
+		return ticks;
 	}
 });

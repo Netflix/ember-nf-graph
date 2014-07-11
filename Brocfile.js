@@ -28,7 +28,8 @@ var exportedCss = exportTree(compiledCss, {
 var app = new EmberApp({
 	trees: {
 		vendor: mergeTrees(['vendor', 'vendor-addon']),
-		app: appTree
+		app: appTree,
+		templates: mergeTrees(['app-addon/templates', 'app/templates'])
 	}
 });
 
