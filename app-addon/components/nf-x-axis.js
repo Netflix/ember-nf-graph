@@ -60,9 +60,13 @@ export default Ember.Component.extend(HasGraphParent, {
     return this.get('graph.graphWidth');
   }.property('graph.graphWidth'),
 
+  tickFactory: function(xScale, tickCount, xData, xScaleType) {
+    return (xScaleType === 'ordinal') ? xData : xScale.ticks(tickCount);
+  },
+
   ticks: property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'graph.xData',
     function(tickCount, xScale, tickPadding, tickLength, height, orient, tickFilter, xScaleType, xData) {
-      var ticks = (xScaleType === 'ordinal') ? xData : xScale.ticks(tickCount);
+      var ticks = this.tickFactory(xScale, tickCount, xData, xScaleType);
       var y1 = orient === 'top' ? height : 0;
       var y2 = y1 + tickLength;
       var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);  
