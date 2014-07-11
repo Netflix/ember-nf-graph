@@ -227,7 +227,7 @@ export default Ember.Component.extend({
     }
   ),
 
-  graphHeight: property('height', 'paddingType', 'paddingBottom', 'xAxis.height',
+  graphHeight: property('height', 'paddingTop', 'paddingBottom', 'xAxis.height',
     function (height, paddingTop, paddingBottom, xAxisHeight) {
       paddingTop = paddingTop || 0;
       paddingBottom = paddingBottom || 0;
