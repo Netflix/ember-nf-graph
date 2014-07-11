@@ -16,9 +16,14 @@ function unwatchedTree(dir) {
 }
 
 EmberCLIEmberDVC.prototype.treeFor = function treeFor(name) {
-  var treePath =  path.join('node_modules', 'ember-cli-ember-dvc', name + '-addon');
+  var treePath =  path.join('node_modules', 'ember-cli-ember-dvc');
 
-  if (fs.existsSync(treePath)) {
+  if (name === 'templates') {
+    treePath = path.join(treePath, 'app-addon', 'templates');
+  } else {
+    treePath = path.join(treePath, name + '-addon');
+  }
+   if (fs.existsSync(treePath)) {
     return unwatchedTree(treePath);
   }
 };
