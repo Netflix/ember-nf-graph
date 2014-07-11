@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { property } from '../utils/computed-property-helpers';
 
 export default Ember.Component.extend({
   tagName: 'g',
@@ -50,41 +51,38 @@ export default Ember.Component.extend({
     return this.get('graph.height');
   }.property('graph.height'),
 
-  ticks: function(){
-    var yScale = this.get('graph.yScale');
-    var tickCount = this.get('tickCount');
-    var scaleType = this.get('graph.yScaleType');
-    var tickPadding = this.get('tickPadding');
-    var axisLineX = this.get('axisLineX');
-    var tickLength = this.get('tickLength');
-    var orient = this.get('orient');
-    var tickFilter = this.get('tickFilter');
-    var ticks = yScale.ticks(tickCount);
-
-    if (scaleType === 'log') {
+  tickFactory: function(yScale, tickCount, yData, yScaleType) {
+    var ticks = yScaleType === 'ordinal' ? yData : yScale.ticks(tickCount);
+    if (yScaleType === 'log') {
       var step = Math.round(ticks.length / tickCount);
       ticks = ticks.filter(function (tick, i) {
         return i % step === 0;
       });
     }
+    return ticks;
+  },
 
-    var result = ticks.map(function (tick) {
-      return {
-        value: tick,
-        y: yScale(tick),
-        x1: axisLineX + tickLength,
-        x2: axisLineX,
-        labelx: orient === 'right' ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding),
-      };
-    });
+  ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'orient', 'tickFilter', 'graph.yData',
+    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, orient, tickFilter, yData) {
+      var ticks = this.tickFactory(yScale, tickCount, yData, yScaleType);
 
-    if(tickFilter) {
-      result = result.filter(tickFilter);
+      var result = ticks.map(function (tick) {
+        return {
+          value: tick,
+          y: yScale(tick),
+          x1: axisLineX + tickLength,
+          x2: axisLineX,
+          labelx: orient === 'right' ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding),
+        };
+      });
+
+      if(tickFilter) {
+        result = result.filter(tickFilter);
+      }
+
+      return result;
     }
-
-    return result;
-  }.property('graph.yScale', 'tickCount', 'graph.yScaleType',
-    'tickPadding', 'axisLineX', 'orient'),
+  ),
 
   axisLineX: function(){
     var orient = this.get('orient');
