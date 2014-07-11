@@ -59,7 +59,7 @@
   stroke-width: 1;
   fill: none;
   cursor: default;
-  stroke: red; }
+  stroke: #ca0000; }
   .graph-container .graph-line .graph-line-line.selected {
     stroke-width: 2; }
 .graph-container .graph-line .graph-line-mask {
@@ -73,7 +73,7 @@
   stroke-width: 0; }
 .graph-container .graph-area .graph-area-line {
   stroke-width: 1px;
-  stroke: red;
+  stroke: #ca0000;
   fill: none; }
 .graph-container .graph-area.selected .graph-area-line {
   stroke-width: 2px; }
@@ -114,7 +114,7 @@
 .graph-container .graph-y-diff.positive text {
   fill: black; }
 .graph-container .graph-y-diff.negative rect {
-  fill: red; }
+  fill: #ca0000; }
 .graph-container .graph-y-diff.negative text {
   fill: white; }
 .graph-container .graph-y-diff.orient-right text {

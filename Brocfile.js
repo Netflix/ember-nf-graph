@@ -6,6 +6,13 @@ var exportTree = require('broccoli-export-tree');
 var pickFiles = require('broccoli-static-compiler');
 var sassImageCompiler = require('broccoli-sass-image-compiler');
 
+function unwatchedTree(dir) {
+  return {
+    read:    function() { return dir; },
+    cleanup: function() { }
+  };
+}
+
 var appTree = mergeTrees(['app', 'app-addon'], { overwrite: true });
 
 var imageTree = sassImageCompiler('images', {
@@ -27,7 +34,7 @@ var exportedCss = exportTree(compiledCss, {
 
 var app = new EmberApp({
 	trees: {
-		vendor: mergeTrees(['vendor', 'vendor-addon']),
+		vendor: mergeTrees(['vendor', unwatchedTree('vendor-addon')]),
 		app: appTree,
 		templates: mergeTrees(['app-addon/templates', 'app/templates'])
 	}

@@ -139,7 +139,7 @@ $muted-red:    #dbaaaa;
       stroke-width: 1;
       fill: none;
       cursor: default; //HACK: because of global cursor:pointer setting all all graph paths in vis.scss
-      stroke: red;
+      stroke: $red;
       
       &.selected {
         stroke-width: 2;
@@ -163,7 +163,7 @@ $muted-red:    #dbaaaa;
 
     .graph-area-line {
       stroke-width: 1px;
-      stroke: red;
+      stroke: $red;
       fill: none;
     }
 
@@ -241,7 +241,7 @@ $muted-red:    #dbaaaa;
 
     &.negative {
       rect {
-        fill: red;
+        fill: $red;
       }
 
       text {
