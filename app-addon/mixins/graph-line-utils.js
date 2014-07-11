@@ -7,7 +7,7 @@ export default Ember.Mixin.create({
         var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
 
         return function(data) {
-        	if(!data) {
+        	if(!data || data.length === 0) {
         		return 'M0,0';
         	}
         	
