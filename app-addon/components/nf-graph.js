@@ -1,6 +1,15 @@
 import Ember from 'ember';
 import { property, observer } from '../utils/computed-property-helpers';
 
+var SCALE_TYPES = {
+  'linear': d3.scale.linear,
+  'power': function () {
+    return d3.scale.pow().exponent(3);
+  },
+  'log': d3.scale.log,
+  'ordinal': d3.scale.ordinal
+};
+
 var computedAlias = Ember.computed.alias;
 var computedBool = Ember.computed.bool;
 
@@ -18,22 +27,34 @@ var domainProperty = function(axis) {
   return property(
     axis + 'Data', axis + 'DomainMode', axis + 'Min', axis + 'Max', axis + 'ScaleType',
     function(data, domainMode, min, max, scaleType) {
-      var extent = [min, max];
-      if(domainMode === 'auto') {
-        extent = d3.extent(data);
-        this.set(axis + 'Min', extent[0]);
-        this.set(axis + 'Max', extent[1]);
+      var domain = null;
+
+      if(scaleType === 'ordinal') {
+        this.set(axis + 'Min', data[0]);
+        this.set(axis + 'Max', data[data.length - 1]);
+        domain = data;
+      } else {
+        var extent = [min, max];
+
+        if(domainMode === 'auto') {
+          extent = d3.extent(data);
+          this.set(axis + 'Min', extent[0]);
+          this.set(axis + 'Max', extent[1]);
+        }
+
+        if(scaleType === 'log') {
+          if (extent[0] <= 0) {
+            extent[0] = 1;
+          }
+          if (domain[1] <= 0) {
+            extent[1] = 1;
+          }
+        }
+
+        domain = extent;
       }
 
-      if(scaleType == 'log') {
-        if (extent[0] <= 0) {
-          extent[0] = 1;
-        }
-        if (domain[1] <= 0) {
-          extent[1] = 1;
-        }
-      }
-      return extent;
+      return domain;
     }
   );
 };
@@ -45,22 +66,16 @@ var scaleProperty = function(axis) {
       var scale = scaleFactory();
 
       if(scaleType === 'ordinal') {
-        return scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+        scale = scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+      } else {        
+        scale = scale.domain(domain).range(range);
       }
-      
-      return scale.domain(domain).range(range);
+
+      return scale;
     }
   );
 };
 
-var SCALE_TYPES = {
-  'linear': d3.scale.linear,
-  'power': function () {
-    return d3.scale.pow().exponent(3);
-  },
-  'log': d3.scale.log,
-  'ordinal': d3.scale.ordinal
-};
 
 export default Ember.Component.extend({
   tagName: 'div',
@@ -84,8 +99,11 @@ export default Ember.Component.extend({
   xScaleType: 'linear',
   yScaleType: 'linear',
   
-  xOrdinalPadding: 5,
-  xOrdinalOuterPadding: 5,
+  xOrdinalPadding: 0.1,
+  xOrdinalOuterPadding: 0.1,
+
+  yOrdinalPadding: 0.1,
+  yOrdinalOuterPadding: 0.1,
 
   yAxis: null,
   xAxis: null,

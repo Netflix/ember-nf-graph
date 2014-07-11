@@ -11,7 +11,7 @@ export default Ember.ObjectController.extend({
 				y: (i+1) * 100
 			});
 		}
-
+		
 		return arr;
 	}.property()
 });

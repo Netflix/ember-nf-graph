@@ -2,25 +2,24 @@ import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import DataGraphic from '../mixins/graph-data-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
+import { property } from '../utils/computed-property-helpers';
 
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
 	tagName: 'g',
 
-	bars: function(){
-		var xScale = this.get('graph.xScale');
-		var yScale = this.get('graph.yScale');
-		var data = this.get('data');
-		var graphHeight = this.get('graph.graphHeight');
+	bars: property('graph.xScale', 'graph.yScale', 'sortedData', 'graph.graphHeight',
+		function(xScale, yScale, sortedData, graphHeight) {
+			var rangeBand = xScale.rangeBand();
 
-		return data.map(function(data, i) {
-			var h = yScale(data[1]);
-			
-			return {
-				x: xScale(data[0]),
-				y: graphHeight - h,
-				width: xScale.rangeBand(),
-				height: h
-			};
-		});
-	}.property('graph.xScale', 'graph.yScale', 'data', 'graph.graphHeight')
+			return sortedData.map(function(d) {
+				var h = yScale(d[1]);
+				return {
+					x: xScale(d[0]),
+					y: h,
+					width: rangeBand,
+					height: graphHeight - h
+				};
+			});
+		}
+	)
 });

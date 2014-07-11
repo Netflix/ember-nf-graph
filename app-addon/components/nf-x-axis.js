@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import { property } from '../utils/computed-property-helpers';
 
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
@@ -59,55 +60,31 @@ export default Ember.Component.extend(HasGraphParent, {
     return this.get('graph.graphWidth');
   }.property('graph.graphWidth'),
 
-  ticks: function(){
-    var xScale = this.get('graph.xScale');
-    var tickCount = this.get('tickCount');
-    var orient = this.get('orient');
-    var height = this.get('height');
-    var tickLength = this.get('tickLength');
-    var ticks = this.getScaleTicks(xScale, tickCount);
-    var y1 = orient === 'top' ? height : 0;
-    var y2 = y1 + tickLength;
-    var tickPadding = this.get('tickPadding');
-    var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);    
-    var result = [];
-    var tickFilter = this.get('tickFilter');
+  ticks: property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'graph.xData',
+    function(tickCount, xScale, tickPadding, tickLength, height, orient, tickFilter, xScaleType, xData) {
+      var ticks = (xScaleType === 'ordinal') ? xData : xScale.ticks(tickCount);
+      var y1 = orient === 'top' ? height : 0;
+      var y2 = y1 + tickLength;
+      var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);  
+      var halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
+      var result = ticks.map(function(tick) {
+        return {
+          value: tick,
+          x: xScale(tick) + halfBandWidth,
+          y1: y1,
+          y2: y2,
+          labely: labely
+        };
+      });
 
-    result = ticks.map(function (tick) {
-      return {
-        value: tick,
-        x: xScale(tick),
-        y1: y1,
-        y2: y2,
-        labely: labely
-      };
-    });
-
-
-    if(tickFilter) {
-      result = result.filter(tickFilter);
-    }
-
-    return result;
-
-  }.property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter'),
-
-  getScaleTicks: function(scale, count){
-    var xScaleType = this.get('graph.xScaleType');
-
-    if(xScaleType === 'ordinal') {
-      var visibleData = this.get('visibleData');
-      if(visibleData) {
-        var xScale = this.get('graph.xScale');
-        return visibleData.map(function(d) {
-          return xScale(d[0]);
-        });
+      if(tickFilter) {
+        result = result.filter(tickFilter);
       }
-      return [];
-    }
 
-    return scale.ticks(count);
-  },
+      return result;
+    }
+  ),
+
 
   _updateGraphXAxis: function(){
     this.graph.set('xAxis', this);
