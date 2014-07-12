@@ -155,6 +155,22 @@ export default Ember.Component.extend({
     graphics.removeObject(graphic);
   },
 
+  _hoverChangeHandlers: property(function(){
+    return [];
+  }),
+
+  _hoverEndHandlers: property(function(){
+    return [];
+  }),
+
+  hoverChange: function(handler) {
+    this.get('_hoverChangeHandlers').pushObject(handler);
+  },
+
+  hoverEnd: function(handler) {
+    this.get('_hoverEndHandlers').pushObject(handler);
+  },
+  
   onDidGraphHoverChange: function (e, mouseX, mouseY) {
     var graphics = this.get('graphics');
     
@@ -167,10 +183,8 @@ export default Ember.Component.extend({
       y: mouseY
     };
 
-    graphics.forEach(function (g) {
-      if (g.didGraphHoverChange) {
-        g.didGraphHoverChange(e, data);
-      }
+    this.get('_hoverChangeHandlers').forEach(function(handler) {
+      handler(e, data);
     });
   },
 
@@ -180,10 +194,8 @@ export default Ember.Component.extend({
       return;
     }
 
-    graphics.forEach(function (g) {
-      if (g.didGraphHoverEnd) {
-        g.didGraphHoverEnd(e);
-      }
+    this.get('_hoverEndHandlers').forEach(function(handler) {
+      handler(e);
     });
   },
 

@@ -1,31 +1,29 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import { observer } from '../utils/computed-property-helpers';
 
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
-  // templateName: 'ember-cli-ember-dvc/components/graph-crosshair',
   
   isVisible: false,
 
   classNameBindings: ['class'],
 
-  height: function (){
-    return this.get('graph.graphHeight');
-  }.property('graph.graphHeight'),
+  height: Ember.computed.alias('graph.graphHeight'),
 
-  width: function(){
-    return this.get('graph.graphWidth');
-  }.property('graph.graphWidth'),
+  width: Ember.computed.alias('graph.graphWidth'),
 
   class: 'graph-crosshair',
 
-  didGraphHoverChange: function(e, data){
-    this.set('x', data.x);
-    this.set('y', data.y);
-    this.set('isVisible', true);
-  },
-
-  didGraphHoverEnd: function(){
-    this.set('isVisible', false);
-  }
+  _hasGraph: observer('graph', function(graph){
+    var self = this;
+    graph.hoverChange(function(e, data){
+      self.set('x', data.x);
+      self.set('y', data.y);
+      self.set('isVisible', true);
+    });
+    graph.hoverEnd(function(){
+      self.set('isVisible', false);
+    });
+  })
 });

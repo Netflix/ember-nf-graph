@@ -1,7 +1,7 @@
 <h1>Graph - Basics</h1>
 
 {{#nf-graph width="500" height="300" showLanes="true"}}
-	{{#nf-x-axis tickFilter=xTickFilter tickFactory=xTickFactory}}
+	{{#nf-x-axis}}
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
@@ -11,9 +11,9 @@
 
 	{{#nf-graph-content}}
 		{{nf-line data=lineData}}
+		{{nf-crosshair}}
 	{{/nf-graph-content}}
 
-	{{nf-crosshair}}
 {{/nf-graph}}
 
 <pre>
