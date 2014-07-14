@@ -11,7 +11,9 @@ export default Ember.Component.extend({
 
   attributeBindings: ['transform'],
 
-  classNamesBindings: [':nf-y-axis', 'orientClass'],
+  classNamesBindings: ['orientClass'],
+  
+  classNames: ['nf-y-axis'],
 
   _tickFilter: null,
 
