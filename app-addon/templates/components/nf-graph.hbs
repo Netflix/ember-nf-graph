@@ -1,8 +1,11 @@
-<svg class="graph-container" {{bind-attr width=width height=height}}>
-  <rect x=0 y=0 class="background" {{bind-attr width=width height=height}}></rect>
+<svg class="nf-graph" {{bind-attr width=width height=height}}>
+	<defs>
+  	<rect id="nfGraphBackground" x=0 y=0 {{bind-attr width=width height=height}}></rect>
+	</defs>
+
+	<use xlink:href="#nfGraphBackground" class="background"></use>
+
   {{yield}}
-
-
 </svg>
 
 {{#if debug}}

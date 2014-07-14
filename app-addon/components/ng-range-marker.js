@@ -17,11 +17,11 @@ export default Ember.Component.extend(HasGraphParent, {
 	// height in pixels
 	height: 0,
 
-	width: property('xMin', 'xMax', 'xScale', function(xMin, xMax, xScale) {
-		return xScale(xMax - xMin)
+	x2: property('xMax', 'xScale', function(xMax, xScale) {
+		return xScale(xMax);
 	}),
 
-	x: property('xMin', 'xScale', function(xMin, xScale) {
+	x1: property('xMin', 'xScale', function(xMin, xScale) {
 		return xScale(xMin);
 	}),
 

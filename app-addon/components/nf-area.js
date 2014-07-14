@@ -13,7 +13,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     tagName: 'g',
     // templateName: 'ember-cli-ember-dvc/components/graph-area',
     
-    classNameBindings: [':graph-area', 'isSelected:selected', 'selectable'],
+    classNameBindings: [':nf-area', 'isSelected:selected', 'selectable'],
 
     interpolator: 'monotone',
     nextStrip: null,

@@ -13,7 +13,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
   // templateName: 'ember-cli-ember-dvc/components/graph-line',
 
   interpolator: 'linear',
-  classNames: ['graph-line'],
+  classNames: ['nf-line'],
   
   dotRadius: 3,
 

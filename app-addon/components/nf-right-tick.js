@@ -8,7 +8,7 @@ export default Ember.Component.extend({
 
 	value: null,
 
-	classNames: ['graph-right-tick'],
+	classNames: ['nf-right-tick'],
 
 	isVisible: property('value', function(value){
 		return value !== null && !isNaN(value);

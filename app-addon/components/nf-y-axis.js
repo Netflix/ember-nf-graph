@@ -3,11 +3,15 @@ import { property } from '../utils/computed-property-helpers';
 
 export default Ember.Component.extend({
   tagName: 'g',
-  // templateName: 'ember-cli-ember-dvc/components/graph-y-axis',
+  tickCount: 5,
+  tickLength: 5,
+  tickPadding: 3,
+  width: 20,
+  orient: 'left',
 
   attributeBindings: ['transform'],
 
-  classNameBindings: ['class'],
+  classNamesBindings: [':nf-y-axis', 'orientClass'],
 
   _tickFilter: null,
 
@@ -18,10 +22,10 @@ export default Ember.Component.extend({
     return this._tickFilter;
   }.property(),
 
-  'class': function(){
-    var orient = this.get('orient');
-    return orient === 'left' ? 'y-axis' : 'y-axis orient-right';
+  orientClass: function(){
+    return 'orient-' + this.get('orient');
   }.property('orient'),
+
 
   transform: function(){
     var x = this.get('x');
@@ -40,13 +44,6 @@ export default Ember.Component.extend({
   y: function(){
     return this.get('graph.graphY');
   }.property('graph.graphY'),
-
-  tickCount: 5,
-  tickLength: 5,
-  tickPadding: 3,
-  width: 20,
-  orient: 'left',
-
   height: function(){
     return this.get('graph.height');
   }.property('graph.height'),

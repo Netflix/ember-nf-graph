@@ -12,6 +12,8 @@ export default Ember.Component.extend(HasGraphParent, {
 	yMin: null,
 	yMax: null,
 
+	classNames: ['nf-selection-box'],
+
 	x: function(){
 		var xScale = this.get('graph.xScale');
 		return xScale(this.get('xMin')) || 0;

@@ -1,18 +1,22 @@
-<rect x=0 y=0 class="background" {{bind-attr width=width height=height}}></rect>
+<defs>
+  <rect id="nfGraphContentBackground" x=0 y=0 class="background" {{bind-attr width=width height=height}}></rect>
+</defs>
+
+<use class="background" xlink:href="#nfGraphContentBackground"></use>
 
 {{#if graph.hasRendered}}
   {{#if graph.hasData}}
     {{#if graph.showLanes}}
-      <g class="grid-lanes">
+      <g class="nf-grid-lanes">
         {{#each lane in gridLanes}}
-          <rect class="grid-lane" {{bind-attr x=lane.x y=lane.y width=width height=lane.height }}></rect>
+          <rect {{bind-attr x=lane.x y=lane.y width=width height=lane.height }}></rect>
         {{/each}}
       </g>
 
       {{#if graph.showXAxis}}
-        <g class="x-ticks">
+        <g class="nf-grid-frets">
           {{#each tick in graph.xAxis.ticks}}
-            <line class="x-tick" {{bind-attr x1=tick.x y1="0" x2=tick.x y2=height}}></line>
+            <line {{bind-attr x1=tick.x y1="0" x2=tick.x y2=height}}></line>
           {{/each}}
         </g>
       {{/if}}

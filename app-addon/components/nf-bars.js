@@ -7,6 +7,8 @@ import { property } from '../utils/computed-property-helpers';
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
 	tagName: 'g',
 
+	classNames: ['nf-bars'],
+
 	bars: property('graph.xScale', 'graph.yScale', 'sortedData', 'graph.graphHeight',
 		function(xScale, yScale, sortedData, graphHeight) {
 			var rangeBand = xScale.rangeBand();

@@ -8,7 +8,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],
-  classNames: ['x-axis'],
+  classNames: ['nf-x-axis'],
 
   height: 20,
   tickCount: 12,

@@ -7,7 +7,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	classNameBindings: ['positive', 'negative', 'orientRight'],
 
-	classNames: ['graph-y-diff'],
+	classNames: ['nf-y-diff'],
 
 	a: null,
 	b: null,

@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   tagName: 'g',
   // templateName: 'ember-cli-ember-dvc/components/graph-content',
   
-  classNameBindings: ['classBinding'],
+  classNames: ['nf-graph-content'],
 
   attributeBindings: ['transform'],
 
@@ -42,15 +42,6 @@ export default Ember.Component.extend({
 
     return lanes;
   }.property('graph.yAxis.ticks', 'width'),
-
-  classBinding: function(){
-    var cls = this.get('class');
-    var result = 'graph';
-    if(cls) {
-      return result + ' ' + cls;
-    }
-    return result;
-  }.property('class'),
 
   _setup: function(){
     var graph = this.nearestWithProperty('isGraph');

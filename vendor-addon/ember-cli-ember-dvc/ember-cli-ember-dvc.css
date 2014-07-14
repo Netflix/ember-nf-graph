@@ -1,3 +1,9 @@
+/* color palette - Visual Design Guidelines, page 40  */
+/* https://www.dropbox.com/sh/y07t0dtnv0np7tt/yBzMfmBJzq/NFLX_03_VisualDesignGuidelines_LATEST.pdf */
+/* variables are color names for design reference
+/* primary */
+/* secondary */
+/* muted text */
 .nf-icon.arrow-asc, .nf-table .nf-sort-ascending .nf-sort-arrow {
   background-repeat: once;
   display: inline-block;
@@ -21,101 +27,109 @@
 .nf-table .nf-sort-descending .nf-sort-arrow {
   visibility: visible; }
 
-/* color palette - Visual Design Guidelines, page 40  */
-/* https://www.dropbox.com/sh/y07t0dtnv0np7tt/yBzMfmBJzq/NFLX_03_VisualDesignGuidelines_LATEST.pdf */
-/* variables are color names for design reference
-/* primary */
-/* secondary */
-/* muted text */
-.graph-container > .background {
+.nf-graph > .background {
   fill: #f5f6f7; }
-.graph-container .graph > .background {
-  fill: white; }
-.graph-container .grid-lanes .grid-lane {
-  fill: #f5f6f7; }
-.graph-container .x-axis g.tick text {
-  dominant-baseline: text-before-edge;
+.nf-graph > .message {
+  font-size: 2em;
+  dominant-baseline: central;
   text-anchor: middle; }
-.graph-container .x-axis g.tick line {
-  stroke: #d3dbdd;
-  stroke-width: 1; }
-.graph-container .x-axis.orient-top g.tick text {
-  dominant-baseline: auto; }
-.graph-container .x-ticks line {
+
+.nf-graph .nf-graph-content > .background {
+  fill: #ffffff; }
+.nf-graph .nf-graph-content .nf-grid-lanes rect {
+  fill: #f5f6f7; }
+.nf-graph .nf-graph-content .nf-grid-frets line {
   stroke: #d3dbdd;
   stroke-width: 0.5; }
-.graph-container .y-axis .tick text {
+
+.nf-graph .nf-x-axis > line {
+  stroke: #d3dbdd;
+  stroke-width: 1; }
+.nf-graph .nf-x-axis g.tick text {
+  dominant-baseline: text-before-edge;
+  text-anchor: middle; }
+.nf-graph .nf-x-axis g.tick line {
+  stroke: #d3dbdd;
+  stroke-width: 1; }
+.nf-graph .nf-x-axis.orient-top g.tick text {
+  dominant-baseline: auto; }
+
+.nf-graph .nf-y-axis > line {
+  stroke: #d3dbdd;
+  stroke-width: 1; }
+.nf-graph .nf-y-axis .tick text {
   dominant-baseline: central;
   text-anchor: end; }
-.graph-container .y-axis .tick line {
+.nf-graph .nf-y-axis .tick line {
   stroke: #d3dbdd;
   stroke-width: 1; }
-.graph-container .y-axis.orient-right g.tick text {
+.nf-graph .nf-y-axis.orient-right g.tick text {
   text-anchor: start; }
-.graph-container .y-axis-line, .graph-container .x-axis-line {
-  stroke: #d3dbdd;
-  stroke-width: 1; }
-.graph-container .graph-line .graph-line-line {
+
+.nf-line .line {
   stroke-width: 1;
   fill: none;
   cursor: default;
   stroke: #ca0000; }
-  .graph-container .graph-line .graph-line-line.selected {
+  .nf-line .line.selected {
     stroke-width: 2; }
-.graph-container .graph-line .graph-line-mask {
+.nf-line .interaction-mask {
   fill: none;
   stroke: transparent;
   stroke-width: 15;
   cursor: pointer; }
-.graph-container .graph-area .graph-area-path {
+.nf-line .tracking-dot {
+  visibility: visible;
+  cursor: default; }
+  .nf-line .tracking-dot.selectable {
+    cursor: pointer; }
+
+.nf-area > path {
   fill: rgba(255, 0, 0, 0.5);
   stroke: none;
   stroke-width: 0; }
-.graph-container .graph-area .graph-area-line {
-  stroke-width: 1px;
-  stroke: #ca0000;
-  fill: none; }
-.graph-container .graph-area.selected .graph-area-line {
-  stroke-width: 2px; }
-.graph-container .graph-area.selected .graph-area-path {
+.nf-area.selected > path {
   fill: rgba(0, 0, 255, 0.5); }
-.graph-container .graph-area.selectable {
+.nf-area.selectable {
   cursor: pointer; }
-.graph-container .message {
-  font-size: 2em;
-  dominant-baseline: central;
-  text-anchor: middle; }
-.graph-container .graph-tracking-dot {
+.nf-area .tracking-dot {
   visibility: visible;
   cursor: default; }
-  .graph-container .graph-tracking-dot.selectable {
+  .nf-area .tracking-dot.selectable {
     cursor: pointer; }
-.graph-container .graph-crosshair .vertical {
-  stroke: #d3dbdd;
-  stroke-width: 1px;
-  visibility: visible; }
-.graph-container .graph-crosshair .horizontal {
-  stroke: #d3dbdd;
-  stroke-width: 1px;
-  visibility: visible; }
-.graph-container .graph-selection-box {
-  fill: none;
-  stroke: #999999;
-  stroke-width: 1; }
-.graph-container .graph-right-tick {
+
+.nf-y-diff.positive rect {
+  fill: lime; }
+.nf-y-diff.positive text {
+  fill: black; }
+.nf-y-diff.negative rect {
+  fill: #ca0000; }
+.nf-y-diff.negative text {
+  fill: white; }
+.nf-y-diff.orient-right text {
+  text-anchor: end; }
+
+.nf-right-tick > path {
   fill: white;
   stroke: #999999;
   stroke-width: 1; }
-.graph-container .graph-right-tick-line {
+.nf-right-tick > line {
   stroke: #999999;
   stroke-width: 1; }
-.graph-container .graph-y-diff.positive rect {
-  fill: lime; }
-.graph-container .graph-y-diff.positive text {
-  fill: black; }
-.graph-container .graph-y-diff.negative rect {
+
+.nf-crosshair .vertical {
+  stroke: #d3dbdd;
+  stroke-width: 1px;
+  visibility: visible; }
+.nf-crosshair .horizontal {
+  stroke: #d3dbdd;
+  stroke-width: 1px;
+  visibility: visible; }
+
+.nf-selection-box > rect {
+  fill: none;
+  stroke: #999999;
+  stroke-width: 1; }
+
+.nf-bars rect {
   fill: #ca0000; }
-.graph-container .graph-y-diff.negative text {
-  fill: white; }
-.graph-container .graph-y-diff.orient-right text {
-  text-anchor: end; }

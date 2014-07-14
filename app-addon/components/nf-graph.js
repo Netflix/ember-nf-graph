@@ -257,17 +257,20 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function () {
-    var graph = this.$('.graph');
+    var graphContentGroup = this.$('.graph');
     var self = this;
 
-    graph.on('mousemove', function (e) {
+    this.set('svg', this.$('svg'));
+    this.set('graphContentGroup', graphContentGroup);
+
+    graphContentGroup.on('mousemove', function (e) {
       Ember.run(function () {
-        var mouse = self.mousePoint(graph[0], e);
+        var mouse = self.mousePoint(graphContentGroup[0], e);
         self.onDidGraphHoverChange(e, mouse[0], mouse[1]);
       });
     });
 
-    graph.on('mouseleave', function (e) {
+    graphContentGroup.on('mouseleave', function (e) {
       Ember.run(function () {
         self.onDidGraphHoverEnd(e);
       });

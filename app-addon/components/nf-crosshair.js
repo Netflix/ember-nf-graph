@@ -7,13 +7,12 @@ export default Ember.Component.extend(HasGraphParent, {
   
   isVisible: false,
 
-  classNameBindings: ['class'],
+  classNames: ['nf-crosshair'],
 
   height: Ember.computed.alias('graph.graphHeight'),
 
   width: Ember.computed.alias('graph.graphWidth'),
 
-  class: 'graph-crosshair',
 
   _hasGraph: observer('graph', function(graph){
     var self = this;

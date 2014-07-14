@@ -1,5 +1,14 @@
+@import './colors';
 @import './compiled-images';
 @import './components/nf-table';
-@import './graph';
-
-// test this
+@import './components/nf-graph';
+@import './components/nf-graph-content';
+@import './components/nf-x-axis';
+@import './components/nf-y-axis';
+@import './components/nf-line';
+@import './components/nf-area';
+@import './components/nf-y-diff';
+@import './components/nf-right-tick';
+@import './components/nf-crosshair';
+@import './components/nf-selection-box';
+@import './components/nf-bars';
