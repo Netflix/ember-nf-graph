@@ -6,48 +6,29 @@ export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
 
 	classNames: ['nf-range-marker'],
-	classNameBindings: ['labelOrientClass'],
-
-	labelOrientClass: property('labelOrient', function(labelOrient) {
-		return 'label-orient-' + labelOrient;
-	}),
 
 	xMin: 0,
 	xMax: 0,
-	margin: 5,
+	topMargin: 15,
 	height: 10,
 
-	labelOrient: 'left',
-  labelPadding: 5,
+  labelPadding: 3,
 
 	x: property('xMin', 'graph.xScale', function(xMin, xScale) {
 		return xScale(xMin);
 	}),
 
-	y: property('prevMarker.y', 'prevMarker.height', 'margin', 'container.orient', 'graph.graphHeight', 'height',
-		function(prevMarkerY, prevMarkerHeight, margin, orient, graphHeight, height) {
-			if(orient === 'bottom') {
-				return (prevMarkerY || graphHeight) - margin - height;
-			}
-			// otherwise orient === top
-			return (prevMarkerY || 0) + (prevMarkerHeight || 0) + margin;
-		}
-	),
+	y: property('graphHeight', 'prevMarker.y', 'prevMarker.topMargin', 'prevMarker.topPadding', function(){
+		return 0;
+	}),
 
 	width: property('xMin', 'xMax', 'graph.xScale', function(xMin, xMax, xScale) {
 		return xScale(xMax - xMin);
 	}),
 
-	labelTransform: property('labelOrient', 'x', 'y', 'width', 'labelPadding', 'height',
-		function(orient, x, y, width, labelPadding, height) {
-			if(orient === 'right') {
-				x += width + labelPadding;
-			} else {
-				x -= labelPadding;
-			}
-
-			y += height / 2;
-
+	labelTransform: property('x', 'y', 'labelPadding',
+		function(x, y, labelPadding) {
+			y -= labelPadding;
 			return 'translate(%@ %@)'.fmt(x, y);
 		}
 	),

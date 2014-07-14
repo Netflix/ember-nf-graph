@@ -138,7 +138,4 @@
 .nf-range-marker rect {
   fill: #ca0000; }
 .nf-range-marker .label text {
-  dominant-baseline: central;
-  text-anchor: end; }
-.nf-range-marker.label-orient-right text {
   text-anchor: start; }
