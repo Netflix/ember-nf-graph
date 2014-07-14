@@ -138,4 +138,5 @@
 .nf-range-marker rect {
   fill: #ca0000; }
 .nf-range-marker .label text {
-  text-anchor: start; }
+  text-anchor: start;
+  dominant-baseline: hanging; }
