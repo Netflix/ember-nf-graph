@@ -46,7 +46,7 @@ var domainProperty = function(axis) {
           if (extent[0] <= 0) {
             extent[0] = 1;
           }
-          if (domain[1] <= 0) {
+          if (extent[1] <= 0) {
             extent[1] = 1;
           }
         }
