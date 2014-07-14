@@ -1,0 +1,18 @@
+.nf-graph .nf-graph-content {
+	> .background {
+		fill: $white;
+	}
+
+	.nf-grid-lanes {
+    rect {
+      fill: $pale-gray;
+    }
+  }
+
+  .nf-grid-frets {
+    line {
+      stroke: $light-gray;
+      stroke-width: .5;
+    }
+  }
+}

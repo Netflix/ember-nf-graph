@@ -1,0 +1,26 @@
+.nf-y-axis {
+  > line {
+    stroke: $light-gray;
+    stroke-width: 1;
+  }
+
+  .tick {
+    text {
+      dominant-baseline: central;
+      text-anchor: end;
+    }
+
+    line {
+      stroke: $light-gray;
+      stroke-width: 1;
+    }
+  }
+
+  &.orient-right {
+    g.tick {
+      text {
+        text-anchor: start;
+      }
+    }
+  }
+}

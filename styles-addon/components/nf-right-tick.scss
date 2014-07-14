@@ -1,0 +1,12 @@
+.nf-right-tick {
+	> path {
+    fill: white;
+    stroke: $gray;
+    stroke-width: 1;
+  }
+
+  > line {
+    stroke: $gray;
+    stroke-width: 1;
+  }
+}

@@ -1,0 +1,13 @@
+.nf-crosshair {
+  .vertical {
+    stroke: $light-gray;
+    stroke-width: 1px;
+    visibility: visible; //HACK: b/c global blah blah same as above.
+  }
+
+  .horizontal {
+    stroke: $light-gray;
+    stroke-width: 1px;
+    visibility: visible; //HACK: curse you, Jeff! :P
+  }
+}

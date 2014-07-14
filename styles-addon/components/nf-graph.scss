@@ -1,0 +1,11 @@
+.nf-graph {
+  > .background {
+		fill: $pale-gray;
+	}
+
+	> .message {
+    font-size: 2em;
+    dominant-baseline: central;
+    text-anchor: middle;
+  }
+}

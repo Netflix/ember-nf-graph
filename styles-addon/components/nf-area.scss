@@ -1,0 +1,30 @@
+.nf-area {
+  > path {
+    fill: rgba(255,0,0,.5);
+    stroke: none;
+    stroke-width: 0;
+  }
+
+  &.selected {
+    .graph-area-line {
+      stroke-width: 2px;
+    }
+
+    .graph-area-path {
+      fill: rgba(0,0,255,.5);
+    }
+  }
+
+  &.selectable {
+    cursor: pointer;
+  }
+
+  .tracking-dot {
+    visibility: visible; //HACK: because of global visibility hiding in vis.scss
+    cursor: default; //HACK: because of global cursor: pointer setting on all graph circles in vis.scss
+
+    &.selectable {
+      cursor: pointer;
+    }
+  }
+}

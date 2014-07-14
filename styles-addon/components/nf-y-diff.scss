@@ -1,0 +1,25 @@
+.nf-y-diff {
+  &.positive {
+    rect {
+      fill: lime;
+    }
+
+    text {
+      fill: black;
+    }
+  }
+
+  &.negative {
+    rect {
+      fill: $red;
+    }
+
+    text {
+      fill: white;
+    }
+  }
+
+  &.orient-right text {
+    text-anchor: end;
+  }
+}

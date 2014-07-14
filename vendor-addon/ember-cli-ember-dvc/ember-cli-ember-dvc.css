@@ -42,36 +42,36 @@
   stroke: #d3dbdd;
   stroke-width: 0.5; }
 
-.nf-graph .nf-x-axis > line {
+.nf-x-axis > line {
   stroke: #d3dbdd;
   stroke-width: 1; }
-.nf-graph .nf-x-axis g.tick text {
+.nf-x-axis .tick text {
   dominant-baseline: text-before-edge;
   text-anchor: middle; }
-.nf-graph .nf-x-axis g.tick line {
+.nf-x-axis .tick line {
   stroke: #d3dbdd;
   stroke-width: 1; }
-.nf-graph .nf-x-axis.orient-top g.tick text {
+.nf-x-axis.orient-top g.tick text {
   dominant-baseline: auto; }
 
-.nf-graph .nf-y-axis > line {
+.nf-y-axis > line {
   stroke: #d3dbdd;
   stroke-width: 1; }
-.nf-graph .nf-y-axis .tick text {
+.nf-y-axis .tick text {
   dominant-baseline: central;
   text-anchor: end; }
-.nf-graph .nf-y-axis .tick line {
+.nf-y-axis .tick line {
   stroke: #d3dbdd;
   stroke-width: 1; }
-.nf-graph .nf-y-axis.orient-right g.tick text {
+.nf-y-axis.orient-right g.tick text {
   text-anchor: start; }
 
-.nf-line .line {
+.nf-line > path {
   stroke-width: 1;
   fill: none;
   cursor: default;
   stroke: #ca0000; }
-  .nf-line .line.selected {
+  .nf-line > path.selected {
     stroke-width: 2; }
 .nf-line .interaction-mask {
   fill: none;
@@ -88,7 +88,9 @@
   fill: rgba(255, 0, 0, 0.5);
   stroke: none;
   stroke-width: 0; }
-.nf-area.selected > path {
+.nf-area.selected .graph-area-line {
+  stroke-width: 2px; }
+.nf-area.selected .graph-area-path {
   fill: rgba(0, 0, 255, 0.5); }
 .nf-area.selectable {
   cursor: pointer; }
@@ -130,6 +132,3 @@
   fill: none;
   stroke: #999999;
   stroke-width: 1; }
-
-.nf-bars rect {
-  fill: #ca0000; }
