@@ -12,6 +12,14 @@
 	{{#nf-graph-content}}
 		{{nf-line data=lineData trackingMode="hover"}}
 		{{nf-crosshair}}
+		{{#nf-range-markers}}
+			{{#nf-range-marker xMin=20 xMax=88}}
+				<text>Number 2</text>
+			{{/nf-range-marker}}
+			{{#nf-range-marker xMin=56 xMax=120}}
+				<text>Numero Uno</text>
+			{{/nf-range-marker}}
+		{{/nf-range-markers}}
 	{{/nf-graph-content}}
 
 {{/nf-graph}}

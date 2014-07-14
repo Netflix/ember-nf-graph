@@ -33,6 +33,8 @@
   font-size: 2em;
   dominant-baseline: central;
   text-anchor: middle; }
+.nf-graph text {
+  font-size: 10px; }
 
 .nf-graph .nf-graph-content > .background {
   fill: #ffffff; }
@@ -132,3 +134,11 @@
   fill: none;
   stroke: #999999;
   stroke-width: 1; }
+
+.nf-range-marker rect {
+  fill: #ca0000; }
+.nf-range-marker .label text {
+  dominant-baseline: central;
+  text-anchor: end; }
+.nf-range-marker.label-orient-right text {
+  text-anchor: start; }

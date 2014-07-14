@@ -1,25 +1,60 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
 import { property } from '../utils/computed-property-helpers';
+import HasGraphParent from '../mixins/graph-has-graph-parent';
 
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
-	isRangeMarkerContainer: true,
 
-	orient: 'bottom',
-	markerMargin: 10,
+	classNames: ['nf-range-marker'],
+	classNameBindings: ['labelOrientClass'],
 
-	markers: property(function(){
-		return [];
+	labelOrientClass: property('labelOrient', function(labelOrient) {
+		return 'label-orient-' + labelOrient;
 	}),
 
-	registerMarker: function(marker) {
-		var markers = this.get('markers');
-		var prevMarker = markers[markers.length - 1];
-		
-		if(prevMarker) {
-			prevMarker.nextMarker = marker;
-			marker.prevMarker = prevMarker;
+	xMin: 0,
+	xMax: 0,
+	margin: 5,
+	height: 10,
+
+	labelOrient: 'left',
+  labelPadding: 5,
+
+	x: property('xMin', 'graph.xScale', function(xMin, xScale) {
+		return xScale(xMin);
+	}),
+
+	y: property('prevMarker.y', 'prevMarker.height', 'margin', 'container.orient', 'graph.graphHeight', 'height',
+		function(prevMarkerY, prevMarkerHeight, margin, orient, graphHeight, height) {
+			if(orient === 'bottom') {
+				return (prevMarkerY || graphHeight) - margin - height;
+			}
+			// otherwise orient === top
+			return (prevMarkerY || 0) + (prevMarkerHeight || 0) + margin;
 		}
-	}
+	),
+
+	width: property('xMin', 'xMax', 'graph.xScale', function(xMin, xMax, xScale) {
+		return xScale(xMax - xMin);
+	}),
+
+	labelTransform: property('labelOrient', 'x', 'y', 'width', 'labelPadding', 'height',
+		function(orient, x, y, width, labelPadding, height) {
+			if(orient === 'right') {
+				x += width + labelPadding;
+			} else {
+				x -= labelPadding;
+			}
+
+			y += height / 2;
+
+			return 'translate(%@ %@)'.fmt(x, y);
+		}
+	),
+
+	_setup: function(){
+		var container = this.nearestWithProperty('isRangeMarkerContainer');
+		container.registerMarker(this);
+		this.set('container', container);
+	}.on('init'),
 });

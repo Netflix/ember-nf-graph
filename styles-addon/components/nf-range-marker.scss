@@ -1,0 +1,18 @@
+.nf-range-marker {
+	rect {
+		fill: $red;
+	}
+
+	.label {
+		text {
+			dominant-baseline: central;
+			text-anchor: end;
+		}
+	}
+
+	&.label-orient-right {
+		text {
+			text-anchor: start;
+		}
+	}
+}

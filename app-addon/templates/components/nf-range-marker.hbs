@@ -1,1 +1,2 @@
-nf-range-marker.hbs
+<rect {{bind-attr x=x y=y width=width height=height}}></rect>
+<g class="label" {{bind-attr transform=labelTransform}}>{{yield}}</g>
