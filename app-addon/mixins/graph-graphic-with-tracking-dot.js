@@ -34,24 +34,29 @@ export default Ember.Mixin.create({
     }
   }.observes('trackedData', 'graph.xScale', 'graph.yScale'),
 
-  didGraphHoverChange: function(e, data){
-    var trackingMode = this.get('trackingMode');
-    var selected = this.get('isSelected');
+  _hasGraph: function(){
+    var self = this;
+    var graph = self.get('graph');
+    graph.hoverChange(function(e, data){
+      var trackingMode = self.get('trackingMode');
+      var selected = self.get('isSelected');
+      var xScale = self.get('graph.xScale');
+      
+      if(trackingMode === 'none' || (trackingMode.indexOf('selected-') === 0 && !selected)) {
+        self.set('trackedData', null);
+      } else {
+        var found = self.getNearestDataToXPosition(data.x, self.get('visibleData'), xScale);
+        self.set('trackedData', found ? {
+          x: found[0],
+          y: found[1]
+        } : null);
+      } 
+    });
 
-    if(trackingMode === 'none' || (trackingMode.indexOf('selected-') === 0 && !selected)) {
-      this.set('trackedData', null);
-    } else {
-      var found = this.getNearestDataToXValue(data.xValue, this.get('visibleData'));
-      this.set('trackedData', found ? {
-        x: found[0],
-        y: found[1]
-      } : null);
-    } 
-  },
-
-  didGraphHoverEnd: function(){
-    this._trackingModeDidChange();
-  },
+    graph.hoverEnd(function() {
+      self._trackingModeDidChange();
+    });
+  }.observes('graph'),
 
   _trackingModeDidChange: function(){
     var trackingMode = this.get('trackingMode');
@@ -60,6 +65,7 @@ export default Ember.Mixin.create({
     var last = this.get('lastVisibleData');
     var first = this.get('firstVisibleData');
     var data = null;
+
     switch(trackingMode) {
       case 'selected-snap-last':
         if(selectable && selected) {
@@ -78,6 +84,7 @@ export default Ember.Mixin.create({
         data = first;
         break;
     }
+    
     this.set('trackedData', data ? {
       x: data[0],
       y: data[1],
