@@ -1,10 +1,6 @@
 <svg class="nf-graph" {{bind-attr width=width height=height}}>
-	<defs>
-  	<rect id="nfGraphBackground" x=0 y=0 {{bind-attr width=width height=height}}></rect>
-	</defs>
-
-	<use xlink:href="#nfGraphBackground" class="background"></use>
-
+	<rect class="background" x=0 y=0 {{bind-attr width=width height=height}}></rect>
+  
   {{yield}}
 </svg>
 
