@@ -1,12 +1,13 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
+import HasGraphParent  from '../mixins/graph-has-graph-parent';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
   tickCount: 5,
   tickLength: 5,
   tickPadding: 3,
-  width: 20,
+  width: 40,
   orient: 'left',
 
   attributeBindings: ['transform'],
@@ -89,9 +90,8 @@ export default Ember.Component.extend({
     return orient === 'right' ? 0 : width;
   }.property('orient', 'width'),
 
-  _setup: function(){
-      var graph = this.nearestWithProperty('isGraph');
-      graph.set('yAxis', this);
-      this.set('graph', graph);
-  }.on('init')
+  _hasGraph: function(){
+    var graph = this.get('graph');
+    graph.set('yAxis', this);
+  }.observes('graph')
 });
