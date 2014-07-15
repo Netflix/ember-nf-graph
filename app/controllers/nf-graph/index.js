@@ -9,5 +9,11 @@ export default Ember.ObjectController.extend({
 		var ticks = [1, 10, 30, 50, 80, 99];
 
 		return ticks;
+	},
+
+	actions: {
+		test: function(){
+			console.log('test!');
+		}
 	}
 });

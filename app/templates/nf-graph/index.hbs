@@ -1,6 +1,11 @@
 <h1>Graph - Basics</h1>
 
-{{#nf-graph width="500" height="300" showLanes="true"}}
+{{#nf-graph width="500" height="300" showLanes="true" paddingTop=50}}
+
+	{{#nf-y-diff a=500 b=1000}}
+		<text {{action 'test'}}>500</text>
+	{{/nf-y-diff}}
+
 	{{#nf-x-axis}}
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
