@@ -19,7 +19,19 @@
     }
   }
 
-  &.orient-right text {
-    text-anchor: end;
+  .nf-y-diff-content {
+    text {
+      dominant-baseline: center;
+      text-anchor: start;
+    }
+  }
+
+  &.orient-right {
+
+    .nf-y-diff-content {
+      text {
+        text-anchor: end;
+      }
+    }
   }
 }

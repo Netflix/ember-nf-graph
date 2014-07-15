@@ -12,7 +12,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	a: null,
 	b: null,
-	textPadding: 5,
+	contentPadding: 5,
 	transition: 500,
 
 	diff: property('a', 'b', function(a, b){
@@ -41,23 +41,20 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	parentController: Ember.computed.alias('templateData.view.controller'),
 
-	textX: property('orientRight', 'x', 'width', 'textPadding', function(orientRight, x, width, textPadding) {
-		if(orientRight) {
-			return x + width - textPadding;
-		}
-		return x + textPadding;
+	contentX: property('orientRight', 'width', 'contentPadding', function(orientRight, width, contentPadding) {
+		return orientRight ? width - contentPadding : contentPadding;
 	}),
 
-	textY: property('y', 'height', 'textPadding', function(y, height, textPadding){
-		return y + height - textPadding;
+	contentY: property('y', 'height', function(y, height){
+		return y + (height / 2);
 	}),
 
 	isVisible: property('a', 'b', function(a, b){
 		return typeof a === 'number' && typeof b === 'number';
 	}),
 
-	updateElements: observer('rect', 'text', 'transition', 'x', 'y', 'width', 'height', 'textX', 'textY',
-		function(rect, text, transition, x, y, width, height, textX, textY){
+	updateElements: observer('rect', 'content', 'transition', 'x', 'y', 'width', 'height', 'contentY', 'contentX',
+		function(rect, content, transition, x, y, width, height, contentY, contentX){
 			if(rect) {
 				rect.transition(transition).attr('x', x || 0)
 					.attr('y', y || 0)
@@ -65,9 +62,10 @@ export default Ember.Component.extend(HasGraphParent, {
 					.attr('height', height || 0);
 			}
 
-			if(text) {
-				text.transition(transition).attr('x', textX || 0)
-					.attr('y', textY || 0);
+			if(content) {
+				content.transition(transition).attr('transform', function() {
+					return 'translate(%@ %@)'.fmt(contentX, contentY);
+				});
 			}
 		}
 	),
@@ -76,9 +74,9 @@ export default Ember.Component.extend(HasGraphParent, {
 		var g = d3.select(this.$()[0]);
 		var data = [0];
 		var rect = g.selectAll('rect').data(data);
-		var text = g.selectAll('text').data(data);
+		var content = g.selectAll('g.nf-y-diff-content').data(data);
 		this.set('rect', rect);
-		this.set('text', text);
+		this.set('content', content);
 		this.updateElements();
 	}.on('didInsertElement')
 
