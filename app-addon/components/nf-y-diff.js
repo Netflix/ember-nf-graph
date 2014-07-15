@@ -4,11 +4,8 @@ import { property, observer } from '../utils/computed-property-helpers';
 
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
-  // templateName: 'ember-cli-ember-dvc/components/graph-y-diff',
 
-	classNameBindings: ['positive', 'negative', 'orientRight'],
-
-	classNames: ['nf-y-diff'],
+	classNameBindings: [':nf-y-diff', 'isPositive:positive:negative', 'isOrientRight:orient-right:orient-left'],
 
 	a: null,
 	b: null,
@@ -19,15 +16,11 @@ export default Ember.Component.extend(HasGraphParent, {
 		return b - a;
 	}),
 
-	positive: Ember.computed.gte('diff', 0),
-
-	negative: Ember.computed.lt('diff', 0),
-
+	isPositive: Ember.computed.gte('diff', 0),
+	
 	x: Ember.computed.alias('graph.yAxis.x'),
 	
-	orientRight: function(){
-		return this.get('graph.yAxis.orient') === 'right';
-	}.property('graph.yAxis.orient'),
+	isOrientRight: Ember.computed.equal('graph.yAxis.orient', 'right'),
 
 	y: property('a', 'b', 'graph.yScale', 'graph.graphY', function(a, b, yScale, graphY){
 		return Math.min(yScale(a), yScale(b)) + graphY;
@@ -41,8 +34,8 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	parentController: Ember.computed.alias('templateData.view.controller'),
 
-	contentX: property('orientRight', 'width', 'contentPadding', function(orientRight, width, contentPadding) {
-		return orientRight ? width - contentPadding : contentPadding;
+	contentX: property('isOrientRight', 'width', 'contentPadding', 'x', function(isOrientRight, width, contentPadding, x) {
+		return x + (isOrientRight ? width - contentPadding : contentPadding);
 	}),
 
 	contentY: property('y', 'height', function(y, height){
@@ -64,7 +57,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
 			if(content) {
 				content.transition(transition).attr('transform', function() {
-					return 'translate(%@ %@)'.fmt(contentX, contentY);
+					return 'translate(%@ %@)'.fmt(contentX || 0, contentY || 0);
 				});
 			}
 		}

@@ -44,11 +44,11 @@ export default Ember.Component.extend(HasGraphParent, {
   }),
 
   transform: property('y', function(y) {
-  	return 'translate(0 %@)'.fmt(y);
+  	return 'translate(0 %@)'.fmt(y || 0);
   }),
 
   labelTransform: property('x', function(x){
-  	return 'translate(%@ 0)'.fmt(x);
+  	return 'translate(%@ 0)'.fmt(x || 0);
   }),
 
 	_setup: function(){

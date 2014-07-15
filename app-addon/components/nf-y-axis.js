@@ -12,10 +12,8 @@ export default Ember.Component.extend(HasGraphParent, {
 
   attributeBindings: ['transform'],
 
-  classNamesBindings: ['orientClass'],
+  classNamesBindings: [':nf-y-axis', 'isOrientRight:orient-right:orient-left'],
   
-  classNames: ['nf-y-axis'],
-
   _tickFilter: null,
 
   tickFilter: function(name, value) {
@@ -25,10 +23,7 @@ export default Ember.Component.extend(HasGraphParent, {
     return this._tickFilter;
   }.property(),
 
-  orientClass: function(){
-    return 'orient-' + this.get('orient');
-  }.property('orient'),
-
+  isOrientRight: Ember.computed.equal('orient', 'right'),
 
   transform: function(){
     var x = this.get('x');
@@ -47,6 +42,7 @@ export default Ember.Component.extend(HasGraphParent, {
   y: function(){
     return this.get('graph.graphY');
   }.property('graph.graphY'),
+
   height: function(){
     return this.get('graph.height');
   }.property('graph.height'),
@@ -62,8 +58,8 @@ export default Ember.Component.extend(HasGraphParent, {
     return ticks;
   },
 
-  ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'orient', 'tickFilter', 'graph.yData',
-    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, orient, tickFilter, yData) {
+  ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'graph.yData',
+    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, yData) {
       var ticks = this.tickFactory(yScale, tickCount, yData, yScaleType);
 
       var result = ticks.map(function (tick) {
@@ -72,7 +68,7 @@ export default Ember.Component.extend(HasGraphParent, {
           y: yScale(tick),
           x1: axisLineX + tickLength,
           x2: axisLineX,
-          labelx: orient === 'right' ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding),
+          labelx: isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding),
         };
       });
 
