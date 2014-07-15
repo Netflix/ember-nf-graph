@@ -257,7 +257,7 @@ export default Ember.Component.extend({
   },
 
   didInsertElement: function () {
-    var graphContentGroup = this.$('.graph');
+    var graphContentGroup = this.$('.nf-graph-content');
     var self = this;
 
     this.set('svg', this.$('svg'));
