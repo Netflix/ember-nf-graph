@@ -2,26 +2,12 @@ import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import parsePropertyExpr from '../utils/parse-property-expression';
 
-var computedAlias = Ember.computed.alias;
-
 export default Ember.Component.extend({
 	tagName: 'rect',
 
-	attributeBindings: ['x', 'y', 'width', 'height', 'dataValue'],
-
-	classNames: ['nf-inline-bar'],
-	
-	width: 0,
-
-	height: 0,
-
-	x: 0,
-
-	y: 0,
+	classNames: ['nf-inline-bar', 'nf-inline-graphic'],
 
 	yprop: 'y',
-
-	data: null,
 
 	getYProp: property('yprop', function(yprop) {
 		return parsePropertyExpr(yprop);
