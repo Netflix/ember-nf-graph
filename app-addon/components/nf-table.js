@@ -10,38 +10,24 @@ export default Ember.Component.extend({
 	
 	sortType: SORTTYPE_SINGLE,
 
-	_columns: null,
-	columns: function(name, value) {
-		if(arguments.length > 1) {
-			this._columns = value;
-		}
-		return this._columns;
+	columns: function() {
+		return [];
 	}.property(),
 
 	_sortBy: null,
-	sortBy: function(name, value) {
-		if(arguments.length > 1) {
-			this._sortBy = value;
-		}
-		return this._sortBy;
-	},
+	sortBy: Ember.computed.alias('_sortBy'),
 
 	registerColumn: function(column) {
-		var columns = this.get('columns');
-		columns.pushObject(column);
+		this.get('columns').pushObject(column);
 	},
 
 	unregisterColumn: function(column) {
 		this.get('columns').removeObject(column);
 	},
 
-	_setup: function() {
-		this.set('columns', []);
-	}.on('init'),
-
-	didInsertElement: function() {
+	_hasRendered: function() {
 		this.set('hasRendered', true);
-	},
+	}.on('didInsertElement'),
 
 	sortedRows: function(){
 		var sort = this.get('columns').filter(function(col) {
@@ -56,7 +42,7 @@ export default Ember.Component.extend({
 		var rowsCopy = this.get('rows').slice();
 		multiSort(rowsCopy, sort);
 		return rowsCopy;
-	}.property('rows.[]', 'columns.@each.sortDirection'),
+	}.property('rows.@each', 'columns.@each.sortDirection', 'columns.@each.sortBy'),
 
 	parentController: Ember.computed.alias('templateData.view.controller'),
 

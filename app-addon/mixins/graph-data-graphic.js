@@ -41,7 +41,7 @@ export default Ember.Mixin.create({
     }
     
     return mapped;
-  }.property('data', 'xPropFn', 'yPropFn'),
+  }.property('data.@each', 'xPropFn', 'yPropFn'),
 
   visibleData: function() {
   	var xMin = this.get('graph.xMin');
