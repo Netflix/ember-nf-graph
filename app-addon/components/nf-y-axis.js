@@ -47,8 +47,8 @@ export default Ember.Component.extend(HasGraphParent, {
     return this.get('graph.height');
   }.property('graph.height'),
 
-  tickFactory: function(yScale, tickCount, yData, yScaleType) {
-    var ticks = yScaleType === 'ordinal' ? yData : yScale.ticks(tickCount);
+  tickFactory: function(yScale, tickCount, uniqueYData, yScaleType) {
+    var ticks = yScaleType === 'ordinal' ? uniqueYData : yScale.ticks(tickCount);
     if (yScaleType === 'log') {
       var step = Math.round(ticks.length / tickCount);
       ticks = ticks.filter(function (tick, i) {
@@ -58,9 +58,11 @@ export default Ember.Component.extend(HasGraphParent, {
     return ticks;
   },
 
-  ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'graph.yData',
-    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, yData) {
-      var ticks = this.tickFactory(yScale, tickCount, yData, yScaleType);
+  uniqueYData: Ember.computed.uniq('graph.yData'),
+
+  ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData',
+    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
+      var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
 
       var result = ticks.map(function (tick) {
         return {
