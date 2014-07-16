@@ -44,7 +44,7 @@ export default Ember.Component.extend({
 		var dataTable = this.nearestWithProperty('isDataTable');
 		this.set('table', dataTable);
 		dataTable.registerColumn(this);
-	}.on('init')
+	}.on('init'),
 
 	_unregister: function(){
 		this.get('table').unregisterColumn(this);
