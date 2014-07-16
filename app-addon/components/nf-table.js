@@ -31,6 +31,10 @@ export default Ember.Component.extend({
 		columns.pushObject(column);
 	},
 
+	unregisterColumn: function(column) {
+		this.get('columns').removeObject(column);
+	},
+
 	_setup: function() {
 		this.set('columns', []);
 	}.on('init'),

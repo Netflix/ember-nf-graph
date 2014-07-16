@@ -16,5 +16,9 @@ export default Ember.Component.extend({
 		}
 		
 		areas.pushObject(area);
-	}
+	},
+
+	unregisterArea: function(area) {
+		this.get('areas').removeObject(area);
+	},
 });

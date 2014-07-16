@@ -22,5 +22,9 @@ export default Ember.Component.extend(HasGraphParent, {
 		}
 
 		markers.pushObject(marker);
+	},
+
+	unregisterMarker: function(marker) {
+		this.get('markers').removeObject(marker);
 	}
 });

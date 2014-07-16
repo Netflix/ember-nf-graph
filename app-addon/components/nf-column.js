@@ -45,4 +45,8 @@ export default Ember.Component.extend({
 		this.set('table', dataTable);
 		dataTable.registerColumn(this);
 	}.on('init')
+
+	_unregister: function(){
+		this.get('table').unregisterColumn(this);
+	}.on('willDestroyElement')
 });

@@ -56,4 +56,8 @@ export default Ember.Component.extend(HasGraphParent, {
 		container.registerMarker(this);
 		this.set('container', container);
 	}.on('init'),
+
+  _unregister: function() {
+    this.get('container').unregisterMarker(this);
+  }.on('willDestroyElement')
 });
