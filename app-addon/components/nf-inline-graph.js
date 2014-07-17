@@ -15,50 +15,22 @@ export default Ember.Component.extend({
 
 	collapsedHeight: 100,
 	
-	expandedHeight: 500,
-	
 	padding: 0.5,
 
 	outerPadding: 0.5,
 
+	rowPadding: 0.1,
+
 	expand: false,
+	
+	expandedHeight: 500,
+
+	expandedItemsPerRow: 20,
 
 	height: property('expand', 'collapsedHeight', 'expandedHeight', 
 		function(expand, collapsedHeight, expandedHeight) {
 			return expand ? expandedHeight : collapsedHeight;
 		}
-	),
-
-	xRange: property('width', function(width){
-		return [0, width];
-	}),
-
-	yRange: property('height', function(height) {
-		return [0, height];
-	}),
-
-	xDomain: property('data.@each', function(data) {
-		return data.map(function(d) {
-			return d[0];
-		});
-	}),
-
-	yDomain: property('data.@each', function(data) {
-		return d3.extent(data.map(function(d) {
-			return d[1];
-		}));
-	}),
-
-	xScale: property('xRange', 'xDomain', 'padding', 'outerPadding',
-		function(xRange, xDomain, padding, outerPadding){
-			return d3.scale.ordinal().domain(xDomain).rangeRoundBands(xRange, padding, outerPadding);
-		}
-	),
-
-	yScale: property('yRange', 'yDomain',
-		function(yRange, yDomain) {
-			return d3.scale.linear().domain(yDomain).range(yRange);
-		} 
 	),
 
 	graphics: property(function() {
@@ -73,28 +45,82 @@ export default Ember.Component.extend({
 		this.get('graphics').removeObject(graphic);
 	},
 
-	data: property('graphics.@each', function(graphics) {
-		return graphics.map(function(graphic, i) {
-			return [i, graphic.get('dataValue')];
-		});
-	}),
+	_updateData: observer('graphics.@each', 'expand', 'expandedItemsPerRow', 
+		function(graphics, expand, expandedItemsPerRow) {
+			var data = graphics.map(function(graphic, i) {
+				return [i, graphic.getDataValue() || 0];
+			});
+			
+			var groupedData = expand ? data.reduce(function(groups, d, i) {
+					var group = groups[groups.length];
+					if(i % expandedItemsPerRow === 0) {
+						group = [];
+						groups.push(group);
+					}
+					group.push(d);
+				}, []).map(function(group) {
+					while(expand && group.length < expandedItemsPerRow) {
+						group.push([group.length, 0]);
+					}
+					return group;
+				}) : [data];
 
-	_d3Render: observer('data.@each', '_div', 'yScale', 'height', 'transition', 'xScale',
-		function(yData, div, yScale, height, transition, xScale) {
-			var inlineGraphics = div.selectAll('.nf-inline-graphic');
+			var dataExtent = d3.extent(data.map(function(d) {
+				return d[1];
+			}));
 
-			inlineGraphics.data(yData)
-				.transition(transition)
-				.attr('x', function(d) {
-					return xScale(d[0]);
-				})
-				.attr('y', function(d) {
-					return height - yScale(d[1]);
-				})
-				.attr('height', function(d) {
-					return yScale(d[1]);
-				})
-				.attr('width', xScale.rangeBand());
+			this.set('groupedData', groupedData);
+			this.set('dataExtent', dataExtent);
+		}),
+
+	_d3Render: observer('_div', 'groupedData.@each', 'width', 'height', 'expand', 'padding', 'outerPadding', 'rowPadding', 'transition', 'expandedItemsPerRow', 'dataExtent',
+		function(div, groupedData, width, height, expand, padding, outerPadding, rowPadding, transition, expandedItemsPerRow, dataExtent) {
+			if(!div) {
+				return;
+			}
+			
+			var totalRowHeight = height / groupedData.length;
+			var rowHeight = totalRowHeight * (1 - rowPadding);
+
+			var groups = div.selectAll('.nf-inline-graph-row').data(groupedData);
+
+			groups.enter().append('g')
+				.attr('class', 'nf-inline-graph-row')
+			
+			groups.transition(transition).attr('transform', function(d, i) {
+					return 'translate(0 %@)'.fmt(totalRowHeight * i);
+				});
+
+			groups.forEach(function(group, gi) {
+				var data = groupedData[gi];
+        var xData = data.map(function(d) { return d[0]; });
+
+				var xScale = d3.scale.ordinal()
+					.rangeRoundBands([0, width], padding, outerPadding)
+					.domain(xData);
+				
+				var yScale = d3.scale.linear()
+					.range([0, rowHeight])
+					.domain(dataExtent);
+				
+				var rangeBand = xScale.rangeBand();
+
+				var bars = d3.select(group[0]).selectAll('.nf-inline-bar')
+					.data(groupedData[gi]);
+
+
+				bars.transition(transition)
+					.attr('x', function(d) {
+						return xScale(d[0]) || 0;
+					})
+					.attr('y', function(d) {
+						return rowHeight - yScale(d[1]) || 0;
+					})
+					.attr('width', rangeBand)
+					.attr('height', function(d) {
+						return yScale(d[1]) || 0;
+					});
+			});
 		}
 	),
 

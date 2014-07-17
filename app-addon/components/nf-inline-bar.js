@@ -8,14 +8,14 @@ export default Ember.Component.extend({
 	classNames: ['nf-inline-bar', 'nf-inline-graphic'],
 
 	yprop: 'y',
-
+	
 	getYProp: property('yprop', function(yprop) {
 		return parsePropertyExpr(yprop);
 	}),
 
-	dataValue: property('getYProp', 'data', function(getYProp, data) {
-		return getYProp(data);
-	}),
+	getDataValue: function(){
+		return this.get('getYProp')(this.get('data'));
+	},
 
 	_register: function(){
 		var graph = this.nearestWithProperty('isInlineGraph');
