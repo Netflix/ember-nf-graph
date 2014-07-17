@@ -12,7 +12,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
   attributeBindings: ['transform'],
 
-  classNamesBindings: [':nf-y-axis', 'isOrientRight:orient-right:orient-left'],
+  classNameBindings: [':nf-y-axis', 'isOrientRight:orient-right:orient-left'],
   
   _tickFilter: null,
 
