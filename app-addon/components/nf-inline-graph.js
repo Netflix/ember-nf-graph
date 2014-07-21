@@ -39,88 +39,98 @@ export default Ember.Component.extend({
 
 	registerGraphic: function(graphic) {
 		this.get('graphics').pushObject(graphic);
+		var d3Setups = this.get('d3Setups');
+
+		var graphicName = graphic.get('name');
+		if(!d3Setups[graphicName]) {
+			d3Setups[graphicName] = graphic.get('d3Setup');
+		}
 	},
 
 	unregisterGraphic: function(graphic) {
 		this.get('graphics').removeObject(graphic);
 	},
 
-	_updateData: observer('graphics.@each', 'expand', 'expandedItemsPerRow', 
-		function(graphics, expand, expandedItemsPerRow) {
-			var data = graphics.map(function(graphic, i) {
-				return [i, graphic.getDataValue() || 0];
-			});
-			
-			var groupedData = expand ? data.reduce(function(groups, d, i) {
-					var group = groups[groups.length];
-					if(i % expandedItemsPerRow === 0) {
-						group = [];
-						groups.push(group);
-					}
-					group.push(d);
-				}, []).map(function(group) {
-					while(expand && group.length < expandedItemsPerRow) {
-						group.push([group.length, 0]);
-					}
-					return group;
-				}) : [data];
+	rowCount: property('expand', 'expandedItemsPerRow', 'data.length', function(expand, expandedItemsPerRow, dataLength) {
+		return expand ? Math.ceiling(dataLength / expandedItemsPerRow) : 1;
+	}),
 
-			var dataExtent = d3.extent(data.map(function(d) {
-				return d[1];
-			}));
+	rowTotalHeight: property('height', 'rowCount', function(height, rowCount) {
+		return height / rowCount;
+	}),
 
-			this.set('groupedData', groupedData);
-			this.set('dataExtent', dataExtent);
-		}),
+	rowHeight: property('rowPaddingHeight', 'rowTotalHeight', function(rowPaddingHeight, rowTotalHeight) {
+		return rowTotalHeight - rowPaddingHeight;
+	}),
 
-	_d3Render: observer('_div', 'groupedData.@each', 'width', 'height', 'expand', 'padding', 'outerPadding', 'rowPadding', 'transition', 'expandedItemsPerRow', 'dataExtent',
-		function(div, groupedData, width, height, expand, padding, outerPadding, rowPadding, transition, expandedItemsPerRow, dataExtent) {
-			if(!div) {
-				return;
-			}
-			
-			var totalRowHeight = height / groupedData.length;
-			var rowHeight = totalRowHeight * (1 - rowPadding);
+	rowPaddingHeight: property('rowTotalHeight', 'rowPadding', 'expand', function(rowTotalHeight, rowPadding, expand) {
+		return expand ? rowTotalHeight * rowPadding : 0;
+	}),
 
-			var groups = div.selectAll('.nf-inline-graph-row').data(groupedData);
-
-			groups.enter().append('g')
-				.attr('class', 'nf-inline-graph-row')
-			
-			groups.transition(transition).attr('transform', function(d, i) {
-					return 'translate(0 %@)'.fmt(totalRowHeight * i);
+	xScaleFactory: property('width', 'expand', 'expandedItemsPerRow', 
+		function(width, expand, expandedItemsPerRow){
+			return function(data, i) {
+				var range = [0, width];
+				var row = expand ? Math.floor(i / expandedItemsPerRow) : 0;
+				var domain = data.map(function(d) {
+					return d[0];
 				});
 
-			groups.forEach(function(group, gi) {
-				var data = groupedData[gi];
-        var xData = data.map(function(d) { return d[0]; });
-
-				var xScale = d3.scale.ordinal()
-					.rangeRoundBands([0, width], padding, outerPadding)
-					.domain(xData);
-				
-				var yScale = d3.scale.linear()
-					.range([0, rowHeight])
-					.domain(dataExtent);
-				
-				var rangeBand = xScale.rangeBand();
-
-				var bars = d3.select(group[0]).selectAll('.nf-inline-bar')
-					.data(groupedData[gi]);
-
-
-				bars.transition(transition)
-					.attr('x', function(d) {
-						return xScale(d[0]) || 0;
-					})
-					.attr('y', function(d) {
-						return rowHeight - yScale(d[1]) || 0;
-					})
-					.attr('width', rangeBand)
-					.attr('height', function(d) {
-						return yScale(d[1]) || 0;
+				if(expand) {
+					var startIndex = Math.floor(i / expandedItemsPerRow) * expandedItemsPerRow;
+					var endIndex = startIndex + expandedItemsPerRow;
+					domain = domain.filter(function(d, i) {
+						return startIndex <= i && i < endIndex;
 					});
-			});
+				}
+				return d3.scale.ordinal().rangeRoundBands(range).domain(domain);
+			};
+		}
+	),
+
+	yScaleFactory: property('expand', 'rowHeight', 'expandedItemsPerRow', 
+		function(expand, rowHeight, expandedItemsPerRow) {
+			return function(data, i) {
+				var yData = data.map(function(d) { return d[1]; });
+				var domain = d3.extent(yData);
+				var row = expand ? Math.floor(i / expandedItemsPerRow) : 0;
+				var rangeMin = row * rowHeight;
+				var rangeMax = rangeMin + rowHeight;
+				return d3.scale.linear().range([rangeMin, rangeMax]).domain(domain);
+			};
+		}
+	),
+
+	_updateData: observer('graphics.@each.value', function(graphics) {
+		this.set('data', graphics.map(function(d, i) {
+			return [i, d];
+		}));
+	}),
+
+	_render: observer('data',
+		function(data) {
+			var xScaleFactory = this.get('xScaleFactory');
+			var yScaleFactory = this.get('yScaleFactory');
+			var rowHeight = this.get('rowHeight');
+			var _div = this.get('_div');
+			
+			var rangeBand = xScaleFactory(data, 0).rangeBand();
+
+			// update bars
+			_div.selectAll('.nf-inline-bar')
+				.data(data)
+			.enter().append('rect')
+				.transition().duration(transition)
+				.attr('x', function(d, i) {
+					return xScaleFactory(data, i)(d[0]);
+				})
+				.attr('y', function(d, i) {
+					return rowHeight - yScaleFactory(data, i)(d[1]);
+				})
+				.attr('width', rangeBand)
+				.attr('height', function(d, i) {
+					return yScaleFactory(data, i)(d[1]);
+				});
 		}
 	),
 

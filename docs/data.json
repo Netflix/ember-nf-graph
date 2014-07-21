@@ -1,0 +1,203 @@
+{
+    "project": {
+        "name": "Ember-CLI-Ember-DVC",
+        "description": "Ember Data Visualization Components for Ember-CLI"
+    },
+    "files": {
+        "app-addon/components/nf-graph.js": {
+            "name": "app-addon/components/nf-graph.js",
+            "modules": {
+                "ember-cli-ember-dvc": 1
+            },
+            "classes": {
+                "NfGraph": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "ember-cli-ember-dvc": {
+            "name": "ember-cli-ember-dvc",
+            "submodules": {},
+            "classes": {
+                "NfGraph": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "app-addon/components/nf-graph.js",
+            "line": 79,
+            "description": "A container component for building complex cartesian graphs."
+        }
+    },
+    "classes": {
+        "NfGraph": {
+            "name": "NfGraph",
+            "shortname": "NfGraph",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ember-cli-ember-dvc",
+            "namespace": "",
+            "file": "app-addon/components/nf-graph.js",
+            "line": 79,
+            "description": "A container component for building complex cartesian graphs."
+        }
+    },
+    "classitems": [
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 86,
+            "itemtype": "property",
+            "name": "tagName",
+            "final": 1,
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 92,
+            "description": "allows child compoenents to identify graph parent.",
+            "itemtype": "property",
+            "name": "isGraph",
+            "final": 1,
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 99,
+            "itemtype": "property",
+            "name": "hasRendered",
+            "access": "private",
+            "tagname": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 105,
+            "description": "The width of the graph in pixels.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "default": "300",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 113,
+            "description": "The height of the graph in pixels.",
+            "itemtype": "property",
+            "name": "height",
+            "type": "Number",
+            "default": "100",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 121,
+            "description": "The padding at the top of the graph",
+            "itemtype": "property",
+            "name": "paddingTop",
+            "type": "Number",
+            "default": "0",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 129,
+            "description": "The padding at the left of the graph",
+            "itemtype": "property",
+            "name": "paddingLeft",
+            "type": "Number",
+            "default": "0",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 137,
+            "description": "The padding at the right of the graph",
+            "itemtype": "property",
+            "name": "paddingRight",
+            "type": "Number",
+            "default": "0",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 145,
+            "description": "The padding at the bottom of the graph",
+            "itemtype": "property",
+            "name": "paddingBottom",
+            "type": "Number",
+            "default": "0",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 153,
+            "description": "Determines whether to display \"lanes\" in the background of\nthe graph.",
+            "itemtype": "property",
+            "name": "showLanes",
+            "type": "Boolean",
+            "default": "false",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 163,
+            "description": "The domain mode for the x axis. This determines the behavior of\nxMin and xMax as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`",
+            "itemtype": "property",
+            "name": "xDomainMode",
+            "type": "String",
+            "default": "'auto'",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 178,
+            "description": "The domain mode for the y axis. This determines the behavior of\n`yMin` and `yMax` as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`",
+            "itemtype": "property",
+            "name": "yDomainMode",
+            "type": "String",
+            "default": "'auto'",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 193,
+            "description": "The type of scale to use for x values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
+            "itemtype": "property",
+            "name": "xScaleType",
+            "type": "String",
+            "default": "'linear'",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 208,
+            "description": "The type of scale to use for y values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
+            "itemtype": "property",
+            "name": "yScaleType",
+            "type": "String",
+            "default": "'linear'",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        }
+    ],
+    "warnings": []
+}

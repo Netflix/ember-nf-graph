@@ -76,27 +76,148 @@ var scaleProperty = function(axis) {
   );
 };
 
-
+/**
+ * A container component for building complex cartesian graphs.
+ *
+ * @module ember-cli-ember-dvc
+ * @class NfGraph
+ */
 export default Ember.Component.extend({
-  tagName: 'div',
-  
+  /**
+   * @property tagName
+   * @final
+   */
+  tagName: 'div',  
+
+  /** 
+   * allows child compoenents to identify graph parent.
+   * @property isGraph
+   * @final
+   */
   isGraph: true,
+
+  /**
+   * @property hasRendered
+   * @private
+   */
   hasRendered: false,
 
+  /**
+   * The width of the graph in pixels.
+   * @property width
+   * @type Number
+   * @default 300
+   */
   width: 300,
+
+  /**
+   * The height of the graph in pixels.
+   * @property height
+   * @type Number
+   * @default 100
+   */
   height: 100,
 
+  /**
+   * The padding at the top of the graph
+   * @property paddingTop
+   * @type Number
+   * @default 0
+   */
   paddingTop: 0,
+
+  /**
+   * The padding at the left of the graph
+   * @property paddingLeft
+   * @type Number
+   * @default 0
+   */
   paddingLeft: 0,
+
+  /**
+   * The padding at the right of the graph
+   * @property paddingRight
+   * @type Number
+   * @default 0
+   */
   paddingRight: 0,
+
+  /**
+   * The padding at the bottom of the graph
+   * @property paddingBottom
+   * @type Number
+   * @default 0
+   */
   paddingBottom: 0,
 
+  /**
+   * Determines whether to display "lanes" in the background of
+   * the graph.
+   * @property showLanes
+   * @type Boolean
+   * @default false
+   */
   showLanes: false,
 
+
+  /**
+   * The domain mode for the x axis. This determines the behavior of
+   * xMin and xMax as they relate to all of the data in the graph and
+   * to the domain for scaling purposes.
+   *
+   * Possible values:
+   * - `'auto'` - automatically sizes the domain to the data it contains
+   * - `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`
+   *
+   * @property xDomainMode
+   * @type String
+   * @default 'auto'
+   */
   xDomainMode: 'auto',
+
+  /**
+   * The domain mode for the y axis. This determines the behavior of
+   * `yMin` and `yMax` as they relate to all of the data in the graph and
+   * to the domain for scaling purposes.
+   *
+   * Possible values:
+   * - `'auto'` - automatically sizes the domain to the data it contains
+   * - `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`
+   *
+   * @property yDomainMode
+   * @type String
+   * @default 'auto'
+   */
   yDomainMode: 'auto',
 
+  /**
+   * The type of scale to use for x values.
+   *
+   * Possible Values:
+   * - `'linear'` - a standard linear scale
+   * - `'log'` - a logarithmic scale
+   * - `'power'` - a power-based scale (exponent = 3)
+   * - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
+   * 
+   * @property xScaleType
+   * @type String
+   * @default 'linear'
+   */
   xScaleType: 'linear',
+
+  /**
+   * The type of scale to use for y values.
+   *
+   * Possible Values:
+   * - `'linear'` - a standard linear scale
+   * - `'log'` - a logarithmic scale
+   * - `'power'` - a power-based scale (exponent = 3)
+   * - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
+   * 
+   * @property yScaleType
+   * @type String
+   * @default 'linear'
+   */
   yScaleType: 'linear',
   
   xOrdinalPadding: 0.1,
