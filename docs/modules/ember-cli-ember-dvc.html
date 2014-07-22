@@ -41,9 +41,11 @@
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
             
-                <li><a href="../classes/nf-y-axis.html">nf-y-axis</a></li>
+                <li><a href="../classes/nf-graph.html">nf-graph</a></li>
             
-                <li><a href="../classes/NfGraph.html">NfGraph</a></li>
+                <li><a href="../classes/nf-x-axis.html">nf-x-axis</a></li>
+            
+                <li><a href="../classes/nf-y-axis.html">nf-y-axis</a></li>
             
             </ul>
 
@@ -134,6 +136,18 @@ render either axis unless its component is present.</p>
 </div>
 
 
+    <div class="example">
+        <h4>Example:</h4>
+        <div class="example-content">
+            <pre class="code prettyprint"><code>  {{#nf-graph width=500 height=300}}
+    {{#nf-x-axis height=40}}
+      &lt;text&gt;x is {{tick.value}}&lt;/text&gt;
+    {{/nf-x-axis}}
+  {{/nf-graph}}</code></pre>
+
+        </div>
+    </div>
+
 
 <div class="yui3-g">
     <div class="yui3-u-1-2">
@@ -143,14 +157,20 @@ render either axis unless its component is present.</p>
             <ul class="module-classes">
             
                 <li class="module-class">
-                    <a href="../classes/nf-y-axis.html">
-                        nf-y-axis
+                    <a href="../classes/nf-graph.html">
+                        nf-graph
                     </a>
                 </li>
             
                 <li class="module-class">
-                    <a href="../classes/NfGraph.html">
-                        NfGraph
+                    <a href="../classes/nf-x-axis.html">
+                        nf-x-axis
+                    </a>
+                </li>
+            
+                <li class="module-class">
+                    <a href="../classes/nf-y-axis.html">
+                        nf-y-axis
                     </a>
                 </li>
             

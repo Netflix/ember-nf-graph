@@ -111,7 +111,7 @@ var scaleProperty = function(axis) {
  * render either axis unless its component is present.
  *
  * @module ember-cli-ember-dvc
- * @class NfGraph
+ * @class nf-graph
  */
 export default Ember.Component.extend({
   /**

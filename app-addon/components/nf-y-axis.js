@@ -8,14 +8,25 @@ import HasGraphParent  from '../mixins/graph-has-graph-parent';
  * rendered graph. Tick values are supplied to the inner scope of this component on the
  * view template via `tick`.
  * 
+ * ### Styling
+ * 
+ * The main container will have a `nf-y-axis` class.
+ * A `orient-left` or `orient-right` container will be applied to the container
+ * depending on the `orient` setting.
+ *
+ * Ticks are positioned via a `<g>` tag, that will contain whatever is passed into it via
+ * templating, along with the tick line. `<text>` tags within tick templates do have some 
+ * default styling applied to them to position them appropriately based off of orientation.
+ *
+ * @module ember-cli-ember-dvc
+ * @class nf-y-axis
+ * @example 
+ *
  *       {{#nf-graph width=500 height=300}}
- *         {{#nf-y-axis}}
+ *         {{#nf-y-axis width=40}}
  *           <text>y is {{tick.value}}</text>
  *         {{/nf-y-axis}}
  *       {{/nf-graph}}
- * 
- * @module ember-cli-ember-dvc
- * @class nf-y-axis
  */
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',

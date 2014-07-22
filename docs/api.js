@@ -1,7 +1,8 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "NfGraph",
+        "nf-graph",
+        "nf-x-axis",
         "nf-y-axis"
     ],
     "modules": [
