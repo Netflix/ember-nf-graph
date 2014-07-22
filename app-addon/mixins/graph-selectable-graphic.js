@@ -1,4 +1,10 @@
 import Ember from 'ember';
+
+/**
+ * @namespace mixins
+ * @class graph-selectable-graphic
+ * @extends Ember.Mixin
+ */
 export default Ember.Mixin.create({
   selected: false,
   selectable: false,

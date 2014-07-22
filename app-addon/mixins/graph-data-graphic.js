@@ -1,6 +1,10 @@
 import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
 
+/**
+ * @namespace mixins
+ * @class graph-data-graphic
+ */
 export default Ember.Mixin.create({
 	isDataGraphic: true,
 

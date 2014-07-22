@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-bars.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/mixins/graph-graphic-with-tracking-dot.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,44 +132,108 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-bars.js</h1>
+                        <h1 class="file-heading">File: app-addon/mixins/graph-graphic-with-tracking-dot.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
-import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * Adds a bar graph to an &#x60;nf-graph&#x60; component.
- *
- * **Requires the graph has &#x60;xScaleType === &#x27;ordinal&#x27;&#x60;***
- *
- * @namespace components
- * @class nf-bars
+ * @namespace mixins
+ * @class graph-graphic-with-tracking-dot
  */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
-	tagName: &#x27;g&#x27;,
+export default Ember.Mixin.create({
+	trackingMode: &#x27;none&#x27;,
+  trackedData: null,
+  
+  _trackingDot: null,
 
-	classNames: [&#x27;nf-bars&#x27;],
+  trackingDot: function(name, value){ 
+    if(arguments.length &gt; 1) {
+      this.set(&#x27;_trackingDot&#x27;, value);
+    }
+    if(!this.get(&#x27;_trackingDot&#x27;)) {
+      this.set(&#x27;_trackingDot&#x27;, {
+        x: 0,
+        y: 0,
+        visible: false,
+        radius: 3
+      });
+    }
+    return this.get(&#x27;_trackingDot&#x27;);
+  }.property(&#x27;_trackingDot&#x27;),
 
-	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;sortedData&#x27;, &#x27;graph.graphHeight&#x27;,
-		function(xScale, yScale, sortedData, graphHeight) {
-			var rangeBand = xScale.rangeBand();
+  updateTrackingDot: function(){
+    var trackedData = this.get(&#x27;trackedData&#x27;);
+    var xScale = this.get(&#x27;graph.xScale&#x27;);
+    var yScale = this.get(&#x27;graph.yScale&#x27;);
 
-			return sortedData.map(function(d) {
-				var h = yScale(d[1]);
-				return {
-					x: xScale(d[0]),
-					y: h,
-					width: rangeBand,
-					height: graphHeight - h
-				};
-			});
-		}
-	)
+    if(!trackedData || !xScale || !yScale) {
+      this.set(&#x27;trackingDot.visible&#x27;, false);
+    } else {
+      this.set(&#x27;trackingDot.visible&#x27;, true);
+      this.set(&#x27;trackingDot.x&#x27;, xScale(trackedData.x));
+      this.set(&#x27;trackingDot.y&#x27;, yScale(trackedData.y));
+    }
+  }.observes(&#x27;trackedData&#x27;, &#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;),
+
+  _hasGraph: function(){
+    var self = this;
+    var graph = self.get(&#x27;graph&#x27;);
+    graph.hoverChange(function(e, data){
+      var trackingMode = self.get(&#x27;trackingMode&#x27;);
+      var selected = self.get(&#x27;isSelected&#x27;);
+      var xScale = self.get(&#x27;graph.xScale&#x27;);
+      
+      if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
+        self.set(&#x27;trackedData&#x27;, null);
+      } else {
+        var found = self.getNearestDataToXPosition(data.x, self.get(&#x27;visibleData&#x27;), xScale);
+        self.set(&#x27;trackedData&#x27;, found ? {
+          x: found[0],
+          y: found[1]
+        } : null);
+      } 
+    });
+
+    graph.hoverEnd(function() {
+      self._trackingModeDidChange();
+    });
+  }.observes(&#x27;graph&#x27;),
+
+  _trackingModeDidChange: function(){
+    var trackingMode = this.get(&#x27;trackingMode&#x27;);
+    var selected = this.get(&#x27;isSelected&#x27;);
+    var selectable = this.get(&#x27;selectable&#x27;);
+    var last = this.get(&#x27;lastVisibleData&#x27;);
+    var first = this.get(&#x27;firstVisibleData&#x27;);
+    var data = null;
+
+    switch(trackingMode) {
+      case &#x27;selected-snap-last&#x27;:
+        if(selectable &amp;&amp; selected) {
+          data = last;
+        }
+        break;
+      case &#x27;selected-snap-first&#x27;:
+        if(selectable &amp;&amp; selected) {
+          data = first;
+        }
+        break;
+      case &#x27;snap-last&#x27;:
+        data = last;
+        break;
+      case &#x27;snap-first&#x27;:
+        data = first;
+        break;
+    }
+    
+    this.set(&#x27;trackedData&#x27;, data ? {
+      x: data[0],
+      y: data[1],
+      data: data.data
+    } : null);
+  }.observes(&#x27;trackingMode&#x27;, &#x27;lastVisibleData&#x27;, &#x27;firstVisibleData&#x27;, &#x27;isSelected&#x27;, &#x27;selectable&#x27;).on(&#x27;init&#x27;),
 });
     </pre>
 </div>

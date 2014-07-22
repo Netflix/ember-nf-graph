@@ -20,7 +20,13 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-y-axis",
         "components.nf-y-diff",
         "mixins.graph-area-utils",
-        "mixins.graph-has-graph-parent"
+        "mixins.graph-data-graphic",
+        "mixins.graph-data-position-utils",
+        "mixins.graph-graphic-with-tracking-dot",
+        "mixins.graph-has-graph-parent",
+        "mixins.graph-line-utils",
+        "mixins.graph-registered-graphic",
+        "mixins.graph-selectable-graphic"
     ],
     "modules": [],
     "allModules": []

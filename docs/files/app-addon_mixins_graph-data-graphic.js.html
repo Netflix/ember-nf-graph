@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-bars.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/mixins/graph-data-graphic.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,44 +132,83 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-bars.js</h1>
+                        <h1 class="file-heading">File: app-addon/mixins/graph-data-graphic.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
-import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
 
 /**
- * Adds a bar graph to an &#x60;nf-graph&#x60; component.
- *
- * **Requires the graph has &#x60;xScaleType === &#x27;ordinal&#x27;&#x60;***
- *
- * @namespace components
- * @class nf-bars
+ * @namespace mixins
+ * @class graph-data-graphic
  */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
-	tagName: &#x27;g&#x27;,
+export default Ember.Mixin.create({
+	isDataGraphic: true,
 
-	classNames: [&#x27;nf-bars&#x27;],
+	xprop: &#x27;x&#x27;,
+	yprop: &#x27;y&#x27;,
 
-	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;sortedData&#x27;, &#x27;graph.graphHeight&#x27;,
-		function(xScale, yScale, sortedData, graphHeight) {
-			var rangeBand = xScale.rangeBand();
+	xPropFn: function() {
+		return parsePropertyExpr(this.get(&#x27;xprop&#x27;));
+	}.property(&#x27;xprop&#x27;),
 
-			return sortedData.map(function(d) {
-				var h = yScale(d[1]);
-				return {
-					x: xScale(d[0]),
-					y: h,
-					width: rangeBand,
-					height: graphHeight - h
-				};
-			});
-		}
-	)
+	yPropFn: function() {
+		return parsePropertyExpr(this.get(&#x27;yprop&#x27;));
+	}.property(&#x27;yprop&#x27;),
+
+	sortedData: function(){
+    var data = this.get(&#x27;data&#x27;);
+    var xPropFn = this.get(&#x27;xPropFn&#x27;);
+    var yPropFn = this.get(&#x27;yPropFn&#x27;);
+    var xScaleType = this.get(&#x27;xScaleType&#x27;);
+
+    if(!data) {
+      return null;
+    }
+
+    var mapped = data.map(function(d, i) {
+    	var item = [xPropFn(d), yPropFn(d)];
+    	item.data = d;
+    	item.origIndex = i;
+    	return item;
+    });
+
+    if(xScaleType !== &#x27;ordinal&#x27;) {
+      mapped.sort(function(a, b) {
+      	var ax = a[0];
+        var bx = b[0];
+        return ax === bx ? 0 : (ax &gt; bx) ? 1 : -1;
+      });
+    }
+    
+    return mapped;
+  }.property(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;),
+
+  visibleData: function() {
+  	var xMin = this.get(&#x27;graph.xMin&#x27;);
+  	var xMax = this.get(&#x27;graph.xMax&#x27;);
+    var sortedData = this.get(&#x27;sortedData&#x27;);
+
+    if(!sortedData) {
+    	return null;
+    }
+
+    return sortedData.filter(function(d) {
+    	var x = d[0];
+    	return xMin &lt;= x &amp;&amp; x &lt;= xMax;
+    });
+  }.property(&#x27;sortedData&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;),
+
+  firstVisibleData: function(){
+  	var visibleData = this.get(&#x27;visibleData&#x27;);
+  	return visibleData &amp;&amp; visibleData.length &gt; 0 ? visibleData[0] : null;
+  }.property(&#x27;visibleData&#x27;),
+
+  lastVisibleData: function(){
+  	var visibleData = this.get(&#x27;visibleData&#x27;);
+  	return visibleData &amp;&amp; visibleData.length &gt; 0 ? visibleData[visibleData.length - 1] : null;
+  }.property(&#x27;visibleData&#x27;),
 });
     </pre>
 </div>

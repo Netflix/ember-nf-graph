@@ -1,4 +1,9 @@
 import Ember from 'ember';
+
+/**
+ * @namespace mixins
+ * @class graph-graphic-with-tracking-dot
+ */
 export default Ember.Mixin.create({
 	trackingMode: 'none',
   trackedData: null,

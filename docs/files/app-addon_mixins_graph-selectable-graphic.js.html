@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-bars.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/mixins/graph-selectable-graphic.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,44 +132,40 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-bars.js</h1>
+                        <h1 class="file-heading">File: app-addon/mixins/graph-selectable-graphic.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
-import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * Adds a bar graph to an &#x60;nf-graph&#x60; component.
- *
- * **Requires the graph has &#x60;xScaleType === &#x27;ordinal&#x27;&#x60;***
- *
- * @namespace components
- * @class nf-bars
+ * @namespace mixins
+ * @class graph-selectable-graphic
+ * @extends Ember.Mixin
  */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
-	tagName: &#x27;g&#x27;,
+export default Ember.Mixin.create({
+  selected: false,
+  selectable: false,
 
-	classNames: [&#x27;nf-bars&#x27;],
+  isSelected: function(){
+    return this === this.get(&#x27;graph.selected&#x27;);
+  }.property(&#x27;graph.selected&#x27;),
 
-	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;sortedData&#x27;, &#x27;graph.graphHeight&#x27;,
-		function(xScale, yScale, sortedData, graphHeight) {
-			var rangeBand = xScale.rangeBand();
-
-			return sortedData.map(function(d) {
-				var h = yScale(d[1]);
-				return {
-					x: xScale(d[0]),
-					y: h,
-					width: rangeBand,
-					height: graphHeight - h
-				};
-			});
-		}
-	)
+  toggleSelected: function(){
+    var graphSelected = this.get(&#x27;graph.selected&#x27;);
+    
+    if(graphSelected === this) {
+      this.set(&#x27;selected&#x27;, false);
+      this.set(&#x27;graph.selected&#x27;, null);
+    } else {
+      this.set(&#x27;selected&#x27;, true);
+      this.set(&#x27;graph.selected&#x27;, this);
+    }
+    if(graphSelected) {
+      graphSelected.set(&#x27;selected&#x27;, false);
+    }
+    this.get(&#x27;isSelected&#x27;);
+  },
 });
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-column - Ember-CLI-Ember-DVC</title>
+    <title>mixins.graph-line-utils - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -132,15 +132,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-column Class</h1>
+                        <h1>mixins.graph-line-utils Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends Ember.Mixin
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-column.js.html#l4"><code>app-addon&#x2F;components&#x2F;nf-column.js:4</code></a>
+            Defined in: <a href="../files/app-addon_mixins_graph-line-utils.js.html#l3"><code>app-addon&#x2F;mixins&#x2F;graph-line-utils.js:3</code></a>
         </div>
     
 
@@ -152,8 +156,7 @@
 
 
 <div class="box intro">
-    <p>A column class to support <code>nf-table</code></p>
-
+    
 </div>
 
 
@@ -163,8 +166,6 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
-        
-            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -177,35 +178,6 @@
             
 
             
-                <div class="index-section properties">
-                    <h3>Properties</h3>
-
-                    <ul class="index-list properties">
-                        
-                            <li class="index-item property">
-                                <a href="#property_isDataTableColumn">isDataTableColumn</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_sortClass">sortClass</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_sortDirection">sortDirection</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
 
             
 
@@ -214,207 +186,6 @@
 
         
 
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_isDataTableColumn" class="property item">
-    <h3 class="name"><code>isDataTableColumn</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l12"><code>app-addon&#x2F;components&#x2F;nf-column.js:12</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>used so child components <code>nf-cell</code> and <code>nf-header</code> can find this component
-and register themselves.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_sortClass" class="property item">
-    <h3 class="name"><code>sortClass</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l74"><code>app-addon&#x2F;components&#x2F;nf-column.js:74</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets the CSS sort class to be applied to the column</p>
-<p>Possible return values are <code>nf-sort-ascending</code>, <code>nf-sort-descending</code> and <code>nf-sort-none</code>.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x27;nf-sort-none&#x27;</p>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code> column.set(&#39;sortDirection&#39;, &#39;asc&#39;);
- console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
-
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="property_sortDirection" class="property item">
-    <h3 class="name"><code>sortDirection</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l25"><code>app-addon&#x2F;components&#x2F;nf-column.js:25</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets the sort direction for the column.</p>
-<p>As a convenence, it accepts either a numeric or string value, and 
-coerces it into the appropriate numeric value.</p>
-<p>Always returns a numeric value</p>
-<table>
-<thead>
-<tr>
-<th style="text-align:left">short</th>
-<th style="text-align:left">long</th>
-<th style="text-align:right">numeric</th>
-<th style="text-align:right">actual</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td style="text-align:left">asc</td>
-<td style="text-align:left">ascending</td>
-<td style="text-align:right">1</td>
-<td style="text-align:right">1</td>
-</tr>
-<tr>
-<td style="text-align:left">desc</td>
-<td style="text-align:left">descending</td>
-<td style="text-align:right">-1</td>
-<td style="text-align:right">-1</td>
-</tr>
-<tr>
-<td style="text-align:left">none</td>
-<td style="text-align:left">(any other string)</td>
-<td style="text-align:right">0</td>
-<td style="text-align:right">0</td>
-</tr>
-</tbody>
-</table>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 0</p>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>  {{#nf-column sortDirection=&quot;asc&quot;}}</code></pre>
-
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-            </div>
         
 
         

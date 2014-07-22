@@ -213,11 +213,77 @@
                 "mixins": 1
             }
         },
+        "app-addon/mixins/graph-data-graphic.js": {
+            "name": "app-addon/mixins/graph-data-graphic.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-data-graphic": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/graph-data-position-utils.js": {
+            "name": "app-addon/mixins/graph-data-position-utils.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-data-position-utils": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/graph-graphic-with-tracking-dot.js": {
+            "name": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-graphic-with-tracking-dot": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
         "app-addon/mixins/graph-has-graph-parent.js": {
             "name": "app-addon/mixins/graph-has-graph-parent.js",
             "modules": {},
             "classes": {
                 "mixins.graph-has-graph-parent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/graph-line-utils.js": {
+            "name": "app-addon/mixins/graph-line-utils.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-line-utils": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/graph-registered-graphic.js": {
+            "name": "app-addon/mixins/graph-registered-graphic.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-registered-graphic": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/graph-selectable-graphic.js": {
+            "name": "app-addon/mixins/graph-selectable-graphic.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-selectable-graphic": 1
             },
             "fors": {},
             "namespaces": {
@@ -487,6 +553,48 @@
             "description": "Utility functions for drawing an area.",
             "extends": "Ember.Mixin"
         },
+        "mixins.graph-data-graphic": {
+            "name": "mixins.graph-data-graphic",
+            "shortname": "mixins.graph-data-graphic",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 4
+        },
+        "mixins.graph-data-position-utils": {
+            "name": "mixins.graph-data-position-utils",
+            "shortname": "mixins.graph-data-position-utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-data-position-utils.js",
+            "line": 3
+        },
+        "mixins.graph-graphic-with-tracking-dot": {
+            "name": "mixins.graph-graphic-with-tracking-dot",
+            "shortname": "mixins.graph-graphic-with-tracking-dot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 3
+        },
         "mixins.graph-has-graph-parent": {
             "name": "mixins.graph-has-graph-parent",
             "shortname": "mixins.graph-has-graph-parent",
@@ -501,6 +609,49 @@
             "file": "app-addon/mixins/graph-has-graph-parent.js",
             "line": 3,
             "description": "Adds initialization code to graph the `nf-graph` parent\nto a component that is to be contained in an `nf-graph`."
+        },
+        "mixins.graph-line-utils": {
+            "name": "mixins.graph-line-utils",
+            "shortname": "mixins.graph-line-utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-line-utils.js",
+            "line": 3,
+            "extends": "Ember.Mixin"
+        },
+        "mixins.graph-registered-graphic": {
+            "name": "mixins.graph-registered-graphic",
+            "shortname": "mixins.graph-registered-graphic",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-registered-graphic.js",
+            "line": 3,
+            "extends": "Ember.Mixin"
+        },
+        "mixins.graph-selectable-graphic": {
+            "name": "mixins.graph-selectable-graphic",
+            "shortname": "mixins.graph-selectable-graphic",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-selectable-graphic.js",
+            "line": 3,
+            "extends": "Ember.Mixin"
         }
     },
     "classitems": [

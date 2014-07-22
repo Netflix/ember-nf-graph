@@ -1,4 +1,10 @@
 import Ember from 'ember';
+
+/**
+ * @namespace mixins
+ * @class graph-line-utils
+ * @extends Ember.Mixin
+ */
 export default Ember.Mixin.create({
 	createLineFn: function(xScale, yScale, interpolate){ 
 		var interp = interpolate || 'linear';

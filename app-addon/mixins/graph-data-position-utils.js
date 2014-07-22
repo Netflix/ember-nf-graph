@@ -1,5 +1,9 @@
 import Ember from 'ember';
 
+/**
+ * @namespace mixins
+ * @class graph-data-position-utils
+ */
 function nearestToXValue(xValue, sortedData) {
 	if(!sortedData || sortedData.length === 0) {
 		return null;
