@@ -4,11 +4,20 @@
         "description": "Ember Data Visualization Components for Ember-CLI"
     },
     "files": {
-        "app-addon/components/nf-graph.js": {
-            "name": "app-addon/components/nf-graph.js",
+        "app-addon/components/nf-area-stack.js": {
+            "name": "app-addon/components/nf-area-stack.js",
             "modules": {
                 "ember-cli-ember-dvc": 1
             },
+            "classes": {
+                "nf-area-stack": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "app-addon/components/nf-graph.js": {
+            "name": "app-addon/components/nf-graph.js",
+            "modules": {},
             "classes": {
                 "nf-graph": 1
             },
@@ -39,6 +48,7 @@
             "name": "ember-cli-ember-dvc",
             "submodules": {},
             "classes": {
+                "nf-area-stack": 1,
                 "nf-graph": 1,
                 "nf-x-axis": 1,
                 "nf-y-axis": 1
@@ -48,13 +58,27 @@
             "tag": "module",
             "file": "app-addon/components/nf-y-axis.js",
             "line": 5,
-            "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present.",
+            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.",
             "example": [
-                " \n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}"
+                "\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}\n"
             ]
         }
     },
     "classes": {
+        "nf-area-stack": {
+            "name": "nf-area-stack",
+            "shortname": "nf-area-stack",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ember-cli-ember-dvc",
+            "namespace": "",
+            "file": "app-addon/components/nf-area-stack.js",
+            "line": 3,
+            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn."
+        },
         "nf-graph": {
             "name": "nf-graph",
             "shortname": "nf-graph",
@@ -99,6 +123,61 @@
         }
     },
     "classitems": [
+        {
+            "file": "app-addon/components/nf-area-stack.js",
+            "line": 28,
+            "description": "Used by `nf-area` to identify an area stack parent",
+            "itemtype": "property",
+            "name": "isAreaStack",
+            "type": "Boolean",
+            "default": "true",
+            "readonly": "",
+            "class": "nf-area-stack",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-area-stack.js",
+            "line": 37,
+            "description": "The collection of `nf-area` components under this stack.",
+            "itemtype": "property",
+            "name": "areas",
+            "type": "Array",
+            "readonly": "",
+            "class": "nf-area-stack",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-area-stack.js",
+            "line": 47,
+            "description": "Registers an area component with this stack. Also links areas to one\nanother by setting `nextArea` on each area component.",
+            "itemtype": "method",
+            "name": "registerArea",
+            "params": [
+                {
+                    "name": "area",
+                    "description": "The area component to register.",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "nf-area-stack",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-area-stack.js",
+            "line": 64,
+            "description": "Unregisters an area component from this stack. Also updates next\nand previous links.",
+            "itemtype": "method",
+            "name": "unregisterArea",
+            "params": [
+                {
+                    "name": "area",
+                    "description": "the area to unregister",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "nf-area-stack",
+            "module": "ember-cli-ember-dvc"
+        },
         {
             "file": "app-addon/components/nf-graph.js",
             "line": 117,
@@ -1093,6 +1172,14 @@
         }
     ],
     "warnings": [
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-area-stack.js:47"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-area-stack.js:64"
+        },
         {
             "message": "replacing incorrect tag: function with method",
             "line": " app-addon/components/nf-graph.js:427"

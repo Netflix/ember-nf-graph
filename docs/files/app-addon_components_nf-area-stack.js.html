@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ember-cli-ember-dvc - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-area-stack.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -90,87 +90,90 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ember-cli-ember-dvc Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: app-addon/components/nf-area-stack.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-y-axis.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-y-axis.js:5</code></a>
-        </div>
-    
+/**
+ * A component for grouping and stacking &#x60;nf-area&#x60; components in an &#x60;nf-graph&#x60;.
+ * 
+ * This component looks at the order of the &#x60;nf-area&#x60; components underneath it 
+ * and uses the ydata of the next sibling &#x60;nf-area&#x60; component to determine the bottom 
+ * of each &#x60;nf-area&#x60; components path to be drawn.
+ *
+ * @module ember-cli-ember-dvc
+ * @class nf-area-stack
+ * @example
+ *
+ *  		{{#nf-graph width=300 height=100}}
+ *  			{{#nf-graph-content}}
+ *  				{{#nf-area-stack}}
+ *  					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;high&quot;}}
+ *  					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;med&quot;}}
+ *  					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;low&quot;}}
+ *  				{{/nf-area-stack}}
+ *  			{{/nf-graph-content}}
+ *  		{{/nf-graph}}
+ * 
+ */
+export default Ember.Component.extend({
+	tagName: &#x27;g&#x27;,
 
-    
-</div>
+	/**
+	 * Used by &#x60;nf-area&#x60; to identify an area stack parent
+	 * @property isAreaStack
+	 * @type Boolean
+	 * @default true
+	 * @readonly
+	 */
+	isAreaStack: true,
 
+	/**
+	 * The collection of &#x60;nf-area&#x60; components under this stack.
+	 * @property areas
+	 * @type Array
+	 * @readonly
+	 */
+	areas: function(){
+		return [];
+	}.property(),
 
+	/**
+	 * Registers an area component with this stack. Also links areas to one
+	 * another by setting &#x60;nextArea&#x60; on each area component.
+	 * @function registerArea
+	 * @param area {Ember.Component} The area component to register.
+	 */
+	registerArea: function(area) {
+		var areas = this.get(&#x27;areas&#x27;);
+		var last = areas[areas.length - 1];
+		if(last) {
+			last.set(&#x27;nextArea&#x27;, area);
+			this.set(&#x27;prevArea&#x27;, last);
+		}
+		
+		areas.pushObject(area);
+	},
 
-<div class="box intro">
-    <p>A component for grouping and stacking <code>nf-area</code> components in an <code>nf-graph</code>.</p>
-<p>This component looks at the order of the <code>nf-area</code> components underneath it 
-and uses the ydata of the next sibling <code>nf-area</code> component to determine the bottom 
-of each <code>nf-area</code> components path to be drawn.</p>
+	/**
+	 * Unregisters an area component from this stack. Also updates next
+	 * and previous links.
+	 * @function unregisterArea
+	 * @param area {Ember.Component} the area to unregister
+	 */
+	unregisterArea: function(area) {
+		var prev = area.get(&#x27;prevArea&#x27;);
+		var next = area.get(&#x27;nextArea&#x27;);
 
-</div>
+		prev.set(&#x27;nextArea&#x27;, next);
+		next.set(&#x27;prevArea&#x27;, prev);
 
-
-    <div class="example">
-        <h4>Example:</h4>
-        <div class="example-content">
-            <pre class="code prettyprint"><code>     {{#nf-graph width=300 height=100}}
-         {{#nf-graph-content}}
-             {{#nf-area-stack}}
-                 {{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;high&quot;}}
-                 {{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;med&quot;}}
-                 {{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;low&quot;}}
-             {{/nf-area-stack}}
-         {{/nf-graph-content}}
-     {{/nf-graph}}</code></pre>
-
-        </div>
-    </div>
-
-
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/nf-area-stack.html">
-                        nf-area-stack
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-graph.html">
-                        nf-graph
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-x-axis.html">
-                        nf-x-axis
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-y-axis.html">
-                        nf-y-axis
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+		this.get(&#x27;areas&#x27;).removeObject(area);
+	},
+});
+    </pre>
 </div>
 
                     </div>
