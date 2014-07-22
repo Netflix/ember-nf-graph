@@ -13,6 +13,10 @@ Router.map(function() {
 	this.resource('nf-table', function(){
 		this.route('/');
 	});
+
+	this.resource('nf-inline-graph', function(){
+		this.route('/');
+	});
 });
 
 export default Router;

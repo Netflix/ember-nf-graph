@@ -1,0 +1,12 @@
+{{#nf-inline-graph width=500 collapsedHeight=100 expandedHeight=600
+	groupBy="propName" sortBy="propName" sortDirection="ascending"}}
+
+	{{#each item in data}}
+		{{nf-inline-bar data=item yprop="y"}}
+  {{/each}}
+  
+{{/nf-inline-graph}}
+
+<pre>
+	data.length: {{data.length}}
+</pre>
