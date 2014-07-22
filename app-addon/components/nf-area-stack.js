@@ -7,9 +7,7 @@ import Ember from 'ember';
  * and uses the ydata of the next sibling `nf-area` component to determine the bottom 
  * of each `nf-area` components path to be drawn.
  *
- * @module ember-cli-ember-dvc
- * @class nf-area-stack
- * @example
+ * ## Example
  *
  *  		{{#nf-graph width=300 height=100}}
  *  			{{#nf-graph-content}}
@@ -20,7 +18,9 @@ import Ember from 'ember';
  *  				{{/nf-area-stack}}
  *  			{{/nf-graph-content}}
  *  		{{/nf-graph}}
- * 
+ *
+ * @module ember-cli-ember-dvc
+ * @class nf-area-stack 
  */
 export default Ember.Component.extend({
 	tagName: 'g',
