@@ -9,19 +9,27 @@ A data visualization component library for Ember 1.7+ and Ember-CLI
 2. `npm install -S git+ssh://git@github.com:Netflix/ember-cli-ember-dvc.git` to install the add-on
 3. Upgrade Ember:  `bower install -S ember#canary`
 3. Install ember-handlebars-svg: `bower install -S ember-handlebars-svg`
-4. Add `app.import('vendor/ember-handlebars-svg/dist/ember-handlebars-svg.js')` to your `Brocfile.js`
+4. Add `app.import('vendor/ember-handlebars-svg/ember-handlebars-svg.js')` to your `Brocfile.js`
 
-## Component List
+## Documentation
 
-graph-container - The outermost container for a graph
-graph-content - An inner container for content like lines, bars and areas
-graph-x-axis - A component to control the size, position and templating of the x-axis
-graph-y-axis - A component to control the size, position and templating of the y-axis
-graph-y-diff - A component to display a difference between two values on the y-axis
-graph-line - A component to plot data as a line
-graph-area - A component to plot data as an area
-graph-area-stack - Used to group graph-area components into a stack of areas
-graph-selection-box - Used to draw a box on the graph within a specified domain bounds
-graph-crosshair - plots a crosshair at the mouse position over the graph
+Documentation can be found in `docs/`. It's HTML-based and can be viewed by simply opening the `docs/index.html` file in a browser.
 
+## Contributing
 
+This is an Ember-CLI "addon". Addon code can be found in directories suffixed with `-addon` (e.g. `app-addon`).
+
+Use `ember serve` at the command line to build the components and serve the test application.
+
+From there, browse to `http://localhost:4200` to view the example app. This is a playground for the most part.
+It's used to sandbox new component features. Tests can be found at `http://localhost:4200/tests`
+
+### Generating Documenation
+
+This project uses YUIDoc to generate documentation. Once YUIDoc is installed run:
+
+```sh
+yuidoc -c yuidoc.json 
+```
+
+The documentation is located in `docs/`.

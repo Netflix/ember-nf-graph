@@ -1,7 +1,8 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "NfGraph"
+        "NfGraph",
+        "nf-y-axis"
     ],
     "modules": [
         "ember-cli-ember-dvc"

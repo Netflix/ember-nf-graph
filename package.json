@@ -13,7 +13,8 @@
   "scripts": {
     "start": "ember server",
     "build": "ember build",
-    "test": "ember test"
+    "test": "ember test",
+    "docs": "yuidoc -c yuidoc.json"
   },
   "repository": "https://github.com/stefanpenner/ember-cli",
   "engines": {

@@ -14,6 +14,15 @@
             },
             "fors": {},
             "namespaces": {}
+        },
+        "app-addon/components/nf-y-axis.js": {
+            "name": "app-addon/components/nf-y-axis.js",
+            "modules": {},
+            "classes": {
+                "nf-y-axis": 1
+            },
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {
@@ -21,13 +30,14 @@
             "name": "ember-cli-ember-dvc",
             "submodules": {},
             "classes": {
-                "NfGraph": 1
+                "NfGraph": 1,
+                "nf-y-axis": 1
             },
             "fors": {},
             "namespaces": {},
             "tag": "module",
-            "file": "app-addon/components/nf-graph.js",
-            "line": 79,
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 5,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
         }
     },
@@ -45,6 +55,20 @@
             "file": "app-addon/components/nf-graph.js",
             "line": 79,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
+        },
+        "nf-y-axis": {
+            "name": "nf-y-axis",
+            "shortname": "nf-y-axis",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ember-cli-ember-dvc",
+            "namespace": "",
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 5,
+            "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-y-axis}}\n          <text>y is {{tick.value}}</text>\n        {{/nf-y-axis}}\n      {{/nf-graph}}"
         }
     },
     "classitems": [
@@ -666,6 +690,198 @@
             "readonly": "",
             "class": "NfGraph",
             "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 23,
+            "description": "The number of ticks to display",
+            "itemtype": "property",
+            "name": "tickCount",
+            "type": "Number",
+            "default": "5",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 31,
+            "description": "The length of the tick's accompanying line.",
+            "itemtype": "property",
+            "name": "tickLength",
+            "type": "Number",
+            "default": "5",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 39,
+            "description": "The distance between the tick line and the origin tick's templated output",
+            "itemtype": "property",
+            "name": "tickPadding",
+            "type": "Number",
+            "default": "3",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 47,
+            "description": "The total width of the y axis",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "default": "40",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 55,
+            "description": "The orientation of the y axis. Possible values are `'left'` and `'right'`",
+            "itemtype": "property",
+            "name": "orient",
+            "type": "String",
+            "default": "'left'",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 69,
+            "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
+            "itemtype": "property",
+            "name": "tickFilter",
+            "type": "Function",
+            "default": "null",
+            "example": [
+                "\n\n      {{#nf-y-axis tickFilter=myFilter}} \n        <text>{{tick.value}}</text>\n      {{/nf-y-axis}}\n\nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n\nThe above example will filter down the set of ticks to only those that are less than 1000."
+            ],
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 98,
+            "description": "computed property. returns true if `orient` is equal to `'right'`.",
+            "itemtype": "property",
+            "name": "isOrientRight",
+            "type": "Boolean",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 107,
+            "description": "The SVG transform for positioning the component.",
+            "itemtype": "property",
+            "name": "transform",
+            "type": "String",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 119,
+            "description": "The x position of the component",
+            "itemtype": "property",
+            "name": "x",
+            "type": "Number",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 133,
+            "description": "The y position of the component",
+            "itemtype": "property",
+            "name": "y",
+            "type": "Number",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 141,
+            "description": "the height of the component",
+            "itemtype": "property",
+            "name": "height",
+            "type": "Number",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 149,
+            "description": "Function to create the tick values. Can be overriden to provide specific values.",
+            "itemtype": "method",
+            "name": "tickFactory",
+            "params": [
+                {
+                    "name": "yScale",
+                    "description": "a d3 scale function",
+                    "type": "Function"
+                },
+                {
+                    "name": "tickCount",
+                    "description": "the number of ticks desired",
+                    "type": "Number"
+                },
+                {
+                    "name": "uniqueYData",
+                    "description": "all y data represented, filted to be unique (used for ordinal cases)",
+                    "type": "Array"
+                },
+                {
+                    "name": "yScaleType",
+                    "description": "the scale type of the containing graph.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "an array of domain values at which ticks should be placed.",
+                "type": "Array"
+            },
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 169,
+            "description": "All y data from the graph, filtered to unique values.",
+            "itemtype": "property",
+            "name": "uniqueYData",
+            "type": "Array",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 177,
+            "description": "The ticks to be displayed.",
+            "itemtype": "property",
+            "name": "ticks",
+            "type": "Array",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-y-axis.js",
+            "line": 205,
+            "description": "The x position of the axis line.",
+            "itemtype": "property",
+            "name": "axisLineX",
+            "type": "Number",
+            "readonly": "",
+            "class": "nf-y-axis",
+            "module": "ember-cli-ember-dvc"
         }
     ],
     "warnings": [
@@ -708,6 +924,10 @@
         {
             "message": "replacing incorrect tag: function with method",
             "line": " app-addon/components/nf-graph.js:667"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-y-axis.js:149"
         },
         {
             "message": "Missing item type\nThe y coordinate position of the graph content",
