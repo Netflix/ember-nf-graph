@@ -28,7 +28,7 @@
             "tag": "module",
             "file": "app-addon/components/nf-graph.js",
             "line": 79,
-            "description": "A container component for building complex cartesian graphs."
+            "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
         }
     },
     "classes": {
@@ -44,13 +44,13 @@
             "namespace": "",
             "file": "app-addon/components/nf-graph.js",
             "line": 79,
-            "description": "A container component for building complex cartesian graphs."
+            "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
         }
     },
     "classitems": [
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 86,
+            "line": 117,
             "itemtype": "property",
             "name": "tagName",
             "final": 1,
@@ -59,7 +59,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 92,
+            "line": 123,
             "description": "allows child compoenents to identify graph parent.",
             "itemtype": "property",
             "name": "isGraph",
@@ -69,7 +69,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 99,
+            "line": 130,
             "itemtype": "property",
             "name": "hasRendered",
             "access": "private",
@@ -79,7 +79,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 105,
+            "line": 136,
             "description": "The width of the graph in pixels.",
             "itemtype": "property",
             "name": "width",
@@ -90,7 +90,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 113,
+            "line": 144,
             "description": "The height of the graph in pixels.",
             "itemtype": "property",
             "name": "height",
@@ -101,7 +101,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 121,
+            "line": 152,
             "description": "The padding at the top of the graph",
             "itemtype": "property",
             "name": "paddingTop",
@@ -112,7 +112,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 129,
+            "line": 160,
             "description": "The padding at the left of the graph",
             "itemtype": "property",
             "name": "paddingLeft",
@@ -123,7 +123,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 137,
+            "line": 168,
             "description": "The padding at the right of the graph",
             "itemtype": "property",
             "name": "paddingRight",
@@ -134,7 +134,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 145,
+            "line": 176,
             "description": "The padding at the bottom of the graph",
             "itemtype": "property",
             "name": "paddingBottom",
@@ -145,7 +145,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 153,
+            "line": 184,
             "description": "Determines whether to display \"lanes\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showLanes",
@@ -156,7 +156,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 163,
+            "line": 194,
             "description": "The domain mode for the x axis. This determines the behavior of\nxMin and xMax as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`",
             "itemtype": "property",
             "name": "xDomainMode",
@@ -167,7 +167,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 178,
+            "line": 209,
             "description": "The domain mode for the y axis. This determines the behavior of\n`yMin` and `yMax` as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`",
             "itemtype": "property",
             "name": "yDomainMode",
@@ -178,7 +178,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 193,
+            "line": 224,
             "description": "The type of scale to use for x values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "xScaleType",
@@ -189,7 +189,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 208,
+            "line": 239,
             "description": "The type of scale to use for y values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "yScaleType",
@@ -197,7 +197,521 @@
             "default": "'linear'",
             "class": "NfGraph",
             "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 254,
+            "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
+            "itemtype": "property",
+            "name": "xOrdinalPadding",
+            "type": "Number",
+            "default": "0.1",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 262,
+            "description": "The padding at the ends of the domain data when `xScaleType` is `'ordinal'`",
+            "itemtype": "property",
+            "name": "xOrdinalOuterPadding",
+            "type": "Number",
+            "default": "0.1",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 270,
+            "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
+            "itemtype": "property",
+            "name": "yOrdinalPadding",
+            "type": "Number",
+            "default": "0.1",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 278,
+            "description": "The padding at the ends of the domain data when `yScaleType` is `'ordinal'`",
+            "itemtype": "property",
+            "name": "yOrdinalOuterPadding",
+            "type": "Number",
+            "default": "0.1",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 286,
+            "description": "the `nf-y-axis` component is registered here if there is one present",
+            "itemtype": "property",
+            "name": "yAxis",
+            "readonly": "",
+            "default": "null",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 294,
+            "description": "The `nf-x-axis` component is registered here if there is one present",
+            "itemtype": "property",
+            "name": "xAxis",
+            "readonly": "",
+            "default": "null",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 307,
+            "description": "The minimum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.\nIf `xDomainMode` is `'fixed'`, setting `xMin` determines the lower bounds of the domain.\nFor `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.",
+            "itemtype": "property",
+            "name": "xMin",
+            "type": "String/Number",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 316,
+            "description": "The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.\nIf `xDomainMode` is `'fixed'`, setting `xMax` determines the upper bounds of the domain.\nFor `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.",
+            "itemtype": "property",
+            "name": "xMax",
+            "type": "String/Number",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 325,
+            "description": "The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.\nIf `yDomainMode` is `'fixed'`, setting `yMin` determines the lower bounds of the domain.\nFor `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.",
+            "itemtype": "property",
+            "name": "yMin",
+            "type": "String/Number",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 334,
+            "description": "The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.\nIf `yDomainMode` is `'fixed'`, setting `yMax` determines the upper bounds of the domain.\nFor `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.",
+            "itemtype": "property",
+            "name": "yMax",
+            "type": "String/Number",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 343,
+            "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
+            "itemtype": "property",
+            "name": "graphics",
+            "type": "Array",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 352,
+            "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
+            "itemtype": "property",
+            "name": "showYAxis",
+            "type": "Boolean",
+            "default": "false",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 360,
+            "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
+            "itemtype": "property",
+            "name": "showXAxis",
+            "type": "Boolean",
+            "default": "false",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 381,
+            "description": "Gets a function to create the xScale",
+            "itemtype": "property",
+            "name": "xScaleFactory",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 388,
+            "description": "Gets a function to create the yScale",
+            "itemtype": "property",
+            "name": "yScaleFactory",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 395,
+            "description": "Gets the domain of x values.",
+            "itemtype": "property",
+            "name": "xDomain",
+            "type": "Array",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 403,
+            "description": "Gets the domain of y values.",
+            "itemtype": "property",
+            "name": "yDomain",
+            "type": "Array",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 411,
+            "description": "Gets the current xScale used to draw the graph.",
+            "itemtype": "property",
+            "name": "xScale",
+            "type": "Function",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 419,
+            "description": "Gets the current yScale used to draw the graph.",
+            "itemtype": "property",
+            "name": "yScale",
+            "type": "Function",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 427,
+            "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
+            "itemtype": "method",
+            "name": "registerGraphic",
+            "params": [
+                {
+                    "name": "graphic",
+                    "description": "The component object to register",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 437,
+            "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
+            "itemtype": "method",
+            "name": "unregisterGraphic",
+            "params": [
+                {
+                    "name": "graphic",
+                    "description": "The component to unregister",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 447,
+            "description": "The handlers for mouse hover changes",
+            "itemtype": "property",
+            "name": "_hoverChangeHandlers",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 458,
+            "description": "The handlers for mouse hover end",
+            "itemtype": "property",
+            "name": "_hoverEndHandlers",
+            "type": "Array",
+            "access": "private",
+            "tagname": "",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 469,
+            "description": "Registers a mouse hover change handler with the graph.",
+            "itemtype": "method",
+            "name": "hoverChange",
+            "params": [
+                {
+                    "name": "handler",
+                    "description": "a function that will handle the hover change",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                " \n    graph.hoverChange(function(e, data) {\n       console.log(data.x, data.y);\n    });"
+            ],
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 482,
+            "description": "Registers a mouse hover end handler with the graph.",
+            "itemtype": "method",
+            "name": "hoverEnd",
+            "params": [
+                {
+                    "name": "handler",
+                    "description": "a function that will handle the hover end",
+                    "type": "Function"
+                }
+            ],
+            "example": [
+                " \n    graph.hoverEnd(function(e) {\n       console.log('hover ended');\n    });"
+            ],
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 495,
+            "description": "Notifies all handlers of a hover change event.",
+            "itemtype": "method",
+            "name": "onDidGraphHoverChange",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "the DOM mouse event args",
+                    "type": "MouseEvent"
+                },
+                {
+                    "name": "mouseX",
+                    "description": "the mouse x coordinates relative to the graph content.",
+                    "type": "Number"
+                },
+                {
+                    "name": "mouseY",
+                    "description": "the mouse y coordinates relative to the graph content.",
+                    "type": "Number"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 520,
+            "description": "Notifies all handlers of a hover end event",
+            "itemtype": "method",
+            "name": "onDidGraphHoverEnd",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "the DOM mouse event",
+                    "type": "MouseEvent"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 537,
+            "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
+            "itemtype": "property",
+            "name": "yRange",
+            "type": "Array",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 548,
+            "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
+            "itemtype": "property",
+            "name": "xRange",
+            "type": "Array",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 559,
+            "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
+            "itemtype": "property",
+            "name": "hasData",
+            "type": "Boolean",
+            "default": "false",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 571,
+            "description": "The x coordinate position of the graph content",
+            "itemtype": "property",
+            "name": "graphX",
+            "type": "Number",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 587,
+            "description": "The y coordinate position of the graph content",
+            "proeprty": "graphY",
+            "type": "Number",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 602,
+            "description": "The width, in pixels, of the graph content",
+            "itemtype": "property",
+            "name": "graphWidth",
+            "type": "Number",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 617,
+            "description": "The height, in pixels, of the graph content",
+            "itemtype": "property",
+            "name": "graphHeight",
+            "type": "Number",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 632,
+            "description": "An SVG transform to position the graph content",
+            "itemtype": "property",
+            "name": "graphTransform",
+            "type": "String",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 667,
+            "description": "Gets the mouse position relative to the container",
+            "itemtype": "method",
+            "name": "mousePoint",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "the SVG element that contains the mouse event",
+                    "type": "SVGElement"
+                },
+                {
+                    "name": "e",
+                    "description": "the DOM mouse event",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "an array of `[xMouseCoord, yMouseCoord]`",
+                "type": "Array"
+            },
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 687,
+            "description": "A computed property returned the view's controller.",
+            "itemtype": "property",
+            "name": "parentController",
+            "type": "Ember.Controller",
+            "readonly": "",
+            "class": "NfGraph",
+            "module": "ember-cli-ember-dvc"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:427"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:437"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:469"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app-addon/components/nf-graph.js:469"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:482"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app-addon/components/nf-graph.js:482"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:495"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:520"
+        },
+        {
+            "message": "unknown tag: proeprty",
+            "line": " app-addon/components/nf-graph.js:587"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-graph.js:667"
+        },
+        {
+            "message": "Missing item type\nThe y coordinate position of the graph content",
+            "line": " app-addon/components/nf-graph.js:587"
+        }
+    ]
 }

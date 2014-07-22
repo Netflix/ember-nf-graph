@@ -167,7 +167,38 @@ var scaleProperty = function(axis) {
 };
 
 /**
- * A container component for building complex cartesian graphs.
+ * A container component for building complex Cartesian graphs.
+ *
+ * ## Minimal example
+ *
+ *       {{#nf-graph width=100 height=50}}
+ *         {{#nf-graph-content}}
+ *           {{nf-line data=lineData xprop=&quot;foo&quot; yprop=&quot;bar&quot;}}
+ *         {{/nf-graph-content}}
+ *       {{/nf-graph}}
+ * 
+ * The above will create a simple 100x50 graph, with no axes, and a single line
+ * plotting the data it finds on each object in the array &#x60;lineData&#x60; at properties
+ * &#x60;foo&#x60; and &#x60;bar&#x60; for x and y values respectively.
+ *
+ * ## More advanced example
+ *
+ *       {{#nf-graph width=500 height=300}}
+ *         {{#nf-x-axis height=&quot;50&quot;}}
+ *           &lt;text&gt;{{tick.value}}&lt;/text&gt;
+ *         {{/nf-x-axis}}
+ *   
+ *         {{#nf-y-axis width=&quot;120&quot;}}
+ *           &lt;text&gt;{{tick.value}}&lt;/text&gt;
+ *         {{/nf-y-axis}}
+ *   
+ *         {{#nf-graph-content}}
+ *           {{nf-line data=lineData xprop=&quot;foo&quot; yprop=&quot;bar&quot;}}
+ *         {{/nf-graph-content}}
+ *       {{/nf-graph}}
+ *
+ * The above example will create a 500x300 graph with both axes visible. The graph will not 
+ * render either axis unless its component is present.
  *
  * @module ember-cli-ember-dvc
  * @class NfGraph
@@ -310,27 +341,118 @@ export default Ember.Component.extend({
    */
   yScaleType: &#x27;linear&#x27;,
   
+  /**
+   * The padding between value steps when &#x60;xScaleType&#x60; is &#x60;&#x27;ordinal&#x27;&#x60;
+   * @property xOrdinalPadding
+   * @type Number
+   * @default 0.1
+   */
   xOrdinalPadding: 0.1,
+
+  /**
+   * The padding at the ends of the domain data when &#x60;xScaleType&#x60; is &#x60;&#x27;ordinal&#x27;&#x60;
+   * @property xOrdinalOuterPadding
+   * @type Number
+   * @default 0.1
+   */
   xOrdinalOuterPadding: 0.1,
 
+  /**
+   * The padding between value steps when &#x60;xScaleType&#x60; is &#x60;&#x27;ordinal&#x27;&#x60;
+   * @property yOrdinalPadding
+   * @type Number
+   * @default 0.1
+   */
   yOrdinalPadding: 0.1,
+
+  /**
+   * The padding at the ends of the domain data when &#x60;yScaleType&#x60; is &#x60;&#x27;ordinal&#x27;&#x60;
+   * @property yOrdinalOuterPadding
+   * @type Number
+   * @default 0.1
+   */
   yOrdinalOuterPadding: 0.1,
 
+  /**
+   * the &#x60;nf-y-axis&#x60; component is registered here if there is one present
+   * @property yAxis
+   * @readonly
+   * @default null
+   */
   yAxis: null,
+
+  /**
+   * The &#x60;nf-x-axis&#x60; component is registered here if there is one present
+   * @property xAxis
+   * @readonly
+   * @default null
+   */
   xAxis: null,
 
   _xMin: 0,
   _xMax: 1,
   _yMin: 0,
-  _yMax: 1,  
+  _yMax: 1,
 
+  /**
+   * The minimum x domain value. If &#x60;xDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
+   * If &#x60;xDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;xMin&#x60; determines the lower bounds of the domain.
+   * For &#x60;xScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;xDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
+   * @property xMin
+   * @type String/Number
+   */
   xMin: computedAlias(&#x27;_xMin&#x27;),
+
+  /**
+   * The maximum x domain value. If &#x60;xDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
+   * If &#x60;xDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;xMax&#x60; determines the upper bounds of the domain.
+   * For &#x60;xScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;xDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
+   * @property xMax
+   * @type String/Number
+   */
   xMax: computedAlias(&#x27;_xMax&#x27;),
+
+  /**
+   * The minimum y domain value. If &#x60;yDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
+   * If &#x60;yDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;yMin&#x60; determines the lower bounds of the domain.
+   * For &#x60;yScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;yDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
+   * @property yMin
+   * @type String/Number
+   */
   yMin: computedAlias(&#x27;_yMin&#x27;),
+
+  /**
+   * The maximum y domain value. If &#x60;yDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
+   * If &#x60;yDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;yMax&#x60; determines the upper bounds of the domain.
+   * For &#x60;yScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;yDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
+   * @property yMax
+   * @type String/Number
+   */
   yMax: computedAlias(&#x27;_yMax&#x27;),
 
+  /**
+   * Registry of contained graphic elements such as &#x60;nf-line&#x60; or &#x60;nf-area&#x60; components.
+   * This registry is used to pool data for scaling purposes.
+   * @property graphics
+   * @type Array
+   * @readonly
+   */
   graphics: computedAlias(&#x27;_graphics&#x27;),
+
+  /**
+   * Computed property to show yAxis. Returns &#x60;true&#x60; if a yAxis is present.
+   * @property showYAxis
+   * @type Boolean
+   * @default false
+   */
   showYAxis: computedBool(&#x27;yAxis&#x27;),
+
+  /**
+   * Computed property to show xAxis. Returns &#x60;true&#x60; if an xAxis is present.
+   * @property showXAxis
+   * @type Boolean
+   * @default false
+   */
   showXAxis: computedBool(&#x27;xAxis&#x27;),
 
   _graphicsSortedDataChanged: observer(
@@ -346,42 +468,128 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * Gets a function to create the xScale
+   * @property xScaleFactory
+   * @readonly
+   */
   xScaleFactory: scaleFactoryProperty(&#x27;x&#x27;),
+
+  /**
+   * Gets a function to create the yScale
+   * @property yScaleFactory
+   * @readonly
+   */
   yScaleFactory: scaleFactoryProperty(&#x27;y&#x27;),
 
+  /**
+   * Gets the domain of x values.
+   * @property xDomain
+   * @type Array
+   * @readonly
+   */
   xDomain: domainProperty(&#x27;x&#x27;),
+
+  /**
+   * Gets the domain of y values.
+   * @property yDomain
+   * @type Array
+   * @readonly
+   */
   yDomain: domainProperty(&#x27;y&#x27;),
 
+  /**
+   * Gets the current xScale used to draw the graph.
+   * @property xScale
+   * @type Function
+   * @readonly
+   */
   xScale: scaleProperty(&#x27;x&#x27;),
+
+  /**
+   * Gets the current yScale used to draw the graph.
+   * @property yScale
+   * @type Function
+   * @readonly
+   */
   yScale: scaleProperty(&#x27;y&#x27;),
 
-  // used to register lines, areas, etc.
+  /**
+   * Registers a graphic such as &#x60;nf-line&#x60; or &#x60;nf-area&#x60; components with the graph.
+   * @function registerGraphic
+   * @param graphic {Ember.Component} The component object to register
+   */
   registerGraphic: function (graphic) {
     var graphics = this.get(&#x27;graphics&#x27;);
     graphics.pushObject(graphic);
   },
 
+  /**
+   * Unregisters a graphic such as an &#x60;nf-line&#x60; or &#x60;nf-area&#x60; from the graph.
+   * @function unregisterGraphic
+   * @param graphic {Ember.Component} The component to unregister
+   */
   unregisterGraphic: function(graphic) {
     var graphics = this.get(&#x27;graphics&#x27;);
     graphics.removeObject(graphic);
   },
 
+  /**
+   * The handlers for mouse hover changes
+   * @property _hoverChangeHandlers
+   * @type Array
+   * @private
+   * @readonly
+   */
   _hoverChangeHandlers: property(function(){
     return [];
   }),
 
+  /**
+   * The handlers for mouse hover end
+   * @property _hoverEndHandlers
+   * @type Array
+   * @private
+   * @readonly
+   */
   _hoverEndHandlers: property(function(){
     return [];
   }),
 
+  /**
+   * Registers a mouse hover change handler with the graph.
+   * @function hoverChange
+   * @params handler {Function} a function that will handle the hover change
+   * @example 
+   *     graph.hoverChange(function(e, data) {
+   *        console.log(data.x, data.y);
+   *     });
+   */
   hoverChange: function(handler) {
     this.get(&#x27;_hoverChangeHandlers&#x27;).pushObject(handler);
   },
 
+  /**
+   * Registers a mouse hover end handler with the graph.
+   * @function hoverEnd
+   * @params handler {Function} a function that will handle the hover end
+   * @example 
+   *     graph.hoverEnd(function(e) {
+   *        console.log(&#x27;hover ended&#x27;);
+   *     });
+   */
   hoverEnd: function(handler) {
     this.get(&#x27;_hoverEndHandlers&#x27;).pushObject(handler);
   },
   
+  /**
+   * Notifies all handlers of a hover change event.
+   * @function onDidGraphHoverChange
+   * @param e {MouseEvent} the DOM mouse event args
+   * @param mouseX {Number} the mouse x coordinates relative to the graph content.
+   * @param mouseY {Number} the mouse y coordinates relative to the graph content.
+   * @private
+   */
   onDidGraphHoverChange: function (e, mouseX, mouseY) {
     var graphics = this.get(&#x27;graphics&#x27;);
     
@@ -399,6 +607,12 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * Notifies all handlers of a hover end event
+   * @function onDidGraphHoverEnd
+   * @param e {MouseEvent} the DOM mouse event
+   * @private
+   */
   onDidGraphHoverEnd: function (e) {
     var graphics = this.get(&#x27;graphics&#x27;);
     if (!graphics) {
@@ -410,18 +624,46 @@ export default Ember.Component.extend({
     });
   },
 
+  /**
+   * The y range of the graph in pixels. The min and max pixel values
+   * in an array form.
+   * @property yRange
+   * @type Array
+   * @readonly
+   */
   yRange: property(&#x27;graphHeight&#x27;, function (graphHeight) {
     return [graphHeight, 0];
   }),
 
+  /**
+   * The x range of the graph in pixels. The min and max pixel values
+   * in an array form.
+   * @property xRange
+   * @type Array
+   * @readonly
+   */
   xRange: property(&#x27;graphWidth&#x27;, function (graphWidth) {
     return [0, graphWidth];
   }),
 
+  /**
+   * Returns &#x60;true&#x60; if the graph has data to render. Data is conveyed
+   * to the graph by registered graphics.
+   * @property hasData
+   * @type Boolean
+   * @default false
+   * @readonly
+   */
   hasData: property(&#x27;graphics&#x27;, function(graphics) {
     return graphics &amp;&amp; graphics.length &gt; 0;
   }),
 
+  /**
+   * The x coordinate position of the graph content
+   * @property graphX
+   * @type Number
+   * @readonly
+   */
   graphX: property(
     &#x27;paddingLeft&#x27;, &#x27;yAxis.width&#x27;, &#x27;yAxis.orient&#x27;, 
     function (paddingLeft, yAxisWidth, yAxisOrient) {
@@ -432,6 +674,12 @@ export default Ember.Component.extend({
     }
   ),
 
+  /** 
+   * The y coordinate position of the graph content
+   * @proeprty graphY
+   * @type Number
+   * @readonly
+   */
   graphY: property(&#x27;paddingTop&#x27;, &#x27;xAxis.orient&#x27;, &#x27;xAxis.height&#x27;, 
     function (paddingTop, xAxisOrient, xAxisHeight) {
       if(xAxisOrient === &#x27;top&#x27;) {
@@ -441,6 +689,12 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * The width, in pixels, of the graph content
+   * @property graphWidth
+   * @type Number
+   * @readonly
+   */
   graphWidth: property(&#x27;width&#x27;, &#x27;paddingRight&#x27;, &#x27;paddingLeft&#x27;, &#x27;yAxis.width&#x27;,
     function (width, paddingLeft, paddingRight, yAxisWidth) {
       paddingRight = paddingRight || 0;
@@ -450,6 +704,12 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * The height, in pixels, of the graph content
+   * @property graphHeight
+   * @type Number
+   * @readonly
+   */
   graphHeight: property(&#x27;height&#x27;, &#x27;paddingTop&#x27;, &#x27;paddingBottom&#x27;, &#x27;xAxis.height&#x27;,
     function (height, paddingTop, paddingBottom, xAxisHeight) {
       paddingTop = paddingTop || 0;
@@ -459,15 +719,21 @@ export default Ember.Component.extend({
     }
   ),
 
+  /**
+   * An SVG transform to position the graph content
+   * @property graphTransform
+   * @type String
+   * @readonly
+   */
   graphTransform: property(&#x27;graphX&#x27;, &#x27;graphY&#x27;, function (graphX, graphY) {
     return &#x27;translate(%@, %@)&#x27;.fmt(graphX, graphY);
   }),
 
-  willInsertElement: function () {
+  _notifyHasRendered: function () {
     this.set(&#x27;hasRendered&#x27;, true);
-  },
+  }.on(&#x27;willInsertElement&#x27;),
 
-  didInsertElement: function () {
+  _registerDOM: function () {
     var graphContentGroup = this.$(&#x27;.nf-graph-content&#x27;);
     var self = this;
 
@@ -486,9 +752,15 @@ export default Ember.Component.extend({
         self.onDidGraphHoverEnd(e);
       });
     });
-  },
+  }.on(&#x27;didInsertElement&#x27;),
 
-  // gets mouse position relative to the container
+  /**
+   * Gets the mouse position relative to the container
+   * @function mousePoint
+   * @param container {SVGElement} the SVG element that contains the mouse event
+   * @param e {Object} the DOM mouse event
+   * @return {Array} an array of &#x60;[xMouseCoord, yMouseCoord]&#x60;
+   */
   mousePoint: function (container, e) {
     var svg = container.ownerSVGElement || container;
     if (svg.createSVGPoint) {
@@ -502,6 +774,12 @@ export default Ember.Component.extend({
     return [ e.clientX - rect.left - container.clientLeft, e.clientY - rect.top - container.clientTop ];
   },
 
+  /**
+   * A computed property returned the view&#x27;s controller.
+   * @property parentController
+   * @type Ember.Controller
+   * @readonly
+   */
   parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
   _setup: function(){
