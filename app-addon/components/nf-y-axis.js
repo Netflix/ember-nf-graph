@@ -18,15 +18,16 @@ import HasGraphParent  from '../mixins/graph-has-graph-parent';
  * templating, along with the tick line. `<text>` tags within tick templates do have some 
  * default styling applied to them to position them appropriately based off of orientation.
  *
- * @module ember-cli-ember-dvc
- * @class nf-y-axis
- * @example 
+ * ### Example
  *
  *       {{#nf-graph width=500 height=300}}
  *         {{#nf-y-axis width=40}}
  *           <text>y is {{tick.value}}</text>
  *         {{/nf-y-axis}}
  *       {{/nf-graph}}
+ *
+ * @module ember-cli-ember-dvc
+ * @class nf-y-axis
  */
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',

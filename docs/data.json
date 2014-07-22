@@ -58,10 +58,7 @@
             "tag": "module",
             "file": "app-addon/components/nf-y-axis.js",
             "line": 5,
-            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.\n\n## Example\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}",
-            "example": [
-                " \n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}"
-            ]
+            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.\n\n### Example\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}"
         }
     },
     "classes": {
@@ -77,7 +74,7 @@
             "namespace": "",
             "file": "app-addon/components/nf-area-stack.js",
             "line": 3,
-            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.\n\n## Example\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}"
+            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.\n\n### Example\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}"
         },
         "nf-graph": {
             "name": "nf-graph",
@@ -105,7 +102,7 @@
             "namespace": "",
             "file": "app-addon/components/nf-x-axis.js",
             "line": 5,
-            "description": "A component for adding a templated x axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-x-axis` class.\nA `orient-top` or `orient-bottom` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation."
+            "description": "A component for adding a templated x axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-x-axis` class.\nA `orient-top` or `orient-bottom` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example \n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}"
         },
         "nf-y-axis": {
             "name": "nf-y-axis",
@@ -119,7 +116,7 @@
             "namespace": "",
             "file": "app-addon/components/nf-y-axis.js",
             "line": 5,
-            "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-y-axis` class.\nA `orient-left` or `orient-right` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation."
+            "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-y-axis` class.\nA `orient-left` or `orient-right` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-y-axis width=40}}\n          <text>y is {{tick.value}}</text>\n        {{/nf-y-axis}}\n      {{/nf-graph}}"
         }
     },
     "classitems": [
@@ -799,7 +796,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 38,
+            "line": 39,
             "description": "The height of the x axis in pixels.",
             "itemtype": "property",
             "name": "height",
@@ -810,7 +807,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 46,
+            "line": 47,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
@@ -821,7 +818,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 54,
+            "line": 55,
             "description": "The length of the tick line (the small vertical line indicating the tick)",
             "itemtype": "property",
             "name": "tickLength",
@@ -832,7 +829,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 62,
+            "line": 63,
             "description": "The spacing between the end of the tick line and the origin of the templated \ntick content",
             "itemtype": "property",
             "name": "tickPadding",
@@ -843,7 +840,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 71,
+            "line": 72,
             "description": "The orientation of the x axis. Value can be `'top'` or `'bottom'`.",
             "itemtype": "property",
             "name": "orient",
@@ -854,7 +851,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 81,
+            "line": 82,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -868,7 +865,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 105,
+            "line": 106,
             "description": "The class applied due to orientation (e.g. `'orient-top'`)",
             "itemtype": "property",
             "name": "orientClass",
@@ -879,7 +876,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 115,
+            "line": 116,
             "description": "The SVG Transform applied to this component's container.",
             "itemtype": "property",
             "name": "transform",
@@ -890,7 +887,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 127,
+            "line": 128,
             "description": "The y position of this component's container.",
             "itemtype": "property",
             "name": "y",
@@ -901,7 +898,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 150,
+            "line": 151,
             "description": "This x position of this component's container",
             "itemtype": "property",
             "name": "x",
@@ -912,7 +909,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 161,
+            "line": 162,
             "description": "The width of the component",
             "itemtype": "property",
             "name": "width",
@@ -923,7 +920,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 169,
+            "line": 170,
             "description": "Function to create the tick values. Can be overriden to provide specific values.",
             "itemtype": "method",
             "name": "tickFactory",
@@ -958,7 +955,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 182,
+            "line": 183,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
@@ -969,7 +966,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 190,
+            "line": 191,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
@@ -980,7 +977,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 34,
+            "line": 35,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
@@ -991,7 +988,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 42,
+            "line": 43,
             "description": "The length of the tick's accompanying line.",
             "itemtype": "property",
             "name": "tickLength",
@@ -1002,7 +999,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 50,
+            "line": 51,
             "description": "The distance between the tick line and the origin tick's templated output",
             "itemtype": "property",
             "name": "tickPadding",
@@ -1013,7 +1010,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 58,
+            "line": 59,
             "description": "The total width of the y axis",
             "itemtype": "property",
             "name": "width",
@@ -1024,7 +1021,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 66,
+            "line": 67,
             "description": "The orientation of the y axis. Possible values are `'left'` and `'right'`",
             "itemtype": "property",
             "name": "orient",
@@ -1035,7 +1032,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 80,
+            "line": 81,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -1049,7 +1046,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 109,
+            "line": 110,
             "description": "computed property. returns true if `orient` is equal to `'right'`.",
             "itemtype": "property",
             "name": "isOrientRight",
@@ -1060,7 +1057,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 118,
+            "line": 119,
             "description": "The SVG transform for positioning the component.",
             "itemtype": "property",
             "name": "transform",
@@ -1071,7 +1068,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 130,
+            "line": 131,
             "description": "The x position of the component",
             "itemtype": "property",
             "name": "x",
@@ -1082,7 +1079,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 144,
+            "line": 145,
             "description": "The y position of the component",
             "itemtype": "property",
             "name": "y",
@@ -1093,7 +1090,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 152,
+            "line": 153,
             "description": "the height of the component",
             "itemtype": "property",
             "name": "height",
@@ -1104,7 +1101,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 160,
+            "line": 161,
             "description": "Function to create the tick values. Can be overriden to provide specific values.",
             "itemtype": "method",
             "name": "tickFactory",
@@ -1139,7 +1136,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 180,
+            "line": 181,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
@@ -1150,7 +1147,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 188,
+            "line": 189,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
@@ -1161,7 +1158,7 @@
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 216,
+            "line": 217,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
@@ -1222,11 +1219,11 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-x-axis.js:169"
+            "line": " app-addon/components/nf-x-axis.js:170"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-y-axis.js:160"
+            "line": " app-addon/components/nf-y-axis.js:161"
         },
         {
             "message": "Missing item type\nThe y coordinate position of the graph content",

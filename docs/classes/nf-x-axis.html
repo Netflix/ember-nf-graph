@@ -125,6 +125,12 @@ depending on the <code>orient</code> setting.</p>
 <p>Ticks are positioned via a <code>&lt;g&gt;</code> tag, that will contain whatever is passed into it via
 templating, along with the tick line. <code>&lt;text&gt;</code> tags within tick templates do have some 
 default styling applied to them to position them appropriately based off of orientation.</p>
+<h3 id="example">Example</h3>
+<pre class="code prettyprint"><code>  {{#nf-graph width=500 height=300}}
+    {{#nf-x-axis height=40}}
+      &lt;text&gt;x is {{tick.value}}&lt;/text&gt;
+    {{/nf-x-axis}}
+  {{/nf-graph}}</code></pre>
 
 </div>
 
@@ -340,7 +346,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l169"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:169</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l170"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:170</code></a>
         
         </p>
 
@@ -480,7 +486,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:38</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l39"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:39</code></a>
         
         </p>
 
@@ -527,7 +533,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l71"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:71</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l72"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:72</code></a>
         
         </p>
 
@@ -574,7 +580,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l105"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:105</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l106"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:106</code></a>
         
         </p>
 
@@ -619,7 +625,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l46"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:46</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l47"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:47</code></a>
         
         </p>
 
@@ -666,7 +672,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l81"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:81</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l82"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:82</code></a>
         
         </p>
 
@@ -731,7 +737,7 @@ The function should have exactly the same signature as the function you&#39;d us
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l54"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:54</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l55"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:55</code></a>
         
         </p>
 
@@ -778,7 +784,7 @@ The function should have exactly the same signature as the function you&#39;d us
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l62"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:62</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l63"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:63</code></a>
         
         </p>
 
@@ -826,7 +832,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l190"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:190</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l191"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:191</code></a>
         
         </p>
 
@@ -871,7 +877,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l115"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:115</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l116"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:116</code></a>
         
         </p>
 
@@ -916,7 +922,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l182"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:182</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l183"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:183</code></a>
         
         </p>
 
@@ -961,7 +967,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l161"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:161</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l162"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:162</code></a>
         
         </p>
 
@@ -1006,7 +1012,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l150"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:150</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l151"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:151</code></a>
         
         </p>
 
@@ -1051,7 +1057,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l127"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:127</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l128"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:128</code></a>
         
         </p>
 

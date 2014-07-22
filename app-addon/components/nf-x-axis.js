@@ -18,15 +18,16 @@ import { property } from '../utils/computed-property-helpers';
  * templating, along with the tick line. `<text>` tags within tick templates do have some 
  * default styling applied to them to position them appropriately based off of orientation.
  *
- * @module ember-cli-ember-dvc
- * @class nf-x-axis
- * @example 
+ * ### Example 
  *
  *       {{#nf-graph width=500 height=300}}
  *         {{#nf-x-axis height=40}}
  *           <text>x is {{tick.value}}</text>
  *         {{/nf-x-axis}}
  *       {{/nf-graph}}
+ *
+ * @module ember-cli-ember-dvc
+ * @class nf-x-axis
  */
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',

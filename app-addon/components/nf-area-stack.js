@@ -7,7 +7,7 @@ import Ember from 'ember';
  * and uses the ydata of the next sibling `nf-area` component to determine the bottom 
  * of each `nf-area` components path to be drawn.
  *
- * ## Example
+ * ### Example
  *
  *  		{{#nf-graph width=300 height=100}}
  *  			{{#nf-graph-content}}
