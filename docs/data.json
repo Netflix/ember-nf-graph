@@ -201,6 +201,28 @@
             "namespaces": {
                 "components": 1
             }
+        },
+        "app-addon/mixins/graph-area-utils.js": {
+            "name": "app-addon/mixins/graph-area-utils.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-area-utils": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/graph-has-graph-parent.js": {
+            "name": "app-addon/mixins/graph-has-graph-parent.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-has-graph-parent": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
         }
     },
     "modules": {},
@@ -229,7 +251,17 @@
             "namespace": "components",
             "file": "app-addon/components/nf-area.js",
             "line": 10,
-            "description": "Adds an area graph to an `nf-graph` component.\n\nOptionally, if it's located within an `nf-area-stack` component, it will work with\nsibling `nf-area` components to create a stacked graph."
+            "description": "Adds an area graph to an `nf-graph` component.\n\nOptionally, if it's located within an `nf-area-stack` component, it will work with\nsibling `nf-area` components to create a stacked graph.",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-area-utils",
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-selectable-graphic",
+                "mixins.graph-registered-graphic",
+                "mixins.graph-data-graphic",
+                "mixins.graph-graphic-with-tracking-dot",
+                "mixins.graph-data-position-utils"
+            ]
         },
         "components.nf-bars": {
             "name": "components.nf-bars",
@@ -438,6 +470,37 @@
             "file": "app-addon/components/nf-y-diff.js",
             "line": 5,
             "description": "Draws a box underneath (or over) the y axis to between the given `a` and `b`\ndomain values. Component content is used to template a label in that box.\n\n## Tips\n\n- Should be outside of `nf-graph-content`.\n- Should be \"above\" `nf-y-axis` in the markup.\n- As a convenience, `<text>` elements will automatically be positioned based on y-axis orientation\ndue to default styling."
+        },
+        "mixins.graph-area-utils": {
+            "name": "mixins.graph-area-utils",
+            "shortname": "mixins.graph-area-utils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-area-utils.js",
+            "line": 3,
+            "description": "Utility functions for drawing an area.",
+            "extends": "Ember.Mixin"
+        },
+        "mixins.graph-has-graph-parent": {
+            "name": "mixins.graph-has-graph-parent",
+            "shortname": "mixins.graph-has-graph-parent",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area"
+            ],
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-has-graph-parent.js",
+            "line": 3,
+            "description": "Adds initialization code to graph the `nf-graph` parent\nto a component that is to be contained in an `nf-graph`."
         }
     },
     "classitems": [
@@ -1640,6 +1703,55 @@
             "readonly": "",
             "class": "components.nf-y-axis",
             "namespace": "components"
+        },
+        {
+            "file": "app-addon/mixins/graph-area-utils.js",
+            "line": 11,
+            "itemtype": "method",
+            "name": "createAreaFn",
+            "params": [
+                {
+                    "name": "xScale",
+                    "description": "a d3 scale",
+                    "type": "Function"
+                },
+                {
+                    "name": "yScale",
+                    "description": "a d3 scale",
+                    "type": "Function"
+                },
+                {
+                    "name": "interpolator",
+                    "description": "the name of the d3 interpolator to use.",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "a function that when called will create SVG path data.",
+                "type": "Function"
+            },
+            "class": "mixins.graph-area-utils",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-has-graph-parent.js",
+            "line": 11,
+            "description": "The parent graph for a component.",
+            "itemtype": "property",
+            "name": "graph",
+            "type": "components.nf-graph",
+            "default": "null",
+            "class": "mixins.graph-has-graph-parent",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-has-graph-parent.js",
+            "line": 19,
+            "description": "Initalization method that gets the `nf-graph` parent\nand assigns it to `graph`",
+            "itemtype": "method",
+            "name": "_getGraph",
+            "class": "mixins.graph-has-graph-parent",
+            "namespace": "mixins"
         }
     ],
     "warnings": [
@@ -1710,6 +1822,10 @@
         {
             "message": "replacing incorrect tag: function with method",
             "line": " app-addon/components/nf-y-axis.js:162"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/mixins/graph-area-utils.js:11"
         },
         {
             "message": "Missing item type\nThe y coordinate position of the graph content",

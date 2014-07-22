@@ -14,6 +14,14 @@ import DataPositionUtils from '../mixins/graph-data-position-utils';
  * sibling `nf-area` components to create a stacked graph.
  * @namespace components
  * @class nf-area
+ * @extends Ember.Component
+ * @uses mixins.graph-area-utils
+ * @uses mixins.graph-has-graph-parent
+ * @uses mixins.graph-selectable-graphic
+ * @uses mixins.graph-registered-graphic
+ * @uses mixins.graph-data-graphic
+ * @uses mixins.graph-graphic-with-tracking-dot
+ * @uses mixins.graph-data-position-utils
  */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
   Selectable, AreaUtils, GraphicWithTrackingDot, DataPositionUtils, {    

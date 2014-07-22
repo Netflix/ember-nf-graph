@@ -18,7 +18,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-table",
         "components.nf-x-axis",
         "components.nf-y-axis",
-        "components.nf-y-diff"
+        "components.nf-y-diff",
+        "mixins.graph-area-utils",
+        "mixins.graph-has-graph-parent"
     ],
     "modules": [],
     "allModules": []
