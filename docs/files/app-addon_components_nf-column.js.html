@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>ember-cli-ember-dvc - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-column.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -94,93 +94,111 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>ember-cli-ember-dvc Module</h1>
-<div class="box clearfix meta">
-    
+                        <h1 class="file-heading">File: app-addon/components/nf-column.js</h1>
 
-    
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import { SORT_NONE, SORT_ASCENDING, SORT_DESCENDING } from &#x27;../utils/constants&#x27;;
 
-    
-        <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-y-axis.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-y-axis.js:5</code></a>
-        </div>
-    
+/**
+ * A column class to support &#x60;nf-table&#x60;
+ * @module ember-cli-ember-dvc
+ * @class nf-column
+ */
+export default Ember.Component.extend({
 
-    
-</div>
+	/**
+	 * used so child components &#x60;nf-cell&#x60; and &#x60;nf-header&#x60; can find this component
+	 * and register themselves.
+	 * @property isDataTableColumn
+	 * @type Boolean
+	 * @default true
+	 * @readonly
+	 */
+	isDataTableColumn: true,
+	
 
+	_sortDirection: SORT_NONE,
 
+	/**
+	 * Gets or sets the sort direction for the column.
+	 * 
+	 * As a convenence, it accepts either a numeric or string value, and 
+	 * coerces it into the appropriate numeric value.
+	 * 
+	 * Always returns a numeric value
+	 *
+	 * |short|long|numeric|actual|
+	 * |:--|:--|--:|--:|
+	 * |asc|ascending|1|1|
+	 * |desc|descending|-1|-1|
+	 * |none|(any other string)|0|0|
+	 *
+	 * @property sortDirection
+	 * @type Number
+	 * @default 0
+	 * @example
+	 *
+	 *       {{#nf-column sortDirection=&quot;asc&quot;}}
+	 */
+	sortDirection: function(name, value) {
+		if(arguments.length &gt; 1) {
+			var typeOfValue = typeof value;
+			if(typeOfValue === &#x27;number&#x27;) {
+				if(value &gt; SORT_NONE) {
+					value = SORT_ASCENDING;
+				} else if(value &lt; SORT_NONE) {
+					value = SORT_DESCENDING;
+				} else {
+					value = SORT_NONE;
+				}
+			} else if(typeOfValue === &#x27;string&#x27;) {
+				 value = value.toLowerCase();
+				 if(value === &#x27;desc&#x27; || value === &#x27;descending&#x27;) {
+				 	value = SORT_DESCENDING;
+				 } else if (value === &#x27;asc&#x27; || value === &#x27;ascending&#x27;) {
+				 	value = SORT_ASCENDING;
+				 } else {
+				 	value = SORT_NONE;
+				 }
+			}
 
-<div class="box intro">
-    <p>A component for grouping and stacking <code>nf-area</code> components in an <code>nf-graph</code>.</p>
-<p>This component looks at the order of the <code>nf-area</code> components underneath it 
-and uses the ydata of the next sibling <code>nf-area</code> component to determine the bottom 
-of each <code>nf-area</code> components path to be drawn.</p>
-<h3 id="example">Example</h3>
-<pre class="code prettyprint"><code>     {{#nf-graph width=300 height=100}}
-         {{#nf-graph-content}}
-             {{#nf-area-stack}}
-                 {{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;high&quot;}}
-                 {{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;med&quot;}}
-                 {{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;low&quot;}}
-             {{/nf-area-stack}}
-         {{/nf-graph-content}}
-     {{/nf-graph}}</code></pre>
+			this._sortDirection = value;
+		}
 
-</div>
+		return this._sortDirection || 0;
+	}.property(),
 
+	/**
+	 * Gets the CSS sort class to be applied to the column
+	 * 
+	 * Possible return values are &#x60;nf-sort-ascending&#x60;, &#x60;nf-sort-descending&#x60; and &#x60;nf-sort-none&#x60;.
+	 *
+	 * @property sortClass
+	 * @type String
+	 * @default &#x27;nf-sort-none&#x27;
+	 * @example
+	 *
+	 *      column.set(&#x27;sortDirection&#x27;, &#x27;asc&#x27;);
+	 *      console.log(column.get(&#x27;sortClass&#x27;)); // nf-sort-ascending
+	 */
+	sortClass: function() {
+		var dir = this.get(&#x27;sortDirection&#x27;);
+		return &#x27;nf-sort-&#x27; + ([&#x27;descending&#x27;, &#x27;none&#x27;, &#x27;ascending&#x27;][dir+1]);
+	}.property(&#x27;sortDirection&#x27;),
 
+	_registerWithDataTable: function(){
+		var dataTable = this.nearestWithProperty(&#x27;isDataTable&#x27;);
+		this.set(&#x27;table&#x27;, dataTable);
+		dataTable.registerColumn(this);
+	}.on(&#x27;init&#x27;),
 
-<div class="yui3-g">
-    <div class="yui3-u-1-2">
-        
-            <p>This module provides the following classes:</p>
-
-            <ul class="module-classes">
-            
-                <li class="module-class">
-                    <a href="../classes/nf-area-stack.html">
-                        nf-area-stack
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-column.html">
-                        nf-column
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-graph.html">
-                        nf-graph
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-table.html">
-                        nf-table
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-x-axis.html">
-                        nf-x-axis
-                    </a>
-                </li>
-            
-                <li class="module-class">
-                    <a href="../classes/nf-y-axis.html">
-                        nf-y-axis
-                    </a>
-                </li>
-            
-            </ul>
-        
-    </div>
-
-    <div class="yui3-u-1-2">
-        
-    </div>
+	_unregister: function(){
+		this.get(&#x27;table&#x27;).unregisterColumn(this);
+	}.on(&#x27;willDestroyElement&#x27;)
+});
+    </pre>
 </div>
 
                     </div>
