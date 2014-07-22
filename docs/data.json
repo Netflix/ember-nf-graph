@@ -24,6 +24,15 @@
             "fors": {},
             "namespaces": {}
         },
+        "app-addon/components/nf-table.js": {
+            "name": "app-addon/components/nf-table.js",
+            "modules": {},
+            "classes": {
+                "nf-table": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
         "app-addon/components/nf-x-axis.js": {
             "name": "app-addon/components/nf-x-axis.js",
             "modules": {},
@@ -50,6 +59,7 @@
             "classes": {
                 "nf-area-stack": 1,
                 "nf-graph": 1,
+                "nf-table": 1,
                 "nf-x-axis": 1,
                 "nf-y-axis": 1
             },
@@ -89,6 +99,20 @@
             "file": "app-addon/components/nf-graph.js",
             "line": 79,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
+        },
+        "nf-table": {
+            "name": "nf-table",
+            "shortname": "nf-table",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "ember-cli-ember-dvc",
+            "namespace": "",
+            "file": "app-addon/components/nf-table.js",
+            "line": 5,
+            "description": "Composable table component with built-in sorting\n\n### Example\n\n      {{#nf-table rows=myData}}\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tFoo\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tBar\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      {{/nf-table}}\n\nThe example above will create a sortable table from an array `myData` containing objects\nwith fields `foo` and `bar`.\n\n### Styling\n\nnf-table emits a `<table>` with a class of `nf-table` applied to it."
         },
         "nf-x-axis": {
             "name": "nf-x-axis",
@@ -795,6 +819,119 @@
             "module": "ember-cli-ember-dvc"
         },
         {
+            "file": "app-addon/components/nf-table.js",
+            "line": 40,
+            "description": "Used to allow child components to identify this component as an nf-table component.",
+            "itemtype": "property",
+            "name": "isDataTable",
+            "type": "Boolean",
+            "readonly": "",
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 50,
+            "description": "The data source for rows to display in this table.",
+            "itemtype": "property",
+            "name": "rows",
+            "default": "null",
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 59,
+            "description": "The type of sorting to do on the table. `'multi'` or `'single'`.",
+            "itemtype": "property",
+            "name": "sortType",
+            "type": "String",
+            "default": "'single'",
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 67,
+            "description": "the registered columns",
+            "itemtype": "property",
+            "name": "columns",
+            "type": "Array",
+            "readonly": "",
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 77,
+            "description": "Registers a child column with the table.",
+            "itemtype": "method",
+            "name": "registerColumn",
+            "params": [
+                {
+                    "name": "column",
+                    "description": "the column to register with the table.",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 86,
+            "description": "Unregisters a child column from the table.",
+            "itemtype": "method",
+            "name": "unregisterColumn",
+            "params": [
+                {
+                    "name": "column",
+                    "description": "the column to unregister from the table.",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 99,
+            "description": "A computed property returning a sorted copy of `rows`",
+            "itemtype": "property",
+            "name": "sortedRows",
+            "type": "Array",
+            "readonly": "",
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 120,
+            "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
+            "itemtype": "property",
+            "name": "parentController",
+            "type": "Ember.Controller",
+            "readonly": "",
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 131,
+            "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
+            "itemtype": "method",
+            "name": "actions.sort",
+            "params": [
+                {
+                    "name": "sortedColumn",
+                    "description": "",
+                    "type": "Nf-column"
+                }
+            ],
+            "class": "nf-table",
+            "module": "ember-cli-ember-dvc"
+        },
+        {
             "file": "app-addon/components/nf-x-axis.js",
             "line": 39,
             "description": "The height of the x axis in pixels.",
@@ -1216,6 +1353,18 @@
         {
             "message": "replacing incorrect tag: function with method",
             "line": " app-addon/components/nf-graph.js:667"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-table.js:77"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-table.js:86"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/components/nf-table.js:131"
         },
         {
             "message": "replacing incorrect tag: function with method",

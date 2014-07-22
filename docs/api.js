@@ -3,6 +3,7 @@ YUI.add("yuidoc-meta", function(Y) {
     "classes": [
         "nf-area-stack",
         "nf-graph",
+        "nf-table",
         "nf-x-axis",
         "nf-y-axis"
     ],
