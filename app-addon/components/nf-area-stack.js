@@ -19,7 +19,7 @@ import Ember from 'ember';
  *  			{{/nf-graph-content}}
  *  		{{/nf-graph}}
  *
- * @module ember-cli-ember-dvc
+ * @namespace components
  * @class nf-area-stack 
  */
 export default Ember.Component.extend({

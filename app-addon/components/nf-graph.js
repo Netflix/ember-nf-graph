@@ -110,7 +110,8 @@ var scaleProperty = function(axis) {
  * The above example will create a 500x300 graph with both axes visible. The graph will not 
  * render either axis unless its component is present.
  *
- * @module ember-cli-ember-dvc
+ *
+ * @namespace components
  * @class nf-graph
  */
 export default Ember.Component.extend({

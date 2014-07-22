@@ -26,7 +26,8 @@ import HasGraphParent  from '../mixins/graph-has-graph-parent';
  *         {{/nf-y-axis}}
  *       {{/nf-graph}}
  *
- * @module ember-cli-ember-dvc
+ *
+ * @namespace components
  * @class nf-y-axis
  */
 export default Ember.Component.extend(HasGraphParent, {

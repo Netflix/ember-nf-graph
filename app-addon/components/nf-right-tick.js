@@ -1,6 +1,18 @@
 import Ember from 'ember';
 import { property, observer } from '../utils/computed-property-helpers';
 
+/**
+ * Draws a line and a chevron at the specified domain value 
+ * on the right side of an `nf-graph`. 
+ * 
+ * ### Tips
+ * 
+ * - Position outside of `nf-graph-content` component, but inside `nf-graph`.
+ * - Adding `paddingRight` to `nf-graph` component will not affect `nf-right-tick`'s position.
+ * 
+ * @namespace components
+ * @class nf-right-tick
+ */
 export default Ember.Component.extend({
 	tagName: 'g',
 	

@@ -1,10 +1,13 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 
+/**
+ * draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`.
+ * @namespace components
+ * @class nf-selection-box
+ */
 export default Ember.Component.extend(HasGraphParent, {
-	tagName: 'g',
-  // templateName: 'ember-cli-ember-dvc/components/graph-selection-box',
-	
+	tagName: 'g',	
 	transition: 500,
 
 	xMin: null,

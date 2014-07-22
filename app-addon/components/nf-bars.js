@@ -4,6 +4,14 @@ import DataGraphic from '../mixins/graph-data-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import { property } from '../utils/computed-property-helpers';
 
+/**
+ * Adds a bar graph to an `nf-graph` component.
+ *
+ * **Requires the graph has `xScaleType === 'ordinal'`***
+ *
+ * @namespace components
+ * @class nf-bars
+ */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
 	tagName: 'g',
 

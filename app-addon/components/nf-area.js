@@ -7,11 +7,18 @@ import AreaUtils from '../mixins/graph-area-utils';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 import DataPositionUtils from '../mixins/graph-data-position-utils';
 
+/**
+ * Adds an area graph to an `nf-graph` component.
+ * 
+ * Optionally, if it's located within an `nf-area-stack` component, it will work with
+ * sibling `nf-area` components to create a stacked graph.
+ * @namespace components
+ * @class nf-area
+ */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
   Selectable, AreaUtils, GraphicWithTrackingDot, DataPositionUtils, {    
 
     tagName: 'g',
-    // templateName: 'ember-cli-ember-dvc/components/graph-area',
     
     classNameBindings: [':nf-area', 'isSelected:selected', 'selectable'],
 

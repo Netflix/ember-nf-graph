@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-table.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-selection-box.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,164 +116,86 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-table.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-selection-box.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import multiSort from &#x27;../utils/multi-sort&#x27;;
-import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/constants&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 
 /**
- * Composable table component with built-in sorting
- * 
- * ### Example
- *
- *       {{#nf-table rows=myData}}
- *       	{{#nf-column sortField=&quot;foo&quot;}}
- *       	  {{nf-header}}
- *       	  	Foo
- *       	  {{/nf-header}}
- *       	  {{#nf-cell}}
- *       			{{row.foo}}
- *       	  {{/nf-cell}}
- *       	{{/nf-column}}
- *       	{{#nf-column sortField=&quot;foo&quot;}}
- *       	  {{nf-header}}
- *       	  	Bar
- *       	  {{/nf-header}}
- *       	  {{#nf-cell}}
- *       			{{row.bar}}
- *       	  {{/nf-cell}}
- *       	{{/nf-column}}
- *       {{/nf-table}}
- * 
- * The example above will create a sortable table from an array &#x60;myData&#x60; containing objects
- * with fields &#x60;foo&#x60; and &#x60;bar&#x60;.
- *
- * ### Styling
- * 
- * nf-table emits a &#x60;&lt;table&gt;&#x60; with a class of &#x60;nf-table&#x60; applied to it.
- *
- *
+ * draws a rectangle on an &#x60;nf-graph&#x60; given domain values &#x60;xMin&#x60;, &#x60;xMax&#x60;, &#x60;yMin&#x60; and &#x60;yMax&#x60;.
  * @namespace components
- * @class nf-table
+ * @class nf-selection-box
  */
-export default Ember.Component.extend({
-	/**
-	 * Used to allow child components to identify this component as an nf-table component.
-	 * @property isDataTable 
-	 * @type Boolean
-	 * @readonly
-	 */
-	isDataTable: true,
+export default Ember.Component.extend(HasGraphParent, {
+	tagName: &#x27;g&#x27;,	
+	transition: 500,
 
-	tagName: &#x27;table&#x27;,
+	xMin: null,
+	xMax: null,
+	yMin: null,
+	yMax: null,
 
-	/**
-	 * The data source for rows to display in this table.
-	 * @property rows
-	 * @default null
-	 */
-	rows: null,
+	classNames: [&#x27;nf-selection-box&#x27;],
 
-	classNames: [&#x27;nf-table&#x27;],
+	x: function(){
+		var xScale = this.get(&#x27;graph.xScale&#x27;);
+		return xScale(this.get(&#x27;xMin&#x27;)) || 0;
+	}.property(&#x27;xMin&#x27;, &#x27;graph.xScale&#x27;),
 
-	/**
-	 * The type of sorting to do on the table. &#x60;&#x27;multi&#x27;&#x60; or &#x60;&#x27;single&#x27;&#x60;.
-	 * @property sortType
-	 * @type String
-	 * @default &#x27;single&#x27;
-	 */
-	sortType: SORTTYPE_SINGLE,
+	y: function(){
+		var yScale = this.get(&#x27;graph.yScale&#x27;);
+		return yScale(this.get(&#x27;yMax&#x27;)) || 0;
+	}.property(&#x27;yMax&#x27;, &#x27;graph.yScale&#x27;),
 
-	/**
-	 * the registered columns
-	 * @property columns
-	 * @type Array
-	 * @readonly
-	 */
-	columns: function() {
-		return [];
-	}.property(),
+	width: function(){
+		var xScale = this.get(&#x27;graph.xScale&#x27;);
+		var x0 = xScale(this.get(&#x27;xMin&#x27;));
+		var x1 = xScale(this.get(&#x27;xMax&#x27;));
+		return Math.abs(x1 - x0) || 0;
+	}.property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;graph.xScale&#x27;),
 
-	/**
-	 * Registers a child column with the table.
-	 * @function registerColumn
-	 * @param column {Ember.Component} the column to register with the table.
-	 */
-	registerColumn: function(column) {
-		this.get(&#x27;columns&#x27;).pushObject(column);
-	},
+	height: function(){
+		var yScale = this.get(&#x27;graph.yScale&#x27;);
+		var y0 = yScale(this.get(&#x27;yMin&#x27;));
+		var y1 = yScale(this.get(&#x27;yMax&#x27;));
+		return Math.abs(y1 - y0) || 0;
+	}.property(&#x27;yMin&#x27;, &#x27;yMax&#x27;, &#x27;graph.yScale&#x27;),
 
-	/**
-	 * Unregisters a child column from the table.
-	 * @function unregisterColumn
-	 * @param column {Ember.Component} the column to unregister from the table.
-	 */
-	unregisterColumn: function(column) {
-		this.get(&#x27;columns&#x27;).removeObject(column);
-	},
+	updateElements: function(){
+		var x = this.get(&#x27;x&#x27;);
+		var y = this.get(&#x27;y&#x27;);
+		var width = this.get(&#x27;width&#x27;);
+		var height = this.get(&#x27;height&#x27;);
+		var transition = this.get(&#x27;transition&#x27;);
+		var g = this.get(&#x27;g&#x27;);
+		var rect = this.get(&#x27;rect&#x27;);
 
-	_hasRendered: function() {
-		this.set(&#x27;hasRendered&#x27;, true);
+		g.transition(transition)
+			.attr(&#x27;transform&#x27;, &#x27;translate(%@ %@)&#x27;.fmt(x, y));
+
+		rect.transition(transition)
+			.attr(&#x27;width&#x27;, width)
+			.attr(&#x27;height&#x27;, height);
+	}.observes(&#x27;x&#x27;, &#x27;y&#x27;, &#x27;width&#x27;, &#x27;height&#x27;),
+
+	getElements: function(){
+		var g = d3.select(this.$()[0]);
+		var rect = g.selectAll(&#x27;rect&#x27;).data([0]);
+		
+		var x = this.get(&#x27;x&#x27;);
+		var y = this.get(&#x27;y&#x27;);
+		var width = this.get(&#x27;width&#x27;);
+		var height = this.get(&#x27;height&#x27;);
+
+		g.attr(&#x27;transform&#x27;, &#x27;translate(%@ %@)&#x27;.fmt(x, y));
+		rect.attr(&#x27;width&#x27;, width).attr(&#x27;height&#x27;, height);
+		
+		this.set(&#x27;g&#x27;, g);
+		this.set(&#x27;rect&#x27;, rect);
+		this.updateElements();
 	}.on(&#x27;didInsertElement&#x27;),
-
-	/**
-	 * A computed property returning a sorted copy of &#x60;rows&#x60;
-	 * @property sortedRows
-	 * @type Array
-	 * @readonly
-	 */
-	sortedRows: function(){
-		var sort = this.get(&#x27;columns&#x27;).filter(function(col) {
-			return col.get(&#x27;sortDirection&#x27;) &amp;&amp; col.get(&#x27;sortBy&#x27;);
-		}).map(function(col) {
-			return {
-				by: col.get(&#x27;sortBy&#x27;).replace(/^row\./, &#x27;&#x27;),
-				direction: col.get(&#x27;sortDirection&#x27;)
-			};
-		});
-
-		var rowsCopy = this.get(&#x27;rows&#x27;).slice();
-		multiSort(rowsCopy, sort);
-		return rowsCopy;
-	}.property(&#x27;rows.@each&#x27;, &#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
-
-	/**
-	 * A computed alias returning the controller of the current view. Used to wire
-	 * up child templates to the proper controller.
-	 * @property parentController
-	 * @type Ember.Controller
-	 * @readonly
-	 */
-	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
-
-	actions: {
-
-		/**
-		 * Action handler to sort columns by a passed column. Sets the &#x60;sortDirection&#x60;
-		 * of the pass column to the appropriate value based on the &#x60;sortType&#x60;.
-		 * @function actions.sort
-		 * @param sortedColumn {nf-column}
-		 */
-		sort: function(sortedColumn) {
-			var columns = this.get(&#x27;columns&#x27;);
-			var sortType = this.get(&#x27;sortType&#x27;);
-			var currentSortDir = sortedColumn.get(&#x27;sortDirection&#x27;);
-
-			if(sortType === SORTTYPE_SINGLE) {
-				columns.forEach(function(col) {
-					col.set(&#x27;sortDirection&#x27;, SORT_NONE);
-				});
-				sortedColumn.set(&#x27;sortDirection&#x27;, [1, 1, -1][currentSortDir + 1]);
-			}
-
-			if(sortType === SORTTYPE_MULTI) {
-				sortedColumn.set(&#x27;sortDirection&#x27;, [0, 1, -1][currentSortDir + 1]);
-			}
-		}
-	}
 });
     </pre>
 </div>

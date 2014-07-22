@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-table.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-y-diff.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,164 +116,99 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-table.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-y-diff.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import multiSort from &#x27;../utils/multi-sort&#x27;;
-import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/constants&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * Composable table component with built-in sorting
+ * Draws a box underneath (or over) the y axis to between the given &#x60;a&#x60; and &#x60;b&#x60;
+ * domain values. Component content is used to template a label in that box.
  * 
- * ### Example
- *
- *       {{#nf-table rows=myData}}
- *       	{{#nf-column sortField=&quot;foo&quot;}}
- *       	  {{nf-header}}
- *       	  	Foo
- *       	  {{/nf-header}}
- *       	  {{#nf-cell}}
- *       			{{row.foo}}
- *       	  {{/nf-cell}}
- *       	{{/nf-column}}
- *       	{{#nf-column sortField=&quot;foo&quot;}}
- *       	  {{nf-header}}
- *       	  	Bar
- *       	  {{/nf-header}}
- *       	  {{#nf-cell}}
- *       			{{row.bar}}
- *       	  {{/nf-cell}}
- *       	{{/nf-column}}
- *       {{/nf-table}}
+ * ## Tips
  * 
- * The example above will create a sortable table from an array &#x60;myData&#x60; containing objects
- * with fields &#x60;foo&#x60; and &#x60;bar&#x60;.
- *
- * ### Styling
- * 
- * nf-table emits a &#x60;&lt;table&gt;&#x60; with a class of &#x60;nf-table&#x60; applied to it.
- *
+ * - Should be outside of &#x60;nf-graph-content&#x60;.
+ * - Should be &quot;above&quot; &#x60;nf-y-axis&#x60; in the markup.
+ * - As a convenience, &#x60;&lt;text&gt;&#x60; elements will automatically be positioned based on y-axis orientation
+ * due to default styling.
  *
  * @namespace components
- * @class nf-table
+ * @class nf-y-diff
  */
-export default Ember.Component.extend({
-	/**
-	 * Used to allow child components to identify this component as an nf-table component.
-	 * @property isDataTable 
-	 * @type Boolean
-	 * @readonly
-	 */
-	isDataTable: true,
+export default Ember.Component.extend(HasGraphParent, {
+	tagName: &#x27;g&#x27;,
 
-	tagName: &#x27;table&#x27;,
+	classNameBindings: [&#x27;:nf-y-diff&#x27;, &#x27;isPositive:positive:negative&#x27;, &#x27;isOrientRight:orient-right:orient-left&#x27;],
 
-	/**
-	 * The data source for rows to display in this table.
-	 * @property rows
-	 * @default null
-	 */
-	rows: null,
+	a: null,
+	b: null,
+	contentPadding: 5,
+	transition: 500,
 
-	classNames: [&#x27;nf-table&#x27;],
+	diff: property(&#x27;a&#x27;, &#x27;b&#x27;, function(a, b){
+		return b - a;
+	}),
 
-	/**
-	 * The type of sorting to do on the table. &#x60;&#x27;multi&#x27;&#x60; or &#x60;&#x27;single&#x27;&#x60;.
-	 * @property sortType
-	 * @type String
-	 * @default &#x27;single&#x27;
-	 */
-	sortType: SORTTYPE_SINGLE,
+	isPositive: Ember.computed.gte(&#x27;diff&#x27;, 0),
+	
+	x: Ember.computed.alias(&#x27;graph.yAxis.x&#x27;),
+	
+	isOrientRight: Ember.computed.equal(&#x27;graph.yAxis.orient&#x27;, &#x27;right&#x27;),
 
-	/**
-	 * the registered columns
-	 * @property columns
-	 * @type Array
-	 * @readonly
-	 */
-	columns: function() {
-		return [];
-	}.property(),
+	y: property(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;graph.yScale&#x27;, &#x27;graph.graphY&#x27;, function(a, b, yScale, graphY){
+		return Math.min(yScale(a), yScale(b)) + graphY;
+	}),
 
-	/**
-	 * Registers a child column with the table.
-	 * @function registerColumn
-	 * @param column {Ember.Component} the column to register with the table.
-	 */
-	registerColumn: function(column) {
-		this.get(&#x27;columns&#x27;).pushObject(column);
-	},
+	width: Ember.computed.alias(&#x27;graph.yAxis.width&#x27;),
 
-	/**
-	 * Unregisters a child column from the table.
-	 * @function unregisterColumn
-	 * @param column {Ember.Component} the column to unregister from the table.
-	 */
-	unregisterColumn: function(column) {
-		this.get(&#x27;columns&#x27;).removeObject(column);
-	},
+	height: property(&#x27;graph.yScale&#x27;, &#x27;a&#x27;, &#x27;b&#x27;, function(yScale, a, b) {
+		return Math.abs(yScale(b) - yScale(a));
+	}),
 
-	_hasRendered: function() {
-		this.set(&#x27;hasRendered&#x27;, true);
-	}.on(&#x27;didInsertElement&#x27;),
-
-	/**
-	 * A computed property returning a sorted copy of &#x60;rows&#x60;
-	 * @property sortedRows
-	 * @type Array
-	 * @readonly
-	 */
-	sortedRows: function(){
-		var sort = this.get(&#x27;columns&#x27;).filter(function(col) {
-			return col.get(&#x27;sortDirection&#x27;) &amp;&amp; col.get(&#x27;sortBy&#x27;);
-		}).map(function(col) {
-			return {
-				by: col.get(&#x27;sortBy&#x27;).replace(/^row\./, &#x27;&#x27;),
-				direction: col.get(&#x27;sortDirection&#x27;)
-			};
-		});
-
-		var rowsCopy = this.get(&#x27;rows&#x27;).slice();
-		multiSort(rowsCopy, sort);
-		return rowsCopy;
-	}.property(&#x27;rows.@each&#x27;, &#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
-
-	/**
-	 * A computed alias returning the controller of the current view. Used to wire
-	 * up child templates to the proper controller.
-	 * @property parentController
-	 * @type Ember.Controller
-	 * @readonly
-	 */
 	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
-	actions: {
+	contentX: property(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;, &#x27;x&#x27;, function(isOrientRight, width, contentPadding, x) {
+		return x + (isOrientRight ? width - contentPadding : contentPadding);
+	}),
 
-		/**
-		 * Action handler to sort columns by a passed column. Sets the &#x60;sortDirection&#x60;
-		 * of the pass column to the appropriate value based on the &#x60;sortType&#x60;.
-		 * @function actions.sort
-		 * @param sortedColumn {nf-column}
-		 */
-		sort: function(sortedColumn) {
-			var columns = this.get(&#x27;columns&#x27;);
-			var sortType = this.get(&#x27;sortType&#x27;);
-			var currentSortDir = sortedColumn.get(&#x27;sortDirection&#x27;);
+	contentY: property(&#x27;y&#x27;, &#x27;height&#x27;, function(y, height){
+		return y + (height / 2);
+	}),
 
-			if(sortType === SORTTYPE_SINGLE) {
-				columns.forEach(function(col) {
-					col.set(&#x27;sortDirection&#x27;, SORT_NONE);
-				});
-				sortedColumn.set(&#x27;sortDirection&#x27;, [1, 1, -1][currentSortDir + 1]);
+	isVisible: property(&#x27;a&#x27;, &#x27;b&#x27;, function(a, b){
+		return typeof a === &#x27;number&#x27; &amp;&amp; typeof b === &#x27;number&#x27;;
+	}),
+
+	updateElements: observer(&#x27;rect&#x27;, &#x27;content&#x27;, &#x27;transition&#x27;, &#x27;x&#x27;, &#x27;y&#x27;, &#x27;width&#x27;, &#x27;height&#x27;, &#x27;contentY&#x27;, &#x27;contentX&#x27;,
+		function(rect, content, transition, x, y, width, height, contentY, contentX){
+			if(rect) {
+				rect.transition(transition).attr(&#x27;x&#x27;, x || 0)
+					.attr(&#x27;y&#x27;, y || 0)
+					.attr(&#x27;width&#x27;, width || 0)
+					.attr(&#x27;height&#x27;, height || 0);
 			}
 
-			if(sortType === SORTTYPE_MULTI) {
-				sortedColumn.set(&#x27;sortDirection&#x27;, [0, 1, -1][currentSortDir + 1]);
+			if(content) {
+				content.transition(transition).attr(&#x27;transform&#x27;, function() {
+					return &#x27;translate(%@ %@)&#x27;.fmt(contentX || 0, contentY || 0);
+				});
 			}
 		}
-	}
+	),
+
+	_d3Setup: function(){
+		var g = d3.select(this.$()[0]);
+		var data = [0];
+		var rect = g.selectAll(&#x27;rect&#x27;).data(data);
+		var content = g.selectAll(&#x27;g.nf-y-diff-content&#x27;).data(data);
+		this.set(&#x27;rect&#x27;, rect);
+		this.set(&#x27;content&#x27;, content);
+		this.updateElements();
+	}.on(&#x27;didInsertElement&#x27;)
+
 });
     </pre>
 </div>

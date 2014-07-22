@@ -6,165 +6,438 @@
     "files": {
         "app-addon/components/nf-area-stack.js": {
             "name": "app-addon/components/nf-area-stack.js",
-            "modules": {
-                "ember-cli-ember-dvc": 1
-            },
+            "modules": {},
             "classes": {
-                "nf-area-stack": 1
+                "components.nf-area-stack": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-area.js": {
+            "name": "app-addon/components/nf-area.js",
+            "modules": {},
+            "classes": {
+                "components.nf-area": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-bars.js": {
+            "name": "app-addon/components/nf-bars.js",
+            "modules": {},
+            "classes": {
+                "components.nf-bars": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-cell.js": {
+            "name": "app-addon/components/nf-cell.js",
+            "modules": {},
+            "classes": {
+                "components.nf-cell": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
         },
         "app-addon/components/nf-column.js": {
             "name": "app-addon/components/nf-column.js",
             "modules": {},
             "classes": {
-                "nf-column": 1
+                "components.nf-column": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-crosshair.js": {
+            "name": "app-addon/components/nf-crosshair.js",
+            "modules": {},
+            "classes": {
+                "components.nf-crosshair": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-graph-content.js": {
+            "name": "app-addon/components/nf-graph-content.js",
+            "modules": {},
+            "classes": {
+                "components.nf-graph-content": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
         },
         "app-addon/components/nf-graph.js": {
             "name": "app-addon/components/nf-graph.js",
             "modules": {},
             "classes": {
-                "nf-graph": 1
+                "components.nf-graph": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-header.js": {
+            "name": "app-addon/components/nf-header.js",
+            "modules": {},
+            "classes": {
+                "components.nf-header": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-line.js": {
+            "name": "app-addon/components/nf-line.js",
+            "modules": {},
+            "classes": {
+                "components.nf-line": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-range-marker.js": {
+            "name": "app-addon/components/nf-range-marker.js",
+            "modules": {},
+            "classes": {
+                "components.nf-range-marker": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-range-markers.js": {
+            "name": "app-addon/components/nf-range-markers.js",
+            "modules": {},
+            "classes": {
+                "components.nf-range-markers": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-right-tick.js": {
+            "name": "app-addon/components/nf-right-tick.js",
+            "modules": {},
+            "classes": {
+                "components.nf-right-tick": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-selection-box.js": {
+            "name": "app-addon/components/nf-selection-box.js",
+            "modules": {},
+            "classes": {
+                "components.nf-selection-box": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
         },
         "app-addon/components/nf-table.js": {
             "name": "app-addon/components/nf-table.js",
             "modules": {},
             "classes": {
-                "nf-table": 1
+                "components.nf-table": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "components": 1
+            }
         },
         "app-addon/components/nf-x-axis.js": {
             "name": "app-addon/components/nf-x-axis.js",
             "modules": {},
             "classes": {
-                "nf-x-axis": 1
+                "components.nf-x-axis": 1
             },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "components": 1
+            }
         },
         "app-addon/components/nf-y-axis.js": {
             "name": "app-addon/components/nf-y-axis.js",
             "modules": {},
             "classes": {
-                "nf-y-axis": 1
+                "components.nf-y-axis": 1
             },
             "fors": {},
-            "namespaces": {}
-        }
-    },
-    "modules": {
-        "ember-cli-ember-dvc": {
-            "name": "ember-cli-ember-dvc",
-            "submodules": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-y-diff.js": {
+            "name": "app-addon/components/nf-y-diff.js",
+            "modules": {},
             "classes": {
-                "nf-area-stack": 1,
-                "nf-column": 1,
-                "nf-graph": 1,
-                "nf-table": 1,
-                "nf-x-axis": 1,
-                "nf-y-axis": 1
+                "components.nf-y-diff": 1
             },
             "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "app-addon/components/nf-y-axis.js",
-            "line": 5,
-            "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.\n\n### Example\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}"
+            "namespaces": {
+                "components": 1
+            }
         }
     },
+    "modules": {},
     "classes": {
-        "nf-area-stack": {
-            "name": "nf-area-stack",
-            "shortname": "nf-area-stack",
+        "components.nf-area-stack": {
+            "name": "components.nf-area-stack",
+            "shortname": "components.nf-area-stack",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ember-cli-ember-dvc",
-            "namespace": "",
+            "namespace": "components",
             "file": "app-addon/components/nf-area-stack.js",
             "line": 3,
             "description": "A component for grouping and stacking `nf-area` components in an `nf-graph`.\n\nThis component looks at the order of the `nf-area` components underneath it \nand uses the ydata of the next sibling `nf-area` component to determine the bottom \nof each `nf-area` components path to be drawn.\n\n### Example\n\n \t\t{{#nf-graph width=300 height=100}}\n \t\t\t{{#nf-graph-content}}\n \t\t\t\t{{#nf-area-stack}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"high\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"med\"}}\n \t\t\t\t\t{{nf-area data=myData xprop=\"time\" yprop=\"low\"}}\n \t\t\t\t{{/nf-area-stack}}\n \t\t\t{{/nf-graph-content}}\n \t\t{{/nf-graph}}"
         },
-        "nf-column": {
-            "name": "nf-column",
-            "shortname": "nf-column",
+        "components.nf-area": {
+            "name": "components.nf-area",
+            "shortname": "components.nf-area",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ember-cli-ember-dvc",
-            "namespace": "",
+            "namespace": "components",
+            "file": "app-addon/components/nf-area.js",
+            "line": 10,
+            "description": "Adds an area graph to an `nf-graph` component.\n\nOptionally, if it's located within an `nf-area-stack` component, it will work with\nsibling `nf-area` components to create a stacked graph."
+        },
+        "components.nf-bars": {
+            "name": "components.nf-bars",
+            "shortname": "components.nf-bars",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-bars.js",
+            "line": 7,
+            "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***"
+        },
+        "components.nf-cell": {
+            "name": "components.nf-cell",
+            "shortname": "components.nf-cell",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-cell.js",
+            "line": 3,
+            "description": "Templating component for `nf-table`. Should always be contained in an `nf-column` component."
+        },
+        "components.nf-column": {
+            "name": "components.nf-column",
+            "shortname": "components.nf-column",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
             "file": "app-addon/components/nf-column.js",
             "line": 4,
             "description": "A column class to support `nf-table`"
         },
-        "nf-graph": {
-            "name": "nf-graph",
-            "shortname": "nf-graph",
+        "components.nf-crosshair": {
+            "name": "components.nf-crosshair",
+            "shortname": "components.nf-crosshair",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ember-cli-ember-dvc",
-            "namespace": "",
+            "namespace": "components",
+            "file": "app-addon/components/nf-crosshair.js",
+            "line": 5,
+            "description": "A component that adds a \"crosshair\" to an `nf-graph` that follows the mouse\nwhile it's hovering over the graph content."
+        },
+        "components.nf-graph-content": {
+            "name": "components.nf-graph-content",
+            "shortname": "components.nf-graph-content",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-graph-content.js",
+            "line": 3,
+            "description": "Container component for graphics to display in `nf-graph`. Represents\nthe area where the graphics, such as lines will display.\n\nExists for layout purposes."
+        },
+        "components.nf-graph": {
+            "name": "components.nf-graph",
+            "shortname": "components.nf-graph",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
             "file": "app-addon/components/nf-graph.js",
             "line": 79,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n      {{#nf-graph width=100 height=50}}\n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=\"50\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-x-axis}}\n  \n        {{#nf-y-axis width=\"120\"}}\n          <text>{{tick.value}}</text>\n        {{/nf-y-axis}}\n  \n        {{#nf-graph-content}}\n          {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n        {{/nf-graph-content}}\n      {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
         },
-        "nf-table": {
-            "name": "nf-table",
-            "shortname": "nf-table",
+        "components.nf-header": {
+            "name": "components.nf-header",
+            "shortname": "components.nf-header",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ember-cli-ember-dvc",
-            "namespace": "",
+            "namespace": "components",
+            "file": "app-addon/components/nf-header.js",
+            "line": 3,
+            "description": "Templating component for `nf-table`. Should always be contained in an `nf-column` component."
+        },
+        "components.nf-line": {
+            "name": "components.nf-line",
+            "shortname": "components.nf-line",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-line.js",
+            "line": 10,
+            "description": "A line graphic for `nf-graph`. Displays a line for the data it's passed."
+        },
+        "components.nf-range-marker": {
+            "name": "components.nf-range-marker",
+            "shortname": "components.nf-range-marker",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 5,
+            "description": "Draws a rectangular strip with a templated label on an `nf-graph`.\nShould always be used in conjunction with an `nf-range-markers` container component."
+        },
+        "components.nf-range-markers": {
+            "name": "components.nf-range-markers",
+            "shortname": "components.nf-range-markers",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-range-markers.js",
+            "line": 5,
+            "description": "A container and manager for `nf-range-marker` components.\nUsed to draw an association between `nf-range-marker` components so they \ncan be laid out in a manner in which they don't collide."
+        },
+        "components.nf-right-tick": {
+            "name": "components.nf-right-tick",
+            "shortname": "components.nf-right-tick",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-right-tick.js",
+            "line": 4,
+            "description": "Draws a line and a chevron at the specified domain value \non the right side of an `nf-graph`. \n\n### Tips\n\n- Position outside of `nf-graph-content` component, but inside `nf-graph`.\n- Adding `paddingRight` to `nf-graph` component will not affect `nf-right-tick`'s position."
+        },
+        "components.nf-selection-box": {
+            "name": "components.nf-selection-box",
+            "shortname": "components.nf-selection-box",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 4,
+            "description": "draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`."
+        },
+        "components.nf-table": {
+            "name": "components.nf-table",
+            "shortname": "components.nf-table",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
             "file": "app-addon/components/nf-table.js",
             "line": 5,
             "description": "Composable table component with built-in sorting\n\n### Example\n\n      {{#nf-table rows=myData}}\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tFoo\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tBar\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      {{/nf-table}}\n\nThe example above will create a sortable table from an array `myData` containing objects\nwith fields `foo` and `bar`.\n\n### Styling\n\nnf-table emits a `<table>` with a class of `nf-table` applied to it."
         },
-        "nf-x-axis": {
-            "name": "nf-x-axis",
-            "shortname": "nf-x-axis",
+        "components.nf-x-axis": {
+            "name": "components.nf-x-axis",
+            "shortname": "components.nf-x-axis",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ember-cli-ember-dvc",
-            "namespace": "",
+            "namespace": "components",
             "file": "app-addon/components/nf-x-axis.js",
             "line": 5,
             "description": "A component for adding a templated x axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-x-axis` class.\nA `orient-top` or `orient-bottom` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example \n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}"
         },
-        "nf-y-axis": {
-            "name": "nf-y-axis",
-            "shortname": "nf-y-axis",
+        "components.nf-y-axis": {
+            "name": "components.nf-y-axis",
+            "shortname": "components.nf-y-axis",
             "classitems": [],
             "plugins": [],
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "ember-cli-ember-dvc",
-            "namespace": "",
+            "namespace": "components",
             "file": "app-addon/components/nf-y-axis.js",
             "line": 5,
             "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-y-axis` class.\nA `orient-left` or `orient-right` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-y-axis width=40}}\n          <text>y is {{tick.value}}</text>\n        {{/nf-y-axis}}\n      {{/nf-graph}}"
+        },
+        "components.nf-y-diff": {
+            "name": "components.nf-y-diff",
+            "shortname": "components.nf-y-diff",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "components",
+            "file": "app-addon/components/nf-y-diff.js",
+            "line": 5,
+            "description": "Draws a box underneath (or over) the y axis to between the given `a` and `b`\ndomain values. Component content is used to template a label in that box.\n\n## Tips\n\n- Should be outside of `nf-graph-content`.\n- Should be \"above\" `nf-y-axis` in the markup.\n- As a convenience, `<text>` elements will automatically be positioned based on y-axis orientation\ndue to default styling."
         }
     },
     "classitems": [
@@ -177,8 +450,8 @@
             "type": "Boolean",
             "default": "true",
             "readonly": "",
-            "class": "nf-area-stack",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-area-stack",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-area-stack.js",
@@ -188,8 +461,8 @@
             "name": "areas",
             "type": "Array",
             "readonly": "",
-            "class": "nf-area-stack",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-area-stack",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-area-stack.js",
@@ -204,8 +477,8 @@
                     "type": "Ember.Component"
                 }
             ],
-            "class": "nf-area-stack",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-area-stack",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-area-stack.js",
@@ -220,24 +493,24 @@
                     "type": "Ember.Component"
                 }
             ],
-            "class": "nf-area-stack",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-area-stack",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 11,
+            "line": 12,
             "description": "used so child components `nf-cell` and `nf-header` can find this component\nand register themselves.",
             "itemtype": "property",
             "name": "isDataTableColumn",
             "type": "Boolean",
             "default": "true",
             "readonly": "",
-            "class": "nf-column",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-column",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 24,
+            "line": 25,
             "description": "Gets or sets the sort direction for the column.\n\nAs a convenence, it accepts either a numeric or string value, and \ncoerces it into the appropriate numeric value.\n\nAlways returns a numeric value\n\n|short|long|numeric|actual|\n|:--|:--|--:|--:|\n|asc|ascending|1|1|\n|desc|descending|-1|-1|\n|none|(any other string)|0|0|",
             "itemtype": "property",
             "name": "sortDirection",
@@ -246,12 +519,12 @@
             "example": [
                 "\n\n      {{#nf-column sortDirection=\"asc\"}}"
             ],
-            "class": "nf-column",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-column",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 73,
+            "line": 74,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",
@@ -260,365 +533,365 @@
             "example": [
                 "\n\n     column.set('sortDirection', 'asc');\n     console.log(column.get('sortClass')); // nf-sort-ascending"
             ],
-            "class": "nf-column",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-column",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 117,
+            "line": 118,
             "itemtype": "property",
             "name": "tagName",
             "final": 1,
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 123,
+            "line": 124,
             "description": "allows child compoenents to identify graph parent.",
             "itemtype": "property",
             "name": "isGraph",
             "final": 1,
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 130,
+            "line": 131,
             "itemtype": "property",
             "name": "hasRendered",
             "access": "private",
             "tagname": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 136,
+            "line": 137,
             "description": "The width of the graph in pixels.",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "default": "300",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 144,
+            "line": 145,
             "description": "The height of the graph in pixels.",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "default": "100",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 152,
+            "line": 153,
             "description": "The padding at the top of the graph",
             "itemtype": "property",
             "name": "paddingTop",
             "type": "Number",
             "default": "0",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 160,
+            "line": 161,
             "description": "The padding at the left of the graph",
             "itemtype": "property",
             "name": "paddingLeft",
             "type": "Number",
             "default": "0",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 168,
+            "line": 169,
             "description": "The padding at the right of the graph",
             "itemtype": "property",
             "name": "paddingRight",
             "type": "Number",
             "default": "0",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 176,
+            "line": 177,
             "description": "The padding at the bottom of the graph",
             "itemtype": "property",
             "name": "paddingBottom",
             "type": "Number",
             "default": "0",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 184,
+            "line": 185,
             "description": "Determines whether to display \"lanes\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showLanes",
             "type": "Boolean",
             "default": "false",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 194,
+            "line": 195,
             "description": "The domain mode for the x axis. This determines the behavior of\nxMin and xMax as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`",
             "itemtype": "property",
             "name": "xDomainMode",
             "type": "String",
             "default": "'auto'",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 209,
+            "line": 210,
             "description": "The domain mode for the y axis. This determines the behavior of\n`yMin` and `yMax` as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`",
             "itemtype": "property",
             "name": "yDomainMode",
             "type": "String",
             "default": "'auto'",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 224,
+            "line": 225,
             "description": "The type of scale to use for x values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "xScaleType",
             "type": "String",
             "default": "'linear'",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 239,
+            "line": 240,
             "description": "The type of scale to use for y values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "yScaleType",
             "type": "String",
             "default": "'linear'",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 254,
+            "line": 255,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalPadding",
             "type": "Number",
             "default": "0.1",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 262,
+            "line": 263,
             "description": "The padding at the ends of the domain data when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalOuterPadding",
             "type": "Number",
             "default": "0.1",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 270,
+            "line": 271,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalPadding",
             "type": "Number",
             "default": "0.1",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 278,
+            "line": 279,
             "description": "The padding at the ends of the domain data when `yScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalOuterPadding",
             "type": "Number",
             "default": "0.1",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 286,
+            "line": 287,
             "description": "the `nf-y-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "yAxis",
             "readonly": "",
             "default": "null",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 294,
+            "line": 295,
             "description": "The `nf-x-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "xAxis",
             "readonly": "",
             "default": "null",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 307,
+            "line": 308,
             "description": "The minimum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.\nIf `xDomainMode` is `'fixed'`, setting `xMin` determines the lower bounds of the domain.\nFor `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.",
             "itemtype": "property",
             "name": "xMin",
             "type": "String/Number",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 316,
+            "line": 317,
             "description": "The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.\nIf `xDomainMode` is `'fixed'`, setting `xMax` determines the upper bounds of the domain.\nFor `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.",
             "itemtype": "property",
             "name": "xMax",
             "type": "String/Number",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 325,
+            "line": 326,
             "description": "The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.\nIf `yDomainMode` is `'fixed'`, setting `yMin` determines the lower bounds of the domain.\nFor `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.",
             "itemtype": "property",
             "name": "yMin",
             "type": "String/Number",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 334,
+            "line": 335,
             "description": "The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.\nIf `yDomainMode` is `'fixed'`, setting `yMax` determines the upper bounds of the domain.\nFor `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.",
             "itemtype": "property",
             "name": "yMax",
             "type": "String/Number",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 343,
+            "line": 344,
             "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
             "itemtype": "property",
             "name": "graphics",
             "type": "Array",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 352,
+            "line": 353,
             "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
             "itemtype": "property",
             "name": "showYAxis",
             "type": "Boolean",
             "default": "false",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 360,
+            "line": 361,
             "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
             "itemtype": "property",
             "name": "showXAxis",
             "type": "Boolean",
             "default": "false",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 381,
+            "line": 382,
             "description": "Gets a function to create the xScale",
             "itemtype": "property",
             "name": "xScaleFactory",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 388,
+            "line": 389,
             "description": "Gets a function to create the yScale",
             "itemtype": "property",
             "name": "yScaleFactory",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 395,
+            "line": 396,
             "description": "Gets the domain of x values.",
             "itemtype": "property",
             "name": "xDomain",
             "type": "Array",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 403,
+            "line": 404,
             "description": "Gets the domain of y values.",
             "itemtype": "property",
             "name": "yDomain",
             "type": "Array",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 411,
+            "line": 412,
             "description": "Gets the current xScale used to draw the graph.",
             "itemtype": "property",
             "name": "xScale",
             "type": "Function",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 419,
+            "line": 420,
             "description": "Gets the current yScale used to draw the graph.",
             "itemtype": "property",
             "name": "yScale",
             "type": "Function",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 427,
+            "line": 428,
             "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
             "itemtype": "method",
             "name": "registerGraphic",
@@ -629,12 +902,12 @@
                     "type": "Ember.Component"
                 }
             ],
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 437,
+            "line": 438,
             "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
             "itemtype": "method",
             "name": "unregisterGraphic",
@@ -645,12 +918,12 @@
                     "type": "Ember.Component"
                 }
             ],
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 447,
+            "line": 448,
             "description": "The handlers for mouse hover changes",
             "itemtype": "property",
             "name": "_hoverChangeHandlers",
@@ -658,12 +931,12 @@
             "access": "private",
             "tagname": "",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 458,
+            "line": 459,
             "description": "The handlers for mouse hover end",
             "itemtype": "property",
             "name": "_hoverEndHandlers",
@@ -671,12 +944,12 @@
             "access": "private",
             "tagname": "",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 469,
+            "line": 470,
             "description": "Registers a mouse hover change handler with the graph.",
             "itemtype": "method",
             "name": "hoverChange",
@@ -690,12 +963,12 @@
             "example": [
                 " \n    graph.hoverChange(function(e, data) {\n       console.log(data.x, data.y);\n    });"
             ],
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 482,
+            "line": 483,
             "description": "Registers a mouse hover end handler with the graph.",
             "itemtype": "method",
             "name": "hoverEnd",
@@ -709,12 +982,12 @@
             "example": [
                 " \n    graph.hoverEnd(function(e) {\n       console.log('hover ended');\n    });"
             ],
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 495,
+            "line": 496,
             "description": "Notifies all handlers of a hover change event.",
             "itemtype": "method",
             "name": "onDidGraphHoverChange",
@@ -737,12 +1010,12 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 520,
+            "line": 521,
             "description": "Notifies all handlers of a hover end event",
             "itemtype": "method",
             "name": "onDidGraphHoverEnd",
@@ -755,100 +1028,100 @@
             ],
             "access": "private",
             "tagname": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 537,
+            "line": 538,
             "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "yRange",
             "type": "Array",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 548,
+            "line": 549,
             "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "xRange",
             "type": "Array",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 559,
+            "line": 560,
             "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
             "itemtype": "property",
             "name": "hasData",
             "type": "Boolean",
             "default": "false",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 571,
+            "line": 572,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
             "type": "Number",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 587,
+            "line": 588,
             "description": "The y coordinate position of the graph content",
             "proeprty": "graphY",
             "type": "Number",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 602,
+            "line": 603,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
             "type": "Number",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 617,
+            "line": 618,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
             "type": "Number",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 632,
+            "line": 633,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
             "type": "String",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 667,
+            "line": 668,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -868,66 +1141,66 @@
                 "description": "an array of `[xMouseCoord, yMouseCoord]`",
                 "type": "Array"
             },
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 687,
+            "line": 688,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
             "type": "Ember.Controller",
             "readonly": "",
-            "class": "nf-graph",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-graph",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 40,
+            "line": 41,
             "description": "Used to allow child components to identify this component as an nf-table component.",
             "itemtype": "property",
             "name": "isDataTable",
             "type": "Boolean",
             "readonly": "",
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 50,
+            "line": 51,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
             "default": "null",
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 59,
+            "line": 60,
             "description": "The type of sorting to do on the table. `'multi'` or `'single'`.",
             "itemtype": "property",
             "name": "sortType",
             "type": "String",
             "default": "'single'",
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 67,
+            "line": 68,
             "description": "the registered columns",
             "itemtype": "property",
             "name": "columns",
             "type": "Array",
             "readonly": "",
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 77,
+            "line": 78,
             "description": "Registers a child column with the table.",
             "itemtype": "method",
             "name": "registerColumn",
@@ -938,12 +1211,12 @@
                     "type": "Ember.Component"
                 }
             ],
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 86,
+            "line": 87,
             "description": "Unregisters a child column from the table.",
             "itemtype": "method",
             "name": "unregisterColumn",
@@ -954,34 +1227,34 @@
                     "type": "Ember.Component"
                 }
             ],
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 99,
+            "line": 100,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
             "type": "Array",
             "readonly": "",
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 120,
+            "line": 121,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
             "type": "Ember.Controller",
             "readonly": "",
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 131,
+            "line": 132,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
@@ -992,67 +1265,67 @@
                     "type": "Nf-column"
                 }
             ],
-            "class": "nf-table",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-table",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 39,
+            "line": 40,
             "description": "The height of the x axis in pixels.",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "default": "20",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 47,
+            "line": 48,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
             "type": "Number",
             "default": "12",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 55,
+            "line": 56,
             "description": "The length of the tick line (the small vertical line indicating the tick)",
             "itemtype": "property",
             "name": "tickLength",
             "type": "Number",
             "default": "0",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 63,
+            "line": 64,
             "description": "The spacing between the end of the tick line and the origin of the templated \ntick content",
             "itemtype": "property",
             "name": "tickPadding",
             "type": "Number",
             "default": "5",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 72,
+            "line": 73,
             "description": "The orientation of the x axis. Value can be `'top'` or `'bottom'`.",
             "itemtype": "property",
             "name": "orient",
             "type": "String",
             "default": "'bottom'",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 82,
+            "line": 83,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -1061,67 +1334,67 @@
             "example": [
                 "\n\n      {{#nf-x-axis tickFilter=myFilter}} \n        <text>{{tick.value}}</text>\n      {{/nf-x-axis}}\n\nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n\nThe above example will filter down the set of ticks to only those that are less than 1000."
             ],
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 106,
+            "line": 107,
             "description": "The class applied due to orientation (e.g. `'orient-top'`)",
             "itemtype": "property",
             "name": "orientClass",
             "type": "String",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 116,
+            "line": 117,
             "description": "The SVG Transform applied to this component's container.",
             "itemtype": "property",
             "name": "transform",
             "type": "String",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 128,
+            "line": 129,
             "description": "The y position of this component's container.",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 151,
+            "line": 152,
             "description": "This x position of this component's container",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 162,
+            "line": 163,
             "description": "The width of the component",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 170,
+            "line": 171,
             "description": "Function to create the tick values. Can be overriden to provide specific values.",
             "itemtype": "method",
             "name": "tickFactory",
@@ -1151,89 +1424,89 @@
                 "description": "an array of domain values at which ticks should be placed.",
                 "type": "Array"
             },
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 183,
+            "line": 184,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
             "type": "Array",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 191,
+            "line": 192,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
             "type": "Array",
             "readonly": "",
-            "class": "nf-x-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-x-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 35,
+            "line": 36,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
             "type": "Number",
             "default": "5",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 43,
+            "line": 44,
             "description": "The length of the tick's accompanying line.",
             "itemtype": "property",
             "name": "tickLength",
             "type": "Number",
             "default": "5",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 51,
+            "line": 52,
             "description": "The distance between the tick line and the origin tick's templated output",
             "itemtype": "property",
             "name": "tickPadding",
             "type": "Number",
             "default": "3",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 59,
+            "line": 60,
             "description": "The total width of the y axis",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "default": "40",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 67,
+            "line": 68,
             "description": "The orientation of the y axis. Possible values are `'left'` and `'right'`",
             "itemtype": "property",
             "name": "orient",
             "type": "String",
             "default": "'left'",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 81,
+            "line": 82,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -1242,67 +1515,67 @@
             "example": [
                 "\n\n      {{#nf-y-axis tickFilter=myFilter}} \n        <text>{{tick.value}}</text>\n      {{/nf-y-axis}}\n\nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n\nThe above example will filter down the set of ticks to only those that are less than 1000."
             ],
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 110,
+            "line": 111,
             "description": "computed property. returns true if `orient` is equal to `'right'`.",
             "itemtype": "property",
             "name": "isOrientRight",
             "type": "Boolean",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 119,
+            "line": 120,
             "description": "The SVG transform for positioning the component.",
             "itemtype": "property",
             "name": "transform",
             "type": "String",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 131,
+            "line": 132,
             "description": "The x position of the component",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 145,
+            "line": 146,
             "description": "The y position of the component",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 153,
+            "line": 154,
             "description": "the height of the component",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 161,
+            "line": 162,
             "description": "Function to create the tick values. Can be overriden to provide specific values.",
             "itemtype": "method",
             "name": "tickFactory",
@@ -1332,41 +1605,41 @@
                 "description": "an array of domain values at which ticks should be placed.",
                 "type": "Array"
             },
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 181,
+            "line": 182,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
             "type": "Array",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 189,
+            "line": 190,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
             "type": "Array",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-y-axis.js",
-            "line": 217,
+            "line": 218,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
             "type": "Number",
             "readonly": "",
-            "class": "nf-y-axis",
-            "module": "ember-cli-ember-dvc"
+            "class": "components.nf-y-axis",
+            "namespace": "components"
         }
     ],
     "warnings": [
@@ -1380,67 +1653,67 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:427"
+            "line": " app-addon/components/nf-graph.js:428"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:437"
+            "line": " app-addon/components/nf-graph.js:438"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:469"
+            "line": " app-addon/components/nf-graph.js:470"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/components/nf-graph.js:469"
+            "line": " app-addon/components/nf-graph.js:470"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:482"
+            "line": " app-addon/components/nf-graph.js:483"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/components/nf-graph.js:482"
+            "line": " app-addon/components/nf-graph.js:483"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:495"
+            "line": " app-addon/components/nf-graph.js:496"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:520"
+            "line": " app-addon/components/nf-graph.js:521"
         },
         {
             "message": "unknown tag: proeprty",
-            "line": " app-addon/components/nf-graph.js:587"
+            "line": " app-addon/components/nf-graph.js:588"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-graph.js:667"
+            "line": " app-addon/components/nf-graph.js:668"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-table.js:77"
+            "line": " app-addon/components/nf-table.js:78"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-table.js:86"
+            "line": " app-addon/components/nf-table.js:87"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-table.js:131"
+            "line": " app-addon/components/nf-table.js:132"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-x-axis.js:170"
+            "line": " app-addon/components/nf-x-axis.js:171"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/components/nf-y-axis.js:161"
+            "line": " app-addon/components/nf-y-axis.js:162"
         },
         {
             "message": "Missing item type\nThe y coordinate position of the graph content",
-            "line": " app-addon/components/nf-graph.js:587"
+            "line": " app-addon/components/nf-graph.js:588"
         }
     ]
 }

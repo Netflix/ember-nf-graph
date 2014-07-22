@@ -3,7 +3,8 @@ import { SORT_NONE, SORT_ASCENDING, SORT_DESCENDING } from '../utils/constants';
 
 /**
  * A column class to support `nf-table`
- * @module ember-cli-ember-dvc
+ *
+ * @namespace components
  * @class nf-column
  */
 export default Ember.Component.extend({

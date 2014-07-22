@@ -33,7 +33,8 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
  * 
  * nf-table emits a `<table>` with a class of `nf-table` applied to it.
  *
- * @module ember-cli-ember-dvc
+ *
+ * @namespace components
  * @class nf-table
  */
 export default Ember.Component.extend({

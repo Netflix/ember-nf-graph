@@ -2,6 +2,20 @@ import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import { property, observer } from '../utils/computed-property-helpers';
 
+/**
+ * Draws a box underneath (or over) the y axis to between the given `a` and `b`
+ * domain values. Component content is used to template a label in that box.
+ * 
+ * ## Tips
+ * 
+ * - Should be outside of `nf-graph-content`.
+ * - Should be "above" `nf-y-axis` in the markup.
+ * - As a convenience, `<text>` elements will automatically be positioned based on y-axis orientation
+ * due to default styling.
+ *
+ * @namespace components
+ * @class nf-y-diff
+ */
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
 

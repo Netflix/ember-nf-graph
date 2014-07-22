@@ -1,8 +1,15 @@
 import Ember from 'ember';
 
+/**
+ * Container component for graphics to display in `nf-graph`. Represents
+ * the area where the graphics, such as lines will display.
+ *
+ * Exists for layout purposes.
+ * @namespace components
+ * @class nf-graph-content
+ */
 export default Ember.Component.extend({
   tagName: 'g',
-  // templateName: 'ember-cli-ember-dvc/components/graph-content',
   
   classNames: ['nf-graph-content'],
 

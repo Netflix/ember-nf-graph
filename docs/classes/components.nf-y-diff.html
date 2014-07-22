@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-table.js - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-y-diff - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -116,166 +116,71 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-table.js</h1>
+                        <h1>components.nf-y-diff Class</h1>
+<div class="box meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import multiSort from &#x27;../utils/multi-sort&#x27;;
-import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/constants&#x27;;
+    
 
-/**
- * Composable table component with built-in sorting
- * 
- * ### Example
- *
- *       {{#nf-table rows=myData}}
- *       	{{#nf-column sortField=&quot;foo&quot;}}
- *       	  {{nf-header}}
- *       	  	Foo
- *       	  {{/nf-header}}
- *       	  {{#nf-cell}}
- *       			{{row.foo}}
- *       	  {{/nf-cell}}
- *       	{{/nf-column}}
- *       	{{#nf-column sortField=&quot;foo&quot;}}
- *       	  {{nf-header}}
- *       	  	Bar
- *       	  {{/nf-header}}
- *       	  {{#nf-cell}}
- *       			{{row.bar}}
- *       	  {{/nf-cell}}
- *       	{{/nf-column}}
- *       {{/nf-table}}
- * 
- * The example above will create a sortable table from an array &#x60;myData&#x60; containing objects
- * with fields &#x60;foo&#x60; and &#x60;bar&#x60;.
- *
- * ### Styling
- * 
- * nf-table emits a &#x60;&lt;table&gt;&#x60; with a class of &#x60;nf-table&#x60; applied to it.
- *
- *
- * @namespace components
- * @class nf-table
- */
-export default Ember.Component.extend({
-	/**
-	 * Used to allow child components to identify this component as an nf-table component.
-	 * @property isDataTable 
-	 * @type Boolean
-	 * @readonly
-	 */
-	isDataTable: true,
+    
+        <div class="foundat">
+            Defined in: <a href="../files/app-addon_components_nf-y-diff.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:5</code></a>
+        </div>
+    
 
-	tagName: &#x27;table&#x27;,
+    
 
-	/**
-	 * The data source for rows to display in this table.
-	 * @property rows
-	 * @default null
-	 */
-	rows: null,
+    
+</div>
 
-	classNames: [&#x27;nf-table&#x27;],
 
-	/**
-	 * The type of sorting to do on the table. &#x60;&#x27;multi&#x27;&#x60; or &#x60;&#x27;single&#x27;&#x60;.
-	 * @property sortType
-	 * @type String
-	 * @default &#x27;single&#x27;
-	 */
-	sortType: SORTTYPE_SINGLE,
 
-	/**
-	 * the registered columns
-	 * @property columns
-	 * @type Array
-	 * @readonly
-	 */
-	columns: function() {
-		return [];
-	}.property(),
+<div class="box intro">
+    <p>Draws a box underneath (or over) the y axis to between the given <code>a</code> and <code>b</code>
+domain values. Component content is used to template a label in that box.</p>
+<h2 id="tips">Tips</h2>
+<ul>
+<li>Should be outside of <code>nf-graph-content</code>.</li>
+<li>Should be &quot;above&quot; <code>nf-y-axis</code> in the markup.</li>
+<li>As a convenience, <code>&lt;text&gt;</code> elements will automatically be positioned based on y-axis orientation
+due to default styling.</li>
+</ul>
 
-	/**
-	 * Registers a child column with the table.
-	 * @function registerColumn
-	 * @param column {Ember.Component} the column to register with the table.
-	 */
-	registerColumn: function(column) {
-		this.get(&#x27;columns&#x27;).pushObject(column);
-	},
+</div>
 
-	/**
-	 * Unregisters a child column from the table.
-	 * @function unregisterColumn
-	 * @param column {Ember.Component} the column to unregister from the table.
-	 */
-	unregisterColumn: function(column) {
-		this.get(&#x27;columns&#x27;).removeObject(column);
-	},
 
-	_hasRendered: function() {
-		this.set(&#x27;hasRendered&#x27;, true);
-	}.on(&#x27;didInsertElement&#x27;),
 
-	/**
-	 * A computed property returning a sorted copy of &#x60;rows&#x60;
-	 * @property sortedRows
-	 * @type Array
-	 * @readonly
-	 */
-	sortedRows: function(){
-		var sort = this.get(&#x27;columns&#x27;).filter(function(col) {
-			return col.get(&#x27;sortDirection&#x27;) &amp;&amp; col.get(&#x27;sortBy&#x27;);
-		}).map(function(col) {
-			return {
-				by: col.get(&#x27;sortBy&#x27;).replace(/^row\./, &#x27;&#x27;),
-				direction: col.get(&#x27;sortDirection&#x27;)
-			};
-		});
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-		var rowsCopy = this.get(&#x27;rows&#x27;).slice();
-		multiSort(rowsCopy, sort);
-		return rowsCopy;
-	}.property(&#x27;rows.@each&#x27;, &#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
+        
+        
+        
+        
+    </ul>
 
-	/**
-	 * A computed alias returning the controller of the current view. Used to wire
-	 * up child templates to the proper controller.
-	 * @property parentController
-	 * @type Ember.Controller
-	 * @readonly
-	 */
-	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
 
-	actions: {
+            
 
-		/**
-		 * Action handler to sort columns by a passed column. Sets the &#x60;sortDirection&#x60;
-		 * of the pass column to the appropriate value based on the &#x60;sortType&#x60;.
-		 * @function actions.sort
-		 * @param sortedColumn {nf-column}
-		 */
-		sort: function(sortedColumn) {
-			var columns = this.get(&#x27;columns&#x27;);
-			var sortType = this.get(&#x27;sortType&#x27;);
-			var currentSortDir = sortedColumn.get(&#x27;sortDirection&#x27;);
+            
 
-			if(sortType === SORTTYPE_SINGLE) {
-				columns.forEach(function(col) {
-					col.set(&#x27;sortDirection&#x27;, SORT_NONE);
-				});
-				sortedColumn.set(&#x27;sortDirection&#x27;, [1, 1, -1][currentSortDir + 1]);
-			}
+            
 
-			if(sortType === SORTTYPE_MULTI) {
-				sortedColumn.set(&#x27;sortDirection&#x27;, [0, 1, -1][currentSortDir + 1]);
-			}
-		}
-	}
-});
-    </pre>
+            
+        </div>
+
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

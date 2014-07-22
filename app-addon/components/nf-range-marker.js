@@ -2,6 +2,12 @@ import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 
+/**
+ * Draws a rectangular strip with a templated label on an `nf-graph`.
+ * Should always be used in conjunction with an `nf-range-markers` container component.
+ * @namespace components
+ * @class nf-range-marker
+ */
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
 

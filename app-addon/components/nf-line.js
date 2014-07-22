@@ -7,11 +7,14 @@ import SelectableGraphic from '../mixins/graph-selectable-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 
+/**
+ * A line graphic for `nf-graph`. Displays a line for the data it's passed.
+ * @namespace components
+ * @class nf-line
+ */
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
   DataPositionUtils, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
   tagName: 'g',
-  // templateName: 'ember-cli-ember-dvc/components/graph-line',
-
   interpolator: 'linear',
   classNames: ['nf-line'],
   

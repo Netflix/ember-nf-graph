@@ -26,7 +26,8 @@ import { property } from '../utils/computed-property-helpers';
  *         {{/nf-x-axis}}
  *       {{/nf-graph}}
  *
- * @module ember-cli-ember-dvc
+ *
+ * @namespace components
  * @class nf-x-axis
  */
 export default Ember.Component.extend(HasGraphParent, {

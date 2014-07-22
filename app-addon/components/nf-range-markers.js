@@ -2,6 +2,13 @@ import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import { property } from '../utils/computed-property-helpers';
 
+/**
+ * A container and manager for `nf-range-marker` components.
+ * Used to draw an association between `nf-range-marker` components so they 
+ * can be laid out in a manner in which they don't collide.
+ * @namespace components
+ * @class nf-range-markers
+ */
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
 	isRangeMarkerContainer: true,
