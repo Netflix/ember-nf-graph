@@ -93,6 +93,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -136,32 +138,42 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+	import Ember from &#x27;ember&#x27;;
 
-/**
- * @namespace mixins
- * @class graph-line-utils
- * @extends Ember.Mixin
- */
-export default Ember.Mixin.create({
-	createLineFn: function(xScale, yScale, interpolate){ 
-		var interp = interpolate || &#x27;linear&#x27;;
+	/**
+		@namespace mixins
+		@class graph-line-utils
+		@extends Ember.Mixin
+		*/
+	export default Ember.Mixin.create({
 
-        var xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
-        var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
+		/**
+			Create a d3 line function from a given scales and interpolation
 
-        return function(data) {
-        	if(!data || data.length === 0) {
-        		return &#x27;M0,0&#x27;;
-        	}
-        	
-        	return d3.svg.line()
-    	      .x(function (d) { return xScale(d[0]) + xMod; })
-    	      .y(function (d) { return yScale(d[1]) + yMod; })
-    	      .interpolate(interp)(data);
-        };
-	}
-});
+			@method createLineFn
+			@param xScale {Function} d3 scale function
+			@param yScale {Function} d3 scale function
+			@param interpolate {String} d3 interpolator name
+			@return {Function} a d3 function that will create SVG path data from a given data set.
+			*/
+		createLineFn: function(xScale, yScale, interpolate){ 
+			var interp = interpolate || &#x27;linear&#x27;;
+
+			var xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
+			var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
+
+			return function(data) {
+				if(!data || data.length === 0) {
+					return &#x27;M0,0&#x27;;
+				}
+
+				return d3.svg.line()
+					.x(function (d) { return xScale(d[0]) + xMod; })
+					.y(function (d) { return yScale(d[1]) + yMod; })
+					.interpolate(interp)(data);
+			};
+		}
+	});
     </pre>
 </div>
 

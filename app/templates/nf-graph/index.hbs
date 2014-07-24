@@ -10,38 +10,25 @@
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
-	{{#nf-y-axis orient="right"}}
+	{{#nf-y-axis orient="left"}}
 		<text>{{tick.value}}</text>
 	{{/nf-y-axis}}
 
 	{{#nf-graph-content}}
-		{{nf-area data=lineData trackingMode="hover"}}
+		{{nf-line data=lineData trackingMode="hover"}}
 		{{nf-crosshair}}
+
 		{{#nf-range-markers orient="top"}}
 			{{#nf-range-marker xMin=20 xMax=88}}
 				<text>Number 2</text>
 			{{/nf-range-marker}}
+
 			{{#nf-range-marker xMin=56 xMax=120}}
 				<text>Numero Uno</text>
 			{{/nf-range-marker}}
-		{{/nf-range-markers}}
+		{{/nf-range-markers}}		
 	{{/nf-graph-content}}
 
 {{/nf-graph}}
 
-<pre>
 
-\{{#nf-graph width="500" height="300"}}
-	\{{#nf-x-axis}}
-		&lt;text&gt;\{{tick.value}}&lt;/text&gt;
-	\{{/nf-x-axis}}
-
-	\{{#nf-y-axis}}
-		&lt;text&gt;\{{tick.value}}&lt;/text&gt;
-	\{{/nf-y-axis}}
-
-	\{{#nf-graph-content}}
-		\{{nf-line data=lineData}}
-	\{{/nf-graph-content}}
-\{{/nf-graph}}
-</pre>

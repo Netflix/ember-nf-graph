@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/mixins/graph-graphic-with-tracking-dot.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/parse-property-expression.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -134,171 +134,80 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/mixins/graph-graphic-with-tracking-dot.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/parse-property-expression.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-
 /**
-  Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
-  or {{#crossLink &quot;components.nf-area&quot;}}{{/crossLink}}
-  
-  @namespace mixins
-  @class graph-graphic-with-tracking-dot
-  */
-export default Ember.Mixin.create({
+  A function that will parse a path expression into a &quot;getter&quot; function that
+  can retrieve a value from that path off of any object when called.
 
-  /**
-    Gets or sets the tracking mode of the component.
+  ### Example
+        
+        import parsePropertyExpr from &#x27;utils/parse-property-expr&#x27;;
 
-    Possible values are:
+        var test = { foo: { bar: [&#x27;apple&#x27;, &#x27;banana&#x27;] } };
+        var getFooBar1 = parsePropertyExpr(&#x27;foo.bar[1]&#x27;);
+        var result = getFooBar1(test);
+        console.log(result); // &quot;banana&quot;
 
-    - &#x27;none&#x27;: no tracking behavior
-    - &#x27;hover&#x27;: only track while mouse hover
-    - &#x27;snap-last&#x27;: track while mouse hover, but snap to the last data element when not hovering
-    - &#x27;snap-first&#x27;: track while mouse hover, but snap to the first data element when not hovering
-    - &#x27;selected-hover&#x27;: The same as &#x60;&#x27;hover&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-    - &#x27;selected-snap-last&#x27;: The same as &#x60;&#x27;snap-last&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-    - &#x27;selected-snap-first&#x27;: The same as &#x60;&#x27;snap-first&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
+  ### Notes
 
-    @property trackingMode
-    @type String
-    @default &#x27;none&#x27;
-    */
-	trackingMode: &#x27;none&#x27;,
+  Will return &#x60;undefined&#x60; if the nothing is at the end of the path, or the
+  path cannot be reached.
 
-  /**
-    The {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} item to plot the tracking dot at.
+  @namespace utils
+  @class parse-property-expression
+*/
 
-    @property trackedData 
-    @type Array
-    @default null
-    */
-  trackedData: null,
-  
-  _trackingDot: null,
 
-  /**
-    An model of the tracking dot&#x27;s position and size
-    @property trackingDot
-    @default { x: 0, y: 0, visible: false, radius: 2 }
-    @type Object
-    @readonly
-    */
-  trackingDot: function(name, value){ 
-    if(arguments.length &gt; 1) {
-      this._trackingDot = value;
+/**  
+  @method default
+  @param expr {String} the expression to parse
+  @return {Function} a function that when called with an object,
+  will locate the value at the end of the expressed path.
+*/
+export default function parsePropertyExpression(expr) {
+  var c, i;
+  var isIndex = false;
+  var token = &#x27;&#x27;;
+  var tokens = [];
+  var addToken = function(){
+    if(token === &#x27;&#x27;) {
+      return;
     }
-
-    if(!this._trackingDot) {
-      this._trackingDot = {
-        x: 0,
-        y: 0,
-        visible: false,
-        radius: 2
-      };
+    if(isIndex) {
+      token = +token;
     }
-
-    return this._trackingDot;
-  }.property(&#x27;_trackingDot&#x27;),
-
-  /**
-    Observes the {{#crossLink &quot;mixin.graph-graphic-with-tracking-dot/trackedData:property&quot;}}{{/crossLink}},
-    {{#crossLink &quot;components.nf-graph/xScale:property&quot;}}{{/crossLink}} and
-    {{#crossLink &quot;components.nf-graph/yScale:property&quot;}}{{/crossLink}}
-    and updates the {{#crossLink &quot;mixin.graph-graphic-with-tracking-dot/trackingDot:property&quot;}}{{/crossLink}}
-    accordingly.
-
-    @method updateTrackingDot
-    */
-  updateTrackingDot: function(){
-    var trackedData = this.get(&#x27;trackedData&#x27;);
-    var xScale = this.get(&#x27;graph.xScale&#x27;);
-    var yScale = this.get(&#x27;graph.yScale&#x27;);
-
-    if(!trackedData || !xScale || !yScale) {
-      this.set(&#x27;trackingDot.visible&#x27;, false);
+    tokens.push(token);
+    token = &#x27;&#x27;;
+    isIndex = c === &#x27;[&#x27;;    
+  };
+  
+  for(i = 0; i &lt; expr.length; i++) {
+    c = expr[i];
+    if(&#x27;[].&#x27;.indexOf(c) &gt;= 0) {
+      addToken();
     } else {
-      this.set(&#x27;trackingDot.visible&#x27;, true);
-      this.set(&#x27;trackingDot.x&#x27;, xScale(trackedData.x));
-      this.set(&#x27;trackingDot.y&#x27;, yScale(trackedData.y));
+      token += c;
     }
-  }.observes(&#x27;trackedData&#x27;, &#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;),
-
-  /**
-    Initializes the tracking dot when the component is assigned a graph.
-
-    @method _hasGraph
-    @private
-    */
-  _hasGraph: function(){
-    var self = this;
-    var graph = self.get(&#x27;graph&#x27;);
-    graph.hoverChange(function(e, data){
-      var trackingMode = self.get(&#x27;trackingMode&#x27;);
-      var selected = self.get(&#x27;isSelected&#x27;);
-      var xScale = self.get(&#x27;graph.xScale&#x27;);
-      
-      if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
-        self.set(&#x27;trackedData&#x27;, null);
-      } else {
-        var found = self.getNearestDataToXPosition(data.x, self.get(&#x27;visibleData&#x27;), xScale);
-        self.set(&#x27;trackedData&#x27;, found ? {
-          x: found[0],
-          y: found[1]
-        } : null);
-      } 
-    });
-
-    graph.hoverEnd(function() {
-      self._trackingModeDidChange();
-    });
-  }.observes(&#x27;graph&#x27;),
-
-  /**
-    Observes changes other than mouse hovers that might update the {{#crossLink &quot;mixins.graph-graphic-with-tracking-dot/trackedData&quot;}}{{/crossLink}}
-    and updates accordingly.
-    
-    @method _updateTrackedData
-    */
-  _updateTrackedData: function(){
-    var trackingMode = this.get(&#x27;trackingMode&#x27;);
-    var selected = this.get(&#x27;isSelected&#x27;);
-    var selectable = this.get(&#x27;selectable&#x27;);
-    var last = this.get(&#x27;lastVisibleData&#x27;);
-    var first = this.get(&#x27;firstVisibleData&#x27;);
-    var data = null;
-
-    switch(trackingMode) {
-      case &#x27;selected-snap-last&#x27;:
-        if(selectable &amp;&amp; selected) {
-          data = last;
-        }
-        break;
-      case &#x27;selected-snap-first&#x27;:
-        if(selectable &amp;&amp; selected) {
-          data = first;
-        }
-        break;
-      case &#x27;snap-last&#x27;:
-        data = last;
-        break;
-      case &#x27;snap-first&#x27;:
-        data = first;
-        break;
+  }
+  
+  addToken();
+  
+  return function(obj){
+    var i, next;
+    var result = obj[tokens[0]];
+    for(i = 1; i &lt; tokens.length; i++) {
+      next = result[tokens[i]];
+      if(typeof next !== &#x27;object&#x27;) {
+        return next;
+      }
+      result = next;
     }
-    
-    this.set(&#x27;trackedData&#x27;, data ? {
-      x: data[0],
-      y: data[1],
-      data: data.data
-    } : null);
-  }.observes(&#x27;trackingMode&#x27;, &#x27;lastVisibleData&#x27;, &#x27;firstVisibleData&#x27;, &#x27;isSelected&#x27;, &#x27;selectable&#x27;).on(&#x27;init&#x27;),
-});
+    return result;
+  };
+}
     </pre>
 </div>
 

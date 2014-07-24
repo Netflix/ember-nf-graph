@@ -93,6 +93,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -152,7 +154,12 @@
 
 
 <div class="box intro">
-    
+    <p>This is mixed in to  child components that need to register data
+with the graph. Includes methods for extracting, sorting and scrubbing data
+for use in graphing components.</p>
+<p>Requires <a href="../classes/mixins.graph-registered-graphic.html" class="crosslink">mixins.graph-registered-graphic</a> and 
+<a href="../classes/mixins.graph-has-graph-parent.html" class="crosslink">mixins.graph-has-graph-parent</a></p>
+
 </div>
 
 
@@ -162,6 +169,8 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -174,6 +183,77 @@
             
 
             
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                        
+                            <li class="index-item property">
+                                <a href="#property_data">data</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_firstVisibleData">firstVisibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_firstVisibleData">firstVisibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_sortedData">sortedData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_visibleData">visibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_x">x</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_xPropFn">xPropFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_y">y</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_yPropFn">yPropFn</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
 
@@ -182,6 +262,433 @@
 
         
 
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_data" class="property item">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l18"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:18</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets the data used by the component to plot itself.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_firstVisibleData" class="property item">
+    <h3 class="name"><code>firstVisibleData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l136"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:136</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_visibleData" class="crosslink">visibleData</a></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_firstVisibleData" class="property item">
+    <h3 class="name"><code>firstVisibleData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l149"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:149</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_visibleData" class="crosslink">visibleData</a></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_sortedData" class="property item">
+    <h3 class="name"><code>sortedData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l73"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:73</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The sorted and mapped data pulled from <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+An array of arrays, structures as so:</p>
+<pre class="code prettyprint"><code>  [[x,y],[x,y],[x,y]];</code></pre>
+<p><strong> each inner array also has a property <code>data</code> on it, containing the original data object </strong></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_visibleData" class="property item">
+    <h3 class="name"><code>visibleData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l113"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:113</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The <a href="../classes/mixins.graph-data-graphic.html#property_sortedData" class="crosslink">sortedData</a> 
+filtered down to only the data that is visible within the graph&#39;s domain.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x" class="property item">
+    <h3 class="name"><code>x</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l27"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:27</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The path of the property on each object in 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+to use as x data to plot on the graph.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;x&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xPropFn" class="property item">
+    <h3 class="name"><code>xPropFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l49"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:49</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The function to get the x value from each 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y" class="property item">
+    <h3 class="name"><code>y</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l38"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:38</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The path of the property on each object in 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+to use as y data to plot on the graph.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;y&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yPropFn" class="property item">
+    <h3 class="name"><code>yPropFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l61"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:61</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The function to get the y value from each 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

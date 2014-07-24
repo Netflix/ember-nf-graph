@@ -1,14 +1,16 @@
 import Ember from 'ember';
 
 /**
- * @namespace mixins
- * @class graph-registered-graphic
- * @extends Ember.Mixin
- */
+	@namespace mixins
+	@class graph-registered-graphic
+	@extends Ember.Mixin
+	*/
 export default Ember.Mixin.create({
-	isRegisteredGraphic: true,
-	isRegistered: false,
 
+	/**
+		calls {{#crossLink "components.nf-graph/registerGraphic"}}{{/crossLink}} on
+		`didInsertElement`.
+		*/
 	_registerGraphic: function() {
 		var graph = this.get('graph');
 		if(graph) {
@@ -16,6 +18,10 @@ export default Ember.Mixin.create({
 		}
 	}.on('didInsertElement'),
 
+	/**
+		calls {{#crossLink "components.nf-graph/unregister"}}{{/crossLink}} on
+		`didInsertElement`.
+		*/
 	_unregisterGraphic: function(){
 		var graph = this.get('graph');
 		if(graph) {

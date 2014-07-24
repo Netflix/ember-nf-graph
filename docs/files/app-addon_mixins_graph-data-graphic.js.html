@@ -93,6 +93,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -140,23 +142,86 @@ import Ember from &#x27;ember&#x27;;
 import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
 
 /**
- * @namespace mixins
- * @class graph-data-graphic
- */
+  This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
+  with the graph. Includes methods for extracting, sorting and scrubbing data
+  for use in graphing components.
+
+  Requires {{#crossLink &quot;mixins.graph-registered-graphic&quot;}}{{/crossLink}} and 
+  {{#crossLink &quot;mixins.graph-has-graph-parent&quot;}}{{/crossLink}}
+
+  @namespace mixins
+  @class graph-data-graphic
+*/
 export default Ember.Mixin.create({
 	isDataGraphic: true,
 
+  /**
+    Gets or sets the data used by the component to plot itself.
+
+    @property data
+    @type Array
+    @default null
+  */
+  data: null,
+
+  /**
+    The path of the property on each object in 
+    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
+    to use as x data to plot on the graph.
+
+    @property x
+    @type String
+    @default &#x27;x&#x27;
+  */
 	xprop: &#x27;x&#x27;,
+
+  /**
+    The path of the property on each object in 
+    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
+    to use as y data to plot on the graph.
+
+    @property y
+    @type String
+    @default &#x27;y&#x27;
+  */
 	yprop: &#x27;y&#x27;,
 
+  /**
+    The function to get the x value from each 
+    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} object
+
+    @property xPropFn
+    @type Function
+    @readonly
+  */
 	xPropFn: function() {
 		return parsePropertyExpr(this.get(&#x27;xprop&#x27;));
 	}.property(&#x27;xprop&#x27;),
 
+  /**
+    The function to get the y value from each 
+    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} object
+
+    @property yPropFn
+    @type Function
+    @readonly
+  */
 	yPropFn: function() {
 		return parsePropertyExpr(this.get(&#x27;yprop&#x27;));
 	}.property(&#x27;yprop&#x27;),
 
+  /**
+    The sorted and mapped data pulled from {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
+    An array of arrays, structures as so:
+
+          [[x,y],[x,y],[x,y]];
+
+    ** each inner array also has a property &#x60;data&#x60; on it, containing the original data object **
+
+    @property sortedData
+    @type Array
+    @readonly
+  */
 	sortedData: function(){
     var data = this.get(&#x27;data&#x27;);
     var xPropFn = this.get(&#x27;xPropFn&#x27;);
@@ -185,6 +250,14 @@ export default Ember.Mixin.create({
     return mapped;
   }.property(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;),
 
+  /**
+    The {{#crossLink &quot;mixins.graph-data-graphic/sortedData:property&quot;}}{{/crossLink}} 
+    filtered down to only the data that is visible within the graph&#x27;s domain.
+
+    @property visibleData
+    @type Array
+    @readonly
+  */
   visibleData: function() {
   	var xMin = this.get(&#x27;graph.xMin&#x27;);
   	var xMax = this.get(&#x27;graph.xMax&#x27;);
@@ -200,11 +273,26 @@ export default Ember.Mixin.create({
     });
   }.property(&#x27;sortedData&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;),
 
+  /**
+    The first element from {{#crossLink &quot;mixins.graph-data-graphic/visibleData:property&quot;}}{{/crossLink}}
+
+    @property firstVisibleData
+    @type Array
+    @readonly
+  */
   firstVisibleData: function(){
   	var visibleData = this.get(&#x27;visibleData&#x27;);
   	return visibleData &amp;&amp; visibleData.length &gt; 0 ? visibleData[0] : null;
   }.property(&#x27;visibleData&#x27;),
 
+
+  /**
+    The last element from {{#crossLink &quot;mixins.graph-data-graphic/visibleData:property&quot;}}{{/crossLink}}
+
+    @property firstVisibleData
+    @type Array
+    @readonly
+  */
   lastVisibleData: function(){
   	var visibleData = this.get(&#x27;visibleData&#x27;);
   	return visibleData &amp;&amp; visibleData.length &gt; 0 ? visibleData[visibleData.length - 1] : null;

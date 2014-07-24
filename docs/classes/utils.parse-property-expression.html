@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/mixins/graph-graphic-with-tracking-dot.js - Ember-CLI-Ember-DVC</title>
+    <title>utils.parse-property-expression - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -134,172 +134,204 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/mixins/graph-graphic-with-tracking-dot.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-
-/**
-  Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
-  or {{#crossLink &quot;components.nf-area&quot;}}{{/crossLink}}
-  
-  @namespace mixins
-  @class graph-graphic-with-tracking-dot
-  */
-export default Ember.Mixin.create({
-
-  /**
-    Gets or sets the tracking mode of the component.
-
-    Possible values are:
-
-    - &#x27;none&#x27;: no tracking behavior
-    - &#x27;hover&#x27;: only track while mouse hover
-    - &#x27;snap-last&#x27;: track while mouse hover, but snap to the last data element when not hovering
-    - &#x27;snap-first&#x27;: track while mouse hover, but snap to the first data element when not hovering
-    - &#x27;selected-hover&#x27;: The same as &#x60;&#x27;hover&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-    - &#x27;selected-snap-last&#x27;: The same as &#x60;&#x27;snap-last&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-    - &#x27;selected-snap-first&#x27;: The same as &#x60;&#x27;snap-first&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-
-    @property trackingMode
-    @type String
-    @default &#x27;none&#x27;
-    */
-	trackingMode: &#x27;none&#x27;,
-
-  /**
-    The {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} item to plot the tracking dot at.
-
-    @property trackedData 
-    @type Array
-    @default null
-    */
-  trackedData: null,
-  
-  _trackingDot: null,
-
-  /**
-    An model of the tracking dot&#x27;s position and size
-    @property trackingDot
-    @default { x: 0, y: 0, visible: false, radius: 2 }
-    @type Object
-    @readonly
-    */
-  trackingDot: function(name, value){ 
-    if(arguments.length &gt; 1) {
-      this._trackingDot = value;
-    }
-
-    if(!this._trackingDot) {
-      this._trackingDot = {
-        x: 0,
-        y: 0,
-        visible: false,
-        radius: 2
-      };
-    }
-
-    return this._trackingDot;
-  }.property(&#x27;_trackingDot&#x27;),
-
-  /**
-    Observes the {{#crossLink &quot;mixin.graph-graphic-with-tracking-dot/trackedData:property&quot;}}{{/crossLink}},
-    {{#crossLink &quot;components.nf-graph/xScale:property&quot;}}{{/crossLink}} and
-    {{#crossLink &quot;components.nf-graph/yScale:property&quot;}}{{/crossLink}}
-    and updates the {{#crossLink &quot;mixin.graph-graphic-with-tracking-dot/trackingDot:property&quot;}}{{/crossLink}}
-    accordingly.
-
-    @method updateTrackingDot
-    */
-  updateTrackingDot: function(){
-    var trackedData = this.get(&#x27;trackedData&#x27;);
-    var xScale = this.get(&#x27;graph.xScale&#x27;);
-    var yScale = this.get(&#x27;graph.yScale&#x27;);
-
-    if(!trackedData || !xScale || !yScale) {
-      this.set(&#x27;trackingDot.visible&#x27;, false);
-    } else {
-      this.set(&#x27;trackingDot.visible&#x27;, true);
-      this.set(&#x27;trackingDot.x&#x27;, xScale(trackedData.x));
-      this.set(&#x27;trackingDot.y&#x27;, yScale(trackedData.y));
-    }
-  }.observes(&#x27;trackedData&#x27;, &#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;),
-
-  /**
-    Initializes the tracking dot when the component is assigned a graph.
-
-    @method _hasGraph
-    @private
-    */
-  _hasGraph: function(){
-    var self = this;
-    var graph = self.get(&#x27;graph&#x27;);
-    graph.hoverChange(function(e, data){
-      var trackingMode = self.get(&#x27;trackingMode&#x27;);
-      var selected = self.get(&#x27;isSelected&#x27;);
-      var xScale = self.get(&#x27;graph.xScale&#x27;);
-      
-      if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
-        self.set(&#x27;trackedData&#x27;, null);
-      } else {
-        var found = self.getNearestDataToXPosition(data.x, self.get(&#x27;visibleData&#x27;), xScale);
-        self.set(&#x27;trackedData&#x27;, found ? {
-          x: found[0],
-          y: found[1]
-        } : null);
-      } 
-    });
-
-    graph.hoverEnd(function() {
-      self._trackingModeDidChange();
-    });
-  }.observes(&#x27;graph&#x27;),
-
-  /**
-    Observes changes other than mouse hovers that might update the {{#crossLink &quot;mixins.graph-graphic-with-tracking-dot/trackedData&quot;}}{{/crossLink}}
-    and updates accordingly.
+                        <h1>utils.parse-property-expression Class</h1>
+<div class="box meta">
     
-    @method _updateTrackedData
-    */
-  _updateTrackedData: function(){
-    var trackingMode = this.get(&#x27;trackingMode&#x27;);
-    var selected = this.get(&#x27;isSelected&#x27;);
-    var selectable = this.get(&#x27;selectable&#x27;);
-    var last = this.get(&#x27;lastVisibleData&#x27;);
-    var first = this.get(&#x27;firstVisibleData&#x27;);
-    var data = null;
 
-    switch(trackingMode) {
-      case &#x27;selected-snap-last&#x27;:
-        if(selectable &amp;&amp; selected) {
-          data = last;
-        }
-        break;
-      case &#x27;selected-snap-first&#x27;:
-        if(selectable &amp;&amp; selected) {
-          data = first;
-        }
-        break;
-      case &#x27;snap-last&#x27;:
-        data = last;
-        break;
-      case &#x27;snap-first&#x27;:
-        data = first;
-        break;
-    }
     
-    this.set(&#x27;trackedData&#x27;, data ? {
-      x: data[0],
-      y: data[1],
-      data: data.data
-    } : null);
-  }.observes(&#x27;trackingMode&#x27;, &#x27;lastVisibleData&#x27;, &#x27;firstVisibleData&#x27;, &#x27;isSelected&#x27;, &#x27;selectable&#x27;).on(&#x27;init&#x27;),
-});
-    </pre>
+
+    
+        <div class="foundat">
+            Defined in: <a href="../files/app-addon_utils_parse-property-expression.js.html#l1"><code>app-addon&#x2F;utils&#x2F;parse-property-expression.js:1</code></a>
+        </div>
+    
+
+    
+
+    
+</div>
+
+
+
+<div class="box intro">
+    <p>A function that will parse a path expression into a &quot;getter&quot; function that
+can retrieve a value from that path off of any object when called.</p>
+<h3 id="example">Example</h3>
+<pre class="code prettyprint"><code>  import parsePropertyExpr from &#39;utils/parse-property-expr&#39;;
+
+  var test = { foo: { bar: [&#39;apple&#39;, &#39;banana&#39;] } };
+  var getFooBar1 = parsePropertyExpr(&#39;foo.bar[1]&#39;);
+  var result = getFooBar1(test);
+  console.log(result); // &quot;banana&quot;</code></pre>
+<h3 id="notes">Notes</h3>
+<p>Will return <code>undefined</code> if the nothing is at the end of the path, or the
+path cannot be reached.</p>
+
+</div>
+
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+        
+        
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_default">default</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+
+            
+
+            
+        </div>
+
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_default" class="method item">
+    <h3 class="name"><code>default</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>expr</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Function</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_parse-property-expression.js.html#l24"><code>app-addon&#x2F;utils&#x2F;parse-property-expression.js:24</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">expr</code>
+                        <span class="type">String</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the expression to parse</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Function</span>:
+                    
+                    <p>a function that when called with an object,
+will locate the value at the end of the expressed path.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+
+        
+
+        
+    </div>
 </div>
 
                     </div>

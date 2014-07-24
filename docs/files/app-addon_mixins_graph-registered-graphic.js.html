@@ -93,6 +93,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -139,14 +141,16 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * @namespace mixins
- * @class graph-registered-graphic
- * @extends Ember.Mixin
- */
+	@namespace mixins
+	@class graph-registered-graphic
+	@extends Ember.Mixin
+	*/
 export default Ember.Mixin.create({
-	isRegisteredGraphic: true,
-	isRegistered: false,
 
+	/**
+		calls {{#crossLink &quot;components.nf-graph/registerGraphic&quot;}}{{/crossLink}} on
+		&#x60;didInsertElement&#x60;.
+		*/
 	_registerGraphic: function() {
 		var graph = this.get(&#x27;graph&#x27;);
 		if(graph) {
@@ -154,6 +158,10 @@ export default Ember.Mixin.create({
 		}
 	}.on(&#x27;didInsertElement&#x27;),
 
+	/**
+		calls {{#crossLink &quot;components.nf-graph/unregister&quot;}}{{/crossLink}} on
+		&#x60;didInsertElement&#x60;.
+		*/
 	_unregisterGraphic: function(){
 		var graph = this.get(&#x27;graph&#x27;);
 		if(graph) {

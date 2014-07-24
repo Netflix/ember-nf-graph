@@ -93,6 +93,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -139,26 +141,28 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * Adds initialization code to graph the &#x60;nf-graph&#x60; parent
- * to a component that is to be contained in an &#x60;nf-graph&#x60;.
- *
- * @namespace mixins
- * @class graph-has-graph-parent
- */
+	Adds initialization code to graph the &#x60;nf-graph&#x60; parent
+	to a component that is to be contained in an &#x60;nf-graph&#x60;.
+
+	@namespace mixins
+	@class graph-has-graph-parent
+	*/
 export default Ember.Mixin.create({
+	
 	/**
-	 * The parent graph for a component.
-	 * @property graph
-	 * @type components.nf-graph
-	 * @default null
-	 */
+		The parent graph for a component.
+		@property graph
+		@type components.nf-graph
+		@default null
+		*/
 	graph: null,
 
 	/**
-	 * Initalization method that gets the &#x60;nf-graph&#x60; parent
-	 * and assigns it to &#x60;graph&#x60;
-	 * @method _getGraph
-	 */
+		Initalization method that gets the &#x60;nf-graph&#x60; parent
+		and assigns it to &#x60;graph&#x60;
+		
+		@method _getGraph
+		*/
 	_getGraph: function(){
 		var graph = this.nearestWithProperty(&#x27;isGraph&#x27;);
 		this.set(&#x27;graph&#x27;, graph);

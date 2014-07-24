@@ -1,30 +1,80 @@
 import Ember from 'ember';
 
 /**
- * @namespace mixins
- * @class graph-graphic-with-tracking-dot
- */
+  Adds tracking dot functionality to a component such as {{#crossLink "components.nf-line"}}{{/crossLink}}
+  or {{#crossLink "components.nf-area"}}{{/crossLink}}
+  
+  @namespace mixins
+  @class graph-graphic-with-tracking-dot
+  */
 export default Ember.Mixin.create({
+
+  /**
+    Gets or sets the tracking mode of the component.
+
+    Possible values are:
+
+    - 'none': no tracking behavior
+    - 'hover': only track while mouse hover
+    - 'snap-last': track while mouse hover, but snap to the last data element when not hovering
+    - 'snap-first': track while mouse hover, but snap to the first data element when not hovering
+    - 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is 
+    {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
+    - 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is 
+    {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
+    - 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is 
+    {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
+
+    @property trackingMode
+    @type String
+    @default 'none'
+    */
 	trackingMode: 'none',
+
+  /**
+    The {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}} item to plot the tracking dot at.
+
+    @property trackedData 
+    @type Array
+    @default null
+    */
   trackedData: null,
   
   _trackingDot: null,
 
+  /**
+    An model of the tracking dot's position and size
+    @property trackingDot
+    @default { x: 0, y: 0, visible: false, radius: 2 }
+    @type Object
+    @readonly
+    */
   trackingDot: function(name, value){ 
     if(arguments.length > 1) {
-      this.set('_trackingDot', value);
+      this._trackingDot = value;
     }
-    if(!this.get('_trackingDot')) {
-      this.set('_trackingDot', {
+
+    if(!this._trackingDot) {
+      this._trackingDot = {
         x: 0,
         y: 0,
         visible: false,
-        radius: 3
-      });
+        radius: 2
+      };
     }
-    return this.get('_trackingDot');
+
+    return this._trackingDot;
   }.property('_trackingDot'),
 
+  /**
+    Observes the {{#crossLink "mixin.graph-graphic-with-tracking-dot/trackedData:property"}}{{/crossLink}},
+    {{#crossLink "components.nf-graph/xScale:property"}}{{/crossLink}} and
+    {{#crossLink "components.nf-graph/yScale:property"}}{{/crossLink}}
+    and updates the {{#crossLink "mixin.graph-graphic-with-tracking-dot/trackingDot:property"}}{{/crossLink}}
+    accordingly.
+
+    @method updateTrackingDot
+    */
   updateTrackingDot: function(){
     var trackedData = this.get('trackedData');
     var xScale = this.get('graph.xScale');
@@ -39,6 +89,12 @@ export default Ember.Mixin.create({
     }
   }.observes('trackedData', 'graph.xScale', 'graph.yScale'),
 
+  /**
+    Initializes the tracking dot when the component is assigned a graph.
+
+    @method _hasGraph
+    @private
+    */
   _hasGraph: function(){
     var self = this;
     var graph = self.get('graph');
@@ -63,7 +119,13 @@ export default Ember.Mixin.create({
     });
   }.observes('graph'),
 
-  _trackingModeDidChange: function(){
+  /**
+    Observes changes other than mouse hovers that might update the {{#crossLink "mixins.graph-graphic-with-tracking-dot/trackedData"}}{{/crossLink}}
+    and updates accordingly.
+    
+    @method _updateTrackedData
+    */
+  _updateTrackedData: function(){
     var trackingMode = this.get('trackingMode');
     var selected = this.get('isSelected');
     var selectable = this.get('selectable');

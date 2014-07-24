@@ -26,7 +26,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-has-graph-parent",
         "mixins.graph-line-utils",
         "mixins.graph-registered-graphic",
-        "mixins.graph-selectable-graphic"
+        "mixins.graph-selectable-graphic",
+        "utils.parse-property-expression"
     ],
     "modules": [],
     "allModules": []

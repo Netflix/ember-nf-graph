@@ -93,6 +93,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+            
             </ul>
 
             <ul id="api-modules" class="apis modules">
@@ -141,11 +143,11 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 
 /**
- * Draws a rectangular strip with a templated label on an &#x60;nf-graph&#x60;.
- * Should always be used in conjunction with an &#x60;nf-range-markers&#x60; container component.
- * @namespace components
- * @class nf-range-marker
- */
+  Draws a rectangular strip with a templated label on an &#x60;nf-graph&#x60;.
+  Should always be used in conjunction with an &#x60;nf-range-markers&#x60; container component.
+  @namespace components
+  @class nf-range-marker
+*/
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: &#x27;g&#x27;,
 
@@ -153,20 +155,78 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	classNames: [&#x27;nf-range-marker&#x27;],
 
+  /**
+    The parent &#x60;nf-range-markers&#x60; component.
+    @property container
+    @type {components.nf-range-markers}
+    @default null
+  */
+  container: null,
+
+  /**
+    The minimum domain value for the range to mark.
+    @property xMin
+    @default 0
+  */
 	xMin: 0,
+
+  /**
+    The maximum domain value for the range to mark.
+    @property xMax
+    @default 0
+  */
 	xMax: 0,
+
+  /**
+    The spacing above the range marker.
+    @property marginTop
+    @type Number
+    @default 10
+  */
 	marginTop: 10,
+
+  /**
+    The spacing below the range marker.
+    @property marginBottom
+    @type Number
+    @default 3
+  */
 	marginBottom: 3,
+
+  /**
+    The height of the range marker.
+    @property height
+    @type Number
+    @default 10
+  */
 	height: 10,
 
+  /**
+    The computed x position of the range marker.
+    @property x
+    @type Number
+    @readonly
+  */
   x: property(&#x27;xMin&#x27;, &#x27;graph.xScale&#x27;, function(xMin, xScale) {
   	return xScale(xMin);
   }),
 
+  /**
+    The computed width of the range marker.
+    @property width
+    @type Number
+    @readonly
+  */
   width: property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;graph.xScale&#x27;, function(xMin, xMax, xScale) {
-  	return xScale(xMax - xMin);
+  	return xScale(xMax) - xScale(xMin);
   }),
 
+  /**
+    The computed y position of the range marker.
+    @property y
+    @type Number
+    @readonly
+  */
   y: property(&#x27;container.orient&#x27;, &#x27;prevMarker.bottom&#x27;, &#x27;prevMarker.y&#x27;, &#x27;graph.graphHeight&#x27;, &#x27;totalHeight&#x27;, function(orient, prevBottom, prevY, graphHeight, totalHeight){
   	prevBottom = prevBottom || 0;
 
@@ -179,28 +239,63 @@ export default Ember.Component.extend(HasGraphParent, {
   	}
   }),
 
+  /**
+    The computed total height of the range marker including its margins.
+    @property totalHeight
+    @type Number
+    @readonly
+  */
   totalHeight: property(&#x27;height&#x27;, &#x27;marginTop&#x27;, &#x27;marginBottom&#x27;, function(height, marginTop, marginBottom) {
   	return height + marginTop + marginBottom;
   }),
 
+  /**
+    The computed bottom of the range marker, not including the bottom margin.
+    @property bottom
+    @type Number
+    @readonly
+  */
   bottom: property(&#x27;y&#x27;, &#x27;totalHeight&#x27;, function(y, totalHeight) {
   	return y + totalHeight;
   }),
 
+  /**
+    The computed SVG transform of the range marker container
+    @property transform
+    @type String
+    @readonly
+  */
   transform: property(&#x27;y&#x27;, function(y) {
   	return &#x27;translate(0 %@)&#x27;.fmt(y || 0);
   }),
 
+  /**
+    The computed SVG transform fo the range marker label container.
+    @property labelTransform
+    @type String
+    @readonly
+  */
   labelTransform: property(&#x27;x&#x27;, function(x){
   	return &#x27;translate(%@ 0)&#x27;.fmt(x || 0);
   }),
 
+  /**
+    Initialization function that registers the range marker with its parent 
+    and populates the container property
+    @method _setup
+    @private
+  */
 	_setup: function(){
 		var container = this.nearestWithProperty(&#x27;isRangeMarkerContainer&#x27;);
 		container.registerMarker(this);
 		this.set(&#x27;container&#x27;, container);
 	}.on(&#x27;init&#x27;),
 
+  /**
+    Unregisters the range marker from its parent when the range marker is destroyed.
+    @method _unregister
+    @private
+  */
   _unregister: function() {
     this.get(&#x27;container&#x27;).unregisterMarker(this);
   }.on(&#x27;willDestroyElement&#x27;)

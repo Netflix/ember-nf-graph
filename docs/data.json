@@ -289,6 +289,17 @@
             "namespaces": {
                 "mixins": 1
             }
+        },
+        "app-addon/utils/parse-property-expression.js": {
+            "name": "app-addon/utils/parse-property-expression.js",
+            "modules": {},
+            "classes": {
+                "utils.parse-property-expression": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils": 1
+            }
         }
     },
     "modules": {},
@@ -565,7 +576,8 @@
             ],
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 4
+            "line": 4,
+            "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}"
         },
         "mixins.graph-data-position-utils": {
             "name": "mixins.graph-data-position-utils",
@@ -579,7 +591,8 @@
             ],
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-data-position-utils.js",
-            "line": 3
+            "line": 26,
+            "description": "Collection of utility functions for dealing with devining positions given certain\nscales and domain data."
         },
         "mixins.graph-graphic-with-tracking-dot": {
             "name": "mixins.graph-graphic-with-tracking-dot",
@@ -593,7 +606,8 @@
             ],
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 3
+            "line": 3,
+            "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
             "name": "mixins.graph-has-graph-parent",
@@ -652,6 +666,19 @@
             "file": "app-addon/mixins/graph-selectable-graphic.js",
             "line": 3,
             "extends": "Ember.Mixin"
+        },
+        "utils.parse-property-expression": {
+            "name": "utils.parse-property-expression",
+            "shortname": "utils.parse-property-expression",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "namespace": "utils",
+            "file": "app-addon/utils/parse-property-expression.js",
+            "line": 1,
+            "description": "A function that will parse a path expression into a \"getter\" function that\ncan retrieve a value from that path off of any object when called.\n\n### Example\n      \n      import parsePropertyExpr from 'utils/parse-property-expr';\n\n      var test = { foo: { bar: ['apple', 'banana'] } };\n      var getFooBar1 = parsePropertyExpr('foo.bar[1]');\n      var result = getFooBar1(test);\n      console.log(result); // \"banana\"\n\n### Notes\n\nWill return `undefined` if the nothing is at the end of the path, or the\npath cannot be reached."
         }
     },
     "classitems": [
@@ -1370,6 +1397,169 @@
             "namespace": "components"
         },
         {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 18,
+            "description": "The parent `nf-range-markers` component.",
+            "itemtype": "property",
+            "name": "container",
+            "type": "{components.nf-range-markers}",
+            "default": "null",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 26,
+            "description": "The minimum domain value for the range to mark.",
+            "itemtype": "property",
+            "name": "xMin",
+            "default": "0",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 33,
+            "description": "The maximum domain value for the range to mark.",
+            "itemtype": "property",
+            "name": "xMax",
+            "default": "0",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 40,
+            "description": "The spacing above the range marker.",
+            "itemtype": "property",
+            "name": "marginTop",
+            "type": "Number",
+            "default": "10",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 48,
+            "description": "The spacing below the range marker.",
+            "itemtype": "property",
+            "name": "marginBottom",
+            "type": "Number",
+            "default": "3",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 56,
+            "description": "The height of the range marker.",
+            "itemtype": "property",
+            "name": "height",
+            "type": "Number",
+            "default": "10",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 64,
+            "description": "The computed x position of the range marker.",
+            "itemtype": "property",
+            "name": "x",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 74,
+            "description": "The computed width of the range marker.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 84,
+            "description": "The computed y position of the range marker.",
+            "itemtype": "property",
+            "name": "y",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 102,
+            "description": "The computed total height of the range marker including its margins.",
+            "itemtype": "property",
+            "name": "totalHeight",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 112,
+            "description": "The computed bottom of the range marker, not including the bottom margin.",
+            "itemtype": "property",
+            "name": "bottom",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 122,
+            "description": "The computed SVG transform of the range marker container",
+            "itemtype": "property",
+            "name": "transform",
+            "type": "String",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 132,
+            "description": "The computed SVG transform fo the range marker label container.",
+            "itemtype": "property",
+            "name": "labelTransform",
+            "type": "String",
+            "readonly": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 142,
+            "description": "Initialization function that registers the range marker with its parent \nand populates the container property",
+            "itemtype": "method",
+            "name": "_setup",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-range-marker.js",
+            "line": 154,
+            "description": "Unregisters the range marker from its parent when the range marker is destroyed.",
+            "itemtype": "method",
+            "name": "_unregister",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
             "file": "app-addon/components/nf-table.js",
             "line": 41,
             "description": "Used to allow child components to identify this component as an nf-table component.",
@@ -1857,7 +2047,8 @@
         },
         {
             "file": "app-addon/mixins/graph-area-utils.js",
-            "line": 11,
+            "line": 12,
+            "description": "Creates a d3 area function from a given set of scales and an interpolator",
             "itemtype": "method",
             "name": "createAreaFn",
             "params": [
@@ -1885,8 +2076,200 @@
             "namespace": "mixins"
         },
         {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 18,
+            "description": "Gets or sets the data used by the component to plot itself.",
+            "itemtype": "property",
+            "name": "data",
+            "type": "Array",
+            "default": "null",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 27,
+            "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as x data to plot on the graph.",
+            "itemtype": "property",
+            "name": "x",
+            "type": "String",
+            "default": "'x'",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 38,
+            "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as y data to plot on the graph.",
+            "itemtype": "property",
+            "name": "y",
+            "type": "String",
+            "default": "'y'",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 49,
+            "description": "The function to get the x value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
+            "itemtype": "property",
+            "name": "xPropFn",
+            "type": "Function",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 61,
+            "description": "The function to get the y value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
+            "itemtype": "property",
+            "name": "yPropFn",
+            "type": "Function",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 73,
+            "description": "The sorted and mapped data pulled from {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nAn array of arrays, structures as so:\n\n      [[x,y],[x,y],[x,y]];\n\n** each inner array also has a property `data` on it, containing the original data object **",
+            "itemtype": "property",
+            "name": "sortedData",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 113,
+            "description": "The {{#crossLink \"mixins.graph-data-graphic/sortedData:property\"}}{{/crossLink}} \nfiltered down to only the data that is visible within the graph's domain.",
+            "itemtype": "property",
+            "name": "visibleData",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 136,
+            "description": "The first element from {{#crossLink \"mixins.graph-data-graphic/visibleData:property\"}}{{/crossLink}}",
+            "itemtype": "property",
+            "name": "firstVisibleData",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 149,
+            "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/visibleData:property\"}}{{/crossLink}}",
+            "itemtype": "property",
+            "name": "firstVisibleData",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-position-utils.js",
+            "line": 35,
+            "description": "Searches a given array for a data point nearest an x coordinate, given a specific scale.",
+            "itemtype": "method",
+            "name": "getNearestDataToXPosition",
+            "params": [
+                {
+                    "name": "rangeX",
+                    "description": "an x pixel value of a point relative to the top left\n\t\tcorner of the graph content.",
+                    "type": "Number"
+                },
+                {
+                    "name": "sortedData",
+                    "description": "the {{#crossLink \"mixins.graph-data-graphic/sortedData:property\"}}{{/crossLink}}\n\t\tto search for the nearest data.",
+                    "type": "Array"
+                },
+                {
+                    "name": "xScale",
+                    "description": "the }{{/crossLink}} used to convert the pixel\n\t\tx value into a domain value with which to search the array.",
+                    "type": "{#crossLink \"components.nf-graph/xScale:property\""
+                }
+            ],
+            "return": {
+                "description": "The data point found to be nearest the rangeX x position passed.",
+                "type": "Array"
+            },
+            "class": "mixins.graph-data-position-utils",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 12,
+            "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'none': no tracking behavior\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
+            "itemtype": "property",
+            "name": "trackingMode",
+            "type": "String",
+            "default": "'none'",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 34,
+            "description": "The {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} item to plot the tracking dot at.",
+            "itemtype": "property",
+            "name": "trackedData",
+            "type": "Array",
+            "default": "null",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 45,
+            "description": "An model of the tracking dot's position and size",
+            "itemtype": "property",
+            "name": "trackingDot",
+            "default": "{ x: 0, y: 0, visible: false, radius: 2 }",
+            "type": "Object",
+            "readonly": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 69,
+            "description": "Observes the {{#crossLink \"mixin.graph-graphic-with-tracking-dot/trackedData:property\"}}{{/crossLink}},\n{{#crossLink \"components.nf-graph/xScale:property\"}}{{/crossLink}} and\n{{#crossLink \"components.nf-graph/yScale:property\"}}{{/crossLink}}\nand updates the {{#crossLink \"mixin.graph-graphic-with-tracking-dot/trackingDot:property\"}}{{/crossLink}}\naccordingly.",
+            "itemtype": "method",
+            "name": "updateTrackingDot",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 92,
+            "description": "Initializes the tracking dot when the component is assigned a graph.",
+            "itemtype": "method",
+            "name": "_hasGraph",
+            "access": "private",
+            "tagname": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 122,
+            "description": "Observes changes other than mouse hovers that might update the {{#crossLink \"mixins.graph-graphic-with-tracking-dot/trackedData\"}}{{/crossLink}}\nand updates accordingly.",
+            "itemtype": "method",
+            "name": "_updateTrackedData",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
             "file": "app-addon/mixins/graph-has-graph-parent.js",
-            "line": 11,
+            "line": 12,
             "description": "The parent graph for a component.",
             "itemtype": "property",
             "name": "graph",
@@ -1897,12 +2280,75 @@
         },
         {
             "file": "app-addon/mixins/graph-has-graph-parent.js",
-            "line": 19,
+            "line": 20,
             "description": "Initalization method that gets the `nf-graph` parent\nand assigns it to `graph`",
             "itemtype": "method",
             "name": "_getGraph",
             "class": "mixins.graph-has-graph-parent",
             "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-line-utils.js",
+            "line": 10,
+            "description": "Create a d3 line function from a given scales and interpolation",
+            "itemtype": "method",
+            "name": "createLineFn",
+            "params": [
+                {
+                    "name": "xScale",
+                    "description": "d3 scale function",
+                    "type": "Function"
+                },
+                {
+                    "name": "yScale",
+                    "description": "d3 scale function",
+                    "type": "Function"
+                },
+                {
+                    "name": "interpolate",
+                    "description": "d3 interpolator name",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "a d3 function that will create SVG path data from a given data set.",
+                "type": "Function"
+            },
+            "class": "mixins.graph-line-utils",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-registered-graphic.js",
+            "line": 10,
+            "description": "calls {{#crossLink \"components.nf-graph/registerGraphic\"}}{{/crossLink}} on\n`didInsertElement`.",
+            "class": "mixins.graph-registered-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-registered-graphic.js",
+            "line": 21,
+            "description": "calls {{#crossLink \"components.nf-graph/unregister\"}}{{/crossLink}} on\n`didInsertElement`.",
+            "class": "mixins.graph-registered-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/utils/parse-property-expression.js",
+            "line": 24,
+            "itemtype": "method",
+            "name": "default",
+            "params": [
+                {
+                    "name": "expr",
+                    "description": "the expression to parse",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "a function that when called with an object,\nwill locate the value at the end of the expressed path.",
+                "type": "Function"
+            },
+            "class": "utils.parse-property-expression",
+            "namespace": "utils"
         }
     ],
     "warnings": [
@@ -1976,11 +2422,19 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/mixins/graph-area-utils.js:11"
+            "line": " app-addon/mixins/graph-area-utils.js:12"
         },
         {
             "message": "Missing item type\nThe y coordinate position of the graph content",
             "line": " app-addon/components/nf-graph.js:588"
+        },
+        {
+            "message": "Missing item type\ncalls {{#crossLink \"components.nf-graph/registerGraphic\"}}{{/crossLink}} on\n`didInsertElement`.",
+            "line": " app-addon/mixins/graph-registered-graphic.js:10"
+        },
+        {
+            "message": "Missing item type\ncalls {{#crossLink \"components.nf-graph/unregister\"}}{{/crossLink}} on\n`didInsertElement`.",
+            "line": " app-addon/mixins/graph-registered-graphic.js:21"
         }
     ]
 }
