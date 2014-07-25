@@ -42,6 +42,7 @@ var app = new EmberApp({
 
 
 app.import('vendor/d3/d3.js');
+app.import('vendor/d3mber/d3mber.js');
 app.import('vendor/ember-cli-ember-dvc/ember-cli-ember-dvc.css');
 app.import('vendor/ember-handlebars-svg/ember-handlebars-svg.js');
 

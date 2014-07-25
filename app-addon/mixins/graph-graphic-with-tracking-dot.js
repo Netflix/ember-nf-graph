@@ -45,7 +45,7 @@ export default Ember.Mixin.create({
   /**
     An model of the tracking dot's position and size
     @property trackingDot
-    @default { x: 0, y: 0, visible: false, radius: 2 }
+    @default { x: 0, y: 0, visible: false, radius: 2.5 }
     @type Object
     @readonly
     */
@@ -59,7 +59,7 @@ export default Ember.Mixin.create({
         x: 0,
         y: 0,
         visible: false,
-        radius: 2
+        radius: 2.5
       };
     }
 

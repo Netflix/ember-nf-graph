@@ -1,6 +1,9 @@
 <h1>Graph - Basics</h1>
 
-{{#nf-graph width="500" height="300" showLanes="true" paddingTop=50}}
+<label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label>
+<output>{{graphWidth}}px</output>
+
+{{#nf-graph width=graphWidth height="300" showLanes="true" paddingTop=50}}
 
 	{{#nf-y-diff a=500 b=1000}}
 		<text {{action 'test'}}>500</text>
@@ -15,7 +18,7 @@
 	{{/nf-y-axis}}
 
 	{{#nf-graph-content}}
-		{{nf-line data=lineData trackingMode="hover"}}
+		{{nf-line data=lineData trackingMode="hover" trackedData=tracked}}
 		{{nf-crosshair}}
 
 		{{#nf-range-markers orient="top"}}
@@ -31,4 +34,8 @@
 
 {{/nf-graph}}
 
+<div>
+	<span>Tracked Data</span>
+	<output>{{tracked.y}}</output>
+</div>
 
