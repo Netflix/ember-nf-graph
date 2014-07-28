@@ -59,7 +59,7 @@ export default Ember.Component.extend({
 
 
   /**
-    A array containing models to render the grid lanes
+    An array containing models to render the grid lanes
     @property gridLanes
     @type Array
     @readonly
