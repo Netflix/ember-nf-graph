@@ -168,8 +168,8 @@
 				}
 
 				return d3.svg.line()
-					.x(function (d) { return xScale(d[0]) + xMod; })
-					.y(function (d) { return yScale(d[1]) + yMod; })
+					.x(function (d) { return (xScale(d[0]) || 0) + xMod; })
+					.y(function (d) { return (yScale(d[1]) || 0) + yMod; })
 					.interpolate(interp)(data);
 			};
 		}

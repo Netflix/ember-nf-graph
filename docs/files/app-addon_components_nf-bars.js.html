@@ -157,11 +157,11 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 	classNames: [&#x27;nf-bars&#x27;],
 
-	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;sortedData&#x27;, &#x27;graph.graphHeight&#x27;,
-		function(xScale, yScale, sortedData, graphHeight) {
+	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;renderedData&#x27;, &#x27;graph.graphHeight&#x27;,
+		function(xScale, yScale, renderedData, graphHeight) {
 			var rangeBand = xScale.rangeBand();
 
-			return sortedData.map(function(d) {
+			return renderedData.map(function(d) {
 				var h = yScale(d[1]);
 				return {
 					x: xScale(d[0]),

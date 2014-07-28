@@ -167,7 +167,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-area.js.html#l10"><code>app-addon&#x2F;components&#x2F;nf-area.js:10</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-area.js.html#l12"><code>app-addon&#x2F;components&#x2F;nf-area.js:12</code></a>
         </div>
     
 
@@ -270,8 +270,8 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                                 
                             </li>
                         
-                            <li class="index-item property inherited inherited">
-                                <a href="#property_firstVisibleData">firstVisibleData</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_firstSortedData">firstSortedData</a>
 
                                 
                                 
@@ -279,6 +279,20 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                         
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_lastVisibleData">lastVisibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_renderedData">renderedData</a>
 
                                 
                                 
@@ -307,13 +321,6 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                         
                             <li class="index-item property inherited">
                                 <a href="#property_trackingMode">trackingMode</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_visibleData">visibleData</a>
 
                                 
                                 
@@ -904,7 +911,7 @@ accordingly.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l18"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:18</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l19"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:19</code></a>
         
         </p>
 
@@ -928,8 +935,8 @@ accordingly.</p>
 </div>
 
                 
-                    <div id="property_firstVisibleData" class="property item inherited">
-    <h3 class="name"><code>firstVisibleData</code></h3>
+                    <div id="property_firstSortedData" class="property item inherited">
+    <h3 class="name"><code>firstSortedData</code></h3>
     <span class="type">Array</span>
 
     
@@ -942,16 +949,13 @@ accordingly.</p>
 
     <div class="meta">
         
-            <p>Inherited from
-            <a href="../classes/mixins.graph-data-graphic.html#property_firstVisibleData">
-                mixins.graph-data-graphic
-            </a>
             
-            but overwritten in
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_firstSortedData">mixins.graph-data-graphic</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l136"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:136</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l142"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:142</code></a>
         
         </p>
 
@@ -961,7 +965,8 @@ accordingly.</p>
     </div>
 
     <div class="description">
-        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_visibleData" class="crosslink">visibleData</a></p>
+        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+that is actually visible within the x domain.</p>
 
     </div>
 
@@ -1017,6 +1022,92 @@ accordingly.</p>
 </div>
 
                 
+                    <div id="property_lastVisibleData" class="property item inherited">
+    <h3 class="name"><code>lastVisibleData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_lastVisibleData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l158"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:158</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+that is actually visible within the x domain.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_renderedData" class="property item inherited">
+    <h3 class="name"><code>renderedData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_renderedData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l115"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The list of data points from mixins.graph-data-graphc/sortedData:property that
+fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_sortedData" class="property item inherited">
     <h3 class="name"><code>sortedData</code></h3>
     <span class="type">Array</span>
@@ -1037,7 +1128,7 @@ accordingly.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l73"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:73</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l74"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:74</code></a>
         
         </p>
 
@@ -1141,7 +1232,7 @@ An array of arrays, structures as so:</p>
     </div>
 
     
-        <p><strong>Default:</strong> { x: 0, y: 0, visible: false, radius: 2 }</p>
+        <p><strong>Default:</strong> { x: 0, y: 0, visible: false, radius: 2.5 }</p>
     
 
     
@@ -1207,49 +1298,6 @@ mixins.graph-selectable-graphic/selected:property</li>
 </div>
 
                 
-                    <div id="property_visibleData" class="property item inherited">
-    <h3 class="name"><code>visibleData</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-data-graphic.html#property_visibleData">mixins.graph-data-graphic</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l113"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:113</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The <a href="../classes/mixins.graph-data-graphic.html#property_sortedData" class="crosslink">sortedData</a> 
-filtered down to only the data that is visible within the graph&#39;s domain.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_x" class="property item inherited">
     <h3 class="name"><code>x</code></h3>
     <span class="type">String</span>
@@ -1270,7 +1318,7 @@ filtered down to only the data that is visible within the graph&#39;s domain.</p
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l27"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:27</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l28"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:28</code></a>
         
         </p>
 
@@ -1316,7 +1364,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l49"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:49</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l50"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:50</code></a>
         
         </p>
 
@@ -1359,7 +1407,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l38"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:38</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l39"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:39</code></a>
         
         </p>
 
@@ -1405,7 +1453,7 @@ to use as y data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l61"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:61</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l62"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:62</code></a>
         
         </p>
 

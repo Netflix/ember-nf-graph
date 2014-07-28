@@ -140,6 +140,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
   This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
@@ -250,54 +251,69 @@ export default Ember.Mixin.create({
     return mapped;
   }.property(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;),
 
-  /**
-    The {{#crossLink &quot;mixins.graph-data-graphic/sortedData:property&quot;}}{{/crossLink}} 
-    filtered down to only the data that is visible within the graph&#x27;s domain.
 
-    @property visibleData
+  /**
+    The list of data points from {{#crossLink &quot;mixins.graph-data-graphc/sortedData:property&quot;}}{{/crossLink}} that
+    fits within the x domain, plus up to one data point outside of that domain in each direction.
+    @property renderedData
     @type Array
     @readonly
   */
-  visibleData: function() {
-  	var xMin = this.get(&#x27;graph.xMin&#x27;);
-  	var xMax = this.get(&#x27;graph.xMax&#x27;);
-    var sortedData = this.get(&#x27;sortedData&#x27;);
-
-    if(!sortedData) {
-    	return null;
+  renderedData: property(&#x27;sortedData.@each&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;, function(sortedData, xScaleType, xMin, xMax) {
+    if(!sortedData || sortedData.length === 0) {
+      return [];
     }
 
-    return sortedData.filter(function(d) {
-    	var x = d[0];
-    	return xMin &lt;= x &amp;&amp; x &lt;= xMax;
+    if(xScaleType === &#x27;ordinal&#x27;) {
+      return sortedData.slice();
+    }
+
+    return sortedData.filter(function(d, i) {
+      var x = d[0];
+      var prev = sortedData[i-1];
+      var next = sortedData[i+1];
+      var prevX = prev ? prev[0] : null;
+      var nextX = next ? next[0] : null;
+
+      return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
     });
-  }.property(&#x27;sortedData&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;),
+  }),
 
   /**
-    The first element from {{#crossLink &quot;mixins.graph-data-graphic/visibleData:property&quot;}}{{/crossLink}}
-
-    @property firstVisibleData
+    The first element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
+    that is actually visible within the x domain.
+    @property firstSortedData
     @type Array
     @readonly
   */
-  firstVisibleData: function(){
-  	var visibleData = this.get(&#x27;visibleData&#x27;);
-  	return visibleData &amp;&amp; visibleData.length &gt; 0 ? visibleData[0] : null;
-  }.property(&#x27;visibleData&#x27;),
+  firstVisibleData: property(&#x27;renderedData&#x27;, &#x27;xMin&#x27;, function(renderedData, xMin) {
+    var first = renderedData[0];
+    if(first &amp;&amp; xMin &gt; first[0] &amp;&amp; renderedData.length &gt; 1) {
+      first = renderedData[1];
+    }
+    return first;
+  }),
 
 
   /**
-    The last element from {{#crossLink &quot;mixins.graph-data-graphic/visibleData:property&quot;}}{{/crossLink}}
-
-    @property firstVisibleData
+    The last element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
+    that is actually visible within the x domain.
+    @property lastVisibleData
     @type Array
     @readonly
   */
-  lastVisibleData: function(){
-  	var visibleData = this.get(&#x27;visibleData&#x27;);
-  	return visibleData &amp;&amp; visibleData.length &gt; 0 ? visibleData[visibleData.length - 1] : null;
-  }.property(&#x27;visibleData&#x27;),
+  lastVisibleData: property(&#x27;renderedData&#x27;, &#x27;xMax&#x27;, function(renderedData, xMax) {
+    var last = renderedData[renderedData.length - 1];
+    if(last &amp;&amp; xMax &lt; last[0] &amp;&amp; renderedData.length &gt; 1) {
+      last = renderedData[renderedData.length - 2];
+    }
+    return last;
+  }),
 });
+
+function between(x, a, b) {
+  return a &lt;= x &amp;&amp; x &lt;= b;
+}
     </pre>
 </div>
 

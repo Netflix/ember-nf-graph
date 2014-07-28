@@ -185,7 +185,7 @@ export default Ember.Mixin.create({
   /**
     An model of the tracking dot&#x27;s position and size
     @property trackingDot
-    @default { x: 0, y: 0, visible: false, radius: 2 }
+    @default { x: 0, y: 0, visible: false, radius: 2.5 }
     @type Object
     @readonly
     */
@@ -199,7 +199,7 @@ export default Ember.Mixin.create({
         x: 0,
         y: 0,
         visible: false,
-        radius: 2
+        radius: 2.5
       };
     }
 
@@ -246,7 +246,7 @@ export default Ember.Mixin.create({
       if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
         self.set(&#x27;trackedData&#x27;, null);
       } else {
-        var found = self.getNearestDataToXPosition(data.x, self.get(&#x27;visibleData&#x27;), xScale);
+        var found = self.getNearestDataToXPosition(data.x, self.get(&#x27;renderedData&#x27;), xScale);
         self.set(&#x27;trackedData&#x27;, found ? {
           x: found[0],
           y: found[1]
@@ -255,7 +255,7 @@ export default Ember.Mixin.create({
     });
 
     graph.hoverEnd(function() {
-      self._trackingModeDidChange();
+      self._updateTrackedData();
     });
   }.observes(&#x27;graph&#x27;),
 

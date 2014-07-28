@@ -147,6 +147,8 @@ import AreaUtils from &#x27;../mixins/graph-area-utils&#x27;;
 import GraphicWithTrackingDot from &#x27;../mixins/graph-graphic-with-tracking-dot&#x27;;
 import DataPositionUtils from &#x27;../mixins/graph-data-position-utils&#x27;;
 
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+
 /**
  * Adds an area graph to an &#x60;nf-graph&#x60; component.
  * 
@@ -191,7 +193,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 
     nextYData: function() {
-      var nextStripData = this.get(&#x27;nextArea.visibleData&#x27;);
+      var nextStripData = this.get(&#x27;nextArea.renderedData&#x27;);
       
       if(nextStripData) {
         return nextStripData.map(function(d) {
@@ -200,26 +202,26 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
 
       var graphYMin = this.get(&#x27;graph.yMin&#x27;);
-      var graphLength = this.get(&#x27;visibleData.length&#x27;);
+      var graphLength = this.get(&#x27;sortedData.length&#x27;);
       var result = [];
       var i;
       for(i = 0; i &lt; graphLength; i++){
         result.push(graphYMin);
       }
       return result;
-    }.property(&#x27;visibleData.length&#x27;, &#x27;graph.yMin&#x27;, &#x27;nextArea.visibleData&#x27;),
+    }.property(&#x27;sortedData.length&#x27;, &#x27;graph.yMin&#x27;, &#x27;nextArea.renderedData&#x27;),
 
 
     areaData: function(){
-      var visibleData = this.get(&#x27;visibleData&#x27;);
+      var sortedData = this.get(&#x27;sortedData&#x27;);
       var nextYData = this.get(&#x27;nextYData&#x27;);
 
       if(nextYData) {
-        return visibleData.map(function(d, i) {
+        return sortedData.map(function(d, i) {
           return d.concat(nextYData[i]);
         });
       }
-    }.property(&#x27;visibleData&#x27;, &#x27;nextYData&#x27;),
+    }.property(&#x27;sortedData&#x27;, &#x27;nextYData&#x27;),
 
 
     areaFn: function(){

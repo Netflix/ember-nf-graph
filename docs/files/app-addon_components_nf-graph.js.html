@@ -165,22 +165,14 @@ var scaleFactoryProperty = function(axis) {
 
 var domainProperty = function(axis) {
   return property(
-    axis + &#x27;Data&#x27;, axis + &#x27;DomainMode&#x27;, axis + &#x27;Min&#x27;, axis + &#x27;Max&#x27;, axis + &#x27;ScaleType&#x27;,
-    function(data, domainMode, min, max, scaleType) {
+    axis + &#x27;Data&#x27;, axis + &#x27;Min&#x27;, axis + &#x27;Max&#x27;, axis + &#x27;ScaleType&#x27;,
+    function(data, min, max, scaleType) {
       var domain = null;
 
       if(scaleType === &#x27;ordinal&#x27;) {
-        this.set(axis + &#x27;Min&#x27;, data[0]);
-        this.set(axis + &#x27;Max&#x27;, data[data.length - 1]);
         domain = data;
       } else {
         var extent = [min, max];
-
-        if(domainMode === &#x27;auto&#x27;) {
-          extent = d3.extent(data);
-          this.set(axis + &#x27;Min&#x27;, extent[0]);
-          this.set(axis + &#x27;Max&#x27;, extent[1]);
-        }
 
         if(scaleType === &#x27;log&#x27;) {
           if (extent[0] &lt;= 0) {
@@ -330,6 +322,15 @@ export default Ember.Component.extend({
    * @default false
    */
   showLanes: false,
+
+  /**
+    Determines whether to display &quot;frets&quot; in the background of
+    the graph.
+    @property showFrets
+    @type Boolean
+    @default false 
+  */
+  showFrets: false,
 
 
   /**
@@ -518,6 +519,22 @@ export default Ember.Component.extend({
       this.set(&#x27;yData&#x27;, all.map(function(d) { return d[1]; }));
     }
   ),
+
+  _updateXMinMaxIfAuto: observer(&#x27;xDomainMode&#x27;, &#x27;xData&#x27;, function(domainMode, data) {
+    if(domainMode === &#x27;auto&#x27;) {
+      var extent = d3.extent(data);
+      this.set(&#x27;xMin&#x27;, extent[0]);
+      this.set(&#x27;xMax&#x27;, extent[1]);
+    }
+  }),
+
+  _updateYMinMaxIfAuto: observer(&#x27;yDomainMode&#x27;, &#x27;yData&#x27;, function(domainMode, data) {
+    if(domainMode === &#x27;auto&#x27;) {
+      var extent = d3.extent(data);
+      this.set(&#x27;yMin&#x27;, extent[0]);
+      this.set(&#x27;yMax&#x27;, extent[1]);
+    }
+  }),
 
   /**
    * Gets a function to create the xScale

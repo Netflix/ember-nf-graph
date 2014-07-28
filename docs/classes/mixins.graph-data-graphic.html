@@ -142,7 +142,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l4"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:4</code></a>
+            Defined in: <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l5"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:5</code></a>
         </div>
     
 
@@ -196,14 +196,21 @@ for use in graphing components.</p>
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_firstVisibleData">firstVisibleData</a>
+                                <a href="#property_firstSortedData">firstSortedData</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_firstVisibleData">firstVisibleData</a>
+                                <a href="#property_lastVisibleData">lastVisibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_renderedData">renderedData</a>
 
                                 
                                 
@@ -211,13 +218,6 @@ for use in graphing components.</p>
                         
                             <li class="index-item property">
                                 <a href="#property_sortedData">sortedData</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_visibleData">visibleData</a>
 
                                 
                                 
@@ -290,7 +290,7 @@ for use in graphing components.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l18"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:18</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l19"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:19</code></a>
         
         </p>
 
@@ -314,8 +314,8 @@ for use in graphing components.</p>
 </div>
 
                 
-                    <div id="property_firstVisibleData" class="property item">
-    <h3 class="name"><code>firstVisibleData</code></h3>
+                    <div id="property_firstSortedData" class="property item">
+    <h3 class="name"><code>firstSortedData</code></h3>
     <span class="type">Array</span>
 
     
@@ -337,7 +337,7 @@ for use in graphing components.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l136"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:136</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l142"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:142</code></a>
         
         </p>
 
@@ -347,7 +347,8 @@ for use in graphing components.</p>
     </div>
 
     <div class="description">
-        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_visibleData" class="crosslink">visibleData</a></p>
+        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+that is actually visible within the x domain.</p>
 
     </div>
 
@@ -359,8 +360,8 @@ for use in graphing components.</p>
 </div>
 
                 
-                    <div id="property_firstVisibleData" class="property item">
-    <h3 class="name"><code>firstVisibleData</code></h3>
+                    <div id="property_lastVisibleData" class="property item">
+    <h3 class="name"><code>lastVisibleData</code></h3>
     <span class="type">Array</span>
 
     
@@ -382,7 +383,7 @@ for use in graphing components.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l149"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:149</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l158"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:158</code></a>
         
         </p>
 
@@ -392,7 +393,54 @@ for use in graphing components.</p>
     </div>
 
     <div class="description">
-        <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_visibleData" class="crosslink">visibleData</a></p>
+        <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+that is actually visible within the x domain.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_renderedData" class="property item">
+    <h3 class="name"><code>renderedData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l115"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The list of data points from mixins.graph-data-graphc/sortedData:property that
+fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
 
     </div>
 
@@ -427,7 +475,7 @@ for use in graphing components.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l73"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:73</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l74"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:74</code></a>
         
         </p>
 
@@ -441,52 +489,6 @@ for use in graphing components.</p>
 An array of arrays, structures as so:</p>
 <pre class="code prettyprint"><code>  [[x,y],[x,y],[x,y]];</code></pre>
 <p><strong> each inner array also has a property <code>data</code> on it, containing the original data object </strong></p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_visibleData" class="property item">
-    <h3 class="name"><code>visibleData</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l113"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:113</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The <a href="../classes/mixins.graph-data-graphic.html#property_sortedData" class="crosslink">sortedData</a> 
-filtered down to only the data that is visible within the graph&#39;s domain.</p>
 
     </div>
 
@@ -521,7 +523,7 @@ filtered down to only the data that is visible within the graph&#39;s domain.</p
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l27"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:27</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l28"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:28</code></a>
         
         </p>
 
@@ -570,7 +572,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l49"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:49</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l50"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:50</code></a>
         
         </p>
 
@@ -616,7 +618,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l38"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:38</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l39"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:39</code></a>
         
         </p>
 
@@ -665,7 +667,7 @@ to use as y data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l61"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:61</code></a>
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l62"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:62</code></a>
         
         </p>
 

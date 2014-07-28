@@ -141,13 +141,13 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * Container component for graphics to display in &#x60;nf-graph&#x60;. Represents
- * the area where the graphics, such as lines will display.
- *
- * Exists for layout purposes.
- * @namespace components
- * @class nf-graph-content
- */
+  Container component for graphics to display in &#x60;nf-graph&#x60;. Represents
+  the area where the graphics, such as lines will display.
+  
+  Exists for layout purposes.
+  @namespace components
+  @class nf-graph-content
+*/  
 export default Ember.Component.extend({
   tagName: &#x27;g&#x27;,
   
@@ -155,40 +155,95 @@ export default Ember.Component.extend({
 
   attributeBindings: [&#x27;transform&#x27;],
 
+  /**
+    The SVG transform for positioning the graph content
+    @property transform
+    @type String
+    @readonly
+  */
   transform: function(){
     return &#x27;translate(%@ %@)&#x27;.fmt(this.get(&#x27;x&#x27;), this.get(&#x27;y&#x27;));
   }.property(&#x27;x&#x27;, &#x27;y&#x27;),
 
+  /**
+    The x position of the graph content
+    @property x
+    @type Number
+    @readonly
+  */
   x: Ember.computed.alias(&#x27;graph.graphX&#x27;),
+
+  /**
+    The calculated y position of the graph content
+    @property y
+    @type Number
+    @readonly
+  */
   y: Ember.computed.alias(&#x27;graph.graphY&#x27;),
+
+  /**
+    The calculated width of the graph content
+    @property width
+    @type Number
+    @readonly
+  */
   width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
+
+  /**
+    The calculated height of the graph content.
+    @property height
+    @type Number
+    @readonly
+  */
   height: Ember.computed.alias(&#x27;graph.graphHeight&#x27;),
 
 
+  /**
+    A array containing models to render the grid lanes
+    @property gridLanes
+    @type Array
+    @readonly
+  */
   gridLanes: function () {
     var ticks = this.get(&#x27;graph.yAxis.ticks&#x27;);
     var width = this.get(&#x27;width&#x27;);
+    var height = this.get(&#x27;height&#x27;);
 
-    if(!ticks) {
+    if(!ticks || ticks.length === 0) {
       return [];
     }
 
-    ticks = ticks.sortBy(&#x27;y&#x27;);
-    var lanes = [];
-    var i, a, b;
-    for(i = 1; i &lt; ticks.length - 1; i += 2) {
-      a = ticks[i];
-      b = ticks[i + 1];
-      lanes.push({
-        x: 0,
-        y: a.y,
-        height: b.y - a.y,
-        width: width
-      });
+    var sorted = ticks.slice().sort(function(a, b) {
+      return a.y - b.y;
+    });
+
+    if(sorted[0].y !== 0) {
+      sorted.unshift({ y: 0 });
     }
 
+    var lanes = sorted.reduce(function(lanes, tick, i) {
+      var y = tick.y;
+      var next = sorted[i+1] || { y: height };
+      var h = next.y - tick.y;
+      lanes.push({
+        x: 0,
+        y: y,
+        width: width,
+        height: h
+      });
+      return lanes;
+    }, []);
+
     return lanes;
-  }.property(&#x27;graph.yAxis.ticks&#x27;, &#x27;width&#x27;),
+  }.property(&#x27;graph.yAxis.ticks&#x27;, &#x27;width&#x27;, &#x27;height&#x27;),
+
+  /**
+    An array containing models to render fret lines
+    @property frets
+    @type Array
+    @readonly
+  */
+  frets: Ember.computed.alias(&#x27;graph.xAxis.ticks&#x27;),
 
   _setup: function(){
     var graph = this.nearestWithProperty(&#x27;isGraph&#x27;);
