@@ -7,7 +7,7 @@
 
 	{{#nf-graph-content}}
 		{{nf-area data=lineData trackingMode="snap-first" trackedData=tracked}}
-		{{nf-crosshair}}
+		{{nf-crosshair xLink=groupX}}
 
 		{{#nf-range-markers orient="top"}}
 			{{#nf-range-marker xMin=20 xMax=88}}
@@ -39,3 +39,43 @@
 	<output>{{tracked.y}}</output>
 </div>
 
+{{#nf-graph width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
+
+	{{#nf-graph-content}}
+		{{nf-area data=lineData2 trackingMode="snap-first" trackedData=tracked2}}
+		{{nf-crosshair xLink=groupX yLink=groupY test="bottom"}}
+
+		{{#nf-range-markers orient="top"}}
+			{{#nf-range-marker xMin=20 xMax=88}}
+				<text>Number 2</text>
+			{{/nf-range-marker}}
+
+			{{#nf-range-marker xMin=56 xMax=120}}
+				<text>Numero Uno</text>
+			{{/nf-range-marker}}
+		{{/nf-range-markers}}		
+	{{/nf-graph-content}}
+
+	{{#nf-y-diff a=500 b=1000}}
+		<text {{action 'test'}}>500</text>
+	{{/nf-y-diff}}
+
+	{{#nf-x-axis}}
+		<text>{{tick.value}}</text>
+	{{/nf-x-axis}}
+
+	{{#nf-y-axis orient="right"}}
+		<text>{{tick.value}}</text>
+	{{/nf-y-axis}}
+
+{{/nf-graph}}
+
+<div>
+	<span>Tracked Data</span>
+	<output>{{tracked2.y}}</output>
+</div>
+
+<div>
+	{{groupX}},
+	{{groupY}}
+</div>

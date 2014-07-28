@@ -1,20 +1,23 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	model: function(){
-		var lineData = [];
-
-		var i, x, y, p;
-
-		for(i = 0, p = 0; i < 300; i++) {
-			x = i;
-			y = Math.max(0, (p + (Math.random() * 300) - 150));
-			p = y;
-			lineData.push({ x: x, y: y });
-		}
-
+	model: function() {
 		return {
-			lineData: lineData
+			lineData: generateLineData(0, 0, 2000, 200, 300),
+			lineData2: generateLineData(0, 100, 1000, 100, 500)
 		};
 	}
 });
+
+function generateLineData(xStart, yMin, yMax, variance, count){
+	var p = 0;
+	return d3.range(count).map(function(d, i) {
+		var y = p + (Math.random() * variance) - (variance / 2);
+		y = Math.min(yMax, Math.max(yMin, y));
+		p = y;
+		return {
+			x: xStart + i,
+			y: y
+		};
+	});
+}

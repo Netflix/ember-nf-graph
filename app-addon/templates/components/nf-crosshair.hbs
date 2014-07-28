@@ -1,3 +1,6 @@
-<line class="vertical"  {{bind-attr x1=x x2=x y1="0" y2=height}} />
-
-<line class="horizontal" {{bind-attr x1="0" x2=width y1=y y2=y}} />
+{{#if yVisible}}
+	<line class="vertical"  {{bind-attr x1=x x2=x y1="0" y2=height}} />
+{{/if}}
+{{#if xVisible}}
+	<line class="horizontal" {{bind-attr x1="0" x2=width y1=y y2=y}} />
+{{/if}}
