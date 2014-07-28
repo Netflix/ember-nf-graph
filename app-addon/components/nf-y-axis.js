@@ -224,7 +224,7 @@ export default Ember.Component.extend(HasGraphParent, {
    * @type Number
    * @readonly
    */
-  axisLineX: property('isOrientRight', 'width', 'tickLength', function(isOrientRight, width, tickLength){
+  axisLineX: property('isOrientRight', 'width', function(isOrientRight, width){
     return isOrientRight ? 0 : width;
   }),
 
