@@ -56,7 +56,7 @@ export default Ember.Component.extend({
     }, []);
 
     return lanes;
-  }.property('graph.yAxis.ticks', 'width'),
+  }.property('graph.yAxis.ticks', 'width', 'height'),
 
   frets: Ember.computed.alias('graph.xAxis.ticks'),
 
