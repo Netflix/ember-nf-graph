@@ -106,7 +106,7 @@ export default Ember.Mixin.create({
       if(trackingMode === 'none' || (trackingMode.indexOf('selected-') === 0 && !selected)) {
         self.set('trackedData', null);
       } else {
-        var found = self.getNearestDataToXPosition(data.x, self.get('visibleData'), xScale);
+        var found = self.getNearestDataToXPosition(data.x, self.get('sortedData'), xScale);
         self.set('trackedData', found ? {
           x: found[0],
           y: found[1]
@@ -129,8 +129,8 @@ export default Ember.Mixin.create({
     var trackingMode = this.get('trackingMode');
     var selected = this.get('isSelected');
     var selectable = this.get('selectable');
-    var last = this.get('lastVisibleData');
-    var first = this.get('firstVisibleData');
+    var last = this.get('lastSortedData');
+    var first = this.get('firstSortedData');
     var data = null;
 
     switch(trackingMode) {
@@ -157,5 +157,5 @@ export default Ember.Mixin.create({
       y: data[1],
       data: data.data
     } : null);
-  }.observes('trackingMode', 'lastVisibleData', 'firstVisibleData', 'isSelected', 'selectable').on('init'),
+  }.observes('trackingMode', 'lastSortedData', 'firstSortedData', 'isSelected', 'selectable').on('init'),
 });

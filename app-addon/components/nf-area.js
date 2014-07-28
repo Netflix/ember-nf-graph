@@ -51,7 +51,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 
     nextYData: function() {
-      var nextStripData = this.get('nextArea.visibleData');
+      var nextStripData = this.get('nextArea.sortedData');
       
       if(nextStripData) {
         return nextStripData.map(function(d) {
@@ -60,26 +60,26 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
 
       var graphYMin = this.get('graph.yMin');
-      var graphLength = this.get('visibleData.length');
+      var graphLength = this.get('sortedData.length');
       var result = [];
       var i;
       for(i = 0; i < graphLength; i++){
         result.push(graphYMin);
       }
       return result;
-    }.property('visibleData.length', 'graph.yMin', 'nextArea.visibleData'),
+    }.property('sortedData.length', 'graph.yMin', 'nextArea.sortedData'),
 
 
     areaData: function(){
-      var visibleData = this.get('visibleData');
+      var sortedData = this.get('sortedData');
       var nextYData = this.get('nextYData');
 
       if(nextYData) {
-        return visibleData.map(function(d, i) {
+        return sortedData.map(function(d, i) {
           return d.concat(nextYData[i]);
         });
       }
-    }.property('visibleData', 'nextYData'),
+    }.property('sortedData', 'nextYData'),
 
 
     areaFn: function(){
