@@ -5,18 +5,6 @@
 
 {{#nf-graph width=graphWidth height="300" showLanes="true" paddingTop=50}}
 
-	{{#nf-y-diff a=500 b=1000}}
-		<text {{action 'test'}}>500</text>
-	{{/nf-y-diff}}
-
-	{{#nf-x-axis}}
-		<text>{{tick.value}}</text>
-	{{/nf-x-axis}}
-
-	{{#nf-y-axis orient="right"}}
-		<text>{{tick.value}}</text>
-	{{/nf-y-axis}}
-
 	{{#nf-graph-content}}
 		{{nf-line data=lineData trackingMode="hover" trackedData=tracked}}
 		{{nf-crosshair}}
@@ -31,6 +19,18 @@
 			{{/nf-range-marker}}
 		{{/nf-range-markers}}		
 	{{/nf-graph-content}}
+
+	{{#nf-y-diff a=500 b=1000}}
+		<text {{action 'test'}}>500</text>
+	{{/nf-y-diff}}
+
+	{{#nf-x-axis}}
+		<text>{{tick.value}}</text>
+	{{/nf-x-axis}}
+
+	{{#nf-y-axis orient="right"}}
+		<text>{{tick.value}}</text>
+	{{/nf-y-axis}}
 
 {{/nf-graph}}
 

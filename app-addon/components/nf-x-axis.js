@@ -224,4 +224,8 @@ export default Ember.Component.extend(HasGraphParent, {
   _updateGraphXAxis: function(){
     this.graph.set('xAxis', this);
   }.observes('graph'),
+
+  axisLineY: property('orient', 'height', function(orient, height) {
+    return orient === 'top' ? height : 0;
+  }),
 });
