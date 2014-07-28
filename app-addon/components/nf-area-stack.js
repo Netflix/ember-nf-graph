@@ -53,6 +53,7 @@ export default Ember.Component.extend({
 	registerArea: function(area) {
 		var areas = this.get('areas');
 		var last = areas[areas.length - 1];
+		
 		if(last) {
 			last.set('nextArea', area);
 			this.set('prevArea', last);
@@ -71,8 +72,10 @@ export default Ember.Component.extend({
 		var prev = area.get('prevArea');
 		var next = area.get('nextArea');
 
-		prev.set('nextArea', next);
-		next.set('prevArea', prev);
+		if(next) {
+			prev.set('nextArea', next);
+			next.set('prevArea', prev);
+		}
 
 		this.get('areas').removeObject(area);
 	},
