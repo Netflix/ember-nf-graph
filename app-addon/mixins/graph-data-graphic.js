@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
+import { property } from '../utils/computed-property-helpers';
 
 /**
   This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
@@ -112,27 +113,64 @@ export default Ember.Mixin.create({
 
 
   /**
-    The first element from {{#crossLink "mixins.graph-data-graphic/sortedData:property"}}{{/crossLink}}
+    The list of data points from {{#crossLink "mixins.graph-data-graphc/sortedData:property"}}{{/crossLink}} that
+    fits within the x domain, plus up to one data point outside of that domain in each direction.
+    @property renderedData
+    @type Array
+    @readonly
+  */
+  renderedData: property('sortedData.@each', 'graph.xScaleType', 'graph.xMin', 'graph.xMax', function(sortedData, xScaleType, xMin, xMax) {
+    if(!sortedData || sortedData.length === 0) {
+      return [];
+    }
 
+    if(xScaleType === 'ordinal') {
+      return sortedData.slice();
+    }
+
+    return sortedData.filter(function(d, i) {
+      var x = d[0];
+      var prev = sortedData[i-1];
+      var next = sortedData[i+1];
+      var prevX = prev ? prev[0] : null;
+      var nextX = next ? next[0] : null;
+
+      return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
+    });
+  }),
+
+  /**
+    The first element from {{#crossLink "mixins.graph-data-graphic/renderedData:property"}}{{/crossLink}}
+    that is actually visible within the x domain.
     @property firstSortedData
     @type Array
     @readonly
   */
-  firstSortedData: function(){
-  	var sortedData = this.get('sortedData');
-  	return sortedData && sortedData.length > 0 ? sortedData[0] : null;
-  }.property('sortedData'),
+  firstVisibleData: property('renderedData', 'xMin', function(renderedData, xMin) {
+    var first = renderedData[0];
+    if(first && xMin > first[0] && renderedData.length > 1) {
+      first = renderedData[1];
+    }
+    return first;
+  }),
 
 
   /**
-    The last element from {{#crossLink "mixins.graph-data-graphic/sortedData:property"}}{{/crossLink}}
-
-    @property firstSortedData
+    The last element from {{#crossLink "mixins.graph-data-graphic/renderedData:property"}}{{/crossLink}}
+    that is actually visible within the x domain.
+    @property lastVisibleData
     @type Array
     @readonly
   */
-  lastSortedData: function(){
-  	var sortedData = this.get('sortedData');
-  	return sortedData && sortedData.length > 0 ? sortedData[sortedData.length - 1] : null;
-  }.property('sortedData'),
+  lastVisibleData: property('renderedData', 'xMax', function(renderedData, xMax) {
+    var last = renderedData[renderedData.length - 1];
+    if(last && xMax < last[0] && renderedData.length > 1) {
+      last = renderedData[renderedData.length - 2];
+    }
+    return last;
+  }),
 });
+
+function between(x, a, b) {
+  return a <= x && x <= b;
+}

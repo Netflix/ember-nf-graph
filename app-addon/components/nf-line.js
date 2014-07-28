@@ -7,6 +7,8 @@ import SelectableGraphic from '../mixins/graph-selectable-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 
+import { property } from '../utils/computed-property-helpers';
+
 /**
  * A line graphic for `nf-graph`. Displays a line for the data it's passed.
  * @namespace components
@@ -15,24 +17,19 @@ import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
   DataPositionUtils, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
   tagName: 'g',
-  interpolator: 'linear',
-  classNames: ['nf-line'],
   
-  dotRadius: 3,
+  interpolator: 'linear',
+  
+  classNames: ['nf-line'],
 
-  lineFn: function(){
-    var xScale = this.get('graph.xScale');
-    var yScale = this.get('graph.yScale');
-    var interpolator = this.get('interpolator');
+  lineFn: property('graph.xScale', 'graph.yScale', 'interpolator', function(xScale, yScale, interpolator) {
     return this.createLineFn(xScale, yScale, interpolator);
-  }.property('graph.xScale', 'graph.yScale', 'interpolator'),
+  }),
 
 
-  d: function(){
-    var sortedData = this.get('sortedData');
-    var lineFn = this.get('lineFn');
-    return lineFn(sortedData);
-  }.property('sortedData', 'lineFn'),
+  d: property('renderedData.@each', 'lineFn', function(renderedData, lineFn) {
+    return lineFn(renderedData);
+  }),
 
   _updateSelectionClick: function(){
     if(this.get('selectable')) {

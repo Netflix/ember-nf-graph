@@ -25,22 +25,14 @@ var scaleFactoryProperty = function(axis) {
 
 var domainProperty = function(axis) {
   return property(
-    axis + 'Data', axis + 'DomainMode', axis + 'Min', axis + 'Max', axis + 'ScaleType',
-    function(data, domainMode, min, max, scaleType) {
+    axis + 'Data', axis + 'Min', axis + 'Max', axis + 'ScaleType',
+    function(data, min, max, scaleType) {
       var domain = null;
 
       if(scaleType === 'ordinal') {
-        this.set(axis + 'Min', data[0]);
-        this.set(axis + 'Max', data[data.length - 1]);
         domain = data;
       } else {
         var extent = [min, max];
-
-        if(domainMode === 'auto') {
-          extent = d3.extent(data);
-          this.set(axis + 'Min', extent[0]);
-          this.set(axis + 'Max', extent[1]);
-        }
 
         if(scaleType === 'log') {
           if (extent[0] <= 0) {
@@ -378,6 +370,22 @@ export default Ember.Component.extend({
       this.set('yData', all.map(function(d) { return d[1]; }));
     }
   ),
+
+  _updateXMinMaxIfAuto: observer('xDomainMode', 'xData', function(domainMode, data) {
+    if(domainMode === 'auto') {
+      var extent = d3.extent(data);
+      this.set('xMin', extent[0]);
+      this.set('xMax', extent[1]);
+    }
+  }),
+
+  _updateYMinMaxIfAuto: observer('yDomainMode', 'yData', function(domainMode, data) {
+    if(domainMode === 'auto') {
+      var extent = d3.extent(data);
+      this.set('yMin', extent[0]);
+      this.set('yMax', extent[1]);
+    }
+  }),
 
   /**
    * Gets a function to create the xScale

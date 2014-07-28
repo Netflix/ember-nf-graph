@@ -7,6 +7,8 @@ import AreaUtils from '../mixins/graph-area-utils';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 import DataPositionUtils from '../mixins/graph-data-position-utils';
 
+import { property } from '../utils/computed-property-helpers';
+
 /**
  * Adds an area graph to an `nf-graph` component.
  * 
@@ -51,7 +53,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 
     nextYData: function() {
-      var nextStripData = this.get('nextArea.sortedData');
+      var nextStripData = this.get('nextArea.renderedData');
       
       if(nextStripData) {
         return nextStripData.map(function(d) {
@@ -67,7 +69,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
         result.push(graphYMin);
       }
       return result;
-    }.property('sortedData.length', 'graph.yMin', 'nextArea.sortedData'),
+    }.property('sortedData.length', 'graph.yMin', 'nextArea.renderedData'),
 
 
     areaData: function(){

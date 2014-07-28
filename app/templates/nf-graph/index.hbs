@@ -6,7 +6,7 @@
 {{#nf-graph width=graphWidth height="300" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{nf-line data=lineData trackingMode="hover" trackedData=tracked}}
+		{{nf-area data=lineData trackingMode="snap-first" trackedData=tracked}}
 		{{nf-crosshair}}
 
 		{{#nf-range-markers orient="top"}}
