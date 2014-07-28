@@ -3,7 +3,7 @@
 <label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label>
 <output>{{graphWidth}}px</output>
 
-{{#nf-graph width=graphWidth height="300" showLanes="true" paddingTop=50}}
+{{#nf-graph width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
 		{{nf-area data=lineData trackingMode="snap-first" trackedData=tracked}}

@@ -28,27 +28,37 @@ export default Ember.Component.extend({
   gridLanes: function () {
     var ticks = this.get('graph.yAxis.ticks');
     var width = this.get('width');
+    var height = this.get('height');
 
-    if(!ticks) {
+    if(!ticks || ticks.length === 0) {
       return [];
     }
 
-    ticks = ticks.sortBy('y');
-    var lanes = [];
-    var i, a, b;
-    for(i = 1; i < ticks.length - 1; i += 2) {
-      a = ticks[i];
-      b = ticks[i + 1];
+    var sorted = ticks.slice().sort(function(a, b) {
+      return a.y - b.y;
+    });
+
+    if(sorted[0].y !== 0) {
+      sorted.unshift({ y: 0 });
+    }
+
+    var lanes = sorted.reduce(function(lanes, tick, i) {
+      var y = tick.y;
+      var next = sorted[i+1] || { y: height };
+      var h = next.y - tick.y;
       lanes.push({
         x: 0,
-        y: a.y,
-        height: b.y - a.y,
-        width: width
+        y: y,
+        width: width,
+        height: h
       });
-    }
+      return lanes;
+    }, []);
 
     return lanes;
   }.property('graph.yAxis.ticks', 'width'),
+
+  frets: Ember.computed.alias('graph.xAxis.ticks'),
 
   _setup: function(){
     var graph = this.nearestWithProperty('isGraph');

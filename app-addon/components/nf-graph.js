@@ -183,6 +183,15 @@ export default Ember.Component.extend({
    */
   showLanes: false,
 
+  /**
+    Determines whether to display "frets" in the background of
+    the graph.
+    @property showFrets
+    @type Boolean
+    @default false 
+  */
+  showFrets: false,
+
 
   /**
    * The domain mode for the x axis. This determines the behavior of

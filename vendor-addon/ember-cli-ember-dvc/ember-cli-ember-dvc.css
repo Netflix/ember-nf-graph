@@ -38,8 +38,10 @@
 
 .nf-graph .nf-graph-content > .background {
   fill: #ffffff; }
-.nf-graph .nf-graph-content .nf-grid-lanes rect {
+.nf-graph .nf-graph-content .nf-grid-lanes rect:nth-child(even) {
   fill: #f5f6f7; }
+.nf-graph .nf-graph-content .nf-grid-lanes rect:nth-child(odd) {
+  fill: #ffffff; }
 .nf-graph .nf-graph-content .nf-grid-frets line {
   stroke: #d3dbdd;
   stroke-width: 0.5; }

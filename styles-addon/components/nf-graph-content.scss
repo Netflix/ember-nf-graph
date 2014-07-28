@@ -4,8 +4,12 @@
 	}
 
 	.nf-grid-lanes {
-    rect {
+    rect:nth-child(even) {
       fill: $pale-gray;
+    }
+
+    rect:nth-child(odd) {
+      fill: $white;
     }
   }
 

@@ -8,14 +8,14 @@
           <rect {{bind-attr x=lane.x y=lane.y width=width height=lane.height }}></rect>
         {{/each}}
       </g>
+    {{/if}}
 
-      {{#if graph.showXAxis}}
-        <g class="nf-grid-frets">
-          {{#each tick in graph.xAxis.ticks}}
-            <line {{bind-attr x1=tick.x y1="0" x2=tick.x y2=height}}></line>
-          {{/each}}
-        </g>
-      {{/if}}
+    {{#if graph.showFrets}}
+      <g class="nf-grid-frets">
+        {{#each fret in frets}}
+          <line {{bind-attr x1=fret.x y1="0" x2=fret.x y2=height}}></line>
+        {{/each}}
+      </g>
     {{/if}}
   {{/if}}
 
