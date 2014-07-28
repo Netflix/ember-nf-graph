@@ -196,14 +196,17 @@ export default Ember.Component.extend(HasGraphParent, {
   ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData',
     function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
       var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
+      var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
+      var x2 = axisLineX;
+      var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
 
       var result = ticks.map(function (tick) {
         return {
           value: tick,
           y: yScale(tick),
-          x1: axisLineX + tickLength,
-          x2: axisLineX,
-          labelx: isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding),
+          x1: x1,
+          x2: x2,
+          labelx: labelx,
         };
       });
 
@@ -221,11 +224,9 @@ export default Ember.Component.extend(HasGraphParent, {
    * @type Number
    * @readonly
    */
-  axisLineX: function(){
-    var orient = this.get('orient');
-    var width = this.get('width');
-    return orient === 'right' ? 0 : width;
-  }.property('orient', 'width'),
+  axisLineX: property('isOrientRight', 'width', 'tickLength', function(isOrientRight, width, tickLength){
+    return isOrientRight ? 0 : width;
+  }),
 
   _hasGraph: function(){
     var graph = this.get('graph');
