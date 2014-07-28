@@ -110,51 +110,29 @@ export default Ember.Mixin.create({
     return mapped;
   }.property('data.@each', 'xPropFn', 'yPropFn'),
 
-  /**
-    The {{#crossLink "mixins.graph-data-graphic/sortedData:property"}}{{/crossLink}} 
-    filtered down to only the data that is visible within the graph's domain.
 
-    @property visibleData
+  /**
+    The first element from {{#crossLink "mixins.graph-data-graphic/sortedData:property"}}{{/crossLink}}
+
+    @property firstSortedData
     @type Array
     @readonly
   */
-  visibleData: function() {
-  	var xMin = this.get('graph.xMin');
-  	var xMax = this.get('graph.xMax');
-    var sortedData = this.get('sortedData');
-
-    if(!sortedData) {
-    	return null;
-    }
-
-    return sortedData.filter(function(d) {
-    	var x = d[0];
-    	return xMin <= x && x <= xMax;
-    });
-  }.property('sortedData', 'graph.xMin', 'graph.xMax'),
-
-  /**
-    The first element from {{#crossLink "mixins.graph-data-graphic/visibleData:property"}}{{/crossLink}}
-
-    @property firstVisibleData
-    @type Array
-    @readonly
-  */
-  firstVisibleData: function(){
-  	var visibleData = this.get('visibleData');
-  	return visibleData && visibleData.length > 0 ? visibleData[0] : null;
-  }.property('visibleData'),
+  firstSortedData: function(){
+  	var sortedData = this.get('sortedData');
+  	return sortedData && sortedData.length > 0 ? sortedData[0] : null;
+  }.property('sortedData'),
 
 
   /**
-    The last element from {{#crossLink "mixins.graph-data-graphic/visibleData:property"}}{{/crossLink}}
+    The last element from {{#crossLink "mixins.graph-data-graphic/sortedData:property"}}{{/crossLink}}
 
-    @property firstVisibleData
+    @property firstSortedData
     @type Array
     @readonly
   */
-  lastVisibleData: function(){
-  	var visibleData = this.get('visibleData');
-  	return visibleData && visibleData.length > 0 ? visibleData[visibleData.length - 1] : null;
-  }.property('visibleData'),
+  lastSortedData: function(){
+  	var sortedData = this.get('sortedData');
+  	return sortedData && sortedData.length > 0 ? sortedData[sortedData.length - 1] : null;
+  }.property('sortedData'),
 });

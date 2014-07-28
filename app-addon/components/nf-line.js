@@ -29,10 +29,10 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
 
 
   d: function(){
-    var visibleData = this.get('visibleData');
+    var sortedData = this.get('sortedData');
     var lineFn = this.get('lineFn');
-    return lineFn(visibleData);
-  }.property('visibleData', 'lineFn'),
+    return lineFn(sortedData);
+  }.property('sortedData', 'lineFn'),
 
   _updateSelectionClick: function(){
     if(this.get('selectable')) {
