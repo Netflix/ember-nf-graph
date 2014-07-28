@@ -115,7 +115,7 @@ export default Ember.Mixin.create({
     });
 
     graph.hoverEnd(function() {
-      self._trackingModeDidChange();
+      self._updateTrackedData();
     });
   }.observes('graph'),
 
