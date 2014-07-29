@@ -24,7 +24,11 @@ export default Ember.Component.extend(HasGraphParent, {
 	a: null,
 	b: null,
 	contentPadding: 5,
-	transition: 500,
+	duration: 300,
+	contentY: 0,
+	contentX: 0,
+	y: 0,
+	height: 0,
 
 	diff: property('a', 'b', function(a, b){
 		return b - a;
@@ -36,55 +40,30 @@ export default Ember.Component.extend(HasGraphParent, {
 	
 	isOrientRight: Ember.computed.equal('graph.yAxis.orient', 'right'),
 
-	y: property('a', 'b', 'graph.yScale', 'graph.graphY', function(a, b, yScale, graphY){
-		return Math.min(yScale(a), yScale(b)) + graphY;
-	}),
-
 	width: Ember.computed.alias('graph.yAxis.width'),
 
-	height: property('graph.yScale', 'a', 'b', function(yScale, a, b) {
-		return Math.abs(yScale(b) - yScale(a));
-	}),
-
 	parentController: Ember.computed.alias('templateData.view.controller'),
-
-	contentX: property('isOrientRight', 'width', 'contentPadding', 'x', function(isOrientRight, width, contentPadding, x) {
-		return x + (isOrientRight ? width - contentPadding : contentPadding);
-	}),
-
-	contentY: property('y', 'height', function(y, height){
-		return y + (height / 2);
-	}),
 
 	isVisible: property('a', 'b', function(a, b){
 		return typeof a === 'number' && typeof b === 'number';
 	}),
 
-	updateElements: observer('rect', 'content', 'transition', 'x', 'y', 'width', 'height', 'contentY', 'contentX',
-		function(rect, content, transition, x, y, width, height, contentY, contentX){
-			if(rect) {
-				rect.transition(transition).attr('x', x || 0)
-					.attr('y', y || 0)
-					.attr('width', width || 0)
-					.attr('height', height || 0);
-			}
+	contentTransform: property('contentX', 'contentY', function(contentX, contentY) {
+		return 'translate(%@ %@)'.fmt(contentX, contentY);
+	}),
 
-			if(content) {
-				content.transition(transition).attr('transform', function() {
-					return 'translate(%@ %@)'.fmt(contentX || 0, contentY || 0);
-				});
-			}
-		}
-	),
+	_updatePosition: observer('a', 'b', 'graph.yScale', 'graph.graphY', function(a, b, yScale, graphY){
+		var y = Math.min(yScale(a), yScale(b)) + graphY;
+		var height = Math.abs(yScale(b) - yScale(a));
+		var contentY = y + (height / 2);
 
-	_d3Setup: function(){
-		var g = d3.select(this.$()[0]);
-		var data = [0];
-		var rect = g.selectAll('rect').data(data);
-		var content = g.selectAll('g.nf-y-diff-content').data(data);
-		this.set('rect', rect);
-		this.set('content', content);
-		this.updateElements();
-	}.on('didInsertElement')
+		this.transition().duration(this.duration)
+			.set('y', y || 0)
+			.set('height', height || 0)
+			.set('contentY', contentY || 0);
+	}),
 
+	_setup: function(){
+
+	}.on('init'),
 });

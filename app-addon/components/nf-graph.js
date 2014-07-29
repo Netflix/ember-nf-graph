@@ -461,97 +461,7 @@ export default Ember.Component.extend({
     var graphics = this.get('graphics');
     graphics.removeObject(graphic);
   },
-
-  /**
-   * The handlers for mouse hover changes
-   * @property _hoverChangeHandlers
-   * @type Array
-   * @private
-   * @readonly
-   */
-  _hoverChangeHandlers: property(function(){
-    return [];
-  }),
-
-  /**
-   * The handlers for mouse hover end
-   * @property _hoverEndHandlers
-   * @type Array
-   * @private
-   * @readonly
-   */
-  _hoverEndHandlers: property(function(){
-    return [];
-  }),
-
-  /**
-   * Registers a mouse hover change handler with the graph.
-   * @function hoverChange
-   * @params handler {Function} a function that will handle the hover change
-   * @example 
-   *     graph.hoverChange(function(e, data) {
-   *        console.log(data.x, data.y);
-   *     });
-   */
-  hoverChange: function(handler) {
-    this.get('_hoverChangeHandlers').pushObject(handler);
-  },
-
-  /**
-   * Registers a mouse hover end handler with the graph.
-   * @function hoverEnd
-   * @params handler {Function} a function that will handle the hover end
-   * @example 
-   *     graph.hoverEnd(function(e) {
-   *        console.log('hover ended');
-   *     });
-   */
-  hoverEnd: function(handler) {
-    this.get('_hoverEndHandlers').pushObject(handler);
-  },
   
-  /**
-   * Notifies all handlers of a hover change event.
-   * @function onDidGraphHoverChange
-   * @param e {MouseEvent} the DOM mouse event args
-   * @param mouseX {Number} the mouse x coordinates relative to the graph content.
-   * @param mouseY {Number} the mouse y coordinates relative to the graph content.
-   * @private
-   */
-  onDidGraphHoverChange: function (e, mouseX, mouseY) {
-    var graphics = this.get('graphics');
-    
-    if (!graphics) {
-      return;
-    }
-
-    var data = {
-      x: mouseX,
-      y: mouseY
-    };
-
-    this.get('_hoverChangeHandlers').forEach(function(handler) {
-      handler(e, data);
-    });
-  },
-
-  /**
-   * Notifies all handlers of a hover end event
-   * @function onDidGraphHoverEnd
-   * @param e {MouseEvent} the DOM mouse event
-   * @private
-   */
-  onDidGraphHoverEnd: function (e) {
-    var graphics = this.get('graphics');
-    if (!graphics) {
-      return;
-    }
-
-    this.get('_hoverEndHandlers').forEach(function(handler) {
-      handler(e);
-    });
-  },
-
   /**
    * The y range of the graph in pixels. The min and max pixel values
    * in an array form.
@@ -671,13 +581,15 @@ export default Ember.Component.extend({
     graphContentGroup.on('mousemove', function (e) {
       Ember.run(function () {
         var mouse = self.mousePoint(graphContentGroup[0], e);
-        self.onDidGraphHoverChange(e, mouse[0], mouse[1]);
+        self.set('xHover', mouse[0]);
+        self.set('yHover', mouse[1]);
       });
     });
 
-    graphContentGroup.on('mouseleave', function (e) {
+    graphContentGroup.on('mouseleave', function () {
       Ember.run(function () {
-        self.onDidGraphHoverEnd(e);
+        self.set('xHover', -1);
+        self.set('yHover', -1);
       });
     });
   }.on('didInsertElement'),
@@ -710,7 +622,45 @@ export default Ember.Component.extend({
    */
   parentController: Ember.computed.alias('templateData.view.controller'),
 
+  _xHover: -1,
+  _yHover: -1,
+  xHover: computedAlias('_xHover'),
+  yHover: computedAlias('_yHover'),
+
+  xLink: function(keyName, value) {
+    var xScale = this.get('xScale');
+    
+    if(!xScale) {
+      return 0;
+    }
+
+    if(arguments.length > 1) {
+      this.set('xHover', value ? xScale(value.xHover) : -1);
+    }
+
+    return {
+      xHover: xScale.invert(this.get('xHover'))
+    };
+  }.property('xScale', 'xHover'),
+
+  yLink: function(keyName, value) {
+    var yScale = this.get('yScale');
+    
+    if(!yScale) {
+      return 0;
+    }
+
+    if(arguments.length > 1) {
+      this.set('yHover', value ? yScale(value.yHover) : -1);
+    }
+
+    return {
+      yHover: yScale.invert(this.get('yHover'))
+    };
+  }.property('yScale', 'yHover'),
+
+
   _setup: function(){
     this.set('graphics', []);
-  }.on('init')
+  }.on('init'),
 });

@@ -52,24 +52,17 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     }.on('willDestroyElement'),
 
 
-    nextYData: function() {
-      var nextStripData = this.get('nextArea.renderedData');
-      
-      if(nextStripData) {
-        return nextStripData.map(function(d) {
-          return d[1];
-        });
-      }
+    nextYData: property('sortedData.length', 'graph.yMin', 'nextArea.renderedData.@each', 
+      function(sortedDataLength, yMin, nextRenderedData) {        
+        if(nextRenderedData) {
+          return nextRenderedData.map(function(d) {
+            return d[1];
+          });
+        }
 
-      var graphYMin = this.get('graph.yMin');
-      var graphLength = this.get('sortedData.length');
-      var result = [];
-      var i;
-      for(i = 0; i < graphLength; i++){
-        result.push(graphYMin);
+        return d3.range(sortedDataLength).map(function() { return yMin; });
       }
-      return result;
-    }.property('sortedData.length', 'graph.yMin', 'nextArea.renderedData'),
+    ),
 
 
     areaData: function(){

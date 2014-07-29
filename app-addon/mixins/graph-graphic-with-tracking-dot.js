@@ -89,35 +89,28 @@ export default Ember.Mixin.create({
     }
   }.observes('trackedData', 'graph.xScale', 'graph.yScale'),
 
-  /**
-    Initializes the tracking dot when the component is assigned a graph.
 
-    @method _hasGraph
-    @private
-    */
-  _hasGraph: function(){
-    var self = this;
-    var graph = self.get('graph');
-    graph.hoverChange(function(e, data){
-      var trackingMode = self.get('trackingMode');
-      var selected = self.get('isSelected');
-      var xScale = self.get('graph.xScale');
-      
-      if(trackingMode === 'none' || (trackingMode.indexOf('selected-') === 0 && !selected)) {
-        self.set('trackedData', null);
-      } else {
-        var found = self.getNearestDataToXPosition(data.x, self.get('renderedData'), xScale);
-        self.set('trackedData', found ? {
-          x: found[0],
-          y: found[1]
-        } : null);
-      } 
-    });
+  _hoverChange: function(){
+    var trackingMode = this.get('trackingMode');
+    var selected = this.get('isSelected');
+    var xScale = this.get('graph.xScale');
+    var xHover = this.get('graph.xHover');
+    var yHover = this.get('graph.yHover');
 
-    graph.hoverEnd(function() {
-      self._updateTrackedData();
-    });
-  }.observes('graph'),
+    if(trackingMode === 'none' || (trackingMode.indexOf('selected-') === 0 && !selected)) {
+      this.set('trackedData', null);
+    } else {
+      var found = this.getNearestDataToXPosition(xHover, this.get('renderedData'), xScale);
+      this.set('trackedData', found ? {
+        x: found[0],
+        y: found[1]
+      } : null);
+    } 
+
+    if(xHover === -1 && yHover === -1) {
+      this._updateTrackedData();
+    }
+  }.observes('graph.xHover', 'graph.yHover'),
 
   /**
     Observes changes other than mouse hovers that might update the {{#crossLink "mixins.graph-graphic-with-tracking-dot/trackedData"}}{{/crossLink}}

@@ -3,11 +3,12 @@
 <label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label>
 <output>{{graphWidth}}px</output>
 
-{{#nf-graph width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
+{{#nf-graph  xLink=groupX yLink=groupY
+	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
 		{{nf-area data=lineData trackingMode="snap-first" trackedData=tracked}}
-		{{nf-crosshair xLink=groupX}}
+		{{nf-crosshair}}
 
 		{{#nf-range-markers orient="top"}}
 			{{#nf-range-marker xMin=20 xMax=88}}
@@ -20,7 +21,7 @@
 		{{/nf-range-markers}}		
 	{{/nf-graph-content}}
 
-	{{#nf-y-diff a=500 b=1000}}
+	{{#nf-y-diff a=100 b=200}}
 		<text {{action 'test'}}>500</text>
 	{{/nf-y-diff}}
 
@@ -39,21 +40,12 @@
 	<output>{{tracked.y}}</output>
 </div>
 
-{{#nf-graph width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
+{{#nf-graph  xLink=groupX
+	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{nf-area data=lineData2 trackingMode="snap-first" trackedData=tracked2}}
-		{{nf-crosshair xLink=groupX yLink=groupY test="bottom"}}
-
-		{{#nf-range-markers orient="top"}}
-			{{#nf-range-marker xMin=20 xMax=88}}
-				<text>Number 2</text>
-			{{/nf-range-marker}}
-
-			{{#nf-range-marker xMin=56 xMax=120}}
-				<text>Numero Uno</text>
-			{{/nf-range-marker}}
-		{{/nf-range-markers}}		
+		{{nf-line data=lineData2 trackingMode="snap-first" trackedData=tracked2}}
+		{{nf-crosshair test="bottom"}}
 	{{/nf-graph-content}}
 
 	{{#nf-y-diff a=500 b=1000}}
@@ -76,6 +68,6 @@
 </div>
 
 <div>
-	{{groupX}},
-	{{groupY}}
+	{{groupX.xHover}},
+	{{groupY.yHover}}
 </div>
