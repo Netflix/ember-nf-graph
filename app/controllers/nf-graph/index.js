@@ -3,11 +3,11 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
 	graphWidth: 400,
 	
-	xTickFilter: function(tick) {
+	xTickFilter: function() {
 		return true;
 	},
 
-	xTickFactory: function(xScale, tickCount, xData, xScaleType) {
+	xTickFactory: function() {
 		var ticks = [1, 10, 30, 50, 80, 99];
 
 		return ticks;
