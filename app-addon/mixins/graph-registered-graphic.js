@@ -4,7 +4,7 @@ import Ember from 'ember';
 	@namespace mixins
 	@class graph-registered-graphic
 	@extends Ember.Mixin
-	*/
+*/
 export default Ember.Mixin.create({
 
 	/**

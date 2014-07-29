@@ -581,7 +581,7 @@ export default Ember.Component.extend({
       });
     });
 
-    graphContenßtGroup.on('mouseleave', function () {
+    graphContentGroup.on('mouseleave', function () {
       Ember.run(function () {
         self.set('xHover', -1);
         self.set('yHover', -1);
