@@ -140,7 +140,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import { observer } from &#x27;../utils/computed-property-helpers&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
  * A component that adds a &quot;crosshair&quot; to an &#x60;nf-graph&#x60; that follows the mouse
@@ -152,8 +152,6 @@ import { observer } from &#x27;../utils/computed-property-helpers&#x27;;
  */
 export default Ember.Component.extend(HasGraphParent, {
   tagName: &#x27;g&#x27;,
-  
-  isVisible: false,
 
   classNames: [&#x27;nf-crosshair&#x27;],
 
@@ -161,18 +159,16 @@ export default Ember.Component.extend(HasGraphParent, {
 
   width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
 
+  x: Ember.computed.alias(&#x27;graph.xHover&#x27;),
+  y: Ember.computed.alias(&#x27;graph.yHover&#x27;),
 
-  _hasGraph: observer(&#x27;graph&#x27;, function(graph){
-    var self = this;
-    graph.hoverChange(function(e, data){
-      self.set(&#x27;x&#x27;, data.x);
-      self.set(&#x27;y&#x27;, data.y);
-      self.set(&#x27;isVisible&#x27;, true);
-    });
-    graph.hoverEnd(function(){
-      self.set(&#x27;isVisible&#x27;, false);
-    });
-  })
+  xVisible: property(&#x27;y&#x27;, &#x27;graph.graphHeight&#x27;, function(y, graphHeight) {
+    return 0 &lt;= y &amp;&amp; y &lt;= graphHeight;
+  }),
+
+  yVisible: property(&#x27;x&#x27;, &#x27;graph.graphWidth&#x27;, function(x, graphWidth) {
+    return 0 &lt;= x &amp;&amp; x &lt;= graphWidth;
+  }),
 });
     </pre>
 </div>

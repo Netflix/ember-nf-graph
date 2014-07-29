@@ -192,24 +192,17 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     }.on(&#x27;willDestroyElement&#x27;),
 
 
-    nextYData: function() {
-      var nextStripData = this.get(&#x27;nextArea.renderedData&#x27;);
-      
-      if(nextStripData) {
-        return nextStripData.map(function(d) {
-          return d[1];
-        });
-      }
+    nextYData: property(&#x27;sortedData.length&#x27;, &#x27;graph.yMin&#x27;, &#x27;nextArea.renderedData.@each&#x27;, 
+      function(sortedDataLength, yMin, nextRenderedData) {        
+        if(nextRenderedData) {
+          return nextRenderedData.map(function(d) {
+            return d[1];
+          });
+        }
 
-      var graphYMin = this.get(&#x27;graph.yMin&#x27;);
-      var graphLength = this.get(&#x27;sortedData.length&#x27;);
-      var result = [];
-      var i;
-      for(i = 0; i &lt; graphLength; i++){
-        result.push(graphYMin);
+        return d3.range(sortedDataLength).map(function() { return yMin; });
       }
-      return result;
-    }.property(&#x27;sortedData.length&#x27;, &#x27;graph.yMin&#x27;, &#x27;nextArea.renderedData&#x27;),
+    ),
 
 
     areaData: function(){

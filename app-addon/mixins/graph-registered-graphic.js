@@ -10,7 +10,9 @@ export default Ember.Mixin.create({
 	/**
 		calls {{#crossLink "components.nf-graph/registerGraphic"}}{{/crossLink}} on
 		`didInsertElement`.
-		*/
+		@method _registerGraphic
+		@private
+	*/
 	_registerGraphic: function() {
 		var graph = this.get('graph');
 		if(graph) {
@@ -19,9 +21,11 @@ export default Ember.Mixin.create({
 	}.on('didInsertElement'),
 
 	/**
-		calls {{#crossLink "components.nf-graph/unregister"}}{{/crossLink}} on
+		calls {{#crossLink "components.nf-graph/unregisterGraphic"}}{{/crossLink}} on
 		`didInsertElement`.
-		*/
+		@method _unregisterGraphic
+		@private
+	*/
 	_unregisterGraphic: function(){
 		var graph = this.get('graph');
 		if(graph) {

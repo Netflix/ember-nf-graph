@@ -219,7 +219,14 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                             </li>
                         
                             <li class="index-item method private inherited">
-                                <a href="#method__hasGraph">_hasGraph</a>
+                                <a href="#method__registerGraphic">_registerGraphic</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__unregisterGraphic">_unregisterGraphic</a>
 
                                 
                                 
@@ -421,8 +428,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__hasGraph" class="method item private inherited">
-    <h3 class="name"><code>_hasGraph</code></h3>
+                    <div id="method__registerGraphic" class="method item private inherited">
+    <h3 class="name"><code>_registerGraphic</code></h3>
 
     
         <span class="paren">()</span>
@@ -448,11 +455,11 @@ and assigns it to <code>graph</code></p>
         
             
                 <p>Inherited from
-                <a href="../classes/mixins.graph-graphic-with-tracking-dot.html#method__hasGraph">mixins.graph-graphic-with-tracking-dot</a>:
+                <a href="../classes/mixins.graph-registered-graphic.html#method__registerGraphic">mixins.graph-registered-graphic</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l92"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:92</code></a>
+        <a href="../files/app-addon_mixins_graph-registered-graphic.js.html#l10"><code>app-addon&#x2F;mixins&#x2F;graph-registered-graphic.js:10</code></a>
         
         </p>
 
@@ -463,7 +470,63 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Initializes the tracking dot when the component is assigned a graph.</p>
+        <p>calls <a href="../classes/components.nf-graph.html#method_registerGraphic" class="crosslink">registerGraphic</a> on
+<code>didInsertElement</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__unregisterGraphic" class="method item private inherited">
+    <h3 class="name"><code>_unregisterGraphic</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-registered-graphic.html#method__unregisterGraphic">mixins.graph-registered-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-registered-graphic.js.html#l23"><code>app-addon&#x2F;mixins&#x2F;graph-registered-graphic.js:23</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>calls <a href="../classes/components.nf-graph.html#method_unregisterGraphic" class="crosslink">unregisterGraphic</a> on
+<code>didInsertElement</code>.</p>
 
     </div>
 
@@ -504,7 +567,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l122"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:122</code></a>
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l115"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:115</code></a>
         
         </p>
 

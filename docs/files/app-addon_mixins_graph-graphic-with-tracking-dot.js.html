@@ -229,35 +229,28 @@ export default Ember.Mixin.create({
     }
   }.observes(&#x27;trackedData&#x27;, &#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;),
 
-  /**
-    Initializes the tracking dot when the component is assigned a graph.
 
-    @method _hasGraph
-    @private
-    */
-  _hasGraph: function(){
-    var self = this;
-    var graph = self.get(&#x27;graph&#x27;);
-    graph.hoverChange(function(e, data){
-      var trackingMode = self.get(&#x27;trackingMode&#x27;);
-      var selected = self.get(&#x27;isSelected&#x27;);
-      var xScale = self.get(&#x27;graph.xScale&#x27;);
-      
-      if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
-        self.set(&#x27;trackedData&#x27;, null);
-      } else {
-        var found = self.getNearestDataToXPosition(data.x, self.get(&#x27;renderedData&#x27;), xScale);
-        self.set(&#x27;trackedData&#x27;, found ? {
-          x: found[0],
-          y: found[1]
-        } : null);
-      } 
-    });
+  _hoverChange: function(){
+    var trackingMode = this.get(&#x27;trackingMode&#x27;);
+    var selected = this.get(&#x27;isSelected&#x27;);
+    var xScale = this.get(&#x27;graph.xScale&#x27;);
+    var xHover = this.get(&#x27;graph.xHover&#x27;);
+    var yHover = this.get(&#x27;graph.yHover&#x27;);
 
-    graph.hoverEnd(function() {
-      self._updateTrackedData();
-    });
-  }.observes(&#x27;graph&#x27;),
+    if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
+      this.set(&#x27;trackedData&#x27;, null);
+    } else {
+      var found = this.getNearestDataToXPosition(xHover, this.get(&#x27;renderedData&#x27;), xScale);
+      this.set(&#x27;trackedData&#x27;, found ? {
+        x: found[0],
+        y: found[1]
+      } : null);
+    } 
+
+    if(xHover === -1 &amp;&amp; yHover === -1) {
+      this._updateTrackedData();
+    }
+  }.observes(&#x27;graph.xHover&#x27;, &#x27;graph.yHover&#x27;),
 
   /**
     Observes changes other than mouse hovers that might update the {{#crossLink &quot;mixins.graph-graphic-with-tracking-dot/trackedData&quot;}}{{/crossLink}}

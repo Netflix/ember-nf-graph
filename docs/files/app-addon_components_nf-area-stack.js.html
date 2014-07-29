@@ -141,55 +141,55 @@
 import Ember from &#x27;ember&#x27;;
 
 /**
- * A component for grouping and stacking &#x60;nf-area&#x60; components in an &#x60;nf-graph&#x60;.
- * 
- * This component looks at the order of the &#x60;nf-area&#x60; components underneath it 
- * and uses the ydata of the next sibling &#x60;nf-area&#x60; component to determine the bottom 
- * of each &#x60;nf-area&#x60; components path to be drawn.
- *
- * ### Example
- *
- *  		{{#nf-graph width=300 height=100}}
- *  			{{#nf-graph-content}}
- *  				{{#nf-area-stack}}
- *  					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;high&quot;}}
- *  					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;med&quot;}}
- *  					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;low&quot;}}
- *  				{{/nf-area-stack}}
- *  			{{/nf-graph-content}}
- *  		{{/nf-graph}}
- *
- * @namespace components
- * @class nf-area-stack 
- */
+	A component for grouping and stacking &#x60;nf-area&#x60; components in an &#x60;nf-graph&#x60;.
+	
+	This component looks at the order of the &#x60;nf-area&#x60; components underneath it 
+	and uses the ydata of the next sibling &#x60;nf-area&#x60; component to determine the bottom 
+	of each &#x60;nf-area&#x60; components path to be drawn.
+
+	### Example
+
+	 		{{#nf-graph width=300 height=100}}
+	 			{{#nf-graph-content}}
+	 				{{#nf-area-stack}}
+	 					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;high&quot;}}
+	 					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;med&quot;}}
+	 					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;low&quot;}}
+	 				{{/nf-area-stack}}
+	 			{{/nf-graph-content}}
+	 		{{/nf-graph}}
+
+	@namespace components
+	@class nf-area-stack 
+*/
 export default Ember.Component.extend({
 	tagName: &#x27;g&#x27;,
 
 	/**
-	 * Used by &#x60;nf-area&#x60; to identify an area stack parent
-	 * @property isAreaStack
-	 * @type Boolean
-	 * @default true
-	 * @readonly
-	 */
+		Used by &#x60;nf-area&#x60; to identify an area stack parent
+		@property isAreaStack
+		@type Boolean
+		@default true
+		@readonly
+  */
 	isAreaStack: true,
 
 	/**
-	 * The collection of &#x60;nf-area&#x60; components under this stack.
-	 * @property areas
-	 * @type Array
-	 * @readonly
-	 */
+		The collection of &#x60;nf-area&#x60; components under this stack.
+		@property areas
+		@type Array
+		@readonly
+	*/
 	areas: function(){
 		return [];
 	}.property(),
 
 	/**
-	 * Registers an area component with this stack. Also links areas to one
-	 * another by setting &#x60;nextArea&#x60; on each area component.
-	 * @function registerArea
-	 * @param area {Ember.Component} The area component to register.
-	 */
+		Registers an area component with this stack. Also links areas to one
+		another by setting &#x60;nextArea&#x60; on each area component.
+		@method registerArea
+		@param area {Ember.Component} The area component to register.
+	*/
 	registerArea: function(area) {
 		var areas = this.get(&#x27;areas&#x27;);
 		var last = areas[areas.length - 1];
@@ -203,11 +203,11 @@ export default Ember.Component.extend({
 	},
 
 	/**
-	 * Unregisters an area component from this stack. Also updates next
-	 * and previous links.
-	 * @function unregisterArea
-	 * @param area {Ember.Component} the area to unregister
-	 */
+		Unregisters an area component from this stack. Also updates next
+		and previous links.
+		@method unregisterArea
+		@param area {Ember.Component} the area to unregister
+	*/
 	unregisterArea: function(area) {
 		var prev = area.get(&#x27;prevArea&#x27;);
 		var next = area.get(&#x27;nextArea&#x27;);

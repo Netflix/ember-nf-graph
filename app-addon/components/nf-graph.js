@@ -69,118 +69,113 @@ var scaleProperty = function(axis) {
 };
 
 /**
- * A container component for building complex Cartesian graphs.
- *
- * ## Minimal example
- *
- *       {{#nf-graph width=100 height=50}}
- *         {{#nf-graph-content}}
- *           {{nf-line data=lineData xprop="foo" yprop="bar"}}
- *         {{/nf-graph-content}}
- *       {{/nf-graph}}
- * 
- * The above will create a simple 100x50 graph, with no axes, and a single line
- * plotting the data it finds on each object in the array `lineData` at properties
- * `foo` and `bar` for x and y values respectively.
- *
- * ## More advanced example
- *
- *       {{#nf-graph width=500 height=300}}
- *         {{#nf-x-axis height="50"}}
- *           <text>{{tick.value}}</text>
- *         {{/nf-x-axis}}
- *   
- *         {{#nf-y-axis width="120"}}
- *           <text>{{tick.value}}</text>
- *         {{/nf-y-axis}}
- *   
- *         {{#nf-graph-content}}
- *           {{nf-line data=lineData xprop="foo" yprop="bar"}}
- *         {{/nf-graph-content}}
- *       {{/nf-graph}}
- *
- * The above example will create a 500x300 graph with both axes visible. The graph will not 
- * render either axis unless its component is present.
- *
- *
- * @namespace components
- * @class nf-graph
- */
+  A container component for building complex Cartesian graphs.
+
+  ## Minimal example
+
+       {{#nf-graph width=100 height=50}}
+         {{#nf-graph-content}}
+           {{nf-line data=lineData xprop="foo" yprop="bar"}}
+         {{/nf-graph-content}}
+       {{/nf-graph}}
+
+  The above will create a simple 100x50 graph, with no axes, and a single line
+  plotting the data it finds on each object in the array `lineData` at properties
+  `foo` and `bar` for x and y values respectively.
+
+  ## More advanced example
+
+       {{#nf-graph width=500 height=300}}
+         {{#nf-x-axis height="50"}}
+           <text>{{tick.value}}</text>
+         {{/nf-x-axis}}
+   
+         {{#nf-y-axis width="120"}}
+           <text>{{tick.value}}</text>
+         {{/nf-y-axis}}
+   
+         {{#nf-graph-content}}
+           {{nf-line data=lineData xprop="foo" yprop="bar"}}
+         {{/nf-graph-content}}
+       {{/nf-graph}}
+
+  The above example will create a 500x300 graph with both axes visible. The graph will not 
+  render either axis unless its component is present.
+
+
+  @namespace components
+  @class nf-graph
+*/
 export default Ember.Component.extend({
-  /**
-   * @property tagName
-   * @final
-   */
   tagName: 'div',  
 
   /** 
-   * allows child compoenents to identify graph parent.
-   * @property isGraph
-   * @final
-   */
+    Allows child compoenents to identify graph parent.
+    @property isGraph
+  */
   isGraph: true,
 
   /**
-   * @property hasRendered
-   * @private
-   */
+    @property hasRendered
+    @private
+  */
   hasRendered: false,
 
   /**
-   * The width of the graph in pixels.
-   * @property width
-   * @type Number
-   * @default 300
-   */
+    The width of the graph in pixels.
+    @property width
+    @type Number
+    @default 300
+  */
   width: 300,
 
   /**
-   * The height of the graph in pixels.
-   * @property height
-   * @type Number
-   * @default 100
-   */
+    The height of the graph in pixels.
+    @property height
+    @type Number
+    @default 100
+  */
   height: 100,
 
   /**
-   * The padding at the top of the graph
-   * @property paddingTop
-   * @type Number
-   * @default 0
-   */
+    The padding at the top of the graph
+    @property paddingTop
+    @type Number
+    @default 0
+  */
   paddingTop: 0,
 
   /**
-   * The padding at the left of the graph
-   * @property paddingLeft
-   * @type Number
-   * @default 0
-   */
+    The padding at the left of the graph
+    @property paddingLeft
+    @type Number
+    @default 0
+  */
   paddingLeft: 0,
 
   /**
-   * The padding at the right of the graph
-   * @property paddingRight
-   * @type Number
-   * @default 0
-   */
+    The padding at the right of the graph
+    @property paddingRight
+    @type Number
+    @default 0
+  */
   paddingRight: 0,
 
   /**
-   * The padding at the bottom of the graph
-   * @property paddingBottom
-   * @type Number
-   * @default 0
-   */
+    The padding at the bottom of the graph
+    @property paddingBottom
+    @type Number
+    @default 0
+  */
   paddingBottom: 0,
 
   /**
-   * Determines whether to display "lanes" in the background of
-   * the graph.
-   * @property showLanes
-   * @type Boolean
-   * @default false
-   */
+    Determines whether to display "lanes" in the background of
+    the graph.
+    @property showLanes
+    @type Boolean
+    @default false
+  */
   showLanes: false,
 
   /**
@@ -194,111 +189,111 @@ export default Ember.Component.extend({
 
 
   /**
-   * The domain mode for the x axis. This determines the behavior of
-   * xMin and xMax as they relate to all of the data in the graph and
-   * to the domain for scaling purposes.
-   *
-   * Possible values:
-   * - `'auto'` - automatically sizes the domain to the data it contains
-   * - `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`
-   *
-   * @property xDomainMode
-   * @type String
-   * @default 'auto'
-   */
+    The domain mode for the x axis. This determines the behavior of
+    xMin and xMax as they relate to all of the data in the graph and
+    to the domain for scaling purposes.
+    
+    Possible values:
+    - `'auto'` - automatically sizes the domain to the data it contains
+    - `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`
+    
+    @property xDomainMode
+    @type String
+    @default 'auto'
+  */
   xDomainMode: 'auto',
 
   /**
-   * The domain mode for the y axis. This determines the behavior of
-   * `yMin` and `yMax` as they relate to all of the data in the graph and
-   * to the domain for scaling purposes.
-   *
-   * Possible values:
-   * - `'auto'` - automatically sizes the domain to the data it contains
-   * - `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`
-   *
-   * @property yDomainMode
-   * @type String
-   * @default 'auto'
-   */
+    The domain mode for the y axis. This determines the behavior of
+    `yMin` and `yMax` as they relate to all of the data in the graph and
+    to the domain for scaling purposes.
+
+    Possible values:
+    - `'auto'` - automatically sizes the domain to the data it contains
+    - `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`
+
+    @property yDomainMode
+    @type String
+    @default 'auto'
+  */
   yDomainMode: 'auto',
 
   /**
-   * The type of scale to use for x values.
-   *
-   * Possible Values:
-   * - `'linear'` - a standard linear scale
-   * - `'log'` - a logarithmic scale
-   * - `'power'` - a power-based scale (exponent = 3)
-   * - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
-   * 
-   * @property xScaleType
-   * @type String
-   * @default 'linear'
-   */
+    The type of scale to use for x values.
+    
+    Possible Values:
+    - `'linear'` - a standard linear scale
+    - `'log'` - a logarithmic scale
+    - `'power'` - a power-based scale (exponent = 3)
+    - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
+    
+    @property xScaleType
+    @type String
+    @default 'linear'
+  */
   xScaleType: 'linear',
 
   /**
-   * The type of scale to use for y values.
-   *
-   * Possible Values:
-   * - `'linear'` - a standard linear scale
-   * - `'log'` - a logarithmic scale
-   * - `'power'` - a power-based scale (exponent = 3)
-   * - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
-   * 
-   * @property yScaleType
-   * @type String
-   * @default 'linear'
-   */
+    The type of scale to use for y values.
+    
+    Possible Values:
+    - `'linear'` - a standard linear scale
+    - `'log'` - a logarithmic scale
+    - `'power'` - a power-based scale (exponent = 3)
+    - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
+    
+    @property yScaleType
+    @type String
+    @default 'linear'
+  */
   yScaleType: 'linear',
   
   /**
-   * The padding between value steps when `xScaleType` is `'ordinal'`
-   * @property xOrdinalPadding
-   * @type Number
-   * @default 0.1
-   */
+    The padding between value steps when `xScaleType` is `'ordinal'`
+    @property xOrdinalPadding
+    @type Number
+    @default 0.1
+  */
   xOrdinalPadding: 0.1,
 
   /**
-   * The padding at the ends of the domain data when `xScaleType` is `'ordinal'`
-   * @property xOrdinalOuterPadding
-   * @type Number
-   * @default 0.1
-   */
+    The padding at the ends of the domain data when `xScaleType` is `'ordinal'`
+    @property xOrdinalOuterPadding
+    @type Number
+    @default 0.1
+  */
   xOrdinalOuterPadding: 0.1,
 
   /**
-   * The padding between value steps when `xScaleType` is `'ordinal'`
-   * @property yOrdinalPadding
-   * @type Number
-   * @default 0.1
-   */
+    The padding between value steps when `xScaleType` is `'ordinal'`
+    @property yOrdinalPadding
+    @type Number
+    @default 0.1
+  */
   yOrdinalPadding: 0.1,
 
   /**
-   * The padding at the ends of the domain data when `yScaleType` is `'ordinal'`
-   * @property yOrdinalOuterPadding
-   * @type Number
-   * @default 0.1
-   */
+    The padding at the ends of the domain data when `yScaleType` is `'ordinal'`
+    @property yOrdinalOuterPadding
+    @type Number
+    @default 0.1
+  */
   yOrdinalOuterPadding: 0.1,
 
   /**
-   * the `nf-y-axis` component is registered here if there is one present
-   * @property yAxis
-   * @readonly
-   * @default null
-   */
+    the `nf-y-axis` component is registered here if there is one present
+    @property yAxis
+    @readonly
+    @default null
+  */
   yAxis: null,
 
   /**
-   * The `nf-x-axis` component is registered here if there is one present
-   * @property xAxis
-   * @readonly
-   * @default null
-   */
+    The `nf-x-axis` component is registered here if there is one present
+    @property xAxis
+    @readonly
+    @default null
+  */
   xAxis: null,
 
   _xMin: 0,
@@ -307,63 +302,63 @@ export default Ember.Component.extend({
   _yMax: 1,
 
   /**
-   * The minimum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
-   * If `xDomainMode` is `'fixed'`, setting `xMin` determines the lower bounds of the domain.
-   * For `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.
-   * @property xMin
-   * @type String/Number
+    The minimum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
+    If `xDomainMode` is `'fixed'`, setting `xMin` determines the lower bounds of the domain.
+    For `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.
+    @property xMin
+    @type String/Number
    */
   xMin: computedAlias('_xMin'),
 
   /**
-   * The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
-   * If `xDomainMode` is `'fixed'`, setting `xMax` determines the upper bounds of the domain.
-   * For `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.
-   * @property xMax
-   * @type String/Number
+    The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
+    If `xDomainMode` is `'fixed'`, setting `xMax` determines the upper bounds of the domain.
+    For `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.
+    @property xMax
+    @type String/Number
    */
   xMax: computedAlias('_xMax'),
 
   /**
-   * The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
-   * If `yDomainMode` is `'fixed'`, setting `yMin` determines the lower bounds of the domain.
-   * For `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.
-   * @property yMin
-   * @type String/Number
+    The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
+    If `yDomainMode` is `'fixed'`, setting `yMin` determines the lower bounds of the domain.
+    For `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.
+    @property yMin
+    @type String/Number
    */
   yMin: computedAlias('_yMin'),
 
   /**
-   * The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
-   * If `yDomainMode` is `'fixed'`, setting `yMax` determines the upper bounds of the domain.
-   * For `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.
-   * @property yMax
-   * @type String/Number
+    The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
+    If `yDomainMode` is `'fixed'`, setting `yMax` determines the upper bounds of the domain.
+    For `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.
+    @property yMax
+    @type String/Number
    */
   yMax: computedAlias('_yMax'),
 
   /**
-   * Registry of contained graphic elements such as `nf-line` or `nf-area` components.
-   * This registry is used to pool data for scaling purposes.
-   * @property graphics
-   * @type Array
-   * @readonly
+    Registry of contained graphic elements such as `nf-line` or `nf-area` components.
+    This registry is used to pool data for scaling purposes.
+    @property graphics
+    @type Array
+    @readonly
    */
   graphics: computedAlias('_graphics'),
 
   /**
-   * Computed property to show yAxis. Returns `true` if a yAxis is present.
-   * @property showYAxis
-   * @type Boolean
-   * @default false
+    Computed property to show yAxis. Returns `true` if a yAxis is present.
+    @property showYAxis
+    @type Boolean
+    @default false
    */
   showYAxis: computedBool('yAxis'),
 
   /**
-   * Computed property to show xAxis. Returns `true` if an xAxis is present.
-   * @property showXAxis
-   * @type Boolean
-   * @default false
+    Computed property to show xAxis. Returns `true` if an xAxis is present.
+    @property showXAxis
+    @type Boolean
+    @default false
    */
   showXAxis: computedBool('xAxis'),
 
@@ -397,55 +392,55 @@ export default Ember.Component.extend({
   }),
 
   /**
-   * Gets a function to create the xScale
-   * @property xScaleFactory
-   * @readonly
+    Gets a function to create the xScale
+    @property xScaleFactory
+    @readonly
    */
   xScaleFactory: scaleFactoryProperty('x'),
 
   /**
-   * Gets a function to create the yScale
-   * @property yScaleFactory
-   * @readonly
+    Gets a function to create the yScale
+    @property yScaleFactory
+    @readonly
    */
   yScaleFactory: scaleFactoryProperty('y'),
 
   /**
-   * Gets the domain of x values.
-   * @property xDomain
-   * @type Array
-   * @readonly
+    Gets the domain of x values.
+    @property xDomain
+    @type Array
+    @readonly
    */
   xDomain: domainProperty('x'),
 
   /**
-   * Gets the domain of y values.
-   * @property yDomain
-   * @type Array
-   * @readonly
+    Gets the domain of y values.
+    @property yDomain
+    @type Array
+    @readonly
    */
   yDomain: domainProperty('y'),
 
   /**
-   * Gets the current xScale used to draw the graph.
-   * @property xScale
-   * @type Function
-   * @readonly
+    Gets the current xScale used to draw the graph.
+    @property xScale
+    @type Function
+    @readonly
    */
   xScale: scaleProperty('x'),
 
   /**
-   * Gets the current yScale used to draw the graph.
-   * @property yScale
-   * @type Function
-   * @readonly
+    Gets the current yScale used to draw the graph.
+    @property yScale
+    @type Function
+    @readonly
    */
   yScale: scaleProperty('y'),
 
   /**
-   * Registers a graphic such as `nf-line` or `nf-area` components with the graph.
-   * @function registerGraphic
-   * @param graphic {Ember.Component} The component object to register
+    Registers a graphic such as `nf-line` or `nf-area` components with the graph.
+    @method registerGraphic
+    @param graphic {Ember.Component} The component object to register
    */
   registerGraphic: function (graphic) {
     var graphics = this.get('graphics');
@@ -453,9 +448,9 @@ export default Ember.Component.extend({
   },
 
   /**
-   * Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.
-   * @function unregisterGraphic
-   * @param graphic {Ember.Component} The component to unregister
+    Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.
+    @method unregisterGraphic
+    @param graphic {Ember.Component} The component to unregister
    */
   unregisterGraphic: function(graphic) {
     var graphics = this.get('graphics');
@@ -463,44 +458,44 @@ export default Ember.Component.extend({
   },
   
   /**
-   * The y range of the graph in pixels. The min and max pixel values
-   * in an array form.
-   * @property yRange
-   * @type Array
-   * @readonly
+    The y range of the graph in pixels. The min and max pixel values
+    in an array form.
+    @property yRange
+    @type Array
+    @readonly
    */
   yRange: property('graphHeight', function (graphHeight) {
     return [graphHeight, 0];
   }),
 
   /**
-   * The x range of the graph in pixels. The min and max pixel values
-   * in an array form.
-   * @property xRange
-   * @type Array
-   * @readonly
+    The x range of the graph in pixels. The min and max pixel values
+    in an array form.
+    @property xRange
+    @type Array
+    @readonly
    */
   xRange: property('graphWidth', function (graphWidth) {
     return [0, graphWidth];
   }),
 
   /**
-   * Returns `true` if the graph has data to render. Data is conveyed
-   * to the graph by registered graphics.
-   * @property hasData
-   * @type Boolean
-   * @default false
-   * @readonly
+    Returns `true` if the graph has data to render. Data is conveyed
+    to the graph by registered graphics.
+    @property hasData
+    @type Boolean
+    @default false
+    @readonly
    */
   hasData: property('graphics', function(graphics) {
     return graphics && graphics.length > 0;
   }),
 
   /**
-   * The x coordinate position of the graph content
-   * @property graphX
-   * @type Number
-   * @readonly
+    The x coordinate position of the graph content
+    @property graphX
+    @type Number
+    @readonly
    */
   graphX: property(
     'paddingLeft', 'yAxis.width', 'yAxis.orient', 
@@ -513,10 +508,10 @@ export default Ember.Component.extend({
   ),
 
   /** 
-   * The y coordinate position of the graph content
-   * @proeprty graphY
-   * @type Number
-   * @readonly
+    The y coordinate position of the graph content
+    @property graphY
+    @type Number
+    @readonly
    */
   graphY: property('paddingTop', 'xAxis.orient', 'xAxis.height', 
     function (paddingTop, xAxisOrient, xAxisHeight) {
@@ -528,10 +523,10 @@ export default Ember.Component.extend({
   ),
 
   /**
-   * The width, in pixels, of the graph content
-   * @property graphWidth
-   * @type Number
-   * @readonly
+    The width, in pixels, of the graph content
+    @property graphWidth
+    @type Number
+    @readonly
    */
   graphWidth: property('width', 'paddingRight', 'paddingLeft', 'yAxis.width',
     function (width, paddingLeft, paddingRight, yAxisWidth) {
@@ -543,10 +538,10 @@ export default Ember.Component.extend({
   ),
 
   /**
-   * The height, in pixels, of the graph content
-   * @property graphHeight
-   * @type Number
-   * @readonly
+    The height, in pixels, of the graph content
+    @property graphHeight
+    @type Number
+    @readonly
    */
   graphHeight: property('height', 'paddingTop', 'paddingBottom', 'xAxis.height',
     function (height, paddingTop, paddingBottom, xAxisHeight) {
@@ -558,10 +553,10 @@ export default Ember.Component.extend({
   ),
 
   /**
-   * An SVG transform to position the graph content
-   * @property graphTransform
-   * @type String
-   * @readonly
+    An SVG transform to position the graph content
+    @property graphTransform
+    @type String
+    @readonly
    */
   graphTransform: property('graphX', 'graphY', function (graphX, graphY) {
     return 'translate(%@, %@)'.fmt(graphX, graphY);
@@ -586,7 +581,7 @@ export default Ember.Component.extend({
       });
     });
 
-    graphContentGroup.on('mouseleave', function () {
+    graphContenßtGroup.on('mouseleave', function () {
       Ember.run(function () {
         self.set('xHover', -1);
         self.set('yHover', -1);
@@ -595,11 +590,11 @@ export default Ember.Component.extend({
   }.on('didInsertElement'),
 
   /**
-   * Gets the mouse position relative to the container
-   * @function mousePoint
-   * @param container {SVGElement} the SVG element that contains the mouse event
-   * @param e {Object} the DOM mouse event
-   * @return {Array} an array of `[xMouseCoord, yMouseCoord]`
+    Gets the mouse position relative to the container
+    @method mousePoint
+    @param container {SVGElement} the SVG element that contains the mouse event
+    @param e {Object} the DOM mouse event
+    @return {Array} an array of `[xMouseCoord, yMouseCoord]`
    */
   mousePoint: function (container, e) {
     var svg = container.ownerSVGElement || container;
@@ -615,18 +610,44 @@ export default Ember.Component.extend({
   },
 
   /**
-   * A computed property returned the view's controller.
-   * @property parentController
-   * @type Ember.Controller
-   * @readonly
-   */
+    A computed property returned the view's controller.
+    @property parentController
+    @type Ember.Controller
+    @readonly
+  */
   parentController: Ember.computed.alias('templateData.view.controller'),
 
   _xHover: -1,
   _yHover: -1,
+
+  /**
+    The x *domain* value of the current mouse hover position.
+    Will be `-1` if the mouse is not hovering over the graph content
+    @property xHover
+    @type Number
+    @default -1
+  */
   xHover: computedAlias('_xHover'),
+
+  /**
+    The y *domain* value of the current mouse hover position.
+    Will be `-1` if the mouse is not hovering over the graph content.
+    @property yHover
+    @type Number
+    @default -1
+  */
   yHover: computedAlias('_yHover'),
 
+  /**
+    Sets or gets the xLink object for the graph. The xLink object is used to 
+    tie two graphs together along the x-axis.
+
+    the xLink object has the following properties:
+
+    - `xHover`: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}
+    @property xLink
+    @type Object
+  */
   xLink: function(keyName, value) {
     var xScale = this.get('xScale');
     
@@ -643,6 +664,17 @@ export default Ember.Component.extend({
     };
   }.property('xScale', 'xHover'),
 
+
+  /**
+    Sets or gets the xLink object for the graph. The xLink object is used to 
+    tie two graphs together along the x-axis.
+
+    the xLink object has the following properties:
+
+    - `xHover`: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}
+    @property xLink
+    @type Object
+  */
   yLink: function(keyName, value) {
     var yScale = this.get('yScale');
     

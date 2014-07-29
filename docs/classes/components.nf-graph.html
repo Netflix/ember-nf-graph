@@ -156,28 +156,28 @@
 <div class="box intro">
     <p>A container component for building complex Cartesian graphs.</p>
 <h2 id="minimal-example">Minimal example</h2>
-<pre class="code prettyprint"><code>  {{#nf-graph width=100 height=50}}
-    {{#nf-graph-content}}
-      {{nf-line data=lineData xprop=&quot;foo&quot; yprop=&quot;bar&quot;}}
-    {{/nf-graph-content}}
-  {{/nf-graph}}</code></pre>
+<pre class="code prettyprint"><code> {{#nf-graph width=100 height=50}}
+   {{#nf-graph-content}}
+     {{nf-line data=lineData xprop=&quot;foo&quot; yprop=&quot;bar&quot;}}
+   {{/nf-graph-content}}
+ {{/nf-graph}}</code></pre>
 <p>The above will create a simple 100x50 graph, with no axes, and a single line
 plotting the data it finds on each object in the array <code>lineData</code> at properties
 <code>foo</code> and <code>bar</code> for x and y values respectively.</p>
 <h2 id="more-advanced-example">More advanced example</h2>
-<pre class="code prettyprint"><code>  {{#nf-graph width=500 height=300}}
-    {{#nf-x-axis height=&quot;50&quot;}}
-      &lt;text&gt;{{tick.value}}&lt;/text&gt;
-    {{/nf-x-axis}}
+<pre class="code prettyprint"><code> {{#nf-graph width=500 height=300}}
+   {{#nf-x-axis height=&quot;50&quot;}}
+     &lt;text&gt;{{tick.value}}&lt;/text&gt;
+   {{/nf-x-axis}}
 
-    {{#nf-y-axis width=&quot;120&quot;}}
-      &lt;text&gt;{{tick.value}}&lt;/text&gt;
-    {{/nf-y-axis}}
+   {{#nf-y-axis width=&quot;120&quot;}}
+     &lt;text&gt;{{tick.value}}&lt;/text&gt;
+   {{/nf-y-axis}}
 
-    {{#nf-graph-content}}
-      {{nf-line data=lineData xprop=&quot;foo&quot; yprop=&quot;bar&quot;}}
-    {{/nf-graph-content}}
-  {{/nf-graph}}</code></pre>
+   {{#nf-graph-content}}
+     {{nf-line data=lineData xprop=&quot;foo&quot; yprop=&quot;bar&quot;}}
+   {{/nf-graph-content}}
+ {{/nf-graph}}</code></pre>
 <p>The above example will create a 500x300 graph with both axes visible. The graph will not 
 render either axis unless its component is present.</p>
 
@@ -210,35 +210,7 @@ render either axis unless its component is present.</p>
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_hoverChange">hoverChange</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_hoverEnd">hoverEnd</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_mousePoint">mousePoint</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method_onDidGraphHoverChange">onDidGraphHoverChange</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method_onDidGraphHoverEnd">onDidGraphHoverEnd</a>
 
                                 
                                 
@@ -267,20 +239,6 @@ render either axis unless its component is present.</p>
                     <h3>Properties</h3>
 
                     <ul class="index-list properties">
-                        
-                            <li class="index-item property private">
-                                <a href="#property__hoverChangeHandlers">_hoverChangeHandlers</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property__hoverEndHandlers">_hoverEndHandlers</a>
-
-                                
-                                
-                            </li>
                         
                             <li class="index-item property">
                                 <a href="#property_graphHeight">graphHeight</a>
@@ -312,6 +270,13 @@ render either axis unless its component is present.</p>
                         
                             <li class="index-item property">
                                 <a href="#property_graphX">graphX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_graphY">graphY</a>
 
                                 
                                 
@@ -409,13 +374,6 @@ render either axis unless its component is present.</p>
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_tagName">tagName</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
                                 <a href="#property_width">width</a>
 
                                 
@@ -438,6 +396,27 @@ render either axis unless its component is present.</p>
                         
                             <li class="index-item property">
                                 <a href="#property_xDomainMode">xDomainMode</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_xHover">xHover</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_xLink">xLink</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_xLink">xLink</a>
 
                                 
                                 
@@ -521,6 +500,13 @@ render either axis unless its component is present.</p>
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_yHover">yHover</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_yMax">yMax</a>
 
                                 
@@ -590,206 +576,6 @@ render either axis unless its component is present.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_hoverChange" class="method item">
-    <h3 class="name"><code>hoverChange</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>handler</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l487"><code>app-addon&#x2F;components&#x2F;nf-graph.js:487</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Registers a mouse hover change handler with the graph.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">handler</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>a function that will handle the hover change</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>graph.hoverChange(function(e, data) {
-   console.log(data.x, data.y);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
-                    <div id="method_hoverEnd" class="method item">
-    <h3 class="name"><code>hoverEnd</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>handler</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l500"><code>app-addon&#x2F;components&#x2F;nf-graph.js:500</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Registers a mouse hover end handler with the graph.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">handler</code>
-                        <span class="type">Function</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>a function that will handle the hover end</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>graph.hoverEnd(function(e) {
-   console.log(&#39;hover ended&#39;);
-});</code></pre>
-
-            </div>
-        </div>
-    
-</div>
-
-                
                     <div id="method_mousePoint" class="method item">
     <h3 class="name"><code>mousePoint</code></h3>
 
@@ -842,7 +628,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l685"><code>app-addon&#x2F;components&#x2F;nf-graph.js:685</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l592"><code>app-addon&#x2F;components&#x2F;nf-graph.js:592</code></a>
         
         </p>
 
@@ -919,232 +705,6 @@ render either axis unless its component is present.</p>
 </div>
 
                 
-                    <div id="method_onDidGraphHoverChange" class="method item private">
-    <h3 class="name"><code>onDidGraphHoverChange</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>e</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>mouseX</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>mouseY</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l513"><code>app-addon&#x2F;components&#x2F;nf-graph.js:513</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Notifies all handlers of a hover change event.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">e</code>
-                        <span class="type">MouseEvent</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the DOM mouse event args</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">mouseX</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the mouse x coordinates relative to the graph content.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">mouseY</code>
-                        <span class="type">Number</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the mouse y coordinates relative to the graph content.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_onDidGraphHoverEnd" class="method item private">
-    <h3 class="name"><code>onDidGraphHoverEnd</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>e</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l538"><code>app-addon&#x2F;components&#x2F;nf-graph.js:538</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Notifies all handlers of a hover end event</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">e</code>
-                        <span class="type">MouseEvent</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the DOM mouse event</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method_registerGraphic" class="method item">
     <h3 class="name"><code>registerGraphic</code></h3>
 
@@ -1187,7 +747,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l445"><code>app-addon&#x2F;components&#x2F;nf-graph.js:445</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l440"><code>app-addon&#x2F;components&#x2F;nf-graph.js:440</code></a>
         
         </p>
 
@@ -1276,7 +836,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l455"><code>app-addon&#x2F;components&#x2F;nf-graph.js:455</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l450"><code>app-addon&#x2F;components&#x2F;nf-graph.js:450</code></a>
         
         </p>
 
@@ -1331,100 +891,6 @@ render either axis unless its component is present.</p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property__hoverChangeHandlers" class="property item private">
-    <h3 class="name"><code>_hoverChangeHandlers</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l465"><code>app-addon&#x2F;components&#x2F;nf-graph.js:465</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The handlers for mouse hover changes</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property__hoverEndHandlers" class="property item private">
-    <h3 class="name"><code>_hoverEndHandlers</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l476"><code>app-addon&#x2F;components&#x2F;nf-graph.js:476</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The handlers for mouse hover end</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_graphHeight" class="property item">
     <h3 class="name"><code>graphHeight</code></h3>
     <span class="type">Number</span>
@@ -1448,7 +914,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l635"><code>app-addon&#x2F;components&#x2F;nf-graph.js:635</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l540"><code>app-addon&#x2F;components&#x2F;nf-graph.js:540</code></a>
         
         </p>
 
@@ -1493,7 +959,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l345"><code>app-addon&#x2F;components&#x2F;nf-graph.js:345</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l340"><code>app-addon&#x2F;components&#x2F;nf-graph.js:340</code></a>
         
         </p>
 
@@ -1539,7 +1005,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l650"><code>app-addon&#x2F;components&#x2F;nf-graph.js:650</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l555"><code>app-addon&#x2F;components&#x2F;nf-graph.js:555</code></a>
         
         </p>
 
@@ -1584,7 +1050,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l620"><code>app-addon&#x2F;components&#x2F;nf-graph.js:620</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l525"><code>app-addon&#x2F;components&#x2F;nf-graph.js:525</code></a>
         
         </p>
 
@@ -1629,7 +1095,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l589"><code>app-addon&#x2F;components&#x2F;nf-graph.js:589</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l494"><code>app-addon&#x2F;components&#x2F;nf-graph.js:494</code></a>
         
         </p>
 
@@ -1640,6 +1106,51 @@ This registry is used to pool data for scaling purposes.</p>
 
     <div class="description">
         <p>The x coordinate position of the graph content</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graphY" class="property item">
+    <h3 class="name"><code>graphY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-graph.js.html#l510"><code>app-addon&#x2F;components&#x2F;nf-graph.js:510</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y coordinate position of the graph content</p>
 
     </div>
 
@@ -1674,7 +1185,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l577"><code>app-addon&#x2F;components&#x2F;nf-graph.js:577</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l482"><code>app-addon&#x2F;components&#x2F;nf-graph.js:482</code></a>
         
         </p>
 
@@ -1724,7 +1235,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l123"><code>app-addon&#x2F;components&#x2F;nf-graph.js:123</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l118"><code>app-addon&#x2F;components&#x2F;nf-graph.js:118</code></a>
         
         </p>
 
@@ -1768,7 +1279,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l137"><code>app-addon&#x2F;components&#x2F;nf-graph.js:137</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l132"><code>app-addon&#x2F;components&#x2F;nf-graph.js:132</code></a>
         
         </p>
 
@@ -1801,8 +1312,6 @@ to the graph by registered graphics.</p>
     
 
     
-        <span class="flag final">final</span>
-    
 
     
 
@@ -1817,7 +1326,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l116"><code>app-addon&#x2F;components&#x2F;nf-graph.js:116</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l112"><code>app-addon&#x2F;components&#x2F;nf-graph.js:112</code></a>
         
         </p>
 
@@ -1827,7 +1336,7 @@ to the graph by registered graphics.</p>
     </div>
 
     <div class="description">
-        <p>allows child compoenents to identify graph parent.</p>
+        <p>Allows child compoenents to identify graph parent.</p>
 
     </div>
 
@@ -1862,7 +1371,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l169"><code>app-addon&#x2F;components&#x2F;nf-graph.js:169</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l164"><code>app-addon&#x2F;components&#x2F;nf-graph.js:164</code></a>
         
         </p>
 
@@ -1909,7 +1418,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l153"><code>app-addon&#x2F;components&#x2F;nf-graph.js:153</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l148"><code>app-addon&#x2F;components&#x2F;nf-graph.js:148</code></a>
         
         </p>
 
@@ -1956,7 +1465,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l161"><code>app-addon&#x2F;components&#x2F;nf-graph.js:161</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l156"><code>app-addon&#x2F;components&#x2F;nf-graph.js:156</code></a>
         
         </p>
 
@@ -2003,7 +1512,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l145"><code>app-addon&#x2F;components&#x2F;nf-graph.js:145</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l140"><code>app-addon&#x2F;components&#x2F;nf-graph.js:140</code></a>
         
         </p>
 
@@ -2050,7 +1559,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l705"><code>app-addon&#x2F;components&#x2F;nf-graph.js:705</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l612"><code>app-addon&#x2F;components&#x2F;nf-graph.js:612</code></a>
         
         </p>
 
@@ -2095,7 +1604,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l186"><code>app-addon&#x2F;components&#x2F;nf-graph.js:186</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l181"><code>app-addon&#x2F;components&#x2F;nf-graph.js:181</code></a>
         
         </p>
 
@@ -2143,7 +1652,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l177"><code>app-addon&#x2F;components&#x2F;nf-graph.js:177</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l172"><code>app-addon&#x2F;components&#x2F;nf-graph.js:172</code></a>
         
         </p>
 
@@ -2191,7 +1700,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l362"><code>app-addon&#x2F;components&#x2F;nf-graph.js:362</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l357"><code>app-addon&#x2F;components&#x2F;nf-graph.js:357</code></a>
         
         </p>
 
@@ -2238,7 +1747,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l354"><code>app-addon&#x2F;components&#x2F;nf-graph.js:354</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l349"><code>app-addon&#x2F;components&#x2F;nf-graph.js:349</code></a>
         
         </p>
 
@@ -2254,52 +1763,6 @@ the graph.</p>
 
     
         <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_tagName" class="property item">
-    <h3 class="name"><code>tagName</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-        <span class="flag final">final</span>
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-graph.js.html#l110"><code>app-addon&#x2F;components&#x2F;nf-graph.js:110</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        
-    </div>
-
     
 
     
@@ -2331,7 +1794,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l129"><code>app-addon&#x2F;components&#x2F;nf-graph.js:129</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-graph.js:124</code></a>
         
         </p>
 
@@ -2378,7 +1841,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l296"><code>app-addon&#x2F;components&#x2F;nf-graph.js:296</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l291"><code>app-addon&#x2F;components&#x2F;nf-graph.js:291</code></a>
         
         </p>
 
@@ -2425,7 +1888,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l413"><code>app-addon&#x2F;components&#x2F;nf-graph.js:413</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l408"><code>app-addon&#x2F;components&#x2F;nf-graph.js:408</code></a>
         
         </p>
 
@@ -2470,7 +1933,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l196"><code>app-addon&#x2F;components&#x2F;nf-graph.js:196</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l191"><code>app-addon&#x2F;components&#x2F;nf-graph.js:191</code></a>
         
         </p>
 
@@ -2493,6 +1956,154 @@ to the domain for scaling purposes.</p>
 
     
         <p><strong>Default:</strong> &#x27;auto&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xHover" class="property item">
+    <h3 class="name"><code>xHover</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-graph.js.html#l623"><code>app-addon&#x2F;components&#x2F;nf-graph.js:623</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x <em>domain</em> value of the current mouse hover position.
+Will be <code>-1</code> if the mouse is not hovering over the graph content</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> -1</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xLink" class="property item">
+    <h3 class="name"><code>xLink</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-graph.js.html#l668"><code>app-addon&#x2F;components&#x2F;nf-graph.js:668</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets or gets the xLink object for the graph. The xLink object is used to 
+tie two graphs together along the x-axis.</p>
+<p>the xLink object has the following properties:</p>
+<ul>
+<li><code>xHover</code>: the x mouse hover position from </li>
+</ul>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xLink" class="property item">
+    <h3 class="name"><code>xLink</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-graph.js.html#l641"><code>app-addon&#x2F;components&#x2F;nf-graph.js:641</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets or gets the xLink object for the graph. The xLink object is used to 
+tie two graphs together along the x-axis.</p>
+<p>the xLink object has the following properties:</p>
+<ul>
+<li><code>xHover</code>: the x mouse hover position from </li>
+</ul>
+
+    </div>
+
     
 
     
@@ -2524,7 +2135,7 @@ to the domain for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l318"><code>app-addon&#x2F;components&#x2F;nf-graph.js:318</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l313"><code>app-addon&#x2F;components&#x2F;nf-graph.js:313</code></a>
         
         </p>
 
@@ -2571,7 +2182,7 @@ For <code>xScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>xDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l309"><code>app-addon&#x2F;components&#x2F;nf-graph.js:309</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l304"><code>app-addon&#x2F;components&#x2F;nf-graph.js:304</code></a>
         
         </p>
 
@@ -2618,7 +2229,7 @@ For <code>xScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>xDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l264"><code>app-addon&#x2F;components&#x2F;nf-graph.js:264</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l259"><code>app-addon&#x2F;components&#x2F;nf-graph.js:259</code></a>
         
         </p>
 
@@ -2665,7 +2276,7 @@ For <code>xScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>xDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l256"><code>app-addon&#x2F;components&#x2F;nf-graph.js:256</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l251"><code>app-addon&#x2F;components&#x2F;nf-graph.js:251</code></a>
         
         </p>
 
@@ -2712,7 +2323,7 @@ For <code>xScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>xDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l566"><code>app-addon&#x2F;components&#x2F;nf-graph.js:566</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l471"><code>app-addon&#x2F;components&#x2F;nf-graph.js:471</code></a>
         
         </p>
 
@@ -2758,7 +2369,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l429"><code>app-addon&#x2F;components&#x2F;nf-graph.js:429</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l424"><code>app-addon&#x2F;components&#x2F;nf-graph.js:424</code></a>
         
         </p>
 
@@ -2803,7 +2414,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l399"><code>app-addon&#x2F;components&#x2F;nf-graph.js:399</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l394"><code>app-addon&#x2F;components&#x2F;nf-graph.js:394</code></a>
         
         </p>
 
@@ -2848,7 +2459,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l226"><code>app-addon&#x2F;components&#x2F;nf-graph.js:226</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l221"><code>app-addon&#x2F;components&#x2F;nf-graph.js:221</code></a>
         
         </p>
 
@@ -2902,7 +2513,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l288"><code>app-addon&#x2F;components&#x2F;nf-graph.js:288</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l283"><code>app-addon&#x2F;components&#x2F;nf-graph.js:283</code></a>
         
         </p>
 
@@ -2949,7 +2560,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l421"><code>app-addon&#x2F;components&#x2F;nf-graph.js:421</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l416"><code>app-addon&#x2F;components&#x2F;nf-graph.js:416</code></a>
         
         </p>
 
@@ -2994,7 +2605,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l211"><code>app-addon&#x2F;components&#x2F;nf-graph.js:211</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l206"><code>app-addon&#x2F;components&#x2F;nf-graph.js:206</code></a>
         
         </p>
 
@@ -3017,6 +2628,54 @@ to the domain for scaling purposes.</p>
 
     
         <p><strong>Default:</strong> &#x27;auto&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yHover" class="property item">
+    <h3 class="name"><code>yHover</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-graph.js.html#l632"><code>app-addon&#x2F;components&#x2F;nf-graph.js:632</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y <em>domain</em> value of the current mouse hover position.
+Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> -1</p>
     
 
     
@@ -3048,7 +2707,7 @@ to the domain for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l336"><code>app-addon&#x2F;components&#x2F;nf-graph.js:336</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l331"><code>app-addon&#x2F;components&#x2F;nf-graph.js:331</code></a>
         
         </p>
 
@@ -3095,7 +2754,7 @@ For <code>yScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>yDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l327"><code>app-addon&#x2F;components&#x2F;nf-graph.js:327</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l322"><code>app-addon&#x2F;components&#x2F;nf-graph.js:322</code></a>
         
         </p>
 
@@ -3142,7 +2801,7 @@ For <code>yScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>yDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l280"><code>app-addon&#x2F;components&#x2F;nf-graph.js:280</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l275"><code>app-addon&#x2F;components&#x2F;nf-graph.js:275</code></a>
         
         </p>
 
@@ -3189,7 +2848,7 @@ For <code>yScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>yDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l272"><code>app-addon&#x2F;components&#x2F;nf-graph.js:272</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l267"><code>app-addon&#x2F;components&#x2F;nf-graph.js:267</code></a>
         
         </p>
 
@@ -3236,7 +2895,7 @@ For <code>yScaleType</code> <code>&#39;ordinal&#39;</code>, use <code>yDomainMod
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l555"><code>app-addon&#x2F;components&#x2F;nf-graph.js:555</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l460"><code>app-addon&#x2F;components&#x2F;nf-graph.js:460</code></a>
         
         </p>
 
@@ -3282,7 +2941,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l437"><code>app-addon&#x2F;components&#x2F;nf-graph.js:437</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l432"><code>app-addon&#x2F;components&#x2F;nf-graph.js:432</code></a>
         
         </p>
 
@@ -3327,7 +2986,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l406"><code>app-addon&#x2F;components&#x2F;nf-graph.js:406</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l401"><code>app-addon&#x2F;components&#x2F;nf-graph.js:401</code></a>
         
         </p>
 
@@ -3372,7 +3031,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l241"><code>app-addon&#x2F;components&#x2F;nf-graph.js:241</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l236"><code>app-addon&#x2F;components&#x2F;nf-graph.js:236</code></a>
         
         </p>
 
