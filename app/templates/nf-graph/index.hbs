@@ -40,11 +40,27 @@
 	<output>{{tracked.y}}</output>
 </div>
 
+<style>
+	.area3 path {
+		fill: blue;
+	}
+	.area2 path {
+		fill: lime;
+	}
+	.area1 path {
+		fill: red;
+	}
+</style>
+
 {{#nf-graph  xLink=groupX
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{nf-line data=lineData2 trackingMode="snap-first" trackedData=tracked2}}
+		{{#nf-area-stack}}
+			{{nf-area class="area3" interpolator="linear" data=area3}}
+			{{nf-area class="area2" interpolator="linear" data=area2}}
+			{{nf-area class="area1" interpolator="linear" data=area1}}
+		{{/nf-area-stack}}
 		{{nf-crosshair test="bottom"}}
 	{{/nf-graph-content}}
 

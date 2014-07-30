@@ -53,14 +53,20 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 
     nextYData: property('sortedData.length', 'graph.yMin', 'nextArea.renderedData.@each', 
-      function(sortedDataLength, yMin, nextRenderedData) {        
+      function(sortedDataLength, yMin, nextRenderedData) { 
+        var nextYData = [];
+
         if(nextRenderedData) {
-          return nextRenderedData.map(function(d) {
+          nextYData = nextRenderedData.map(function(d) {
             return d[1];
           });
         }
 
-        return d3.range(sortedDataLength).map(function() { return yMin; });
+        while(nextYData.length < sortedDataLength) {
+          nextYData.push(yMin);
+        }
+
+        return nextYData;
       }
     ),
 

@@ -4,7 +4,10 @@ export default Ember.Route.extend({
 	model: function() {
 		return {
 			lineData: generateLineData(0, 0, 2000, 200, 300),
-			lineData2: generateLineData(0, 100, 1000, 100, 500)
+			lineData2: generateLineData(0, 100, 1000, 100, 500),
+			area1: generateLineData(0, 0, 50, 20, 10),
+			area2: generateLineData(0, 51, 100, 20, 11),
+			area3: generateLineData(0, 101, 150, 20, 10)
 		};
 	}
 });
