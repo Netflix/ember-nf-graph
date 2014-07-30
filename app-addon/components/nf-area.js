@@ -33,8 +33,10 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     classNameBindings: [':nf-area', 'isSelected:selected', 'selectable'],
 
     interpolator: 'monotone',
-    nextStrip: null,
-    prevStrip: null,
+
+    prevArea: null,
+
+    nextArea: null,
 
     _checkForAreaStackParent: function() {
       var stack = this.nearestWithProperty('isAreaStack');
@@ -51,36 +53,27 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     }.on('willDestroyElement'),
 
-
-    nextYData: property('sortedData.length', 'graph.yMin', 'nextArea.renderedData.@each', 
-      function(sortedDataLength, yMin, nextRenderedData) { 
-        var nextYData = [];
-
-        if(nextRenderedData) {
-          nextYData = nextRenderedData.map(function(d) {
-            return d[1];
-          });
+    nextYData: property('renderedData.@each', 'graph.yMin', 'nextArea.renderedData.@each', 
+      function(renderedData, yMin, nextRenderedData) { 
+        var nextData = nextRenderedData || [];
+        
+        var result = nextData.map(function(next) {
+          return next[1];
+        });
+        
+        while(result.length < renderedData.length) {
+          result.push(yMin);
         }
 
-        while(nextYData.length < sortedDataLength) {
-          nextYData.push(yMin);
-        }
-
-        return nextYData;
+        return result;
       }
     ),
 
-
-    areaData: function(){
-      var sortedData = this.get('sortedData');
-      var nextYData = this.get('nextYData');
-
-      if(nextYData) {
-        return sortedData.map(function(d, i) {
-          return d.concat(nextYData[i]);
-        });
-      }
-    }.property('sortedData', 'nextYData'),
+    areaData: property('renderedData.@each', 'nextYData.@each', function(renderedData, nextYData){
+      return renderedData.map(function(r, i){
+        return [r[0], r[1], nextYData[i]];
+      });
+    }),
 
 
     areaFn: function(){

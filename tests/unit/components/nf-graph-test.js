@@ -1,4 +1,3 @@
-import NfGraph from '../../../components/nf-graph';
 import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('nf-graph');
