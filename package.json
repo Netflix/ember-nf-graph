@@ -1,7 +1,7 @@
 {
   "name": "ember-cli-ember-dvc",
   "ember-addon-main": "ember-cli-addon.js",
-  "version": "0.2.19",
+  "version": "0.2.20",
   "private": true,
   "directories": {
     "doc": "doc",
