@@ -14,7 +14,7 @@
     "ember-cli-test-loader": "rjackson/ember-cli-test-loader#0.0.2",
     "d3": "~3.4.8",
     "ember-handlebars-svg": "0.X",
-    "d3mber": "~0.0.3"
+    "d3mber": "~0.0.11"
   },
   "devDependencies": {
     "svg": "https://github.com/kbwood/svg.git",

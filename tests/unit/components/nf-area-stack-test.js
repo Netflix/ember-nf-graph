@@ -74,6 +74,7 @@ test('nf-area nextYData should update when data is pushed onto the next area\'s 
 		y: 21
 	});
 
-	equal(area2.get('nextYData.length'), 11);
+	equal(area2.get('data').length, 11, 'area2.data.length should be 11');
+	equal(area2.get('nextYData').length, 11, 'area2.nextYData.length should now be 11');
 	equal(area1.get('nextYData')[area1.get('nextYData.length') - 1], 21);
 });
