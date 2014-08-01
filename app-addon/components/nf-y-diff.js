@@ -31,9 +31,27 @@ export default Ember.Component.extend(HasGraphParent, {
 	
 	duration: 300,
 
-	contentY: 0,
+	yCenter: property('y', 'height', function(y, height) {
+		return y + (height / 2) || 0;
+	}),
 
-	y: 0,
+	y: property('graph.yScale', 'a', 'b', function(yScale, a, b) {
+		if(!yScale) {
+			return 0;
+		}
+		a = a || 0;
+		b = b || 0;
+		return Math.min(yScale(a), yScale(b)) || 0;
+	}),
+
+	height: property('graph.yScale', 'a', 'b', function(yScale, a, b) {
+		if(!yScale) {
+			return 0;
+		}
+		a = a || 0;
+		b = b || 0;
+		return Math.abs(yScale(a) - yScale(b));
+	}),
 
 	transform: Ember.computed.alias('graph.yAxis.transform'),
 
@@ -49,27 +67,14 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	parentController: Ember.computed.alias('templateData.view.controller'),
 
-	isVisible: property('a', 'b', function(a, b){
-		return typeof a === 'number' && typeof b === 'number';
-	}),
-
 	contentTransform: property('contentY', function(contentY) {
 		return 'translate(0 %@)'.fmt(contentY);
 	}),
 
-	_updatePosition: observer('a', 'b', 'graph.yScale', function(a, b, yScale){
-		if(!yScale) {
-			return;
-		}
-
-		var y = Math.min(yScale(a), yScale(b));
-		var height = Math.abs(yScale(b) - yScale(a));
-		var contentY = y + (height / 2);
-
-		this.transition().duration(this.duration)
-				.set('y', y || 0)
-	  		.set('height', height || 0)
-	 			.set('contentY', contentY || 0);
+	_updatePosition: observer('y', 'height', 'yCenter', function(y, height, yCenter){
+		this.set('rectY', y)
+	  		.set('rectHeight', height)
+	 			.set('contentY', yCenter);
 	}).on('init'),
 
 	_setup: function(){
