@@ -31,7 +31,7 @@ export default Ember.Component.extend(HasGraphParent, {
 	
 	duration: 300,
 
-	yCenter: property('y', 'height', function(y, height) {
+	yCenter: property('height', 'y', function(height, y) {
 		return y + (height / 2) || 0;
 	}),
 
@@ -67,15 +67,13 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	parentController: Ember.computed.alias('templateData.view.controller'),
 
-	contentTransform: property('contentY', function(contentY) {
-		return 'translate(0 %@)'.fmt(contentY);
+	contentX: property('isOrientRight', 'width', 'contentPadding', function(isOrientRight, width, contentPadding) {
+		return isOrientRight ? width - contentPadding : contentPadding;
 	}),
 
-	_updatePosition: observer('y', 'height', 'yCenter', function(y, height, yCenter){
-		this.set('rectY', y)
-	  		.set('rectHeight', height)
-	 			.set('contentY', yCenter);
-	}).on('init'),
+	contentTransform: property('yCenter', 'contentX', function(yCenter, contentX) {
+		return 'translate(%@ %@)'.fmt(contentX, yCenter);
+	}),
 
 	_setup: function(){
 

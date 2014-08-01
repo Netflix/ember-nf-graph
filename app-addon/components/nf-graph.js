@@ -378,16 +378,16 @@ export default Ember.Component.extend({
   _updateXMinMaxIfAuto: observer('xDomainMode', 'xData', function(domainMode, data) {
     if(domainMode === 'auto') {
       var extent = d3.extent(data);
-      this.set('xMin', extent[0]);
-      this.set('xMax', extent[1]);
+      this.set('xMin', extent[0] || 0);
+      this.set('xMax', extent[1] || 0);
     }
   }),
 
   _updateYMinMaxIfAuto: observer('yDomainMode', 'yData', function(domainMode, data) {
     if(domainMode === 'auto') {
       var extent = d3.extent(data);
-      this.set('yMin', extent[0]);
-      this.set('yMax', extent[1]);
+      this.set('yMin', extent[0] || 0);
+      this.set('yMax', extent[1] || 0);
     }
   }),
 

@@ -5,7 +5,9 @@ import { moduleForComponent, test } from 'ember-qunit';
 
 moduleForComponent('nf-y-diff');
 
-asyncTest('nf-y-diff y positioning', 3, function(assert){
+test('nf-y-diff y positioning', function(){
+	Ember.d3.Transition.testMode(true);
+
 	var graph = Ember.Object.create({
 		yScale: function(x) { return x; },
 	});
@@ -20,6 +22,7 @@ asyncTest('nf-y-diff y positioning', 3, function(assert){
 		equal(ydiff.get('y'), 100, 'y should be 100');
 		equal(ydiff.get('contentY'), 100, 'contentY should be 100');
 		equal(ydiff.get('height'), 200, 'height should be 200');
+		Ember.d3.Transition.testMode(false);
 	}, 0);
 });
 
