@@ -5,7 +5,7 @@
 <label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
 <output>{{graphWidth}}px</output>
 
-{{#nf-graph  xLink=groupX yLink=groupY selected=selectedThings
+{{#nf-graph xLink=groupX yLink=groupY selected=selectedThings
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
@@ -41,11 +41,7 @@
 
 <div>
 	<span>Selected Things</span>
-	<ul>
-		{{#each thing in selectedThings}}
-			<li>{{thing.elementId}}</li>
-		{{/each}}
-	</ul>
+	{{selectedThings}}
 </div>
 
 <style>
@@ -60,14 +56,14 @@
 	}
 </style>
 
-{{#nf-graph  xLink=groupX
+{{#nf-graph  xLink=groupX selectMultiple=1
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
 		{{#nf-area-stack}}
 			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3}}
-			{{nf-area class="area2" interpolator="linear" data=area2}}
-			{{nf-area class="area1" interpolator="linear" data=area1}}
+			{{nf-area class="area2" selectable=1 interpolator="linear" data=area2}}
+			{{nf-area class="area1" selectable=1 interpolator="linear" data=area1}}
 		{{/nf-area-stack}}
 	{{/nf-graph-content}}
 

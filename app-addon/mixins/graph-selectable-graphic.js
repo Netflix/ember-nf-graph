@@ -23,9 +23,9 @@ export default Ember.Mixin.create({
     var graph = this.get('graph');
     if(graph) {
       if(selected) {
-        graph.get('selected').pushObject(this);
+        graph.selectGraphic(this);
       } else {
-        graph.get('selected').removeObject(this);
+        graph.deselectGraphic(this);
       }
     }
   }.observes('selected').on('init'),

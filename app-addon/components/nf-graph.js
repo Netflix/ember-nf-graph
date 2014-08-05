@@ -121,6 +121,15 @@ export default Ember.Component.extend({
   hasRendered: false,
 
   /**
+    Gets or sets the whether or not multiple selectable graphics may be
+    selected simultaneously.
+    @property selectMultiple
+    @type Boolean
+    @default false
+  */
+  selectMultiple: false,
+
+  /**
     The width of the graph in pixels.
     @property width
     @type Number
@@ -698,9 +707,35 @@ export default Ember.Component.extend({
     };
   }.property('yScale', 'yHover'),
 
+  selectGraphic: function(graphic) {
+    if(!graphic.get('selected')) {
+      graphic.set('selected', true);
+    }
+    if(this.selectMultiple) {
+      this.get('selected').pushObject(graphic);
+    } else {
+      var current = this.get('selected');
+      if(current && current !== graphic) {
+        current.set('selected', false);
+      }
+      this.set('selected', graphic);
+    }
+  },
+
+  deselectGraphic: function(graphic) {
+    graphic.set('selected', false);
+    if(this.selectMultiple) {
+      this.get('selected').removeObject(graphic);
+    } else {
+      var current = this.get('selected');
+      if(current && current === graphic) {
+        this.set('selected', null);
+      }
+    }
+  },
 
   _setup: function(){
     this.set('graphics', []);
-    this.set('selected', []);
+    this.set('selected', this.selectMultiple ? [] : null);
   }.on('init'),
 });
