@@ -350,7 +350,7 @@
             "extension_for": [],
             "namespace": "components",
             "file": "app-addon/components/nf-bars.js",
-            "line": 7,
+            "line": 8,
             "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***"
         },
         "components.nf-cell": {
@@ -739,6 +739,39 @@
                 }
             ],
             "class": "components.nf-area-stack",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 21,
+            "description": "The name of the property on each data item containing the className for the bar rectangle",
+            "itemtype": "property",
+            "name": "classprop",
+            "type": "String",
+            "default": "'className'",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 29,
+            "description": "Gets the function to get the classname from each data item.",
+            "itemtype": "property",
+            "name": "getBarClass",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 39,
+            "description": "The bar models used to render the bars.",
+            "itemtype": "property",
+            "name": "bars",
+            "readonly": "",
+            "class": "components.nf-bars",
             "namespace": "components"
         },
         {

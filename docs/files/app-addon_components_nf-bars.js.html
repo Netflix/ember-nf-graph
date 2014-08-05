@@ -142,23 +142,47 @@ import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
 import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
+import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * Adds a bar graph to an &#x60;nf-graph&#x60; component.
- *
- * **Requires the graph has &#x60;xScaleType === &#x27;ordinal&#x27;&#x60;***
- *
- * @namespace components
- * @class nf-bars
- */
+	Adds a bar graph to an &#x60;nf-graph&#x60; component.
+
+	**Requires the graph has &#x60;xScaleType === &#x27;ordinal&#x27;&#x60;***
+
+	@namespace components
+  @class nf-bars
+*/
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
 	tagName: &#x27;g&#x27;,
 
 	classNames: [&#x27;nf-bars&#x27;],
 
-	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;renderedData&#x27;, &#x27;graph.graphHeight&#x27;,
-		function(xScale, yScale, renderedData, graphHeight) {
+	/**
+		The name of the property on each data item containing the className for the bar rectangle
+		@property classprop
+		@type String
+		@default &#x27;className&#x27;
+	*/
+	classprop: &#x27;className&#x27;,
+
+	/**
+		Gets the function to get the classname from each data item.
+		@property getBarClass
+		@readonly
+		@private
+	*/
+	getBarClass: property(&#x27;classprop&#x27;, function(classprop) {
+		return parsePropExpr(classprop);
+	}),
+
+	/**
+		The bar models used to render the bars.
+		@property bars
+		@readonly
+	*/
+	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;renderedData.@each&#x27;, &#x27;graph.graphHeight&#x27;, &#x27;getBarClass&#x27;,
+		function(xScale, yScale, renderedData, graphHeight, getBarClass) {
 			var rangeBand = xScale.rangeBand();
 
 			return renderedData.map(function(d) {
@@ -167,11 +191,14 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 					x: xScale(d[0]),
 					y: h,
 					width: rangeBand,
-					height: graphHeight - h
+					height: graphHeight - h,
+					className: getBarClass(d.data)
 				};
 			});
 		}
-	)
+	),
+
+
 });
     </pre>
 </div>
