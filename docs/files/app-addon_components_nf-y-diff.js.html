@@ -159,16 +159,41 @@ import { property, observer } from &#x27;../utils/computed-property-helpers&#x27
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: &#x27;g&#x27;,
 
+	attributeBindings: [&#x27;transform&#x27;],
+
 	classNameBindings: [&#x27;:nf-y-diff&#x27;, &#x27;isPositive:positive:negative&#x27;, &#x27;isOrientRight:orient-right:orient-left&#x27;],
 
 	a: null,
+	
 	b: null,
+	
 	contentPadding: 5,
-	duration: 300,
-	contentY: 0,
-	contentX: 0,
-	y: 0,
-	height: 0,
+	
+	duration: 400,
+
+	yCenter: property(&#x27;height&#x27;, &#x27;y&#x27;, function(height, y) {
+		return y + (height / 2) || 0;
+	}),
+
+	y: property(&#x27;graph.yScale&#x27;, &#x27;a&#x27;, &#x27;b&#x27;, function(yScale, a, b) {
+		if(!yScale) {
+			return 0;
+		}
+		a = a || 0;
+		b = b || 0;
+		return Math.min(yScale(a), yScale(b)) || 0;
+	}),
+
+	height: property(&#x27;graph.yScale&#x27;, &#x27;a&#x27;, &#x27;b&#x27;, function(yScale, a, b) {
+		if(!yScale) {
+			return 0;
+		}
+		a = a || 0;
+		b = b || 0;
+		return Math.abs(yScale(a) - yScale(b));
+	}),
+
+	transform: Ember.computed.alias(&#x27;graph.yAxis.transform&#x27;),
 
 	diff: property(&#x27;a&#x27;, &#x27;b&#x27;, function(a, b){
 		return b - a;
@@ -176,36 +201,56 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	isPositive: Ember.computed.gte(&#x27;diff&#x27;, 0),
 	
-	x: Ember.computed.alias(&#x27;graph.yAxis.x&#x27;),
-	
 	isOrientRight: Ember.computed.equal(&#x27;graph.yAxis.orient&#x27;, &#x27;right&#x27;),
 
 	width: Ember.computed.alias(&#x27;graph.yAxis.width&#x27;),
 
 	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
-	isVisible: property(&#x27;a&#x27;, &#x27;b&#x27;, function(a, b){
-		return typeof a === &#x27;number&#x27; &amp;&amp; typeof b === &#x27;number&#x27;;
+	contentX: property(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;, function(isOrientRight, width, contentPadding) {
+		return isOrientRight ? width - contentPadding : contentPadding;
 	}),
 
-	contentTransform: property(&#x27;contentX&#x27;, &#x27;contentY&#x27;, function(contentX, contentY) {
-		return &#x27;translate(%@ %@)&#x27;.fmt(contentX, contentY);
+	contentTransform: property(&#x27;yCenter&#x27;, &#x27;contentX&#x27;, function(yCenter, contentX) {
+		return &#x27;translate(%@ %@)&#x27;.fmt(contentX, yCenter);
 	}),
 
-	_updatePosition: observer(&#x27;a&#x27;, &#x27;b&#x27;, &#x27;graph.yScale&#x27;, &#x27;graph.graphY&#x27;, function(a, b, yScale, graphY){
-		var y = Math.min(yScale(a), yScale(b)) + graphY;
-		var height = Math.abs(yScale(b) - yScale(a));
-		var contentY = y + (height / 2);
+	_transition: function(){
+		var y = this.get(&#x27;y&#x27;);
+		var height = this.get(&#x27;height&#x27;);
+		var contentTransform = this.get(&#x27;contentTransform&#x27;);
+		var duration = this.duration;
+		var elem = this.$()[0];
 
-		this.transition().duration(this.duration)
-			.set(&#x27;y&#x27;, y || 0)
-			.set(&#x27;height&#x27;, height || 0)
-			.set(&#x27;contentY&#x27;, contentY || 0);
-	}),
+		var d3Elem = d3.select(elem);
 
-	_setup: function(){
+		d3Elem.selectAll(&#x27;.nf-y-diff rect&#x27;)
+			.transition()
+			.duration(duration)
+			.attr(&#x27;height&#x27;, height)
+			.attr(&#x27;y&#x27;, y);
 
-	}.on(&#x27;init&#x27;),
+		d3Elem.selectAll(&#x27;.nf-y-diff-content&#x27;)
+			.transition()
+			.duration(duration)
+			.attr(&#x27;transform&#x27;, contentTransform);
+	},
+
+	_nonTransitionalUpdate: function(){
+		var contentTransform = this.get(&#x27;contentTransform&#x27;);
+		var elem = this.$()[0];
+		d3.select(elem).selectAll(&#x27;.nf-y-diff-content&#x27;)
+			.attr(&#x27;transform&#x27;, contentTransform);
+	},
+
+	_triggerUpdates: function() {
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._transition);
+	}.observes(&#x27;a&#x27;, &#x27;b&#x27;).on(&#x27;init&#x27;),
+
+
+	_triggerNonTransitionalUpdate: function(){
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._nonTransitionalUpdate);
+	}.observes(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;).on(&#x27;init&#x27;),
 });
     </pre>
 </div>

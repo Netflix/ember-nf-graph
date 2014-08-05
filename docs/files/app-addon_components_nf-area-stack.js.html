@@ -213,8 +213,11 @@ export default Ember.Component.extend({
 		var next = area.get(&#x27;nextArea&#x27;);
 
 		if(next) {
-			prev.set(&#x27;nextArea&#x27;, next);
 			next.set(&#x27;prevArea&#x27;, prev);
+		}
+		
+		if(prev) {
+			prev.set(&#x27;nextArea&#x27;, next);
 		}
 
 		this.get(&#x27;areas&#x27;).removeObject(area);

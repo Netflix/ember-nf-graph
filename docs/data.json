@@ -494,7 +494,10 @@
             "namespace": "components",
             "file": "app-addon/components/nf-selection-box.js",
             "line": 4,
-            "description": "draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`."
+            "description": "Draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`.",
+            "uses": [
+                "mixins.graph-has-graph-parent"
+            ]
         },
         "components.nf-table": {
             "name": "components.nf-table",
@@ -617,7 +620,8 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [
-                "components.nf-area"
+                "components.nf-area",
+                "components.nf-selection-box"
             ],
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-has-graph-parent.js",
@@ -1568,6 +1572,132 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 13,
+            "description": "The duration of the transition in ms",
+            "itemtype": "property",
+            "name": "duration",
+            "type": "Number",
+            "default": "400",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 21,
+            "description": "The minimum x domain value to encompass.",
+            "itemtype": "property",
+            "name": "xMin",
+            "default": "null",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 28,
+            "description": "The maximum x domain value to encompoass.",
+            "itemtype": "property",
+            "name": "xMax",
+            "default": "null",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 35,
+            "description": "The minimum y domain value to encompass.",
+            "itemtype": "property",
+            "name": "yMin",
+            "default": "null",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 42,
+            "description": "The maximum y domain value to encompass",
+            "itemtype": "property",
+            "name": "yMax",
+            "default": "null",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 51,
+            "description": "The computed x position of the box.",
+            "itemtype": "property",
+            "name": "x",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 61,
+            "description": "The computed y position of the box.",
+            "itemtype": "property",
+            "name": "y",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 71,
+            "description": "The computed width of the box.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 83,
+            "description": "The computed height of the box",
+            "itemtype": "property",
+            "name": "width",
+            "type": "number",
+            "readonly": "",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 95,
+            "description": "Gets the updated position of the box, and begins a transition to that position",
+            "itemtype": "method",
+            "name": "updatePosition",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 116,
+            "description": "Observes values supplied to xMin, xMax, yMin and yMax and schedules an\nupdate to the position of the box.",
+            "itemtype": "method",
+            "name": "_triggerPositionUpdate",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-selection-box.js",
+            "line": 127,
+            "description": "Sets up the box's initial position on didInsertElement",
+            "itemtype": "method",
+            "name": "_initializePosition",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-selection-box",
             "namespace": "components"
         },
         {

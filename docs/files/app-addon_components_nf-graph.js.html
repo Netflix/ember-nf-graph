@@ -518,16 +518,16 @@ export default Ember.Component.extend({
   _updateXMinMaxIfAuto: observer(&#x27;xDomainMode&#x27;, &#x27;xData&#x27;, function(domainMode, data) {
     if(domainMode === &#x27;auto&#x27;) {
       var extent = d3.extent(data);
-      this.set(&#x27;xMin&#x27;, extent[0]);
-      this.set(&#x27;xMax&#x27;, extent[1]);
+      this.set(&#x27;xMin&#x27;, extent[0] || 0);
+      this.set(&#x27;xMax&#x27;, extent[1] || 0);
     }
   }),
 
   _updateYMinMaxIfAuto: observer(&#x27;yDomainMode&#x27;, &#x27;yData&#x27;, function(domainMode, data) {
     if(domainMode === &#x27;auto&#x27;) {
       var extent = d3.extent(data);
-      this.set(&#x27;yMin&#x27;, extent[0]);
-      this.set(&#x27;yMax&#x27;, extent[1]);
+      this.set(&#x27;yMin&#x27;, extent[0] || 0);
+      this.set(&#x27;yMax&#x27;, extent[1] || 0);
     }
   }),
 
@@ -721,7 +721,7 @@ export default Ember.Component.extend({
       });
     });
 
-    graphContenßtGroup.on(&#x27;mouseleave&#x27;, function () {
+    graphContentGroup.on(&#x27;mouseleave&#x27;, function () {
       Ember.run(function () {
         self.set(&#x27;xHover&#x27;, -1);
         self.set(&#x27;yHover&#x27;, -1);

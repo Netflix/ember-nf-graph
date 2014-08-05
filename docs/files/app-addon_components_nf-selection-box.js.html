@@ -140,48 +140,103 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 /**
- * draws a rectangle on an &#x60;nf-graph&#x60; given domain values &#x60;xMin&#x60;, &#x60;xMax&#x60;, &#x60;yMin&#x60; and &#x60;yMax&#x60;.
- * @namespace components
- * @class nf-selection-box
- */
+	Draws a rectangle on an &#x60;nf-graph&#x60; given domain values &#x60;xMin&#x60;, &#x60;xMax&#x60;, &#x60;yMin&#x60; and &#x60;yMax&#x60;.
+	@namespace components
+  @class nf-selection-box
+  @uses mixins.graph-has-graph-parent
+*/
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: &#x27;g&#x27;,	
-	transition: 500,
 
+	/**
+		The duration of the transition in ms
+		@property duration
+		@type Number
+		@default 400
+	*/
+	duration: 400,
+
+	/**
+		The minimum x domain value to encompass.
+		@property xMin
+		@default null
+	*/
 	xMin: null,
+
+	/**
+		The maximum x domain value to encompoass.
+		@property xMax
+		@default null
+	*/
 	xMax: null,
+
+	/**
+		The minimum y domain value to encompass.
+		@property yMin
+		@default null
+	*/
 	yMin: null,
+
+	/** 
+		The maximum y domain value to encompass
+		@property yMax
+		@default null
+	*/
 	yMax: null,
 
 	classNames: [&#x27;nf-selection-box&#x27;],
 
-	x: function(){
-		var xScale = this.get(&#x27;graph.xScale&#x27;);
-		return xScale(this.get(&#x27;xMin&#x27;)) || 0;
-	}.property(&#x27;xMin&#x27;, &#x27;graph.xScale&#x27;),
+	/**
+		The computed x position of the box.
+		@property x
+		@type Number
+		@readonly
+	*/
+	x: property(&#x27;xMin&#x27;, &#x27;graph.xScale&#x27;, function(xMin, xScale){
+		return xScale(xMin) || 0;
+	}),
 
-	y: function(){
-		var yScale = this.get(&#x27;graph.yScale&#x27;);
-		return yScale(this.get(&#x27;yMax&#x27;)) || 0;
-	}.property(&#x27;yMax&#x27;, &#x27;graph.yScale&#x27;),
+	/**
+		The computed y position of the box.
+		@property y
+		@type Number
+		@readonly
+	*/
+	y: property(&#x27;yMax&#x27;, &#x27;graph.yScale&#x27;, function(yMax, yScale) {
+		return yScale(yMax) || 0;
+	}),
 
-	width: function(){
-		var xScale = this.get(&#x27;graph.xScale&#x27;);
-		var x0 = xScale(this.get(&#x27;xMin&#x27;));
-		var x1 = xScale(this.get(&#x27;xMax&#x27;));
+	/**
+		The computed width of the box.
+		@property width
+		@type Number
+		@readonly
+	*/
+	width: property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;graph.xScale&#x27;, function(xMin, xMax, xScale){
+		var x0 = xScale(xMin);
+		var x1 = xScale(xMax);
 		return Math.abs(x1 - x0) || 0;
-	}.property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;graph.xScale&#x27;),
+	}),
 
-	height: function(){
-		var yScale = this.get(&#x27;graph.yScale&#x27;);
-		var y0 = yScale(this.get(&#x27;yMin&#x27;));
-		var y1 = yScale(this.get(&#x27;yMax&#x27;));
+	/**
+		The computed height of the box
+		@property width
+		@type number
+		@readonly
+	*/
+	height: property(&#x27;yMin&#x27;, &#x27;yMax&#x27;, &#x27;graph.yScale&#x27;, function(yMin, yMax, yScale){
+		var y0 = yScale(yMin);
+		var y1 = yScale(yMax);
 		return Math.abs(y1 - y0) || 0;
-	}.property(&#x27;yMin&#x27;, &#x27;yMax&#x27;, &#x27;graph.yScale&#x27;),
+	}),
 
-	updateElements: function(){
+	/**
+		Gets the updated position of the box, and begins a transition to that position
+		@method updatePosition
+	*/
+	updatePosition: function(){
 		var x = this.get(&#x27;x&#x27;);
 		var y = this.get(&#x27;y&#x27;);
 		var width = this.get(&#x27;width&#x27;);
@@ -196,9 +251,25 @@ export default Ember.Component.extend(HasGraphParent, {
 		rect.transition(transition)
 			.attr(&#x27;width&#x27;, width)
 			.attr(&#x27;height&#x27;, height);
-	}.observes(&#x27;x&#x27;, &#x27;y&#x27;, &#x27;width&#x27;, &#x27;height&#x27;),
+	},
 
-	getElements: function(){
+	/**
+		Observes values supplied to xMin, xMax, yMin and yMax and schedules an
+		update to the position of the box.
+		@method _triggerPositionUpdate
+		@private
+	*/
+
+	_triggerPositionUpdate: function(){
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.updatePosition);
+	}.observes(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;yMin&#x27;, &#x27;yMax&#x27;),
+
+	/**
+		Sets up the box&#x27;s initial position on didInsertElement
+		@method _initializePosition
+		@private
+	*/
+	_initializePosition: function(){
 		var g = d3.select(this.$()[0]);
 		var rect = g.selectAll(&#x27;rect&#x27;).data([0]);
 		

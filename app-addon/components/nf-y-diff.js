@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
-import { property, observer } from '../utils/computed-property-helpers';
+import { property } from '../utils/computed-property-helpers';
 
 /**
  * Draws a box underneath (or over) the y axis to between the given `a` and `b`
