@@ -8,7 +8,8 @@ export default Ember.ObjectController.extend({
 		for(var i = 0, len = str.length; i < len; i++) {
 			arr.push({
 				x: str[i],
-				y: (i+1) * 100
+				y: (i+1) * 100,
+				className: 'foo-bar-' + (i % 3)
 			});
 		}
 		
