@@ -1,6 +1,8 @@
 <h1>Graph - Basics</h1>
 
-<label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label>
+<label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label><output>{{graphWidth}}px</output><br/>
+<label>Graph1 Diff A: {{input type="range" min="0" max="1000" value=diffA}}</label><output>{{diffA}}</output><br/>
+<label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
 <output>{{graphWidth}}px</output>
 
 {{#nf-graph  xLink=groupX yLink=groupY
@@ -21,7 +23,7 @@
 		{{/nf-range-markers}}		
 	{{/nf-graph-content}}
 
-	{{#nf-y-diff a=100 b=200}}
+	{{#nf-y-diff a=diffA b=diffB}}
 		<text {{action 'test'}}>500</text>
 	{{/nf-y-diff}}
 
@@ -29,7 +31,7 @@
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
-	{{#nf-y-axis orient="left"}}
+	{{#nf-y-axis orient="right"}}
 		<text>{{tick.value}}</text>
 	{{/nf-y-axis}}
 
@@ -63,10 +65,6 @@
 		{{/nf-area-stack}}
 		{{nf-crosshair test="bottom"}}
 	{{/nf-graph-content}}
-
-	{{#nf-y-diff a=500 b=1000}}
-		<text {{action 'test'}}>500</text>
-	{{/nf-y-diff}}
 
 	{{#nf-x-axis}}
 		<text>{{tick.value}}</text>

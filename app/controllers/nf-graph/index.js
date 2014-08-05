@@ -13,6 +13,9 @@ export default Ember.ObjectController.extend({
 		return ticks;
 	},
 
+	diffA: 100,
+	diffB: 200,
+
 	actions: {
 		test: function(){
 			console.log('test!');

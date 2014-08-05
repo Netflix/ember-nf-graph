@@ -29,7 +29,7 @@ export default Ember.Component.extend(HasGraphParent, {
 	
 	contentPadding: 5,
 	
-	duration: 300,
+	duration: 400,
 
 	yCenter: property('height', 'y', function(height, y) {
 		return y + (height / 2) || 0;
@@ -75,7 +75,40 @@ export default Ember.Component.extend(HasGraphParent, {
 		return 'translate(%@ %@)'.fmt(contentX, yCenter);
 	}),
 
-	_setup: function(){
+	_transition: function(){
+		var y = this.get('y');
+		var height = this.get('height');
+		var contentTransform = this.get('contentTransform');
+		var duration = this.duration;
+		var elem = this.$()[0];
 
-	}.on('init'),
+		var d3Elem = d3.select(elem);
+
+		d3Elem.selectAll('.nf-y-diff rect')
+			.transition()
+			.duration(duration)
+			.attr('height', height)
+			.attr('y', y);
+
+		d3Elem.selectAll('.nf-y-diff-content')
+			.transition()
+			.duration(duration)
+			.attr('transform', contentTransform);
+	},
+
+	_nonTransitionalUpdate: function(){
+		var contentTransform = this.get('contentTransform');
+		var elem = this.$()[0];
+		d3.select(elem).selectAll('.nf-y-diff-content')
+			.attr('transform', contentTransform);
+	},
+
+	_triggerUpdates: function() {
+		Ember.run.scheduleOnce('afterRender', this, this._transition);
+	}.observes('a', 'b').on('init'),
+
+
+	_triggerNonTransitionalUpdate: function(){
+		Ember.run.scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
+	}.observes('isOrientRight', 'width', 'contentPadding').on('init'),
 });
