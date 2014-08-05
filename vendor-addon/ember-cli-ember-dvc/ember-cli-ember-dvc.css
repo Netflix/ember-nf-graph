@@ -70,13 +70,11 @@
 .nf-y-axis.orient-right g.tick text {
   text-anchor: start; }
 
-.nf-line > path {
+.nf-line > .line {
   stroke-width: 1;
   fill: none;
   cursor: default;
   stroke: #ca0000; }
-  .nf-line > path.selected {
-    stroke-width: 2; }
 .nf-line .interaction-mask {
   fill: none;
   stroke: transparent;
@@ -85,24 +83,26 @@
 .nf-line .tracking-dot {
   visibility: visible;
   cursor: default; }
-  .nf-line .tracking-dot.selectable {
-    cursor: pointer; }
+.nf-line.selectable .tracking-dot {
+  cursor: pointer; }
+.nf-line.selected > .line {
+  stroke-width: 2; }
 
-.nf-area > path {
+.nf-area > .area {
   fill: rgba(255, 0, 0, 0.5);
   stroke: none;
   stroke-width: 0; }
-.nf-area.selected .graph-area-line {
+.nf-area.selected .area-line {
   stroke-width: 2px; }
-.nf-area.selected .graph-area-path {
+.nf-area.selected > .area {
   fill: rgba(0, 0, 255, 0.5); }
 .nf-area.selectable {
   cursor: pointer; }
+  .nf-area.selectable .tracking-dot {
+    cursor: pointer; }
 .nf-area .tracking-dot {
   visibility: visible;
   cursor: default; }
-  .nf-area .tracking-dot.selectable {
-    cursor: pointer; }
 
 .nf-y-diff.positive rect {
   fill: lime; }

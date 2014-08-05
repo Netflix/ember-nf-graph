@@ -92,7 +92,7 @@ export default Ember.Mixin.create({
 
   _hoverChange: function(){
     var trackingMode = this.get('trackingMode');
-    var selected = this.get('isSelected');
+    var selected = this.get('selected');
     var xScale = this.get('graph.xScale');
     var xHover = this.get('graph.xHover');
     var yHover = this.get('graph.yHover');
@@ -120,7 +120,7 @@ export default Ember.Mixin.create({
     */
   _updateTrackedData: function(){
     var trackingMode = this.get('trackingMode');
-    var selected = this.get('isSelected');
+    var selected = this.get('selected');
     var selectable = this.get('selectable');
     var last = this.get('lastVisibleData');
     var first = this.get('firstVisibleData');

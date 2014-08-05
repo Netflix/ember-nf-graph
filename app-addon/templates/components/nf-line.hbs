@@ -1,8 +1,8 @@
-<path {{bind-attr d=d class=":line selected"}}></path>
+<path class="line" {{bind-attr d=d}}></path>
 {{#if selectable}}
 	<path class="interaction-mask" {{bind-attr d=d}}></path>
 {{/if}}
 
 {{#if trackingDot.visible}}
-	<circle {{bind-attr cx=trackingDot.x cy=trackingDot.y r=trackingDot.radius class=":tracking-dot selected selectable"}}></circle>
+	<circle class="tracking-dot" {{bind-attr cx=trackingDot.x cy=trackingDot.y r=trackingDot.radius}}></circle>
 {{/if}}

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { property, observer } from '../utils/computed-property-helpers';
+import { property, observer, backedProperty } from '../utils/computed-property-helpers';
 
 var SCALE_TYPES = {
   'linear': d3.scale.linear,
@@ -10,7 +10,6 @@ var SCALE_TYPES = {
   'ordinal': d3.scale.ordinal
 };
 
-var computedAlias = Ember.computed.alias;
 var computedBool = Ember.computed.bool;
 
 var scaleFactoryProperty = function(axis) {
@@ -308,7 +307,7 @@ export default Ember.Component.extend({
     @property xMin
     @type String/Number
    */
-  xMin: computedAlias('_xMin'),
+  xMin: backedProperty('_xMin'),
 
   /**
     The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
@@ -317,7 +316,7 @@ export default Ember.Component.extend({
     @property xMax
     @type String/Number
    */
-  xMax: computedAlias('_xMax'),
+  xMax: backedProperty('_xMax'),
 
   /**
     The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
@@ -326,7 +325,7 @@ export default Ember.Component.extend({
     @property yMin
     @type String/Number
    */
-  yMin: computedAlias('_yMin'),
+  yMin: backedProperty('_yMin'),
 
   /**
     The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
@@ -335,7 +334,7 @@ export default Ember.Component.extend({
     @property yMax
     @type String/Number
    */
-  yMax: computedAlias('_yMax'),
+  yMax: backedProperty('_yMax'),
 
   /**
     Registry of contained graphic elements such as `nf-line` or `nf-area` components.
@@ -344,7 +343,15 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  graphics: computedAlias('_graphics'),
+  graphics: null,
+
+  /**
+    An array of "selectable" graphics that have been selected within this graph.
+    @property selected
+    @type Array
+    @readonly
+  */
+  selected: null,
 
   /**
     Computed property to show yAxis. Returns `true` if a yAxis is present.
@@ -627,7 +634,7 @@ export default Ember.Component.extend({
     @type Number
     @default -1
   */
-  xHover: computedAlias('_xHover'),
+  xHover: backedProperty('_xHover'),
 
   /**
     The y *domain* value of the current mouse hover position.
@@ -636,7 +643,7 @@ export default Ember.Component.extend({
     @type Number
     @default -1
   */
-  yHover: computedAlias('_yHover'),
+  yHover: backedProperty('_yHover'),
 
   /**
     Sets or gets the xLink object for the graph. The xLink object is used to 
@@ -694,5 +701,6 @@ export default Ember.Component.extend({
 
   _setup: function(){
     this.set('graphics', []);
+    this.set('selected', []);
   }.on('init'),
 });

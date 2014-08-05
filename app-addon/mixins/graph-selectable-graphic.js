@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { backedProperty } from '../utils/computed-property-helpers';
 
 /**
  * @namespace mixins
@@ -6,26 +7,26 @@ import Ember from 'ember';
  * @extends Ember.Mixin
  */
 export default Ember.Mixin.create({
-  selected: false,
+  _selected: false,
   selectable: false,
 
-  isSelected: function(){
-    return this === this.get('graph.selected');
-  }.property('graph.selected'),
+  selected: backedProperty('_selected'),
 
-  toggleSelected: function(){
-    var graphSelected = this.get('graph.selected');
-    
-    if(graphSelected === this) {
-      this.set('selected', false);
-      this.set('graph.selected', null);
-    } else {
-      this.set('selected', true);
-      this.set('graph.selected', this);
+  /**
+    @property isSelected
+    @deprecated use `selected`
+  */
+  isSelected: Ember.computed.alias('selected'),
+
+  _updateGraphSelected: function() {
+    var selected = this.get('selected');
+    var graph = this.get('graph');
+    if(graph) {
+      if(selected) {
+        graph.get('selected').pushObject(this);
+      } else {
+        graph.get('selected').removeObject(this);
+      }
     }
-    if(graphSelected) {
-      graphSelected.set('selected', false);
-    }
-    this.get('isSelected');
-  },
+  }.observes('selected').on('init'),
 });

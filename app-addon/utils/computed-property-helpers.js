@@ -36,6 +36,18 @@ function shorthandFor(type) {
 	};
 }
 
+
 export var property = shorthandFor('property');
 export var observer = shorthandFor('observes');
+
+export var backedProperty = function(backingField) {
+	var fn = function(key, value) {
+		if(arguments.length > 1) {
+			this[backingField] = value;
+		}
+		return this[backingField];
+	};
+
+	return Function.prototype.property.apply(fn);
+};
 

@@ -30,7 +30,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
     tagName: 'g',
     
-    classNameBindings: [':nf-area', 'isSelected:selected', 'selectable'],
+    classNameBindings: [':nf-area', 'selected', 'selectable'],
 
     interpolator: 'monotone',
 
@@ -89,7 +89,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
     click: function(){
       if(this.get('selectable')) {
-        this.toggleSelected();
+        this.toggleProperty('selected');
       }
     }
   });

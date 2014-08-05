@@ -1,28 +1,36 @@
+$nf-line-width: 1;
+$nf-line-selected-width: 2;
+$nf-line-interaction-mask-width: 15;
+
 .nf-line {
-  > path {
-    stroke-width: 1;
+  > .line {
+    stroke-width: $nf-line-width;
     fill: none;
     cursor: default; //HACK: because of global cursor:pointer setting all all graph paths in vis.scss
     stroke: $red;
-    
-    &.selected {
-      stroke-width: 2;
-    }
   }
 
   .interaction-mask {
     fill: none;
     stroke: transparent;
-    stroke-width: 15;
+    stroke-width: $nf-line-interaction-mask-width;
     cursor: pointer;
   }
 
   .tracking-dot {
     visibility: visible; //HACK: because of global visibility hiding in vis.scss
     cursor: default; //HACK: because of global cursor: pointer setting on all graph circles in vis.scss
+  }
 
-    &.selectable {
+  &.selectable {
+    .tracking-dot {
       cursor: pointer;
+    }
+  }
+
+  &.selected {
+    > .line {
+      stroke-width: $nf-line-selected-width;
     }
   }
 }

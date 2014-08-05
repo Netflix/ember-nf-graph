@@ -20,6 +20,8 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
   
   interpolator: 'linear',
   
+  classNameBindings: ['selected', 'selectable'],
+
   classNames: ['nf-line'],
 
   lineFn: property('graph.xScale', 'graph.yScale', 'interpolator', function(xScale, yScale, interpolator) {
@@ -31,11 +33,9 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     return lineFn(renderedData);
   }),
 
-  _updateSelectionClick: function(){
+  click: function(){
     if(this.get('selectable')) {
-      this.set('click', function(){
-        this.toggleSelected();
-      });
+      this.toggleProperty('selected')
     }
-  }.observes('selectable')
+  },
 });

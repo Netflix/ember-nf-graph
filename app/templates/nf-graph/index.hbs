@@ -5,12 +5,11 @@
 <label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
 <output>{{graphWidth}}px</output>
 
-{{#nf-graph  xLink=groupX yLink=groupY
+{{#nf-graph  xLink=groupX yLink=groupY selected=selectedThings
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{nf-area data=lineData trackingMode="snap-first" trackedData=tracked}}
-		{{nf-crosshair}}
+		{{nf-line selectable=1 selected=fooSelected data=lineData trackingMode="snap-first" trackedData=tracked}}
 
 		{{#nf-range-markers orient="top"}}
 			{{#nf-range-marker xMin=20 xMax=88}}
@@ -41,8 +40,12 @@
 {{/nf-graph}}
 
 <div>
-	<span>Tracked Data</span>
-	<output>{{tracked.y}}</output>
+	<span>Selected Things</span>
+	<ul>
+		{{#each thing in selectedThings}}
+			<li>{{thing.elementId}}</li>
+		{{/each}}
+	</ul>
 </div>
 
 <style>
@@ -62,11 +65,10 @@
 
 	{{#nf-graph-content}}
 		{{#nf-area-stack}}
-			{{nf-area class="area3" interpolator="linear" data=area3}}
+			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3}}
 			{{nf-area class="area2" interpolator="linear" data=area2}}
 			{{nf-area class="area1" interpolator="linear" data=area1}}
 		{{/nf-area-stack}}
-		{{nf-crosshair test="bottom"}}
 	{{/nf-graph-content}}
 
 	{{#nf-x-axis}}
