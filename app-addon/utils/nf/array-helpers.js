@@ -36,7 +36,7 @@ export function nearestIndexTo(arr, val, mappingFn) {
   var av = getItem(a);
   var bv = getItem(b);
 
-  while(!between(val, av, bv) && startIndex < stopIndex){
+  while(!(av <= val && val <= bv) && startIndex < stopIndex){
 
     if (val < av){
         stopIndex = middle - 1;
@@ -52,8 +52,4 @@ export function nearestIndexTo(arr, val, mappingFn) {
   }
 
   return (Math.abs(val - av) < Math.abs(val - bv)) ? a : b;
-}
-
-function between(x, a, b) {
-  return a <= x && x <= b;
 }
