@@ -592,15 +592,15 @@ export default Ember.Component.extend({
     graphContentGroup.on('mousemove', function (e) {
       Ember.run(function () {
         var mouse = self.mousePoint(graphContentGroup[0], e);
-        self.set('xHover', mouse[0]);
-        self.set('yHover', mouse[1]);
+        self.set('mouseX', mouse[0]);
+        self.set('mouseY', mouse[1]);
       });
     });
 
     graphContentGroup.on('mouseleave', function () {
       Ember.run(function () {
-        self.set('xHover', -1);
-        self.set('yHover', -1);
+        self.set('mouseX', -1);
+        self.set('mouseY', -1);
       });
     });
   }.on('didInsertElement'),
@@ -633,79 +633,34 @@ export default Ember.Component.extend({
   */
   parentController: Ember.computed.alias('templateData.view.controller'),
 
-  _xHover: -1,
-  _yHover: -1,
+  _mouseX: -1,
+  _mouseY: -1,
 
   /**
-    The x *domain* value of the current mouse hover position.
+    The x pixel value of the current mouse hover position.
     Will be `-1` if the mouse is not hovering over the graph content
-    @property xHover
+    @property mouseX
     @type Number
     @default -1
   */
-  xHover: backedProperty('_xHover'),
+  mouseX: backedProperty('_mouseX'),
 
   /**
-    The y *domain* value of the current mouse hover position.
+    The y pixel value of the current mouse hover position.
     Will be `-1` if the mouse is not hovering over the graph content.
-    @property yHover
+    @property mouseY
     @type Number
     @default -1
   */
-  yHover: backedProperty('_yHover'),
+  mouseY: backedProperty('_mouseY'),
 
-  /**
-    Sets or gets the xLink object for the graph. The xLink object is used to 
-    tie two graphs together along the x-axis.
+  hoverX: property('mouseX', 'xScale', function(mouseX, xScale){
+    return xScale ? xScale.invert(mouseX) : null;
+  }),
 
-    the xLink object has the following properties:
-
-    - `xHover`: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}
-    @property xLink
-    @type Object
-  */
-  xLink: function(keyName, value) {
-    var xScale = this.get('xScale');
-    
-    if(!xScale) {
-      return 0;
-    }
-
-    if(arguments.length > 1) {
-      this.set('xHover', value ? xScale(value.xHover) : -1);
-    }
-
-    return {
-      xHover: xScale.invert(this.get('xHover'))
-    };
-  }.property('xScale', 'xHover'),
-
-
-  /**
-    Sets or gets the xLink object for the graph. The xLink object is used to 
-    tie two graphs together along the x-axis.
-
-    the xLink object has the following properties:
-
-    - `xHover`: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}
-    @property xLink
-    @type Object
-  */
-  yLink: function(keyName, value) {
-    var yScale = this.get('yScale');
-    
-    if(!yScale) {
-      return 0;
-    }
-
-    if(arguments.length > 1) {
-      this.set('yHover', value ? yScale(value.yHover) : -1);
-    }
-
-    return {
-      yHover: yScale.invert(this.get('yHover'))
-    };
-  }.property('yScale', 'yHover'),
+  hoverY: property('mouseY', 'yScale', function(mouseY, yScale) {
+    return yScale ? yScale.invert(mouseY) : null;
+  }),
 
   selectGraphic: function(graphic) {
     if(!graphic.get('selected')) {

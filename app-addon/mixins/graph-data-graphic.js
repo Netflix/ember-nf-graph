@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
-import { property } from '../utils/computed-property-helpers';
+import { property, observer } from '../utils/computed-property-helpers';
+import { nearestIndexTo } from '../utils/nf/array-helpers';
 
 /**
   This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
@@ -146,7 +147,7 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  firstVisibleData: property('renderedData', 'xMin', function(renderedData, xMin) {
+  firstVisibleData: property('renderedData.@each', 'xMin', function(renderedData, xMin) {
     var first = renderedData[0];
     if(first && xMin > first[0] && renderedData.length > 1) {
       first = renderedData[1];
@@ -162,12 +163,30 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  lastVisibleData: property('renderedData', 'xMax', function(renderedData, xMax) {
+  lastVisibleData: property('renderedData.@each', 'xMax', function(renderedData, xMax) {
     var last = renderedData[renderedData.length - 1];
     if(last && xMax < last[0] && renderedData.length > 1) {
       last = renderedData[renderedData.length - 2];
     }
     return last;
+  }),
+
+  updateHoverIndex: observer('graph.hoverX', 'renderedData.@each', function(graphHoverX, renderedData) {
+    var index = -1;
+    if(renderedData && renderedData.length > 0) {
+      index = nearestIndexTo(renderedData, graphHoverX, function(d) {
+        return d ? d[0] : null;
+      });
+    }
+
+    this.set('hoverIndex', index);
+    var data = renderedData[index];
+
+    this.set('hoverData', data ? {
+      x: data[0],
+      y: data[1],
+      data: data.data,
+    } : null);
   }),
 });
 

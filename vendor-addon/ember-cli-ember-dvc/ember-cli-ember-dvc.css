@@ -145,3 +145,11 @@
 .nf-range-marker .label text {
   text-anchor: start;
   dominant-baseline: hanging; }
+
+.nf-vertical-line {
+  stroke: #d3dbdd;
+  stroke-width: 1px; }
+
+.nf-horizontal-line {
+  stroke: #d3dbdd;
+  stroke-width: 1px; }

@@ -35,7 +35,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
 
   click: function(){
     if(this.get('selectable')) {
-      this.toggleProperty('selected')
+      this.toggleProperty('selected');
     }
   },
 });

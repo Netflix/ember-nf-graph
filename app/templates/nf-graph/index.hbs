@@ -9,7 +9,10 @@
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{nf-line selectable=1 selected=fooSelected data=lineData trackingMode="snap-first" trackedData=tracked}}
+		{{nf-line selectable=1 selected=fooSelected data=lineData hoverIndex=fooIndex hoverData=fooHovered}}
+		{{nf-dot x=fooHovered.x y=fooHovered.y}}
+		{{nf-vertical-line x=fooHovered.x}}
+		{{nf-horizontal-line y=fooHovered.y duration=diffA}}
 
 		{{#nf-range-markers orient="top"}}
 			{{#nf-range-marker xMin=20 xMax=88}}
@@ -42,6 +45,8 @@
 <div>
 	<span>Selected Things</span>
 	{{selectedThings}}
+	<span>HoveredData</span>
+	{{fooIndex}} : {{fooHovered.x}}, {{fooHovered.y}} : {{fooMouseX}}
 </div>
 
 <style>
@@ -80,11 +85,6 @@
 <div>
 	<span>Tracked Data</span>
 	<output>{{tracked2.y}}</output>
-</div>
-
-<div>
-	{{groupX.xHover}},
-	{{groupY.yHover}}
 </div>
 
 <button {{action 'appendAreaData' area1}}>area1</button>
