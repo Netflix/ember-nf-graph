@@ -84,10 +84,10 @@
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{#nf-area-stack}}
-			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3  trackingMode="snap-last"}}
-			{{nf-area class="area2" selectable=1 interpolator="linear" data=area2  trackingMode="snap-last"}}
-			{{nf-area class="area1" selectable=1 interpolator="linear" data=area1  trackingMode="snap-last"}}
+		{{#nf-area-stack}}{{!-- 
+			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3  trackingMode="snap-last"}} --}}
+			{{nf-area class="area2" selectable=1 interpolator="linear" data=area2  trackingMode="snap-last"}}{{!-- 
+			{{nf-area class="area1" selectable=1 interpolator="linear" data=area1  trackingMode="snap-last"}} --}}
 		{{/nf-area-stack}}
 	{{/nf-graph-content}}
 

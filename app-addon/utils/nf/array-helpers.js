@@ -22,37 +22,38 @@ function identity(x) {
   array items.
 */
 export function nearestIndexTo(arr, val, mappingFn) {
-  'use strict';
-  
-  var min = 0;
-  var max = arr.length - 1;
-  var i;
-  var curr;
-
   mappingFn = mappingFn || identity;
+  var startIndex  = 0;
+  var stopIndex = arr.length - 1;
+  var middle = (stopIndex + startIndex) / 2;
+  var a = Math.floor(middle);
+  var b = Math.floor(middle + 1);
 
-  while (min <= max) {
-    i = (min + max) / 2 || 0;
-    curr = mappingFn(arr[Math.floor(i)]);
-    if (curr < val) {
-      min = i + 1;
+  var getItem = function(i){
+    return mappingFn(arr[i]);
+  };
+
+  var av = getItem(a);
+  var bv = getItem(b);
+
+  while(!between(val, av, bv) && startIndex < stopIndex){
+
+    if (val < av){
+        stopIndex = middle - 1;
+    } else if (val > av){
+        startIndex = middle + 1;
     }
-    else if (curr > val) {
-      max = i - 1;
-    }
-    else {
-      i = i - 1;
-      break;
-    }
+
+    middle = (stopIndex + startIndex) / 2;
+    a = Math.floor(middle);
+    b = Math.floor(middle + 1);
+    av = getItem(a);
+    bv = getItem(b);
   }
-  var a = Math.floor(i);
-  var b = Math.ceil(i);
-  var av = mappingFn(arr[a]);
-  var bv = mappingFn(arr[b]);
-  if(Math.abs(av - val) <= Math.abs(bv - val)) {
-    return a;
-  } else {
-    return b;
-  }
+
+  return (Math.abs(val - av) < Math.abs(val - bv)) ? a : b;
 }
 
+function between(x, a, b) {
+  return a <= x && x <= b;
+}
