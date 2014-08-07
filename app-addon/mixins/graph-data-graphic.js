@@ -171,12 +171,15 @@ export default Ember.Mixin.create({
     return last;
   }),
 
+
   updateHoverIndex: observer('graph.hoverX', 'renderedData.@each', function(graphHoverX, renderedData) {
     var index = -1;
-    if(renderedData && renderedData.length > 0) {
-      index = nearestIndexTo(renderedData, graphHoverX, function(d) {
-        return d ? d[0] : null;
-      });
+    if(!isNaN(graphHoverX)) {
+      if(renderedData && renderedData.length > 0) {
+        index = nearestIndexTo(renderedData, graphHoverX, function(d) {
+          return d ? d[0] : null;
+        });
+      }
     }
 
     this.set('hoverIndex', index);

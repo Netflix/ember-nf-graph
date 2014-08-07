@@ -5,14 +5,14 @@
 <label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
 <output>{{graphWidth}}px</output>
 
-{{#nf-graph xLink=groupX yLink=groupY selected=selectedThings
+{{#nf-graph xLink=groupX yLink=groupY selected=selectedThings hoverX=fooGraphHoverX hoverY=fooGraphHoverY mouseX=fooGraphMouseX mouseY=fooGraphMouseY
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{nf-line selectable=1 selected=fooSelected data=lineData hoverIndex=fooIndex hoverData=fooHovered}}
-		{{nf-dot x=fooHovered.x y=fooHovered.y}}
+		{{nf-area selectable=1 selected=fooSelected data=lineData hoverIndex=fooIndex hoverData=fooHovered trackingMode="snap-last"}}
+		{{!-- {{nf-dot x=fooHovered.x y=fooHovered.y}} --}}
 		{{nf-vertical-line x=fooHovered.x}}
-		{{nf-horizontal-line y=fooHovered.y duration=diffA}}
+		{{nf-horizontal-line y=fooHovered.y}}
 
 		{{#nf-range-markers orient="top"}}
 			{{#nf-range-marker xMin=20 xMax=88}}
@@ -43,20 +43,39 @@
 {{/nf-graph}}
 
 <div>
-	<span>Selected Things</span>
-	{{selectedThings}}
 	<span>HoveredData</span>
+	<table>
+		<tbody>
+			<tr>
+				<td>line.hoverIndex</td>
+				<td>{{fooIndex}}</td>
+			</tr>
+			<tr>
+				<td>line.hoverData</td>
+				<td>{ x: {{fooHovered.x}}, y: {{fooHovered.y}} }</td>
+			</tr>
+			<tr>
+				<td>graph.hover</td>
+				<td>{ x: {{fooGraphHoverX}}, y: {{fooGraphHoverY}} }</td>
+			</tr>
+
+			<tr>
+				<td>graph.mouse</td>
+				<td>{ x: {{fooGraphMouseX}}, y: {{fooGraphMouseY}} }</td>
+			</tr>
+		</tbody>
+	</table>
 	{{fooIndex}} : {{fooHovered.x}}, {{fooHovered.y}} : {{fooMouseX}}
 </div>
 
 <style>
-	.area3 path {
+	.area3 .area {
 		fill: blue;
 	}
-	.area2 path {
+	.area2 .area {
 		fill: lime;
 	}
-	.area1 path {
+	.area1 .area {
 		fill: red;
 	}
 </style>
@@ -66,9 +85,9 @@
 
 	{{#nf-graph-content}}
 		{{#nf-area-stack}}
-			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3}}
-			{{nf-area class="area2" selectable=1 interpolator="linear" data=area2}}
-			{{nf-area class="area1" selectable=1 interpolator="linear" data=area1}}
+			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3  trackingMode="snap-last"}}
+			{{nf-area class="area2" selectable=1 interpolator="linear" data=area2  trackingMode="snap-last"}}
+			{{nf-area class="area1" selectable=1 interpolator="linear" data=area1  trackingMode="snap-last"}}
 		{{/nf-area-stack}}
 	{{/nf-graph-content}}
 

@@ -3,6 +3,6 @@
 	<path class="interaction-mask" {{bind-attr d=d}}></path>
 {{/if}}
 
-{{#if trackingDot.visible}}
-	<circle class="tracking-dot" {{bind-attr cx=trackingDot.x cy=trackingDot.y r=trackingDot.radius}}></circle>
+{{#if showTrackingDot}}
+	{{nf-dot x=trackedData.x y=trackedData.y}}
 {{/if}}

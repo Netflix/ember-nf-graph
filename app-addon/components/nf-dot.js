@@ -7,21 +7,21 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	attributeBindings: ['r', 'cy', 'cx'],
 
-	x: -1,
+	x: null,
 	
-	y: -1,
+	y: null,
 	
 	r: 2.5,
 
 	cx: property('x', 'graph.xScale', function(x, xScale) {
-		return xScale ? xScale(x) : -1;
+		return !isNaN(x) && xScale ? xScale(x) : -1;
 	}),
 
 	cy: property('y', 'graph.yScale', function(y, yScale) {
-		return yScale ? yScale(y) : -1;
+		return !isNaN(y) && yScale ? yScale(y) : -1;
 	}),
 
-	isVisible: property('cx', 'cy', function(cx, cy) {
-		return cx !== -1 && cy !== -1;
+	isVisible: property('x', 'y', function(x, y) {
+		return !(isNaN(x) || isNaN(y));
 	}),
 });

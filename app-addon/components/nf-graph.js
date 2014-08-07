@@ -654,12 +654,17 @@ export default Ember.Component.extend({
   */
   mouseY: backedProperty('_mouseY'),
 
-  hoverX: property('mouseX', 'xScale', function(mouseX, xScale){
-    return xScale ? xScale.invert(mouseX) : null;
+  hoverX: null,
+  hoverY: null,
+
+  _updateHoverX: observer('mouseX', 'xScale', function(mouseX, xScale){
+    var hx = mouseX !== -1 && xScale ? xScale.invert(mouseX) : null;
+    this.set('hoverX', isNaN(hx) ? null : hx);
   }),
 
-  hoverY: property('mouseY', 'yScale', function(mouseY, yScale) {
-    return yScale ? yScale.invert(mouseY) : null;
+  _updateHoverY: observer('mouseY', 'yScale', function(mouseY, yScale) {
+    var hy = mouseY !== -1 && yScale ? yScale.invert(mouseY) : null;
+    this.set('hoverY', isNaN(hy) ? null : hy);
   }),
 
   selectGraphic: function(graphic) {
