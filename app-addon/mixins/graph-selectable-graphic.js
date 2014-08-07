@@ -21,12 +21,10 @@ export default Ember.Mixin.create({
   _updateGraphSelected: function() {
     var selected = this.get('selected');
     var graph = this.get('graph');
-    if(graph) {
-      if(selected) {
-        graph.selectGraphic(this);
-      } else {
-        graph.deselectGraphic(this);
-      }
+    if(selected) {
+      graph.selectGraphic(this);
+    } else {
+      graph.deselectGraphic(this);
     }
-  }.observes('selected').on('init'),
+  }.observes('selected').on('didInsertElement'),
 });
