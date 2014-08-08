@@ -378,6 +378,11 @@ export default Ember.Component.extend({
    */
   showXAxis: computedBool('xAxis'),
 
+  /**
+    Observes changes to the sortedData under each registered graphic, and updates `xData` and `yData`
+    @method _graphicsSortedDataChanged
+    @private
+  */
   _graphicsSortedDataChanged: observer(
     'graphics.@each.sortedData', 
     function(graphics){
@@ -578,10 +583,21 @@ export default Ember.Component.extend({
     return 'translate(%@, %@)'.fmt(graphX, graphY);
   }),
 
+  /**
+    Sets `hasRendered` to `true` on `willInsertElement`.
+    @method _notifyHasRendered
+    @private
+  */
   _notifyHasRendered: function () {
     this.set('hasRendered', true);
   }.on('willInsertElement'),
 
+  /**
+    Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up
+    DOM events for the graph. Fires on `didInsertElement`
+    @method _registerDOM
+    @private
+  */
   _registerDOM: function () {
     var graphContentGroup = this.$('.nf-graph-content');
     var self = this;
@@ -633,9 +649,6 @@ export default Ember.Component.extend({
   */
   parentController: Ember.computed.alias('templateData.view.controller'),
 
-  _mouseX: -1,
-  _mouseY: -1,
-
   /**
     The x pixel value of the current mouse hover position.
     Will be `-1` if the mouse is not hovering over the graph content
@@ -643,7 +656,7 @@ export default Ember.Component.extend({
     @type Number
     @default -1
   */
-  mouseX: backedProperty('_mouseX'),
+  mouseX: -1,
 
   /**
     The y pixel value of the current mouse hover position.
@@ -652,21 +665,48 @@ export default Ember.Component.extend({
     @type Number
     @default -1
   */
-  mouseY: backedProperty('_mouseY'),
+  mouseY: -1,
 
+  /**
+    Gets the x domain value at the current mouse x hover position.
+    @property hoverX
+    @readonly
+  */
   hoverX: null,
+
+  /**
+    Gets teh y domain value at the current mouse y hover position.
+    @property hoverY
+    @readonly
+  */
   hoverY: null,
 
-  _updateHoverX: observer('mouseX', 'xScale', function(mouseX, xScale){
-    var hx = mouseX !== -1 && xScale ? xScale.invert(mouseX) : null;
+  /**
+    updates `hoverX` when `mouseX` changes or something causes the scale to change.
+    @method updateHoverX
+    @private
+  */
+  updateHoverX: observer('mouseX', 'xScale', function(mouseX, xScale){
+    var hx = mouseX !== -1 && xScale && xScale.invert ? xScale.invert(mouseX) : null;
     this.set('hoverX', isNaN(hx) ? null : hx);
   }),
 
-  _updateHoverY: observer('mouseY', 'yScale', function(mouseY, yScale) {
-    var hy = mouseY !== -1 && yScale ? yScale.invert(mouseY) : null;
+  /**
+    updates `hoverY` when `mouseY` changes or something causes the scale to change.
+    @method updateHoverY
+    @private
+  */  
+  updateHoverY: observer('mouseY', 'yScale', function(mouseY, yScale) {
+    var hy = mouseY !== -1 && yScale && yScale.invert ? yScale.invert(mouseY) : null;
     this.set('hoverY', isNaN(hy) ? null : hy);
   }),
 
+  /**
+    Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently
+    selected graphic if it's different from the one passed.
+    @method selectGraphic
+    @param graphic {Ember.Component} the graph component to select within the graph.
+  */
   selectGraphic: function(graphic) {
     if(!graphic.get('selected')) {
       graphic.set('selected', true);
@@ -682,6 +722,11 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+    deselects the graphic passed.
+    @method deselectGraphic
+    @param graphic {Ember.Component} the graph child component to deselect.
+  */
   deselectGraphic: function(graphic) {
     graphic.set('selected', false);
     if(this.selectMultiple) {
@@ -694,6 +739,11 @@ export default Ember.Component.extend({
     }
   },
 
+  /**
+    The initialization method. Fired on `init`.
+    @method _setup
+    @private
+  */
   _setup: function(){
     this.set('graphics', []);
     this.set('selected', this.selectMultiple ? [] : null);
