@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { property, observer, backedProperty } from '../utils/computed-property-helpers';
+import { property, observer } from '../utils/computed-property-helpers';
 
 var SCALE_TYPES = {
   'linear': d3.scale.linear,
@@ -195,37 +195,6 @@ export default Ember.Component.extend({
   */
   showFrets: false,
 
-
-  /**
-    The domain mode for the x axis. This determines the behavior of
-    xMin and xMax as they relate to all of the data in the graph and
-    to the domain for scaling purposes.
-    
-    Possible values:
-    - `'auto'` - automatically sizes the domain to the data it contains
-    - `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`
-    
-    @property xDomainMode
-    @type String
-    @default 'auto'
-  */
-  xDomainMode: 'auto',
-
-  /**
-    The domain mode for the y axis. This determines the behavior of
-    `yMin` and `yMax` as they relate to all of the data in the graph and
-    to the domain for scaling purposes.
-
-    Possible values:
-    - `'auto'` - automatically sizes the domain to the data it contains
-    - `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`
-
-    @property yDomainMode
-    @type String
-    @default 'auto'
-  */
-  yDomainMode: 'auto',
-
   /**
     The type of scale to use for x values.
     
@@ -304,46 +273,100 @@ export default Ember.Component.extend({
   */
   xAxis: null,
 
-  _xMin: 0,
-  _xMax: 1,
-  _yMin: 0,
-  _yMax: 1,
+  _xMin: null,
+  _xMax: null,
+  _yMin: null,
+  _yMax: null,
+
+  xMin: function(key, value) {
+    var mode = this.xMinMode;
+    if(mode === 'fixed' && arguments.length > 1) {
+      this._xMin = value;
+    }
+
+    if(mode === 'auto') {
+      return this.get('xDataExtent')[0];
+    }
+    return this._xMin;
+  }.property('xMinMode', 'xDataExtent'),
+
+  xMax: function(key, value) {
+    var mode = this.xMaxMode;
+    if(mode === 'fixed' && arguments.length > 1) {
+      this._xMax = value;
+    }
+
+    if(mode === 'auto') {
+      return this.get('xDataExtent')[1];
+    }
+    return this._xMax;
+  }.property('xMaxMode', 'xDataExtent'),
+
+  yMin: function(key, value) {
+    var mode = this.yMinMode;
+    if(mode === 'fixed' && arguments.length > 1) {
+      this._yMin = value;
+    }
+
+    if(mode === 'auto') {
+      return this.get('yDataExtent')[0];
+    }
+    return this._yMin;
+  }.property('yMinMode', 'yDataExtent'),
+
+  yMax: function(key, value) {
+    var mode = this.yMaxMode;
+    if(mode === 'fixed' && arguments.length > 1) {
+      this._yMax = value;
+    }
+
+    if(mode === 'auto') {
+      return this.get('yDataExtent')[1];
+    }
+    return this._yMax;
+  }.property('yMaxMode', 'yDataExtent'),
+  
+
+  xMinMode: 'auto',
+  xMaxMode: 'auto',
+  yMinMode: 'auto',
+  yMaxMode: 'auto',
+
+  xDataExtent: property('xData.@each', function(xData) {
+    return xData && xData.length > 0 ? d3.extent(xData) : [0, 1];
+  }),
+
+  yDataExtent: property('yData.@each', function(yData) {
+    return yData && yData.length > 0 ? d3.extent(yData) : [0, 1];
+  }),
 
   /**
-    The minimum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
-    If `xDomainMode` is `'fixed'`, setting `xMin` determines the lower bounds of the domain.
-    For `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.
-    @property xMin
-    @type String/Number
-   */
-  xMin: backedProperty('_xMin'),
+    Gets all x data from all graphics.
+    @property xData
+    @type Array
+    @readonly
+  */
+  xData: property('graphics.@each.xData', function(graphics) {
+    var all = [];
+    graphics.forEach(function(graphic) {
+      all = all.concat(graphic.get('xData'));
+    });
+    return all;
+  }),
 
   /**
-    The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.
-    If `xDomainMode` is `'fixed'`, setting `xMax` determines the upper bounds of the domain.
-    For `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.
-    @property xMax
-    @type String/Number
-   */
-  xMax: backedProperty('_xMax'),
-
-  /**
-    The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
-    If `yDomainMode` is `'fixed'`, setting `yMin` determines the lower bounds of the domain.
-    For `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.
-    @property yMin
-    @type String/Number
-   */
-  yMin: backedProperty('_yMin'),
-
-  /**
-    The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.
-    If `yDomainMode` is `'fixed'`, setting `yMax` determines the upper bounds of the domain.
-    For `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.
-    @property yMax
-    @type String/Number
-   */
-  yMax: backedProperty('_yMax'),
+    Gets all y data from all graphics
+    @property yData
+    @type Array
+    @readonly
+  */
+  yData: property('graphics.@each.yData', function(graphics) {
+    var all = [];
+    graphics.forEach(function(graphic) {
+      all = all.concat(graphic.get('yData'));
+    });
+    return all;
+  }),
 
   /**
     Registry of contained graphic elements such as `nf-line` or `nf-area` components.
@@ -377,40 +400,6 @@ export default Ember.Component.extend({
     @default false
    */
   showXAxis: computedBool('xAxis'),
-
-  /**
-    Observes changes to the sortedData under each registered graphic, and updates `xData` and `yData`
-    @method _graphicsSortedDataChanged
-    @private
-  */
-  _graphicsSortedDataChanged: observer(
-    'graphics.@each.sortedData', 
-    function(graphics){
-      var all = graphics.reduce(function(all, graphic) {
-        all = all.concat(graphic.get('sortedData') || []);
-        return all;
-      }, []);
-
-      this.set('xData', all.map(function(d) { return d[0]; }));
-      this.set('yData', all.map(function(d) { return d[1]; }));
-    }
-  ),
-
-  _updateXMinMaxIfAuto: observer('xDomainMode', 'xData', function(domainMode, data) {
-    if(domainMode === 'auto') {
-      var extent = d3.extent(data);
-      this.set('xMin', extent[0] || 0);
-      this.set('xMax', extent[1] || 0);
-    }
-  }),
-
-  _updateYMinMaxIfAuto: observer('yDomainMode', 'yData', function(domainMode, data) {
-    if(domainMode === 'auto') {
-      var extent = d3.extent(data);
-      this.set('yMin', extent[0] || 0);
-      this.set('yMax', extent[1] || 0);
-    }
-  }),
 
   /**
     Gets a function to create the xScale

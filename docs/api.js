@@ -29,7 +29,14 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-selectable-graphic",
         "utils.parse-property-expression"
     ],
-    "modules": [],
-    "allModules": []
+    "modules": [
+        "utils_nf_array-helpers"
+    ],
+    "allModules": [
+        {
+            "displayName": "utils/nf/array-helpers",
+            "name": "utils_nf_array-helpers"
+        }
+    ]
 } };
 });

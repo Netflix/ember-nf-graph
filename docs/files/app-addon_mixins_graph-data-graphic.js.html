@@ -99,6 +99,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+            
             </ul>
         </div>
     </div>
@@ -140,7 +142,8 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
+import { nearestIndexTo } from &#x27;../utils/nf/array-helpers&#x27;;
 
 /**
   This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
@@ -212,6 +215,22 @@ export default Ember.Mixin.create({
 	}.property(&#x27;yprop&#x27;),
 
   /**
+    Gets the x values from the &#x60;sortedData&#x60;.
+    @property xData
+    @type Array
+    @readonly
+  */
+  xData: null,
+
+  /**
+    Gets the y values from the &#x60;sortedData&#x60;
+    @property yData
+    @type Array
+    @readonly
+  */
+  yData: null,
+
+  /**
     The sorted and mapped data pulled from {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
     An array of arrays, structures as so:
 
@@ -234,7 +253,7 @@ export default Ember.Mixin.create({
     }
 
     var mapped = data.map(function(d, i) {
-    	var item = [xPropFn(d), yPropFn(d)];
+      var item = [xPropFn(d), yPropFn(d)];
     	item.data = d;
     	item.origIndex = i;
     	return item;
@@ -247,6 +266,17 @@ export default Ember.Mixin.create({
         return ax === bx ? 0 : (ax &gt; bx) ? 1 : -1;
       });
     }
+
+    var xData = [];
+    var yData = [];
+    
+    mapped.forEach(function(d) {
+      xData.push(d[0]);
+      yData.push(d[1]);
+    });
+
+    this.set(&#x27;xData&#x27;, xData);
+    this.set(&#x27;yData&#x27;, yData);
     
     return mapped;
   }.property(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;),
@@ -286,7 +316,7 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  firstVisibleData: property(&#x27;renderedData&#x27;, &#x27;xMin&#x27;, function(renderedData, xMin) {
+  firstVisibleData: property(&#x27;renderedData.@each&#x27;, &#x27;xMin&#x27;, function(renderedData, xMin) {
     var first = renderedData[0];
     if(first &amp;&amp; xMin &gt; first[0] &amp;&amp; renderedData.length &gt; 1) {
       first = renderedData[1];
@@ -302,12 +332,33 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  lastVisibleData: property(&#x27;renderedData&#x27;, &#x27;xMax&#x27;, function(renderedData, xMax) {
+  lastVisibleData: property(&#x27;renderedData.@each&#x27;, &#x27;xMax&#x27;, function(renderedData, xMax) {
     var last = renderedData[renderedData.length - 1];
     if(last &amp;&amp; xMax &lt; last[0] &amp;&amp; renderedData.length &gt; 1) {
       last = renderedData[renderedData.length - 2];
     }
     return last;
+  }),
+
+
+  updateHoverIndex: observer(&#x27;graph.hoverX&#x27;, &#x27;renderedData.@each&#x27;, function(graphHoverX, renderedData) {
+    var index = -1;
+    if(!isNaN(graphHoverX)) {
+      if(renderedData &amp;&amp; renderedData.length &gt; 0) {
+        index = nearestIndexTo(renderedData, graphHoverX, function(d) {
+          return d ? d[0] : null;
+        });
+      }
+    }
+
+    this.set(&#x27;hoverIndex&#x27;, index);
+    var data = renderedData[index];
+
+    this.set(&#x27;hoverData&#x27;, data ? {
+      x: data[0],
+      y: data[1],
+      data: data.data,
+    } : null);
   }),
 });
 

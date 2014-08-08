@@ -99,6 +99,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+            
             </ul>
         </div>
     </div>
@@ -139,6 +141,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import { backedProperty } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
  * @namespace mixins
@@ -146,28 +149,26 @@ import Ember from &#x27;ember&#x27;;
  * @extends Ember.Mixin
  */
 export default Ember.Mixin.create({
-  selected: false,
+  _selected: false,
   selectable: false,
 
-  isSelected: function(){
-    return this === this.get(&#x27;graph.selected&#x27;);
-  }.property(&#x27;graph.selected&#x27;),
+  selected: backedProperty(&#x27;_selected&#x27;),
 
-  toggleSelected: function(){
-    var graphSelected = this.get(&#x27;graph.selected&#x27;);
-    
-    if(graphSelected === this) {
-      this.set(&#x27;selected&#x27;, false);
-      this.set(&#x27;graph.selected&#x27;, null);
+  /**
+    @property isSelected
+    @deprecated use &#x60;selected&#x60;
+  */
+  isSelected: Ember.computed.alias(&#x27;selected&#x27;),
+
+  _updateGraphSelected: function() {
+    var selected = this.get(&#x27;selected&#x27;);
+    var graph = this.get(&#x27;graph&#x27;);
+    if(selected) {
+      graph.selectGraphic(this);
     } else {
-      this.set(&#x27;selected&#x27;, true);
-      this.set(&#x27;graph.selected&#x27;, this);
+      graph.deselectGraphic(this);
     }
-    if(graphSelected) {
-      graphSelected.set(&#x27;selected&#x27;, false);
-    }
-    this.get(&#x27;isSelected&#x27;);
-  },
+  }.observes(&#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
 });
     </pre>
 </div>

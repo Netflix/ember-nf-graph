@@ -99,6 +99,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+            
             </ul>
         </div>
     </div>
@@ -170,7 +172,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
     tagName: &#x27;g&#x27;,
     
-    classNameBindings: [&#x27;:nf-area&#x27;, &#x27;isSelected:selected&#x27;, &#x27;selectable&#x27;],
+    classNameBindings: [&#x27;:nf-area&#x27;, &#x27;selected&#x27;, &#x27;selectable&#x27;],
 
     interpolator: &#x27;monotone&#x27;,
 
@@ -229,7 +231,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
     click: function(){
       if(this.get(&#x27;selectable&#x27;)) {
-        this.toggleSelected();
+        this.toggleProperty(&#x27;selected&#x27;);
       }
     }
   });

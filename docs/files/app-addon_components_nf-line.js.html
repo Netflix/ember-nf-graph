@@ -99,6 +99,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+            
             </ul>
         </div>
     </div>
@@ -160,6 +162,8 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
   
   interpolator: &#x27;linear&#x27;,
   
+  classNameBindings: [&#x27;selected&#x27;, &#x27;selectable&#x27;],
+
   classNames: [&#x27;nf-line&#x27;],
 
   lineFn: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;interpolator&#x27;, function(xScale, yScale, interpolator) {
@@ -171,13 +175,11 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     return lineFn(renderedData);
   }),
 
-  _updateSelectionClick: function(){
+  click: function(){
     if(this.get(&#x27;selectable&#x27;)) {
-      this.set(&#x27;click&#x27;, function(){
-        this.toggleSelected();
-      });
+      this.toggleProperty(&#x27;selected&#x27;);
     }
-  }.observes(&#x27;selectable&#x27;)
+  },
 });
     </pre>
 </div>

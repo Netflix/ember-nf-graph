@@ -290,6 +290,15 @@
                 "mixins": 1
             }
         },
+        "app-addon/utils/nf/array-helpers.js": {
+            "name": "app-addon/utils/nf/array-helpers.js",
+            "modules": {
+                "utils/nf/array-helpers": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "app-addon/utils/parse-property-expression.js": {
             "name": "app-addon/utils/parse-property-expression.js",
             "modules": {},
@@ -302,7 +311,48 @@
             }
         }
     },
-    "modules": {},
+    "modules": {
+        "utils/nf/array-helpers": {
+            "name": "utils/nf/array-helpers",
+            "submodules": {},
+            "classes": {
+                "components.nf-area-stack": 1,
+                "components.nf-area": 1,
+                "components.nf-bars": 1,
+                "components.nf-cell": 1,
+                "components.nf-column": 1,
+                "components.nf-crosshair": 1,
+                "components.nf-graph-content": 1,
+                "components.nf-graph": 1,
+                "components.nf-header": 1,
+                "components.nf-line": 1,
+                "components.nf-range-marker": 1,
+                "components.nf-range-markers": 1,
+                "components.nf-right-tick": 1,
+                "components.nf-selection-box": 1,
+                "components.nf-table": 1,
+                "components.nf-x-axis": 1,
+                "components.nf-y-axis": 1,
+                "components.nf-y-diff": 1,
+                "mixins.graph-area-utils": 1,
+                "mixins.graph-data-graphic": 1,
+                "mixins.graph-data-position-utils": 1,
+                "mixins.graph-graphic-with-tracking-dot": 1,
+                "mixins.graph-has-graph-parent": 1,
+                "mixins.graph-line-utils": 1,
+                "mixins.graph-registered-graphic": 1,
+                "mixins.graph-selectable-graphic": 1,
+                "utils.parse-property-expression": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils": 1
+            },
+            "tag": "module",
+            "file": "app-addon/utils/parse-property-expression.js",
+            "line": 1
+        }
+    },
     "classes": {
         "components.nf-area-stack": {
             "name": "components.nf-area-stack",
@@ -312,6 +362,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-area-stack.js",
             "line": 3,
@@ -325,6 +376,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-area.js",
             "line": 12,
@@ -348,6 +400,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-bars.js",
             "line": 8,
@@ -361,6 +414,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-cell.js",
             "line": 3,
@@ -374,6 +428,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-column.js",
             "line": 4,
@@ -387,6 +442,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-crosshair.js",
             "line": 5,
@@ -400,6 +456,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-graph-content.js",
             "line": 3,
@@ -413,9 +470,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-graph.js",
-            "line": 71,
+            "line": 70,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n     {{#nf-graph width=100 height=50}}\n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n     {{#nf-graph width=500 height=300}}\n       {{#nf-x-axis height=\"50\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-x-axis}}\n \n       {{#nf-y-axis width=\"120\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-y-axis}}\n \n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present."
         },
         "components.nf-header": {
@@ -426,6 +484,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-header.js",
             "line": 3,
@@ -439,6 +498,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-line.js",
             "line": 12,
@@ -452,6 +512,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-range-marker.js",
             "line": 5,
@@ -465,6 +526,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-range-markers.js",
             "line": 5,
@@ -478,6 +540,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-right-tick.js",
             "line": 4,
@@ -491,6 +554,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-selection-box.js",
             "line": 4,
@@ -507,6 +571,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-table.js",
             "line": 5,
@@ -520,6 +585,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-x-axis.js",
             "line": 5,
@@ -533,6 +599,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-y-axis.js",
             "line": 5,
@@ -546,6 +613,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-y-diff.js",
             "line": 5,
@@ -561,6 +629,7 @@
             "extension_for": [
                 "components.nf-area"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-area-utils.js",
             "line": 3,
@@ -577,9 +646,10 @@
             "extension_for": [
                 "components.nf-area"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 5,
+            "line": 6,
             "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}"
         },
         "mixins.graph-data-position-utils": {
@@ -592,6 +662,7 @@
             "extension_for": [
                 "components.nf-area"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-data-position-utils.js",
             "line": 26,
@@ -607,9 +678,10 @@
             "extension_for": [
                 "components.nf-area"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 3,
+            "line": 4,
             "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
@@ -623,6 +695,7 @@
                 "components.nf-area",
                 "components.nf-selection-box"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-has-graph-parent.js",
             "line": 3,
@@ -636,6 +709,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-line-utils.js",
             "line": 3,
@@ -651,6 +725,7 @@
             "extension_for": [
                 "components.nf-area"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-registered-graphic.js",
             "line": 3,
@@ -666,9 +741,10 @@
             "extension_for": [
                 "components.nf-area"
             ],
+            "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-selectable-graphic.js",
-            "line": 3,
+            "line": 4,
             "extends": "Ember.Mixin"
         },
         "utils.parse-property-expression": {
@@ -679,6 +755,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
+            "module": "utils/nf/array-helpers",
             "namespace": "utils",
             "file": "app-addon/utils/parse-property-expression.js",
             "line": 1,
@@ -893,7 +970,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 112,
+            "line": 111,
             "description": "Allows child compoenents to identify graph parent.",
             "itemtype": "property",
             "name": "isGraph",
@@ -902,7 +979,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 118,
+            "line": 117,
             "itemtype": "property",
             "name": "hasRendered",
             "access": "private",
@@ -912,7 +989,18 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 124,
+            "line": 123,
+            "description": "Gets or sets the whether or not multiple selectable graphics may be\nselected simultaneously.",
+            "itemtype": "property",
+            "name": "selectMultiple",
+            "type": "Boolean",
+            "default": "false",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 132,
             "description": "The width of the graph in pixels.",
             "itemtype": "property",
             "name": "width",
@@ -923,7 +1011,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 132,
+            "line": 140,
             "description": "The height of the graph in pixels.",
             "itemtype": "property",
             "name": "height",
@@ -934,7 +1022,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 140,
+            "line": 148,
             "description": "The padding at the top of the graph",
             "itemtype": "property",
             "name": "paddingTop",
@@ -945,7 +1033,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 148,
+            "line": 156,
             "description": "The padding at the left of the graph",
             "itemtype": "property",
             "name": "paddingLeft",
@@ -956,7 +1044,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 156,
+            "line": 164,
             "description": "The padding at the right of the graph",
             "itemtype": "property",
             "name": "paddingRight",
@@ -967,7 +1055,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 164,
+            "line": 172,
             "description": "The padding at the bottom of the graph",
             "itemtype": "property",
             "name": "paddingBottom",
@@ -978,7 +1066,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 172,
+            "line": 180,
             "description": "Determines whether to display \"lanes\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showLanes",
@@ -989,7 +1077,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 181,
+            "line": 189,
             "description": "Determines whether to display \"frets\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showFrets",
@@ -1000,29 +1088,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 191,
-            "description": "The domain mode for the x axis. This determines the behavior of\nxMin and xMax as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `xMin` and `xMax`",
-            "itemtype": "property",
-            "name": "xDomainMode",
-            "type": "String",
-            "default": "'auto'",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 206,
-            "description": "The domain mode for the y axis. This determines the behavior of\n`yMin` and `yMax` as they relate to all of the data in the graph and\nto the domain for scaling purposes.\n\nPossible values:\n- `'auto'` - automatically sizes the domain to the data it contains\n- `'fixed'` - fixes the domain to bounds specified by `yMin` and `yMax`",
-            "itemtype": "property",
-            "name": "yDomainMode",
-            "type": "String",
-            "default": "'auto'",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 221,
+            "line": 198,
             "description": "The type of scale to use for x values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "xScaleType",
@@ -1033,7 +1099,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 236,
+            "line": 213,
             "description": "The type of scale to use for y values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "yScaleType",
@@ -1044,7 +1110,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 251,
+            "line": 228,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalPadding",
@@ -1055,7 +1121,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 259,
+            "line": 236,
             "description": "The padding at the ends of the domain data when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalOuterPadding",
@@ -1066,7 +1132,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 267,
+            "line": 244,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalPadding",
@@ -1077,7 +1143,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 275,
+            "line": 252,
             "description": "The padding at the ends of the domain data when `yScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalOuterPadding",
@@ -1088,7 +1154,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 283,
+            "line": 260,
             "description": "the `nf-y-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "yAxis",
@@ -1099,7 +1165,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 291,
+            "line": 268,
             "description": "The `nf-x-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "xAxis",
@@ -1110,47 +1176,29 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 304,
-            "description": "The minimum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.\nIf `xDomainMode` is `'fixed'`, setting `xMin` determines the lower bounds of the domain.\nFor `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.",
+            "line": 343,
+            "description": "Gets all x data from all graphics.",
             "itemtype": "property",
-            "name": "xMin",
-            "type": "String/Number",
+            "name": "xData",
+            "type": "Array",
+            "readonly": "",
             "class": "components.nf-graph",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 313,
-            "description": "The maximum x domain value. If `xDomainMode` is `'auto'`, this is *readonly*.\nIf `xDomainMode` is `'fixed'`, setting `xMax` determines the upper bounds of the domain.\nFor `xScaleType` `'ordinal'`, use `xDomainMode` `'auto'`.",
+            "line": 357,
+            "description": "Gets all y data from all graphics",
             "itemtype": "property",
-            "name": "xMax",
-            "type": "String/Number",
+            "name": "yData",
+            "type": "Array",
+            "readonly": "",
             "class": "components.nf-graph",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 322,
-            "description": "The minimum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.\nIf `yDomainMode` is `'fixed'`, setting `yMin` determines the lower bounds of the domain.\nFor `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.",
-            "itemtype": "property",
-            "name": "yMin",
-            "type": "String/Number",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 331,
-            "description": "The maximum y domain value. If `yDomainMode` is `'auto'`, this is *readonly*.\nIf `yDomainMode` is `'fixed'`, setting `yMax` determines the upper bounds of the domain.\nFor `yScaleType` `'ordinal'`, use `yDomainMode` `'auto'`.",
-            "itemtype": "property",
-            "name": "yMax",
-            "type": "String/Number",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 340,
+            "line": 371,
             "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
             "itemtype": "property",
             "name": "graphics",
@@ -1161,7 +1209,18 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 349,
+            "line": 380,
+            "description": "An array of \"selectable\" graphics that have been selected within this graph.",
+            "itemtype": "property",
+            "name": "selected",
+            "type": "Array",
+            "readonly": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 388,
             "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
             "itemtype": "property",
             "name": "showYAxis",
@@ -1172,7 +1231,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 357,
+            "line": 396,
             "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
             "itemtype": "property",
             "name": "showXAxis",
@@ -1183,7 +1242,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 394,
+            "line": 404,
             "description": "Gets a function to create the xScale",
             "itemtype": "property",
             "name": "xScaleFactory",
@@ -1193,7 +1252,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 401,
+            "line": 411,
             "description": "Gets a function to create the yScale",
             "itemtype": "property",
             "name": "yScaleFactory",
@@ -1203,7 +1262,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 408,
+            "line": 418,
             "description": "Gets the domain of x values.",
             "itemtype": "property",
             "name": "xDomain",
@@ -1214,7 +1273,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 416,
+            "line": 426,
             "description": "Gets the domain of y values.",
             "itemtype": "property",
             "name": "yDomain",
@@ -1225,7 +1284,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 424,
+            "line": 434,
             "description": "Gets the current xScale used to draw the graph.",
             "itemtype": "property",
             "name": "xScale",
@@ -1236,7 +1295,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 432,
+            "line": 442,
             "description": "Gets the current yScale used to draw the graph.",
             "itemtype": "property",
             "name": "yScale",
@@ -1247,7 +1306,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 440,
+            "line": 450,
             "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
             "itemtype": "method",
             "name": "registerGraphic",
@@ -1263,7 +1322,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 450,
+            "line": 460,
             "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
             "itemtype": "method",
             "name": "unregisterGraphic",
@@ -1279,7 +1338,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 460,
+            "line": 470,
             "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "yRange",
@@ -1290,7 +1349,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 471,
+            "line": 481,
             "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "xRange",
@@ -1301,7 +1360,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 482,
+            "line": 492,
             "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
             "itemtype": "property",
             "name": "hasData",
@@ -1313,7 +1372,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 494,
+            "line": 504,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
@@ -1324,7 +1383,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 510,
+            "line": 520,
             "description": "The y coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphY",
@@ -1335,7 +1394,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 525,
+            "line": 535,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
@@ -1346,7 +1405,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 540,
+            "line": 550,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
@@ -1357,7 +1416,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 555,
+            "line": 565,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
@@ -1368,7 +1427,29 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 592,
+            "line": 575,
+            "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
+            "itemtype": "method",
+            "name": "_notifyHasRendered",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 584,
+            "description": "Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up\nDOM events for the graph. Fires on `didInsertElement`",
+            "itemtype": "method",
+            "name": "_registerDOM",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 613,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -1393,7 +1474,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 612,
+            "line": 633,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -1404,43 +1485,108 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 623,
-            "description": "The x *domain* value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content",
-            "itemtype": "property",
-            "name": "xHover",
-            "type": "Number",
-            "default": "-1",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 632,
-            "description": "The y *domain* value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content.",
-            "itemtype": "property",
-            "name": "yHover",
-            "type": "Number",
-            "default": "-1",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
             "line": 641,
-            "description": "Sets or gets the xLink object for the graph. The xLink object is used to \ntie two graphs together along the x-axis.\n\nthe xLink object has the following properties:\n\n- `xHover`: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}",
+            "description": "The x pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content",
             "itemtype": "property",
-            "name": "xLink",
-            "type": "Object",
+            "name": "mouseX",
+            "type": "Number",
+            "default": "-1",
             "class": "components.nf-graph",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 668,
-            "description": "Sets or gets the xLink object for the graph. The xLink object is used to \ntie two graphs together along the x-axis.\n\nthe xLink object has the following properties:\n\n- `xHover`: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}",
+            "line": 650,
+            "description": "The y pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content.",
             "itemtype": "property",
-            "name": "xLink",
-            "type": "Object",
+            "name": "mouseY",
+            "type": "Number",
+            "default": "-1",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 659,
+            "description": "Gets the x domain value at the current mouse x hover position.",
+            "itemtype": "property",
+            "name": "hoverX",
+            "readonly": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 666,
+            "description": "Gets teh y domain value at the current mouse y hover position.",
+            "itemtype": "property",
+            "name": "hoverY",
+            "readonly": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 673,
+            "description": "updates `hoverX` when `mouseX` changes or something causes the scale to change.",
+            "itemtype": "method",
+            "name": "updateHoverX",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 683,
+            "description": "updates `hoverY` when `mouseY` changes or something causes the scale to change.",
+            "itemtype": "method",
+            "name": "updateHoverY",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 693,
+            "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
+            "itemtype": "method",
+            "name": "selectGraphic",
+            "params": [
+                {
+                    "name": "graphic",
+                    "description": "the graph component to select within the graph.",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 714,
+            "description": "deselects the graphic passed.",
+            "itemtype": "method",
+            "name": "deselectGraphic",
+            "params": [
+                {
+                    "name": "graphic",
+                    "description": "the graph child component to deselect.",
+                    "type": "Ember.Component"
+                }
+            ],
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 731,
+            "description": "The initialization method. Fired on `init`.",
+            "itemtype": "method",
+            "name": "_setup",
+            "access": "private",
+            "tagname": "",
             "class": "components.nf-graph",
             "namespace": "components"
         },
@@ -2251,7 +2397,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 19,
+            "line": 20,
             "description": "Gets or sets the data used by the component to plot itself.",
             "itemtype": "property",
             "name": "data",
@@ -2262,7 +2408,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 28,
+            "line": 29,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as x data to plot on the graph.",
             "itemtype": "property",
             "name": "x",
@@ -2273,7 +2419,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 39,
+            "line": 40,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as y data to plot on the graph.",
             "itemtype": "property",
             "name": "y",
@@ -2284,7 +2430,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 50,
+            "line": 51,
             "description": "The function to get the x value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "xPropFn",
@@ -2295,7 +2441,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 62,
+            "line": 63,
             "description": "The function to get the y value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "yPropFn",
@@ -2306,7 +2452,29 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 74,
+            "line": 75,
+            "description": "Gets the x values from the `sortedData`.",
+            "itemtype": "property",
+            "name": "xData",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 83,
+            "description": "Gets the y values from the `sortedData`",
+            "itemtype": "property",
+            "name": "yData",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-data-graphic.js",
+            "line": 91,
             "description": "The sorted and mapped data pulled from {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nAn array of arrays, structures as so:\n\n      [[x,y],[x,y],[x,y]];\n\n** each inner array also has a property `data` on it, containing the original data object **",
             "itemtype": "property",
             "name": "sortedData",
@@ -2317,7 +2485,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 115,
+            "line": 143,
             "description": "The list of data points from {{#crossLink \"mixins.graph-data-graphc/sortedData:property\"}}{{/crossLink}} that\nfits within the x domain, plus up to one data point outside of that domain in each direction.",
             "itemtype": "property",
             "name": "renderedData",
@@ -2328,7 +2496,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 142,
+            "line": 170,
             "description": "The first element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "firstSortedData",
@@ -2339,7 +2507,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 158,
+            "line": 186,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
@@ -2386,47 +2554,6 @@
             "name": "trackingMode",
             "type": "String",
             "default": "'none'",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 34,
-            "description": "The {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} item to plot the tracking dot at.",
-            "itemtype": "property",
-            "name": "trackedData",
-            "type": "Array",
-            "default": "null",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 45,
-            "description": "An model of the tracking dot's position and size",
-            "itemtype": "property",
-            "name": "trackingDot",
-            "default": "{ x: 0, y: 0, visible: false, radius: 2.5 }",
-            "type": "Object",
-            "readonly": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 69,
-            "description": "Observes the {{#crossLink \"mixin.graph-graphic-with-tracking-dot/trackedData:property\"}}{{/crossLink}},\n{{#crossLink \"components.nf-graph/xScale:property\"}}{{/crossLink}} and\n{{#crossLink \"components.nf-graph/yScale:property\"}}{{/crossLink}}\nand updates the {{#crossLink \"mixin.graph-graphic-with-tracking-dot/trackingDot:property\"}}{{/crossLink}}\naccordingly.",
-            "itemtype": "method",
-            "name": "updateTrackingDot",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 115,
-            "description": "Observes changes other than mouse hovers that might update the {{#crossLink \"mixins.graph-graphic-with-tracking-dot/trackedData\"}}{{/crossLink}}\nand updates accordingly.",
-            "itemtype": "method",
-            "name": "_updateTrackedData",
             "class": "mixins.graph-graphic-with-tracking-dot",
             "namespace": "mixins"
         },
@@ -2503,6 +2630,64 @@
             "namespace": "mixins"
         },
         {
+            "file": "app-addon/mixins/graph-selectable-graphic.js",
+            "line": 15,
+            "itemtype": "property",
+            "name": "isSelected",
+            "deprecated": true,
+            "deprecationMessage": "use `selected`",
+            "class": "mixins.graph-selectable-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/utils/nf/array-helpers.js",
+            "line": 5,
+            "description": "returns whatever you pass into it.",
+            "itemtype": "method",
+            "name": "identity",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "",
+                    "type": "Any"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "return": {
+                "description": "x",
+                "type": "Any"
+            },
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/array-helpers"
+        },
+        {
+            "file": "app-addon/utils/nf/array-helpers.js",
+            "line": 16,
+            "description": "Performs a binary search on the array and finds the nearest index to the value passed.",
+            "itemtype": "method",
+            "name": "nearestIndexTo",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "the *sorted* array to search.",
+                    "type": "Array"
+                },
+                {
+                    "name": "val",
+                    "description": "the value to find the nearest index to.",
+                    "type": "Number"
+                },
+                {
+                    "name": "mappingFn",
+                    "description": "an optional function for pulling values out of the \narray items.",
+                    "type": "Function"
+                }
+            ],
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/array-helpers"
+        },
+        {
             "file": "app-addon/utils/parse-property-expression.js",
             "line": 24,
             "itemtype": "method",
@@ -2519,6 +2704,7 @@
                 "type": "Function"
             },
             "class": "utils.parse-property-expression",
+            "module": "utils/nf/array-helpers",
             "namespace": "utils"
         }
     ],

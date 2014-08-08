@@ -99,6 +99,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+            
             </ul>
         </div>
     </div>
@@ -150,7 +152,6 @@ var SCALE_TYPES = {
   &#x27;ordinal&#x27;: d3.scale.ordinal
 };
 
-var computedAlias = Ember.computed.alias;
 var computedBool = Ember.computed.bool;
 
 var scaleFactoryProperty = function(axis) {
@@ -262,6 +263,15 @@ export default Ember.Component.extend({
   hasRendered: false,
 
   /**
+    Gets or sets the whether or not multiple selectable graphics may be
+    selected simultaneously.
+    @property selectMultiple
+    @type Boolean
+    @default false
+  */
+  selectMultiple: false,
+
+  /**
     The width of the graph in pixels.
     @property width
     @type Number
@@ -326,37 +336,6 @@ export default Ember.Component.extend({
     @default false 
   */
   showFrets: false,
-
-
-  /**
-    The domain mode for the x axis. This determines the behavior of
-    xMin and xMax as they relate to all of the data in the graph and
-    to the domain for scaling purposes.
-    
-    Possible values:
-    - &#x60;&#x27;auto&#x27;&#x60; - automatically sizes the domain to the data it contains
-    - &#x60;&#x27;fixed&#x27;&#x60; - fixes the domain to bounds specified by &#x60;xMin&#x60; and &#x60;xMax&#x60;
-    
-    @property xDomainMode
-    @type String
-    @default &#x27;auto&#x27;
-  */
-  xDomainMode: &#x27;auto&#x27;,
-
-  /**
-    The domain mode for the y axis. This determines the behavior of
-    &#x60;yMin&#x60; and &#x60;yMax&#x60; as they relate to all of the data in the graph and
-    to the domain for scaling purposes.
-
-    Possible values:
-    - &#x60;&#x27;auto&#x27;&#x60; - automatically sizes the domain to the data it contains
-    - &#x60;&#x27;fixed&#x27;&#x60; - fixes the domain to bounds specified by &#x60;yMin&#x60; and &#x60;yMax&#x60;
-
-    @property yDomainMode
-    @type String
-    @default &#x27;auto&#x27;
-  */
-  yDomainMode: &#x27;auto&#x27;,
 
   /**
     The type of scale to use for x values.
@@ -436,46 +415,100 @@ export default Ember.Component.extend({
   */
   xAxis: null,
 
-  _xMin: 0,
-  _xMax: 1,
-  _yMin: 0,
-  _yMax: 1,
+  _xMin: null,
+  _xMax: null,
+  _yMin: null,
+  _yMax: null,
+
+  xMin: function(key, value) {
+    var mode = this.xMinMode;
+    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
+      this._xMin = value;
+    }
+
+    if(mode === &#x27;auto&#x27;) {
+      return this.get(&#x27;xDataExtent&#x27;)[0];
+    }
+    return this._xMin;
+  }.property(&#x27;xMinMode&#x27;, &#x27;xDataExtent&#x27;),
+
+  xMax: function(key, value) {
+    var mode = this.xMaxMode;
+    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
+      this._xMax = value;
+    }
+
+    if(mode === &#x27;auto&#x27;) {
+      return this.get(&#x27;xDataExtent&#x27;)[1];
+    }
+    return this._xMax;
+  }.property(&#x27;xMaxMode&#x27;, &#x27;xDataExtent&#x27;),
+
+  yMin: function(key, value) {
+    var mode = this.yMinMode;
+    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
+      this._yMin = value;
+    }
+
+    if(mode === &#x27;auto&#x27;) {
+      return this.get(&#x27;yDataExtent&#x27;)[0];
+    }
+    return this._yMin;
+  }.property(&#x27;yMinMode&#x27;, &#x27;yDataExtent&#x27;),
+
+  yMax: function(key, value) {
+    var mode = this.yMaxMode;
+    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
+      this._yMax = value;
+    }
+
+    if(mode === &#x27;auto&#x27;) {
+      return this.get(&#x27;yDataExtent&#x27;)[1];
+    }
+    return this._yMax;
+  }.property(&#x27;yMaxMode&#x27;, &#x27;yDataExtent&#x27;),
+  
+
+  xMinMode: &#x27;auto&#x27;,
+  xMaxMode: &#x27;auto&#x27;,
+  yMinMode: &#x27;auto&#x27;,
+  yMaxMode: &#x27;auto&#x27;,
+
+  xDataExtent: property(&#x27;xData.@each&#x27;, function(xData) {
+    return xData &amp;&amp; xData.length &gt; 0 ? d3.extent(xData) : [0, 1];
+  }),
+
+  yDataExtent: property(&#x27;yData.@each&#x27;, function(yData) {
+    return yData &amp;&amp; yData.length &gt; 0 ? d3.extent(yData) : [0, 1];
+  }),
 
   /**
-    The minimum x domain value. If &#x60;xDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
-    If &#x60;xDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;xMin&#x60; determines the lower bounds of the domain.
-    For &#x60;xScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;xDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
-    @property xMin
-    @type String/Number
-   */
-  xMin: computedAlias(&#x27;_xMin&#x27;),
+    Gets all x data from all graphics.
+    @property xData
+    @type Array
+    @readonly
+  */
+  xData: property(&#x27;graphics.@each.xData&#x27;, function(graphics) {
+    var all = [];
+    graphics.forEach(function(graphic) {
+      all = all.concat(graphic.get(&#x27;xData&#x27;));
+    });
+    return all;
+  }),
 
   /**
-    The maximum x domain value. If &#x60;xDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
-    If &#x60;xDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;xMax&#x60; determines the upper bounds of the domain.
-    For &#x60;xScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;xDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
-    @property xMax
-    @type String/Number
-   */
-  xMax: computedAlias(&#x27;_xMax&#x27;),
-
-  /**
-    The minimum y domain value. If &#x60;yDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
-    If &#x60;yDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;yMin&#x60; determines the lower bounds of the domain.
-    For &#x60;yScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;yDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
-    @property yMin
-    @type String/Number
-   */
-  yMin: computedAlias(&#x27;_yMin&#x27;),
-
-  /**
-    The maximum y domain value. If &#x60;yDomainMode&#x60; is &#x60;&#x27;auto&#x27;&#x60;, this is *readonly*.
-    If &#x60;yDomainMode&#x60; is &#x60;&#x27;fixed&#x27;&#x60;, setting &#x60;yMax&#x60; determines the upper bounds of the domain.
-    For &#x60;yScaleType&#x60; &#x60;&#x27;ordinal&#x27;&#x60;, use &#x60;yDomainMode&#x60; &#x60;&#x27;auto&#x27;&#x60;.
-    @property yMax
-    @type String/Number
-   */
-  yMax: computedAlias(&#x27;_yMax&#x27;),
+    Gets all y data from all graphics
+    @property yData
+    @type Array
+    @readonly
+  */
+  yData: property(&#x27;graphics.@each.yData&#x27;, function(graphics) {
+    var all = [];
+    graphics.forEach(function(graphic) {
+      all = all.concat(graphic.get(&#x27;yData&#x27;));
+    });
+    return all;
+  }),
 
   /**
     Registry of contained graphic elements such as &#x60;nf-line&#x60; or &#x60;nf-area&#x60; components.
@@ -484,7 +517,15 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  graphics: computedAlias(&#x27;_graphics&#x27;),
+  graphics: null,
+
+  /**
+    An array of &quot;selectable&quot; graphics that have been selected within this graph.
+    @property selected
+    @type Array
+    @readonly
+  */
+  selected: null,
 
   /**
     Computed property to show yAxis. Returns &#x60;true&#x60; if a yAxis is present.
@@ -501,35 +542,6 @@ export default Ember.Component.extend({
     @default false
    */
   showXAxis: computedBool(&#x27;xAxis&#x27;),
-
-  _graphicsSortedDataChanged: observer(
-    &#x27;graphics.@each.sortedData&#x27;, 
-    function(graphics){
-      var all = graphics.reduce(function(all, graphic) {
-        all = all.concat(graphic.get(&#x27;sortedData&#x27;) || []);
-        return all;
-      }, []);
-
-      this.set(&#x27;xData&#x27;, all.map(function(d) { return d[0]; }));
-      this.set(&#x27;yData&#x27;, all.map(function(d) { return d[1]; }));
-    }
-  ),
-
-  _updateXMinMaxIfAuto: observer(&#x27;xDomainMode&#x27;, &#x27;xData&#x27;, function(domainMode, data) {
-    if(domainMode === &#x27;auto&#x27;) {
-      var extent = d3.extent(data);
-      this.set(&#x27;xMin&#x27;, extent[0] || 0);
-      this.set(&#x27;xMax&#x27;, extent[1] || 0);
-    }
-  }),
-
-  _updateYMinMaxIfAuto: observer(&#x27;yDomainMode&#x27;, &#x27;yData&#x27;, function(domainMode, data) {
-    if(domainMode === &#x27;auto&#x27;) {
-      var extent = d3.extent(data);
-      this.set(&#x27;yMin&#x27;, extent[0] || 0);
-      this.set(&#x27;yMax&#x27;, extent[1] || 0);
-    }
-  }),
 
   /**
     Gets a function to create the xScale
@@ -702,10 +714,21 @@ export default Ember.Component.extend({
     return &#x27;translate(%@, %@)&#x27;.fmt(graphX, graphY);
   }),
 
+  /**
+    Sets &#x60;hasRendered&#x60; to &#x60;true&#x60; on &#x60;willInsertElement&#x60;.
+    @method _notifyHasRendered
+    @private
+  */
   _notifyHasRendered: function () {
     this.set(&#x27;hasRendered&#x27;, true);
   }.on(&#x27;willInsertElement&#x27;),
 
+  /**
+    Gets the elements for the &#x60;svg&#x60; and &#x60;graphContentGroup&#x60; properties. Also wires up
+    DOM events for the graph. Fires on &#x60;didInsertElement&#x60;
+    @method _registerDOM
+    @private
+  */
   _registerDOM: function () {
     var graphContentGroup = this.$(&#x27;.nf-graph-content&#x27;);
     var self = this;
@@ -716,15 +739,15 @@ export default Ember.Component.extend({
     graphContentGroup.on(&#x27;mousemove&#x27;, function (e) {
       Ember.run(function () {
         var mouse = self.mousePoint(graphContentGroup[0], e);
-        self.set(&#x27;xHover&#x27;, mouse[0]);
-        self.set(&#x27;yHover&#x27;, mouse[1]);
+        self.set(&#x27;mouseX&#x27;, mouse[0]);
+        self.set(&#x27;mouseY&#x27;, mouse[1]);
       });
     });
 
     graphContentGroup.on(&#x27;mouseleave&#x27;, function () {
       Ember.run(function () {
-        self.set(&#x27;xHover&#x27;, -1);
-        self.set(&#x27;yHover&#x27;, -1);
+        self.set(&#x27;mouseX&#x27;, -1);
+        self.set(&#x27;mouseY&#x27;, -1);
       });
     });
   }.on(&#x27;didInsertElement&#x27;),
@@ -757,83 +780,104 @@ export default Ember.Component.extend({
   */
   parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
-  _xHover: -1,
-  _yHover: -1,
-
   /**
-    The x *domain* value of the current mouse hover position.
+    The x pixel value of the current mouse hover position.
     Will be &#x60;-1&#x60; if the mouse is not hovering over the graph content
-    @property xHover
+    @property mouseX
     @type Number
     @default -1
   */
-  xHover: computedAlias(&#x27;_xHover&#x27;),
+  mouseX: -1,
 
   /**
-    The y *domain* value of the current mouse hover position.
+    The y pixel value of the current mouse hover position.
     Will be &#x60;-1&#x60; if the mouse is not hovering over the graph content.
-    @property yHover
+    @property mouseY
     @type Number
     @default -1
   */
-  yHover: computedAlias(&#x27;_yHover&#x27;),
+  mouseY: -1,
 
   /**
-    Sets or gets the xLink object for the graph. The xLink object is used to 
-    tie two graphs together along the x-axis.
-
-    the xLink object has the following properties:
-
-    - &#x60;xHover&#x60;: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}
-    @property xLink
-    @type Object
+    Gets the x domain value at the current mouse x hover position.
+    @property hoverX
+    @readonly
   */
-  xLink: function(keyName, value) {
-    var xScale = this.get(&#x27;xScale&#x27;);
-    
-    if(!xScale) {
-      return 0;
-    }
-
-    if(arguments.length &gt; 1) {
-      this.set(&#x27;xHover&#x27;, value ? xScale(value.xHover) : -1);
-    }
-
-    return {
-      xHover: xScale.invert(this.get(&#x27;xHover&#x27;))
-    };
-  }.property(&#x27;xScale&#x27;, &#x27;xHover&#x27;),
-
+  hoverX: null,
 
   /**
-    Sets or gets the xLink object for the graph. The xLink object is used to 
-    tie two graphs together along the x-axis.
-
-    the xLink object has the following properties:
-
-    - &#x60;xHover&#x60;: the x mouse hover position from {{#crossLink ember-cli-ember-dvc.nf-graph/xHover:property}}{{/crossLink}}
-    @property xLink
-    @type Object
+    Gets teh y domain value at the current mouse y hover position.
+    @property hoverY
+    @readonly
   */
-  yLink: function(keyName, value) {
-    var yScale = this.get(&#x27;yScale&#x27;);
-    
-    if(!yScale) {
-      return 0;
+  hoverY: null,
+
+  /**
+    updates &#x60;hoverX&#x60; when &#x60;mouseX&#x60; changes or something causes the scale to change.
+    @method updateHoverX
+    @private
+  */
+  updateHoverX: observer(&#x27;mouseX&#x27;, &#x27;xScale&#x27;, function(mouseX, xScale){
+    var hx = mouseX !== -1 &amp;&amp; xScale &amp;&amp; xScale.invert ? xScale.invert(mouseX) : null;
+    this.set(&#x27;hoverX&#x27;, isNaN(hx) ? null : hx);
+  }),
+
+  /**
+    updates &#x60;hoverY&#x60; when &#x60;mouseY&#x60; changes or something causes the scale to change.
+    @method updateHoverY
+    @private
+  */  
+  updateHoverY: observer(&#x27;mouseY&#x27;, &#x27;yScale&#x27;, function(mouseY, yScale) {
+    var hy = mouseY !== -1 &amp;&amp; yScale &amp;&amp; yScale.invert ? yScale.invert(mouseY) : null;
+    this.set(&#x27;hoverY&#x27;, isNaN(hy) ? null : hy);
+  }),
+
+  /**
+    Selects the graphic passed. If &#x60;selectMultiple&#x60; is false, it will deselect the currently
+    selected graphic if it&#x27;s different from the one passed.
+    @method selectGraphic
+    @param graphic {Ember.Component} the graph component to select within the graph.
+  */
+  selectGraphic: function(graphic) {
+    if(!graphic.get(&#x27;selected&#x27;)) {
+      graphic.set(&#x27;selected&#x27;, true);
     }
-
-    if(arguments.length &gt; 1) {
-      this.set(&#x27;yHover&#x27;, value ? yScale(value.yHover) : -1);
+    if(this.selectMultiple) {
+      this.get(&#x27;selected&#x27;).pushObject(graphic);
+    } else {
+      var current = this.get(&#x27;selected&#x27;);
+      if(current &amp;&amp; current !== graphic) {
+        current.set(&#x27;selected&#x27;, false);
+      }
+      this.set(&#x27;selected&#x27;, graphic);
     }
+  },
 
-    return {
-      yHover: yScale.invert(this.get(&#x27;yHover&#x27;))
-    };
-  }.property(&#x27;yScale&#x27;, &#x27;yHover&#x27;),
+  /**
+    deselects the graphic passed.
+    @method deselectGraphic
+    @param graphic {Ember.Component} the graph child component to deselect.
+  */
+  deselectGraphic: function(graphic) {
+    graphic.set(&#x27;selected&#x27;, false);
+    if(this.selectMultiple) {
+      this.get(&#x27;selected&#x27;).removeObject(graphic);
+    } else {
+      var current = this.get(&#x27;selected&#x27;);
+      if(current &amp;&amp; current === graphic) {
+        this.set(&#x27;selected&#x27;, null);
+      }
+    }
+  },
 
-
+  /**
+    The initialization method. Fired on &#x60;init&#x60;.
+    @method _setup
+    @private
+  */
   _setup: function(){
     this.set(&#x27;graphics&#x27;, []);
+    this.set(&#x27;selected&#x27;, this.selectMultiple ? [] : null);
   }.on(&#x27;init&#x27;),
 });
 

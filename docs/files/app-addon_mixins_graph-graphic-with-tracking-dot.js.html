@@ -99,6 +99,8 @@
 
             <ul id="api-modules" class="apis modules">
             
+                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+            
             </ul>
         </div>
     </div>
@@ -139,6 +141,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
   Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
@@ -148,7 +151,6 @@ import Ember from &#x27;ember&#x27;;
   @class graph-graphic-with-tracking-dot
   */
 export default Ember.Mixin.create({
-
   /**
     Gets or sets the tracking mode of the component.
 
@@ -168,129 +170,90 @@ export default Ember.Mixin.create({
     @property trackingMode
     @type String
     @default &#x27;none&#x27;
-    */
-	trackingMode: &#x27;none&#x27;,
+  */
+  trackingMode: &#x27;none&#x27;,
 
-  /**
-    The {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} item to plot the tracking dot at.
+  showTrackingDot: property(&#x27;trackedData.x&#x27;, &#x27;trackedData.y&#x27;, function(x, y) {
+    return typeof x === &#x27;number&#x27; &amp;&amp; typeof y === &#x27;number&#x27;;
+  }),
 
-    @property trackedData 
-    @type Array
-    @default null
-    */
-  trackedData: null,
-  
-  _trackingDot: null,
-
-  /**
-    An model of the tracking dot&#x27;s position and size
-    @property trackingDot
-    @default { x: 0, y: 0, visible: false, radius: 2.5 }
-    @type Object
-    @readonly
-    */
-  trackingDot: function(name, value){ 
-    if(arguments.length &gt; 1) {
-      this._trackingDot = value;
-    }
-
-    if(!this._trackingDot) {
-      this._trackingDot = {
-        x: 0,
-        y: 0,
-        visible: false,
-        radius: 2.5
-      };
-    }
-
-    return this._trackingDot;
-  }.property(&#x27;_trackingDot&#x27;),
-
-  /**
-    Observes the {{#crossLink &quot;mixin.graph-graphic-with-tracking-dot/trackedData:property&quot;}}{{/crossLink}},
-    {{#crossLink &quot;components.nf-graph/xScale:property&quot;}}{{/crossLink}} and
-    {{#crossLink &quot;components.nf-graph/yScale:property&quot;}}{{/crossLink}}
-    and updates the {{#crossLink &quot;mixin.graph-graphic-with-tracking-dot/trackingDot:property&quot;}}{{/crossLink}}
-    accordingly.
-
-    @method updateTrackingDot
-    */
-  updateTrackingDot: function(){
-    var trackedData = this.get(&#x27;trackedData&#x27;);
-    var xScale = this.get(&#x27;graph.xScale&#x27;);
-    var yScale = this.get(&#x27;graph.yScale&#x27;);
-
-    if(!trackedData || !xScale || !yScale) {
-      this.set(&#x27;trackingDot.visible&#x27;, false);
-    } else {
-      this.set(&#x27;trackingDot.visible&#x27;, true);
-      this.set(&#x27;trackingDot.x&#x27;, xScale(trackedData.x));
-      this.set(&#x27;trackingDot.y&#x27;, yScale(trackedData.y));
-    }
-  }.observes(&#x27;trackedData&#x27;, &#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;),
-
-
-  _hoverChange: function(){
+  updateTrackedData: function(){
     var trackingMode = this.get(&#x27;trackingMode&#x27;);
-    var selected = this.get(&#x27;isSelected&#x27;);
-    var xScale = this.get(&#x27;graph.xScale&#x27;);
-    var xHover = this.get(&#x27;graph.xHover&#x27;);
-    var yHover = this.get(&#x27;graph.yHover&#x27;);
+    var hoverDataX = this.get(&#x27;hoverData.x&#x27;);
+    var hoverDataY = this.get(&#x27;hoverData.y&#x27;);
+    var firstVisibleData = this.get(&#x27;firstVisibleData&#x27;);
+    var lastVisibleData = this.get(&#x27;lastVisibleData&#x27;);
+    var selected = this.get(&#x27;selected&#x27;);
+    var vx, vy;
+    var firstX = firstVisibleData ? firstVisibleData[0] : null;
+    var firstY = firstVisibleData ? firstVisibleData[1] : null;
+    var lastX = lastVisibleData ? lastVisibleData[0] : null;
+    var lastY = lastVisibleData ? lastVisibleData[1] : null;
+    var isHovered = typeof hoverDataX === &#x27;number&#x27; &amp;&amp;  typeof hoverDataY === &#x27;number&#x27;;
 
-    if(trackingMode === &#x27;none&#x27; || (trackingMode.indexOf(&#x27;selected-&#x27;) === 0 &amp;&amp; !selected)) {
-      this.set(&#x27;trackedData&#x27;, null);
-    } else {
-      var found = this.getNearestDataToXPosition(xHover, this.get(&#x27;renderedData&#x27;), xScale);
-      this.set(&#x27;trackedData&#x27;, found ? {
-        x: found[0],
-        y: found[1]
-      } : null);
-    } 
+    var setToHover = function(){
+      vx = hoverDataX;
+      vy = hoverDataY;
+    };
 
-    if(xHover === -1 &amp;&amp; yHover === -1) {
-      this._updateTrackedData();
-    }
-  }.observes(&#x27;graph.xHover&#x27;, &#x27;graph.yHover&#x27;),
+    var snapFirstBehavior = function(){        
+      if(isHovered) {
+        setToHover();
+      } else {
+        vx = firstX;
+        vy = firstY;
+      }
+    };
 
-  /**
-    Observes changes other than mouse hovers that might update the {{#crossLink &quot;mixins.graph-graphic-with-tracking-dot/trackedData&quot;}}{{/crossLink}}
-    and updates accordingly.
-    
-    @method _updateTrackedData
-    */
-  _updateTrackedData: function(){
-    var trackingMode = this.get(&#x27;trackingMode&#x27;);
-    var selected = this.get(&#x27;isSelected&#x27;);
-    var selectable = this.get(&#x27;selectable&#x27;);
-    var last = this.get(&#x27;lastVisibleData&#x27;);
-    var first = this.get(&#x27;firstVisibleData&#x27;);
-    var data = null;
+    var snapLastBehavior = function(){
+      if(isHovered) {
+        setToHover();
+      } else {
+        vx = lastX;
+        vy = lastY;
+      }
+    };
 
     switch(trackingMode) {
-      case &#x27;selected-snap-last&#x27;:
-        if(selectable &amp;&amp; selected) {
-          data = last;
+      case &#x27;none&#x27;:
+        break;
+      case &#x27;hover&#x27;:
+        if(isHovered) {
+          setToHover();
         }
         break;
+      case &#x27;selected-hover&#x27;:
+        if(selected &amp;&amp; isHovered) {
+          setToHover();
+        }
+        break;
+      case &#x27;snap-first&#x27;:
+        snapFirstBehavior();
+        break;
       case &#x27;selected-snap-first&#x27;:
-        if(selectable &amp;&amp; selected) {
-          data = first;
+        if(selected) {
+          snapFirstBehavior();
         }
         break;
       case &#x27;snap-last&#x27;:
-        data = last;
+        snapLastBehavior();
         break;
-      case &#x27;snap-first&#x27;:
-        data = first;
+      case &#x27;selected-snap-last&#x27;:
+        if(selected) {
+          snapLastBehavior();
+        }
         break;
     }
-    
-    this.set(&#x27;trackedData&#x27;, data ? {
-      x: data[0],
-      y: data[1],
-      data: data.data
-    } : null);
-  }.observes(&#x27;trackingMode&#x27;, &#x27;lastVisibleData&#x27;, &#x27;firstVisibleData&#x27;, &#x27;isSelected&#x27;, &#x27;selectable&#x27;).on(&#x27;init&#x27;),
+
+    this.set(&#x27;trackedData&#x27;, {
+      x: vx,
+      y: vy
+    });
+  },
+
+  _watchTrackingChanges: function(){
+    Ember.run.scheduleOnce(&#x27;render&#x27;, this, this.updateTrackedData);
+  }.observes(&#x27;trackingMode&#x27;, &#x27;hoverData.x&#x27;, &#x27;hoverData.y&#x27;, &#x27;firstVisibleData&#x27;, &#x27;lastVisibleData&#x27;, &#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
 });
     </pre>
 </div>

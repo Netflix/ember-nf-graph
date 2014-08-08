@@ -73,6 +73,22 @@ export default Ember.Mixin.create({
 	}.property('yprop'),
 
   /**
+    Gets the x values from the `sortedData`.
+    @property xData
+    @type Array
+    @readonly
+  */
+  xData: null,
+
+  /**
+    Gets the y values from the `sortedData`
+    @property yData
+    @type Array
+    @readonly
+  */
+  yData: null,
+
+  /**
     The sorted and mapped data pulled from {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     An array of arrays, structures as so:
 
@@ -95,7 +111,7 @@ export default Ember.Mixin.create({
     }
 
     var mapped = data.map(function(d, i) {
-    	var item = [xPropFn(d), yPropFn(d)];
+      var item = [xPropFn(d), yPropFn(d)];
     	item.data = d;
     	item.origIndex = i;
     	return item;
@@ -108,6 +124,17 @@ export default Ember.Mixin.create({
         return ax === bx ? 0 : (ax > bx) ? 1 : -1;
       });
     }
+
+    var xData = [];
+    var yData = [];
+    
+    mapped.forEach(function(d) {
+      xData.push(d[0]);
+      yData.push(d[1]);
+    });
+
+    this.set('xData', xData);
+    this.set('yData', yData);
     
     return mapped;
   }.property('data.@each', 'xPropFn', 'yPropFn'),
