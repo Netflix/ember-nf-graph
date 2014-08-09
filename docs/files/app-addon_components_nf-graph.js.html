@@ -194,7 +194,7 @@ var domainProperty = function(axis) {
 
 var scaleProperty = function(axis) {
   return property(
-    axis + &#x27;ScaleFactory&#x27;, axis + &#x27;Range&#x27;, axis + &#x27;Domain&#x27;, axis + &#x27;ScaleType&#x27;, axis + &#x27;TickCount&#x27;, axis + &#x27;OrdinalPadding&#x27;, axis + &#x27;OrdinalOuterPadding&#x27;,
+    axis + &#x27;ScaleFactory&#x27;, axis + &#x27;Range&#x27;, axis + &#x27;Domain&#x27;, axis + &#x27;ScaleType&#x27;, axis + &#x27;Axis.tickCount&#x27;, axis + &#x27;OrdinalPadding&#x27;, axis + &#x27;OrdinalOuterPadding&#x27;,
     function(scaleFactory, range, domain, scaleType, tickCount, ordinalPadding, ordinalOuterPadding) {
       var scale = scaleFactory();
 
@@ -450,6 +450,7 @@ export default Ember.Component.extend({
   */
   xMin: function(key, value) {
     var mode = this.xMinMode;
+    var x0;
 
     if(arguments.length &gt; 1) {
       if(mode === &#x27;fixed&#x27;) {
@@ -461,9 +462,20 @@ export default Ember.Component.extend({
       }
 
       if(mode === &#x27;push&#x27;) {
-        var x0 = this.get(&#x27;xDataExtent&#x27;)[0];
+        x0 = this.get(&#x27;xDataExtent&#x27;)[0];
         if(!isNaN(x0) &amp;&amp; x0 &lt; this._xMin) {
           this._xMin = x0;
+        }
+      }
+
+      if(mode === &#x27;push-tick&#x27;) {
+        var extent = this.get(&#x27;xDataExtent&#x27;);
+        x0 = extent[0];
+
+        if(!isNaN(x0) &amp;&amp; x0 &lt; this._xMin) {
+          var tickCount = this.get(&#x27;xAxis.tickCount&#x27;) || 8;
+          var newDomain = this.get(&#x27;xScaleFactory&#x27;)().domain(extent).nice(tickCount).domain();
+          this._xMin = newDomain[0];
         }
       }
     }
@@ -478,6 +490,7 @@ export default Ember.Component.extend({
   */
   xMax: function(key, value) {
     var mode = this.xMaxMode;
+    var x1;
 
     if(arguments.length &gt; 1) {
       if(mode === &#x27;fixed&#x27;) {
@@ -489,15 +502,26 @@ export default Ember.Component.extend({
       }
 
       if(mode === &#x27;push&#x27;) {
-        var x1 = this.get(&#x27;xDataExtent&#x27;)[1];
+        x1 = this.get(&#x27;xDataExtent&#x27;)[1];
         if(!isNaN(x1) &amp;&amp; this._xMax &lt; x1) {
           this._xMax = x1;
+        }
+      }
+
+      if(mode === &#x27;push-tick&#x27;) {
+        var extent = this.get(&#x27;xDataExtent&#x27;);
+        x1 = extent[1];
+
+        if(!isNaN(x1) &amp;&amp; this._xMax &lt; x1) {
+          var tickCount = this.get(&#x27;xAxis.tickCount&#x27;) || 8;
+          var newDomain = this.get(&#x27;xScaleFactory&#x27;)().domain(extent).nice(tickCount).domain();
+          this._xMax = newDomain[1];
         }
       }
     }
 
     return this._xMax;
-  }.property(&#x27;xMaxMode&#x27;, &#x27;xDataExtent&#x27;),
+  }.property(&#x27;xMaxMode&#x27;, &#x27;xDataExtent&#x27;, &#x27;xScaleFactory&#x27;, &#x27;xAxis.tickCount&#x27;),
 
   /**
     Gets or sets the maximum y domain value to display on the graph.
@@ -506,6 +530,7 @@ export default Ember.Component.extend({
   */
   yMin: function(key, value) {
     var mode = this.yMinMode;
+    var y0;
 
     if(arguments.length &gt; 1) {
       if(mode === &#x27;fixed&#x27;) {
@@ -517,15 +542,27 @@ export default Ember.Component.extend({
       }
 
       if(mode === &#x27;push&#x27;) {
-        var y0 = this.get(&#x27;yDataExtent&#x27;)[0];
+        y0 = this.get(&#x27;yDataExtent&#x27;)[0];
         if(!isNaN(y0) &amp;&amp; y0 &lt; this._yMin) {
           this._yMin = y0;
         }
       }
+
+      if(mode === &#x27;push-tick&#x27;) {
+        var extent = this.get(&#x27;yDataExtent&#x27;);
+        y0 = extent[0];
+
+        if(!isNaN(y0) &amp;&amp; y0 &lt; this._yMin) {
+          var tickCount = this.get(&#x27;yAxis.tickCount&#x27;) || 5;
+          var newDomain = this.get(&#x27;yScaleFactory&#x27;)().domain(extent).nice(tickCount).domain();
+          this._yMax = newDomain[0];
+        }
+      }
     }
 
+
     return this._yMin;
-  }.property(&#x27;yMinMode&#x27;, &#x27;yDataExtent&#x27;),
+  }.property(&#x27;yMinMode&#x27;, &#x27;yDataExtent&#x27;, &#x27;yScaleFactory&#x27;, &#x27;yAxis.tickCount&#x27;),
 
   /**
     Gets or sets the maximum y domain value to display on the graph.
@@ -534,6 +571,7 @@ export default Ember.Component.extend({
   */
   yMax: function(key, value) {
     var mode = this.yMaxMode;
+    var y1;
 
     if(arguments.length &gt; 1) {
       if(mode === &#x27;fixed&#x27;) {
@@ -545,15 +583,26 @@ export default Ember.Component.extend({
       }
 
       if(mode === &#x27;push&#x27;) {
-        var y1 = this.get(&#x27;yDataExtent&#x27;)[1];
+        y1 = this.get(&#x27;yDataExtent&#x27;)[1];
         if(!isNaN(y1) &amp;&amp; this._yMax &lt; y1) {
           this._yMax = y1;
+        }
+      }
+
+      if(mode === &#x27;push-tick&#x27;) {
+        var extent = this.get(&#x27;yDataExtent&#x27;);
+        y1 = extent[1];
+
+        if(!isNaN(y1) &amp;&amp; this._yMax &lt; y1) {
+          var tickCount = this.get(&#x27;yAxis.tickCount&#x27;) || 5;
+          var newDomain = this.get(&#x27;yScaleFactory&#x27;)().domain(extent).nice(tickCount).domain();
+          this._yMax = newDomain[1];
         }
       }
     }
 
     return this._yMax;
-  }.property(&#x27;yMaxMode&#x27;, &#x27;yDataExtent&#x27;),
+  }.property(&#x27;yMaxMode&#x27;, &#x27;yDataExtent&#x27;, &#x27;yScaleFactory&#x27;, &#x27;yAxis.tickCount&#x27;),
   
 
   /**
@@ -565,6 +614,8 @@ export default Ember.Component.extend({
     - &#x27;fixed&#x27;: xMin can be set to an exact value and will not change based on graphed data.
     - &#x27;push&#x27;: xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than 
       what xMin is currently set to.
+    - &#x27;push-tick&#x27;: xMin can be set to a specific value, but will update to next &quot;nice&quot; tick if the minimum x value contained in
+      the graph is less than that xMin is set to.
 
     @property xMinMode
     @type String
@@ -581,6 +632,8 @@ export default Ember.Component.extend({
     - &#x27;fixed&#x27;: xMax can be set to an exact value and will not change based on graphed data.
     - &#x27;push&#x27;: xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than 
       what xMax is currently set to.
+    - &#x27;push-tick&#x27;: xMax can be set to a specific value, but will update to next &quot;nice&quot; tick if the maximum x value contained in
+      the graph is greater than that xMax is set to.
       
     @property xMaxMode
     @type String
@@ -597,6 +650,8 @@ export default Ember.Component.extend({
     - &#x27;fixed&#x27;: yMin can be set to an exact value and will not change based on graphed data.
     - &#x27;push&#x27;: yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than 
       what yMin is currently set to.
+    - &#x27;push-tick&#x27;: yMin can be set to a specific value, but will update to next &quot;nice&quot; tick if the minimum y value contained in
+      the graph is less than that yMin is set to.
 
     @property yMinMode
     @type String
@@ -613,6 +668,8 @@ export default Ember.Component.extend({
     - &#x27;fixed&#x27;: yMax can be set to an exact value and will not change based on graphed data.
     - &#x27;push&#x27;: yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than 
       what yMax is currently set to.
+    - &#x27;push-tick&#x27;: yMax can be set to a specific value, but will update to next &quot;nice&quot; tick if the maximum y value contained in
+      the graph is greater than that yMax is set to.
       
     @property yMaxMode
     @type String

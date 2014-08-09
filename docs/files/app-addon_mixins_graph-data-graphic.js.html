@@ -342,6 +342,12 @@ export default Ember.Mixin.create({
   }),
 
 
+  /**
+    Sets the hoverIndex and hoverData properties when the graph&#x27;s &#x60;hoverX&#x60; property changes, or when 
+    the renderedData changes.
+    @method updateHoverIndex
+    @private
+  */
   updateHoverIndex: observer(&#x27;graph.hoverX&#x27;, &#x27;renderedData.@each&#x27;, function(graphHoverX, renderedData) {
     var index = -1;
     if(!isNaN(graphHoverX)) {
