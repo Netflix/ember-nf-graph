@@ -415,71 +415,229 @@ export default Ember.Component.extend({
   */
   xAxis: null,
 
+  /**
+    Backing field for &#x60;xMin&#x60;
+    @property _xMin
+    @private
+  */
   _xMin: null,
+
+  /**
+    Backing field for &#x60;xMax&#x60;
+    @property _xMax
+    @private
+  */
   _xMax: null,
+
+  /**
+    Backing field for &#x60;yMin&#x60;
+    @property _yMin
+    @private
+  */
   _yMin: null,
+
+  /**
+    Backing field for &#x60;yMax&#x60;
+    @property _yMax
+    @private
+  */
   _yMax: null,
 
+  /**
+    Gets or sets the minimum x domain value to display on the graph.
+    Behavior depends on &#x60;xMinMode&#x60;.
+    @property xMin
+  */
   xMin: function(key, value) {
     var mode = this.xMinMode;
-    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
-      this._xMin = value;
+
+    if(arguments.length &gt; 1) {
+      if(mode === &#x27;fixed&#x27;) {
+        this._xMin = value;
+      }
+    } else {
+      if(mode === &#x27;auto&#x27;) {
+        this._xMin = this.get(&#x27;xDataExtent&#x27;)[0] || 0;
+      }
+
+      if(mode === &#x27;push&#x27;) {
+        var x0 = this.get(&#x27;xDataExtent&#x27;)[0];
+        if(!isNaN(x0) &amp;&amp; x0 &lt; this._xMin) {
+          this._xMin = x0;
+        }
+      }
     }
 
-    if(mode === &#x27;auto&#x27;) {
-      return this.get(&#x27;xDataExtent&#x27;)[0];
-    }
     return this._xMin;
   }.property(&#x27;xMinMode&#x27;, &#x27;xDataExtent&#x27;),
 
+  /**
+    Gets or sets the maximum x domain value to display on the graph.
+    Behavior depends on &#x60;xMaxMode&#x60;.
+    @property xMax
+  */
   xMax: function(key, value) {
     var mode = this.xMaxMode;
-    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
-      this._xMax = value;
+
+    if(arguments.length &gt; 1) {
+      if(mode === &#x27;fixed&#x27;) {
+        this._xMax = value;
+      }
+    } else {
+      if(mode === &#x27;auto&#x27;) {
+        this._xMax = this.get(&#x27;xDataExtent&#x27;)[1] || 1;
+      }
+
+      if(mode === &#x27;push&#x27;) {
+        var x1 = this.get(&#x27;xDataExtent&#x27;)[1];
+        if(!isNaN(x1) &amp;&amp; this._xMax &lt; x1) {
+          this._xMax = x1;
+        }
+      }
     }
 
-    if(mode === &#x27;auto&#x27;) {
-      return this.get(&#x27;xDataExtent&#x27;)[1];
-    }
     return this._xMax;
   }.property(&#x27;xMaxMode&#x27;, &#x27;xDataExtent&#x27;),
 
+  /**
+    Gets or sets the maximum y domain value to display on the graph.
+    Behavior depends on &#x60;yMaxMode&#x60;.
+    @property yMax
+  */
   yMin: function(key, value) {
     var mode = this.yMinMode;
-    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
-      this._yMin = value;
+
+    if(arguments.length &gt; 1) {
+      if(mode === &#x27;fixed&#x27;) {
+        this._yMin = value;
+      }
+    } else {
+      if(mode === &#x27;auto&#x27;) {
+        this._yMin = this.get(&#x27;yDataExtent&#x27;)[0] || 0;
+      }
+
+      if(mode === &#x27;push&#x27;) {
+        var y0 = this.get(&#x27;yDataExtent&#x27;)[0];
+        if(!isNaN(y0) &amp;&amp; y0 &lt; this._yMin) {
+          this._yMin = y0;
+        }
+      }
     }
 
-    if(mode === &#x27;auto&#x27;) {
-      return this.get(&#x27;yDataExtent&#x27;)[0];
-    }
     return this._yMin;
   }.property(&#x27;yMinMode&#x27;, &#x27;yDataExtent&#x27;),
 
+  /**
+    Gets or sets the maximum y domain value to display on the graph.
+    Behavior depends on &#x60;yMaxMode&#x60;.
+    @property yMax
+  */
   yMax: function(key, value) {
     var mode = this.yMaxMode;
-    if(mode === &#x27;fixed&#x27; &amp;&amp; arguments.length &gt; 1) {
-      this._yMax = value;
+
+    if(arguments.length &gt; 1) {
+      if(mode === &#x27;fixed&#x27;) {
+        this._yMax = value;
+      }
+    } else {
+      if(mode === &#x27;auto&#x27;) {
+        this._yMax = this.get(&#x27;yDataExtent&#x27;)[1] || 1;
+      }
+
+      if(mode === &#x27;push&#x27;) {
+        var y1 = this.get(&#x27;yDataExtent&#x27;)[1];
+        if(!isNaN(y1) &amp;&amp; this._yMax &lt; y1) {
+          this._yMax = y1;
+        }
+      }
     }
 
-    if(mode === &#x27;auto&#x27;) {
-      return this.get(&#x27;yDataExtent&#x27;)[1];
-    }
     return this._yMax;
   }.property(&#x27;yMaxMode&#x27;, &#x27;yDataExtent&#x27;),
   
 
+  /**
+    Sets the behavior of &#x60;xMin&#x60; for the graph.
+
+    ### Possible values:
+
+    - &#x27;auto&#x27;: (default) xMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.
+    - &#x27;fixed&#x27;: xMin can be set to an exact value and will not change based on graphed data.
+    - &#x27;push&#x27;: xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than 
+      what xMin is currently set to.
+
+    @property xMinMode
+    @type String
+    @default &#x27;auto&#x27;
+  */
   xMinMode: &#x27;auto&#x27;,
+
+  /**
+    Sets the behavior of &#x60;xMax&#x60; for the graph.
+
+    ### Possible values:
+
+    - &#x27;auto&#x27;: (default) xMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.
+    - &#x27;fixed&#x27;: xMax can be set to an exact value and will not change based on graphed data.
+    - &#x27;push&#x27;: xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than 
+      what xMax is currently set to.
+      
+    @property xMaxMode
+    @type String
+    @default &#x27;auto&#x27;
+  */
   xMaxMode: &#x27;auto&#x27;,
+
+  /**
+    Sets the behavior of &#x60;yMin&#x60; for the graph.
+
+    ### Possible values:
+
+    - &#x27;auto&#x27;: (default) yMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.
+    - &#x27;fixed&#x27;: yMin can be set to an exact value and will not change based on graphed data.
+    - &#x27;push&#x27;: yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than 
+      what yMin is currently set to.
+
+    @property yMinMode
+    @type String
+    @default &#x27;auto&#x27;
+  */
   yMinMode: &#x27;auto&#x27;,
+
+  /**
+    Sets the behavior of &#x60;yMax&#x60; for the graph.
+
+    ### Possible values:
+
+    - &#x27;auto&#x27;: (default) yMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.
+    - &#x27;fixed&#x27;: yMax can be set to an exact value and will not change based on graphed data.
+    - &#x27;push&#x27;: yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than 
+      what yMax is currently set to.
+      
+    @property yMaxMode
+    @type String
+    @default &#x27;auto&#x27;
+  */
   yMaxMode: &#x27;auto&#x27;,
 
+  /**
+    Gets the highest and lowest x values of the graphed data in a two element array.
+    @property xDataExtent
+    @type Array
+    @readonly
+  */
   xDataExtent: property(&#x27;xData.@each&#x27;, function(xData) {
-    return xData &amp;&amp; xData.length &gt; 0 ? d3.extent(xData) : [0, 1];
+    return xData ? d3.extent(xData) : [null, null];
   }),
 
+  /**
+    Gets the highest and lowest y values of the graphed data in a two element array.
+    @property yDataExtent
+    @type Array
+    @readonly
+  */
   yDataExtent: property(&#x27;yData.@each&#x27;, function(yData) {
-    return yData &amp;&amp; yData.length &gt; 0 ? d3.extent(yData) : [0, 1];
+    return yData ? d3.extent(yData) : [null, null];
   }),
 
   /**

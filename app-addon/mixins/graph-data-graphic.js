@@ -96,6 +96,7 @@ export default Ember.Mixin.create({
 
     ** each inner array also has a property `data` on it, containing the original data object **
 
+    When this property is computed, it also updates the `xData` and `yData` properties of the graphic.
     @property sortedData
     @type Array
     @readonly

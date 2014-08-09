@@ -273,11 +273,39 @@ export default Ember.Component.extend({
   */
   xAxis: null,
 
+  /**
+    Backing field for `xMin`
+    @property _xMin
+    @private
+  */
   _xMin: null,
+
+  /**
+    Backing field for `xMax`
+    @property _xMax
+    @private
+  */
   _xMax: null,
+
+  /**
+    Backing field for `yMin`
+    @property _yMin
+    @private
+  */
   _yMin: null,
+
+  /**
+    Backing field for `yMax`
+    @property _yMax
+    @private
+  */
   _yMax: null,
 
+  /**
+    Gets or sets the minimum x domain value to display on the graph.
+    Behavior depends on `xMinMode`.
+    @property xMin
+  */
   xMin: function(key, value) {
     var mode = this.xMinMode;
 
@@ -301,6 +329,11 @@ export default Ember.Component.extend({
     return this._xMin;
   }.property('xMinMode', 'xDataExtent'),
 
+  /**
+    Gets or sets the maximum x domain value to display on the graph.
+    Behavior depends on `xMaxMode`.
+    @property xMax
+  */
   xMax: function(key, value) {
     var mode = this.xMaxMode;
 
@@ -324,6 +357,11 @@ export default Ember.Component.extend({
     return this._xMax;
   }.property('xMaxMode', 'xDataExtent'),
 
+  /**
+    Gets or sets the maximum y domain value to display on the graph.
+    Behavior depends on `yMaxMode`.
+    @property yMax
+  */
   yMin: function(key, value) {
     var mode = this.yMinMode;
 
@@ -347,6 +385,11 @@ export default Ember.Component.extend({
     return this._yMin;
   }.property('yMinMode', 'yDataExtent'),
 
+  /**
+    Gets or sets the maximum y domain value to display on the graph.
+    Behavior depends on `yMaxMode`.
+    @property yMax
+  */
   yMax: function(key, value) {
     var mode = this.yMaxMode;
 
@@ -371,15 +414,86 @@ export default Ember.Component.extend({
   }.property('yMaxMode', 'yDataExtent'),
   
 
+  /**
+    Sets the behavior of `xMin` for the graph.
+
+    ### Possible values:
+
+    - 'auto': (default) xMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.
+    - 'fixed': xMin can be set to an exact value and will not change based on graphed data.
+    - 'push': xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than 
+      what xMin is currently set to.
+
+    @property xMinMode
+    @type String
+    @default 'auto'
+  */
   xMinMode: 'auto',
+
+  /**
+    Sets the behavior of `xMax` for the graph.
+
+    ### Possible values:
+
+    - 'auto': (default) xMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.
+    - 'fixed': xMax can be set to an exact value and will not change based on graphed data.
+    - 'push': xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than 
+      what xMax is currently set to.
+      
+    @property xMaxMode
+    @type String
+    @default 'auto'
+  */
   xMaxMode: 'auto',
+
+  /**
+    Sets the behavior of `yMin` for the graph.
+
+    ### Possible values:
+
+    - 'auto': (default) yMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.
+    - 'fixed': yMin can be set to an exact value and will not change based on graphed data.
+    - 'push': yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than 
+      what yMin is currently set to.
+
+    @property yMinMode
+    @type String
+    @default 'auto'
+  */
   yMinMode: 'auto',
+
+  /**
+    Sets the behavior of `yMax` for the graph.
+
+    ### Possible values:
+
+    - 'auto': (default) yMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.
+    - 'fixed': yMax can be set to an exact value and will not change based on graphed data.
+    - 'push': yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than 
+      what yMax is currently set to.
+      
+    @property yMaxMode
+    @type String
+    @default 'auto'
+  */
   yMaxMode: 'auto',
 
+  /**
+    Gets the highest and lowest x values of the graphed data in a two element array.
+    @property xDataExtent
+    @type Array
+    @readonly
+  */
   xDataExtent: property('xData.@each', function(xData) {
     return xData ? d3.extent(xData) : [null, null];
   }),
 
+  /**
+    Gets the highest and lowest y values of the graphed data in a two element array.
+    @property yDataExtent
+    @type Array
+    @readonly
+  */
   yDataExtent: property('yData.@each', function(yData) {
     return yData ? d3.extent(yData) : [null, null];
   }),
