@@ -280,49 +280,93 @@ export default Ember.Component.extend({
 
   xMin: function(key, value) {
     var mode = this.xMinMode;
-    if(mode === 'fixed' && arguments.length > 1) {
-      this._xMin = value;
+
+    if(arguments.length > 1) {
+      if(mode === 'fixed') {
+        this._xMin = value;
+      }
+    } else {
+      if(mode === 'auto') {
+        this._xMin = this.get('xDataExtent')[0] || 0;
+      }
+
+      if(mode === 'push') {
+        var x0 = this.get('xDataExtent')[0];
+        if(!isNaN(x0) && x0 < this._xMin) {
+          this._xMin = x0;
+        }
+      }
     }
 
-    if(mode === 'auto') {
-      return this.get('xDataExtent')[0];
-    }
     return this._xMin;
   }.property('xMinMode', 'xDataExtent'),
 
   xMax: function(key, value) {
     var mode = this.xMaxMode;
-    if(mode === 'fixed' && arguments.length > 1) {
-      this._xMax = value;
+
+    if(arguments.length > 1) {
+      if(mode === 'fixed') {
+        this._xMax = value;
+      }
+    } else {
+      if(mode === 'auto') {
+        this._xMax = this.get('xDataExtent')[1] || 1;
+      }
+
+      if(mode === 'push') {
+        var x1 = this.get('xDataExtent')[1];
+        if(!isNaN(x1) && this._xMax < x1) {
+          this._xMax = x1;
+        }
+      }
     }
 
-    if(mode === 'auto') {
-      return this.get('xDataExtent')[1];
-    }
     return this._xMax;
   }.property('xMaxMode', 'xDataExtent'),
 
   yMin: function(key, value) {
     var mode = this.yMinMode;
-    if(mode === 'fixed' && arguments.length > 1) {
-      this._yMin = value;
+
+    if(arguments.length > 1) {
+      if(mode === 'fixed') {
+        this._yMin = value;
+      }
+    } else {
+      if(mode === 'auto') {
+        this._yMin = this.get('yDataExtent')[0] || 0;
+      }
+
+      if(mode === 'push') {
+        var y0 = this.get('yDataExtent')[0];
+        if(!isNaN(y0) && y0 < this._yMin) {
+          this._yMin = y0;
+        }
+      }
     }
 
-    if(mode === 'auto') {
-      return this.get('yDataExtent')[0];
-    }
     return this._yMin;
   }.property('yMinMode', 'yDataExtent'),
 
   yMax: function(key, value) {
     var mode = this.yMaxMode;
-    if(mode === 'fixed' && arguments.length > 1) {
-      this._yMax = value;
+
+    if(arguments.length > 1) {
+      if(mode === 'fixed') {
+        this._yMax = value;
+      }
+    } else {
+      if(mode === 'auto') {
+        this._yMax = this.get('yDataExtent')[1] || 1;
+      }
+
+      if(mode === 'push') {
+        var y1 = this.get('yDataExtent')[1];
+        if(!isNaN(y1) && this._yMax < y1) {
+          this._yMax = y1;
+        }
+      }
     }
 
-    if(mode === 'auto') {
-      return this.get('yDataExtent')[1];
-    }
     return this._yMax;
   }.property('yMaxMode', 'yDataExtent'),
   
@@ -333,11 +377,11 @@ export default Ember.Component.extend({
   yMaxMode: 'auto',
 
   xDataExtent: property('xData.@each', function(xData) {
-    return xData && xData.length > 0 ? d3.extent(xData) : [0, 1];
+    return xData ? d3.extent(xData) : [null, null];
   }),
 
   yDataExtent: property('yData.@each', function(yData) {
-    return yData && yData.length > 0 ? d3.extent(yData) : [0, 1];
+    return yData ? d3.extent(yData) : [null, null];
   }),
 
   /**
