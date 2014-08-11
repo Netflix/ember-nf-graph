@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -139,7 +145,20 @@
                         <h1>components.nf-range-marker Class</h1>
 <div class="box meta">
     
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                
+            </ul>
+        </div>
+    
 
+    
+        <div class="extends">
+            Extends Ember.Component
+        </div>
     
 
     
@@ -189,7 +208,14 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getGraph">_getGraph</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method private">
                                 <a href="#method__setup">_setup</a>
@@ -213,7 +239,7 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
                             <li class="index-item property">
                                 <a href="#property_bottom">bottom</a>
@@ -224,6 +250,13 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                         
                             <li class="index-item property">
                                 <a href="#property_container">container</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_graph">graph</a>
 
                                 
                                 
@@ -320,6 +353,59 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method__getGraph" class="method item inherited">
+    <h3 class="name"><code>_getGraph</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method__setup" class="method item private">
     <h3 class="name"><code>_setup</code></h3>
 
@@ -354,7 +440,7 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l142"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:142</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l144"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:144</code></a>
         
         </p>
 
@@ -412,7 +498,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l154"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:154</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l156"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:156</code></a>
         
         </p>
 
@@ -466,7 +552,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l112"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:112</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l114"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:114</code></a>
         
         </p>
 
@@ -511,7 +597,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l18"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:18</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l20"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:20</code></a>
         
         </p>
 
@@ -522,6 +608,50 @@ and populates the container property</p>
 
     <div class="description">
         <p>The parent <code>nf-range-markers</code> component.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graph" class="property item inherited">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The parent graph for a component.</p>
 
     </div>
 
@@ -558,7 +688,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l56"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:56</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:58</code></a>
         
         </p>
 
@@ -605,7 +735,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l132"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:132</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l134"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:134</code></a>
         
         </p>
 
@@ -650,7 +780,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l48"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:48</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l50"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:50</code></a>
         
         </p>
 
@@ -697,7 +827,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l40"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:40</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:42</code></a>
         
         </p>
 
@@ -744,7 +874,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l102"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:102</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l104"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:104</code></a>
         
         </p>
 
@@ -789,7 +919,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l122"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:122</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:124</code></a>
         
         </p>
 
@@ -834,7 +964,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l74"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:74</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l76"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:76</code></a>
         
         </p>
 
@@ -879,7 +1009,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l64"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:64</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l66"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:66</code></a>
         
         </p>
 
@@ -924,7 +1054,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l33"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:33</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l35"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:35</code></a>
         
         </p>
 
@@ -971,7 +1101,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l26"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:26</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l28"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:28</code></a>
         
         </p>
 
@@ -1018,7 +1148,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l84"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:84</code></a>
+        <a href="../files/app-addon_components_nf-range-marker.js.html#l86"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:86</code></a>
         
         </p>
 

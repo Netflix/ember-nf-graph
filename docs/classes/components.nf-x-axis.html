@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -139,7 +145,20 @@
                         <h1>components.nf-x-axis Class</h1>
 <div class="box meta">
     
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                
+            </ul>
+        </div>
+    
 
+    
+        <div class="extends">
+            Extends Ember.Component
+        </div>
     
 
     
@@ -204,7 +223,21 @@ default styling applied to them to position them appropriately based off of orie
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getGraph">_getGraph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__updateGraphXAxis">_updateGraphXAxis</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item method">
                                 <a href="#method_tickFactory">tickFactory</a>
@@ -221,7 +254,21 @@ default styling applied to them to position them appropriately based off of orie
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property">
+                                <a href="#property_axisLineY">axisLineY</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_graph">graph</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item property">
                                 <a href="#property_height">height</a>
@@ -328,6 +375,116 @@ default styling applied to them to position them appropriately based off of orie
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method__getGraph" class="method item inherited">
+    <h3 class="name"><code>_getGraph</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__updateGraphXAxis" class="method item private">
+    <h3 class="name"><code>_updateGraphXAxis</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l225"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:225</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Updates the graph&#39;s xAxis property on willInsertElement</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_tickFactory" class="method item">
     <h3 class="name"><code>tickFactory</code></h3>
 
@@ -392,7 +549,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l171"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:171</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l173"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:173</code></a>
         
         </p>
 
@@ -509,6 +666,95 @@ default styling applied to them to position them appropriately based off of orie
                 <h2 class="off-left">Properties</h2>
 
                 
+                    <div id="property_axisLineY" class="property item">
+    <h3 class="name"><code>axisLineY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l234"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:234</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y position, in pixels, of the axis line</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graph" class="property item inherited">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The parent graph for a component.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_height" class="property item">
     <h3 class="name"><code>height</code></h3>
     <span class="type">Number</span>
@@ -532,7 +778,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l40"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:40</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:42</code></a>
         
         </p>
 
@@ -579,7 +825,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l73"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:73</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l75"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:75</code></a>
         
         </p>
 
@@ -626,7 +872,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l107"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:107</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l109"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:109</code></a>
         
         </p>
 
@@ -671,7 +917,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l48"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:48</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l50"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:50</code></a>
         
         </p>
 
@@ -718,7 +964,7 @@ default styling applied to them to position them appropriately based off of orie
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l83"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:83</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l85"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:85</code></a>
         
         </p>
 
@@ -783,7 +1029,7 @@ The function should have exactly the same signature as the function you&#39;d us
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l56"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:56</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:58</code></a>
         
         </p>
 
@@ -830,7 +1076,7 @@ The function should have exactly the same signature as the function you&#39;d us
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l64"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:64</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l66"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:66</code></a>
         
         </p>
 
@@ -878,7 +1124,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l192"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:192</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l194"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:194</code></a>
         
         </p>
 
@@ -923,7 +1169,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l117"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:117</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l119"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:119</code></a>
         
         </p>
 
@@ -968,7 +1214,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l184"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:184</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l186"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:186</code></a>
         
         </p>
 
@@ -1013,7 +1259,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l163"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:163</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l165"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:165</code></a>
         
         </p>
 
@@ -1058,7 +1304,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l152"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:152</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l154"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:154</code></a>
         
         </p>
 
@@ -1103,7 +1349,7 @@ tick content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-x-axis.js.html#l129"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:129</code></a>
+        <a href="../files/app-addon_components_nf-x-axis.js.html#l131"><code>app-addon&#x2F;components&#x2F;nf-x-axis.js:131</code></a>
         
         </p>
 

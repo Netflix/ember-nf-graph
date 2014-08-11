@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -165,18 +171,54 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	classNameBindings: [&#x27;:nf-y-diff&#x27;, &#x27;isPositive:positive:negative&#x27;, &#x27;isOrientRight:orient-right:orient-left&#x27;],
 
+	/**
+		The starting domain value of the difference measurement. The subrahend of the difference calculation.
+		@property a
+		@type Number
+		@default null
+	*/
 	a: null,
 	
+	/**
+		The ending domain value of the difference measurement. The minuend of the difference calculation.
+		@property b
+		@type Number
+		@default null
+	*/
 	b: null,
 	
+	/**
+		The amount of padding, in pixels, between the edge of the difference &quot;box&quot; and the content container
+		@property contentPadding
+		@type Number
+		@default 5
+	*/
 	contentPadding: 5,
 	
+	/**
+		The duration of the transition, in milliseconds, as the difference slides vertically
+		@property duration
+		@type Number
+		@default 400
+	*/
 	duration: 400,
 
+	/**
+		The calculated vertical center of the difference box, in pixels.
+		@property yCenter
+		@type Number
+		@readonly
+	*/
 	yCenter: property(&#x27;height&#x27;, &#x27;y&#x27;, function(height, y) {
 		return y + (height / 2) || 0;
 	}),
 
+	/**
+		The calculated top of the difference box, in pixels
+		@property y
+		@type Number
+		@readonly
+	*/
 	y: property(&#x27;graph.yScale&#x27;, &#x27;a&#x27;, &#x27;b&#x27;, function(yScale, a, b) {
 		if(!yScale) {
 			return 0;
@@ -186,6 +228,12 @@ export default Ember.Component.extend(HasGraphParent, {
 		return Math.min(yScale(a), yScale(b)) || 0;
 	}),
 
+	/**
+		The calculated height of the difference box, in pixels.
+		@property height
+		@type Number
+		@readonly
+	*/
 	height: property(&#x27;graph.yScale&#x27;, &#x27;a&#x27;, &#x27;b&#x27;, function(yScale, a, b) {
 		if(!yScale) {
 			return 0;
@@ -195,29 +243,85 @@ export default Ember.Component.extend(HasGraphParent, {
 		return Math.abs(yScale(a) - yScale(b));
 	}),
 
+	/**
+		The SVG transformation of the component.
+		@property transform
+		@type String
+		@private
+		@readonly
+	*/
 	transform: Ember.computed.alias(&#x27;graph.yAxis.transform&#x27;),
 
+	/**
+		The calculated difference between &#x60;a&#x60; and &#x60;b&#x60;.
+		@property diff
+		@type Number
+		@readonly
+	*/
 	diff: property(&#x27;a&#x27;, &#x27;b&#x27;, function(a, b){
 		return b - a;
 	}),
 
+	/**
+		Returns &#x60;true&#x60; if &#x60;diff&#x60; is a positive number
+		@property isPositive
+		@type Boolean
+		@readonly
+	*/
 	isPositive: Ember.computed.gte(&#x27;diff&#x27;, 0),
 	
+	/**
+		Returns &#x60;true&#x60; if the graph&#x27;s y-axis component is configured to orient right.
+		@property isOrientRight
+		@type Boolean
+		@readonly
+	*/
 	isOrientRight: Ember.computed.equal(&#x27;graph.yAxis.orient&#x27;, &#x27;right&#x27;),
 
+	/**
+		The width of the difference box
+		@property width
+		@type Number
+		@readonly
+	*/
 	width: Ember.computed.alias(&#x27;graph.yAxis.width&#x27;),
 
+	/**
+		The view controller for the view this component is present in
+		@property parentController
+		@type Ember.Controller
+		@private
+		@readonly
+	*/
 	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
+	/**
+		The x pixel coordinate of the content container.
+		@property contentX
+		@type Number
+		@readonly
+	*/
 	contentX: property(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;, function(isOrientRight, width, contentPadding) {
 		return isOrientRight ? width - contentPadding : contentPadding;
 	}),
 
+	/**
+		The SVG transformation used to position the content container.
+		@property contentTransform
+		@type String
+		@private
+		@readonly
+	*/
 	contentTransform: property(&#x27;yCenter&#x27;, &#x27;contentX&#x27;, function(yCenter, contentX) {
 		return &#x27;translate(%@ %@)&#x27;.fmt(contentX, yCenter);
 	}),
 
-	_transition: function(){
+	/**
+		Begins the the D3 transition to adjust the vertical positions of the diff box
+		@method _transitionalUpdate
+		@private
+	*/
+	_transitionalUpdate: function(){
 		var y = this.get(&#x27;y&#x27;);
 		var height = this.get(&#x27;height&#x27;);
 		var contentTransform = this.get(&#x27;contentTransform&#x27;);
@@ -238,6 +342,11 @@ export default Ember.Component.extend(HasGraphParent, {
 			.attr(&#x27;transform&#x27;, contentTransform);
 	},
 
+	/**
+		Updates the elements horizontal positions using D3.
+		@method _nonTransitionalUpdate
+		@private
+	*/
 	_nonTransitionalUpdate: function(){
 		var contentTransform = this.get(&#x27;contentTransform&#x27;);
 		var elem = this.$()[0];
@@ -245,11 +354,21 @@ export default Ember.Component.extend(HasGraphParent, {
 			.attr(&#x27;transform&#x27;, contentTransform);
 	},
 
+	/**
+		Schedules a transition when &#x60;a&#x60; or &#x60;b&#x60; changes, and when the component is initialized.
+		@method _triggerUpdates
+		@private
+	*/
 	_triggerUpdates: function() {
-		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._transition);
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._transitionalUpdate);
 	}.observes(&#x27;a&#x27;, &#x27;b&#x27;).on(&#x27;init&#x27;),
 
 
+	/**
+		Schedules non-transitioned properties on the elements to update when underlying values are changed.
+		@method _triggerNonTransitionalUpdate
+		@private
+	*/
 	_triggerNonTransitionalUpdate: function(){
 		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._nonTransitionalUpdate);
 	}.observes(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;).on(&#x27;init&#x27;),

@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -171,6 +177,8 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
   @namespace components
   @class nf-x-axis
+  @extends Ember.Component
+  @uses mixins.graph-has-graph-parent
 */
 export default Ember.Component.extend(HasGraphParent, {
   tagName: &#x27;g&#x27;,
@@ -362,11 +370,21 @@ export default Ember.Component.extend(HasGraphParent, {
     }
   ),
 
-
+  /**
+    Updates the graph&#x27;s xAxis property on willInsertElement
+    @method _updateGraphXAxis
+    @private
+  */
   _updateGraphXAxis: function(){
-    this.graph.set(&#x27;xAxis&#x27;, this);
-  }.observes(&#x27;graph&#x27;),
+    this.set(&#x27;graph.xAxis&#x27;, this);
+  }.on(&#x27;willInsertElement&#x27;),
 
+  /**
+    The y position, in pixels, of the axis line
+    @property axisLineY
+    @type Number
+    @readonly
+  */
   axisLineY: property(&#x27;orient&#x27;, &#x27;height&#x27;, function(orient, height) {
     return orient === &#x27;top&#x27; ? height : 0;
   }),

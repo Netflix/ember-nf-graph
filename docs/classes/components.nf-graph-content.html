@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -139,12 +145,21 @@
                         <h1>components.nf-graph-content Class</h1>
 <div class="box meta">
     
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                
+            </ul>
+        </div>
+    
 
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-graph-content.js.html#l3"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:3</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-graph-content.js.html#l4"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:4</code></a>
         </div>
     
 
@@ -173,6 +188,8 @@ the area where the graphics, such as lines will display.</p>
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
@@ -185,6 +202,21 @@ the area where the graphics, such as lines will display.</p>
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getGraph">_getGraph</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
                 <div class="index-section properties">
@@ -194,6 +226,13 @@ the area where the graphics, such as lines will display.</p>
                         
                             <li class="index-item property">
                                 <a href="#property_frets">frets</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_graph">graph</a>
 
                                 
                                 
@@ -251,6 +290,65 @@ the area where the graphics, such as lines will display.</p>
         </div>
 
         
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__getGraph" class="method item inherited">
+    <h3 class="name"><code>_getGraph</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
 
         
             <div id="properties" class="api-class-tabpanel">
@@ -280,7 +378,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l100"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:100</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l102"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:102</code></a>
         
         </p>
 
@@ -294,6 +392,50 @@ the area where the graphics, such as lines will display.</p>
 
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graph" class="property item inherited">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The parent graph for a component.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -325,7 +467,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l61"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:61</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l63"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:63</code></a>
         
         </p>
 
@@ -370,7 +512,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l52"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:52</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l54"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:54</code></a>
         
         </p>
 
@@ -415,7 +557,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l18"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:18</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l20"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:20</code></a>
         
         </p>
 
@@ -460,7 +602,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l44"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:44</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l46"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:46</code></a>
         
         </p>
 
@@ -505,7 +647,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l28"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:28</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l30"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:30</code></a>
         
         </p>
 
@@ -550,7 +692,7 @@ the area where the graphics, such as lines will display.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph-content.js.html#l36"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:36</code></a>
+        <a href="../files/app-addon_components_nf-graph-content.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-graph-content.js:38</code></a>
         
         </p>
 

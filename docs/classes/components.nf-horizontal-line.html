@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-right-tick - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-horizontal-line - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -142,7 +142,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-right-tick Class</h1>
+                        <h1>components.nf-horizontal-line Class</h1>
 <div class="box meta">
     
         <div class="uses">
@@ -163,7 +163,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-right-tick.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:5</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-horizontal-line.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-horizontal-line.js:5</code></a>
         </div>
     
 
@@ -179,13 +179,7 @@
 
 
 <div class="box intro">
-    <p>Draws a line and a chevron at the specified domain value 
-on the right side of an <code>nf-graph</code>. </p>
-<h3 id="tips">Tips</h3>
-<ul>
-<li>Position outside of <code>nf-graph-content</code> component, but inside <code>nf-graph</code>.</li>
-<li>Adding <code>paddingRight</code> to <code>nf-graph</code> component will not affect <code>nf-right-tick</code>&#39;s position.</li>
-</ul>
+    <p>Draws a horizontal line on the graph at a given y domain value</p>
 
 </div>
 
@@ -215,43 +209,8 @@ on the right side of an <code>nf-graph</code>. </p>
 
                     <ul class="index-list methods extends">
                         
-                            <li class="index-item method private">
-                                <a href="#method__getElements">_getElements</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item method inherited">
                                 <a href="#method__getGraph">_getGraph</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__nonTransitionalUpdate">_nonTransitionalUpdate</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__transitionalUpdate">_transitionalUpdate</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__triggerNonTransitionalUpdate">_triggerNonTransitionalUpdate</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__triggerTransition">_triggerTransition</a>
 
                                 
                                 
@@ -267,13 +226,6 @@ on the right side of an <code>nf-graph</code>. </p>
 
                     <ul class="index-list properties extends">
                         
-                            <li class="index-item property">
-                                <a href="#property_duration">duration</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
 
@@ -282,21 +234,21 @@ on the right side of an <code>nf-graph</code>. </p>
                             </li>
                         
                             <li class="index-item property private">
-                                <a href="#property_isVisible">isVisible</a>
+                                <a href="#property_lineY">lineY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property private">
-                                <a href="#property_transform">transform</a>
+                                <a href="#property_x1">x1</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_value">value</a>
+                            <li class="index-item property private">
+                                <a href="#property_x2">x2</a>
 
                                 
                                 
@@ -321,63 +273,6 @@ on the right side of an <code>nf-graph</code>. </p>
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method__getElements" class="method item private">
-    <h3 class="name"><code>_getElements</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l114"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:114</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets the elements required to do the d3 transitions</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="method__getGraph" class="method item inherited">
@@ -433,287 +328,12 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__nonTransitionalUpdate" class="method item private">
-    <h3 class="name"><code>_nonTransitionalUpdate</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l94"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:94</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Updates the tick position without a transition.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__transitionalUpdate" class="method item private">
-    <h3 class="name"><code>_transitionalUpdate</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l72"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:72</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>performs the D3 transition to move the tick to the proper position.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__triggerNonTransitionalUpdate" class="method item private">
-    <h3 class="name"><code>_triggerNonTransitionalUpdate</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l105"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:105</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Schedules the update of non-transitional positions</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__triggerTransition" class="method item private">
-    <h3 class="name"><code>_triggerTransition</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l85"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:85</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Schedules the transition when <code>value</code> changes on on init.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
             </div>
         
 
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_duration" class="property item">
-    <h3 class="name"><code>duration</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l24"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:24</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The transition duration in milliseconds</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 400</p>
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="property_graph" class="property item inherited">
@@ -760,108 +380,15 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_isVisible" class="property item private">
-    <h3 class="name"><code>isVisible</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l40"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:40</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Sets the visibility of the component. Returns false if <code>y</code> is not 
-a numeric data type.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_transform" class="property item private">
-    <h3 class="name"><code>transform</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l61"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:61</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The SVG transform used to render the tick</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_value" class="property item">
-    <h3 class="name"><code>value</code></h3>
+                    <div id="property_lineY" class="property item private">
+    <h3 class="name"><code>lineY</code></h3>
     <span class="type">Number</span>
 
     
 
     
+        <span class="flag private">private</span>
+    
 
     
 
@@ -878,7 +405,7 @@ a numeric data type.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l32"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:32</code></a>
+        <a href="../files/app-addon_components_nf-horizontal-line.js.html#l27"><code>app-addon&#x2F;components&#x2F;nf-horizontal-line.js:27</code></a>
         
         </p>
 
@@ -888,12 +415,106 @@ a numeric data type.</p>
     </div>
 
     <div class="description">
-        <p>The domain value at which to place the tick</p>
+        <p>The computed y coordinate of the line to draw</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x1" class="property item private">
+    <h3 class="name"><code>x1</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-horizontal-line.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-horizontal-line.js:38</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The left x coordinate of the line</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x2" class="property item private">
+    <h3 class="name"><code>x2</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-horizontal-line.js.html#l47"><code>app-addon&#x2F;components&#x2F;nf-horizontal-line.js:47</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The right x coordinate of the line</p>
+
+    </div>
+
     
 
     
@@ -925,7 +546,7 @@ a numeric data type.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-right-tick.js.html#l51"><code>app-addon&#x2F;components&#x2F;nf-right-tick.js:51</code></a>
+        <a href="../files/app-addon_components_nf-horizontal-line.js.html#l19"><code>app-addon&#x2F;components&#x2F;nf-horizontal-line.js:19</code></a>
         
         </p>
 
@@ -935,10 +556,12 @@ a numeric data type.</p>
     </div>
 
     <div class="description">
-        <p>The calculated y coordinate of the tick</p>
+        <p>The y domain value at which to draw the horizontal line</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> null</p>
     
 
     

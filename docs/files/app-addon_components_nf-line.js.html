@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -143,7 +149,6 @@
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
-import DataPositionUtils from &#x27;../mixins/graph-data-position-utils&#x27;;
 import LineUtils from &#x27;../mixins/graph-line-utils&#x27;;
 import SelectableGraphic from &#x27;../mixins/graph-selectable-graphic&#x27;;
 import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
@@ -152,34 +157,65 @@ import GraphicWithTrackingDot from &#x27;../mixins/graph-graphic-with-tracking-d
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * A line graphic for &#x60;nf-graph&#x60;. Displays a line for the data it&#x27;s passed.
- * @namespace components
- * @class nf-line
- */
+  A line graphic for &#x60;nf-graph&#x60;. Displays a line for the data it&#x27;s passed.
+  @namespace components
+  @class nf-line
+  @extends Ember.Component
+  @uses mixins.graph-line-utils
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-selectable-graphic
+  @uses mixins.graph-registered-graphic
+  @uses mixins.graph-data-graphic
+  @uses mixins.graph-graphic-with-tracking-dot
+*/
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
-  DataPositionUtils, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
+  LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
   tagName: &#x27;g&#x27;,
   
+  /**
+    The type of D3 interpolator to use to create the line.
+    @property interpolator
+    @type String
+    @default &#x27;linear&#x27;
+  */
   interpolator: &#x27;linear&#x27;,
   
   classNameBindings: [&#x27;selected&#x27;, &#x27;selectable&#x27;],
 
   classNames: [&#x27;nf-line&#x27;],
 
+  /**
+    The d3 line function to create the line path.
+    @method lineFn
+    @param data {Array} the array of coordinate arrays to plot as an SVG path
+    @private
+    @return {String} an SVG path data string
+  */
   lineFn: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;interpolator&#x27;, function(xScale, yScale, interpolator) {
     return this.createLineFn(xScale, yScale, interpolator);
   }),
 
-
+  /**
+    The SVG path data string to render the line
+    @property d
+    @type String
+    @private
+    @readonly
+  */
   d: property(&#x27;renderedData.@each&#x27;, &#x27;lineFn&#x27;, function(renderedData, lineFn) {
     return lineFn(renderedData);
   }),
 
-  click: function(){
+  /**
+    Event handler to toggle the &#x60;selected&#x60; property on click
+    @method _toggleSelected
+    @private
+  */
+  _toggleSelected: function(){
     if(this.get(&#x27;selectable&#x27;)) {
       this.toggleProperty(&#x27;selected&#x27;);
     }
-  },
+  }.on(&#x27;click&#x27;),
 });
     </pre>
 </div>

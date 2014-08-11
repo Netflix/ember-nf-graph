@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -145,74 +151,74 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import HasGraphParent  from &#x27;../mixins/graph-has-graph-parent&#x27;;
 
 /**
- * A component for adding a templated y axis to an &#x60;nf-graph&#x60; component.
- * All items contained within this component are used to template each tick mark on the 
- * rendered graph. Tick values are supplied to the inner scope of this component on the
- * view template via &#x60;tick&#x60;.
- * 
- * ### Styling
- * 
- * The main container will have a &#x60;nf-y-axis&#x60; class.
- * A &#x60;orient-left&#x60; or &#x60;orient-right&#x60; container will be applied to the container
- * depending on the &#x60;orient&#x60; setting.
- *
- * Ticks are positioned via a &#x60;&lt;g&gt;&#x60; tag, that will contain whatever is passed into it via
- * templating, along with the tick line. &#x60;&lt;text&gt;&#x60; tags within tick templates do have some 
- * default styling applied to them to position them appropriately based off of orientation.
- *
- * ### Example
- *
- *       {{#nf-graph width=500 height=300}}
- *         {{#nf-y-axis width=40}}
- *           &lt;text&gt;y is {{tick.value}}&lt;/text&gt;
- *         {{/nf-y-axis}}
- *       {{/nf-graph}}
- *
- *
- * @namespace components
- * @class nf-y-axis
- */
+  A component for adding a templated y axis to an &#x60;nf-graph&#x60; component.
+  All items contained within this component are used to template each tick mark on the 
+  rendered graph. Tick values are supplied to the inner scope of this component on the
+  view template via &#x60;tick&#x60;.
+  
+  ### Styling
+  
+  The main container will have a &#x60;nf-y-axis&#x60; class.
+  A &#x60;orient-left&#x60; or &#x60;orient-right&#x60; container will be applied to the container
+  depending on the &#x60;orient&#x60; setting.
+
+  Ticks are positioned via a &#x60;&lt;g&gt;&#x60; tag, that will contain whatever is passed into it via
+  templating, along with the tick line. &#x60;&lt;text&gt;&#x60; tags within tick templates do have some 
+  default styling applied to them to position them appropriately based off of orientation.
+
+  ### Example
+
+        {{#nf-graph width=500 height=300}}
+          {{#nf-y-axis width=40}}
+            &lt;text&gt;y is {{tick.value}}&lt;/text&gt;
+          {{/nf-y-axis}}
+        {{/nf-graph}}
+
+
+  @namespace components
+  @class nf-y-axis
+*/
 export default Ember.Component.extend(HasGraphParent, {
   tagName: &#x27;g&#x27;,
 
   /**
-   * The number of ticks to display
-   * @property tickCount
-   * @type Number
-   * @default 5
-   */
+    The number of ticks to display
+    @property tickCount
+    @type Number
+    @default 5
+  */
   tickCount: 5,
 
   /**
-   * The length of the tick&#x27;s accompanying line.
-   * @property tickLength
-   * @type Number
-   * @default 5
-   */
+    The length of the tick&#x27;s accompanying line.
+    @property tickLength
+    @type Number
+    @default 5
+  */
   tickLength: 5,
 
   /**
-   * The distance between the tick line and the origin tick&#x27;s templated output
-   * @property tickPadding
-   * @type Number
-   * @default 3
-   */
+    The distance between the tick line and the origin tick&#x27;s templated output
+    @property tickPadding
+    @type Number
+    @default 3
+  */
   tickPadding: 3,
 
   /**
-   * The total width of the y axis
-   * @property width
-   * @type Number
-   * @default 40
-   */
+    The total width of the y axis
+    @property width
+    @type Number
+    @default 40
+  */
   width: 40,
 
   /**
-   * The orientation of the y axis. Possible values are &#x60;&#x27;left&#x27;&#x60; and &#x60;&#x27;right&#x27;&#x60;
-   * @property orient
-   * @type String
-   * @default &#x27;left&#x27;
-   */
+    The orientation of the y axis. Possible values are &#x60;&#x27;left&#x27;&#x60; and &#x60;&#x27;right&#x27;&#x60;
+    @property orient
+    @type String
+    @default &#x27;left&#x27;
+  */
   orient: &#x27;left&#x27;,
 
   attributeBindings: [&#x27;transform&#x27;],
@@ -222,27 +228,27 @@ export default Ember.Component.extend(HasGraphParent, {
   _tickFilter: null,
 
   /**
-   * An optional filtering function to allow more control over what tick marks are displayed.
-   * The function should have exactly the same signature as the function you&#x27;d use for an
-   * &#x60;Array.prototype.filter()&#x60;.
-   *
-   * @property tickFilter
-   * @type Function
-   * @default null
-   * @example
-   *
-   *       {{#nf-y-axis tickFilter=myFilter}} 
-   *         &lt;text&gt;{{tick.value}}&lt;/text&gt;
-   *       {{/nf-y-axis}}
-   *
-   * And on your controller:
-   * 
-   *       myFilter: function(tick, index, ticks) {
-   *         return tick.value &lt; 1000;
-   *       },
-   *
-   * The above example will filter down the set of ticks to only those that are less than 1000.
-   */
+    An optional filtering function to allow more control over what tick marks are displayed.
+    The function should have exactly the same signature as the function you&#x27;d use for an
+    &#x60;Array.prototype.filter()&#x60;.
+  
+    @property tickFilter
+    @type Function
+    @default null
+    @example
+  
+          {{#nf-y-axis tickFilter=myFilter}} 
+            &lt;text&gt;{{tick.value}}&lt;/text&gt;
+          {{/nf-y-axis}}
+  
+    And on your controller:
+    
+          myFilter: function(tick, index, ticks) {
+            return tick.value &lt; 1000;
+          },
+  
+    The above example will filter down the set of ticks to only those that are less than 1000.
+  */
   tickFilter: function(name, value) {
     if(arguments.length &gt; 1) {
       this._tickFilter = value;
@@ -251,20 +257,20 @@ export default Ember.Component.extend(HasGraphParent, {
   }.property(),
 
   /**
-   * computed property. returns true if &#x60;orient&#x60; is equal to &#x60;&#x27;right&#x27;&#x60;.
-   * @property isOrientRight
-   * @type Boolean
-   * @readonly
-   */
+    computed property. returns true if &#x60;orient&#x60; is equal to &#x60;&#x27;right&#x27;&#x60;.
+    @property isOrientRight
+    @type Boolean
+    @readonly
+  */
   isOrientRight: Ember.computed.equal(&#x27;orient&#x27;, &#x27;right&#x27;),
 
 
   /**
-   * The SVG transform for positioning the component.
-   * @property transform
-   * @type String
-   * @readonly
-   */
+    The SVG transform for positioning the component.
+    @property transform
+    @type String
+    @readonly
+  */
   transform: function(){
     var x = this.get(&#x27;x&#x27;);
     var y = this.get(&#x27;y&#x27;);
@@ -272,11 +278,11 @@ export default Ember.Component.extend(HasGraphParent, {
   }.property(&#x27;x&#x27;, &#x27;y&#x27;),
 
   /**
-   * The x position of the component
-   * @property x
-   * @type Number
-   * @readonly
-   */
+    The x position of the component
+    @property x
+    @type Number
+    @readonly
+  */
   x: function(){
     var orient = this.get(&#x27;orient&#x27;);
     if(orient !== &#x27;left&#x27;) {
@@ -286,30 +292,30 @@ export default Ember.Component.extend(HasGraphParent, {
   }.property(&#x27;orient&#x27;, &#x27;graph.width&#x27;, &#x27;width&#x27;, &#x27;graph.paddingLeft&#x27;, &#x27;graph.paddingRight&#x27;),
 
   /**
-   * The y position of the component
-   * @property y
-   * @type Number
-   * @readonly
-   */
+    The y position of the component
+    @property y
+    @type Number
+    @readonly
+  */
   y: Ember.computed.alias(&#x27;graph.graphY&#x27;),
 
   /** 
-   * the height of the component
-   * @property height
-   * @type Number
-   * @readonly
-   */
+    the height of the component
+    @property height
+    @type Number
+    @readonly
+  */
   height: Ember.computed.alias(&#x27;graph.height&#x27;),
 
   /**
-   * Function to create the tick values. Can be overriden to provide specific values.
-   * @method tickFactory
-   * @param yScale {Function} a d3 scale function
-   * @param tickCount {Number} the number of ticks desired
-   * @param uniqueYData {Array} all y data represented, filted to be unique (used for ordinal cases)
-   * @param yScaleType {String} the scale type of the containing graph.
-   * @return {Array} an array of domain values at which ticks should be placed.
-   */
+    Function to create the tick values. Can be overriden to provide specific values.
+    @method tickFactory
+    @param yScale {Function} a d3 scale function
+    @param tickCount {Number} the number of ticks desired
+    @param uniqueYData {Array} all y data represented, filted to be unique (used for ordinal cases)
+    @param yScaleType {String} the scale type of the containing graph.
+    @return {Array} an array of domain values at which ticks should be placed.
+  */
   tickFactory: function(yScale, tickCount, uniqueYData, yScaleType) {
     var ticks = yScaleType === &#x27;ordinal&#x27; ? uniqueYData : yScale.ticks(tickCount);
     if (yScaleType === &#x27;log&#x27;) {
@@ -322,19 +328,19 @@ export default Ember.Component.extend(HasGraphParent, {
   },
 
   /**
-   * All y data from the graph, filtered to unique values.
-   * @property uniqueYData
-   * @type Array
-   * @readonly
-   */
+    All y data from the graph, filtered to unique values.
+    @property uniqueYData
+    @type Array
+    @readonly
+  */
   uniqueYData: Ember.computed.uniq(&#x27;graph.yData&#x27;),
 
   /** 
-   * The ticks to be displayed.
-   * @property ticks
-   * @type Array
-   * @readonly
-   */
+    The ticks to be displayed.
+    @property ticks
+    @type Array
+    @readonly
+  */
   ticks: property(&#x27;graph.yScale&#x27;, &#x27;tickCount&#x27;, &#x27;graph.yScaleType&#x27;, &#x27;tickPadding&#x27;, &#x27;axisLineX&#x27;, &#x27;tickLength&#x27;, &#x27;isOrientRight&#x27;, &#x27;tickFilter&#x27;, &#x27;uniqueYData&#x27;,
     function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
       var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
@@ -361,19 +367,23 @@ export default Ember.Component.extend(HasGraphParent, {
   ),
 
   /**
-   * The x position of the axis line.
-   * @property axisLineX
-   * @type Number
-   * @readonly
-   */
+    The x position of the axis line.
+    @property axisLineX
+    @type Number
+    @readonly
+  */
   axisLineX: property(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, function(isOrientRight, width){
     return isOrientRight ? 0 : width;
   }),
 
-  _hasGraph: function(){
-    var graph = this.get(&#x27;graph&#x27;);
-    graph.set(&#x27;yAxis&#x27;, this);
-  }.observes(&#x27;graph&#x27;)
+  /**
+    sets graph&#x27;s yAxis property on willInsertElement
+    @method _updateGraphYAxis
+    @private
+  */
+  _updateGraphYAxis: function(){
+    this.set(&#x27;graph.yAxis&#x27;, this);
+  }.on(&#x27;willInsertElement&#x27;)
 });
 
     </pre>

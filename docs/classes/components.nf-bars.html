@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -139,7 +145,24 @@
                         <h1>components.nf-bars Class</h1>
 <div class="box meta">
     
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                
+                    <li><a href="mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
+                
+                    <li><a href="mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
+                
+            </ul>
+        </div>
+    
 
+    
+        <div class="extends">
+            Extends Ember.Component
+        </div>
     
 
     
@@ -172,6 +195,8 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
@@ -184,12 +209,48 @@
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getGraph">_getGraph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__registerGraphic">_registerGraphic</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method__unregisterGraphic">_unregisterGraphic</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private inherited">
+                                <a href="#method_updateHoverIndex">updateHoverIndex</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
                             <li class="index-item property">
                                 <a href="#property_bars">bars</a>
@@ -205,8 +266,92 @@
                                 
                             </li>
                         
+                            <li class="index-item property inherited">
+                                <a href="#property_data">data</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_firstSortedData">firstSortedData</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property private">
                                 <a href="#property_getBarClass">getBarClass</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_graph">graph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_lastVisibleData">lastVisibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_renderedData">renderedData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_sortedData">sortedData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_x">x</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_xData">xData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_xPropFn">xPropFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_y">y</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_yData">yData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_yPropFn">yPropFn</a>
 
                                 
                                 
@@ -221,6 +366,230 @@
             
         </div>
 
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__getGraph" class="method item inherited">
+    <h3 class="name"><code>_getGraph</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__registerGraphic" class="method item private inherited">
+    <h3 class="name"><code>_registerGraphic</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-registered-graphic.html#method__registerGraphic">mixins.graph-registered-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-registered-graphic.js.html#l10"><code>app-addon&#x2F;mixins&#x2F;graph-registered-graphic.js:10</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>calls <a href="../classes/components.nf-graph.html#method_registerGraphic" class="crosslink">registerGraphic</a> on
+<code>didInsertElement</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__unregisterGraphic" class="method item private inherited">
+    <h3 class="name"><code>_unregisterGraphic</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-registered-graphic.html#method__unregisterGraphic">mixins.graph-registered-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-registered-graphic.js.html#l23"><code>app-addon&#x2F;mixins&#x2F;graph-registered-graphic.js:23</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>calls <a href="../classes/components.nf-graph.html#method_unregisterGraphic" class="crosslink">unregisterGraphic</a> on
+<code>didInsertElement</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_updateHoverIndex" class="method item private inherited">
+    <h3 class="name"><code>updateHoverIndex</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#method_updateHoverIndex">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l204"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:204</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the hoverIndex and hoverData properties when the graph&#39;s <code>hoverX</code> property changes, or when 
+the renderedData changes.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         
@@ -251,7 +620,7 @@
             
         
         
-        <a href="../files/app-addon_components_nf-bars.js.html#l39"><code>app-addon&#x2F;components&#x2F;nf-bars.js:39</code></a>
+        <a href="../files/app-addon_components_nf-bars.js.html#l43"><code>app-addon&#x2F;components&#x2F;nf-bars.js:43</code></a>
         
         </p>
 
@@ -296,7 +665,7 @@
             
         
         
-        <a href="../files/app-addon_components_nf-bars.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-bars.js:21</code></a>
+        <a href="../files/app-addon_components_nf-bars.js.html#l25"><code>app-addon&#x2F;components&#x2F;nf-bars.js:25</code></a>
         
         </p>
 
@@ -312,6 +681,93 @@
 
     
         <p><strong>Default:</strong> &#x27;className&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_data" class="property item inherited">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_data">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l21"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:21</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets the data used by the component to plot itself.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_firstSortedData" class="property item inherited">
+    <h3 class="name"><code>firstSortedData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_firstSortedData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l172"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:172</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+that is actually visible within the x domain.</p>
+
+    </div>
+
     
 
     
@@ -345,7 +801,7 @@
             
         
         
-        <a href="../files/app-addon_components_nf-bars.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-bars.js:29</code></a>
+        <a href="../files/app-addon_components_nf-bars.js.html#l33"><code>app-addon&#x2F;components&#x2F;nf-bars.js:33</code></a>
         
         </p>
 
@@ -356,6 +812,444 @@
 
     <div class="description">
         <p>Gets the function to get the classname from each data item.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graph" class="property item inherited">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The parent graph for a component.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_lastVisibleData" class="property item inherited">
+    <h3 class="name"><code>lastVisibleData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_lastVisibleData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l188"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:188</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+that is actually visible within the x domain.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_renderedData" class="property item inherited">
+    <h3 class="name"><code>renderedData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_renderedData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l145"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:145</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The list of data points from mixins.graph-data-graphc/sortedData:property that
+fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_sortedData" class="property item inherited">
+    <h3 class="name"><code>sortedData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_sortedData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l92"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:92</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The sorted and mapped data pulled from <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+An array of arrays, structures as so:</p>
+<pre class="code prettyprint"><code>  [[x,y],[x,y],[x,y]];</code></pre>
+<p><strong> each inner array also has a property <code>data</code> on it, containing the original data object </strong></p>
+<p>When this property is computed, it also updates the <code>xData</code> and <code>yData</code> properties of the graphic.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x" class="property item inherited">
+    <h3 class="name"><code>x</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_x">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l30"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:30</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The path of the property on each object in 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+to use as x data to plot on the graph.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;x&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xData" class="property item inherited">
+    <h3 class="name"><code>xData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_xData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l76"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:76</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the x values from the <code>sortedData</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xPropFn" class="property item inherited">
+    <h3 class="name"><code>xPropFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_xPropFn">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l52"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:52</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The function to get the x value from each 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y" class="property item inherited">
+    <h3 class="name"><code>y</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_y">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l41"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The path of the property on each object in 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+to use as y data to plot on the graph.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;y&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yData" class="property item inherited">
+    <h3 class="name"><code>yData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_yData">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l84"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:84</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the y values from the <code>sortedData</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yPropFn" class="property item inherited">
+    <h3 class="name"><code>yPropFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#property_yPropFn">mixins.graph-data-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l64"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:64</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The function to get the y value from each 
+<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
 
     </div>
 

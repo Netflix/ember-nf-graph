@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -145,29 +151,66 @@ import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * A component that adds a &quot;crosshair&quot; to an &#x60;nf-graph&#x60; that follows the mouse
- * while it&#x27;s hovering over the graph content.
- *
- *
- * @namespace components
- * @class nf-crosshair
- */
+  A component that adds a &quot;crosshair&quot; to an &#x60;nf-graph&#x60; that follows the mouse
+  while it&#x27;s hovering over the graph content.
+  @namespace components
+  @class nf-crosshair
+  @extends Ember.Component
+  @uses mixins.graph-has-graph-parent
+*/
 export default Ember.Component.extend(HasGraphParent, {
   tagName: &#x27;g&#x27;,
 
   classNames: [&#x27;nf-crosshair&#x27;],
 
+  /**
+    The height of the crosshair in pixels
+    @property height
+    @type Number
+    @readonly
+  */
   height: Ember.computed.alias(&#x27;graph.graphHeight&#x27;),
 
+  /**
+    The width of the crosshair in pixels
+    @property width
+    @type Number
+    @readonly
+  */
   width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
 
+  /**
+    The x position, in pixels, of the crosshair center
+    @property x
+    @type Number
+    @readonly
+  */
   x: Ember.computed.alias(&#x27;graph.xHover&#x27;),
+
+  /**
+    The y position, in pixels, of the crosshair center
+    @property y
+    @type Number
+    @readonly
+  */
   y: Ember.computed.alias(&#x27;graph.yHover&#x27;),
 
+  /**
+    Determines visibility of horizontal &quot;x&quot; line.
+    @property xVisible
+    @type Boolean
+    @readonly
+  */
   xVisible: property(&#x27;y&#x27;, &#x27;graph.graphHeight&#x27;, function(y, graphHeight) {
     return 0 &lt;= y &amp;&amp; y &lt;= graphHeight;
   }),
 
+  /**
+    Determines visibility of vertical &quot;y&quot; line.
+    @property yVisible
+    @type Boolean
+    @readonly
+  */
   yVisible: property(&#x27;x&#x27;, &#x27;graph.graphWidth&#x27;, function(x, graphWidth) {
     return 0 &lt;= x &amp;&amp; x &lt;= graphWidth;
   }),

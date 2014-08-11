@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-graph-content.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-dot.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -142,118 +142,83 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-graph-content.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-dot.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
-  Container component for graphics to display in &#x60;nf-graph&#x60;. Represents
-  the area where the graphics, such as lines will display.
-  
-  Exists for layout purposes.
-  @namespace components
-  @class nf-graph-content
+	Plots a circle at a given x and y domain value on an &#x60;nf-graph&#x60;.
+
+	@namespace components
+	@class nf-dot
+	@extends Ember.Component
   @uses mixins.graph-has-graph-parent
-*/  
+*/
 export default Ember.Component.extend(HasGraphParent, {
-  tagName: &#x27;g&#x27;,
-  
-  classNames: [&#x27;nf-graph-content&#x27;],
+	tagName: &#x27;circle&#x27;,
 
-  attributeBindings: [&#x27;transform&#x27;],
+	attributeBindings: [&#x27;r&#x27;, &#x27;cy&#x27;, &#x27;cx&#x27;],
 
-  /**
-    The SVG transform for positioning the graph content
-    @property transform
-    @type String
-    @readonly
-  */
-  transform: function(){
-    return &#x27;translate(%@ %@)&#x27;.fmt(this.get(&#x27;x&#x27;), this.get(&#x27;y&#x27;));
-  }.property(&#x27;x&#x27;, &#x27;y&#x27;),
+	/**
+		The x domain value at which to plot the circle
+		@property x
+		@type Number
+		@default null
+	*/
+	x: null,
+	
+	/**
+		The y domain value at which to plot the circle
+		@property x
+		@type Number
+		@default null
+	*/
+	y: null,
+	
+	/**
+		The radius of the circle plotted
+		@property r
+		@type Number
+		@default 2.5
+	*/
+	r: 2.5,
 
-  /**
-    The x position of the graph content
-    @property x
-    @type Number
-    @readonly
-  */
-  x: Ember.computed.alias(&#x27;graph.graphX&#x27;),
+	/**
+		The computed center x coordinate of the circle
+		@property cx
+		@type Number
+		@private
+		@readonly
+	*/
+	cx: property(&#x27;x&#x27;, &#x27;graph.xScale&#x27;, function(x, xScale) {
+		return !isNaN(x) &amp;&amp; xScale ? xScale(x) : -1;
+	}),
 
-  /**
-    The calculated y position of the graph content
-    @property y
-    @type Number
-    @readonly
-  */
-  y: Ember.computed.alias(&#x27;graph.graphY&#x27;),
+	/**
+		The computed center y coordinate of the circle
+		@property cy
+		@type Number
+		@private
+		@readonly
+	*/
+	cy: property(&#x27;y&#x27;, &#x27;graph.yScale&#x27;, function(y, yScale) {
+		return !isNaN(y) &amp;&amp; yScale ? yScale(y) : -1;
+	}),
 
-  /**
-    The calculated width of the graph content
-    @property width
-    @type Number
-    @readonly
-  */
-  width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
-
-  /**
-    The calculated height of the graph content.
-    @property height
-    @type Number
-    @readonly
-  */
-  height: Ember.computed.alias(&#x27;graph.graphHeight&#x27;),
-
-
-  /**
-    An array containing models to render the grid lanes
-    @property gridLanes
-    @type Array
-    @readonly
-  */
-  gridLanes: function () {
-    var ticks = this.get(&#x27;graph.yAxis.ticks&#x27;);
-    var width = this.get(&#x27;width&#x27;);
-    var height = this.get(&#x27;height&#x27;);
-
-    if(!ticks || ticks.length === 0) {
-      return [];
-    }
-
-    var sorted = ticks.slice().sort(function(a, b) {
-      return a.y - b.y;
-    });
-
-    if(sorted[0].y !== 0) {
-      sorted.unshift({ y: 0 });
-    }
-
-    var lanes = sorted.reduce(function(lanes, tick, i) {
-      var y = tick.y;
-      var next = sorted[i+1] || { y: height };
-      var h = next.y - tick.y;
-      lanes.push({
-        x: 0,
-        y: y,
-        width: width,
-        height: h
-      });
-      return lanes;
-    }, []);
-
-    return lanes;
-  }.property(&#x27;graph.yAxis.ticks&#x27;, &#x27;width&#x27;, &#x27;height&#x27;),
-
-  /**
-    An array containing models to render fret lines
-    @property frets
-    @type Array
-    @readonly
-  */
-  frets: Ember.computed.alias(&#x27;graph.xAxis.ticks&#x27;),
+	/**
+		Toggles the visibility of the dot. If x or y are
+		not numbers, will return false.
+		@property isVisible
+		@private
+		@readonly
+	*/
+	isVisible: property(&#x27;x&#x27;, &#x27;y&#x27;, function(x, y) {
+		return !(isNaN(x) || isNaN(y));
+	}),
 });
     </pre>
 </div>

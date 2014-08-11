@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -139,7 +145,20 @@
                         <h1>components.nf-range-markers Class</h1>
 <div class="box meta">
     
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                
+            </ul>
+        </div>
+    
 
+    
+        <div class="extends">
+            Extends Ember.Component
+        </div>
     
 
     
@@ -173,6 +192,10 @@ can be laid out in a manner in which they don&#39;t collide.</p>
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
+        
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
         
         
@@ -183,7 +206,79 @@ can be laid out in a manner in which they don&#39;t collide.</p>
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
 
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getGraph">_getGraph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_registerMarker">registerMarker</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_unregisterMarker">unregisterMarker</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
+
+            
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_graph">graph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_isRangeMarkerContainer">isRangeMarkerContainer</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_markerMargin">markerMargin</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_markers">markers</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_orient">orient</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -192,7 +287,486 @@ can be laid out in a manner in which they don&#39;t collide.</p>
         </div>
 
         
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
+                
+                    <div id="method__getGraph" class="method item inherited">
+    <h3 class="name"><code>_getGraph</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_registerMarker" class="method item">
+    <h3 class="name"><code>registerMarker</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>marker</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-range-markers.js.html#l55"><code>app-addon&#x2F;components&#x2F;nf-range-markers.js:55</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Adds the passed marker to the <code>markers</code> list, and sets the <code>prevMarker</code> and <code>nextMarker</code>
+properties on the marker component and it&#39;s neighbor.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">marker</code>
+                        <span class="type">Nf-range-marker</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the range marker to register with this container</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_unregisterMarker" class="method item">
+    <h3 class="name"><code>unregisterMarker</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>marker</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-range-markers.js.html#l73"><code>app-addon&#x2F;components&#x2F;nf-range-markers.js:73</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Removes the marker from the <code>markers</code> list. Also updates the <code>nextMarker</code> and <code>prevMarker</code>
+properties of it&#39;s neighboring components.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">marker</code>
+                        <span class="type">Nf-range-marker</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the range marker to remove from the <code>markers</code> list.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_graph" class="property item inherited">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The parent graph for a component.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_isRangeMarkerContainer" class="property item">
+    <h3 class="name"><code>isRangeMarkerContainer</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-range-markers.js.html#l17"><code>app-addon&#x2F;components&#x2F;nf-range-markers.js:17</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Used by <code>nf-range-marker</code> to identify the <code>nf-range-markers</code> container</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> true</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_markerMargin" class="property item">
+    <h3 class="name"><code>markerMargin</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-range-markers.js.html#l37"><code>app-addon&#x2F;components&#x2F;nf-range-markers.js:37</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The margin, in pixels, between the markers</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 10</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_markers" class="property item">
+    <h3 class="name"><code>markers</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-range-markers.js.html#l45"><code>app-addon&#x2F;components&#x2F;nf-range-markers.js:45</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The marker components registered with this container</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_orient" class="property item">
+    <h3 class="name"><code>orient</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-range-markers.js.html#l26"><code>app-addon&#x2F;components&#x2F;nf-range-markers.js:26</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the orientation of the range markers.</p>
+<ul>
+<li><code>&#39;bottom&#39;</code> - Range markers start at the bottom and stack upward</li>
+<li><code>&#39;top&#39;</code> - Range markers start at the top and stack downward</li>
+</ul>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;bottom&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

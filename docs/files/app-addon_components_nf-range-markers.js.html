@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -145,37 +151,92 @@ import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * A container and manager for &#x60;nf-range-marker&#x60; components.
- * Used to draw an association between &#x60;nf-range-marker&#x60; components so they 
- * can be laid out in a manner in which they don&#x27;t collide.
- * @namespace components
- * @class nf-range-markers
- */
+	A container and manager for &#x60;nf-range-marker&#x60; components.
+	Used to draw an association between &#x60;nf-range-marker&#x60; components so they 
+	can be laid out in a manner in which they don&#x27;t collide.
+	@namespace components
+	@class nf-range-markers
+	@extends Ember.Component
+  @uses mixins.graph-has-graph-parent
+*/
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: &#x27;g&#x27;,
+	
+	/**
+		Used by &#x60;nf-range-marker&#x60; to identify the &#x60;nf-range-markers&#x60; container
+		@property isRangeMarkerContainer
+		@type Boolean
+		@default true
+		@readonly
+	*/
 	isRangeMarkerContainer: true,
 
+	/**
+		Sets the orientation of the range markers.
+
+		- &#x60;&#x27;bottom&#x27;&#x60; - Range markers start at the bottom and stack upward
+		- &#x60;&#x27;top&#x27;&#x60; - Range markers start at the top and stack downward
+		@property orient
+		@type String
+		@default &#x27;bottom&#x27;
+	*/
 	orient: &#x27;bottom&#x27;,
+
+	/**
+		The margin, in pixels, between the markers
+		@property markerMargin
+		@type Number
+		@default 10
+	*/
 	markerMargin: 10,
 
+	/**
+		The marker components registered with this container
+		@property markers
+		@type Array
+		@readonly
+	*/
 	markers: property(function(){
 		return [];
 	}),
 
+	/**
+		Adds the passed marker to the &#x60;markers&#x60; list, and sets the &#x60;prevMarker&#x60; and &#x60;nextMarker&#x60;
+		properties on the marker component and it&#x27;s neighbor.
+		@method registerMarker
+		@param marker {nf-range-marker} the range marker to register with this container
+	*/
 	registerMarker: function(marker) {
 		var markers = this.get(&#x27;markers&#x27;);
 		var prevMarker = markers[markers.length - 1];
 		
 		if(prevMarker) {
-			marker.prevMarker = prevMarker;
+			marker.set(&#x27;prevMarker&#x27;, prevMarker);
+			prevMarker.set(&#x27;nextMarker&#x27;, marker);
 		}
 
 		markers.pushObject(marker);
 	},
 
+	/**
+		Removes the marker from the &#x60;markers&#x60; list. Also updates the &#x60;nextMarker&#x60; and &#x60;prevMarker&#x60;
+		properties of it&#x27;s neighboring components.
+		@method unregisterMarker
+		@param marker {nf-range-marker} the range marker to remove from the &#x60;markers&#x60; list.
+	*/
 	unregisterMarker: function(marker) {
-		this.get(&#x27;markers&#x27;).removeObject(marker);
-	}
+		if(marker) {
+			var next = marker.nextMarker;
+			var prev = marker.prevMarker;
+			if(prev) {
+				prev.set(&#x27;nextMarker&#x27;, next);
+			}
+			if(next) {
+				next.set(&#x27;prevMarker&#x27;, prev);
+			}
+			this.get(&#x27;markers&#x27;).removeObject(marker);
+		}
+	},
 });
     </pre>
 </div>

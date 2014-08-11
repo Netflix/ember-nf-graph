@@ -53,11 +53,15 @@
             
                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
             
+                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
             
                 <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+            
+                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
             
                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
             
@@ -70,6 +74,8 @@
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
+                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
             
@@ -141,58 +147,127 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 
 /**
- * Draws a line and a chevron at the specified domain value 
- * on the right side of an &#x60;nf-graph&#x60;. 
- * 
- * ### Tips
- * 
- * - Position outside of &#x60;nf-graph-content&#x60; component, but inside &#x60;nf-graph&#x60;.
- * - Adding &#x60;paddingRight&#x60; to &#x60;nf-graph&#x60; component will not affect &#x60;nf-right-tick&#x60;&#x27;s position.
- * 
- * @namespace components
- * @class nf-right-tick
- */
-export default Ember.Component.extend({
-	tagName: &#x27;g&#x27;,
+	Draws a line and a chevron at the specified domain value 
+	on the right side of an &#x60;nf-graph&#x60;. 
 	
-	transition: 500,
-
-	value: null,
+	### Tips
+	
+	- Position outside of &#x60;nf-graph-content&#x60; component, but inside &#x60;nf-graph&#x60;.
+	- Adding &#x60;paddingRight&#x60; to &#x60;nf-graph&#x60; component will not affect &#x60;nf-right-tick&#x60;&#x27;s position.
+	
+	@namespace components
+	@class nf-right-tick
+	@extends Ember.Component
+  @uses mixins.graph-has-graph-parent
+*/
+export default Ember.Component.extend(HasGraphParent, {
+	tagName: &#x27;g&#x27;,
 
 	classNames: [&#x27;nf-right-tick&#x27;],
+	
+	/**
+		The transition duration in milliseconds
+		@property duration
+		@type Number
+		@default 400
+	*/
+	duration: 400,
 
-	isVisible: property(&#x27;value&#x27;, function(value){
-		return value !== null &amp;&amp; !isNaN(value);
+	/**
+		The domain value at which to place the tick
+		@property value
+		@type Number
+		@default null
+	*/
+	value: null,
+
+	/**
+		Sets the visibility of the component. Returns false if &#x60;y&#x60; is not 
+		a numeric data type.
+		@property isVisible
+		@private
+		@readonly
+	*/
+	isVisible: property(&#x27;y&#x27;, function(y){
+		return !isNaN(y);
 	}),
 
-	y: property(&#x27;value&#x27;, &#x27;graph.yScale&#x27;, &#x27;graph.paddingTop&#x27;, &#x27;isVisible&#x27;, function(value, yScale, paddingTop, isVisible){
-		if(!isVisible) {
-			return 0;
-		}
-		return (yScale(value) + paddingTop) || 0;
+	/**
+		The calculated y coordinate of the tick
+		@property y
+		@type Number
+		@readonly
+	*/
+	y: property(&#x27;value&#x27;, &#x27;graph.yScale&#x27;, &#x27;graph.paddingTop&#x27;, function(value, yScale, paddingTop){
+		return yScale(value) + paddingTop;
 	}),
 
+	/**
+		The SVG transform used to render the tick
+		@property transform
+		@type String
+		@private
+		@readonly
+	*/
 	transform: property(&#x27;y&#x27;, &#x27;graph.width&#x27;, function(y, graphWidth){
 		return &#x27;translate(%@ %@)&#x27;.fmt(graphWidth - 6, y - 3);
 	}),
 
-	_setup: function(){
-		var graph = this.nearestWithProperty(&#x27;isGraph&#x27;);
-		this.set(&#x27;graph&#x27;, graph);
-	}.on(&#x27;init&#x27;),
+	/**
+		performs the D3 transition to move the tick to the proper position.
+		@method _transitionalUpdate
+		@private
+	*/
+	_transitionalUpdate: function(){
+		var transform = this.get(&#x27;transform&#x27;);
+		var path = this.get(&#x27;path&#x27;);
+		var duration = this.get(&#x27;duration&#x27;);
+		path.transition().duration(duration)
+			.attr(&#x27;transform&#x27;, transform);
+	},
 
-	updateElement: observer(&#x27;path&#x27;, &#x27;transition&#x27;, &#x27;transform&#x27;, function(path, transition, transform){
-		path.transition(transition).attr(&#x27;transform&#x27;, transform);
-	}),
+	/**
+		Schedules the transition when &#x60;value&#x60; changes on on init.
+		@method _triggerTransition
+		@private
+	*/
+	_triggerTransition: function(){
+		Ember.run.scheduleOnce(&#x27;hasRendered&#x27;, this, this._transitionalUpdate);
+	}.observes(&#x27;value&#x27;).on(&#x27;init&#x27;),
 
-	getElement: function(){
+	/**
+		Updates the tick position without a transition.
+		@method _nonTransitionalUpdate
+		@private
+	*/
+	_nonTransitionalUpdate: function(){
+		var transform = this.get(&#x27;transform&#x27;);
+		var path = this.get(&#x27;path&#x27;);
+		path.attr(&#x27;transform&#x27;, transform);
+	},
+
+	/**
+		Schedules the update of non-transitional positions
+		@method _triggerNonTransitionalUpdate
+		@private
+	*/
+	_triggerNonTransitionalUpdate: function(){
+		Ember.run.scheduleOnce(&#x27;hadRendered&#x27;, this, this._nonTransitionalUpdate);
+	}.observes(&#x27;graph.width&#x27;),
+
+	/**
+		Gets the elements required to do the d3 transitions
+		@method _getElements
+		@private
+	*/
+	_getElements: function(){
 		var g = d3.select(this.$()[0]);
 		var path = g.selectAll(&#x27;path&#x27;).data([0]);
 		this.set(&#x27;path&#x27;, path);
-		this.updateElement();
 	}.on(&#x27;didInsertElement&#x27;)
 });
     </pre>
