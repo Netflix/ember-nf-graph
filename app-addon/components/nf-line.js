@@ -1,7 +1,6 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import DataGraphic from '../mixins/graph-data-graphic';
-import DataPositionUtils from '../mixins/graph-data-position-utils';
 import LineUtils from '../mixins/graph-line-utils';
 import SelectableGraphic from '../mixins/graph-selectable-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
@@ -10,32 +9,63 @@ import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 import { property } from '../utils/computed-property-helpers';
 
 /**
- * A line graphic for `nf-graph`. Displays a line for the data it's passed.
- * @namespace components
- * @class nf-line
- */
+  A line graphic for `nf-graph`. Displays a line for the data it's passed.
+  @namespace components
+  @class nf-line
+  @extends Ember.Component
+  @uses mixins.graph-line-utils
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-selectable-graphic
+  @uses mixins.graph-registered-graphic
+  @uses mixins.graph-data-graphic
+  @uses mixins.graph-graphic-with-tracking-dot
+*/
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
   DataPositionUtils, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
   tagName: 'g',
   
+  /**
+    The type of D3 interpolator to use to create the line.
+    @property interpolator
+    @type String
+    @default 'linear'
+  */
   interpolator: 'linear',
   
   classNameBindings: ['selected', 'selectable'],
 
   classNames: ['nf-line'],
 
+  /**
+    The d3 line function to create the line path.
+    @method lineFn
+    @param data {Array} the array of coordinate arrays to plot as an SVG path
+    @private
+    @return {String} an SVG path data string
+  */
   lineFn: property('graph.xScale', 'graph.yScale', 'interpolator', function(xScale, yScale, interpolator) {
     return this.createLineFn(xScale, yScale, interpolator);
   }),
 
-
+  /**
+    The SVG path data string to render the line
+    @property d
+    @type String
+    @private
+    @readonly
+  */
   d: property('renderedData.@each', 'lineFn', function(renderedData, lineFn) {
     return lineFn(renderedData);
   }),
 
-  click: function(){
+  /**
+    Event handler to toggle the `selected` property on click
+    @method _toggleSelected
+    @private
+  */
+  _toggleSelected: function(){
     if(this.get('selectable')) {
       this.toggleProperty('selected');
     }
-  },
+  }.on('click'),
 });

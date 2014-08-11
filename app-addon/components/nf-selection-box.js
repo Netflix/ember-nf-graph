@@ -5,6 +5,7 @@ import { property } from '../utils/computed-property-helpers';
 	Draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`.
 	@namespace components
   @class nf-selection-box
+  @extends Ember.Component
   @uses mixins.graph-has-graph-parent
 */
 export default Ember.Component.extend(HasGraphParent, {

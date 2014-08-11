@@ -2,11 +2,11 @@ import Ember from 'ember';
 import { SORT_NONE, SORT_ASCENDING, SORT_DESCENDING } from '../utils/constants';
 
 /**
- * A column class to support `nf-table`
- *
- * @namespace components
- * @class nf-column
- */
+	A column class to support `nf-table`
+	@namespace components
+	@class nf-column
+	@extends Ember.Component
+*/
 export default Ember.Component.extend({
 
 	/**

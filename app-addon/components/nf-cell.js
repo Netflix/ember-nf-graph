@@ -1,9 +1,10 @@
 import Ember from 'ember';
 
 /**
- * Templating component for `nf-table`. Should always be contained in an `nf-column` component.
- * @namespace components
- * @class nf-cell
+ 	Templating component for `nf-table`. Should always be contained in an `nf-column` component.
+ 	@namespace components
+ 	@class nf-cell
+ 	@extends Ember.Component
  */
 export default Ember.Component.extend({
 	_setup: function(){

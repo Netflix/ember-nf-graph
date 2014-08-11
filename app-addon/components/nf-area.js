@@ -5,26 +5,24 @@ import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import DataGraphic from '../mixins/graph-data-graphic';
 import AreaUtils from '../mixins/graph-area-utils';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
-import DataPositionUtils from '../mixins/graph-data-position-utils';
 
 import { property } from '../utils/computed-property-helpers';
 
 /**
- * Adds an area graph to an `nf-graph` component.
- * 
- * Optionally, if it's located within an `nf-area-stack` component, it will work with
- * sibling `nf-area` components to create a stacked graph.
- * @namespace components
- * @class nf-area
- * @extends Ember.Component
- * @uses mixins.graph-area-utils
- * @uses mixins.graph-has-graph-parent
- * @uses mixins.graph-selectable-graphic
- * @uses mixins.graph-registered-graphic
- * @uses mixins.graph-data-graphic
- * @uses mixins.graph-graphic-with-tracking-dot
- * @uses mixins.graph-data-position-utils
- */
+  Adds an area graph to an `nf-graph` component.
+  
+  Optionally, if it's located within an `nf-area-stack` component, it will work with
+  sibling `nf-area` components to create a stacked graph.
+  @namespace components
+  @class nf-area
+  @extends Ember.Component
+  @uses mixins.graph-area-utils
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-selectable-graphic
+  @uses mixins.graph-registered-graphic
+  @uses mixins.graph-data-graphic
+  @uses mixins.graph-graphic-with-tracking-dot
+*/
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
   Selectable, AreaUtils, GraphicWithTrackingDot, DataPositionUtils, {    
 

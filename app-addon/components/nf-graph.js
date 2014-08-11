@@ -104,6 +104,7 @@ var scaleProperty = function(axis) {
 
   @namespace components
   @class nf-graph
+  @extends Ember.Component
 */
 export default Ember.Component.extend({
   tagName: 'div',  

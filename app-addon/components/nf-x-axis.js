@@ -29,6 +29,8 @@ import { property } from '../utils/computed-property-helpers';
 
   @namespace components
   @class nf-x-axis
+  @extends Ember.Component
+  @uses mixins.graph-has-graph-parent
 */
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
@@ -220,11 +222,21 @@ export default Ember.Component.extend(HasGraphParent, {
     }
   ),
 
-
+  /**
+    Updates the graph's xAxis property on init
+    @method _updateGraphXAxis
+    @private
+  */
   _updateGraphXAxis: function(){
-    this.graph.set('xAxis', this);
-  }.observes('graph'),
+    this.set('graph.xAxis', this);
+  }.on('init'),
 
+  /**
+    The y position, in pixels, of the axis line
+    @property axisLineY
+    @type Number
+    @readonly
+  */
   axisLineY: property('orient', 'height', function(orient, height) {
     return orient === 'top' ? height : 0;
   }),

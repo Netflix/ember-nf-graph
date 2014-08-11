@@ -12,6 +12,10 @@ import { property } from '../utils/computed-property-helpers';
 
 	@namespace components
   @class nf-bars
+  @extends Ember.Component
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-registered-graphic
+  @uses mixins.graph-data-graphic
 */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
 	tagName: 'g',

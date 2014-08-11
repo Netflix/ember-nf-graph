@@ -13,6 +13,7 @@ import { nearestIndexTo } from '../utils/nf/array-helpers';
 
   @namespace mixins
   @class graph-data-graphic
+  @extends Ember.Mixin
 */
 export default Ember.Mixin.create({
 	isDataGraphic: true,

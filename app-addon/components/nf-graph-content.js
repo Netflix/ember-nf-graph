@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import HasGraphParent from '../mixins/graph-has-graph-parent';
 
 /**
   Container component for graphics to display in `nf-graph`. Represents
@@ -7,8 +8,9 @@ import Ember from 'ember';
   Exists for layout purposes.
   @namespace components
   @class nf-graph-content
+  @uses mixins.graph-has-graph-parent
 */  
-export default Ember.Component.extend({
+export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
   
   classNames: ['nf-graph-content'],
@@ -104,9 +106,4 @@ export default Ember.Component.extend({
     @readonly
   */
   frets: Ember.computed.alias('graph.xAxis.ticks'),
-
-  _setup: function(){
-    var graph = this.nearestWithProperty('isGraph');
-    this.set('graph', graph);
-  }.on('init')
 });

@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 
 
-// gets teh data nearest to the xValue provided.
+// gets the data nearest to the xValue provided.
 function nearestToXValue(xValue, sortedData) {
 	if(!sortedData || sortedData.length === 0) {
 		return null;
@@ -29,6 +29,7 @@ function nearestToXValue(xValue, sortedData) {
 
 	@namespace mixins
 	@class graph-data-position-utils
+	@extends Ember.Mixin
 */
 export default Ember.Mixin.create({
 	

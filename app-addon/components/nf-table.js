@@ -36,6 +36,7 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 
 	@namespace components
 	@class nf-table
+	@extends Ember.Component
 */
 export default Ember.Component.extend({
 	/**

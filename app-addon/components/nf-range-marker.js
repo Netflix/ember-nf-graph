@@ -7,6 +7,8 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
   Should always be used in conjunction with an `nf-range-markers` container component.
   @namespace components
   @class nf-range-marker
+  @extends Ember.Component
+  @uses mixins.graph-has-graph-parent
 */
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: 'g',
