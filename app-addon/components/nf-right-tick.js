@@ -92,7 +92,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 	*/
 	_triggerTransition: function(){
-		Ember.run.scheduleOnce('hasRendered', this, this._transitionalUpdate);
+		Ember.run.scheduleOnce('afterRender', this, this._transitionalUpdate);
 	}.observes('value').on('init'),
 
 	/**
