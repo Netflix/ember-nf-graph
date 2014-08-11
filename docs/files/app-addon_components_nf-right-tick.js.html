@@ -240,7 +240,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 	*/
 	_triggerTransition: function(){
-		Ember.run.scheduleOnce(&#x27;hasRendered&#x27;, this, this._transitionalUpdate);
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._transitionalUpdate);
 	}.observes(&#x27;value&#x27;).on(&#x27;init&#x27;),
 
 	/**
@@ -260,7 +260,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 	*/
 	_triggerNonTransitionalUpdate: function(){
-		Ember.run.scheduleOnce(&#x27;hadRendered&#x27;, this, this._nonTransitionalUpdate);
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._nonTransitionalUpdate);
 	}.observes(&#x27;graph.width&#x27;),
 
 	/**

@@ -1874,6 +1874,35 @@
         {
             "file": "app-addon/components/nf-graph.js",
             "line": 800,
+            "description": "event handler for mouse movement inside the `graphContentGroup`",
+            "itemtype": "method",
+            "name": "_contentMouseMove",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "the DOM mouse event",
+                    "type": "MouseEvent"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 813,
+            "description": "Event handler for mouse leaving the `graphContentGroup`",
+            "itemtype": "method",
+            "name": "_contentMouseLeave",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-graph",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph.js",
+            "line": 823,
             "description": "Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up\nDOM events for the graph. Fires on `didInsertElement`",
             "itemtype": "method",
             "name": "_registerDOM",
@@ -1884,7 +1913,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 829,
+            "line": 837,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -1909,7 +1938,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 849,
+            "line": 857,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -1920,7 +1949,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 857,
+            "line": 865,
             "description": "The x pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content",
             "itemtype": "property",
             "name": "mouseX",
@@ -1931,7 +1960,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 866,
+            "line": 874,
             "description": "The y pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content.",
             "itemtype": "property",
             "name": "mouseY",
@@ -1942,7 +1971,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 875,
+            "line": 883,
             "description": "Gets the x domain value at the current mouse x hover position.",
             "itemtype": "property",
             "name": "hoverX",
@@ -1952,7 +1981,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 882,
+            "line": 890,
             "description": "Gets teh y domain value at the current mouse y hover position.",
             "itemtype": "property",
             "name": "hoverY",
@@ -1962,7 +1991,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 889,
+            "line": 897,
             "description": "updates `hoverX` when `mouseX` changes or something causes the scale to change.",
             "itemtype": "method",
             "name": "updateHoverX",
@@ -1973,7 +2002,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 899,
+            "line": 907,
             "description": "updates `hoverY` when `mouseY` changes or something causes the scale to change.",
             "itemtype": "method",
             "name": "updateHoverY",
@@ -1984,7 +2013,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 909,
+            "line": 917,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -2000,7 +2029,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 930,
+            "line": 938,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -2016,7 +2045,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 947,
+            "line": 955,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
