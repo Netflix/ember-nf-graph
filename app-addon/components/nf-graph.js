@@ -798,6 +798,29 @@ export default Ember.Component.extend({
   }.on('willInsertElement'),
 
   /**
+    event handler for mouse movement inside the `graphContentGroup`
+    @method _contentMouseMove
+    @param e {MouseEvent} the DOM mouse event
+    @private
+  */
+  _contentMouseMove: function(e) {
+    var graphContentGroup = this.get('graphContentGroup');
+    var mouse = this.mousePoint(graphContentGroup[0], e);
+    this.set('mouseX', mouse[0]);
+    this.set('mouseY', mouse[1]);
+  },
+
+  /**
+    Event handler for mouse leaving the `graphContentGroup`
+    @method _contentMouseLeave
+    @private
+  */
+  _contentMouseLeave: function() {
+    this.set('mouseX', -1);
+    this.set('mouseY', -1);
+  },
+
+  /**
     Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up
     DOM events for the graph. Fires on `didInsertElement`
     @method _registerDOM
@@ -805,25 +828,10 @@ export default Ember.Component.extend({
   */
   _registerDOM: function () {
     var graphContentGroup = this.$('.nf-graph-content');
-    var self = this;
-
     this.set('svg', this.$('svg'));
     this.set('graphContentGroup', graphContentGroup);
-
-    graphContentGroup.on('mousemove', function (e) {
-      Ember.run(function () {
-        var mouse = self.mousePoint(graphContentGroup[0], e);
-        self.set('mouseX', mouse[0]);
-        self.set('mouseY', mouse[1]);
-      });
-    });
-
-    graphContentGroup.on('mouseleave', function () {
-      Ember.run(function () {
-        self.set('mouseX', -1);
-        self.set('mouseY', -1);
-      });
-    });
+    graphContentGroup.on('mousemove', this._contentMouseMove.bind(this));
+    graphContentGroup.on('mouseleave', this._contentMouseLeave.bind(this));
   }.on('didInsertElement'),
 
   /**
