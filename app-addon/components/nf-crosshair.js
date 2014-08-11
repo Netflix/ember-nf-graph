@@ -37,7 +37,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Number
     @readonly
   */
-  x: Ember.computed.alias('graph.xHover'),
+  x: Ember.computed.alias('graph.mouseX'),
 
   /**
     The y position, in pixels, of the crosshair center
@@ -45,7 +45,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Number
     @readonly
   */
-  y: Ember.computed.alias('graph.yHover'),
+  y: Ember.computed.alias('graph.mouseY'),
 
   /**
     Determines visibility of horizontal "x" line.
