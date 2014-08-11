@@ -112,7 +112,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 	*/
 	_triggerNonTransitionalUpdate: function(){
-		Ember.run.scheduleOnce('hadRendered', this, this._nonTransitionalUpdate);
+		Ember.run.scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
 	}.observes('graph.width'),
 
 	/**
