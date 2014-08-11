@@ -229,11 +229,11 @@ export default Ember.Component.extend(HasGraphParent, {
   }),
 
   /**
-    sets graph's yAxis property on init
+    sets graph's yAxis property on willInsertElement
     @method _updateGraphYAxis
     @private
   */
   _updateGraphYAxis: function(){
     this.set('graph.yAxis', this);
-  }.on('init')
+  }.on('willInsertElement')
 });

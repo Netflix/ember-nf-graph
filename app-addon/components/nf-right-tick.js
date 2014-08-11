@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { property, observer } from '../utils/computed-property-helpers';
+import { property } from '../utils/computed-property-helpers';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 
 /**

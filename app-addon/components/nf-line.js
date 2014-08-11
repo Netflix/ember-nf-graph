@@ -21,7 +21,7 @@ import { property } from '../utils/computed-property-helpers';
   @uses mixins.graph-graphic-with-tracking-dot
 */
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
-  DataPositionUtils, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
+  LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
   tagName: 'g',
   
   /**

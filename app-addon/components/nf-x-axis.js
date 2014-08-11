@@ -223,13 +223,13 @@ export default Ember.Component.extend(HasGraphParent, {
   ),
 
   /**
-    Updates the graph's xAxis property on init
+    Updates the graph's xAxis property on willInsertElement
     @method _updateGraphXAxis
     @private
   */
   _updateGraphXAxis: function(){
     this.set('graph.xAxis', this);
-  }.on('init'),
+  }.on('willInsertElement'),
 
   /**
     The y position, in pixels, of the axis line
