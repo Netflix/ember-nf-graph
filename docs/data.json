@@ -2419,7 +2419,7 @@
         },
         {
             "file": "app-addon/components/nf-right-tick.js",
-            "line": 61,
+            "line": 65,
             "description": "The SVG transform used to render the tick",
             "itemtype": "property",
             "name": "transform",
@@ -2432,7 +2432,7 @@
         },
         {
             "file": "app-addon/components/nf-right-tick.js",
-            "line": 72,
+            "line": 76,
             "description": "performs the D3 transition to move the tick to the proper position.",
             "itemtype": "method",
             "name": "_transitionalUpdate",
@@ -2443,7 +2443,7 @@
         },
         {
             "file": "app-addon/components/nf-right-tick.js",
-            "line": 85,
+            "line": 89,
             "description": "Schedules the transition when `value` changes on on init.",
             "itemtype": "method",
             "name": "_triggerTransition",
@@ -2454,7 +2454,7 @@
         },
         {
             "file": "app-addon/components/nf-right-tick.js",
-            "line": 94,
+            "line": 98,
             "description": "Updates the tick position without a transition.",
             "itemtype": "method",
             "name": "_nonTransitionalUpdate",
@@ -2465,7 +2465,7 @@
         },
         {
             "file": "app-addon/components/nf-right-tick.js",
-            "line": 105,
+            "line": 109,
             "description": "Schedules the update of non-transitional positions",
             "itemtype": "method",
             "name": "_triggerNonTransitionalUpdate",
@@ -2476,7 +2476,7 @@
         },
         {
             "file": "app-addon/components/nf-right-tick.js",
-            "line": 114,
+            "line": 118,
             "description": "Gets the elements required to do the d3 transitions",
             "itemtype": "method",
             "name": "_getElements",
