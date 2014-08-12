@@ -67,6 +67,92 @@ var scaleProperty = function(axis) {
   );
 };
 
+var minProperty = function(axis, defaultTickCount){
+  var _DataExtent_ = axis + 'DataExtent';
+  var _MinMode_ = axis + 'MinMode';
+  var _Axis_tickCount_ = axis + 'Axis.tickCount';
+  var _ScaleFactory_ = axis + 'ScaleFactory';
+  var __Min_ = '_' + axis + 'Min';
+
+  return function(key, value) {
+    var mode = this.get(_MinMode_);
+    var ext;
+
+    if(arguments.length > 1) {
+      if(mode === 'fixed') {
+        this[__Min_] = value;
+      }
+    } else {
+      if(mode === 'auto') {
+        this[__Min_] = this.get(_DataExtent_)[0] || 0;
+      }
+
+      if(mode === 'push') {
+        ext = this.get(_DataExtent_)[0];
+        if(!isNaN(ext) && ext < this[__Min_]) {
+          this[__Min_] = ext;
+        }
+      }
+
+      if(mode === 'push-tick') {
+        var extent = this.get(_DataExtent_);
+        ext = extent[0];
+
+        if(!isNaN(ext) && ext < this[__Min_]) {
+          var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
+          var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
+          this[__Min_] = newDomain[0];
+        }
+      }
+    }
+
+    return this[__Min_];
+  }.property(_MinMode_, _DataExtent_, _Axis_tickCount_, _ScaleFactory_);
+};
+
+var maxProperty = function(axis, defaultTickCount) {
+  var _DataExtent_ = axis + 'DataExtent';
+  var _Axis_tickCount_ = axis + 'Axis.tickCount';
+  var _ScaleFactory_ = axis + 'ScaleFactory';
+  var _MaxMode_ = axis + 'MaxMode';
+  var __Max_ = '_' + axis + 'Max';
+
+  return function(key, value) {
+    var mode = this.get(_MaxMode_);
+    var ext;
+
+    if(arguments.length > 1) {
+      if(mode === 'fixed') {
+        this[__Max_] = value;
+      }
+    } else {
+      if(mode === 'auto') {
+        this[__Max_] = this.get(_DataExtent_)[1] || 1;
+      }
+
+      if(mode === 'push') {
+        ext = this.get(_DataExtent_)[1];
+        if(!isNaN(ext) && this[__Max_] < ext) {
+          this[__Max_] = ext;
+        }
+      }
+
+      if(mode === 'push-tick') {
+        var extent = this.get(_DataExtent_);
+        ext = extent[1];
+
+        if(!isNaN(ext) && this[__Max_] < ext) {
+          var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
+          var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
+          this[__Max_] = newDomain[1];
+        }
+      }
+    }
+
+    return this[__Max_];
+  }.property(_MaxMode_, _DataExtent_, _ScaleFactory_, _Axis_tickCount_);
+};
+
 /**
   A container component for building complex Cartesian graphs.
 
@@ -307,161 +393,28 @@ export default Ember.Component.extend({
     Behavior depends on `xMinMode`.
     @property xMin
   */
-  xMin: function(key, value) {
-    var mode = this.xMinMode;
-    var x0;
-
-    if(arguments.length > 1) {
-      if(mode === 'fixed') {
-        this._xMin = value;
-      }
-    } else {
-      if(mode === 'auto') {
-        this._xMin = this.get('xDataExtent')[0] || 0;
-      }
-
-      if(mode === 'push') {
-        x0 = this.get('xDataExtent')[0];
-        if(!isNaN(x0) && x0 < this._xMin) {
-          this._xMin = x0;
-        }
-      }
-
-      if(mode === 'push-tick') {
-        var extent = this.get('xDataExtent');
-        x0 = extent[0];
-
-        if(!isNaN(x0) && x0 < this._xMin) {
-          var tickCount = this.get('xAxis.tickCount') || 8;
-          var newDomain = this.get('xScaleFactory')().domain(extent).nice(tickCount).domain();
-          this._xMin = newDomain[0];
-        }
-      }
-    }
-
-    return this._xMin;
-  }.property('xMinMode', 'xDataExtent'),
+  xMin: minProperty('x', 8),
 
   /**
     Gets or sets the maximum x domain value to display on the graph.
     Behavior depends on `xMaxMode`.
     @property xMax
   */
-  xMax: function(key, value) {
-    var mode = this.xMaxMode;
-    var x1;
-
-    if(arguments.length > 1) {
-      if(mode === 'fixed') {
-        this._xMax = value;
-      }
-    } else {
-      if(mode === 'auto') {
-        this._xMax = this.get('xDataExtent')[1] || 1;
-      }
-
-      if(mode === 'push') {
-        x1 = this.get('xDataExtent')[1];
-        if(!isNaN(x1) && this._xMax < x1) {
-          this._xMax = x1;
-        }
-      }
-
-      if(mode === 'push-tick') {
-        var extent = this.get('xDataExtent');
-        x1 = extent[1];
-
-        if(!isNaN(x1) && this._xMax < x1) {
-          var tickCount = this.get('xAxis.tickCount') || 8;
-          var newDomain = this.get('xScaleFactory')().domain(extent).nice(tickCount).domain();
-          this._xMax = newDomain[1];
-        }
-      }
-    }
-
-    return this._xMax;
-  }.property('xMaxMode', 'xDataExtent', 'xScaleFactory', 'xAxis.tickCount'),
+  xMax: maxProperty('x', 8),
 
   /**
     Gets or sets the maximum y domain value to display on the graph.
     Behavior depends on `yMaxMode`.
     @property yMax
   */
-  yMin: function(key, value) {
-    var mode = this.yMinMode;
-    var y0;
-
-    if(arguments.length > 1) {
-      if(mode === 'fixed') {
-        this._yMin = value;
-      }
-    } else {
-      if(mode === 'auto') {
-        this._yMin = this.get('yDataExtent')[0] || 0;
-      }
-
-      if(mode === 'push') {
-        y0 = this.get('yDataExtent')[0];
-        if(!isNaN(y0) && y0 < this._yMin) {
-          this._yMin = y0;
-        }
-      }
-
-      if(mode === 'push-tick') {
-        var extent = this.get('yDataExtent');
-        y0 = extent[0];
-
-        if(!isNaN(y0) && y0 < this._yMin) {
-          var tickCount = this.get('yAxis.tickCount') || 5;
-          var newDomain = this.get('yScaleFactory')().domain(extent).nice(tickCount).domain();
-          this._yMax = newDomain[0];
-        }
-      }
-    }
-
-
-    return this._yMin;
-  }.property('yMinMode', 'yDataExtent', 'yScaleFactory', 'yAxis.tickCount'),
+  yMin: minProperty('y', 5),
 
   /**
     Gets or sets the maximum y domain value to display on the graph.
     Behavior depends on `yMaxMode`.
     @property yMax
   */
-  yMax: function(key, value) {
-    var mode = this.yMaxMode;
-    var y1;
-
-    if(arguments.length > 1) {
-      if(mode === 'fixed') {
-        this._yMax = value;
-      }
-    } else {
-      if(mode === 'auto') {
-        this._yMax = this.get('yDataExtent')[1] || 1;
-      }
-
-      if(mode === 'push') {
-        y1 = this.get('yDataExtent')[1];
-        if(!isNaN(y1) && this._yMax < y1) {
-          this._yMax = y1;
-        }
-      }
-
-      if(mode === 'push-tick') {
-        var extent = this.get('yDataExtent');
-        y1 = extent[1];
-
-        if(!isNaN(y1) && this._yMax < y1) {
-          var tickCount = this.get('yAxis.tickCount') || 5;
-          var newDomain = this.get('yScaleFactory')().domain(extent).nice(tickCount).domain();
-          this._yMax = newDomain[1];
-        }
-      }
-    }
-
-    return this._yMax;
-  }.property('yMaxMode', 'yDataExtent', 'yScaleFactory', 'yAxis.tickCount'),
+  yMax: maxProperty('y', 5),
   
 
   /**
