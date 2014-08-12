@@ -83,18 +83,19 @@ var minProperty = function(axis, defaultTickCount){
         this[__Min_] = value;
       }
     } else {
+
       if(mode === 'auto') {
         this[__Min_] = this.get(_DataExtent_)[0] || 0;
       }
 
-      if(mode === 'push') {
+      else if(mode === 'push') {
         ext = this.get(_DataExtent_)[0];
         if(!isNaN(ext) && ext < this[__Min_]) {
           this[__Min_] = ext;
         }
       }
 
-      if(mode === 'push-tick') {
+      else if(mode === 'push-tick') {
         var extent = this.get(_DataExtent_);
         ext = extent[0];
 
@@ -130,14 +131,14 @@ var maxProperty = function(axis, defaultTickCount) {
         this[__Max_] = this.get(_DataExtent_)[1] || 1;
       }
 
-      if(mode === 'push') {
+      else if(mode === 'push') {
         ext = this.get(_DataExtent_)[1];
         if(!isNaN(ext) && this[__Max_] < ext) {
           this[__Max_] = ext;
         }
       }
 
-      if(mode === 'push-tick') {
+      else if(mode === 'push-tick') {
         var extent = this.get(_DataExtent_);
         ext = extent[1];
 
