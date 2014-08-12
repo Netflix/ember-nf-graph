@@ -9,7 +9,8 @@ export default Ember.Route.extend({
 			myData.push({
 				id: i+1,
 				foo: Math.random() * 100,
-				bar: 'Bar ' + i
+				bar: 'Bar ' + i,
+				blah: 'Blah' + (i % 2),
 			});
 		}
 

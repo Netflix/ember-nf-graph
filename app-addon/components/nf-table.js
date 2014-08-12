@@ -1,5 +1,7 @@
 import Ember from 'ember';
 import multiSort from '../utils/multi-sort';
+import TableColumnRegistrar from '../mixins/table-column-registrar';
+import parsePropExpr from '../utils/parse-property-expression';
 import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 
 /**
@@ -37,17 +39,69 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 	@namespace components
 	@class nf-table
 	@extends Ember.Component
+	@uses mixins.table-column-registrar
 */
-export default Ember.Component.extend({
-	/**
-		Used to allow child components to identify this component as an nf-table component.
-		@property isDataTable 
-		@type Boolean
-		@readonly
-	*/
-	isDataTable: true,
-
+export default Ember.Component.extend(TableColumnRegistrar, {
 	tagName: 'table',
+
+	/**
+		Property used by child components to locate the table component.
+		@property isTable
+		@type Boolean
+		@default true
+	*/
+	isTable: true,
+
+	/**
+		Gets the nf-table-group component if one is present.
+		@property group
+		@type components.nf-table-group
+		@default null
+	*/
+	group: null,
+
+	isStandardTable: Ember.computed.not('isGroupedTable'),
+
+	isGroupedTable: Ember.computed.bool('group'),
+
+	sortedGroups: function() {
+		var sortMap = this.get('sortMap');
+		var rows = this.get('rows');
+		var groupBy = this.get('group.groupBy');
+
+		if(!groupBy || !rows || rows.length === 0) {
+			return null;
+		}
+
+		sortMap.unshift({
+			by: groupBy,
+			direction: 1
+		});
+
+		var rowsCopy = rows.slice();
+		multiSort(rowsCopy, sortMap);
+
+		var prevGroupVal;
+		var group;
+		var groupByExpr = parsePropExpr(groupBy);
+
+		var groups = rowsCopy.reduce(function(groups, d) {
+			var groupVal = groupByExpr(d) || null;
+
+			if(groupVal !== prevGroupVal) {
+				group = [];
+				group.sortValue = groupVal;
+				groups.push(group);
+				prevGroupVal = groupVal;
+			}
+
+			group.push(d);
+			return groups;
+		}, []);
+
+		return groups;
+
+	}.property('rows.@each', 'sortMap', 'group.groupBy'),
 
 	/**
 		The data source for rows to display in this table.
@@ -58,6 +112,8 @@ export default Ember.Component.extend({
 
 	classNames: ['nf-table'],
 
+	hasRendered: false,
+
 	/**
 		The type of sorting to do on the table. `'multi'` or `'single'`.
 		@property sortType
@@ -66,37 +122,21 @@ export default Ember.Component.extend({
 	*/
 	sortType: SORTTYPE_SINGLE,
 
-	/**
-		the registered columns
-		@property columns
-		@type Array
-		@readonly
-	*/
-	columns: function() {
-		return [];
-	}.property(),
-
-	/**
-		Registers a child column with the table.
-		@method registerColumn
-		@param column {Ember.Component} the column to register with the table.
-	*/
-	registerColumn: function(column) {
-		this.get('columns').pushObject(column);
-	},
-
-	/**
-		Unregisters a child column from the table.
-		@method unregisterColumn
-		@param column {Ember.Component} the column to unregister from the table.
-	*/
-	unregisterColumn: function(column) {
-		this.get('columns').removeObject(column);
-	},
 
 	_hasRendered: function() {
 		this.set('hasRendered', true);
-	}.on('didInsertElement'),
+	}.on('willInsertElement'),
+
+	sortMap: function(){
+		return this.get('columns').filter(function(col) {
+			return col.get('sortDirection') && col.get('sortBy');
+		}).map(function(col) {
+			return {
+				by: col.get('sortBy').replace(/^row\./, ''),
+				direction: col.get('sortDirection')
+			};
+		});
+	}.property('columns.@each.sortDirection', 'columns.@each.sortBy'),
 
 	/**
 		A computed property returning a sorted copy of `rows`
@@ -105,19 +145,11 @@ export default Ember.Component.extend({
 		@readonly
 	*/
 	sortedRows: function(){
-		var sort = this.get('columns').filter(function(col) {
-			return col.get('sortDirection') && col.get('sortBy');
-		}).map(function(col) {
-			return {
-				by: col.get('sortBy').replace(/^row\./, ''),
-				direction: col.get('sortDirection')
-			};
-		});
-
+		var sortMap = this.get('sortMap');
 		var rowsCopy = this.get('rows').slice();
-		multiSort(rowsCopy, sort);
+		multiSort(rowsCopy, sortMap);
 		return rowsCopy;
-	}.property('rows.@each', 'columns.@each.sortDirection', 'columns.@each.sortBy'),
+	}.property('rows.@each', 'sortMap'),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire
