@@ -60,6 +60,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	group: null,
 
+	/**
+		The expression used to locate the values in the rows to group by.
+		@property groupBy
+		@type String
+		@default null
+	*/
+	groupBy: null,
+
 	isStandardTable: Ember.computed.not('isGroupedTable'),
 
 	isGroupedTable: Ember.computed.bool('group'),
@@ -67,8 +75,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	sortedGroups: function() {
 		var sortMap = this.get('sortMap');
 		var rows = this.get('rows');
-		var groupBy = this.get('group.groupBy');
-
+		var groupBy = this.get('groupBy');
 		if(!groupBy || !rows || rows.length === 0) {
 			return null;
 		}
@@ -100,8 +107,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		}, []);
 
 		return groups;
-
-	}.property('rows.@each', 'sortMap', 'group.groupBy'),
+	}.property('rows.@each', 'sortMap', 'groupBy'),
 
 	/**
 		The data source for rows to display in this table.
