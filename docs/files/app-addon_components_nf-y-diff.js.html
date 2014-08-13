@@ -326,20 +326,22 @@ export default Ember.Component.extend(HasGraphParent, {
 		var height = this.get(&#x27;height&#x27;);
 		var contentTransform = this.get(&#x27;contentTransform&#x27;);
 		var duration = this.duration;
-		var elem = this.$()[0];
+		var elem = this.get(&#x27;elem&#x27;);
 
-		var d3Elem = d3.select(elem);
+		if(elem) {
+			var d3Elem = d3.select(elem);
 
-		d3Elem.selectAll(&#x27;.nf-y-diff rect&#x27;)
-			.transition()
-			.duration(duration)
-			.attr(&#x27;height&#x27;, height)
-			.attr(&#x27;y&#x27;, y);
+			d3Elem.selectAll(&#x27;.nf-y-diff rect&#x27;)
+				.transition()
+				.duration(duration)
+				.attr(&#x27;height&#x27;, height)
+				.attr(&#x27;y&#x27;, y);
 
-		d3Elem.selectAll(&#x27;.nf-y-diff-content&#x27;)
-			.transition()
-			.duration(duration)
-			.attr(&#x27;transform&#x27;, contentTransform);
+			d3Elem.selectAll(&#x27;.nf-y-diff-content&#x27;)
+				.transition()
+				.duration(duration)
+				.attr(&#x27;transform&#x27;, contentTransform);
+		}
 	},
 
 	/**
@@ -349,9 +351,11 @@ export default Ember.Component.extend(HasGraphParent, {
 	*/
 	_nonTransitionalUpdate: function(){
 		var contentTransform = this.get(&#x27;contentTransform&#x27;);
-		var elem = this.$()[0];
-		d3.select(elem).selectAll(&#x27;.nf-y-diff-content&#x27;)
-			.attr(&#x27;transform&#x27;, contentTransform);
+		var elem = this.get(&#x27;elem&#x27;);
+		if(elem) {
+			d3.select(elem).selectAll(&#x27;.nf-y-diff-content&#x27;)
+				.attr(&#x27;transform&#x27;, contentTransform);
+		}
 	},
 
 	/**
@@ -372,6 +376,10 @@ export default Ember.Component.extend(HasGraphParent, {
 	_triggerNonTransitionalUpdate: function(){
 		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this._nonTransitionalUpdate);
 	}.observes(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;).on(&#x27;init&#x27;),
+
+	_getElement: function(){
+		this.set(&#x27;elem&#x27;, this.$()[0]);
+	}.on(&#x27;didInsertElement&#x27;),
 });
     </pre>
 </div>
