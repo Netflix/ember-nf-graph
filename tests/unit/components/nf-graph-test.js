@@ -24,8 +24,21 @@ test('graph xMinMode auto', function() {
 	Ember.run(function(){
 		graph.set('xDataExtent', [-50, 200]);
 	});
-	
+
 	equal(graph.get('xMin'), -50);
+});
+
+test('graph xMaxMode auto', function(){
+	var graph = this.subject({
+		xMaxMode: 'auto',
+		xMax: 100,
+	});
+
+	Ember.run(function(){
+		graph.set('xDataExtent', [-50, 200]);
+	});
+
+	equal(graph.get('xMax'), 200);
 });
 
 test('graphY should change as xAxis.orient changes', function(){

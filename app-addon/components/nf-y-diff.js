@@ -178,20 +178,22 @@ export default Ember.Component.extend(HasGraphParent, {
 		var height = this.get('height');
 		var contentTransform = this.get('contentTransform');
 		var duration = this.duration;
-		var elem = this.$()[0];
+		var elem = this.get('elem');
 
-		var d3Elem = d3.select(elem);
+		if(elem) {
+			var d3Elem = d3.select(elem);
 
-		d3Elem.selectAll('.nf-y-diff rect')
-			.transition()
-			.duration(duration)
-			.attr('height', height)
-			.attr('y', y);
+			d3Elem.selectAll('.nf-y-diff rect')
+				.transition()
+				.duration(duration)
+				.attr('height', height)
+				.attr('y', y);
 
-		d3Elem.selectAll('.nf-y-diff-content')
-			.transition()
-			.duration(duration)
-			.attr('transform', contentTransform);
+			d3Elem.selectAll('.nf-y-diff-content')
+				.transition()
+				.duration(duration)
+				.attr('transform', contentTransform);
+		}
 	},
 
 	/**
@@ -201,9 +203,11 @@ export default Ember.Component.extend(HasGraphParent, {
 	*/
 	_nonTransitionalUpdate: function(){
 		var contentTransform = this.get('contentTransform');
-		var elem = this.$()[0];
-		d3.select(elem).selectAll('.nf-y-diff-content')
-			.attr('transform', contentTransform);
+		var elem = this.get('elem');
+		if(elem) {
+			d3.select(elem).selectAll('.nf-y-diff-content')
+				.attr('transform', contentTransform);
+		}
 	},
 
 	/**
@@ -224,4 +228,8 @@ export default Ember.Component.extend(HasGraphParent, {
 	_triggerNonTransitionalUpdate: function(){
 		Ember.run.scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
 	}.observes('isOrientRight', 'width', 'contentPadding').on('init'),
+
+	_getElement: function(){
+		this.set('elem', this.$()[0]);
+	}.on('didInsertElement'),
 });
