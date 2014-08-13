@@ -21,8 +21,10 @@ test('graph xMinMode auto', function() {
 		xMin: 100,
 	});
 
-	graph.set('xDataExtent', [-50, 200]);
-
+	Ember.run(function(){
+		graph.set('xDataExtent', [-50, 200]);
+	});
+	
 	equal(graph.get('xMin'), -50);
 });
 

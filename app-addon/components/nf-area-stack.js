@@ -54,7 +54,7 @@ export default Ember.Component.extend({
 		var areas = this.get('areas');
 		var prev = areas[areas.length - 1];
 		
-		if(last) {
+		if(prev) {
 			prev.set('nextArea', area);
 			area.set('prevArea', prev);
 		}
