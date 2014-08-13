@@ -195,3 +195,19 @@ test('hasRendered updates on willInsertElement', function(){
 	Ember.sendEvent(graph, 'willInsertElement');
 	equal(graph.get('hasRendered'), true);
 });
+
+test('xDataExtent', function(){
+	var graph = this.subject({
+		xData: [1,2,3,4,5,6],
+	});
+
+	deepEqual(graph.get('xDataExtent'), [1, 6]);
+});
+
+test('yDataExtent', function(){
+	var graph = this.subject({
+		yData: [1,2,3,4,5,6],
+	});
+
+	deepEqual(graph.get('yDataExtent'), [1, 6]);
+});
