@@ -29,52 +29,40 @@ test('nf-area nextYData should update when data is pushed onto the next area\'s 
 		};
 	});
 
-	var area1 = NfArea.create({
-		data: data1
+	var area1;
+	var area2;
+
+	Ember.run(function(){
+		area1 = NfArea.create({
+			data: data1
+		});
+
+		area2 = NfArea.create({
+			data: data2
+		});
+
+		
+		graph.registerGraphic(area1);
+		graph.registerGraphic(area2);
+
+		areaStack.registerArea(area1);
+		areaStack.registerArea(area2);
+		
+		area1.set('graph', graph);
+		area2.set('graph', graph);
 	});
-
-	var area2 = NfArea.create({
-		data: data2
-	});
-
-	graph.registerGraphic(area1);
-	graph.registerGraphic(area2);
-
-	areaStack.registerArea(area1);
-	areaStack.registerArea(area2);
-	area1.set('graph', graph);
-	area2.set('graph', graph);
 
 	equal(areaStack.get('areas.length'), 2, 'areas should be the proper length');	
 	equal(area1.get('nextArea'), area2, 'area1 should have nextArea of area2');
+	equal(area2.get('prevArea'), area1, 'area2 should have prevArea of area1');
+	equal(area1.get('nextYData.length'), area2.get('renderedData.length'), 'area1.nextYData length same as area2.renderedData.length');
 
-	equal(area1.get('sortedData').length, 10, 'area1.sortedData.length should be 10');
-	equal(area2.get('sortedData').length, 10, 'area2.sortedData.length should be 10');
-
-	equal(graph.get('xMin'), 0, 'graph xMin should be 0');
-	equal(graph.get('xMax'), 9, 'graph xMax should be 10');
-
-	equal(area1.get('renderedData').length, 10, 'area1.renderedData.length should be 10');
-	equal(area2.get('renderedData').length, 10, 'area2.renderedData.length should be 10');
-
-	equal(area1.get('nextYData')[0], 10, 'area1.nextYData[0] should be 10');
-	equal(area2.get('nextYData')[0], 10, 'area2.nextYData[0] should be 10'); //graph.yMin
-
-	area1.get('data').pushObject({
-		x: 11,
-		y: 31
+	Ember.run(function(){
+		area2.get('data').pushObject({
+			x: 222,
+			y: 333,
+		});
 	});
 
-	equal(area1.get('nextYData.length'), 11);
-	equal(area2.get('nextYData')[area2.get('nextYData.length') - 1], 10);
-	equal(area1.get('nextYData')[area1.get('nextYData.length') - 1], 10);
-
-	area2.get('data').pushObject({
-		x: 11,
-		y: 21
-	});
-
-	equal(area2.get('data').length, 11, 'area2.data.length should be 11');
-	equal(area2.get('nextYData').length, 11, 'area2.nextYData.length should now be 11');
-	equal(area1.get('nextYData')[area1.get('nextYData.length') - 1], 21);
+	equal(area1.get('nextYData.length'), area2.get('renderedData.length'), 'area1.nextYData STILL length same as area2.renderedData.length');
 });

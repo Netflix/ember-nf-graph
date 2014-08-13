@@ -15,98 +15,15 @@ test('graphic registration register and unregister', function(){
 	equal(graph.get('graphics.length'), 0);
 });
 
-test('xDomainMode auto should update xMin and xMax as graphic data changes', function(){
+test('graph xMinMode auto', function() {
 	var graph = this.subject({
-		xDomainMode: 'auto'
-	});
-
-	var graphic = Ember.Object.create({
-		sortedData: [[-12,0],[2,0],[30,0]]
-	});
-
-	var graphic2 = Ember.Object.create({
-		sortedData: [[-2,0],[2,0],[130,0]]
-	});
-
-	graph.registerGraphic(graphic);
-	graph.registerGraphic(graphic2);
-
-	equal(graph.get('xMin'), -12);
-	equal(graph.get('xMax'), 130);
-});
-
-test('yDomainMode auto should update yMin and yMax as graphic data changes', function(){
-	var graph = this.subject({
-		yDomainMode: 'auto'
-	});
-
-	var graphic = Ember.Object.create({
-		sortedData: [[0,222],[0,333],[0,888]]
-	});
-
-	var graphic2 = Ember.Object.create({
-		sortedData: [[0,-444],[0,111],[0,222]]
-	});
-
-	graph.registerGraphic(graphic);
-	graph.registerGraphic(graphic2);
-
-	equal(graph.get('yMin'), -444);
-	equal(graph.get('yMax'), 888);
-});
-
-test('xDomainMode fixed should not update xMin and xMax as graphic data changes', function(){
-	var graph = this.subject({
-		xDomainMode: 'fixed',
+		xMinMode: 'auto',
 		xMin: 100,
-		xMax: 1000,
 	});
 
-	var graphic = Ember.Object.create({
-		sortedData: [[-12,0],[2,0],[30,0]]
-	});
+	graph.set('xDataExtent', [-50, 200]);
 
-	var graphic2 = Ember.Object.create({
-		sortedData: [[-2,0],[2,0],[1300,0]]
-	});
-
-	graph.registerGraphic(graphic);
-	graph.registerGraphic(graphic2);
-
-	equal(graph.get('xMin'), 100);
-	equal(graph.get('xMax'), 1000);
-});
-
-test('yDomainMode fixed should not update yMin and yMax as graphic data changes', function(){
-	var graph = this.subject({
-		yDomainMode: 'fixed',
-		yMin: 100,
-		yMax: 101
-	});
-
-	var graphic = Ember.Object.create({
-		sortedData: [[0,222],[0,333],[0,888]]
-	});
-
-	var graphic2 = Ember.Object.create({
-		sortedData: [[0,-444],[0,111],[0,222]]
-	});
-
-	graph.registerGraphic(graphic);
-	graph.registerGraphic(graphic2);
-
-	equal(graph.get('yMin'), 100);
-	equal(graph.get('yMax'), 101);
-});
-
-test('yDomainMode should default to "auto"', function(){
-	var graph = this.subject();
-	equal(graph.get('yDomainMode'), 'auto');
-});
-
-test('xDomainMode should default to "auto"', function(){
-	var graph = this.subject();
-	equal(graph.get('xDomainMode'), 'auto');
+	equal(graph.get('xMin'), -50);
 });
 
 test('graphY should change as xAxis.orient changes', function(){

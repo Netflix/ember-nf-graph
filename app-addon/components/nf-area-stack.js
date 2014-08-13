@@ -52,11 +52,11 @@ export default Ember.Component.extend({
 	*/
 	registerArea: function(area) {
 		var areas = this.get('areas');
-		var last = areas[areas.length - 1];
+		var prev = areas[areas.length - 1];
 		
 		if(last) {
-			last.set('nextArea', area);
-			this.set('prevArea', last);
+			prev.set('nextArea', area);
+			area.set('prevArea', prev);
 		}
 		
 		areas.pushObject(area);
