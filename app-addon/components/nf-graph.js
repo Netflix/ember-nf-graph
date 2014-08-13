@@ -79,7 +79,7 @@ var minProperty = function(axis, defaultTickCount){
     var ext;
 
     if(arguments.length > 1) {
-      if(mode === 'fixed') {
+      if(mode !== 'auto') {
         this[__Min_] = value;
       }
     } else {
@@ -123,7 +123,7 @@ var maxProperty = function(axis, defaultTickCount) {
     var ext;
 
     if(arguments.length > 1) {
-      if(mode === 'fixed') {
+      if(mode !== 'auto') {
         this[__Max_] = value;
       }
     } else {

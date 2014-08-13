@@ -41,6 +41,49 @@ test('graph xMaxMode auto', function(){
 	equal(graph.get('xMax'), 200);
 });
 
+test('graph xMaxMode push', function(){
+	var graph = this.subject({
+		xMaxMode: 'push',
+		xMax: 100,
+	});
+
+	Ember.run(function(){
+		graph.set('xDataExtent', [-50, 50]);
+	});
+
+	equal(graph.get('xMax'), 100);
+
+
+	Ember.run(function(){
+		graph.set('xDataExtent', [-50, 200]);
+	});
+
+	equal(graph.get('xMax'), 200);	
+});
+
+test('graph xMaxMode push-tick', function(){
+	var graph = this.subject({
+		xMaxMode: 'push-tick',
+		xMax: 100,
+		xAxis: {
+			tickCount: 4,
+		}
+	});
+
+	Ember.run(function(){
+		graph.set('xDataExtent', [0, 50]);
+	});
+
+	equal(graph.get('xMax'), 100);
+
+
+	Ember.run(function(){
+		graph.set('xDataExtent', [0, 199]);
+	});
+
+	equal(graph.get('xMax'), 200);	
+});
+
 test('graphY should change as xAxis.orient changes', function(){
 	var graph = this.subject({
 		paddingTop: 100,
