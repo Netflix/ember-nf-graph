@@ -73,6 +73,7 @@ var minProperty = function(axis, defaultTickCount){
   var _Axis_tickCount_ = axis + 'Axis.tickCount';
   var _ScaleFactory_ = axis + 'ScaleFactory';
   var __Min_ = '_' + axis + 'Min';
+  var _prop_ = axis + 'Min';
 
   return function(key, value) {
     var mode = this.get(_MinMode_);
@@ -83,15 +84,20 @@ var minProperty = function(axis, defaultTickCount){
         this[__Min_] = value;
       }
     } else {
+      var change = function(val) {
+        this.propertyWillChange(_prop_);
+        this[__Min_] =  val;
+        this.propertyDidChange(_prop_);
+      }.bind(this);
 
       if(mode === 'auto') {
-        this[__Min_] = this.get(_DataExtent_)[0] || 0;
+        change(this.get(_DataExtent_)[0] || 0);
       }
 
       else if(mode === 'push') {
         ext = this.get(_DataExtent_)[0];
         if(!isNaN(ext) && ext < this[__Min_]) {
-          this[__Min_] = ext;
+          change(ext);
         }
       }
 
@@ -102,7 +108,7 @@ var minProperty = function(axis, defaultTickCount){
         if(!isNaN(ext) && ext < this[__Min_]) {
           var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
           var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
-          this[__Min_] = newDomain[0];
+          change(newDomain[0]);
         }
       }
     }
@@ -117,6 +123,7 @@ var maxProperty = function(axis, defaultTickCount) {
   var _ScaleFactory_ = axis + 'ScaleFactory';
   var _MaxMode_ = axis + 'MaxMode';
   var __Max_ = '_' + axis + 'Max';
+  var _prop_ = axis + 'Max';
 
   return function(key, value) {
     var mode = this.get(_MaxMode_);
@@ -127,14 +134,20 @@ var maxProperty = function(axis, defaultTickCount) {
         this[__Max_] = value;
       }
     } else {
+      var change = function(val) {
+        this.propertyWillChange(_prop_);
+        this[__Max_] = val;
+        this.propertyDidChange(_prop_);
+      }.bind(this);
+
       if(mode === 'auto') {
-        this[__Max_] = this.get(_DataExtent_)[1] || 1;
+        change(this.get(_DataExtent_)[1] || 1);
       }
 
       else if(mode === 'push') {
         ext = this.get(_DataExtent_)[1];
         if(!isNaN(ext) && this[__Max_] < ext) {
-          this[__Max_] = ext;
+          change(ext);
         }
       }
 
@@ -145,7 +158,7 @@ var maxProperty = function(axis, defaultTickCount) {
         if(!isNaN(ext) && this[__Max_] < ext) {
           var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
           var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
-          this[__Max_] = newDomain[1];
+          change(newDomain[1]);
         }
       }
     }
