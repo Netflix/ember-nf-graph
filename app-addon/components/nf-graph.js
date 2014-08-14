@@ -80,14 +80,10 @@ var minProperty = function(axis, defaultTickCount){
     var ext;
 
     if(arguments.length > 1) {
-      if(mode !== 'auto') {
-        this[__Min_] = value;
-      }
+      this[__Min_] = value;
     } else {
       var change = function(val) {
-        this.propertyWillChange(_prop_);
-        this[__Min_] =  val;
-        this.propertyDidChange(_prop_);
+        this.set(_prop_, val);
       }.bind(this);
 
       if(mode === 'auto') {
@@ -130,14 +126,10 @@ var maxProperty = function(axis, defaultTickCount) {
     var ext;
 
     if(arguments.length > 1) {
-      if(mode !== 'auto') {
-        this[__Max_] = value;
-      }
+      this[__Max_] = value;
     } else {
       var change = function(val) {
-        this.propertyWillChange(_prop_);
-        this[__Max_] = val;
-        this.propertyDidChange(_prop_);
+        this.set(_prop_, val);
       }.bind(this);
 
       if(mode === 'auto') {
