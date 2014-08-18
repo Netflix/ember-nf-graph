@@ -7,9 +7,10 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 /**
 	Composable table component with built-in sorting
 	
-	### Example
+	### Basic Example
 
 	      {{#nf-table rows=myData}}
+
 	      	{{#nf-column sortField="foo"}}
 	      	  {{nf-header}}
 	      	  	Foo
@@ -18,6 +19,7 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 	      			{{row.foo}}
 	      	  {{/nf-cell}}
 	      	{{/nf-column}}
+
 	      	{{#nf-column sortField="foo"}}
 	      	  {{nf-header}}
 	      	  	Bar
@@ -26,10 +28,53 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 	      			{{row.bar}}
 	      	  {{/nf-cell}}
 	      	{{/nf-column}}
+
 	      {{/nf-table}}
 	
 	The example above will create a sortable table from an array `myData` containing objects
 	with fields `foo` and `bar`.
+
+	### Grouped Example
+
+	If you wish to create a "grouped table", you simply need to group the data with the `groupBy`
+	property.
+
+	Additionally, you can add grouping rows with the `{{nf-table-group}}` component, which allows you
+	to define the columns for the group rows. If you do this, you will need to create an ArrayController
+	for the group that will carry with it any computed properties you might need, such as a sum or average
+	aggregated over the group.
+
+				{{#nf-table rows=myData groupBy="baz"}}
+					
+					{{#nf-table-group itemController="my-group-controller"}}
+						
+						{{#nf-column}}
+							{{#nf-cell colspan="2"}}
+								Baz = {{group.groupValue}}
+							{{/nf-cell}}
+						{{/nf-column}}
+
+					{{/nf-table-group}}
+
+	      	{{#nf-column sortField="foo"}}
+	      	  {{nf-header}}
+	      	  	Foo
+	      	  {{/nf-header}}
+	      	  {{#nf-cell}}
+	      			{{row.foo}}
+	      	  {{/nf-cell}}
+	      	{{/nf-column}}
+	      	
+	      	{{#nf-column sortField="foo"}}
+	      	  {{nf-header}}
+	      	  	Bar
+	      	  {{/nf-header}}
+	      	  {{#nf-cell}}
+	      			{{row.bar}}
+	      	  {{/nf-cell}}
+	      	{{/nf-column}}
+
+	      {{/nf-table}}
 
 	### Styling
 	
@@ -68,6 +113,13 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	groupBy: null,
 
+	/**
+		Gets whether or not to use the grouped table layout
+		@property useGroupedTableLayout
+		@type boolean
+		@private
+		@readonly
+	*/
 	useGroupedTableLayout: Ember.computed.bool('groupBy'),
 
 	sortedGroups: function() {
@@ -116,6 +168,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		});
 
 		var itemController = this.get('tableGroup.itemController');
+
 		if(itemController) {
 			tableGroupingCtrl.set('itemController', itemController);
 		}

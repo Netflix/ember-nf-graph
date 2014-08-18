@@ -1,6 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.ArrayController.extend({
+	blah: function(){
+		var model = this.get('model');
+		if(Array.isArray(model) && model.length > 0) {
+			return model[0].blah;
+		}
+	}.property('model.@each'),
+
 	fooSum: function(){
 		return this.get('model').reduce(function(sum, item) {
 			sum += item.foo || 0;
