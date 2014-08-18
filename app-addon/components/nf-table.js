@@ -78,10 +78,16 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			return null;
 		}
 
-		sortMap.unshift({
-			by: groupBy,
-			direction: 1
+		var alreadyGrouping = sortMap.any(function(x) {
+			return x.by === groupBy;
 		});
+
+		if(!alreadyGrouping) {
+			sortMap.unshift({
+				by: groupBy,
+				direction: 1
+			});
+		}
 
 		var rowsCopy = rows.slice();
 		multiSort(rowsCopy, sortMap);
