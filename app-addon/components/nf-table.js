@@ -2,7 +2,6 @@ import Ember from 'ember';
 import multiSort from '../utils/multi-sort';
 import TableColumnRegistrar from '../mixins/table-column-registrar';
 import parsePropExpr from '../utils/parse-property-expression';
-import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from '../utils/constants';
 
 /**
 	Composable table component with built-in sorting
@@ -189,13 +188,12 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	hasRendered: false,
 
 	/**
-		The type of sorting to do on the table. `'multi'` or `'single'`.
-		@property sortType
-		@type String
-		@default 'single'
+		Gets or sets whether a multi sort is used.
+		@property sortMultiple
+		@type Boolean
+		@default false
 	*/
-	sortType: SORTTYPE_SINGLE,
-
+	sortMultiple: false,
 
 	_hasRendered: function() {
 		this.set('hasRendered', true);
@@ -244,18 +242,16 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		*/
 		sort: function(sortedColumn) {
 			var columns = this.get('columns');
-			var sortType = this.get('sortType');
+			var sortMultiple = this.get('sortMultiple');
 			var currentSortDir = sortedColumn.get('sortDirection');
 
-			if(sortType === SORTTYPE_SINGLE) {
+			if(sortMultiple) {
+				sortedColumn.set('sortDirection', [0, 1, -1][currentSortDir + 1]);
+			} else {
 				columns.forEach(function(col) {
-					col.set('sortDirection', SORT_NONE);
+					col.set('sortDirection', 0);
 				});
 				sortedColumn.set('sortDirection', [1, 1, -1][currentSortDir + 1]);
-			}
-
-			if(sortType === SORTTYPE_MULTI) {
-				sortedColumn.set('sortDirection', [0, 1, -1][currentSortDir + 1]);
 			}
 		}
 	}
