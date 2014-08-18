@@ -12,7 +12,7 @@
 
     <tbody>
       {{#each group in sortedGroups}}
-        <tr class="nf-table-group-child">
+        <tr class="nf-table-group">
           {{#each column in tableGroup.columns}}
             <td {{bind-attr colspan=column.cell.colspan}}>
               {{view Ember.View tagName="div" controller=parentController template=column.cell.template}}
@@ -20,7 +20,7 @@
           {{/each}}
         </tr>
         {{#each row in group}}
-          <tr class="nf-table-group">
+          <tr class="nf-table-group-child">
             {{#each column in columns}}
               <td {{bind-attr colspan=column.cell.colspan}}>
                 {{view Ember.View tagName="div" controller=parentController template=column.cell.template}}
