@@ -54,11 +54,11 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 
 	/**
 		Gets the nf-table-group component if one is present.
-		@property group
+		@property tableGroup
 		@type components.nf-table-group
 		@default null
 	*/
-	group: null,
+	tableGroup: null,
 
 	/**
 		The expression used to locate the values in the rows to group by.
@@ -68,9 +68,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	groupBy: null,
 
-	isStandardTable: Ember.computed.not('isGroupedTable'),
-
-	isGroupedTable: Ember.computed.bool('group'),
+	useGroupedTableLayout: Ember.computed.bool('groupBy'),
 
 	sortedGroups: function() {
 		var sortMap = this.get('sortMap');
@@ -97,7 +95,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 
 			if(groupVal !== prevGroupVal) {
 				group = [];
-				group.sortValue = groupVal;
+				group.groupValue = groupVal;
 				groups.push(group);
 				prevGroupVal = groupVal;
 			}
@@ -106,8 +104,19 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			return groups;
 		}, []);
 
-		return groups;
-	}.property('rows.@each', 'sortMap', 'groupBy'),
+		var tableGroupingCtrl = Ember.ArrayController.create({
+			container: this.get('container'),
+			content: groups,
+		});
+
+		var itemController = this.get('tableGroup.itemController');
+		if(itemController) {
+			tableGroupingCtrl.set('itemController', itemController);
+		}
+
+		return tableGroupingCtrl;
+	}.property('rows.@each', 'sortMap', 'groupBy', 'tableGroup.itemController'),
+
 
 	/**
 		The data source for rows to display in this table.
@@ -192,3 +201,4 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		}
 	}
 });
+

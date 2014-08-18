@@ -7,6 +7,14 @@ import Ember from 'ember';
  	@extends Ember.Component
  */
 export default Ember.Component.extend({
+	/**
+		The number of columns for the output cell to span
+		@property colspan
+		@type Number
+		@default 1
+	*/
+	colspan: 1,
+
 	_setup: function(){
 		var column = this.nearestWithProperty('isDataTableColumn');
 		this.set('column', column);

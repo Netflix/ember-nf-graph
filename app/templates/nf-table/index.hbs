@@ -1,31 +1,44 @@
 <h2>nf-table</h2>
 
-{{#nf-table rows=myData}}
-	{{#nf-column sortBy="groupRow.blah"}}
+{{#nf-table rows=myData groupBy="blah"}}
+	{{#nf-column sortBy="row.blah"}}
 		{{#nf-header}}
 			Blah <div class="nf-sort-arrow"></div>
 		{{/nf-header}}
 		{{#nf-cell}}
-			{{groupRow.sortValue}}
+			{{row.blah}}
+		{{/nf-cell}}
+	{{/nf-column}}
+	{{#nf-column sortBy="row.blah"}}
+		{{#nf-header}}
+			Foo <div class="nf-sort-arrow"></div>
+		{{/nf-header}}
+		{{#nf-cell}}
+			{{row.foo}}
+		{{/nf-cell}}
+	{{/nf-column}}
+	{{#nf-column sortBy="row.blah"}}
+		{{#nf-header}}
+			Bar <div class="nf-sort-arrow"></div>
+		{{/nf-header}}
+		{{#nf-cell}}
+			{{row.bar}}
 		{{/nf-cell}}
 	{{/nf-column}}
 	
-	{{#nf-table-group groupBy="blah"}}
-		{{#nf-column sortBy="row.foo"}}
-			{{#nf-header}}
-				Foo <div class="nf-sort-arrow"></div>
-			{{/nf-header}}
+	{{#nf-table-group itemController="nf-table-group-test"}}
+		{{#nf-column sortBy="group.foo"}}
 			{{#nf-cell}}
-				{{row.foo}}
+				{{group.groupValue}}
 			{{/nf-cell}}
 		{{/nf-column}}
 
-		{{#nf-column sortBy="row.bar"}}
-			{{#nf-header}}
-				Bar	<div class="nf-sort-arrow"></div>
-			{{/nf-header}}
-			{{#nf-cell}}
-				{{row.bar}}
+		{{#nf-column}}
+			{{#nf-cell colspan="2"}}
+				<h4>Foo</h4>
+				Sum: {{group.fooSum}}<br/>
+				Avg: {{group.fooAvg}}<br/>
+				Mean: {{group.fooMean}}
 			{{/nf-cell}}
 		{{/nf-column}}
 	{{/nf-table-group}}

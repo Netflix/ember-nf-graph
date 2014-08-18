@@ -18,7 +18,6 @@ export default Ember.Component.extend({
 		@readonly
 	*/
 	isDataTableColumn: true,
-	
 
 	_sortDirection: SORT_NONE,
 

@@ -14,4 +14,4 @@ export default Ember.Mixin.create({
 	unregisterColumn: function(column) {
 		this.get('columns').removeObject(column);
 	},
-})
+});

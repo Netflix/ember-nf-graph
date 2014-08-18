@@ -1,31 +1,9 @@
 {{#if hasRendered}}
-  {{#if isStandardTable}}
-  <thead>
-    <tr>
-      {{#each column in columns}}
-        <th {{action 'sort' column}} {{bind-attr class="column.sortClass"}}>
-          {{view Ember.View tagName="div" controller=parentController template=column.header.template}}
-        </th>
-      {{/each}}
-    </tr>
-  </thead>
-
-  <tbody>
-    {{#each row in sortedRows}}
-      <tr>
-        {{#each column in columns}}
-          {{view Ember.View tagName="td" controller=parentController template=column.cell.template}}
-        {{/each}}
-      </tr>
-    {{/each}}
-  </tbody>
-  {{/if}}
-
-  {{#if isGroupedTable}}
+  {{#if useGroupedTableLayout}}
     <thead>
       <tr>
         {{#each column in columns}}
-          <th {{action 'sort' column}} {{bind-attr class="column.sortClass"}}>
+          <th {{action 'sort' column}} {{bind-attr class="column.sortClass" colspan=column.header.colspan}}>
             {{view Ember.View tagName="div" controller=parentController template=column.header.template}}
           </th>
         {{/each}}
@@ -33,21 +11,50 @@
     </thead>
 
     <tbody>
-      {{#each groupRow in sortedGroups}}
-        <tr class="nf-table-group">
-          {{#each column in columns}}
-            {{view Ember.View tagName="td" controller=parentController template=column.cell.template}}
+      {{#each group in sortedGroups}}
+        <tr class="nf-table-group-child">
+          {{#each column in tableGroup.columns}}
+            <td {{bind-attr colspan=column.cell.colspan}}>
+              {{view Ember.View tagName="div" controller=parentController template=column.cell.template}}
+            </td>
           {{/each}}
         </tr>
-        {{#each row in groupRow}}
-          <tr class="nf-table-group-child">
-            {{#each column in group.columns}}
-              {{view Ember.View tagName="td" controller=parentController template=column.cell.template}}
+        {{#each row in group}}
+          <tr class="nf-table-group">
+            {{#each column in columns}}
+              <td {{bind-attr colspan=column.cell.colspan}}>
+                {{view Ember.View tagName="div" controller=parentController template=column.cell.template}}
+              </td>
             {{/each}}
           </tr>
         {{/each}}
       {{/each}}
     </tbody>
+
+  {{else}}
+
+    <thead>
+      <tr>
+        {{#each column in columns}}
+          <th {{action 'sort' column}} {{bind-attr class="column.sortClass" colspan=column.header.colspan}}>
+            {{view Ember.View tagName="div" controller=parentController template=column.header.template}}
+          </th>
+        {{/each}}
+      </tr>
+    </thead>
+
+    <tbody>
+      {{#each row in sortedRows}}
+        <tr>
+          {{#each column in columns}}
+            <td {{bind-attr colspan=column.cell.colspan}}>
+              {{view Ember.View tagName="div" controller=parentController template=column.cell.template}}
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+
   {{/if}}
 {{/if}}
 
