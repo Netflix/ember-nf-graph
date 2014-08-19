@@ -253,7 +253,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 				});
 				sortedColumn.set('sortDirection', [1, 1, -1][currentSortDir + 1]);
 			}
-		}
-	}
+		},
+
+		cellClicked: function(row, column, group) {
+			var cellAction = Ember.get(column, 'cell.action');
+			if(cellAction) {
+				this.get('parentController').send('cellClickAction', row, column, group);
+			}
+		},
+	},
 });
 

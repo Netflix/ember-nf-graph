@@ -7,6 +7,8 @@ import Ember from 'ember';
  	@extends Ember.Component
  */
 export default Ember.Component.extend({
+	tagName: 'td',
+	
 	/**
 		The number of columns for the output cell to span
 		@property colspan

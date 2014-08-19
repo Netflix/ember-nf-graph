@@ -47,7 +47,7 @@
       {{#each row in sortedRows}}
         <tr>
           {{#each column in columns}}
-            <td {{bind-attr colspan=column.cell.colspan}}>
+            <td {{bind-attr colspan=column.cell.colspan}} {{action 'cellClicked' row column}}>
               {{view Ember.View tagName="div" controller=parentController template=column.cell.template}}
             </td>
           {{/each}}
