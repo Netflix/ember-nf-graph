@@ -1,8 +1,14 @@
 <h2>nf-table</h2>
 
+<style>
+	.test {
+		background: lime;
+	}
+</style>
+
 {{#nf-table rows=myData groupBy="blah" sortMultiple=1}}
 	{{#nf-column sortBy="row.blah"}}
-		{{#nf-header}}
+		{{#nf-header class="test"}}
 			Blah <div class="nf-sort-arrow"></div>
 		{{/nf-header}}
 		{{#nf-cell}}

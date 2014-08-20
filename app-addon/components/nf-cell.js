@@ -8,6 +8,8 @@ import Ember from 'ember';
  */
 export default Ember.Component.extend({
 	tagName: 'td',
+
+	classNames: ['nf-cell'],
 	
 	/**
 		The number of columns for the output cell to span

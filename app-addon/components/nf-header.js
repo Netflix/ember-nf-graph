@@ -9,6 +9,8 @@ import NfCell from './nf-cell';
 export default NfCell.extend({
 	tagName: 'th',
 
+	classNames: ['nf-header'],
+	
 	_setup: function(){
 		var column = this.nearestWithProperty('isDataTableColumn');
 		this.set('column', column);

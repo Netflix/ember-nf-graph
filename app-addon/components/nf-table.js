@@ -115,12 +115,18 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	/**
 		Gets whether or not to use the grouped table layout
 		@property useGroupedTableLayout
-		@type boolean
+		@type Boolean
 		@private
 		@readonly
 	*/
 	useGroupedTableLayout: Ember.computed.bool('groupBy'),
 
+	/**
+		Gets an array of grouped and sorted data, represented as an array of arrays.
+		@property sortedGroups
+		@type Array
+		@readonly
+	*/
 	sortedGroups: function() {
 		var sortMap = this.get('sortMap');
 		var rows = this.get('rows');
@@ -199,6 +205,12 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		this.set('hasRendered', true);
 	}.on('willInsertElement'),
 
+	/**
+		Gets the an array of sorts, in order to be processed when sorting the rows.
+		@property sortMap
+		@readonly
+		@private
+	*/
 	sortMap: function(){
 		return this.get('columns').filter(function(col) {
 			return col.get('sortDirection') && col.get('sortBy');
@@ -255,6 +267,13 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			}
 		},
 
+		/**
+			Handles the cell click action and sends the appropriate action to the view.
+			@method actions.cellClicked
+			@param row {Object} the data row from the the rows array
+			@param column {nf-column} the column component for the current column
+			@param group {Array} the array containing the group data (this is undefined if the table is not grouped)
+		*/
 		cellClicked: function(row, column, group) {
 			var cellAction = Ember.get(column, 'cell.action');
 			if(cellAction) {
