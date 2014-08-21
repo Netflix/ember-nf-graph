@@ -35,10 +35,10 @@ var domainProperty = function(axis) {
 
         if(scaleType === 'log') {
           if (extent[0] <= 0) {
-            extent[0] = 1;
+            extent[0] = 0.1;
           }
           if (extent[1] <= 0) {
-            extent[1] = 1;
+            extent[1] = 0.1;
           }
         }
 
