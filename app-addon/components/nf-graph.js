@@ -544,6 +544,17 @@ export default Ember.Component.extend({
   }),
 
   /**
+    Gets the DOM id for the content clipPath element.
+    @property contentClipPathId
+    @type String
+    @readonly
+    @private
+  */
+  contentClipPathId: function(){
+    return this.get('elementId') + '-content-mask';
+  }.property('elementId'),
+
+  /**
     Registry of contained graphic elements such as `nf-line` or `nf-area` components.
     This registry is used to pool data for scaling purposes.
     @property graphics

@@ -15,7 +15,12 @@ export default Ember.Component.extend(HasGraphParent, {
   
   classNames: ['nf-graph-content'],
 
-  attributeBindings: ['transform'],
+  attributeBindings: ['transform', 'clip-path'],
+
+  'clip-path': function(){
+    var clipPathId = this.get('graph.contentClipPathId');
+    return 'url(\'#%@\')'.fmt(clipPathId);
+  }.property('graph.contentClipPathId'),
 
   /**
     The SVG transform for positioning the graph content

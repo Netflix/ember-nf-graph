@@ -1,7 +1,15 @@
 <svg class="nf-graph" {{bind-attr width=width height=height}}>
+	<defs>
+		<clipPath {{bind-attr id=contentClipPathId}}>
+			<rect x=0 y=0 {{bind-attr width=graphWidth height=graphHeight}}></rect>
+		</clipPath>
+	</defs>
+
 	<rect class="background" x=0 y=0 {{bind-attr width=width height=height}}></rect>
   
   {{yield}}
+
+
 </svg>
 
 {{#if debug}}
