@@ -24,8 +24,8 @@ var scaleFactoryProperty = function(axis) {
 
 var domainProperty = function(axis) {
   return property(
-    axis + 'Data', axis + 'Min', axis + 'Max', axis + 'ScaleType',
-    function(data, min, max, scaleType) {
+    axis + 'Data', axis + 'Min', axis + 'Max', axis + 'ScaleType', axis + 'LogMin',
+    function(data, min, max, scaleType, logMin) {
       var domain = null;
 
       if(scaleType === 'ordinal') {
@@ -35,10 +35,10 @@ var domainProperty = function(axis) {
 
         if(scaleType === 'log') {
           if (extent[0] <= 0) {
-            extent[0] = 0.1;
+            extent[0] = logMin;
           }
           if (extent[1] <= 0) {
-            extent[1] = 0.1;
+            extent[1] = logMin;
           }
         }
 
@@ -59,7 +59,7 @@ var scaleProperty = function(axis) {
       if(scaleType === 'ordinal') {
         scale = scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
       } else {        
-        scale = scale.domain(domain).range(range);
+        scale = scale.domain(domain).range(range).clamp(true);
       }
 
       return scale;
@@ -200,6 +200,22 @@ var maxProperty = function(axis, defaultTickCount) {
 */
 export default Ember.Component.extend({
   tagName: 'div',  
+
+  /**
+    The min value to use for xScaleType "log" if xMin <= 0
+    @property xLogMin
+    @type Number
+    @default 0.1
+  */
+  xLogMin: 0.1,
+
+  /**
+    The min value to use for yScaleType "log" if yMin <= 0
+    @property yLogMin
+    @type Number
+    @default 0.1
+  */
+  yLogMin: 0.1,
 
   /** 
     Allows child compoenents to identify graph parent.
