@@ -53,3 +53,57 @@ export function nearestIndexTo(arr, val, mappingFn) {
 
   return (Math.abs(val - av) < Math.abs(val - bv)) ? a : b;
 }
+
+var NATURAL_SORT_REGEXP = /[+-]?\d+\.?\d*|\S+/g;
+
+/**
+  Parses an array into an array of arrays of tokens to 
+  use in the natural sort.
+  
+  @method naturalParse
+  @param arr {Array} the array to parse
+*/
+var naturalParse = function(arr) {
+  return arr.map(function(item) {
+    NATURAL_SORT_REGEXP.lastIndex = 0;
+    var matches;
+    var pieces = [];
+    while(matches = NATURAL_SORT_REGEXP.exec(item)) {
+      pieces.push(matches[0]);
+    }
+    return { tokens: pieces, value: item };
+  });
+};
+
+/**
+  Returns a new array, sorted "naturally". Meaning taking into account both
+  alphabetical and numeric sorting within strings.
+
+  @method natualSort
+  @param arr {Array} the array to sort
+  @return {Array} sorted array
+*/
+export function naturalSort(arr) {
+  var parsed = naturalParse(arr);
+  parsed.sort(function(a, b) {
+     var len = Math.max(a.tokens.length, b.tokens.length);
+     var i = 0, bx, ax, na, nb;
+     while((ax = a.tokens[i]) && (bx = b.tokens[i++])) {
+       na = +ax;
+       nb = +bx;
+       if(nb === nb && na === na) {
+         if(na !== nb) {
+           return na > nb ? 1 : -1;
+         }
+       }
+       if(ax !== bx) {
+         return ax > bx ? 1 : -1;
+       }
+     }
+    return 0;
+  });
+
+  return parsed.map(function(p) {
+    return p.value;
+  });
+}
