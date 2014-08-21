@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
+                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+            
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
@@ -146,26 +148,24 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import NfCell from &#x27;./nf-cell&#x27;;
 
 /**
 	Templating component for &#x60;nf-table&#x60;. Should always be contained in an &#x60;nf-column&#x60; component.
 	@namespace components
 	@class nf-header
-	@extends Ember.Component
+	@extends components.nf-cell
 */
-export default Ember.Component.extend({
+export default NfCell.extend({
 	tagName: &#x27;th&#x27;,
 
+	classNames: [&#x27;nf-header&#x27;],
+	
 	_setup: function(){
 		var column = this.nearestWithProperty(&#x27;isDataTableColumn&#x27;);
 		this.set(&#x27;column&#x27;, column);
 		column.set(&#x27;header&#x27;, this);
 	}.on(&#x27;init&#x27;),
-
-	renderToBuffer: function() {
-		//overridden
-	}
 });
     </pre>
 </div>

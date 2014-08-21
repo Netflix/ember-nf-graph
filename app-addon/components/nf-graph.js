@@ -13,12 +13,31 @@ var SCALE_TYPES = {
 var computedBool = Ember.computed.bool;
 
 var scaleFactoryProperty = function(axis) {
-  return property(axis + 'ScaleType', function (type) {
-    var factory = SCALE_TYPES[type];
-    if (!factory) {
-      throw new Error('invalid scale type: ' + type);
+  return property(axis + 'ScaleType', axis + 'PowerExponent', function (type, powExp) {
+    type = typeof type === 'string' ? type.toLowerCase() : '';
+    
+    if(type === 'linear') {
+      return d3.scale.linear;
     }
-    return factory;
+
+    else if(type === 'ordinal') {
+      return d3.scale.ordinal;
+    }
+    
+    else if(type === 'power' || type === 'pow') {
+      return function(){
+        return d3.scale.pow().exponent(powExp);
+      };
+    }
+    
+    else if(type === 'log') {
+      return d3.scale.log;
+    }
+    
+    else {
+      Ember.warn('unknown scale type: ' + type);
+      return d3.scale.linear;
+    }
   });
 };
 
@@ -200,6 +219,22 @@ var maxProperty = function(axis, defaultTickCount) {
 */
 export default Ember.Component.extend({
   tagName: 'div',  
+
+  /**
+    The exponent to use for xScaleType "pow" or "power".
+    @property xPowerExponent
+    @type Number
+    @default 3
+  */
+  xPowerExponent: 3,
+
+  /**
+    The exponent to use for yScaleType "pow" or "power".
+    @property yPowerExponent
+    @type Number
+    @default 3
+  */
+  yPowerExponent: 3,
 
   /**
     The min value to use for xScaleType "log" if xMin <= 0

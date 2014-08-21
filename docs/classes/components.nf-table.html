@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
+                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+            
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
@@ -145,6 +147,15 @@
                         <h1>components.nf-table Class</h1>
 <div class="box meta">
     
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+                
+            </ul>
+        </div>
+    
 
     
         <div class="extends">
@@ -154,7 +165,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-table.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-table.js:5</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-table.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-table.js:6</code></a>
         </div>
     
 
@@ -171,8 +182,9 @@
 
 <div class="box intro">
     <p>Composable table component with built-in sorting</p>
-<h3 id="example">Example</h3>
+<h3 id="basic-example">Basic Example</h3>
 <pre class="code prettyprint"><code>  {{#nf-table rows=myData}}
+
       {{#nf-column sortField=&quot;foo&quot;}}
         {{nf-header}}
             Foo
@@ -181,6 +193,7 @@
               {{row.foo}}
         {{/nf-cell}}
       {{/nf-column}}
+
       {{#nf-column sortField=&quot;foo&quot;}}
         {{nf-header}}
             Bar
@@ -189,9 +202,48 @@
               {{row.bar}}
         {{/nf-cell}}
       {{/nf-column}}
+
   {{/nf-table}}</code></pre>
 <p>The example above will create a sortable table from an array <code>myData</code> containing objects
 with fields <code>foo</code> and <code>bar</code>.</p>
+<h3 id="grouped-example">Grouped Example</h3>
+<p>If you wish to create a &quot;grouped table&quot;, you simply need to group the data with the <code>groupBy</code>
+property.</p>
+<p>Additionally, you can add grouping rows with the <code>{{nf-table-group}}</code> component, which allows you
+to define the columns for the group rows. If you do this, you will need to create an ArrayController
+for the group that will carry with it any computed properties you might need, such as a sum or average
+aggregated over the group.</p>
+<pre class="code prettyprint"><code>        {{#nf-table rows=myData groupBy=&quot;baz&quot;}}
+
+            {{#nf-table-group itemController=&quot;my-group-controller&quot;}}
+
+                {{#nf-column}}
+                    {{#nf-cell colspan=&quot;2&quot;}}
+                        Baz = {{group.groupValue}}
+                    {{/nf-cell}}
+                {{/nf-column}}
+
+            {{/nf-table-group}}
+
+      {{#nf-column sortField=&quot;foo&quot;}}
+        {{nf-header}}
+            Foo
+        {{/nf-header}}
+        {{#nf-cell}}
+              {{row.foo}}
+        {{/nf-cell}}
+      {{/nf-column}}
+
+      {{#nf-column sortField=&quot;foo&quot;}}
+        {{nf-header}}
+            Bar
+        {{/nf-header}}
+        {{#nf-cell}}
+              {{row.bar}}
+        {{/nf-cell}}
+      {{/nf-column}}
+
+  {{/nf-table}}</code></pre>
 <h3 id="styling">Styling</h3>
 <p>nf-table emits a <code>&lt;table&gt;</code> with a class of <code>nf-table</code> applied to it.</p>
 
@@ -224,21 +276,14 @@ with fields <code>foo</code> and <code>bar</code>.</p>
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method">
+                                <a href="#method_actions.cellClicked">actions.cellClicked</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_actions.sort">actions.sort</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_registerColumn">registerColumn</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
-                                <a href="#method_unregisterColumn">unregisterColumn</a>
 
                                 
                                 
@@ -255,14 +300,14 @@ with fields <code>foo</code> and <code>bar</code>.</p>
                     <ul class="index-list properties extends">
                         
                             <li class="index-item property">
-                                <a href="#property_columns">columns</a>
+                                <a href="#property_groupBy">groupBy</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_isDataTable">isDataTable</a>
+                                <a href="#property_isTable">isTable</a>
 
                                 
                                 
@@ -283,14 +328,42 @@ with fields <code>foo</code> and <code>bar</code>.</p>
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_sortedRows">sortedRows</a>
+                                <a href="#property_sortedGroups">sortedGroups</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_sortType">sortType</a>
+                                <a href="#property_sortedRows">sortedRows</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property_sortMap">sortMap</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_sortMultiple">sortMultiple</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_tableGroup">tableGroup</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property_useGroupedTableLayout">useGroupedTableLayout</a>
 
                                 
                                 
@@ -308,6 +381,139 @@ with fields <code>foo</code> and <code>bar</code>.</p>
         
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_actions.cellClicked" class="method item">
+    <h3 class="name"><code>actions.cellClicked</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>row</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>column</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>group</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l270"><code>app-addon&#x2F;components&#x2F;nf-table.js:270</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles the cell click action and sends the appropriate action to the view.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">row</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the data row from the the rows array</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">column</code>
+                        <span class="type">Nf-column</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the column component for the current column</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">group</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the array containing the group data (this is undefined if the table is not grouped)</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="method_actions.sort" class="method item">
@@ -352,7 +558,7 @@ with fields <code>foo</code> and <code>bar</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l133"><code>app-addon&#x2F;components&#x2F;nf-table.js:133</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l249"><code>app-addon&#x2F;components&#x2F;nf-table.js:249</code></a>
         
         </p>
 
@@ -399,184 +605,6 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
 </div>
 
                 
-                    <div id="method_registerColumn" class="method item">
-    <h3 class="name"><code>registerColumn</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>column</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-table.js.html#l79"><code>app-addon&#x2F;components&#x2F;nf-table.js:79</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Registers a child column with the table.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">column</code>
-                        <span class="type">Ember.Component</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the column to register with the table.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method_unregisterColumn" class="method item">
-    <h3 class="name"><code>unregisterColumn</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>column</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-table.js.html#l88"><code>app-addon&#x2F;components&#x2F;nf-table.js:88</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Unregisters a child column from the table.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">column</code>
-                        <span class="type">Ember.Component</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the column to unregister from the table.</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
             </div>
         
 
@@ -585,9 +613,9 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_columns" class="property item">
-    <h3 class="name"><code>columns</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_groupBy" class="property item">
+    <h3 class="name"><code>groupBy</code></h3>
+    <span class="type">String</span>
 
     
 
@@ -608,7 +636,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l69"><code>app-addon&#x2F;components&#x2F;nf-table.js:69</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l107"><code>app-addon&#x2F;components&#x2F;nf-table.js:107</code></a>
         
         </p>
 
@@ -618,10 +646,12 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
     </div>
 
     <div class="description">
-        <p>the registered columns</p>
+        <p>The expression used to locate the values in the rows to group by.</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -630,8 +660,8 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
 </div>
 
                 
-                    <div id="property_isDataTable" class="property item">
-    <h3 class="name"><code>isDataTable</code></h3>
+                    <div id="property_isTable" class="property item">
+    <h3 class="name"><code>isTable</code></h3>
     <span class="type">Boolean</span>
 
     
@@ -653,7 +683,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-table.js:42</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l91"><code>app-addon&#x2F;components&#x2F;nf-table.js:91</code></a>
         
         </p>
 
@@ -663,10 +693,12 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
     </div>
 
     <div class="description">
-        <p>Used to allow child components to identify this component as an nf-table component.</p>
+        <p>Property used by child components to locate the table component.</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> true</p>
     
 
     
@@ -698,7 +730,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l122"><code>app-addon&#x2F;components&#x2F;nf-table.js:122</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l238"><code>app-addon&#x2F;components&#x2F;nf-table.js:238</code></a>
         
         </p>
 
@@ -744,7 +776,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l52"><code>app-addon&#x2F;components&#x2F;nf-table.js:52</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l185"><code>app-addon&#x2F;components&#x2F;nf-table.js:185</code></a>
         
         </p>
 
@@ -760,6 +792,51 @@ up child templates to the proper controller.</p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_sortedGroups" class="property item">
+    <h3 class="name"><code>sortedGroups</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-table.js:124</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets an array of grouped and sorted data, represented as an array of arrays.</p>
+
+    </div>
+
     
 
     
@@ -791,7 +868,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l101"><code>app-addon&#x2F;components&#x2F;nf-table.js:101</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l225"><code>app-addon&#x2F;components&#x2F;nf-table.js:225</code></a>
         
         </p>
 
@@ -813,9 +890,56 @@ up child templates to the proper controller.</p>
 </div>
 
                 
-                    <div id="property_sortType" class="property item">
-    <h3 class="name"><code>sortType</code></h3>
-    <span class="type">String</span>
+                    <div id="property_sortMap" class="property item private">
+    <h3 class="name"><code>sortMap</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l208"><code>app-addon&#x2F;components&#x2F;nf-table.js:208</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the an array of sorts, in order to be processed when sorting the rows.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_sortMultiple" class="property item">
+    <h3 class="name"><code>sortMultiple</code></h3>
+    <span class="type">Boolean</span>
 
     
 
@@ -836,7 +960,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l61"><code>app-addon&#x2F;components&#x2F;nf-table.js:61</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l196"><code>app-addon&#x2F;components&#x2F;nf-table.js:196</code></a>
         
         </p>
 
@@ -846,12 +970,106 @@ up child templates to the proper controller.</p>
     </div>
 
     <div class="description">
-        <p>The type of sorting to do on the table. <code>&#39;multi&#39;</code> or <code>&#39;single&#39;</code>.</p>
+        <p>Gets or sets whether a multi sort is used.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;single&#x27;</p>
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_tableGroup" class="property item">
+    <h3 class="name"><code>tableGroup</code></h3>
+    <span class="type"><a href="../classes/components.nf-table-group.html" class="crosslink">components.nf-table-group</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l99"><code>app-addon&#x2F;components&#x2F;nf-table.js:99</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the nf-table-group component if one is present.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_useGroupedTableLayout" class="property item private">
+    <h3 class="name"><code>useGroupedTableLayout</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l115"><code>app-addon&#x2F;components&#x2F;nf-table.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets whether or not to use the grouped table layout</p>
+
+    </div>
+
     
 
     

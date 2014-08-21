@@ -7,7 +7,7 @@
 
 {{#nf-graph xLink=groupX yLink=groupY selected=selectedThings hoverX=fooGraphHoverX hoverY=fooGraphHoverY mouseX=fooGraphMouseX mouseY=fooGraphMouseY
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50
-	yScaleType="log"}}
+	yScaleType="power"}}
 
 	{{#nf-graph-content}}
 		{{nf-area selectable=1 selected=fooSelected data=lineData hoverIndex=fooIndex hoverData=fooHovered trackingMode="snap-last"}}

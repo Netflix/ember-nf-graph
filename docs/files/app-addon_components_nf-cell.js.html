@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
+                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+            
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
@@ -155,6 +157,18 @@ import Ember from &#x27;ember&#x27;;
  	@extends Ember.Component
  */
 export default Ember.Component.extend({
+	tagName: &#x27;td&#x27;,
+
+	classNames: [&#x27;nf-cell&#x27;],
+	
+	/**
+		The number of columns for the output cell to span
+		@property colspan
+		@type Number
+		@default 1
+	*/
+	colspan: 1,
+
 	_setup: function(){
 		var column = this.nearestWithProperty(&#x27;isDataTableColumn&#x27;);
 		this.set(&#x27;column&#x27;, column);

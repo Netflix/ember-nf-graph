@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-column.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-table-group.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -144,109 +144,35 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-column.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-table-group.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { SORT_NONE, SORT_ASCENDING, SORT_DESCENDING } from &#x27;../utils/constants&#x27;;
+import TableColumnRegistrar from &#x27;../mixins/table-column-registrar&#x27;;
 
 /**
-	A column class to support &#x60;nf-table&#x60;
+	A component for defining a grouping row on an &#x60;nf-table&#x60;.
 	@namespace components
-	@class nf-column
-	@extends Ember.Component
+	@class nf-table-group
+	@uses mixins.table-column-registrar
 */
-export default Ember.Component.extend({
-
+export default Ember.Component.extend(TableColumnRegistrar, {
 	/**
-		used so child components &#x60;nf-cell&#x60; and &#x60;nf-header&#x60; can find this component
-		and register themselves.
-		@property isDataTableColumn
-		@type Boolean
-		@default true
-		@readonly
+		The name of the item controller to use for each grouping.
+		@property itemController
 	*/
-	isDataTableColumn: true,
-
-	_sortDirection: SORT_NONE,
-
-	/**
-		Gets or sets the sort direction for the column.
-
-		As a convenence, it accepts either a numeric or string value, and 
-		coerces it into the appropriate numeric value.
-
-		Always returns a numeric value
-
-		|short|long|numeric|actual|
-		|:--|:--|--:|--:|
-		|asc|ascending|1|1|
-		|desc|descending|-1|-1|
-		|none|(any other string)|0|0|
-
-		@property sortDirection
-		@type Number
-		@default 0
-		@example
-
-		     {{#nf-column sortDirection=&quot;asc&quot;}}
-	*/
-	sortDirection: function(name, value) {
-		if(arguments.length &gt; 1) {
-			var typeOfValue = typeof value;
-			if(typeOfValue === &#x27;number&#x27;) {
-				if(value &gt; SORT_NONE) {
-					value = SORT_ASCENDING;
-				} else if(value &lt; SORT_NONE) {
-					value = SORT_DESCENDING;
-				} else {
-					value = SORT_NONE;
-				}
-			} else if(typeOfValue === &#x27;string&#x27;) {
-				 value = value.toLowerCase();
-				 if(value === &#x27;desc&#x27; || value === &#x27;descending&#x27;) {
-				 	value = SORT_DESCENDING;
-				 } else if (value === &#x27;asc&#x27; || value === &#x27;ascending&#x27;) {
-				 	value = SORT_ASCENDING;
-				 } else {
-				 	value = SORT_NONE;
-				 }
-			}
-
-			this._sortDirection = value;
-		}
-
-		return this._sortDirection || 0;
-	}.property(),
-
-	/**
-		Gets the CSS sort class to be applied to the column
-
-		Possible return values are &#x60;nf-sort-ascending&#x60;, &#x60;nf-sort-descending&#x60; and &#x60;nf-sort-none&#x60;.
-
-		@property sortClass
-		@type String
-		@default &#x27;nf-sort-none&#x27;
-		@example
-
-		    column.set(&#x27;sortDirection&#x27;, &#x27;asc&#x27;);
-		    console.log(column.get(&#x27;sortClass&#x27;)); // nf-sort-ascending
-	*/
-	sortClass: function() {
-		var dir = this.get(&#x27;sortDirection&#x27;);
-		return &#x27;nf-sort-&#x27; + ([&#x27;descending&#x27;, &#x27;none&#x27;, &#x27;ascending&#x27;][dir+1]);
-	}.property(&#x27;sortDirection&#x27;),
+	itemController: undefined,
 
 	_register: function(){
-		var registrar = this.nearestWithProperty(&#x27;isTableColumnRegistrar&#x27;);
-		this.set(&#x27;columnRegistrar&#x27;, registrar);
-		registrar.registerColumn(this);
+		var table = this.nearestWithProperty(&#x27;isTable&#x27;);
+		table.set(&#x27;tableGroup&#x27;, this);
+		this.set(&#x27;table&#x27;, table);
 	}.on(&#x27;init&#x27;),
 
 	_unregister: function(){
-		this.get(&#x27;columnRegistrar&#x27;).unregisterColumn(this);
-	}.on(&#x27;willDestroyElement&#x27;)
+		this.get(&#x27;table&#x27;).set(&#x27;tableGroup&#x27;, null);
+	}.on(&#x27;willDestroyElement&#x27;),
 });
     </pre>
 </div>

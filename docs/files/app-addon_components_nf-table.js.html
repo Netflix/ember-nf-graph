@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
+                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+            
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
@@ -148,14 +150,16 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import multiSort from &#x27;../utils/multi-sort&#x27;;
-import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/constants&#x27;;
+import TableColumnRegistrar from &#x27;../mixins/table-column-registrar&#x27;;
+import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
 
 /**
 	Composable table component with built-in sorting
 	
-	### Example
+	### Basic Example
 
 	      {{#nf-table rows=myData}}
+
 	      	{{#nf-column sortField=&quot;foo&quot;}}
 	      	  {{nf-header}}
 	      	  	Foo
@@ -164,6 +168,7 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/consta
 	      			{{row.foo}}
 	      	  {{/nf-cell}}
 	      	{{/nf-column}}
+
 	      	{{#nf-column sortField=&quot;foo&quot;}}
 	      	  {{nf-header}}
 	      	  	Bar
@@ -172,10 +177,53 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/consta
 	      			{{row.bar}}
 	      	  {{/nf-cell}}
 	      	{{/nf-column}}
+
 	      {{/nf-table}}
 	
 	The example above will create a sortable table from an array &#x60;myData&#x60; containing objects
 	with fields &#x60;foo&#x60; and &#x60;bar&#x60;.
+
+	### Grouped Example
+
+	If you wish to create a &quot;grouped table&quot;, you simply need to group the data with the &#x60;groupBy&#x60;
+	property.
+
+	Additionally, you can add grouping rows with the &#x60;{{nf-table-group}}&#x60; component, which allows you
+	to define the columns for the group rows. If you do this, you will need to create an ArrayController
+	for the group that will carry with it any computed properties you might need, such as a sum or average
+	aggregated over the group.
+
+				{{#nf-table rows=myData groupBy=&quot;baz&quot;}}
+					
+					{{#nf-table-group itemController=&quot;my-group-controller&quot;}}
+						
+						{{#nf-column}}
+							{{#nf-cell colspan=&quot;2&quot;}}
+								Baz = {{group.groupValue}}
+							{{/nf-cell}}
+						{{/nf-column}}
+
+					{{/nf-table-group}}
+
+	      	{{#nf-column sortField=&quot;foo&quot;}}
+	      	  {{nf-header}}
+	      	  	Foo
+	      	  {{/nf-header}}
+	      	  {{#nf-cell}}
+	      			{{row.foo}}
+	      	  {{/nf-cell}}
+	      	{{/nf-column}}
+	      	
+	      	{{#nf-column sortField=&quot;foo&quot;}}
+	      	  {{nf-header}}
+	      	  	Bar
+	      	  {{/nf-header}}
+	      	  {{#nf-cell}}
+	      			{{row.bar}}
+	      	  {{/nf-cell}}
+	      	{{/nf-column}}
+
+	      {{/nf-table}}
 
 	### Styling
 	
@@ -185,17 +233,104 @@ import { SORT_NONE, SORTTYPE_SINGLE, SORTTYPE_MULTI } from &#x27;../utils/consta
 	@namespace components
 	@class nf-table
 	@extends Ember.Component
+	@uses mixins.table-column-registrar
 */
-export default Ember.Component.extend({
+export default Ember.Component.extend(TableColumnRegistrar, {
+	tagName: &#x27;table&#x27;,
+
 	/**
-		Used to allow child components to identify this component as an nf-table component.
-		@property isDataTable 
+		Property used by child components to locate the table component.
+		@property isTable
 		@type Boolean
+		@default true
+	*/
+	isTable: true,
+
+	/**
+		Gets the nf-table-group component if one is present.
+		@property tableGroup
+		@type components.nf-table-group
+		@default null
+	*/
+	tableGroup: null,
+
+	/**
+		The expression used to locate the values in the rows to group by.
+		@property groupBy
+		@type String
+		@default null
+	*/
+	groupBy: null,
+
+	/**
+		Gets whether or not to use the grouped table layout
+		@property useGroupedTableLayout
+		@type Boolean
+		@private
 		@readonly
 	*/
-	isDataTable: true,
+	useGroupedTableLayout: Ember.computed.bool(&#x27;groupBy&#x27;),
 
-	tagName: &#x27;table&#x27;,
+	/**
+		Gets an array of grouped and sorted data, represented as an array of arrays.
+		@property sortedGroups
+		@type Array
+		@readonly
+	*/
+	sortedGroups: function() {
+		var sortMap = this.get(&#x27;sortMap&#x27;);
+		var rows = this.get(&#x27;rows&#x27;);
+		var groupBy = this.get(&#x27;groupBy&#x27;);
+		if(!groupBy || !rows || rows.length === 0) {
+			return null;
+		}
+
+		var alreadyGrouping = sortMap.any(function(x) {
+			return x.by === groupBy;
+		});
+
+		if(!alreadyGrouping) {
+			sortMap.unshift({
+				by: groupBy,
+				direction: 1
+			});
+		}
+
+		var rowsCopy = rows.slice();
+		multiSort(rowsCopy, sortMap);
+
+		var prevGroupVal;
+		var group;
+		var groupByExpr = parsePropExpr(groupBy);
+
+		var groups = rowsCopy.reduce(function(groups, d) {
+			var groupVal = groupByExpr(d) || null;
+
+			if(groupVal !== prevGroupVal) {
+				group = [];
+				group.groupValue = groupVal;
+				groups.push(group);
+				prevGroupVal = groupVal;
+			}
+
+			group.push(d);
+			return groups;
+		}, []);
+
+		var tableGroupingCtrl = Ember.ArrayController.create({
+			container: this.get(&#x27;container&#x27;),
+			content: groups,
+		});
+
+		var itemController = this.get(&#x27;tableGroup.itemController&#x27;);
+
+		if(itemController) {
+			tableGroupingCtrl.set(&#x27;itemController&#x27;, itemController);
+		}
+
+		return tableGroupingCtrl;
+	}.property(&#x27;rows.@each&#x27;, &#x27;sortMap&#x27;, &#x27;groupBy&#x27;, &#x27;tableGroup.itemController&#x27;),
+
 
 	/**
 		The data source for rows to display in this table.
@@ -206,45 +341,36 @@ export default Ember.Component.extend({
 
 	classNames: [&#x27;nf-table&#x27;],
 
-	/**
-		The type of sorting to do on the table. &#x60;&#x27;multi&#x27;&#x60; or &#x60;&#x27;single&#x27;&#x60;.
-		@property sortType
-		@type String
-		@default &#x27;single&#x27;
-	*/
-	sortType: SORTTYPE_SINGLE,
+	hasRendered: false,
 
 	/**
-		the registered columns
-		@property columns
-		@type Array
-		@readonly
+		Gets or sets whether a multi sort is used.
+		@property sortMultiple
+		@type Boolean
+		@default false
 	*/
-	columns: function() {
-		return [];
-	}.property(),
-
-	/**
-		Registers a child column with the table.
-		@method registerColumn
-		@param column {Ember.Component} the column to register with the table.
-	*/
-	registerColumn: function(column) {
-		this.get(&#x27;columns&#x27;).pushObject(column);
-	},
-
-	/**
-		Unregisters a child column from the table.
-		@method unregisterColumn
-		@param column {Ember.Component} the column to unregister from the table.
-	*/
-	unregisterColumn: function(column) {
-		this.get(&#x27;columns&#x27;).removeObject(column);
-	},
+	sortMultiple: false,
 
 	_hasRendered: function() {
 		this.set(&#x27;hasRendered&#x27;, true);
-	}.on(&#x27;didInsertElement&#x27;),
+	}.on(&#x27;willInsertElement&#x27;),
+
+	/**
+		Gets the an array of sorts, in order to be processed when sorting the rows.
+		@property sortMap
+		@readonly
+		@private
+	*/
+	sortMap: function(){
+		return this.get(&#x27;columns&#x27;).filter(function(col) {
+			return col.get(&#x27;sortDirection&#x27;) &amp;&amp; col.get(&#x27;sortBy&#x27;);
+		}).map(function(col) {
+			return {
+				by: col.get(&#x27;sortBy&#x27;).replace(/^row\./, &#x27;&#x27;),
+				direction: col.get(&#x27;sortDirection&#x27;)
+			};
+		});
+	}.property(&#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
 
 	/**
 		A computed property returning a sorted copy of &#x60;rows&#x60;
@@ -253,19 +379,11 @@ export default Ember.Component.extend({
 		@readonly
 	*/
 	sortedRows: function(){
-		var sort = this.get(&#x27;columns&#x27;).filter(function(col) {
-			return col.get(&#x27;sortDirection&#x27;) &amp;&amp; col.get(&#x27;sortBy&#x27;);
-		}).map(function(col) {
-			return {
-				by: col.get(&#x27;sortBy&#x27;).replace(/^row\./, &#x27;&#x27;),
-				direction: col.get(&#x27;sortDirection&#x27;)
-			};
-		});
-
+		var sortMap = this.get(&#x27;sortMap&#x27;);
 		var rowsCopy = this.get(&#x27;rows&#x27;).slice();
-		multiSort(rowsCopy, sort);
+		multiSort(rowsCopy, sortMap);
 		return rowsCopy;
-	}.property(&#x27;rows.@each&#x27;, &#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
+	}.property(&#x27;rows.@each&#x27;, &#x27;sortMap&#x27;),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire
@@ -286,22 +404,36 @@ export default Ember.Component.extend({
 		*/
 		sort: function(sortedColumn) {
 			var columns = this.get(&#x27;columns&#x27;);
-			var sortType = this.get(&#x27;sortType&#x27;);
+			var sortMultiple = this.get(&#x27;sortMultiple&#x27;);
 			var currentSortDir = sortedColumn.get(&#x27;sortDirection&#x27;);
 
-			if(sortType === SORTTYPE_SINGLE) {
+			if(sortMultiple) {
+				sortedColumn.set(&#x27;sortDirection&#x27;, [0, 1, -1][currentSortDir + 1]);
+			} else {
 				columns.forEach(function(col) {
-					col.set(&#x27;sortDirection&#x27;, SORT_NONE);
+					col.set(&#x27;sortDirection&#x27;, 0);
 				});
 				sortedColumn.set(&#x27;sortDirection&#x27;, [1, 1, -1][currentSortDir + 1]);
 			}
+		},
 
-			if(sortType === SORTTYPE_MULTI) {
-				sortedColumn.set(&#x27;sortDirection&#x27;, [0, 1, -1][currentSortDir + 1]);
+		/**
+			Handles the cell click action and sends the appropriate action to the view.
+			@method actions.cellClicked
+			@param row {Object} the data row from the the rows array
+			@param column {nf-column} the column component for the current column
+			@param group {Array} the array containing the group data (this is undefined if the table is not grouped)
+		*/
+		cellClicked: function(row, column, group) {
+			var cellAction = Ember.get(column, &#x27;cell.action&#x27;);
+			if(cellAction) {
+				this.get(&#x27;parentController&#x27;).send(&#x27;cellClickAction&#x27;, row, column, group);
 			}
-		}
-	}
+		},
+	},
 });
+
+
     </pre>
 </div>
 

@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
+                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+            
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
             
                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
@@ -163,7 +165,12 @@ export default Ember.Component.extend(HasGraphParent, {
   
   classNames: [&#x27;nf-graph-content&#x27;],
 
-  attributeBindings: [&#x27;transform&#x27;],
+  attributeBindings: [&#x27;transform&#x27;, &#x27;clip-path&#x27;],
+
+  &#x27;clip-path&#x27;: function(){
+    var clipPathId = this.get(&#x27;graph.contentClipPathId&#x27;);
+    return &#x27;url(\&#x27;#%@\&#x27;)&#x27;.fmt(clipPathId);
+  }.property(&#x27;graph.contentClipPathId&#x27;),
 
   /**
     The SVG transform for positioning the graph content
