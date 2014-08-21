@@ -94,6 +94,10 @@ export function naturalSort(arr) {
        if(nb === nb && na === na) {
          if(na !== nb) {
            return na > nb ? 1 : -1;
+         } else {
+           if(ax.length !== bx.length) {
+             return ax.length > bx.length ? 1 : -1;
+           }
          }
        }
        if(ax !== bx) {
