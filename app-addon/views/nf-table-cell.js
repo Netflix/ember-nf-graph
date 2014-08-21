@@ -17,5 +17,5 @@ export default Ember.View.extend({
 
 	tableComponent: computedAlias('tableView.controller'),
 
-	controller: computedAlias('tableComponent.templateData.view.controller'),
+	controller: computedAlias('tableComponent.parentController'),
 });
