@@ -149,15 +149,6 @@
 import Ember from &#x27;ember&#x27;;
 import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
 
-var SCALE_TYPES = {
-  &#x27;linear&#x27;: d3.scale.linear,
-  &#x27;power&#x27;: function () {
-    return d3.scale.pow().exponent(3);
-  },
-  &#x27;log&#x27;: d3.scale.log,
-  &#x27;ordinal&#x27;: d3.scale.ordinal
-};
-
 var computedBool = Ember.computed.bool;
 
 var scaleFactoryProperty = function(axis) {

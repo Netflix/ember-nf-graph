@@ -1,15 +1,6 @@
 import Ember from 'ember';
 import { property, observer } from '../utils/computed-property-helpers';
 
-var SCALE_TYPES = {
-  'linear': d3.scale.linear,
-  'power': function () {
-    return d3.scale.pow().exponent(3);
-  },
-  'log': d3.scale.log,
-  'ordinal': d3.scale.ordinal
-};
-
 var computedBool = Ember.computed.bool;
 
 var scaleFactoryProperty = function(axis) {

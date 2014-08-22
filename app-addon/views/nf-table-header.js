@@ -5,21 +5,19 @@ var computedAlias = Ember.computed.alias;
 export default Ember.View.extend({
 	tagName: 'th',
 
+	column: null,
+
 	classNameBindings: ['column.sortClass'],
 
 	attributeBindings: ['colspan'],
 
 	colspan: computedAlias('column.header.colspan'),
 
-	column: null,
+	template: computedAlias('column.header.template'),
 
 	tableView: computedAlias('templateData.view'),
 
 	tableComponent: computedAlias('tableView.controller'),
-
-	controller: computedAlias('tableComponent.templateData.view.controller'),
-
-	template: computedAlias('column.header.template'),
 
 	_sendSort: function(){
 		var component = this.get('tableComponent');

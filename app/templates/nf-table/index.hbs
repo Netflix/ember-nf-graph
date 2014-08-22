@@ -19,8 +19,8 @@
 		{{#nf-header}}
 			Foo <div class="nf-sort-arrow"></div>
 		{{/nf-header}}
-		{{#nf-cell action="fooCellClicked"}}
-			{{row.foo}}
+		{{#nf-cell}}
+			<a href="#" {{action 'fooCellClicked'}}>test</a>{{row.foo}}
 		{{/nf-cell}}
 	{{/nf-column}}
 	{{#nf-column sortBy="row.bar" sortNatural=1}}
