@@ -24,6 +24,11 @@ export default Ember.ObjectController.extend({
 		appendAreaData: function(area) {
 			var last = area[area.length - 1];
 			area.pushObject({ x: last.x + 1, y: last.y });
-		}
+		},
+
+		showData: function(data) {
+			console.log(data);
+			this.set('shownData', data);
+		},
 	}
 });

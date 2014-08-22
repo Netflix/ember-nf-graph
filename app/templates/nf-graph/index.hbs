@@ -11,23 +11,29 @@
 
 	{{#nf-graph-content}}
 		{{nf-area selectable=1 selected=fooSelected data=lineData hoverIndex=fooIndex hoverData=fooHovered trackingMode="snap-last"}}
-		{{!-- {{nf-dot x=fooHovered.x y=fooHovered.y}} --}}
 		{{nf-vertical-line x=fooHovered.x}}
-		{{nf-horizontal-line y=fooHovered.y}}
-
-		{{nf-crosshair}}
-		
-		{{#nf-range-markers orient="top"}}
-			{{#nf-range-marker xMin=20 xMax=88}}
-				<text>Number 2</text>
-			{{/nf-range-marker}}
-
-			{{#nf-range-marker xMin=56 xMax=120}}
-				<text>Numero Uno</text>
-			{{/nf-range-marker}}
-		{{/nf-range-markers}}		
+		{{nf-horizontal-line y=fooHovered.y}}	
 
 		{{nf-selection-box xMin=10 xMax=50 yMin=diffA yMax=diffB}}
+
+
+
+		{{#nf-plots data=lineData}}
+			<image xlink:href="assets/images/emberjs-tomster.png" 
+				x="0" y="0" width="40" height="40" transform="translate(-20 -20)"
+				{{action 'showData' item}}/>
+		{{/nf-plots}}
+
+
+		{{#if shownData}}
+			{{#nf-plot x=shownData.x y=shownData.y}}
+				<foreignObject width="150" height="50">
+					<div style="box-sizing: border-box; background-color: white; padding: 10px; border: 1px solid gray; border-radius: 8px">
+						{{shownData.y}}
+					</div>
+				</foreignObject>
+			{{/nf-plot}}
+		{{/if}}
 
 	{{/nf-graph-content}}
 

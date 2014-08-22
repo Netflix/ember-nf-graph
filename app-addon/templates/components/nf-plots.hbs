@@ -1,0 +1,5 @@
+{{#each item in plotData}}
+	{{#nf-plot x=item.x y=item.y}}
+		{{view Ember.View tagName="g" template=template controller=parentController}}
+	{{/nf-plot}}
+{{/each}}
