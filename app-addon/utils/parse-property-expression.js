@@ -58,12 +58,14 @@ export default function parsePropertyExpression(expr) {
   return function(obj){
     var i, next;
     var result = obj[tokens[0]];
-    for(i = 1; i < tokens.length; i++) {
-      next = result[tokens[i]];
-      if(typeof next !== 'object') {
-        return next;
+    if(result) {
+      for(i = 1; i < tokens.length; i++) {
+        next = result[tokens[i]];
+        if(typeof next !== 'object') {
+          return next;
+        }
+        result = next;
       }
-      result = next;
     }
     return result;
   };

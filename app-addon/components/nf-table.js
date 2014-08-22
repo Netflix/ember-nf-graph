@@ -2,8 +2,7 @@ import Ember from 'ember';
 import multiSort from '../utils/multi-sort';
 import TableColumnRegistrar from '../mixins/table-column-registrar';
 import parsePropExpr from '../utils/parse-property-expression';
-
-/**
+import { naturalCompare } from '../utils/nf/array-helpers'; /**
 	Composable table component with built-in sorting
 	
 	### Basic Example
@@ -212,14 +211,28 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@private
 	*/
 	sortMap: function(){
-		return this.get('columns').filter(function(col) {
-			return col.get('sortDirection') && col.get('sortBy');
-		}).map(function(col) {
-			return {
-				by: col.get('sortBy').replace(/^row\./, ''),
-				direction: col.get('sortDirection')
-			};
-		});
+		return this.get('columns').reduce(function(sortMap, col) {
+			var direction = col.get('direction');
+			if(direction) {
+				var sortBy = col.get('sortBy');
+				sortBy = sortBy.replace(/^row\./, '');
+				if(sortBy) {
+					if(col.get('sortNatural')) {
+						sortMap.push(function(a, b){
+							var ax = Ember.get(a, sortBy);
+							var bx = Ember.get(b, sortBy);
+							return naturalCompare(ax, bx) * direction;
+						});
+					} else {
+						sortMap.push({
+							by: sortBy,
+							direction: direction,
+						});
+					}
+				}
+			}
+			return sortMap;
+		}, []);
 	}.property('columns.@each.sortDirection', 'columns.@each.sortBy'),
 
 	/**
@@ -255,15 +268,15 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		sort: function(sortedColumn) {
 			var columns = this.get('columns');
 			var sortMultiple = this.get('sortMultiple');
-			var currentSortDir = sortedColumn.get('sortDirection');
+			var currentSortDir = sortedColumn.get('direction');
 
 			if(sortMultiple) {
-				sortedColumn.set('sortDirection', [0, 1, -1][currentSortDir + 1]);
+				sortedColumn.set('sortDirection', ['none', 'asc', 'desc'][currentSortDir + 1]);
 			} else {
 				columns.forEach(function(col) {
 					col.set('sortDirection', 0);
 				});
-				sortedColumn.set('sortDirection', [1, 1, -1][currentSortDir + 1]);
+				sortedColumn.set('sortDirection', ['asc', 'asc', 'desc'][currentSortDir + 1]);
 			}
 		},
 

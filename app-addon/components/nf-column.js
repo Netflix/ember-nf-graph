@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { SORT_NONE, SORT_ASCENDING, SORT_DESCENDING } from '../utils/constants';
 
 /**
 	A column class to support `nf-table`
@@ -19,56 +18,54 @@ export default Ember.Component.extend({
 	*/
 	isDataTableColumn: true,
 
-	_sortDirection: SORT_NONE,
-
 	/**
 		Gets or sets the sort direction for the column.
 
-		As a convenence, it accepts either a numeric or string value, and 
-		coerces it into the appropriate numeric value.
+		As a convenence, it accepts either a numeric or string value.
 
-		Always returns a numeric value
-
-		|short|long|numeric|actual|
-		|:--|:--|--:|--:|
-		|asc|ascending|1|1|
-		|desc|descending|-1|-1|
-		|none|(any other string)|0|0|
+		|short|long|numeric|
+		|:--|:--|--:|
+		|asc|ascending|1|
+		|desc|descending|-1|
+		|none|(any other string)|0|
 
 		@property sortDirection
-		@type Number
-		@default 0
+		@type String
+		@default 'none'
 		@example
 
 		     {{#nf-column sortDirection="asc"}}
 	*/
-	sortDirection: function(name, value) {
-		if(arguments.length > 1) {
-			var typeOfValue = typeof value;
-			if(typeOfValue === 'number') {
-				if(value > SORT_NONE) {
-					value = SORT_ASCENDING;
-				} else if(value < SORT_NONE) {
-					value = SORT_DESCENDING;
-				} else {
-					value = SORT_NONE;
-				}
-			} else if(typeOfValue === 'string') {
-				 value = value.toLowerCase();
-				 if(value === 'desc' || value === 'descending') {
-				 	value = SORT_DESCENDING;
-				 } else if (value === 'asc' || value === 'ascending') {
-				 	value = SORT_ASCENDING;
-				 } else {
-				 	value = SORT_NONE;
-				 }
-			}
+	sortDirection: 'none',
 
-			this._sortDirection = value;
+	/**
+		Gets or sets whether to use a natural sort.
+		@property sortNatural
+		@type Boolean
+		@default false
+	*/
+	sortNatural: false,
+
+	/**
+		The numeric value of `sortDirection`
+		@property direction
+		@type number
+		@readonly
+	*/
+	direction: function(){
+		var sortDirection = this.get('sortDirection');
+		sortDirection = 'string' === typeof sortDirection ? sortDirection.toLowerCase() : '';
+		
+		if(sortDirection === 'asc' || sortDirection === 'ascending' || sortDirection === 1) {
+			return 1;
+		}
+		
+		if(sortDirection === 'desc' || sortDirection === 'descending' || sortDirection === -1) {
+			return -1;
 		}
 
-		return this._sortDirection || 0;
-	}.property(),
+		return 0;
+	}.property('sortDirection'),
 
 	/**
 		Gets the CSS sort class to be applied to the column
@@ -84,7 +81,7 @@ export default Ember.Component.extend({
 		    console.log(column.get('sortClass')); // nf-sort-ascending
 	*/
 	sortClass: function() {
-		var dir = this.get('sortDirection');
+		var dir = this.get('direction');
 		return 'nf-sort-' + (['descending', 'none', 'ascending'][dir+1]);
 	}.property('sortDirection'),
 
