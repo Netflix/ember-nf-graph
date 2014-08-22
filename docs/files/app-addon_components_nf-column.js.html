@@ -73,8 +73,6 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
-                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
-            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -149,7 +147,6 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { SORT_NONE, SORT_ASCENDING, SORT_DESCENDING } from &#x27;../utils/constants&#x27;;
 
 /**
 	A column class to support &#x60;nf-table&#x60;
@@ -169,56 +166,54 @@ export default Ember.Component.extend({
 	*/
 	isDataTableColumn: true,
 
-	_sortDirection: SORT_NONE,
-
 	/**
 		Gets or sets the sort direction for the column.
 
-		As a convenence, it accepts either a numeric or string value, and 
-		coerces it into the appropriate numeric value.
+		As a convenence, it accepts either a numeric or string value.
 
-		Always returns a numeric value
-
-		|short|long|numeric|actual|
-		|:--|:--|--:|--:|
-		|asc|ascending|1|1|
-		|desc|descending|-1|-1|
-		|none|(any other string)|0|0|
+		|short|long|numeric|
+		|:--|:--|--:|
+		|asc|ascending|1|
+		|desc|descending|-1|
+		|none|(any other string)|0|
 
 		@property sortDirection
-		@type Number
-		@default 0
+		@type String
+		@default &#x27;none&#x27;
 		@example
 
 		     {{#nf-column sortDirection=&quot;asc&quot;}}
 	*/
-	sortDirection: function(name, value) {
-		if(arguments.length &gt; 1) {
-			var typeOfValue = typeof value;
-			if(typeOfValue === &#x27;number&#x27;) {
-				if(value &gt; SORT_NONE) {
-					value = SORT_ASCENDING;
-				} else if(value &lt; SORT_NONE) {
-					value = SORT_DESCENDING;
-				} else {
-					value = SORT_NONE;
-				}
-			} else if(typeOfValue === &#x27;string&#x27;) {
-				 value = value.toLowerCase();
-				 if(value === &#x27;desc&#x27; || value === &#x27;descending&#x27;) {
-				 	value = SORT_DESCENDING;
-				 } else if (value === &#x27;asc&#x27; || value === &#x27;ascending&#x27;) {
-				 	value = SORT_ASCENDING;
-				 } else {
-				 	value = SORT_NONE;
-				 }
-			}
+	sortDirection: &#x27;none&#x27;,
 
-			this._sortDirection = value;
+	/**
+		Gets or sets whether to use a natural sort.
+		@property sortNatural
+		@type Boolean
+		@default false
+	*/
+	sortNatural: false,
+
+	/**
+		The numeric value of &#x60;sortDirection&#x60;
+		@property direction
+		@type number
+		@readonly
+	*/
+	direction: function(){
+		var sortDirection = this.get(&#x27;sortDirection&#x27;);
+		sortDirection = &#x27;string&#x27; === typeof sortDirection ? sortDirection.toLowerCase() : &#x27;&#x27;;
+		
+		if(sortDirection === &#x27;asc&#x27; || sortDirection === &#x27;ascending&#x27; || sortDirection === 1) {
+			return 1;
+		}
+		
+		if(sortDirection === &#x27;desc&#x27; || sortDirection === &#x27;descending&#x27; || sortDirection === -1) {
+			return -1;
 		}
 
-		return this._sortDirection || 0;
-	}.property(),
+		return 0;
+	}.property(&#x27;sortDirection&#x27;),
 
 	/**
 		Gets the CSS sort class to be applied to the column
@@ -234,7 +229,7 @@ export default Ember.Component.extend({
 		    console.log(column.get(&#x27;sortClass&#x27;)); // nf-sort-ascending
 	*/
 	sortClass: function() {
-		var dir = this.get(&#x27;sortDirection&#x27;);
+		var dir = this.get(&#x27;direction&#x27;);
 		return &#x27;nf-sort-&#x27; + ([&#x27;descending&#x27;, &#x27;none&#x27;, &#x27;ascending&#x27;][dir+1]);
 	}.property(&#x27;sortDirection&#x27;),
 

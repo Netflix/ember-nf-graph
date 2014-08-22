@@ -73,8 +73,6 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
-                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
-            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -152,8 +150,7 @@ import Ember from &#x27;ember&#x27;;
 import multiSort from &#x27;../utils/multi-sort&#x27;;
 import TableColumnRegistrar from &#x27;../mixins/table-column-registrar&#x27;;
 import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
-
-/**
+import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; /**
 	Composable table component with built-in sorting
 	
 	### Basic Example
@@ -362,14 +359,28 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@private
 	*/
 	sortMap: function(){
-		return this.get(&#x27;columns&#x27;).filter(function(col) {
-			return col.get(&#x27;sortDirection&#x27;) &amp;&amp; col.get(&#x27;sortBy&#x27;);
-		}).map(function(col) {
-			return {
-				by: col.get(&#x27;sortBy&#x27;).replace(/^row\./, &#x27;&#x27;),
-				direction: col.get(&#x27;sortDirection&#x27;)
-			};
-		});
+		return this.get(&#x27;columns&#x27;).reduce(function(sortMap, col) {
+			var direction = col.get(&#x27;direction&#x27;);
+			if(direction) {
+				var sortBy = col.get(&#x27;sortBy&#x27;);
+				sortBy = sortBy.replace(/^row\./, &#x27;&#x27;);
+				if(sortBy) {
+					if(col.get(&#x27;sortNatural&#x27;)) {
+						sortMap.push(function(a, b){
+							var ax = Ember.get(a, sortBy);
+							var bx = Ember.get(b, sortBy);
+							return naturalCompare(ax, bx) * direction;
+						});
+					} else {
+						sortMap.push({
+							by: sortBy,
+							direction: direction,
+						});
+					}
+				}
+			}
+			return sortMap;
+		}, []);
 	}.property(&#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
 
 	/**
@@ -405,15 +416,15 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		sort: function(sortedColumn) {
 			var columns = this.get(&#x27;columns&#x27;);
 			var sortMultiple = this.get(&#x27;sortMultiple&#x27;);
-			var currentSortDir = sortedColumn.get(&#x27;sortDirection&#x27;);
+			var currentSortDir = sortedColumn.get(&#x27;direction&#x27;);
 
 			if(sortMultiple) {
-				sortedColumn.set(&#x27;sortDirection&#x27;, [0, 1, -1][currentSortDir + 1]);
+				sortedColumn.set(&#x27;sortDirection&#x27;, [&#x27;none&#x27;, &#x27;asc&#x27;, &#x27;desc&#x27;][currentSortDir + 1]);
 			} else {
 				columns.forEach(function(col) {
 					col.set(&#x27;sortDirection&#x27;, 0);
 				});
-				sortedColumn.set(&#x27;sortDirection&#x27;, [1, 1, -1][currentSortDir + 1]);
+				sortedColumn.set(&#x27;sortDirection&#x27;, [&#x27;asc&#x27;, &#x27;asc&#x27;, &#x27;desc&#x27;][currentSortDir + 1]);
 			}
 		},
 

@@ -73,8 +73,6 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
-                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
-            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -208,12 +206,14 @@ export default function parsePropertyExpression(expr) {
   return function(obj){
     var i, next;
     var result = obj[tokens[0]];
-    for(i = 1; i &lt; tokens.length; i++) {
-      next = result[tokens[i]];
-      if(typeof next !== &#x27;object&#x27;) {
-        return next;
+    if(result) {
+      for(i = 1; i &lt; tokens.length; i++) {
+        next = result[tokens[i]];
+        if(typeof next !== &#x27;object&#x27;) {
+          return next;
+        }
+        result = next;
       }
-      result = next;
     }
     return result;
   };

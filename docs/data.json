@@ -194,13 +194,9 @@
         "app-addon/components/nf-table.js": {
             "name": "app-addon/components/nf-table.js",
             "modules": {},
-            "classes": {
-                "components.nf-table": 1
-            },
+            "classes": {},
             "fors": {},
-            "namespaces": {
-                "components": 1
-            }
+            "namespaces": {}
         },
         "app-addon/components/nf-vertical-line.js": {
             "name": "app-addon/components/nf-vertical-line.js",
@@ -377,7 +373,6 @@
                 "components.nf-right-tick": 1,
                 "components.nf-selection-box": 1,
                 "components.nf-table-group": 1,
-                "components.nf-table": 1,
                 "components.nf-vertical-line": 1,
                 "components.nf-x-axis": 1,
                 "components.nf-y-axis": 1,
@@ -485,7 +480,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-column.js",
-            "line": 4,
+            "line": 3,
             "description": "A column class to support `nf-table`",
             "extends": "Ember.Component"
         },
@@ -698,24 +693,6 @@
             "file": "app-addon/components/nf-table-group.js",
             "line": 4,
             "description": "A component for defining a grouping row on an `nf-table`.",
-            "uses": [
-                "mixins.table-column-registrar"
-            ]
-        },
-        "components.nf-table": {
-            "name": "components.nf-table",
-            "shortname": "components.nf-table",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "utils/nf/array-helpers",
-            "namespace": "components",
-            "file": "app-addon/components/nf-table.js",
-            "line": 6,
-            "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n      {{#nf-table rows=myData}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tFoo\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tBar\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nThe example above will create a sortable table from an array `myData` containing objects\nwith fields `foo` and `bar`.\n\n### Grouped Example\n\nIf you wish to create a \"grouped table\", you simply need to group the data with the `groupBy`\nproperty.\n\nAdditionally, you can add grouping rows with the `{{nf-table-group}}` component, which allows you\nto define the columns for the group rows. If you do this, you will need to create an ArrayController\nfor the group that will carry with it any computed properties you might need, such as a sum or average\naggregated over the group.\n\n\t\t\t{{#nf-table rows=myData groupBy=\"baz\"}}\n\t\t\t\t\n\t\t\t\t{{#nf-table-group itemController=\"my-group-controller\"}}\n\t\t\t\t\t\n\t\t\t\t\t{{#nf-column}}\n\t\t\t\t\t\t{{#nf-cell colspan=\"2\"}}\n\t\t\t\t\t\t\tBaz = {{group.groupValue}}\n\t\t\t\t\t\t{{/nf-cell}}\n\t\t\t\t\t{{/nf-column}}\n\n\t\t\t\t{{/nf-table-group}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tFoo\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      \t\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \tBar\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\n### Styling\n\nnf-table emits a `<table>` with a class of `nf-table` applied to it.",
-            "extends": "Ember.Component",
             "uses": [
                 "mixins.table-column-registrar"
             ]
@@ -1048,7 +1025,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 12,
+            "line": 11,
             "description": "used so child components `nf-cell` and `nf-header` can find this component\nand register themselves.",
             "itemtype": "property",
             "name": "isDataTableColumn",
@@ -1060,12 +1037,12 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 24,
-            "description": "Gets or sets the sort direction for the column.\n\nAs a convenence, it accepts either a numeric or string value, and \ncoerces it into the appropriate numeric value.\n\nAlways returns a numeric value\n\n|short|long|numeric|actual|\n|:--|:--|--:|--:|\n|asc|ascending|1|1|\n|desc|descending|-1|-1|\n|none|(any other string)|0|0|",
+            "line": 21,
+            "description": "Gets or sets the sort direction for the column.\n\nAs a convenence, it accepts either a numeric or string value.\n\n|short|long|numeric|\n|:--|:--|--:|\n|asc|ascending|1|\n|desc|descending|-1|\n|none|(any other string)|0|",
             "itemtype": "property",
             "name": "sortDirection",
-            "type": "Number",
-            "default": "0",
+            "type": "String",
+            "default": "'none'",
             "example": [
                 "\n\n     {{#nf-column sortDirection=\"asc\"}}"
             ],
@@ -1074,7 +1051,29 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 73,
+            "line": 41,
+            "description": "Gets or sets whether to use a natural sort.",
+            "itemtype": "property",
+            "name": "sortNatural",
+            "type": "Boolean",
+            "default": "false",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 49,
+            "description": "The numeric value of `sortDirection`",
+            "itemtype": "property",
+            "name": "direction",
+            "type": "number",
+            "readonly": "",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 70,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",
@@ -2751,40 +2750,40 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 91,
+            "line": 90,
             "description": "Property used by child components to locate the table component.",
             "itemtype": "property",
             "name": "isTable",
             "type": "Boolean",
             "default": "true",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 99,
+            "line": 98,
             "description": "Gets the nf-table-group component if one is present.",
             "itemtype": "property",
             "name": "tableGroup",
             "type": "components.nf-table-group",
             "default": "null",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 107,
+            "line": 106,
             "description": "The expression used to locate the values in the rows to group by.",
             "itemtype": "property",
             "name": "groupBy",
             "type": "String",
             "default": "null",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 115,
+            "line": 114,
             "description": "Gets whether or not to use the grouped table layout",
             "itemtype": "property",
             "name": "useGroupedTableLayout",
@@ -2792,78 +2791,78 @@
             "access": "private",
             "tagname": "",
             "readonly": "",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 124,
+            "line": 123,
             "description": "Gets an array of grouped and sorted data, represented as an array of arrays.",
             "itemtype": "property",
             "name": "sortedGroups",
             "type": "Array",
             "readonly": "",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 185,
+            "line": 184,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
             "default": "null",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 196,
+            "line": 195,
             "description": "Gets or sets whether a multi sort is used.",
             "itemtype": "property",
             "name": "sortMultiple",
             "type": "Boolean",
             "default": "false",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 208,
+            "line": 207,
             "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
             "itemtype": "property",
             "name": "sortMap",
             "readonly": "",
             "access": "private",
             "tagname": "",
-            "class": "components.nf-table",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-table.js",
-            "line": 225,
-            "description": "A computed property returning a sorted copy of `rows`",
-            "itemtype": "property",
-            "name": "sortedRows",
-            "type": "Array",
-            "readonly": "",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
             "line": 238,
+            "description": "A computed property returning a sorted copy of `rows`",
+            "itemtype": "property",
+            "name": "sortedRows",
+            "type": "Array",
+            "readonly": "",
+            "class": "components.nf-vertical-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 251,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
             "type": "Ember.Controller",
             "readonly": "",
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 249,
+            "line": 262,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
@@ -2874,12 +2873,12 @@
                     "type": "Nf-column"
                 }
             ],
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 270,
+            "line": 283,
             "description": "Handles the cell click action and sends the appropriate action to the view.",
             "itemtype": "method",
             "name": "actions.cellClicked",
@@ -2900,7 +2899,7 @@
                     "type": "Array"
                 }
             ],
-            "class": "components.nf-table",
+            "class": "components.nf-vertical-line",
             "namespace": "components"
         },
         {
@@ -3902,6 +3901,22 @@
                     "name": "mappingFn",
                     "description": "an optional function for pulling values out of the \narray items.",
                     "type": "Function"
+                }
+            ],
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/array-helpers"
+        },
+        {
+            "file": "app-addon/utils/nf/array-helpers.js",
+            "line": 96,
+            "description": "Sorts the array \"naturally\". Meaning taking into account both\nalphabetical and numeric sorting within strings.",
+            "itemtype": "method",
+            "name": "natualSort",
+            "params": [
+                {
+                    "name": "arr",
+                    "description": "the array to sort",
+                    "type": "Array"
                 }
             ],
             "class": "utils.parse-property-expression",

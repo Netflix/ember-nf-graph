@@ -73,8 +73,6 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
-                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
-            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -156,7 +154,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-column.js.html#l4"><code>app-addon&#x2F;components&#x2F;nf-column.js:4</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-column.js.html#l3"><code>app-addon&#x2F;components&#x2F;nf-column.js:3</code></a>
         </div>
     
 
@@ -203,6 +201,13 @@
                     <ul class="index-list properties extends">
                         
                             <li class="index-item property">
+                                <a href="#property_direction">direction</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_isDataTableColumn">isDataTableColumn</a>
 
                                 
@@ -223,6 +228,13 @@
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_sortNatural">sortNatural</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -237,6 +249,51 @@
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_direction" class="property item">
+    <h3 class="name"><code>direction</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-column.js.html#l49"><code>app-addon&#x2F;components&#x2F;nf-column.js:49</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The numeric value of <code>sortDirection</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property_isDataTableColumn" class="property item">
@@ -262,7 +319,7 @@
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l12"><code>app-addon&#x2F;components&#x2F;nf-column.js:12</code></a>
+        <a href="../files/app-addon_components_nf-column.js.html#l11"><code>app-addon&#x2F;components&#x2F;nf-column.js:11</code></a>
         
         </p>
 
@@ -310,7 +367,7 @@ and register themselves.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l73"><code>app-addon&#x2F;components&#x2F;nf-column.js:73</code></a>
+        <a href="../files/app-addon_components_nf-column.js.html#l70"><code>app-addon&#x2F;components&#x2F;nf-column.js:70</code></a>
         
         </p>
 
@@ -347,7 +404,7 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
                 
                     <div id="property_sortDirection" class="property item">
     <h3 class="name"><code>sortDirection</code></h3>
-    <span class="type">Number</span>
+    <span class="type">String</span>
 
     
 
@@ -368,7 +425,7 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l24"><code>app-addon&#x2F;components&#x2F;nf-column.js:24</code></a>
+        <a href="../files/app-addon_components_nf-column.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-column.js:21</code></a>
         
         </p>
 
@@ -379,16 +436,13 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
 
     <div class="description">
         <p>Gets or sets the sort direction for the column.</p>
-<p>As a convenence, it accepts either a numeric or string value, and 
-coerces it into the appropriate numeric value.</p>
-<p>Always returns a numeric value</p>
+<p>As a convenence, it accepts either a numeric or string value.</p>
 <table>
 <thead>
 <tr>
 <th style="text-align:left">short</th>
 <th style="text-align:left">long</th>
 <th style="text-align:right">numeric</th>
-<th style="text-align:right">actual</th>
 </tr>
 </thead>
 <tbody>
@@ -396,18 +450,15 @@ coerces it into the appropriate numeric value.</p>
 <td style="text-align:left">asc</td>
 <td style="text-align:left">ascending</td>
 <td style="text-align:right">1</td>
-<td style="text-align:right">1</td>
 </tr>
 <tr>
 <td style="text-align:left">desc</td>
 <td style="text-align:left">descending</td>
 <td style="text-align:right">-1</td>
-<td style="text-align:right">-1</td>
 </tr>
 <tr>
 <td style="text-align:left">none</td>
 <td style="text-align:left">(any other string)</td>
-<td style="text-align:right">0</td>
 <td style="text-align:right">0</td>
 </tr>
 </tbody>
@@ -416,7 +467,7 @@ coerces it into the appropriate numeric value.</p>
     </div>
 
     
-        <p><strong>Default:</strong> 0</p>
+        <p><strong>Default:</strong> &#x27;none&#x27;</p>
     
 
     
@@ -428,6 +479,53 @@ coerces it into the appropriate numeric value.</p>
 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="property_sortNatural" class="property item">
+    <h3 class="name"><code>sortNatural</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-column.js.html#l41"><code>app-addon&#x2F;components&#x2F;nf-column.js:41</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether to use a natural sort.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
     
 
     
