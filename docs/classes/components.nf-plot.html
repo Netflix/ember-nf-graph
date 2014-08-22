@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-dot - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-plot - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -144,7 +144,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-dot Class</h1>
+                        <h1>components.nf-plot Class</h1>
 <div class="box meta">
     
         <div class="uses">
@@ -165,7 +165,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-dot.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-dot.js:5</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-plot.js.html#l4"><code>app-addon&#x2F;components&#x2F;nf-plot.js:4</code></a>
         </div>
     
 
@@ -181,7 +181,7 @@
 
 
 <div class="box intro">
-    <p>Plots a circle at a given x and y domain value on an <code>nf-graph</code>.</p>
+    <p>Plots a group tag on a graph at a given x and y domain coordinate.</p>
 
 </div>
 
@@ -228,20 +228,6 @@
 
                     <ul class="index-list properties extends">
                         
-                            <li class="index-item property private">
-                                <a href="#property_cx">cx</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_cy">cy</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
 
@@ -249,7 +235,7 @@
                                 
                             </li>
                         
-                            <li class="index-item property private">
+                            <li class="index-item property">
                                 <a href="#property_isVisible">isVisible</a>
 
                                 
@@ -257,7 +243,21 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_r">r</a>
+                                <a href="#property_rangeX">rangeX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_rangeY">rangeY</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_transform">transform</a>
 
                                 
                                 
@@ -352,100 +352,6 @@ and assigns it to <code>graph</code></p>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_cx" class="property item private">
-    <h3 class="name"><code>cx</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-dot.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-dot.js:42</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed center x coordinate of the circle</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_cy" class="property item private">
-    <h3 class="name"><code>cy</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-dot.js.html#l53"><code>app-addon&#x2F;components&#x2F;nf-dot.js:53</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed center y coordinate of the circle</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_graph" class="property item inherited">
     <h3 class="name"><code>graph</code></h3>
     <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
@@ -490,14 +396,12 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_isVisible" class="property item private">
+                    <div id="property_isVisible" class="property item">
     <h3 class="name"><code>isVisible</code></h3>
-    <span class="type">Unknown</span>
+    <span class="type">Boolean</span>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -515,7 +419,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-dot.js.html#l64"><code>app-addon&#x2F;components&#x2F;nf-dot.js:64</code></a>
+        <a href="../files/app-addon_components_nf-plot.js.html#l32"><code>app-addon&#x2F;components&#x2F;nf-plot.js:32</code></a>
         
         </p>
 
@@ -525,8 +429,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Toggles the visibility of the dot. If x or y are
-not numbers, will return false.</p>
+        <p>The calculated visibility of the component</p>
 
     </div>
 
@@ -538,8 +441,8 @@ not numbers, will return false.</p>
 </div>
 
                 
-                    <div id="property_r" class="property item">
-    <h3 class="name"><code>r</code></h3>
+                    <div id="property_rangeX" class="property item">
+    <h3 class="name"><code>rangeX</code></h3>
     <span class="type">Number</span>
 
     
@@ -561,7 +464,7 @@ not numbers, will return false.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-dot.js.html#l34"><code>app-addon&#x2F;components&#x2F;nf-dot.js:34</code></a>
+        <a href="../files/app-addon_components_nf-plot.js.html#l44"><code>app-addon&#x2F;components&#x2F;nf-plot.js:44</code></a>
         
         </p>
 
@@ -571,12 +474,100 @@ not numbers, will return false.</p>
     </div>
 
     <div class="description">
-        <p>The radius of the circle plotted</p>
+        <p>The calculated x coordinate</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 2.5</p>
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_rangeY" class="property item">
+    <h3 class="name"><code>rangeY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-plot.js.html#l56"><code>app-addon&#x2F;components&#x2F;nf-plot.js:56</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The calculated y coordinate</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_transform" class="property item">
+    <h3 class="name"><code>transform</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-plot.js.html#l68"><code>app-addon&#x2F;components&#x2F;nf-plot.js:68</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The SVG transform of the component&#39;s <code>&lt;g&gt;</code> tag.</p>
+
+    </div>
+
     
 
     
@@ -587,7 +578,7 @@ not numbers, will return false.</p>
                 
                     <div id="property_x" class="property item">
     <h3 class="name"><code>x</code></h3>
-    <span class="type">Number</span>
+    <span class="type">Unknown</span>
 
     
 
@@ -608,7 +599,7 @@ not numbers, will return false.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-dot.js.html#l18"><code>app-addon&#x2F;components&#x2F;nf-dot.js:18</code></a>
+        <a href="../files/app-addon_components_nf-plot.js.html#l18"><code>app-addon&#x2F;components&#x2F;nf-plot.js:18</code></a>
         
         </p>
 
@@ -618,7 +609,7 @@ not numbers, will return false.</p>
     </div>
 
     <div class="description">
-        <p>The x domain value at which to plot the circle</p>
+        <p>The x domain value to set the plot at</p>
 
     </div>
 
@@ -634,7 +625,7 @@ not numbers, will return false.</p>
                 
                     <div id="property_x" class="property item">
     <h3 class="name"><code>x</code></h3>
-    <span class="type">Number</span>
+    <span class="type">Unknown</span>
 
     
 
@@ -655,7 +646,7 @@ not numbers, will return false.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-dot.js.html#l26"><code>app-addon&#x2F;components&#x2F;nf-dot.js:26</code></a>
+        <a href="../files/app-addon_components_nf-plot.js.html#l25"><code>app-addon&#x2F;components&#x2F;nf-plot.js:25</code></a>
         
         </p>
 
@@ -665,7 +656,7 @@ not numbers, will return false.</p>
     </div>
 
     <div class="description">
-        <p>The y domain value at which to plot the circle</p>
+        <p>The y domain value to set the plot at</p>
 
     </div>
 

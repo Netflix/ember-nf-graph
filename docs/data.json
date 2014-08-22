@@ -136,6 +136,17 @@
                 "components": 1
             }
         },
+        "app-addon/components/nf-plot.js": {
+            "name": "app-addon/components/nf-plot.js",
+            "modules": {},
+            "classes": {
+                "components.nf-plot": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
         "app-addon/components/nf-range-marker.js": {
             "name": "app-addon/components/nf-range-marker.js",
             "modules": {},
@@ -368,6 +379,7 @@
                 "components.nf-header": 1,
                 "components.nf-horizontal-line": 1,
                 "components.nf-line": 1,
+                "components.nf-plot": 1,
                 "components.nf-range-marker": 1,
                 "components.nf-range-markers": 1,
                 "components.nf-right-tick": 1,
@@ -608,6 +620,24 @@
                 "mixins.graph-graphic-with-tracking-dot"
             ]
         },
+        "components.nf-plot": {
+            "name": "components.nf-plot",
+            "shortname": "components.nf-plot",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-plot.js",
+            "line": 4,
+            "description": "Plots a group tag on a graph at a given x and y domain coordinate.",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-has-graph-parent"
+            ]
+        },
         "components.nf-range-marker": {
             "name": "components.nf-range-marker",
             "shortname": "components.nf-range-marker",
@@ -844,6 +874,7 @@
                 "components.nf-graph-content",
                 "components.nf-horizontal-line",
                 "components.nf-line",
+                "components.nf-plot",
                 "components.nf-range-marker",
                 "components.nf-range-markers",
                 "components.nf-right-tick",
@@ -2258,6 +2289,70 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 18,
+            "description": "The x domain value to set the plot at",
+            "itemtype": "property",
+            "name": "x",
+            "default": "null",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 25,
+            "description": "The y domain value to set the plot at",
+            "itemtype": "property",
+            "name": "x",
+            "default": "null",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 32,
+            "description": "The calculated visibility of the component",
+            "itemtype": "property",
+            "name": "isVisible",
+            "type": "Boolean",
+            "readonly": "",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 44,
+            "description": "The calculated x coordinate",
+            "itemtype": "property",
+            "name": "rangeX",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 56,
+            "description": "The calculated y coordinate",
+            "itemtype": "property",
+            "name": "rangeY",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 68,
+            "description": "The SVG transform of the component's `<g>` tag.",
+            "itemtype": "property",
+            "name": "transform",
+            "type": "String",
+            "readonly": "",
+            "class": "components.nf-plot",
             "namespace": "components"
         },
         {

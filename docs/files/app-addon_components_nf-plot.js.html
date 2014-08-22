@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-range-markers.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-plot.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -144,101 +144,86 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-range-markers.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-plot.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
-	A container and manager for &#x60;nf-range-marker&#x60; components.
-	Used to draw an association between &#x60;nf-range-marker&#x60; components so they 
-	can be laid out in a manner in which they don&#x27;t collide.
+	Plots a group tag on a graph at a given x and y domain coordinate.
 	@namespace components
-	@class nf-range-markers
+	@class nf-plot
 	@extends Ember.Component
-  @uses mixins.graph-has-graph-parent
+	@uses mixins.graph-has-graph-parent
 */
 export default Ember.Component.extend(HasGraphParent, {
 	tagName: &#x27;g&#x27;,
-	
+
+	attributeBindings: [&#x27;transform&#x27;],
+
+	classNames: [&#x27;nf-plot&#x27;],
+
 	/**
-		Used by &#x60;nf-range-marker&#x60; to identify the &#x60;nf-range-markers&#x60; container
-		@property isRangeMarkerContainer
+		The x domain value to set the plot at
+		@property x
+		@default null
+	*/
+	x: null,
+
+	/**
+		The y domain value to set the plot at
+		@property x
+		@default null
+	*/
+	y: null,
+
+	/**
+		The calculated visibility of the component
+		@property isVisible
 		@type Boolean
-		@default true
 		@readonly
 	*/
-	isRangeMarkerContainer: true,
+	isVisible: function(){
+		var x = this.get(&#x27;x&#x27;);
+		var y = this.get(&#x27;y&#x27;);
+		return !(isNaN(x) &amp;&amp; isNaN(y));
+	}.property(&#x27;x&#x27;, &#x27;y&#x27;),
 
 	/**
-		Sets the orientation of the range markers.
-
-		- &#x60;&#x27;bottom&#x27;&#x60; - Range markers start at the bottom and stack upward
-		- &#x60;&#x27;top&#x27;&#x60; - Range markers start at the top and stack downward
-		@property orient
-		@type String
-		@default &#x27;bottom&#x27;
-	*/
-	orient: &#x27;bottom&#x27;,
-
-	/**
-		The margin, in pixels, between the markers
-		@property markerMargin
+		The calculated x coordinate
+		@property rangeX
 		@type Number
-		@default 10
-	*/
-	markerMargin: 10,
-
-	/**
-		The marker components registered with this container
-		@property markers
-		@type Array
 		@readonly
 	*/
-	markers: property(function(){
-		return [];
-	}),
+	rangeX: function(){
+		var xScale = this.get(&#x27;graph.xScale&#x27;);
+		var x = this.get(&#x27;x&#x27;);
+		return (xScale ? xScale(x) : 0) || 0;
+	}.property(&#x27;x&#x27;, &#x27;graph.xScale&#x27;),
 
 	/**
-		Adds the passed marker to the &#x60;markers&#x60; list, and sets the &#x60;prevMarker&#x60; and &#x60;nextMarker&#x60;
-		properties on the marker component and it&#x27;s neighbor.
-		@method registerMarker
-		@param marker {nf-range-marker} the range marker to register with this container
+		The calculated y coordinate
+		@property rangeY
+		@type Number
+		@readonly
 	*/
-	registerMarker: function(marker) {
-		var markers = this.get(&#x27;markers&#x27;);
-		var prevMarker = markers[markers.length - 1];
-		
-		if(prevMarker) {
-			marker.set(&#x27;prevMarker&#x27;, prevMarker);
-			prevMarker.set(&#x27;nextMarker&#x27;, marker);
-		}
-
-		markers.pushObject(marker);
-	},
+	rangeY: function(){
+		var yScale = this.get(&#x27;graph.yScale&#x27;);
+		var y = this.get(&#x27;y&#x27;);
+		return (yScale ? yScale(y) : 0) || 0;
+	}.property(&#x27;y&#x27;, &#x27;graph.yScale&#x27;),
 
 	/**
-		Removes the marker from the &#x60;markers&#x60; list. Also updates the &#x60;nextMarker&#x60; and &#x60;prevMarker&#x60;
-		properties of it&#x27;s neighboring components.
-		@method unregisterMarker
-		@param marker {nf-range-marker} the range marker to remove from the &#x60;markers&#x60; list.
+		The SVG transform of the component&#x27;s &#x60;&lt;g&gt;&#x60; tag.
+		@property transform
+		@type String
+		@readonly
 	*/
-	unregisterMarker: function(marker) {
-		if(marker) {
-			var next = marker.nextMarker;
-			var prev = marker.prevMarker;
-			if(prev) {
-				prev.set(&#x27;nextMarker&#x27;, next);
-			}
-			if(next) {
-				next.set(&#x27;prevMarker&#x27;, prev);
-			}
-			this.get(&#x27;markers&#x27;).removeObject(marker);
-		}
-	},
+	transform: function(){
+		return &#x27;translate(%@ %@)&#x27;.fmt(this.get(&#x27;rangeX&#x27;), this.get(&#x27;rangeY&#x27;));
+	}.property(&#x27;rangeX&#x27;, &#x27;rangeY&#x27;),
 });
     </pre>
 </div>

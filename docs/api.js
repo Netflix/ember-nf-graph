@@ -13,6 +13,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-header",
         "components.nf-horizontal-line",
         "components.nf-line",
+        "components.nf-plot",
         "components.nf-range-marker",
         "components.nf-range-markers",
         "components.nf-right-tick",
