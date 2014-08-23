@@ -3,7 +3,7 @@
   "ember-addon": {
     "main": "ember-cli-addon.js"
   },
-  "version": "0.3.20",
+  "version": "0.3.21",
   "private": true,
   "directories": {
     "doc": "doc",
