@@ -74,4 +74,22 @@ export default Ember.Component.extend(HasGraphParent, {
 	transform: function(){
 		return 'translate(%@ %@)'.fmt(this.get('rangeX'), this.get('rangeY'));
 	}.property('rangeX', 'rangeY'),
+
+	data: null,
+
+	click: function(e) {
+		var props = this.getProperties('x', 'y', 'element', 'data');
+		Ember.mixin(props, { originalEvent: e });
+		var context = this.get('graph').createActionContext(props.x, props.y, props);
+		this.sendAction('action', context);
+	},
 });
+
+
+
+
+
+
+
+
+

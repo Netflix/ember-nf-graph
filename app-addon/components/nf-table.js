@@ -2,7 +2,9 @@ import Ember from 'ember';
 import multiSort from '../utils/multi-sort';
 import TableColumnRegistrar from '../mixins/table-column-registrar';
 import parsePropExpr from '../utils/parse-property-expression';
-import { naturalCompare } from '../utils/nf/array-helpers'; /**
+import { naturalCompare } from '../utils/nf/array-helpers'; 
+
+/**
 	Composable table component with built-in sorting
 	
 	### Basic Example
@@ -54,7 +56,7 @@ import { naturalCompare } from '../utils/nf/array-helpers'; /**
 
 					{{/nf-table-group}}
 
-	      	{{#nf-column sortField="foo"}}
+	      	{{#nf-column sortBy="foo"}}
 	      	  {{nf-header}}
 	      	  	Foo
 	      	  {{/nf-header}}
@@ -63,7 +65,7 @@ import { naturalCompare } from '../utils/nf/array-helpers'; /**
 	      	  {{/nf-cell}}
 	      	{{/nf-column}}
 	      	
-	      	{{#nf-column sortField="foo"}}
+	      	{{#nf-column sortBy="foo"}}
 	      	  {{nf-header}}
 	      	  	Bar
 	      	  {{/nf-header}}

@@ -26,9 +26,25 @@ export default Ember.ObjectController.extend({
 			area.pushObject({ x: last.x + 1, y: last.y });
 		},
 
-		showData: function(data) {
-			console.log(data);
-			this.set('shownData', data);
+		showData: function(e) {
+			$('.test-div').remove();
+			var testDiv = $('<div class="test-div"/>');
+
+			testDiv.css({
+				width: 'auto',
+				height: 'auto',
+				padding: '10px',
+				background: 'white',
+				position: 'absolute',
+				top: e.pagePosition.y + 'px',
+				left: e.pagePosition.x + 'px',
+			});
+
+			testDiv.text(e.data.y);
+
+			testDiv.appendTo('body');
+
+			console.log('showData', e);
 		},
 	}
 });

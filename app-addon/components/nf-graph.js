@@ -973,4 +973,44 @@ export default Ember.Component.extend({
     this.set('graphics', []);
     this.set('selected', this.selectMultiple ? [] : null);
   }.on('init'),
+
+  /**
+    Builds an action context to send to the controller.
+    @method createActionContext
+    @param x Domain value x
+    @param y Domain value y
+    @param context {Object} additional context to mixin to the result
+    @return {Object} a context to send with `sendAction`
+    @private
+  */
+  createActionContext: function(x, y, context){
+    var self = this;
+    var xScale = this.get('xScale');
+    var yScale = this.get('yScale');
+    var graphOffset = this.$().offset();
+    var positionX = xScale ? xScale(x) : NaN;
+    var positionY = yScale ? yScale(y) : NaN;
+    var graphX = this.get('graphX');
+    var graphY = this.get('graphY');
+    var offsetX = positionX + graphX + graphOffset.left;
+    var offsetY = positionY + graphY + graphOffset.top;
+
+    context = context || {};
+
+    Ember.mixin(context, {
+      x: x,
+      y: y,
+      pagePosition: {
+        x: offsetX,
+        y: offsetY,
+      },
+      graphPosition: {
+        x: graphX,
+        y: graphY,
+      },
+      graph: self,
+    });
+
+    return context;
+  },
 });

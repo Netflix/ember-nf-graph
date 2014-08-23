@@ -18,6 +18,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-range-markers",
         "components.nf-right-tick",
         "components.nf-selection-box",
+        "components.nf-table",
         "components.nf-table-group",
         "components.nf-vertical-line",
         "components.nf-x-axis",

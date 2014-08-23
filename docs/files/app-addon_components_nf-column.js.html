@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -171,14 +173,12 @@ export default Ember.Component.extend({
 	/**
 		Gets or sets the sort direction for the column.
 
-		As a convenence, it accepts either a numeric or string value.
+		Possible Values:
 
-		|short|long|numeric|
-		|:--|:--|--:|
-		|asc|ascending|1|
-		|desc|descending|-1|
-		|none|(any other string)|0|
-
+		- &#x60;&#x27;asc&#x27;&#x60; - sort ascending.
+		- &#x60;&#x27;desc&#x27;&#x60; - sort descending.
+		- &#x60;&#x27;none&#x27;&#x60; - (or any other value) no sort.
+		
 		@property sortDirection
 		@type String
 		@default &#x27;none&#x27;
@@ -206,11 +206,11 @@ export default Ember.Component.extend({
 		var sortDirection = this.get(&#x27;sortDirection&#x27;);
 		sortDirection = &#x27;string&#x27; === typeof sortDirection ? sortDirection.toLowerCase() : &#x27;&#x27;;
 		
-		if(sortDirection === &#x27;asc&#x27; || sortDirection === &#x27;ascending&#x27; || sortDirection === 1) {
+		if(sortDirection === &#x27;asc&#x27;) {
 			return 1;
 		}
 		
-		if(sortDirection === &#x27;desc&#x27; || sortDirection === &#x27;descending&#x27; || sortDirection === -1) {
+		if(sortDirection === &#x27;desc&#x27;) {
 			return -1;
 		}
 

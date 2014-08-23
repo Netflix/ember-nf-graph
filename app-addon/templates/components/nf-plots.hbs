@@ -1,5 +1,5 @@
 {{#each item in plotData}}
-	{{#nf-plot x=item.x y=item.y}}
+	{{#nf-plot x=item.x y=item.y action='itemClicked' data=item.data}}
 		{{view Ember.View tagName="g" template=template controller=parentController}}
 	{{/nf-plot}}
 {{/each}}

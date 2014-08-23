@@ -21,14 +21,12 @@ export default Ember.Component.extend({
 	/**
 		Gets or sets the sort direction for the column.
 
-		As a convenence, it accepts either a numeric or string value.
+		Possible Values:
 
-		|short|long|numeric|
-		|:--|:--|--:|
-		|asc|ascending|1|
-		|desc|descending|-1|
-		|none|(any other string)|0|
-
+		- `'asc'` - sort ascending.
+		- `'desc'` - sort descending.
+		- `'none'` - (or any other value) no sort.
+		
 		@property sortDirection
 		@type String
 		@default 'none'
@@ -56,11 +54,11 @@ export default Ember.Component.extend({
 		var sortDirection = this.get('sortDirection');
 		sortDirection = 'string' === typeof sortDirection ? sortDirection.toLowerCase() : '';
 		
-		if(sortDirection === 'asc' || sortDirection === 'ascending' || sortDirection === 1) {
+		if(sortDirection === 'asc') {
 			return 1;
 		}
 		
-		if(sortDirection === 'desc' || sortDirection === 'descending' || sortDirection === -1) {
+		if(sortDirection === 'desc') {
 			return -1;
 		}
 

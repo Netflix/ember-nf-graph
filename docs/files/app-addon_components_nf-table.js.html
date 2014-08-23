@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -152,7 +154,9 @@ import Ember from &#x27;ember&#x27;;
 import multiSort from &#x27;../utils/multi-sort&#x27;;
 import TableColumnRegistrar from &#x27;../mixins/table-column-registrar&#x27;;
 import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
-import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; /**
+import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; 
+
+/**
 	Composable table component with built-in sorting
 	
 	### Basic Example
@@ -204,7 +208,7 @@ import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; /**
 
 					{{/nf-table-group}}
 
-	      	{{#nf-column sortField=&quot;foo&quot;}}
+	      	{{#nf-column sortBy=&quot;foo&quot;}}
 	      	  {{nf-header}}
 	      	  	Foo
 	      	  {{/nf-header}}
@@ -213,7 +217,7 @@ import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; /**
 	      	  {{/nf-cell}}
 	      	{{/nf-column}}
 	      	
-	      	{{#nf-column sortField=&quot;foo&quot;}}
+	      	{{#nf-column sortBy=&quot;foo&quot;}}
 	      	  {{nf-header}}
 	      	  	Bar
 	      	  {{/nf-header}}

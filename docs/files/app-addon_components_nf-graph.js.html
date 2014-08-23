@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -1123,6 +1125,46 @@ export default Ember.Component.extend({
     this.set(&#x27;graphics&#x27;, []);
     this.set(&#x27;selected&#x27;, this.selectMultiple ? [] : null);
   }.on(&#x27;init&#x27;),
+
+  /**
+    Builds an action context to send to the controller.
+    @method createActionContext
+    @param x Domain value x
+    @param y Domain value y
+    @param context {Object} additional context to mixin to the result
+    @return {Object} a context to send with &#x60;sendAction&#x60;
+    @private
+  */
+  createActionContext: function(x, y, context){
+    var self = this;
+    var xScale = this.get(&#x27;xScale&#x27;);
+    var yScale = this.get(&#x27;yScale&#x27;);
+    var graphOffset = this.$().offset();
+    var positionX = xScale ? xScale(x) : NaN;
+    var positionY = yScale ? yScale(y) : NaN;
+    var graphX = this.get(&#x27;graphX&#x27;);
+    var graphY = this.get(&#x27;graphY&#x27;);
+    var offsetX = positionX + graphX + graphOffset.left;
+    var offsetY = positionY + graphY + graphOffset.top;
+
+    context = context || {};
+
+    Ember.mixin(context, {
+      x: x,
+      y: y,
+      pagePosition: {
+        x: offsetX,
+        y: offsetY,
+      },
+      graphPosition: {
+        x: graphX,
+        y: graphY,
+      },
+      graph: self,
+    });
+
+    return context;
+  },
 });
 
     </pre>

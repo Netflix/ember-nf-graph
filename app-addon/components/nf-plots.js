@@ -11,7 +11,6 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, {
 
 	plotData: function(){
 		var renderedData = this.get('renderedData');
-
 		if(renderedData && Ember.isArray(renderedData)) {
 			return renderedData.map(function(d) {
 				return {
@@ -22,4 +21,11 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, {
 			});
 		}
 	}.property('renderedData.@each'),
+
+
+	actions: {
+		itemClicked: function(e) {
+			this.sendAction('action', e);
+		},
+	},
 });

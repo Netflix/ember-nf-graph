@@ -75,6 +75,8 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+            
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
             
                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
@@ -224,7 +226,26 @@ export default Ember.Component.extend(HasGraphParent, {
 	transform: function(){
 		return &#x27;translate(%@ %@)&#x27;.fmt(this.get(&#x27;rangeX&#x27;), this.get(&#x27;rangeY&#x27;));
 	}.property(&#x27;rangeX&#x27;, &#x27;rangeY&#x27;),
+
+	data: null,
+
+	click: function(e) {
+		var props = this.getProperties(&#x27;x&#x27;, &#x27;y&#x27;, &#x27;element&#x27;, &#x27;data&#x27;);
+		Ember.mixin(props, { originalEvent: e });
+		var context = this.get(&#x27;graph&#x27;).createActionContext(props.x, props.y, props);
+		this.sendAction(&#x27;action&#x27;, context);
+	},
 });
+
+
+
+
+
+
+
+
+
+
     </pre>
 </div>
 
