@@ -365,6 +365,15 @@
                 "utils.nf": 1
             }
         },
+        "app-addon/utils/nf/svg-dom.js": {
+            "name": "app-addon/utils/nf/svg-dom.js",
+            "modules": {
+                "utils/nf/svg-dom": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "app-addon/utils/parse-property-expression.js": {
             "name": "app-addon/utils/parse-property-expression.js",
             "modules": {},
@@ -413,12 +422,24 @@
                 "mixins.graph-line-utils": 1,
                 "mixins.graph-registered-graphic": 1,
                 "mixins.graph-selectable-graphic": 1,
-                "utils.nf.nf-graph-action-context": 1,
+                "utils.nf.nf-graph-action-context": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            },
+            "tag": "module",
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 3
+        },
+        "utils/nf/svg-dom": {
+            "name": "utils/nf/svg-dom",
+            "submodules": {},
+            "classes": {
                 "utils.parse-property-expression": 1
             },
             "fors": {},
             "namespaces": {
-                "utils.nf": 1,
                 "utils": 1
             },
             "tag": "module",
@@ -998,7 +1019,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "utils/nf/array-helpers",
+            "module": "utils/nf/svg-dom",
             "namespace": "utils",
             "file": "app-addon/utils/parse-property-expression.js",
             "line": 1,
@@ -2259,6 +2280,11 @@
                     "name": "data",
                     "description": "item data for the event.",
                     "type": "Object"
+                },
+                {
+                    "name": "originalEvent",
+                    "description": "the original event object, if there is one.",
+                    "type": "Event"
                 }
             ],
             "return": {
@@ -4222,6 +4248,40 @@
             "namespace": "utils.nf"
         },
         {
+            "file": "app-addon/utils/nf/svg-dom.js",
+            "line": 5,
+            "description": "Traverses an element and all of its descendants, setting their\ninline style property to whatever the computed style is.",
+            "itemtype": "method",
+            "name": "inlineAllStyles",
+            "params": [
+                {
+                    "name": "element",
+                    "description": "the dom element to traverse.",
+                    "type": "Element"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/svg-dom"
+        },
+        {
+            "file": "app-addon/utils/nf/svg-dom.js",
+            "line": 28,
+            "description": "Renders an SVG element to a Base64 encoded data URI.",
+            "itemtype": "method",
+            "name": "svgToImageUrl",
+            "params": [
+                {
+                    "name": "svg",
+                    "description": "the svg element to render",
+                    "type": "SVGSVGElement"
+                }
+            ],
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/svg-dom"
+        },
+        {
             "file": "app-addon/utils/parse-property-expression.js",
             "line": 24,
             "itemtype": "method",
@@ -4238,7 +4298,7 @@
                 "type": "Function"
             },
             "class": "utils.parse-property-expression",
-            "module": "utils/nf/array-helpers",
+            "module": "utils/nf/svg-dom",
             "namespace": "utils"
         }
     ],

@@ -36,12 +36,17 @@ YUI.add("yuidoc-meta", function(Y) {
         "utils.parse-property-expression"
     ],
     "modules": [
-        "utils_nf_array-helpers"
+        "utils_nf_array-helpers",
+        "utils_nf_svg-dom"
     ],
     "allModules": [
         {
             "displayName": "utils/nf/array-helpers",
             "name": "utils_nf_array-helpers"
+        },
+        {
+            "displayName": "utils/nf/svg-dom",
+            "name": "utils_nf_svg-dom"
         }
     ]
 } };

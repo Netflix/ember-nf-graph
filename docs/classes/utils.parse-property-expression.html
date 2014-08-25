@@ -113,6 +113,8 @@
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
+                <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
+            
             </ul>
         </div>
     </div>
@@ -162,7 +164,7 @@
 
     
         
-            Module: <a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a>
+            Module: <a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a>
         
     
 
@@ -213,6 +215,20 @@ path cannot be reached.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_default">default</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_inlineAllStyles">inlineAllStyles</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_svgToImageUrl">svgToImageUrl</a>
 
                                 
                                 
@@ -335,6 +351,187 @@ will locate the value at the end of the expressed path.</p>
                 
             </div>
         </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_inlineAllStyles" class="method item private">
+    <h3 class="name"><code>inlineAllStyles</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>element</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_svg-dom.js.html#l5"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;svg-dom.js:5</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Traverses an element and all of its descendants, setting their
+inline style property to whatever the computed style is.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">element</code>
+                        <span class="type">Element</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the dom element to traverse.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_svgToImageUrl" class="method item">
+    <h3 class="name"><code>svgToImageUrl</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>svg</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_svg-dom.js.html#l28"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;svg-dom.js:28</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Renders an SVG element to a Base64 encoded data URI.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">svg</code>
+                        <span class="type">SVGSVGElement</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the svg element to render</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
     
 
     

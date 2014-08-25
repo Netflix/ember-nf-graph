@@ -113,6 +113,8 @@
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
+                <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
+            
             </ul>
         </div>
     </div>
@@ -233,7 +235,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	click: function(e) {
 		var props = this.getProperties(&#x27;x&#x27;, &#x27;y&#x27;, &#x27;element&#x27;, &#x27;data&#x27;);
-		var context = this.get(&#x27;graph&#x27;).createActionContext(props.x, props.y, this, props.data);
+		var context = this.get(&#x27;graph&#x27;).createActionContext(props.x, props.y, this, props.data, e);
 		this.sendAction(&#x27;action&#x27;, context);
 	},
 });

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-area-stack.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/svg-dom.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -150,95 +150,79 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-area-stack.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/svg-dom.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+/**
+  @module utils/nf/svg-dom
+*/
 
 /**
-	A component for grouping and stacking &#x60;nf-area&#x60; components in an &#x60;nf-graph&#x60;.
-	
-	This component looks at the order of the &#x60;nf-area&#x60; components underneath it 
-	and uses the ydata of the next sibling &#x60;nf-area&#x60; component to determine the bottom 
-	of each &#x60;nf-area&#x60; components path to be drawn.
-
-	### Example
-
-	 		{{#nf-graph width=300 height=100}}
-	 			{{#nf-graph-content}}
-	 				{{#nf-area-stack}}
-	 					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;high&quot;}}
-	 					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;med&quot;}}
-	 					{{nf-area data=myData xprop=&quot;time&quot; yprop=&quot;low&quot;}}
-	 				{{/nf-area-stack}}
-	 			{{/nf-graph-content}}
-	 		{{/nf-graph}}
-
-	@namespace components
-	@class nf-area-stack 
+  Traverses an element and all of its descendants, setting their
+  inline style property to whatever the computed style is.
+  @method inlineAllStyles
+  @param element {Element} the dom element to traverse.
+  @private
 */
-export default Ember.Component.extend({
-	tagName: &#x27;g&#x27;,
+function inlineAllStyles(element) {
+  var styles = getComputedStyle(element);
+  for(var key in styles) {
+    if(styles.hasOwnProperty(key)) {
+      element.style[key] = styles[key];
+    }
+  }
+  
+  for(var i = 0; i &lt; element.childNodes.length; i++) {
+    var node = element.childNodes[i];
+    if(node.nodeType === 1) {
+      inlineAllStyles(node);
+    }
+  }
+}
 
-	/**
-		Used by &#x60;nf-area&#x60; to identify an area stack parent
-		@property isAreaStack
-		@type Boolean
-		@default true
-		@readonly
-  */
-	isAreaStack: true,
+/**
+  Renders an SVG element to a Base64 encoded data URI.
+  @method svgToImageUrl
+  @param svg {SVGSVGElement} the svg element to render
+*/
+export function svgToImageUrl(svg, callback) {
+  var clone = svg.cloneNode(true);
+  var parent = svg.parentElement;
+  
+  var canvas = document.createElement(&#x27;canvas&#x27;);
+  canvas.setAttribute(&#x27;width&#x27;, svg.getAttribute(&#x27;width&#x27;));
+  canvas.setAttribute(&#x27;height&#x27;, svg.getAttribute(&#x27;height&#x27;));
+  var context = canvas.getContext(&#x27;2d&#x27;);
+  
+  parent.insertBefore(clone, svg);
+  clone.setAttribute(&#x27;xmlns&#x27;, &#x27;http://www.w3.org/2000/svg&#x27;);
 
-	/**
-		The collection of &#x60;nf-area&#x60; components under this stack.
-		@property areas
-		@type Array
-		@readonly
-	*/
-	areas: function(){
-		return [];
-	}.property(),
+  inlineAllStyles(clone);
+  
+  var img = new Image();  
+  var blob = new Blob([clone.outerHTML], { type: &#x27;image/svg+xml;charset=utf-8&#x27; });
+  clone.remove();
+  var url = URL.createObjectURL(blob);
+  
+  img.onload = function(){
+    context.drawImage(img, 0, 0);
+    URL.revokeObjectURL(url);
+    if(callback) {
+      callback(canvas.toDataURL());
+    }
+    canvas.remove();
+  };
+  
+  img.src = url;  
+}
 
-	/**
-		Registers an area component with this stack. Also links areas to one
-		another by setting &#x60;nextArea&#x60; on each area component.
-		@method registerArea
-		@param area {Ember.Component} The area component to register.
-	*/
-	registerArea: function(area) {
-		var areas = this.get(&#x27;areas&#x27;);
-		var prev = areas[areas.length - 1];
-		
-		if(prev) {
-			prev.set(&#x27;nextArea&#x27;, area);
-			area.set(&#x27;prevArea&#x27;, prev);
-		}
-		
-		areas.pushObject(area);
-	},
-
-	/**
-		Unregisters an area component from this stack. Also updates next
-		and previous links.
-		@method unregisterArea
-		@param area {Ember.Component} the area to unregister
-	*/
-	unregisterArea: function(area) {
-		var prev = area.get(&#x27;prevArea&#x27;);
-		var next = area.get(&#x27;nextArea&#x27;);
-
-		if(next) {
-			next.set(&#x27;prevArea&#x27;, prev);
-		}
-		
-		if(prev) {
-			prev.set(&#x27;nextArea&#x27;, next);
-		}
-
-		this.get(&#x27;areas&#x27;).removeObject(area);
-	},
-});
+export function downloadSvg(svg) {
+  svgToImageUrl(svg, function(url) {
+    var dlUrl = url.replace(&#x27;image/png&#x27;, &#x27;image/octet-stream&#x27;);
+    location.href = dlUrl;
+  });
+}
     </pre>
 </div>
 
