@@ -193,7 +193,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Array
     @readonly
   */
-  ticks: property('graph.yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData',
+  ticks: property('yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData',
     function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
       var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
       var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;

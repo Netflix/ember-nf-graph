@@ -54,7 +54,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Number
 		@readonly
 	*/
-	y: property('value', 'graph.yScale', 'graph.paddingTop', function(value, yScale, paddingTop){
+	y: property('value', 'yScale', 'graph.paddingTop', function(value, yScale, paddingTop){
 		var vy = 0;
 		if(yScale) {
 			vy = yScale(value) || 0;

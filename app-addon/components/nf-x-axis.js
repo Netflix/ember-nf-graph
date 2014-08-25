@@ -197,7 +197,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Array
     @readonly
   */
-  ticks: property('tickCount', 'graph.xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'uniqueXData',
+  ticks: property('tickCount', 'xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'uniqueXData',
     function(tickCount, xScale, tickPadding, tickLength, height, orient, tickFilter, xScaleType, uniqueXData) {
       var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
       var y1 = orient === 'top' ? height : 0;

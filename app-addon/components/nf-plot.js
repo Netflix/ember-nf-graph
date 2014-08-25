@@ -48,10 +48,10 @@ export default Ember.Component.extend(HasGraphParent, {
 		@readonly
 	*/
 	rangeX: function(){
-		var xScale = this.get('graph.xScale');
+		var xScale = this.get('xScale');
 		var x = this.get('x');
 		return (xScale ? xScale(x) : 0) || 0;
-	}.property('x', 'graph.xScale'),
+	}.property('x', 'xScale'),
 
 	/**
 		The calculated y coordinate
@@ -60,10 +60,10 @@ export default Ember.Component.extend(HasGraphParent, {
 		@readonly
 	*/
 	rangeY: function(){
-		var yScale = this.get('graph.yScale');
+		var yScale = this.get('yScale');
 		var y = this.get('y');
 		return (yScale ? yScale(y) : 0) || 0;
-	}.property('y', 'graph.yScale'),
+	}.property('y', 'yScale'),
 
 	/**
 		The SVG transform of the component's `<g>` tag.

@@ -55,7 +55,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Number
 		@readonly
 	*/
-	x: property('xMin', 'graph.xScale', function(xMin, xScale){
+	x: property('xMin', 'xScale', function(xMin, xScale){
 		return xScale(xMin) || 0;
 	}),
 
@@ -65,7 +65,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Number
 		@readonly
 	*/
-	y: property('yMax', 'graph.yScale', function(yMax, yScale) {
+	y: property('yMax', 'yScale', function(yMax, yScale) {
 		return yScale(yMax) || 0;
 	}),
 
@@ -75,7 +75,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Number
 		@readonly
 	*/
-	width: property('xMin', 'xMax', 'graph.xScale', function(xMin, xMax, xScale){
+	width: property('xMin', 'xMax', 'xScale', function(xMin, xMax, xScale){
 		var x0 = xScale(xMin);
 		var x1 = xScale(xMax);
 		return Math.abs(x1 - x0) || 0;
@@ -87,7 +87,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type number
 		@readonly
 	*/
-	height: property('yMin', 'yMax', 'graph.yScale', function(yMin, yMax, yScale){
+	height: property('yMin', 'yMax', 'yScale', function(yMin, yMax, yScale){
 		var y0 = yScale(yMin);
 		var y1 = yScale(yMax);
 		return Math.abs(y1 - y0) || 0;

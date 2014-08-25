@@ -46,7 +46,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 		@readonly
 	*/
-	cx: property('x', 'graph.xScale', function(x, xScale) {
+	cx: property('x', 'xScale', function(x, xScale) {
 		return !isNaN(x) && xScale ? xScale(x) : -1;
 	}),
 
@@ -57,7 +57,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 		@readonly
 	*/
-	cy: property('y', 'graph.yScale', function(y, yScale) {
+	cy: property('y', 'yScale', function(y, yScale) {
 		return !isNaN(y) && yScale ? yScale(y) : -1;
 	}),
 

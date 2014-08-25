@@ -49,7 +49,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 		@readonly
 	*/
-	lineX: property('x', 'graph.xScale', function(x, xScale) {
+	lineX: property('x', 'xScale', function(x, xScale) {
 		return xScale ? xScale(x) : -1;
 	}),
 });

@@ -45,6 +45,14 @@ export default Ember.Object.extend({
 	*/
 	data: null,
 
+	xScale: function(){
+		return this.get('source.xScale') || this.get('graph.xScale');
+	}.property('source.xScale', 'graph.xScale'),
+
+	yScale: function(){
+		return this.get('source.yScale') || this.get('graph.yScale');
+	}.property('source.yScale', 'graph.yScale'),
+
 	/**
 		The computed x position of the event relative to the graph content
 		@property graphPositionX
@@ -52,9 +60,9 @@ export default Ember.Object.extend({
 		@readonly
 	*/
 	graphPositionX: function() {
-		var xScale = this.get('graph.xScale');
+		var xScale = this.get('xScale');
 		return xScale ? xScale(this.get('x')) : NaN;
-	}.property('graph.xScale', 'x'),
+	}.property('xScale', 'x'),
 
 	/**
 		The computed y position of the event relative to the graph content
@@ -63,9 +71,9 @@ export default Ember.Object.extend({
 		@readonly
 	*/
 	graphPositionY: function() {
-		var yScale = this.get('graph.yScale');
+		var yScale = this.get('yScale');
 		return yScale ? yScale(this.get('y')) : NaN;
-	}.property('graph.yScale', 'y'),
+	}.property('yScale', 'y'),
 
 	/**
 		The jQuery offset of the graph's element

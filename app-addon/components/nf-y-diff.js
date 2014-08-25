@@ -71,7 +71,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Number
 		@readonly
 	*/
-	y: property('graph.yScale', 'a', 'b', function(yScale, a, b) {
+	y: property('yScale', 'a', 'b', function(yScale, a, b) {
 		if(!yScale) {
 			return 0;
 		}
@@ -86,7 +86,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Number
 		@readonly
 	*/
-	height: property('graph.yScale', 'a', 'b', function(yScale, a, b) {
+	height: property('yScale', 'a', 'b', function(yScale, a, b) {
 		if(!yScale) {
 			return 0;
 		}

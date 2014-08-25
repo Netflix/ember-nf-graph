@@ -31,7 +31,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 		@readonly
 	*/
-	lineY: property('y', 'graph.yScale', function(y, yScale) {
+	lineY: property('y', 'yScale', function(y, yScale) {
 		return yScale ? yScale(y) : -1;
 	}),
 

@@ -26,5 +26,31 @@ export default Ember.Mixin.create({
 	_getGraph: function(){
 		var graph = this.nearestWithProperty('isGraph');
 		this.set('graph', graph);
-	}.on('init')
+	}.on('init'),
+
+	yScale: function(){
+		var scale = this.get('graph.yScale');
+		var m = +this.get('multiplierY') || 1;
+		if(m !== 1) {
+			scale = scale.copy();
+			var d = scale.domain();
+			scale.domain([d[0] / m, d[1] / m]);
+		}
+		return scale;
+	}.property('graph.yScale', 'multiplierY'),
+
+	xScale: function(){
+		var scale = this.get('graph.xScale');
+		var m = +this.get('multiplierX') || 1;
+		if(m !== 1) {
+			scale = scale.copy();
+			var d = scale.domain();
+			scale.domain([d[0] / m, d[1] / m]);
+		}
+		return scale;
+	}.property('graph.xScale', 'multiplierX'),
+
+	multiplierY: 1,
+
+	multiplierX: 1,
 });

@@ -69,7 +69,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Number
     @readonly
   */
-  x: property('xMin', 'graph.xScale', function(xMin, xScale) {
+  x: property('xMin', 'xScale', function(xMin, xScale) {
   	return xScale(xMin);
   }),
 
@@ -79,7 +79,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Number
     @readonly
   */
-  width: property('xMin', 'xMax', 'graph.xScale', function(xMin, xMax, xScale) {
+  width: property('xMin', 'xMax', 'xScale', function(xMin, xMax, xScale) {
   	return xScale(xMax) - xScale(xMin);
   }),
 

@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Route.extend({
 	model: function() {
 		return {
-			lineData: generateLineData(0, 0, 2000, 200, 20, 1000),
+			lineData: generateLineData(0, 0, 2000, 200, 20, 500),
 			lineData2: generateLineData(0, 100, 1000, 100, 500),
 			area1: generateLineData(0, 0, 50, 20, 10),
 			area2: generateLineData(0, 51, 100, 20, 11),

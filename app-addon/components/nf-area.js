@@ -60,7 +60,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
         });
         
         while(result.length < renderedData.length) {
-          result.push(yMin);
+          result.push(-99999999);
         }
 
         return result;
@@ -75,11 +75,13 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 
     areaFn: function(){
-      var xScale = this.get('graph.xScale');
-      var yScale = this.get('graph.yScale');
+      var xScale = this.get('xScale');
+      var yScale = this.get('yScale');
       var interpolator = this.get('interpolator');
       return this.createAreaFn(xScale, yScale, interpolator);
-    }.property('graph.xScale', 'graph.yScale', 'interpolator'),
+    }.property('xScale', 'yScale', 'interpolator', 'multiplierY'),
+
+    multiplierY: 1,
 
     d: function(){
       return this.get('areaFn')(this.get('areaData'));
