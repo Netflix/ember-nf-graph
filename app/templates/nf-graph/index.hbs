@@ -3,7 +3,7 @@
 <label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label><output>{{graphWidth}}px</output><br/>
 <label>Graph1 Diff A: {{input type="range" min="0" max="1000" value=diffA}}</label><output>{{diffA}}</output><br/>
 <label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
-<label>Multiplier Y: {{input type="range" min="1" step=".25" max="3" value=multiY}}</label><output>{{multiY}}</output><br/>
+<label>Multiplier Y: {{input type="range" min="1" step=".01" max="2" value=multiY}}</label><output>{{multiY}}</output><br/>
 <output>{{graphWidth}}px</output>
 
 {{#nf-graph xLink=groupX yLink=groupY selected=selectedThings hoverX=fooGraphHoverX hoverY=fooGraphHoverY mouseX=fooGraphMouseX mouseY=fooGraphMouseY
@@ -17,16 +17,16 @@
 			multiplierY=multiY
 			trackingMode="snap-last"}}
 		{{nf-vertical-line x=fooHovered.x}}
-		{{nf-horizontal-line y=fooHovered.y}}	
+		{{nf-horizontal-line y=fooHovered.y multiplierY=multiY}}	
 
 		{{nf-selection-box xMin=10 xMax=50 yMin=diffA yMax=diffB}}
 
 
 
-		{{#nf-plots data=lineData action="showData"}}
+		{{!-- {{#nf-plots data=lineData action="showData" multiplierY=multiY}}
 			<image xlink:href="assets/images/emberjs-tomster.png" 
 				x="0" y="0" width="40" height="40" transform="translate(-20 -20)"/>
-		{{/nf-plots}}
+		{{/nf-plots}} --}}
 
 
 		{{#if shownData}}
