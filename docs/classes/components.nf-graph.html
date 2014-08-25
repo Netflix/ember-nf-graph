@@ -103,6 +103,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+            
                 <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
             
             </ul>
@@ -158,7 +160,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-graph.js.html#l172"><code>app-addon&#x2F;components&#x2F;nf-graph.js:172</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-graph.js.html#l173"><code>app-addon&#x2F;components&#x2F;nf-graph.js:173</code></a>
         </div>
     
 
@@ -819,7 +821,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l825"><code>app-addon&#x2F;components&#x2F;nf-graph.js:825</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l826"><code>app-addon&#x2F;components&#x2F;nf-graph.js:826</code></a>
         
         </p>
 
@@ -886,7 +888,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l812"><code>app-addon&#x2F;components&#x2F;nf-graph.js:812</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l813"><code>app-addon&#x2F;components&#x2F;nf-graph.js:813</code></a>
         
         </p>
 
@@ -967,7 +969,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l803"><code>app-addon&#x2F;components&#x2F;nf-graph.js:803</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l804"><code>app-addon&#x2F;components&#x2F;nf-graph.js:804</code></a>
         
         </p>
 
@@ -1024,7 +1026,7 @@ render either axis unless its component is present.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l835"><code>app-addon&#x2F;components&#x2F;nf-graph.js:835</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l836"><code>app-addon&#x2F;components&#x2F;nf-graph.js:836</code></a>
         
         </p>
 
@@ -1082,7 +1084,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l967"><code>app-addon&#x2F;components&#x2F;nf-graph.js:967</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l968"><code>app-addon&#x2F;components&#x2F;nf-graph.js:968</code></a>
         
         </p>
 
@@ -1126,7 +1128,13 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
                 <li class="arg">
                     
-                        <code>context</code>
+                        <code>source</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>data</code>
                     
                 </li>
             
@@ -1136,7 +1144,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
 
     
         <span class="returns-inline">
-            <span class="type">Object</span>
+            <span class="type">utils.nf.graph-action-context</span>
         </span>
     
 
@@ -1165,7 +1173,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l977"><code>app-addon&#x2F;components&#x2F;nf-graph.js:977</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l978"><code>app-addon&#x2F;components&#x2F;nf-graph.js:978</code></a>
         
         </p>
 
@@ -1220,14 +1228,30 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
                 <li class="param">
                     
-                        <code class="param-name">context</code>
+                        <code class="param-name">source</code>
+                        <span class="type">Ember.Component</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the component that is firing the event</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">data</code>
                         <span class="type">Object</span>
                     
 
                     
 
                     <div class="param-description">
-                        <p>additional context to mixin to the result</p>
+                        <p>item data for the event.</p>
 
                     </div>
 
@@ -1245,7 +1269,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             <div class="returns-description">
                 
                     
-                        <span class="type">Object</span>:
+                        <span class="type">utils.nf.graph-action-context</span>:
                     
                     <p>a context to send with <code>sendAction</code></p>
 
@@ -1300,7 +1324,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l950"><code>app-addon&#x2F;components&#x2F;nf-graph.js:950</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l951"><code>app-addon&#x2F;components&#x2F;nf-graph.js:951</code></a>
         
         </p>
 
@@ -1399,7 +1423,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l849"><code>app-addon&#x2F;components&#x2F;nf-graph.js:849</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l850"><code>app-addon&#x2F;components&#x2F;nf-graph.js:850</code></a>
         
         </p>
 
@@ -1518,7 +1542,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l678"><code>app-addon&#x2F;components&#x2F;nf-graph.js:678</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l679"><code>app-addon&#x2F;components&#x2F;nf-graph.js:679</code></a>
         
         </p>
 
@@ -1607,7 +1631,7 @@ DOM events for the graph. Fires on <code>didInsertElement</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l929"><code>app-addon&#x2F;components&#x2F;nf-graph.js:929</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l930"><code>app-addon&#x2F;components&#x2F;nf-graph.js:930</code></a>
         
         </p>
 
@@ -1697,7 +1721,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l688"><code>app-addon&#x2F;components&#x2F;nf-graph.js:688</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l689"><code>app-addon&#x2F;components&#x2F;nf-graph.js:689</code></a>
         
         </p>
 
@@ -1778,7 +1802,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l909"><code>app-addon&#x2F;components&#x2F;nf-graph.js:909</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l910"><code>app-addon&#x2F;components&#x2F;nf-graph.js:910</code></a>
         
         </p>
 
@@ -1835,7 +1859,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l919"><code>app-addon&#x2F;components&#x2F;nf-graph.js:919</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l920"><code>app-addon&#x2F;components&#x2F;nf-graph.js:920</code></a>
         
         </p>
 
@@ -1891,7 +1915,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l418"><code>app-addon&#x2F;components&#x2F;nf-graph.js:418</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l419"><code>app-addon&#x2F;components&#x2F;nf-graph.js:419</code></a>
         
         </p>
 
@@ -1938,7 +1962,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l411"><code>app-addon&#x2F;components&#x2F;nf-graph.js:411</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l412"><code>app-addon&#x2F;components&#x2F;nf-graph.js:412</code></a>
         
         </p>
 
@@ -1985,7 +2009,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l432"><code>app-addon&#x2F;components&#x2F;nf-graph.js:432</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l433"><code>app-addon&#x2F;components&#x2F;nf-graph.js:433</code></a>
         
         </p>
 
@@ -2032,7 +2056,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l425"><code>app-addon&#x2F;components&#x2F;nf-graph.js:425</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l426"><code>app-addon&#x2F;components&#x2F;nf-graph.js:426</code></a>
         
         </p>
 
@@ -2079,7 +2103,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l588"><code>app-addon&#x2F;components&#x2F;nf-graph.js:588</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l589"><code>app-addon&#x2F;components&#x2F;nf-graph.js:589</code></a>
         
         </p>
 
@@ -2124,7 +2148,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l778"><code>app-addon&#x2F;components&#x2F;nf-graph.js:778</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l779"><code>app-addon&#x2F;components&#x2F;nf-graph.js:779</code></a>
         
         </p>
 
@@ -2169,7 +2193,7 @@ selected graphic if it&#39;s different from the one passed.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l599"><code>app-addon&#x2F;components&#x2F;nf-graph.js:599</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l600"><code>app-addon&#x2F;components&#x2F;nf-graph.js:600</code></a>
         
         </p>
 
@@ -2215,7 +2239,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l793"><code>app-addon&#x2F;components&#x2F;nf-graph.js:793</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l794"><code>app-addon&#x2F;components&#x2F;nf-graph.js:794</code></a>
         
         </p>
 
@@ -2260,7 +2284,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l763"><code>app-addon&#x2F;components&#x2F;nf-graph.js:763</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l764"><code>app-addon&#x2F;components&#x2F;nf-graph.js:764</code></a>
         
         </p>
 
@@ -2305,7 +2329,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l732"><code>app-addon&#x2F;components&#x2F;nf-graph.js:732</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l733"><code>app-addon&#x2F;components&#x2F;nf-graph.js:733</code></a>
         
         </p>
 
@@ -2350,7 +2374,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l748"><code>app-addon&#x2F;components&#x2F;nf-graph.js:748</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l749"><code>app-addon&#x2F;components&#x2F;nf-graph.js:749</code></a>
         
         </p>
 
@@ -2395,7 +2419,7 @@ This registry is used to pool data for scaling purposes.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l720"><code>app-addon&#x2F;components&#x2F;nf-graph.js:720</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l721"><code>app-addon&#x2F;components&#x2F;nf-graph.js:721</code></a>
         
         </p>
 
@@ -2445,7 +2469,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l252"><code>app-addon&#x2F;components&#x2F;nf-graph.js:252</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l253"><code>app-addon&#x2F;components&#x2F;nf-graph.js:253</code></a>
         
         </p>
 
@@ -2489,7 +2513,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l275"><code>app-addon&#x2F;components&#x2F;nf-graph.js:275</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l276"><code>app-addon&#x2F;components&#x2F;nf-graph.js:276</code></a>
         
         </p>
 
@@ -2536,7 +2560,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l895"><code>app-addon&#x2F;components&#x2F;nf-graph.js:895</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l896"><code>app-addon&#x2F;components&#x2F;nf-graph.js:896</code></a>
         
         </p>
 
@@ -2581,7 +2605,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l902"><code>app-addon&#x2F;components&#x2F;nf-graph.js:902</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l903"><code>app-addon&#x2F;components&#x2F;nf-graph.js:903</code></a>
         
         </p>
 
@@ -2626,7 +2650,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l246"><code>app-addon&#x2F;components&#x2F;nf-graph.js:246</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l247"><code>app-addon&#x2F;components&#x2F;nf-graph.js:247</code></a>
         
         </p>
 
@@ -2671,7 +2695,7 @@ to the graph by registered graphics.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l877"><code>app-addon&#x2F;components&#x2F;nf-graph.js:877</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l878"><code>app-addon&#x2F;components&#x2F;nf-graph.js:878</code></a>
         
         </p>
 
@@ -2719,7 +2743,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l886"><code>app-addon&#x2F;components&#x2F;nf-graph.js:886</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l887"><code>app-addon&#x2F;components&#x2F;nf-graph.js:887</code></a>
         
         </p>
 
@@ -2767,7 +2791,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l307"><code>app-addon&#x2F;components&#x2F;nf-graph.js:307</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l308"><code>app-addon&#x2F;components&#x2F;nf-graph.js:308</code></a>
         
         </p>
 
@@ -2814,7 +2838,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l291"><code>app-addon&#x2F;components&#x2F;nf-graph.js:291</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l292"><code>app-addon&#x2F;components&#x2F;nf-graph.js:292</code></a>
         
         </p>
 
@@ -2861,7 +2885,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l299"><code>app-addon&#x2F;components&#x2F;nf-graph.js:299</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l300"><code>app-addon&#x2F;components&#x2F;nf-graph.js:300</code></a>
         
         </p>
 
@@ -2908,7 +2932,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l283"><code>app-addon&#x2F;components&#x2F;nf-graph.js:283</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l284"><code>app-addon&#x2F;components&#x2F;nf-graph.js:284</code></a>
         
         </p>
 
@@ -2955,7 +2979,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l869"><code>app-addon&#x2F;components&#x2F;nf-graph.js:869</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l870"><code>app-addon&#x2F;components&#x2F;nf-graph.js:870</code></a>
         
         </p>
 
@@ -3000,7 +3024,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l608"><code>app-addon&#x2F;components&#x2F;nf-graph.js:608</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l609"><code>app-addon&#x2F;components&#x2F;nf-graph.js:609</code></a>
         
         </p>
 
@@ -3045,7 +3069,7 @@ Will be <code>-1</code> if the mouse is not hovering over the graph content.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l258"><code>app-addon&#x2F;components&#x2F;nf-graph.js:258</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l259"><code>app-addon&#x2F;components&#x2F;nf-graph.js:259</code></a>
         
         </p>
 
@@ -3093,7 +3117,7 @@ selected simultaneously.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l324"><code>app-addon&#x2F;components&#x2F;nf-graph.js:324</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l325"><code>app-addon&#x2F;components&#x2F;nf-graph.js:325</code></a>
         
         </p>
 
@@ -3141,7 +3165,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l315"><code>app-addon&#x2F;components&#x2F;nf-graph.js:315</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l316"><code>app-addon&#x2F;components&#x2F;nf-graph.js:316</code></a>
         
         </p>
 
@@ -3189,7 +3213,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l624"><code>app-addon&#x2F;components&#x2F;nf-graph.js:624</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l625"><code>app-addon&#x2F;components&#x2F;nf-graph.js:625</code></a>
         
         </p>
 
@@ -3236,7 +3260,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l616"><code>app-addon&#x2F;components&#x2F;nf-graph.js:616</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l617"><code>app-addon&#x2F;components&#x2F;nf-graph.js:617</code></a>
         
         </p>
 
@@ -3283,7 +3307,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l267"><code>app-addon&#x2F;components&#x2F;nf-graph.js:267</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l268"><code>app-addon&#x2F;components&#x2F;nf-graph.js:268</code></a>
         
         </p>
 
@@ -3330,7 +3354,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l403"><code>app-addon&#x2F;components&#x2F;nf-graph.js:403</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l404"><code>app-addon&#x2F;components&#x2F;nf-graph.js:404</code></a>
         
         </p>
 
@@ -3377,7 +3401,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l560"><code>app-addon&#x2F;components&#x2F;nf-graph.js:560</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l561"><code>app-addon&#x2F;components&#x2F;nf-graph.js:561</code></a>
         
         </p>
 
@@ -3422,7 +3446,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l540"><code>app-addon&#x2F;components&#x2F;nf-graph.js:540</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l541"><code>app-addon&#x2F;components&#x2F;nf-graph.js:541</code></a>
         
         </p>
 
@@ -3467,7 +3491,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l646"><code>app-addon&#x2F;components&#x2F;nf-graph.js:646</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l647"><code>app-addon&#x2F;components&#x2F;nf-graph.js:647</code></a>
         
         </p>
 
@@ -3512,7 +3536,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l230"><code>app-addon&#x2F;components&#x2F;nf-graph.js:230</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l231"><code>app-addon&#x2F;components&#x2F;nf-graph.js:231</code></a>
         
         </p>
 
@@ -3559,7 +3583,7 @@ the graph.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l446"><code>app-addon&#x2F;components&#x2F;nf-graph.js:446</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l447"><code>app-addon&#x2F;components&#x2F;nf-graph.js:447</code></a>
         
         </p>
 
@@ -3605,7 +3629,7 @@ Behavior depends on <code>xMaxMode</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l486"><code>app-addon&#x2F;components&#x2F;nf-graph.js:486</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l487"><code>app-addon&#x2F;components&#x2F;nf-graph.js:487</code></a>
         
         </p>
 
@@ -3661,7 +3685,7 @@ the graph is greater than that xMax is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l439"><code>app-addon&#x2F;components&#x2F;nf-graph.js:439</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l440"><code>app-addon&#x2F;components&#x2F;nf-graph.js:440</code></a>
         
         </p>
 
@@ -3707,7 +3731,7 @@ Behavior depends on <code>xMinMode</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l468"><code>app-addon&#x2F;components&#x2F;nf-graph.js:468</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l469"><code>app-addon&#x2F;components&#x2F;nf-graph.js:469</code></a>
         
         </p>
 
@@ -3763,7 +3787,7 @@ the graph is less than that xMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l371"><code>app-addon&#x2F;components&#x2F;nf-graph.js:371</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l372"><code>app-addon&#x2F;components&#x2F;nf-graph.js:372</code></a>
         
         </p>
 
@@ -3810,7 +3834,7 @@ the graph is less than that xMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l363"><code>app-addon&#x2F;components&#x2F;nf-graph.js:363</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l364"><code>app-addon&#x2F;components&#x2F;nf-graph.js:364</code></a>
         
         </p>
 
@@ -3857,7 +3881,7 @@ the graph is less than that xMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l214"><code>app-addon&#x2F;components&#x2F;nf-graph.js:214</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l215"><code>app-addon&#x2F;components&#x2F;nf-graph.js:215</code></a>
         
         </p>
 
@@ -3904,7 +3928,7 @@ the graph is less than that xMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l709"><code>app-addon&#x2F;components&#x2F;nf-graph.js:709</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l710"><code>app-addon&#x2F;components&#x2F;nf-graph.js:710</code></a>
         
         </p>
 
@@ -3950,7 +3974,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l662"><code>app-addon&#x2F;components&#x2F;nf-graph.js:662</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l663"><code>app-addon&#x2F;components&#x2F;nf-graph.js:663</code></a>
         
         </p>
 
@@ -3995,7 +4019,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l632"><code>app-addon&#x2F;components&#x2F;nf-graph.js:632</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l633"><code>app-addon&#x2F;components&#x2F;nf-graph.js:633</code></a>
         
         </p>
 
@@ -4040,7 +4064,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l333"><code>app-addon&#x2F;components&#x2F;nf-graph.js:333</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l334"><code>app-addon&#x2F;components&#x2F;nf-graph.js:334</code></a>
         
         </p>
 
@@ -4094,7 +4118,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l395"><code>app-addon&#x2F;components&#x2F;nf-graph.js:395</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l396"><code>app-addon&#x2F;components&#x2F;nf-graph.js:396</code></a>
         
         </p>
 
@@ -4141,7 +4165,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l574"><code>app-addon&#x2F;components&#x2F;nf-graph.js:574</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l575"><code>app-addon&#x2F;components&#x2F;nf-graph.js:575</code></a>
         
         </p>
 
@@ -4186,7 +4210,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l550"><code>app-addon&#x2F;components&#x2F;nf-graph.js:550</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l551"><code>app-addon&#x2F;components&#x2F;nf-graph.js:551</code></a>
         
         </p>
 
@@ -4231,7 +4255,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l654"><code>app-addon&#x2F;components&#x2F;nf-graph.js:654</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l655"><code>app-addon&#x2F;components&#x2F;nf-graph.js:655</code></a>
         
         </p>
 
@@ -4276,7 +4300,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l238"><code>app-addon&#x2F;components&#x2F;nf-graph.js:238</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l239"><code>app-addon&#x2F;components&#x2F;nf-graph.js:239</code></a>
         
         </p>
 
@@ -4323,7 +4347,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l453"><code>app-addon&#x2F;components&#x2F;nf-graph.js:453</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l454"><code>app-addon&#x2F;components&#x2F;nf-graph.js:454</code></a>
         
         </p>
 
@@ -4369,7 +4393,7 @@ Behavior depends on <code>yMaxMode</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l460"><code>app-addon&#x2F;components&#x2F;nf-graph.js:460</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l461"><code>app-addon&#x2F;components&#x2F;nf-graph.js:461</code></a>
         
         </p>
 
@@ -4415,7 +4439,7 @@ Behavior depends on <code>yMaxMode</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l522"><code>app-addon&#x2F;components&#x2F;nf-graph.js:522</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l523"><code>app-addon&#x2F;components&#x2F;nf-graph.js:523</code></a>
         
         </p>
 
@@ -4471,7 +4495,7 @@ the graph is greater than that yMax is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l504"><code>app-addon&#x2F;components&#x2F;nf-graph.js:504</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l505"><code>app-addon&#x2F;components&#x2F;nf-graph.js:505</code></a>
         
         </p>
 
@@ -4527,7 +4551,7 @@ the graph is less than that yMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l387"><code>app-addon&#x2F;components&#x2F;nf-graph.js:387</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l388"><code>app-addon&#x2F;components&#x2F;nf-graph.js:388</code></a>
         
         </p>
 
@@ -4574,7 +4598,7 @@ the graph is less than that yMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l379"><code>app-addon&#x2F;components&#x2F;nf-graph.js:379</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l380"><code>app-addon&#x2F;components&#x2F;nf-graph.js:380</code></a>
         
         </p>
 
@@ -4621,7 +4645,7 @@ the graph is less than that yMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l222"><code>app-addon&#x2F;components&#x2F;nf-graph.js:222</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l223"><code>app-addon&#x2F;components&#x2F;nf-graph.js:223</code></a>
         
         </p>
 
@@ -4668,7 +4692,7 @@ the graph is less than that yMin is set to.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l698"><code>app-addon&#x2F;components&#x2F;nf-graph.js:698</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l699"><code>app-addon&#x2F;components&#x2F;nf-graph.js:699</code></a>
         
         </p>
 
@@ -4714,7 +4738,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l670"><code>app-addon&#x2F;components&#x2F;nf-graph.js:670</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l671"><code>app-addon&#x2F;components&#x2F;nf-graph.js:671</code></a>
         
         </p>
 
@@ -4759,7 +4783,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l639"><code>app-addon&#x2F;components&#x2F;nf-graph.js:639</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l640"><code>app-addon&#x2F;components&#x2F;nf-graph.js:640</code></a>
         
         </p>
 
@@ -4804,7 +4828,7 @@ in an array form.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-graph.js.html#l348"><code>app-addon&#x2F;components&#x2F;nf-graph.js:348</code></a>
+        <a href="../files/app-addon_components_nf-graph.js.html#l349"><code>app-addon&#x2F;components&#x2F;nf-graph.js:349</code></a>
         
         </p>
 

@@ -354,6 +354,17 @@
             "fors": {},
             "namespaces": {}
         },
+        "app-addon/utils/nf/graph-action-context.js": {
+            "name": "app-addon/utils/nf/graph-action-context.js",
+            "modules": {},
+            "classes": {
+                "utils.nf.nf-graph-action-context": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            }
+        },
         "app-addon/utils/parse-property-expression.js": {
             "name": "app-addon/utils/parse-property-expression.js",
             "modules": {},
@@ -402,10 +413,12 @@
                 "mixins.graph-line-utils": 1,
                 "mixins.graph-registered-graphic": 1,
                 "mixins.graph-selectable-graphic": 1,
+                "utils.nf.nf-graph-action-context": 1,
                 "utils.parse-property-expression": 1
             },
             "fors": {},
             "namespaces": {
+                "utils.nf": 1,
                 "utils": 1
             },
             "tag": "module",
@@ -565,7 +578,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-graph.js",
-            "line": 172,
+            "line": 173,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n     {{#nf-graph width=100 height=50}}\n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n     {{#nf-graph width=500 height=300}}\n       {{#nf-x-axis height=\"50\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-x-axis}}\n \n       {{#nf-y-axis width=\"120\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-y-axis}}\n \n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present.",
             "extends": "Ember.Component"
         },
@@ -962,6 +975,21 @@
             "line": 4,
             "extends": "Ember.Mixin"
         },
+        "utils.nf.nf-graph-action-context": {
+            "name": "utils.nf.nf-graph-action-context",
+            "shortname": "utils.nf.nf-graph-action-context",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf",
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 3,
+            "description": "Event object for graph events",
+            "extends": "Ember.Object"
+        },
         "utils.parse-property-expression": {
             "name": "utils.parse-property-expression",
             "shortname": "utils.parse-property-expression",
@@ -1355,7 +1383,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 214,
+            "line": 215,
             "description": "The exponent to use for xScaleType \"pow\" or \"power\".",
             "itemtype": "property",
             "name": "xPowerExponent",
@@ -1366,7 +1394,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 222,
+            "line": 223,
             "description": "The exponent to use for yScaleType \"pow\" or \"power\".",
             "itemtype": "property",
             "name": "yPowerExponent",
@@ -1377,7 +1405,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 230,
+            "line": 231,
             "description": "The min value to use for xScaleType \"log\" if xMin <= 0",
             "itemtype": "property",
             "name": "xLogMin",
@@ -1388,7 +1416,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 238,
+            "line": 239,
             "description": "The min value to use for yScaleType \"log\" if yMin <= 0",
             "itemtype": "property",
             "name": "yLogMin",
@@ -1399,7 +1427,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 246,
+            "line": 247,
             "description": "Allows child compoenents to identify graph parent.",
             "itemtype": "property",
             "name": "isGraph",
@@ -1408,7 +1436,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 252,
+            "line": 253,
             "itemtype": "property",
             "name": "hasRendered",
             "access": "private",
@@ -1418,7 +1446,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 258,
+            "line": 259,
             "description": "Gets or sets the whether or not multiple selectable graphics may be\nselected simultaneously.",
             "itemtype": "property",
             "name": "selectMultiple",
@@ -1429,7 +1457,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 267,
+            "line": 268,
             "description": "The width of the graph in pixels.",
             "itemtype": "property",
             "name": "width",
@@ -1440,7 +1468,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 275,
+            "line": 276,
             "description": "The height of the graph in pixels.",
             "itemtype": "property",
             "name": "height",
@@ -1451,7 +1479,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 283,
+            "line": 284,
             "description": "The padding at the top of the graph",
             "itemtype": "property",
             "name": "paddingTop",
@@ -1462,7 +1490,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 291,
+            "line": 292,
             "description": "The padding at the left of the graph",
             "itemtype": "property",
             "name": "paddingLeft",
@@ -1473,7 +1501,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 299,
+            "line": 300,
             "description": "The padding at the right of the graph",
             "itemtype": "property",
             "name": "paddingRight",
@@ -1484,7 +1512,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 307,
+            "line": 308,
             "description": "The padding at the bottom of the graph",
             "itemtype": "property",
             "name": "paddingBottom",
@@ -1495,7 +1523,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 315,
+            "line": 316,
             "description": "Determines whether to display \"lanes\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showLanes",
@@ -1506,7 +1534,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 324,
+            "line": 325,
             "description": "Determines whether to display \"frets\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showFrets",
@@ -1517,7 +1545,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 333,
+            "line": 334,
             "description": "The type of scale to use for x values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "xScaleType",
@@ -1528,7 +1556,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 348,
+            "line": 349,
             "description": "The type of scale to use for y values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "yScaleType",
@@ -1539,7 +1567,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 363,
+            "line": 364,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalPadding",
@@ -1550,7 +1578,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 371,
+            "line": 372,
             "description": "The padding at the ends of the domain data when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalOuterPadding",
@@ -1561,7 +1589,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 379,
+            "line": 380,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalPadding",
@@ -1572,7 +1600,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 387,
+            "line": 388,
             "description": "The padding at the ends of the domain data when `yScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalOuterPadding",
@@ -1583,7 +1611,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 395,
+            "line": 396,
             "description": "the `nf-y-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "yAxis",
@@ -1594,7 +1622,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 403,
+            "line": 404,
             "description": "The `nf-x-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "xAxis",
@@ -1605,7 +1633,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 411,
+            "line": 412,
             "description": "Backing field for `xMin`",
             "itemtype": "property",
             "name": "_xMin",
@@ -1616,7 +1644,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 418,
+            "line": 419,
             "description": "Backing field for `xMax`",
             "itemtype": "property",
             "name": "_xMax",
@@ -1627,7 +1655,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 425,
+            "line": 426,
             "description": "Backing field for `yMin`",
             "itemtype": "property",
             "name": "_yMin",
@@ -1638,7 +1666,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 432,
+            "line": 433,
             "description": "Backing field for `yMax`",
             "itemtype": "property",
             "name": "_yMax",
@@ -1649,7 +1677,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 439,
+            "line": 440,
             "description": "Gets or sets the minimum x domain value to display on the graph.\nBehavior depends on `xMinMode`.",
             "itemtype": "property",
             "name": "xMin",
@@ -1658,7 +1686,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 446,
+            "line": 447,
             "description": "Gets or sets the maximum x domain value to display on the graph.\nBehavior depends on `xMaxMode`.",
             "itemtype": "property",
             "name": "xMax",
@@ -1667,7 +1695,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 453,
+            "line": 454,
             "description": "Gets or sets the maximum y domain value to display on the graph.\nBehavior depends on `yMaxMode`.",
             "itemtype": "property",
             "name": "yMax",
@@ -1676,7 +1704,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 460,
+            "line": 461,
             "description": "Gets or sets the maximum y domain value to display on the graph.\nBehavior depends on `yMaxMode`.",
             "itemtype": "property",
             "name": "yMax",
@@ -1685,7 +1713,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 468,
+            "line": 469,
             "description": "Sets the behavior of `xMin` for the graph.\n\n### Possible values:\n\n- 'auto': (default) xMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.\n- 'fixed': xMin can be set to an exact value and will not change based on graphed data.\n- 'push': xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than \n  what xMin is currently set to.\n- 'push-tick': xMin can be set to a specific value, but will update to next \"nice\" tick if the minimum x value contained in\n  the graph is less than that xMin is set to.",
             "itemtype": "property",
             "name": "xMinMode",
@@ -1696,7 +1724,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 486,
+            "line": 487,
             "description": "Sets the behavior of `xMax` for the graph.\n\n### Possible values:\n\n- 'auto': (default) xMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.\n- 'fixed': xMax can be set to an exact value and will not change based on graphed data.\n- 'push': xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than \n  what xMax is currently set to.\n- 'push-tick': xMax can be set to a specific value, but will update to next \"nice\" tick if the maximum x value contained in\n  the graph is greater than that xMax is set to.",
             "itemtype": "property",
             "name": "xMaxMode",
@@ -1707,7 +1735,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 504,
+            "line": 505,
             "description": "Sets the behavior of `yMin` for the graph.\n\n### Possible values:\n\n- 'auto': (default) yMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.\n- 'fixed': yMin can be set to an exact value and will not change based on graphed data.\n- 'push': yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than \n  what yMin is currently set to.\n- 'push-tick': yMin can be set to a specific value, but will update to next \"nice\" tick if the minimum y value contained in\n  the graph is less than that yMin is set to.",
             "itemtype": "property",
             "name": "yMinMode",
@@ -1718,7 +1746,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 522,
+            "line": 523,
             "description": "Sets the behavior of `yMax` for the graph.\n\n### Possible values:\n\n- 'auto': (default) yMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.\n- 'fixed': yMax can be set to an exact value and will not change based on graphed data.\n- 'push': yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than \n  what yMax is currently set to.\n- 'push-tick': yMax can be set to a specific value, but will update to next \"nice\" tick if the maximum y value contained in\n  the graph is greater than that yMax is set to.",
             "itemtype": "property",
             "name": "yMaxMode",
@@ -1729,7 +1757,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 540,
+            "line": 541,
             "description": "Gets the highest and lowest x values of the graphed data in a two element array.",
             "itemtype": "property",
             "name": "xDataExtent",
@@ -1740,7 +1768,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 550,
+            "line": 551,
             "description": "Gets the highest and lowest y values of the graphed data in a two element array.",
             "itemtype": "property",
             "name": "yDataExtent",
@@ -1751,7 +1779,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 560,
+            "line": 561,
             "description": "Gets all x data from all graphics.",
             "itemtype": "property",
             "name": "xData",
@@ -1762,7 +1790,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 574,
+            "line": 575,
             "description": "Gets all y data from all graphics",
             "itemtype": "property",
             "name": "yData",
@@ -1773,7 +1801,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 588,
+            "line": 589,
             "description": "Gets the DOM id for the content clipPath element.",
             "itemtype": "property",
             "name": "contentClipPathId",
@@ -1786,7 +1814,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 599,
+            "line": 600,
             "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
             "itemtype": "property",
             "name": "graphics",
@@ -1797,7 +1825,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 608,
+            "line": 609,
             "description": "An array of \"selectable\" graphics that have been selected within this graph.",
             "itemtype": "property",
             "name": "selected",
@@ -1808,7 +1836,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 616,
+            "line": 617,
             "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
             "itemtype": "property",
             "name": "showYAxis",
@@ -1819,7 +1847,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 624,
+            "line": 625,
             "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
             "itemtype": "property",
             "name": "showXAxis",
@@ -1830,7 +1858,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 632,
+            "line": 633,
             "description": "Gets a function to create the xScale",
             "itemtype": "property",
             "name": "xScaleFactory",
@@ -1840,7 +1868,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 639,
+            "line": 640,
             "description": "Gets a function to create the yScale",
             "itemtype": "property",
             "name": "yScaleFactory",
@@ -1850,7 +1878,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 646,
+            "line": 647,
             "description": "Gets the domain of x values.",
             "itemtype": "property",
             "name": "xDomain",
@@ -1861,7 +1889,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 654,
+            "line": 655,
             "description": "Gets the domain of y values.",
             "itemtype": "property",
             "name": "yDomain",
@@ -1872,7 +1900,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 662,
+            "line": 663,
             "description": "Gets the current xScale used to draw the graph.",
             "itemtype": "property",
             "name": "xScale",
@@ -1883,7 +1911,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 670,
+            "line": 671,
             "description": "Gets the current yScale used to draw the graph.",
             "itemtype": "property",
             "name": "yScale",
@@ -1894,7 +1922,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 678,
+            "line": 679,
             "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
             "itemtype": "method",
             "name": "registerGraphic",
@@ -1910,7 +1938,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 688,
+            "line": 689,
             "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
             "itemtype": "method",
             "name": "unregisterGraphic",
@@ -1926,7 +1954,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 698,
+            "line": 699,
             "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "yRange",
@@ -1937,7 +1965,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 709,
+            "line": 710,
             "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "xRange",
@@ -1948,7 +1976,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 720,
+            "line": 721,
             "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
             "itemtype": "property",
             "name": "hasData",
@@ -1960,7 +1988,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 732,
+            "line": 733,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
@@ -1971,7 +1999,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 748,
+            "line": 749,
             "description": "The y coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphY",
@@ -1982,7 +2010,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 763,
+            "line": 764,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
@@ -1993,7 +2021,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 778,
+            "line": 779,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
@@ -2004,7 +2032,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 793,
+            "line": 794,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
@@ -2015,7 +2043,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 803,
+            "line": 804,
             "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
             "itemtype": "method",
             "name": "_notifyHasRendered",
@@ -2026,7 +2054,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 812,
+            "line": 813,
             "description": "event handler for mouse movement inside the `graphContentGroup`",
             "itemtype": "method",
             "name": "_contentMouseMove",
@@ -2044,7 +2072,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 825,
+            "line": 826,
             "description": "Event handler for mouse leaving the `graphContentGroup`",
             "itemtype": "method",
             "name": "_contentMouseLeave",
@@ -2055,7 +2083,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 835,
+            "line": 836,
             "description": "Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up\nDOM events for the graph. Fires on `didInsertElement`",
             "itemtype": "method",
             "name": "_registerDOM",
@@ -2066,7 +2094,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 849,
+            "line": 850,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -2091,7 +2119,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 869,
+            "line": 870,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -2102,7 +2130,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 877,
+            "line": 878,
             "description": "The x pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content",
             "itemtype": "property",
             "name": "mouseX",
@@ -2113,7 +2141,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 886,
+            "line": 887,
             "description": "The y pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content.",
             "itemtype": "property",
             "name": "mouseY",
@@ -2124,7 +2152,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 895,
+            "line": 896,
             "description": "Gets the x domain value at the current mouse x hover position.",
             "itemtype": "property",
             "name": "hoverX",
@@ -2134,7 +2162,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 902,
+            "line": 903,
             "description": "Gets teh y domain value at the current mouse y hover position.",
             "itemtype": "property",
             "name": "hoverY",
@@ -2144,7 +2172,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 909,
+            "line": 910,
             "description": "updates `hoverX` when `mouseX` changes or something causes the scale to change.",
             "itemtype": "method",
             "name": "updateHoverX",
@@ -2155,7 +2183,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 919,
+            "line": 920,
             "description": "updates `hoverY` when `mouseY` changes or something causes the scale to change.",
             "itemtype": "method",
             "name": "updateHoverY",
@@ -2166,7 +2194,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 929,
+            "line": 930,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -2182,7 +2210,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 950,
+            "line": 951,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -2198,7 +2226,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 967,
+            "line": 968,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
@@ -2209,7 +2237,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 977,
+            "line": 978,
             "description": "Builds an action context to send to the controller.",
             "itemtype": "method",
             "name": "createActionContext",
@@ -2223,14 +2251,19 @@
                     "description": "Domain value y"
                 },
                 {
-                    "name": "context",
-                    "description": "additional context to mixin to the result",
+                    "name": "source",
+                    "description": "the component that is firing the event",
+                    "type": "Ember.Component"
+                },
+                {
+                    "name": "data",
+                    "description": "item data for the event.",
                     "type": "Object"
                 }
             ],
             "return": {
                 "description": "a context to send with `sendAction`",
-                "type": "Object"
+                "type": "utils.nf.graph-action-context"
             },
             "access": "private",
             "tagname": "",
@@ -4025,7 +4058,7 @@
                 "description": "x",
                 "type": "Any"
             },
-            "class": "utils.parse-property-expression",
+            "class": "utils.nf.nf-graph-action-context",
             "module": "utils/nf/array-helpers"
         },
         {
@@ -4051,7 +4084,7 @@
                     "type": "Function"
                 }
             ],
-            "class": "utils.parse-property-expression",
+            "class": "utils.nf.nf-graph-action-context",
             "module": "utils/nf/array-helpers"
         },
         {
@@ -4067,8 +4100,126 @@
                     "type": "Array"
                 }
             ],
-            "class": "utils.parse-property-expression",
+            "class": "utils.nf.nf-graph-action-context",
             "module": "utils/nf/array-helpers"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 10,
+            "description": "Gets or sets the domain x value",
+            "itemtype": "property",
+            "name": "x",
+            "default": "null",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 17,
+            "description": "Gets or sets the domain y value",
+            "itemtype": "property",
+            "name": "x",
+            "default": "null",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 24,
+            "description": "The nf-graph component of the event",
+            "itemtype": "property",
+            "name": "graph",
+            "type": "components.nf-graph",
+            "default": "null",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 32,
+            "description": "The source component for the event.",
+            "itemtype": "property",
+            "name": "source",
+            "type": "Ember.Component",
+            "default": "null",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 40,
+            "description": "Item data for the event and/or additional data.",
+            "itemtype": "property",
+            "name": "data",
+            "type": "Object",
+            "default": "null",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 48,
+            "description": "The computed x position of the event relative to the graph content",
+            "itemtype": "property",
+            "name": "graphPositionX",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 59,
+            "description": "The computed y position of the event relative to the graph content",
+            "itemtype": "property",
+            "name": "graphPositionY",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 70,
+            "description": "The jQuery offset of the graph's element",
+            "itemtype": "property",
+            "name": "graphOffset",
+            "type": "Object",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 80,
+            "description": "The computed event x position relative to the document",
+            "itemtype": "property",
+            "name": "pagePositionX",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 90,
+            "description": "The computed event y position relative to the document",
+            "itemtype": "property",
+            "name": "pagePositionY",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
         },
         {
             "file": "app-addon/utils/parse-property-expression.js",

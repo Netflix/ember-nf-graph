@@ -32,6 +32,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-line-utils",
         "mixins.graph-registered-graphic",
         "mixins.graph-selectable-graphic",
+        "utils.nf.nf-graph-action-context",
         "utils.parse-property-expression"
     ],
     "modules": [

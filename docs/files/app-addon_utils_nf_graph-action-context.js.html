@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-range-marker.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/graph-action-context.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -148,173 +148,108 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-range-marker.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/graph-action-context.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
-import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 
 /**
-  Draws a rectangular strip with a templated label on an &#x60;nf-graph&#x60;.
-  Should always be used in conjunction with an &#x60;nf-range-markers&#x60; container component.
-  @namespace components
-  @class nf-range-marker
-  @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
+	Event object for graph events
+	@namespace utils.nf
+	@class nf-graph-action-context
+	@extends Ember.Object
 */
-export default Ember.Component.extend(HasGraphParent, {
-	tagName: &#x27;g&#x27;,
+export default Ember.Object.extend({
+	/**
+		Gets or sets the domain x value
+		@property x
+		@default null
+	*/
+	x: null,
 
-	attributeBindings: [&#x27;transform&#x27;],
+	/**
+		Gets or sets the domain y value
+		@property x
+		@default null
+	*/
+	y: null,
 
-	classNames: [&#x27;nf-range-marker&#x27;],
+	/**
+		The nf-graph component of the event
+		@property graph
+		@type components.nf-graph
+		@default null
+	*/
+	graph: null,
 
-  /**
-    The parent &#x60;nf-range-markers&#x60; component.
-    @property container
-    @type {components.nf-range-markers}
-    @default null
-  */
-  container: null,
+	/**
+		The source component for the event.
+		@property source
+		@type Ember.Component
+		@default null
+	*/
+	source: null,
 
-  /**
-    The minimum domain value for the range to mark.
-    @property xMin
-    @default 0
-  */
-	xMin: 0,
+	/**
+		Item data for the event and/or additional data.
+		@property data
+		@type Object
+		@default null
+	*/
+	data: null,
 
-  /**
-    The maximum domain value for the range to mark.
-    @property xMax
-    @default 0
-  */
-	xMax: 0,
+	/**
+		The computed x position of the event relative to the graph content
+		@property graphPositionX
+		@type Number
+		@readonly
+	*/
+	graphPositionX: function() {
+		var xScale = this.get(&#x27;graph.xScale&#x27;);
+		return xScale ? xScale(this.get(&#x27;x&#x27;)) : NaN;
+	}.property(&#x27;graph.xScale&#x27;, &#x27;x&#x27;),
 
-  /**
-    The spacing above the range marker.
-    @property marginTop
-    @type Number
-    @default 10
-  */
-	marginTop: 10,
+	/**
+		The computed y position of the event relative to the graph content
+		@property graphPositionY
+		@type Number
+		@readonly
+	*/
+	graphPositionY: function() {
+		var yScale = this.get(&#x27;graph.yScale&#x27;);
+		return yScale ? yScale(this.get(&#x27;y&#x27;)) : NaN;
+	}.property(&#x27;graph.yScale&#x27;, &#x27;y&#x27;),
 
-  /**
-    The spacing below the range marker.
-    @property marginBottom
-    @type Number
-    @default 3
-  */
-	marginBottom: 3,
+	/**
+		The jQuery offset of the graph&#x27;s element
+		@property graphOffset
+		@type Object
+		@readonly
+	*/
+	graphOffset: function(){
+		return this.get(&#x27;graph&#x27;).$().offset();
+	}.property(&#x27;graph&#x27;),
 
-  /**
-    The height of the range marker.
-    @property height
-    @type Number
-    @default 10
-  */
-	height: 10,
+	/**
+		The computed event x position relative to the document
+		@property pagePositionX
+		@type Number
+		@readonly
+	*/
+	pagePositionX: function(){
+		return this.get(&#x27;graphPositionX&#x27;) + this.get(&#x27;graph.graphX&#x27;) + this.get(&#x27;graphOffset.left&#x27;);
+	}.property(&#x27;graphPositionX&#x27;, &#x27;graph.graphX&#x27;, &#x27;graphOffset.left&#x27;),
 
-  /**
-    The computed x position of the range marker.
-    @property x
-    @type Number
-    @readonly
-  */
-  x: property(&#x27;xMin&#x27;, &#x27;graph.xScale&#x27;, function(xMin, xScale) {
-  	return xScale(xMin);
-  }),
-
-  /**
-    The computed width of the range marker.
-    @property width
-    @type Number
-    @readonly
-  */
-  width: property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;graph.xScale&#x27;, function(xMin, xMax, xScale) {
-  	return xScale(xMax) - xScale(xMin);
-  }),
-
-  /**
-    The computed y position of the range marker.
-    @property y
-    @type Number
-    @readonly
-  */
-  y: property(&#x27;container.orient&#x27;, &#x27;prevMarker.bottom&#x27;, &#x27;prevMarker.y&#x27;, &#x27;graph.graphHeight&#x27;, &#x27;totalHeight&#x27;, function(orient, prevBottom, prevY, graphHeight, totalHeight){
-  	prevBottom = prevBottom || 0;
-
-  	if(orient === &#x27;bottom&#x27;) {
-  		return (prevY || graphHeight) - totalHeight;
-  	}
-
-  	if(orient === &#x27;top&#x27;) {
-  		return prevBottom;
-  	}
-  }),
-
-  /**
-    The computed total height of the range marker including its margins.
-    @property totalHeight
-    @type Number
-    @readonly
-  */
-  totalHeight: property(&#x27;height&#x27;, &#x27;marginTop&#x27;, &#x27;marginBottom&#x27;, function(height, marginTop, marginBottom) {
-  	return height + marginTop + marginBottom;
-  }),
-
-  /**
-    The computed bottom of the range marker, not including the bottom margin.
-    @property bottom
-    @type Number
-    @readonly
-  */
-  bottom: property(&#x27;y&#x27;, &#x27;totalHeight&#x27;, function(y, totalHeight) {
-  	return y + totalHeight;
-  }),
-
-  /**
-    The computed SVG transform of the range marker container
-    @property transform
-    @type String
-    @readonly
-  */
-  transform: property(&#x27;y&#x27;, function(y) {
-  	return &#x27;translate(0 %@)&#x27;.fmt(y || 0);
-  }),
-
-  /**
-    The computed SVG transform fo the range marker label container.
-    @property labelTransform
-    @type String
-    @readonly
-  */
-  labelTransform: property(&#x27;x&#x27;, function(x){
-  	return &#x27;translate(%@ 0)&#x27;.fmt(x || 0);
-  }),
-
-  /**
-    Initialization function that registers the range marker with its parent 
-    and populates the container property
-    @method _setup
-    @private
-  */
-	_setup: function(){
-		var container = this.nearestWithProperty(&#x27;isRangeMarkerContainer&#x27;);
-		container.registerMarker(this);
-		this.set(&#x27;container&#x27;, container);
-	}.on(&#x27;init&#x27;),
-
-  /**
-    Unregisters the range marker from its parent when the range marker is destroyed.
-    @method _unregister
-    @private
-  */
-  _unregister: function() {
-    this.get(&#x27;container&#x27;).unregisterMarker(this);
-  }.on(&#x27;willDestroyElement&#x27;)
+	/**
+		The computed event y position relative to the document
+		@property pagePositionY
+		@type Number
+		@readonly
+	*/
+	pagePositionY: function(){
+		return this.get(&#x27;graphPositionY&#x27;) + this.get(&#x27;graph.graphY&#x27;) + this.get(&#x27;graphOffset.top&#x27;);
+	}.property(&#x27;graphPositionY&#x27;, &#x27;graph.graphY&#x27;, &#x27;graphOffset.top&#x27;),
 });
     </pre>
 </div>

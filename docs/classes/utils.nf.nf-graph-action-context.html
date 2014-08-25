@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-y-diff - Ember-CLI-Ember-DVC</title>
+    <title>utils.nf.nf-graph-action-context - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -148,15 +148,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-y-diff Class</h1>
+                        <h1>utils.nf.nf-graph-action-context Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends Ember.Object
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-y-diff.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:5</code></a>
+            Defined in: <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l3"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:3</code></a>
         </div>
     
 
@@ -172,15 +176,7 @@
 
 
 <div class="box intro">
-    <p>Draws a box underneath (or over) the y axis to between the given <code>a</code> and <code>b</code>
-domain values. Component content is used to template a label in that box.</p>
-<h2 id="tips">Tips</h2>
-<ul>
-<li>Should be outside of <code>nf-graph-content</code>.</li>
-<li>Should be &quot;above&quot; <code>nf-y-axis</code> in the markup.</li>
-<li>As a convenience, <code>&lt;text&gt;</code> elements will automatically be positioned based on y-axis orientation
-due to default styling.</li>
-</ul>
+    <p>Event object for graph events</p>
 
 </div>
 
@@ -208,31 +204,24 @@ due to default styling.</li>
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods">
+                    <ul class="index-list methods extends">
                         
                             <li class="index-item method private">
-                                <a href="#method__nonTransitionalUpdate">_nonTransitionalUpdate</a>
+                                <a href="#method_identity">identity</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__transitionalUpdate">_transitionalUpdate</a>
+                            <li class="index-item method">
+                                <a href="#method_natualSort">natualSort</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__triggerNonTransitionalUpdate">_triggerNonTransitionalUpdate</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__triggerUpdates">_triggerUpdates</a>
+                            <li class="index-item method">
+                                <a href="#method_nearestIndexTo">nearestIndexTo</a>
 
                                 
                                 
@@ -246,108 +235,73 @@ due to default styling.</li>
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
                             <li class="index-item property">
-                                <a href="#property_a">a</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_b">b</a>
+                                <a href="#property_data">data</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_contentPadding">contentPadding</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_contentTransform">contentTransform</a>
+                                <a href="#property_graph">graph</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_contentX">contentX</a>
+                                <a href="#property_graphOffset">graphOffset</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_diff">diff</a>
+                                <a href="#property_graphPositionX">graphPositionX</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_duration">duration</a>
+                                <a href="#property_graphPositionY">graphPositionY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_height">height</a>
+                                <a href="#property_pagePositionX">pagePositionX</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_isOrientRight">isOrientRight</a>
+                                <a href="#property_pagePositionY">pagePositionY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_isPositive">isPositive</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_parentController">parentController</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_transform">transform</a>
+                                <a href="#property_source">source</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_width">width</a>
+                                <a href="#property_x">x</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_y">y</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_yCenter">yCenter</a>
+                                <a href="#property_x">x</a>
 
                                 
                                 
@@ -367,13 +321,27 @@ due to default styling.</li>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method__nonTransitionalUpdate" class="method item private">
-    <h3 class="name"><code>_nonTransitionalUpdate</code></h3>
+                    <div id="method_identity" class="method item private">
+    <h3 class="name"><code>identity</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>x</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
     
 
     
@@ -401,7 +369,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l199"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:199</code></a>
+        <a href="../files/app-addon_utils_nf_array-helpers.js.html#l5"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:5</code></a>
         
         </p>
 
@@ -412,10 +380,137 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>Updates the elements horizontal positions using D3.</p>
+        <p>returns whatever you pass into it.</p>
 
     </div>
 
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">x</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Any</span>:
+                    
+                    <p>x</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_natualSort" class="method item">
+    <h3 class="name"><code>natualSort</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>arr</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_array-helpers.js.html#l96"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:96</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sorts the array &quot;naturally&quot;. Meaning taking into account both
+alphabetical and numeric sorting within strings.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">arr</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the array to sort</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
     
 
     
@@ -424,19 +519,39 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="method__transitionalUpdate" class="method item private">
-    <h3 class="name"><code>_transitionalUpdate</code></h3>
+                    <div id="method_nearestIndexTo" class="method item">
+    <h3 class="name"><code>nearestIndexTo</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>arr</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>mappingFn</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
     
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -458,7 +573,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l171"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:171</code></a>
+        <a href="../files/app-addon_utils_nf_array-helpers.js.html#l16"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:16</code></a>
         
         </p>
 
@@ -469,124 +584,67 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>Begins the the D3 transition to adjust the vertical positions of the diff box</p>
+        <p>Performs a binary search on the array and finds the nearest index to the value passed.</p>
 
     </div>
 
     
+        <div class="params">
+            <h4>Parameters:</h4>
 
-    
-
-    
-</div>
-
-                
-                    <div id="method__triggerNonTransitionalUpdate" class="method item private">
-    <h3 class="name"><code>_triggerNonTransitionalUpdate</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
+            <ul class="params-list">
             
-                
-                <p>
-                
-                Defined in
-                
+                <li class="param">
+                    
+                        <code class="param-name">arr</code>
+                        <span class="type">Array</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the <em>sorted</em> array to search.</p>
+
+                    </div>
+
+                    
+                </li>
             
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l223"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:223</code></a>
-        
-        </p>
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type">Number</span>
+                    
 
+                    
 
-        
+                    <div class="param-description">
+                        <p>the value to find the nearest index to.</p>
 
-        
-    </div>
+                    </div>
 
-    <div class="description">
-        <p>Schedules non-transitioned properties on the elements to update when underlying values are changed.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__triggerUpdates" class="method item private">
-    <h3 class="name"><code>_triggerUpdates</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
+                    
+                </li>
             
-                
-                <p>
-                
-                Defined in
-                
+                <li class="param">
+                    
+                        <code class="param-name">mappingFn</code>
+                        <span class="type">Function</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>an optional function for pulling values out of the 
+array items.</p>
+
+                    </div>
+
+                    
+                </li>
             
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l213"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:213</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Schedules a transition when <code>a</code> or <code>b</code> changes, and when the component is initialized.</p>
-
-    </div>
-
+            </ul>
+        </div>
     
 
     
@@ -603,9 +661,9 @@ due to default styling.</li>
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_a" class="property item">
-    <h3 class="name"><code>a</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_data" class="property item">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Object</span>
 
     
 
@@ -626,7 +684,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l26"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:26</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l40"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:40</code></a>
         
         </p>
 
@@ -636,7 +694,7 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The starting domain value of the difference measurement. The subrahend of the difference calculation.</p>
+        <p>Item data for the event and/or additional data.</p>
 
     </div>
 
@@ -650,9 +708,9 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_b" class="property item">
-    <h3 class="name"><code>b</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_graph" class="property item">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
 
     
 
@@ -673,7 +731,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l34"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:34</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l24"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:24</code></a>
         
         </p>
 
@@ -683,7 +741,7 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The ending domain value of the difference measurement. The minuend of the difference calculation.</p>
+        <p>The nf-graph component of the event</p>
 
     </div>
 
@@ -697,8 +755,53 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_contentPadding" class="property item">
-    <h3 class="name"><code>contentPadding</code></h3>
+                    <div id="property_graphOffset" class="property item">
+    <h3 class="name"><code>graphOffset</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l70"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:70</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The jQuery offset of the graph&#39;s element</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graphPositionX" class="property item">
+    <h3 class="name"><code>graphPositionX</code></h3>
     <span class="type">Number</span>
 
     
@@ -720,7 +823,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:42</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l48"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:48</code></a>
         
         </p>
 
@@ -730,56 +833,7 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The amount of padding, in pixels, between the edge of the difference &quot;box&quot; and the content container</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 5</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_contentTransform" class="property item private">
-    <h3 class="name"><code>contentTransform</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l160"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:160</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The SVG transformation used to position the content container.</p>
+        <p>The computed x position of the event relative to the graph content</p>
 
     </div>
 
@@ -791,8 +845,8 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_contentX" class="property item">
-    <h3 class="name"><code>contentX</code></h3>
+                    <div id="property_graphPositionY" class="property item">
+    <h3 class="name"><code>graphPositionY</code></h3>
     <span class="type">Number</span>
 
     
@@ -814,7 +868,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l150"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:150</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l59"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:59</code></a>
         
         </p>
 
@@ -824,7 +878,7 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The x pixel coordinate of the content container.</p>
+        <p>The computed y position of the event relative to the graph content</p>
 
     </div>
 
@@ -836,8 +890,8 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_diff" class="property item">
-    <h3 class="name"><code>diff</code></h3>
+                    <div id="property_pagePositionX" class="property item">
+    <h3 class="name"><code>pagePositionX</code></h3>
     <span class="type">Number</span>
 
     
@@ -859,7 +913,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l107"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:107</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l80"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:80</code></a>
         
         </p>
 
@@ -869,7 +923,7 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The calculated difference between <code>a</code> and <code>b</code>.</p>
+        <p>The computed event x position relative to the document</p>
 
     </div>
 
@@ -881,8 +935,8 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_duration" class="property item">
-    <h3 class="name"><code>duration</code></h3>
+                    <div id="property_pagePositionY" class="property item">
+    <h3 class="name"><code>pagePositionY</code></h3>
     <span class="type">Number</span>
 
     
@@ -904,7 +958,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l50"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:50</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l90"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:90</code></a>
         
         </p>
 
@@ -914,12 +968,10 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The duration of the transition, in milliseconds, as the difference slides vertically</p>
+        <p>The computed event y position relative to the document</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> 400</p>
     
 
     
@@ -928,9 +980,9 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_height" class="property item">
-    <h3 class="name"><code>height</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_source" class="property item">
+    <h3 class="name"><code>source</code></h3>
+    <span class="type">Ember.Component</span>
 
     
 
@@ -951,7 +1003,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l83"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:83</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l32"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:32</code></a>
         
         </p>
 
@@ -961,10 +1013,12 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>The calculated height of the difference box, in pixels.</p>
+        <p>The source component for the event.</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -973,9 +1027,9 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_isOrientRight" class="property item">
-    <h3 class="name"><code>isOrientRight</code></h3>
-    <span class="type">Boolean</span>
+                    <div id="property_x" class="property item">
+    <h3 class="name"><code>x</code></h3>
+    <span class="type">Unknown</span>
 
     
 
@@ -996,7 +1050,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l125"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:125</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l10"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:10</code></a>
         
         </p>
 
@@ -1006,10 +1060,12 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>Returns <code>true</code> if the graph&#39;s y-axis component is configured to orient right.</p>
+        <p>Gets or sets the domain x value</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1018,9 +1074,9 @@ due to default styling.</li>
 </div>
 
                 
-                    <div id="property_isPositive" class="property item">
-    <h3 class="name"><code>isPositive</code></h3>
-    <span class="type">Boolean</span>
+                    <div id="property_x" class="property item">
+    <h3 class="name"><code>x</code></h3>
+    <span class="type">Unknown</span>
 
     
 
@@ -1041,7 +1097,7 @@ due to default styling.</li>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l117"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:117</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l17"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:17</code></a>
         
         </p>
 
@@ -1051,239 +1107,12 @@ due to default styling.</li>
     </div>
 
     <div class="description">
-        <p>Returns <code>true</code> if <code>diff</code> is a positive number</p>
+        <p>Gets or sets the domain y value</p>
 
     </div>
 
     
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_parentController" class="property item private">
-    <h3 class="name"><code>parentController</code></h3>
-    <span class="type">Ember.Controller</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l141"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:141</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The view controller for the view this component is present in</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_transform" class="property item private">
-    <h3 class="name"><code>transform</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l98"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:98</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The SVG transformation of the component.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_width" class="property item">
-    <h3 class="name"><code>width</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l133"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:133</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The width of the difference box</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_y" class="property item">
-    <h3 class="name"><code>y</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l68"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:68</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The calculated top of the difference box, in pixels</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_yCenter" class="property item">
-    <h3 class="name"><code>yCenter</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:58</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The calculated vertical center of the difference box, in pixels.</p>
-
-    </div>
-
+        <p><strong>Default:</strong> null</p>
     
 
     

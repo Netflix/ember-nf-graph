@@ -103,6 +103,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+            
                 <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
             
             </ul>
@@ -231,8 +233,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	click: function(e) {
 		var props = this.getProperties(&#x27;x&#x27;, &#x27;y&#x27;, &#x27;element&#x27;, &#x27;data&#x27;);
-		Ember.mixin(props, { originalEvent: e });
-		var context = this.get(&#x27;graph&#x27;).createActionContext(props.x, props.y, props);
+		var context = this.get(&#x27;graph&#x27;).createActionContext(props.x, props.y, this, props.data);
 		this.sendAction(&#x27;action&#x27;, context);
 	},
 });

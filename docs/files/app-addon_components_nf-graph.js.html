@@ -103,6 +103,8 @@
             
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
+                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+            
                 <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
             
             </ul>
@@ -152,6 +154,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
+import GraphActionContext from &#x27;../utils/nf/graph-action-context&#x27;;
 
 var computedBool = Ember.computed.bool;
 
@@ -1131,39 +1134,19 @@ export default Ember.Component.extend({
     @method createActionContext
     @param x Domain value x
     @param y Domain value y
-    @param context {Object} additional context to mixin to the result
-    @return {Object} a context to send with &#x60;sendAction&#x60;
+    @param source {Ember.Component} the component that is firing the event
+    @param data {Object} item data for the event.
+    @return {utils.nf.graph-action-context} a context to send with &#x60;sendAction&#x60;
     @private
   */
-  createActionContext: function(x, y, context){
-    var self = this;
-    var xScale = this.get(&#x27;xScale&#x27;);
-    var yScale = this.get(&#x27;yScale&#x27;);
-    var graphOffset = this.$().offset();
-    var positionX = xScale ? xScale(x) : NaN;
-    var positionY = yScale ? yScale(y) : NaN;
-    var graphX = this.get(&#x27;graphX&#x27;);
-    var graphY = this.get(&#x27;graphY&#x27;);
-    var offsetX = positionX + graphX + graphOffset.left;
-    var offsetY = positionY + graphY + graphOffset.top;
-
-    context = context || {};
-
-    Ember.mixin(context, {
+  createActionContext: function(x, y, source, data){
+    return GraphActionContext.create({
       x: x,
       y: y,
-      pagePosition: {
-        x: offsetX,
-        y: offsetY,
-      },
-      graphPosition: {
-        x: graphX,
-        y: graphY,
-      },
-      graph: self,
+      graph: this,
+      source: source,
+      data: data,
     });
-
-    return context;
   },
 });
 
