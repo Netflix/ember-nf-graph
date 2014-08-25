@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { property, observer } from '../utils/computed-property-helpers';
+import GraphActionContext from '../utils/nf/graph-action-context';
 
 var computedBool = Ember.computed.bool;
 
@@ -979,38 +980,18 @@ export default Ember.Component.extend({
     @method createActionContext
     @param x Domain value x
     @param y Domain value y
-    @param context {Object} additional context to mixin to the result
-    @return {Object} a context to send with `sendAction`
+    @param source {Ember.Component} the component that is firing the event
+    @param data {Object} item data for the event.
+    @return {utils.nf.graph-action-context} a context to send with `sendAction`
     @private
   */
-  createActionContext: function(x, y, context){
-    var self = this;
-    var xScale = this.get('xScale');
-    var yScale = this.get('yScale');
-    var graphOffset = this.$().offset();
-    var positionX = xScale ? xScale(x) : NaN;
-    var positionY = yScale ? yScale(y) : NaN;
-    var graphX = this.get('graphX');
-    var graphY = this.get('graphY');
-    var offsetX = positionX + graphX + graphOffset.left;
-    var offsetY = positionY + graphY + graphOffset.top;
-
-    context = context || {};
-
-    Ember.mixin(context, {
+  createActionContext: function(x, y, source, data){
+    return GraphActionContext.create({
       x: x,
       y: y,
-      pagePosition: {
-        x: offsetX,
-        y: offsetY,
-      },
-      graphPosition: {
-        x: graphX,
-        y: graphY,
-      },
-      graph: self,
+      graph: this,
+      source: source,
+      data: data,
     });
-
-    return context;
   },
 });

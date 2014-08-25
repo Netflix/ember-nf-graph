@@ -36,8 +36,8 @@ export default Ember.ObjectController.extend({
 				padding: '10px',
 				background: 'white',
 				position: 'absolute',
-				top: e.pagePosition.y + 'px',
-				left: e.pagePosition.x + 'px',
+				top: e.get('pagePositionY') + 'px',
+				left: e.get('pagePositionX') + 'px',
 			});
 
 			testDiv.text(e.data.y);

@@ -79,8 +79,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
 	click: function(e) {
 		var props = this.getProperties('x', 'y', 'element', 'data');
-		Ember.mixin(props, { originalEvent: e, source: this });
-		var context = this.get('graph').createActionContext(props.x, props.y, props);
+		var context = this.get('graph').createActionContext(props.x, props.y, this, props.data);
 		this.sendAction('action', context);
 	},
 });
