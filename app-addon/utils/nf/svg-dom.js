@@ -30,7 +30,7 @@ function inlineAllStyles(element) {
   @method svgToImageUrl
   @param svg {SVGSVGElement} the svg element to render
 */
-function svgToImageUrl(svg, callback) {
+export function svgToImageUrl(svg, callback) {
   var clone = svg.cloneNode(true);
   var parent = svg.parentElement;
   
@@ -61,7 +61,7 @@ function svgToImageUrl(svg, callback) {
   img.src = url;  
 }
 
-function downloadSvg(svg) {
+export function downloadSvg(svg) {
   svgToImageUrl(svg, function(url) {
     var dlUrl = url.replace('image/png', 'image/octet-stream');
     location.href = dlUrl;

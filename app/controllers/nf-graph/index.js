@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+var $ = window.jQuery;
+
 export default Ember.ObjectController.extend({
 	graphWidth: 400,
 	
