@@ -68,9 +68,6 @@ export default Ember.Mixin.create({
   */
   didHoverChange: function(e) {
     var trackingMode = this.get('trackingMode');
-    if(!trackingMode || trackingMode === 'none') {
-      return;
-    }
 
     if(this.get('selected') && 
       (trackingMode === 'selected-hover' ||
@@ -78,8 +75,7 @@ export default Ember.Mixin.create({
       trackingMode === 'selected-snap-last')) {
       this.set('trackedData', e.get('nearestData'));
     }
-
-    if(trackingMode === 'hover' ||
+    else if(trackingMode === 'hover' ||
       trackingMode === 'snap-first' ||
       trackingMode === 'snap-last') {
       this.set('trackedData', e.get('nearestData'));
