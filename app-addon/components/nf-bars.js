@@ -47,8 +47,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		@property bars
 		@readonly
 	*/
-	bars: property('Scale', 'Scale', 'renderedData.@each', 'graph.graphHeight', 'getBarClass',
+	bars: property('xScale', 'yScale', 'renderedData.@each', 'graph.graphHeight', 'getBarClass',
 		function(xScale, yScale, renderedData, graphHeight, getBarClass) {
+			if(!xScale || !yScale || !renderedData) {
+				return null;
+			}
+
 			var rangeBand = xScale.rangeBand();
 
 			return renderedData.map(function(d) {
