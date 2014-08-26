@@ -64,13 +64,11 @@ export default Ember.Component.extend(HasGraphParent, {
     this.set('isVisible', false);
   },
 
-  graphContent: Ember.computed.oneWay('graph.content'),
-
-  _subscribeToContentHover: function(){
-    var content = this.get('graphContent');
+  _setupBindings: function() {
+    var content = this.get('graph.content');
     if(content) {
       content.on('didHoverChange', this, this.didContentHoverChange);
       content.on('didHoverEnd', this, this.didContentHoverEnd);
     }
-  }.observes('graphContent'),
+  }.observes('graph.content'),
 });

@@ -116,14 +116,14 @@ export default Ember.Component.extend(HasGraphParent, {
   _triggerHoverChange: function(e) {
     this.trigger('didHoverChange', GraphMouseActionContext.create({
       originalEvent: e,
-      container: this,
+      source: this,
       graph: this.get('graph'),
     }));
 
     if(this.get('hoverChange')) {
       this.sendAction('hoverChange', GraphMouseActionContext.create({
         originalEvent: e,
-        container: this,
+        source: this,
         graph: this.get('graph'),
       }));
     }
@@ -140,14 +140,14 @@ export default Ember.Component.extend(HasGraphParent, {
   _triggerHoverEnd: function(e) {
     this.trigger('didHoverEnd', GraphMouseActionContext.create({
       originalEvent: e,
-      container: this,
+      source: this,
       graph: this.get('graph'),
     }));
 
     if(this.get('hoverEnd')) {
       this.sendAction('hoverEnd', GraphMouseActionContext.create({
         originalEvent: e,
-        container: this,
+        source: this,
         graph: this.get('graph'),
       }));
     }
@@ -161,15 +161,7 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   frets: Ember.computed.alias('graph.xAxis.ticks'),
 
-  /**
-    Sets graph content when graph set
-    @method _setGraphContent
-    @private
-  */
-  _setGraphContent: function(){
-    var graph = this.get('graph');
-    if(graph) {
-      graph.set('content', this);
-    }
-  }.observes('graph'),
+  hasGraph: function(graph) {
+    graph.set('content', this);
+  },
 });

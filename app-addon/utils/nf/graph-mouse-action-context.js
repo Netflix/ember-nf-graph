@@ -5,11 +5,11 @@ import { property } from '../computed-property-helpers';
 export default Ember.Object.extend({
 	originalEvent: null,
 
-	container: null,
+	source: null,
 
 	graph: null,
 
-	mousePoint: property('container.element', 'originalEvent', function(containerElement, e) {
+	mousePoint: property('source.element', 'originalEvent', function(containerElement, e) {
 		if(containerElement && e) {
 			return getMousePoint(containerElement, e);
 		}
@@ -27,5 +27,11 @@ export default Ember.Object.extend({
 		return scale && scale.invert ? scale.invert(mouse) : NaN;
 	}),
 
-	xScale: Ember.computed.alias('container.xScale'),
+	xScale: property('source.xScale', 'graph.xScale', function(sourceScale, graphScale) {
+		return sourceScale || graphScale;
+	}),
+
+	yScale: property('source.yScale', 'graph.yScale', function(sourceScale, graphScale) {
+		return sourceScale || graphScale;
+	}),
 });
