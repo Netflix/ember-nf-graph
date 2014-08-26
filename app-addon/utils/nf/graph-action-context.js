@@ -45,10 +45,24 @@ export default Ember.Object.extend({
 	*/
 	data: null,
 
+	/**
+		The x scale used to calculate graph position.
+		Comes from `source` if available, otherwise comes from `graph`
+		@property xScale
+		@type d3.scale
+		@readonly
+	*/
 	xScale: function(){
 		return this.get('source.xScale') || this.get('graph.xScale');
 	}.property('source.xScale', 'graph.xScale'),
 
+	/**
+		The y scale used to calculate graph position.
+		Comes from `source` if available, otherwise comes from `graph`
+		@property yScale
+		@type d3.scale
+		@readonly
+	*/
 	yScale: function(){
 		return this.get('source.yScale') || this.get('graph.yScale');
 	}.property('source.yScale', 'graph.yScale'),
