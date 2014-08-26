@@ -161,6 +161,7 @@ import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
 import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
 import AreaUtils from &#x27;../mixins/graph-area-utils&#x27;;
 import GraphicWithTrackingDot from &#x27;../mixins/graph-graphic-with-tracking-dot&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
@@ -178,9 +179,10 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-graphic-with-tracking-dot
+  @uses mixins.graph-requires-scale-source
 */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
-  Selectable, AreaUtils, GraphicWithTrackingDot, {    
+  Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, {    
 
     tagName: &#x27;g&#x27;,
     
@@ -216,7 +218,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
         });
         
         while(result.length &lt; renderedData.length) {
-          result.push(yMin);
+          result.push(-99999999);
         }
 
         return result;
@@ -231,11 +233,13 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
 
     areaFn: function(){
-      var xScale = this.get(&#x27;graph.xScale&#x27;);
-      var yScale = this.get(&#x27;graph.yScale&#x27;);
+      var xScale = this.get(&#x27;xScale&#x27;);
+      var yScale = this.get(&#x27;yScale&#x27;);
       var interpolator = this.get(&#x27;interpolator&#x27;);
       return this.createAreaFn(xScale, yScale, interpolator);
-    }.property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;interpolator&#x27;),
+    }.property(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;, &#x27;multiplierY&#x27;),
+
+    multiplierY: 1,
 
     d: function(){
       return this.get(&#x27;areaFn&#x27;)(this.get(&#x27;areaData&#x27;));

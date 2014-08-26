@@ -157,6 +157,7 @@
 import Ember from &#x27;ember&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import HasGraphParent  from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
   A component for adding a templated y axis to an &#x60;nf-graph&#x60; component.
@@ -185,8 +186,10 @@ import HasGraphParent  from &#x27;../mixins/graph-has-graph-parent&#x27;;
 
   @namespace components
   @class nf-y-axis
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tagName: &#x27;g&#x27;,
 
   /**
@@ -349,7 +352,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Array
     @readonly
   */
-  ticks: property(&#x27;graph.yScale&#x27;, &#x27;tickCount&#x27;, &#x27;graph.yScaleType&#x27;, &#x27;tickPadding&#x27;, &#x27;axisLineX&#x27;, &#x27;tickLength&#x27;, &#x27;isOrientRight&#x27;, &#x27;tickFilter&#x27;, &#x27;uniqueYData&#x27;,
+  ticks: property(&#x27;yScale&#x27;, &#x27;tickCount&#x27;, &#x27;graph.yScaleType&#x27;, &#x27;tickPadding&#x27;, &#x27;axisLineX&#x27;, &#x27;tickLength&#x27;, &#x27;isOrientRight&#x27;, &#x27;tickFilter&#x27;, &#x27;uniqueYData&#x27;,
     function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
       var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
       var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;

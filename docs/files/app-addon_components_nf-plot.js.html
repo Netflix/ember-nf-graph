@@ -156,6 +156,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
 	Plots a group tag on a graph at a given x and y domain coordinate.
@@ -163,8 +164,9 @@ import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 	@class nf-plot
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
+	@uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: &#x27;g&#x27;,
 
 	attributeBindings: [&#x27;transform&#x27;],
@@ -204,10 +206,10 @@ export default Ember.Component.extend(HasGraphParent, {
 		@readonly
 	*/
 	rangeX: function(){
-		var xScale = this.get(&#x27;graph.xScale&#x27;);
+		var xScale = this.get(&#x27;xScale&#x27;);
 		var x = this.get(&#x27;x&#x27;);
 		return (xScale ? xScale(x) : 0) || 0;
-	}.property(&#x27;x&#x27;, &#x27;graph.xScale&#x27;),
+	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
 
 	/**
 		The calculated y coordinate
@@ -216,10 +218,10 @@ export default Ember.Component.extend(HasGraphParent, {
 		@readonly
 	*/
 	rangeY: function(){
-		var yScale = this.get(&#x27;graph.yScale&#x27;);
+		var yScale = this.get(&#x27;yScale&#x27;);
 		var y = this.get(&#x27;y&#x27;);
 		return (yScale ? yScale(y) : 0) || 0;
-	}.property(&#x27;y&#x27;, &#x27;graph.yScale&#x27;),
+	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
 
 	/**
 		The SVG transform of the component&#x27;s &#x60;&lt;g&gt;&#x60; tag.

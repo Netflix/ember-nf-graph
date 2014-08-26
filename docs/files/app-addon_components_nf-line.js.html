@@ -161,7 +161,7 @@ import LineUtils from &#x27;../mixins/graph-line-utils&#x27;;
 import SelectableGraphic from &#x27;../mixins/graph-selectable-graphic&#x27;;
 import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
 import GraphicWithTrackingDot from &#x27;../mixins/graph-graphic-with-tracking-dot&#x27;;
-
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
@@ -175,9 +175,11 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-graphic-with-tracking-dot
+  @uses mixins.graph-requires-scale-source
 */
 export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
-  LineUtils, RegisteredGraphic, GraphicWithTrackingDot, {
+  LineUtils, RegisteredGraphic, GraphicWithTrackingDot, RequireScaleSource, {
+    
   tagName: &#x27;g&#x27;,
   
   /**
@@ -199,7 +201,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @return {String} an SVG path data string
   */
-  lineFn: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;interpolator&#x27;, function(xScale, yScale, interpolator) {
+  lineFn: property(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;, function(xScale, yScale, interpolator) {
     return this.createLineFn(xScale, yScale, interpolator);
   }),
 

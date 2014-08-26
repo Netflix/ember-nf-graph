@@ -157,6 +157,7 @@
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
 	Plots a circle at a given x and y domain value on an &#x60;nf-graph&#x60;.
@@ -165,8 +166,9 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 	@class nf-dot
 	@extends Ember.Component
   @uses mixins.graph-has-graph-parent
+	@uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: &#x27;circle&#x27;,
 
 	attributeBindings: [&#x27;r&#x27;, &#x27;cy&#x27;, &#x27;cx&#x27;],
@@ -202,7 +204,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 		@readonly
 	*/
-	cx: property(&#x27;x&#x27;, &#x27;graph.xScale&#x27;, function(x, xScale) {
+	cx: property(&#x27;x&#x27;, &#x27;xScale&#x27;, function(x, xScale) {
 		return !isNaN(x) &amp;&amp; xScale ? xScale(x) : -1;
 	}),
 
@@ -213,7 +215,7 @@ export default Ember.Component.extend(HasGraphParent, {
 		@private
 		@readonly
 	*/
-	cy: property(&#x27;y&#x27;, &#x27;graph.yScale&#x27;, function(y, yScale) {
+	cy: property(&#x27;y&#x27;, &#x27;yScale&#x27;, function(y, yScale) {
 		return !isNaN(y) &amp;&amp; yScale ? yScale(y) : -1;
 	}),
 

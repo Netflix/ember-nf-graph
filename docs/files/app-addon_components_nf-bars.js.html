@@ -160,6 +160,7 @@ import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
 import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
 import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
 	Adds a bar graph to an &#x60;nf-graph&#x60; component.
@@ -172,8 +173,9 @@ import { property } from &#x27;../utils/computed-property-helpers&#x27;;
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
+export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, {
 	tagName: &#x27;g&#x27;,
 
 	classNames: [&#x27;nf-bars&#x27;],
@@ -201,7 +203,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		@property bars
 		@readonly
 	*/
-	bars: property(&#x27;graph.xScale&#x27;, &#x27;graph.yScale&#x27;, &#x27;renderedData.@each&#x27;, &#x27;graph.graphHeight&#x27;, &#x27;getBarClass&#x27;,
+	bars: property(&#x27;Scale&#x27;, &#x27;Scale&#x27;, &#x27;renderedData.@each&#x27;, &#x27;graph.graphHeight&#x27;, &#x27;getBarClass&#x27;,
 		function(xScale, yScale, renderedData, graphHeight, getBarClass) {
 			var rangeBand = xScale.rangeBand();
 
