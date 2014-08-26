@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
 	Plots a group tag on a graph at a given x and y domain coordinate.
@@ -7,8 +8,9 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
 	@class nf-plot
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
+	@uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'g',
 
 	attributeBindings: ['transform'],

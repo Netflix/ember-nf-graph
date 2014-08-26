@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
 	Draws a vertical line on a graph at a given x domain value
@@ -8,8 +9,9 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
 	@class nf-vertical-line
 	@extends Ember.Component
   @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'line',
 
 	classNames: ['nf-vertical-line'],

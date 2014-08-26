@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
 	Draws a horizontal line on the graph at a given y domain value
@@ -8,8 +9,9 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
 	@class nf-horizontal-line
 	@extends Ember.Component
   @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'line',
 
 	attributeBindings: ['lineY:y1', 'lineY:y2', 'x1', 'x2'],

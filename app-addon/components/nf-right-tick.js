@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
 	Draws a line and a chevron at the specified domain value 
@@ -15,8 +16,9 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
 	@class nf-right-tick
 	@extends Ember.Component
   @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'g',
 
 	classNames: ['nf-right-tick'],

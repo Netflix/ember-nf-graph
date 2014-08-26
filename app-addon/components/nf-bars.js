@@ -4,6 +4,7 @@ import DataGraphic from '../mixins/graph-data-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import parsePropExpr from '../utils/parse-property-expression';
 import { property } from '../utils/computed-property-helpers';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
 	Adds a bar graph to an `nf-graph` component.
@@ -16,8 +17,9 @@ import { property } from '../utils/computed-property-helpers';
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, {
+export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, {
 	tagName: 'g',
 
 	classNames: ['nf-bars'],

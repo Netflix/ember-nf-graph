@@ -1,14 +1,16 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import { property } from '../utils/computed-property-helpers';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 /**
 	Draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`.
 	@namespace components
   @class nf-selection-box
   @extends Ember.Component
   @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'g',	
 
 	/**

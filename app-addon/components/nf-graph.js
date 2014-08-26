@@ -247,8 +247,16 @@ export default Ember.Component.extend({
   /** 
     Allows child compoenents to identify graph parent.
     @property isGraph
+    @private
   */
   isGraph: true,
+
+  /**
+    Identifies this graph to its children as providing scales.
+    @property isScaleSource
+    @private
+  */
+  isScaleSource: true,
 
   /**
     @property hasRendered

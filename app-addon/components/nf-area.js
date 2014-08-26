@@ -5,6 +5,7 @@ import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import DataGraphic from '../mixins/graph-data-graphic';
 import AreaUtils from '../mixins/graph-area-utils';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 import { property } from '../utils/computed-property-helpers';
 
@@ -22,9 +23,10 @@ import { property } from '../utils/computed-property-helpers';
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-graphic-with-tracking-dot
+  @uses mixins.graph-requires-scale-source
 */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
-  Selectable, AreaUtils, GraphicWithTrackingDot, {    
+  Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, {    
 
     tagName: 'g',
     

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import HasGraphParent  from '../mixins/graph-has-graph-parent';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
   A component for adding a templated y axis to an `nf-graph` component.
@@ -29,8 +30,10 @@ import HasGraphParent  from '../mixins/graph-has-graph-parent';
 
   @namespace components
   @class nf-y-axis
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tagName: 'g',
 
   /**

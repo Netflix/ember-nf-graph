@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import { property } from '../utils/computed-property-helpers';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
 	Plots a circle at a given x and y domain value on an `nf-graph`.
@@ -9,8 +10,9 @@ import { property } from '../utils/computed-property-helpers';
 	@class nf-dot
 	@extends Ember.Component
   @uses mixins.graph-has-graph-parent
+	@uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'circle',
 
 	attributeBindings: ['r', 'cy', 'cx'],

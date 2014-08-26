@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import { property } from '../utils/computed-property-helpers';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
   A component for adding a templated x axis to an `nf-graph` component.
@@ -31,8 +32,9 @@ import { property } from '../utils/computed-property-helpers';
   @class nf-x-axis
   @extends Ember.Component
   @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tagName: 'g',
 
   attributeBindings: ['transform'],

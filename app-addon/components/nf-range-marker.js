@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import RequireScaleSource from '../mixins/graph-requires-scale-source';
 
 /**
   Draws a rectangular strip with a templated label on an `nf-graph`.
@@ -9,8 +10,9 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
   @class nf-range-marker
   @extends Ember.Component
   @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	tagName: 'g',
 
 	attributeBindings: ['transform'],
