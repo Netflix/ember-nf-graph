@@ -3,7 +3,7 @@
     <thead>
       <tr>
         {{#each column in columns}}
-          {{view 'nf-table-header' column=column classNames=column.header.classNames controller=parentController}}
+          {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
         {{/each}}
       </tr>
     </thead>
@@ -12,13 +12,13 @@
       {{#each group in sortedGroups}}
         <tr class="nf-table-group">
           {{#each column in tableGroup.columns}}
-            {{view 'nf-table-cell' column=column classNames=column.cell.classNames controller=parentController}}
+            {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
           {{/each}}
         </tr>
         {{#each row in group}}
           <tr class="nf-table-group-child">
             {{#each column in columns}}
-              {{view 'nf-table-cell' column=column classNames=column.cell.classNames controller=parentController}}
+              {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
             {{/each}}
           </tr>
         {{/each}}
@@ -30,7 +30,7 @@
     <thead>
       <tr>
         {{#each column in columns}}
-          {{view 'nf-table-header' column=column classNames=column.header.classNames controller=parentController}}
+          {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
         {{/each}}
       </tr>
     </thead>
@@ -39,7 +39,7 @@
       {{#each row in sortedRows}}
         <tr>
           {{#each column in columns}}
-            {{view 'nf-table-cell' column=column classNames=column.cell.classNames controller=parentController}}
+            {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
           {{/each}}
         </tr>
       {{/each}}

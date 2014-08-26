@@ -6,46 +6,34 @@
 	}
 </style>
 
-{{#nf-table rows=myData groupBy="blah" sortMultiple=1}}
-	{{#nf-column sortBy="row.blah"}}
-		{{#nf-header class="test"}}
+{{#nf-table rows=myData sortMultiple=1}}
+	{{#nf-column sortBy="row.blah"}}	
+{{!-- 		{{#nf-header class="test"}}
 			Blah <div class="nf-sort-arrow"></div>
-		{{/nf-header}}
+		{{/nf-header}} --}}
+		
 		{{#nf-cell}}
 			{{row.blah}}
 		{{/nf-cell}}
 	{{/nf-column}}
+
 	{{#nf-column sortBy="row.foo"}}
-		{{#nf-header}}
+{{!-- 		{{#nf-header}}
 			Foo <div class="nf-sort-arrow"></div>
-		{{/nf-header}}
+		{{/nf-header}} --}}
+		
 		{{#nf-cell}}
 			<a href="#" {{action 'fooCellClicked'}}>test</a>{{row.foo}}
 		{{/nf-cell}}
 	{{/nf-column}}
-	{{#nf-column sortBy="row.bar" sortNatural=1}}
-		{{#nf-header}}
+	
+	{{#nf-column sortBy="row.bar" sortNatural=1}}	
+{{!-- 		{{#nf-header}}
 			Bar <div class="nf-sort-arrow"></div>
-		{{/nf-header}}
+		{{/nf-header}} --}}
+
 		{{#nf-cell}}
 			{{row.bar}}
 		{{/nf-cell}}
 	{{/nf-column}}
-	
-	{{#nf-table-group itemController="nf-table-group-test"}}
-		{{#nf-column sortBy="group.foo"}}
-			{{#nf-cell}}
-				{{group.blah}}
-			{{/nf-cell}}
-		{{/nf-column}}
-
-		{{#nf-column}}
-			{{#nf-cell colspan="2"}}
-				<h4>Foo</h4>
-				Sum: {{group.fooSum}}<br/>
-				Avg: {{group.fooAvg}}<br/>
-				Mean: {{group.fooMean}}
-			{{/nf-cell}}
-		{{/nf-column}}
-	{{/nf-table-group}}
 {{/nf-table}}

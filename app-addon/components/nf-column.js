@@ -18,6 +18,18 @@ export default Ember.Component.extend({
 	*/
 	isDataTableColumn: true,
 
+	header: null,
+
+	cell: null,
+
+	headerClassNames: function() {
+		return this.get('header.classNames') || [];
+	}.property('header.classNames'),
+
+	cellClassNames: function(){
+		return this.get('cell.classNames') || [];
+	}.property('cell.classNames'),
+
 	/**
 		Gets or sets the sort direction for the column.
 
