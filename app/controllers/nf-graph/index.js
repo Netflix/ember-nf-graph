@@ -18,6 +18,8 @@ export default Ember.ObjectController.extend({
 	diffA: 100,
 	diffB: 200,
 
+	fooData: null,
+
 	actions: {
 		test: function(){
 			console.log('test!');
@@ -47,6 +49,16 @@ export default Ember.ObjectController.extend({
 			testDiv.appendTo('body');
 
 			console.log('showData', e);
+		},
+
+		setTrackedData: function(e) {
+			var key = e.source.trackedDataKey;
+			this.set(key, e);
+		},
+
+		setHoverData: function(e) {
+			var key = e.source.hoverDataKey;
+			this.set(key, e);
 		},
 	}
 });

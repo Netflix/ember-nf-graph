@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
+import GraphMouseActionContext from '../utils/nf/graph-mouse-action-context';
 
 /**
   Container component for graphics to display in `nf-graph`. Represents
@@ -105,10 +106,70 @@ export default Ember.Component.extend(HasGraphParent, {
   }.property('graph.yAxis.ticks', 'width', 'height'),
 
   /**
+    The name of the hoverChange action to fire
+    @property hoverChange
+    @type String
+    @default null
+  */
+  hoverChange: null,
+
+  _triggerHoverChange: function(e) {
+    this.trigger('didHoverChange', GraphMouseActionContext.create({
+      originalEvent: e,
+      container: this,
+      graph: this.get('graph'),
+    }));
+
+    if(this.get('hoverChange')) {
+      this.sendAction('hoverChange', GraphMouseActionContext.create({
+        originalEvent: e,
+        container: this,
+        graph: this.get('graph'),
+      }));
+    }
+  }.on('mouseMove'),
+
+  /**
+    The name of the hoverEnd action to fire
+    @property hoverEnd
+    @type String
+    @default null
+  */
+  hoverEnd: null,
+
+  _triggerHoverEnd: function(e) {
+    this.trigger('didHoverEnd', GraphMouseActionContext.create({
+      originalEvent: e,
+      container: this,
+      graph: this.get('graph'),
+    }));
+
+    if(this.get('hoverEnd')) {
+      this.sendAction('hoverEnd', GraphMouseActionContext.create({
+        originalEvent: e,
+        container: this,
+        graph: this.get('graph'),
+      }));
+    }
+  }.on('mouseOut'),
+
+  /**
     An array containing models to render fret lines
     @property frets
     @type Array
     @readonly
   */
   frets: Ember.computed.alias('graph.xAxis.ticks'),
+
+  /**
+    Sets graph content when graph set
+    @method _setGraphContent
+    @private
+  */
+  _setGraphContent: function(){
+    var graph = this.get('graph');
+    if(graph) {
+      graph.set('content', this);
+    }
+  }.observes('graph'),
 });

@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
-import { property } from '../utils/computed-property-helpers';
 
 /**
   A component that adds a "crosshair" to an `nf-graph` that follows the mouse
@@ -32,38 +31,46 @@ export default Ember.Component.extend(HasGraphParent, {
   width: Ember.computed.alias('graph.graphWidth'),
 
   /**
-    The x position, in pixels, of the crosshair center
+    The x position of the crosshairs
     @property x
     @type Number
-    @readonly
+    @default 0
   */
-  x: Ember.computed.alias('graph.mouseX'),
+  x: 0,
 
   /**
-    The y position, in pixels, of the crosshair center
+    The y position of the crosshairs
     @property y
     @type Number
-    @readonly
+    @default 0
   */
-  y: Ember.computed.alias('graph.mouseY'),
+  y: 0,
 
   /**
-    Determines visibility of horizontal "x" line.
-    @property xVisible
+    The visibility of the component
+    @property isVisible
     @type Boolean
-    @readonly
+    @default false
   */
-  xVisible: property('y', 'graph.graphHeight', function(y, graphHeight) {
-    return 0 <= y && y <= graphHeight;
-  }),
+  isVisible: false,
 
-  /**
-    Determines visibility of vertical "y" line.
-    @property yVisible
-    @type Boolean
-    @readonly
-  */
-  yVisible: property('x', 'graph.graphWidth', function(x, graphWidth) {
-    return 0 <= x && x <= graphWidth;
-  }),
+  didContentHoverChange: function(e) {
+    this.set('isVisible', true);
+    this.set('x', e.get('mouseX'));
+    this.set('y', e.get('mouseY'));
+  },
+
+  didContentHoverEnd: function() {
+    this.set('isVisible', false);
+  },
+
+  graphContent: Ember.computed.oneWay('graph.content'),
+
+  _subscribeToContentHover: function(){
+    var content = this.get('graphContent');
+    if(content) {
+      content.on('didHoverChange', this, this.didContentHoverChange);
+      content.on('didHoverEnd', this, this.didContentHoverEnd);
+    }
+  }.observes('graphContent'),
 });

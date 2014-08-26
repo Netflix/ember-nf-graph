@@ -6,18 +6,24 @@
 <label>Multiplier Y: {{input type="range" min="0" step=".01" max="2" value=multiY}}</label><output>{{multiY}}</output><br/>
 <output>{{graphWidth}}px</output>
 
-{{#nf-graph xLink=groupX yLink=groupY selected=selectedThings hoverX=fooGraphHoverX hoverY=fooGraphHoverY mouseX=fooGraphMouseX mouseY=fooGraphMouseY
+{{#nf-graph xLink=groupX yLink=groupY selected=selectedThings 
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50
 	yScaleType="power"}}
 
 	{{#nf-graph-content}}
 		{{#nf-gg scaleZoomX=multiY scaleZoomY=multiY}}
 			{{nf-area selectable=1 selected=fooSelected data=lineData 
-				hoverIndex=fooIndex 
-				hoverData=fooHovered
+				
+				author="Ben"
+
+				trackedDataKey="fooData"
+
+				didTrack="setTrackedData"
+
 				trackingMode="snap-last"}}
-			{{nf-vertical-line x=fooHovered.x}}
-			{{nf-horizontal-line y=fooHovered.y}}	
+			{{nf-vertical-line x=fooData.x}}
+			{{nf-horizontal-line y=fooData.y}}	
+
 
 			{{nf-selection-box xMin=10 xMax=50 yMin=diffA yMax=diffB}}
 		{{/nf-gg}}
@@ -56,29 +62,8 @@
 {{/nf-graph}}
 
 <div>
-	<span>HoveredData</span>
-	<table>
-		<tbody>
-			<tr>
-				<td>line.hoverIndex</td>
-				<td>{{fooIndex}}</td>
-			</tr>
-			<tr>
-				<td>line.hoverData</td>
-				<td>{ x: {{fooHovered.x}}, y: {{fooHovered.y}} }</td>
-			</tr>
-			<tr>
-				<td>graph.hover</td>
-				<td>{ x: {{fooGraphHoverX}}, y: {{fooGraphHoverY}} }</td>
-			</tr>
-
-			<tr>
-				<td>graph.mouse</td>
-				<td>{ x: {{fooGraphMouseX}}, y: {{fooGraphMouseY}} }</td>
-			</tr>
-		</tbody>
-	</table>
-	{{fooIndex}} : {{fooHovered.x}}, {{fooHovered.y}} : {{fooMouseX}}
+	fooData: {{fooData.x}}, {{fooData.y}} <br>
+	fooHovered: {{fooHovered.x}}, {{fooHovered.y}} <br>
 </div>
 
 <style>

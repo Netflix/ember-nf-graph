@@ -61,9 +61,45 @@ export function svgToImageUrl(svg, callback) {
   img.src = url;  
 }
 
+/**
+  Triggers a download of an image rendered from the passed svg document
+  @method downloadSvg
+  @param svg {SVGSVGElement} the svg document to render
+*/
 export function downloadSvg(svg) {
   svgToImageUrl(svg, function(url) {
     var dlUrl = url.replace('image/png', 'image/octet-stream');
     location.href = dlUrl;
   });
+}
+
+/**
+  @method getMousePoint
+  @param container {SVGElement} the container reference to get the mouse position from
+  @param e {MouseEvent} A DOM mouse event
+  @return {Array} the [x,y] data of the mouse position relative to the container
+*/
+export function getMousePoint(container, e) {
+  var x, y;
+  
+  if(e && e.hasOwnProperty('clientX') && e.hasOwnProperty('clientY')) {
+    var svg = container.ownerSVGElement || container;
+    if (svg.createSVGPoint) {
+      var point = svg.createSVGPoint();
+      point.x = e.clientX;
+      point.y = e.clientY;
+      point = point.matrixTransform(container.getScreenCTM().inverse());
+      x = point.x;
+      y = point.y;
+    } else {
+      var rect = container.getBoundingClientRect();
+      x = e.clientX - rect.left - container.clientLeft; 
+      y = e.clientY - rect.top - container.clientTop;
+    }
+  }
+
+  return {
+    x: x,
+    y: y,
+  };
 }

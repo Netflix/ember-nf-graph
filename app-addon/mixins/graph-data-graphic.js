@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
-import { property, observer } from '../utils/computed-property-helpers';
+import { property } from '../utils/computed-property-helpers';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
 
 /**
@@ -200,32 +200,16 @@ export default Ember.Mixin.create({
     return last;
   }),
 
-
-  /**
-    Sets the hoverIndex and hoverData properties when the graph's `hoverX` property changes, or when 
-    the renderedData changes.
-    @method updateHoverIndex
-    @private
-  */
-  updateHoverIndex: observer('graph.hoverX', 'renderedData.@each', function(graphHoverX, renderedData) {
-    var index = -1;
-    if(!isNaN(graphHoverX)) {
-      if(renderedData && renderedData.length > 0) {
-        index = nearestIndexTo(renderedData, graphHoverX, function(d) {
-          return d ? d[0] : null;
-        });
-      }
+  getDataNearX: function(x) {
+    x = +x;
+    if(x === x) {
+      var renderedData = this.get('renderedData');
+      var index = nearestIndexTo(renderedData, x, function(d){
+        return d ? d[0] : null;
+      });
+      return index !== -1 ? renderedData[index] : null;
     }
-
-    this.set('hoverIndex', index);
-    var data = renderedData[index];
-
-    this.set('hoverData', data ? {
-      x: data[0],
-      y: data[1],
-      data: data.data,
-    } : null);
-  }),
+  },
 });
 
 function between(x, a, b) {

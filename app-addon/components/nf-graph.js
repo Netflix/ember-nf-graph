@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { property, observer } from '../utils/computed-property-helpers';
+import { property } from '../utils/computed-property-helpers';
 import GraphActionContext from '../utils/nf/graph-action-context';
 
 var computedBool = Ember.computed.bool;
@@ -819,43 +819,6 @@ export default Ember.Component.extend({
   }.on('willInsertElement'),
 
   /**
-    event handler for mouse movement inside the `graphContentGroup`
-    @method _contentMouseMove
-    @param e {MouseEvent} the DOM mouse event
-    @private
-  */
-  _contentMouseMove: function(e) {
-    var graphContentGroup = this.get('graphContentGroup');
-    var mouse = this.mousePoint(graphContentGroup[0], e);
-    this.set('mouseX', mouse[0]);
-    this.set('mouseY', mouse[1]);
-  },
-
-  /**
-    Event handler for mouse leaving the `graphContentGroup`
-    @method _contentMouseLeave
-    @private
-  */
-  _contentMouseLeave: function() {
-    this.set('mouseX', -1);
-    this.set('mouseY', -1);
-  },
-
-  /**
-    Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up
-    DOM events for the graph. Fires on `didInsertElement`
-    @method _registerDOM
-    @private
-  */
-  _registerDOM: function () {
-    var graphContentGroup = this.$('.nf-graph-content');
-    this.set('svg', this.$('svg'));
-    this.set('graphContentGroup', graphContentGroup);
-    graphContentGroup.on('mousemove', this._contentMouseMove.bind(this));
-    graphContentGroup.on('mouseleave', this._contentMouseLeave.bind(this));
-  }.on('didInsertElement'),
-
-  /**
     Gets the mouse position relative to the container
     @method mousePoint
     @param container {SVGElement} the SVG element that contains the mouse event
@@ -882,58 +845,6 @@ export default Ember.Component.extend({
     @readonly
   */
   parentController: Ember.computed.alias('templateData.view.controller'),
-
-  /**
-    The x pixel value of the current mouse hover position.
-    Will be `-1` if the mouse is not hovering over the graph content
-    @property mouseX
-    @type Number
-    @default -1
-  */
-  mouseX: -1,
-
-  /**
-    The y pixel value of the current mouse hover position.
-    Will be `-1` if the mouse is not hovering over the graph content.
-    @property mouseY
-    @type Number
-    @default -1
-  */
-  mouseY: -1,
-
-  /**
-    Gets the x domain value at the current mouse x hover position.
-    @property hoverX
-    @readonly
-  */
-  hoverX: null,
-
-  /**
-    Gets teh y domain value at the current mouse y hover position.
-    @property hoverY
-    @readonly
-  */
-  hoverY: null,
-
-  /**
-    updates `hoverX` when `mouseX` changes or something causes the scale to change.
-    @method updateHoverX
-    @private
-  */
-  updateHoverX: observer('mouseX', 'xScale', function(mouseX, xScale){
-    var hx = mouseX !== -1 && xScale && xScale.invert ? xScale.invert(mouseX) : null;
-    this.set('hoverX', isNaN(hx) ? null : hx);
-  }),
-
-  /**
-    updates `hoverY` when `mouseY` changes or something causes the scale to change.
-    @method updateHoverY
-    @private
-  */  
-  updateHoverY: observer('mouseY', 'yScale', function(mouseY, yScale) {
-    var hy = mouseY !== -1 && yScale && yScale.invert ? yScale.invert(mouseY) : null;
-    this.set('hoverY', isNaN(hy) ? null : hy);
-  }),
 
   /**
     Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently
