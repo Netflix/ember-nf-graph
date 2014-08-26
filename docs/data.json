@@ -334,11 +334,33 @@
                 "mixins": 1
             }
         },
+        "app-addon/mixins/graph-requires-scale-source.js": {
+            "name": "app-addon/mixins/graph-requires-scale-source.js",
+            "modules": {},
+            "classes": {
+                "mixins.graph-requires-scale-source": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
         "app-addon/mixins/graph-selectable-graphic.js": {
             "name": "app-addon/mixins/graph-selectable-graphic.js",
             "modules": {},
             "classes": {
                 "mixins.graph-selectable-graphic": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "mixins": 1
+            }
+        },
+        "app-addon/mixins/table-column-registrar.js": {
+            "name": "app-addon/mixins/table-column-registrar.js",
+            "modules": {},
+            "classes": {
+                "mixins.table-column-registrar": 1
             },
             "fors": {},
             "namespaces": {
@@ -421,7 +443,9 @@
                 "mixins.graph-has-graph-parent": 1,
                 "mixins.graph-line-utils": 1,
                 "mixins.graph-registered-graphic": 1,
+                "mixins.graph-requires-scale-source": 1,
                 "mixins.graph-selectable-graphic": 1,
+                "mixins.table-column-registrar": 1,
                 "utils.nf.nf-graph-action-context": 1
             },
             "fors": {},
@@ -548,7 +572,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-crosshair.js",
-            "line": 5,
+            "line": 4,
             "description": "A component that adds a \"crosshair\" to an `nf-graph` that follows the mouse\nwhile it's hovering over the graph content.",
             "extends": "Ember.Component",
             "uses": [
@@ -585,7 +609,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 4,
+            "line": 5,
             "description": "Container component for graphics to display in `nf-graph`. Represents\nthe area where the graphics, such as lines will display.\n\nExists for layout purposes.",
             "uses": [
                 "mixins.graph-has-graph-parent"
@@ -933,7 +957,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 4,
+            "line": 5,
             "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
@@ -1001,6 +1025,34 @@
             "line": 3,
             "extends": "Ember.Mixin"
         },
+        "mixins.graph-requires-scale-source": {
+            "name": "mixins.graph-requires-scale-source",
+            "shortname": "mixins.graph-requires-scale-source",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-area",
+                "components.nf-bars",
+                "components.nf-dot",
+                "components.nf-horizontal-line",
+                "components.nf-line",
+                "components.nf-plot",
+                "components.nf-range-marker",
+                "components.nf-right-tick",
+                "components.nf-selection-box",
+                "components.nf-vertical-line",
+                "components.nf-x-axis",
+                "components.nf-y-axis",
+                "components.nf-y-diff"
+            ],
+            "module": "utils/nf/array-helpers",
+            "namespace": "mixins",
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 21,
+            "description": "Adds functionality to identify a parent control that will provide an x and\ny scale, then adds scaling properties to the component it's mixed in to."
+        },
         "mixins.graph-selectable-graphic": {
             "name": "mixins.graph-selectable-graphic",
             "shortname": "mixins.graph-selectable-graphic",
@@ -1017,6 +1069,23 @@
             "file": "app-addon/mixins/graph-selectable-graphic.js",
             "line": 4,
             "extends": "Ember.Mixin"
+        },
+        "mixins.table-column-registrar": {
+            "name": "mixins.table-column-registrar",
+            "shortname": "mixins.table-column-registrar",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [
+                "components.nf-table-group",
+                "components.nf-table"
+            ],
+            "module": "utils/nf/array-helpers",
+            "namespace": "mixins",
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 3,
+            "description": "Marks a component as a registry for table columns"
         },
         "utils.nf.nf-graph-action-context": {
             "name": "utils.nf.nf-graph-action-context",
@@ -1162,7 +1231,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 21,
+            "line": 33,
             "description": "Gets or sets the sort direction for the column.\n\nPossible Values:\n\n- `'asc'` - sort ascending.\n- `'desc'` - sort descending.\n- `'none'` - (or any other value) no sort.",
             "itemtype": "property",
             "name": "sortDirection",
@@ -1176,7 +1245,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 39,
+            "line": 51,
             "description": "Gets or sets whether to use a natural sort.",
             "itemtype": "property",
             "name": "sortNatural",
@@ -1187,7 +1256,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 47,
+            "line": 59,
             "description": "The numeric value of `sortDirection`",
             "itemtype": "property",
             "name": "direction",
@@ -1198,7 +1267,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 68,
+            "line": 80,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",
@@ -1212,7 +1281,7 @@
         },
         {
             "file": "app-addon/components/nf-crosshair.js",
-            "line": 18,
+            "line": 17,
             "description": "The height of the crosshair in pixels",
             "itemtype": "property",
             "name": "height",
@@ -1223,7 +1292,7 @@
         },
         {
             "file": "app-addon/components/nf-crosshair.js",
-            "line": 26,
+            "line": 25,
             "description": "The width of the crosshair in pixels",
             "itemtype": "property",
             "name": "width",
@@ -1234,45 +1303,34 @@
         },
         {
             "file": "app-addon/components/nf-crosshair.js",
-            "line": 34,
-            "description": "The x position, in pixels, of the crosshair center",
+            "line": 33,
+            "description": "The x position of the crosshairs",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
-            "readonly": "",
+            "default": "0",
             "class": "components.nf-crosshair",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-crosshair.js",
-            "line": 42,
-            "description": "The y position, in pixels, of the crosshair center",
+            "line": 41,
+            "description": "The y position of the crosshairs",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
-            "readonly": "",
+            "default": "0",
             "class": "components.nf-crosshair",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-crosshair.js",
-            "line": 50,
-            "description": "Determines visibility of horizontal \"x\" line.",
+            "line": 49,
+            "description": "The visibility of the component",
             "itemtype": "property",
-            "name": "xVisible",
+            "name": "isVisible",
             "type": "Boolean",
-            "readonly": "",
-            "class": "components.nf-crosshair",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-crosshair.js",
-            "line": 60,
-            "description": "Determines visibility of vertical \"y\" line.",
-            "itemtype": "property",
-            "name": "yVisible",
-            "type": "Boolean",
-            "readonly": "",
+            "default": "false",
             "class": "components.nf-crosshair",
             "namespace": "components"
         },
@@ -1349,7 +1407,7 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 25,
+            "line": 26,
             "description": "The SVG transform for positioning the graph content",
             "itemtype": "property",
             "name": "transform",
@@ -1360,7 +1418,7 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 35,
+            "line": 36,
             "description": "The x position of the graph content",
             "itemtype": "property",
             "name": "x",
@@ -1371,7 +1429,7 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 43,
+            "line": 44,
             "description": "The calculated y position of the graph content",
             "itemtype": "property",
             "name": "y",
@@ -1382,7 +1440,7 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 51,
+            "line": 52,
             "description": "The calculated width of the graph content",
             "itemtype": "property",
             "name": "width",
@@ -1393,7 +1451,7 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 59,
+            "line": 60,
             "description": "The calculated height of the graph content.",
             "itemtype": "property",
             "name": "height",
@@ -1404,7 +1462,7 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 68,
+            "line": 69,
             "description": "An array containing models to render the grid lanes",
             "itemtype": "property",
             "name": "gridLanes",
@@ -1415,7 +1473,29 @@
         },
         {
             "file": "app-addon/components/nf-graph-content.js",
-            "line": 107,
+            "line": 108,
+            "description": "The name of the hoverChange action to fire",
+            "itemtype": "property",
+            "name": "hoverChange",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-graph-content",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph-content.js",
+            "line": 132,
+            "description": "The name of the hoverEnd action to fire",
+            "itemtype": "property",
+            "name": "hoverEnd",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-graph-content",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-graph-content.js",
+            "line": 156,
             "description": "An array containing models to render fret lines",
             "itemtype": "property",
             "name": "frets",
@@ -2111,46 +2191,6 @@
         {
             "file": "app-addon/components/nf-graph.js",
             "line": 821,
-            "description": "event handler for mouse movement inside the `graphContentGroup`",
-            "itemtype": "method",
-            "name": "_contentMouseMove",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "the DOM mouse event",
-                    "type": "MouseEvent"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 834,
-            "description": "Event handler for mouse leaving the `graphContentGroup`",
-            "itemtype": "method",
-            "name": "_contentMouseLeave",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 844,
-            "description": "Gets the elements for the `svg` and `graphContentGroup` properties. Also wires up\nDOM events for the graph. Fires on `didInsertElement`",
-            "itemtype": "method",
-            "name": "_registerDOM",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 858,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -2175,7 +2215,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 878,
+            "line": 841,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -2186,71 +2226,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 886,
-            "description": "The x pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content",
-            "itemtype": "property",
-            "name": "mouseX",
-            "type": "Number",
-            "default": "-1",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 895,
-            "description": "The y pixel value of the current mouse hover position.\nWill be `-1` if the mouse is not hovering over the graph content.",
-            "itemtype": "property",
-            "name": "mouseY",
-            "type": "Number",
-            "default": "-1",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 904,
-            "description": "Gets the x domain value at the current mouse x hover position.",
-            "itemtype": "property",
-            "name": "hoverX",
-            "readonly": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 911,
-            "description": "Gets teh y domain value at the current mouse y hover position.",
-            "itemtype": "property",
-            "name": "hoverY",
-            "readonly": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 918,
-            "description": "updates `hoverX` when `mouseX` changes or something causes the scale to change.",
-            "itemtype": "method",
-            "name": "updateHoverX",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 928,
-            "description": "updates `hoverY` when `mouseY` changes or something causes the scale to change.",
-            "itemtype": "method",
-            "name": "updateHoverY",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-graph",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-graph.js",
-            "line": 938,
+            "line": 849,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -2266,7 +2242,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 959,
+            "line": 870,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -2282,7 +2258,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 976,
+            "line": 887,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
@@ -2293,7 +2269,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 986,
+            "line": 897,
             "description": "Builds an action context to send to the controller.",
             "itemtype": "method",
             "name": "createActionContext",
@@ -3967,17 +3943,6 @@
             "namespace": "mixins"
         },
         {
-            "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 204,
-            "description": "Sets the hoverIndex and hoverData properties when the graph's `hoverX` property changes, or when \nthe renderedData changes.",
-            "itemtype": "method",
-            "name": "updateHoverIndex",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-data-graphic",
-            "namespace": "mixins"
-        },
-        {
             "file": "app-addon/mixins/graph-data-position-utils.js",
             "line": 36,
             "description": "Searches a given array for a data point nearest an x coordinate, given a specific scale.",
@@ -4009,12 +3974,157 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 12,
+            "line": 13,
             "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'none': no tracking behavior\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
             "itemtype": "property",
             "name": "trackingMode",
             "type": "String",
             "default": "'none'",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 39,
+            "description": "The action name to send to the controller when the `hoverChange` event fires",
+            "itemtype": "property",
+            "name": "hoverChange",
+            "type": "String",
+            "default": "null",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 47,
+            "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
+            "itemtype": "method",
+            "name": "didContentHoverChange",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "utils.nf.graph-mouse-action-context"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 64,
+            "description": "Event handler for didHoverChange. Sends hoverChange action.",
+            "itemtype": "method",
+            "name": "didHoverChange",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "utils.nf.graph-tracking-action-context"
+                }
+            ],
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 93,
+            "description": "Name of the action to send on `hoverEnd`",
+            "itemtype": "property",
+            "name": "hoverEnd",
+            "type": "String",
+            "default": "null",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 101,
+            "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
+            "itemtype": "method",
+            "name": "didHoverEnd",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "hover end event object.",
+                    "type": "Object"
+                }
+            ],
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 127,
+            "description": "The action to send on `didTrack`.",
+            "itemtype": "property",
+            "name": "didTrack",
+            "type": "String",
+            "default": "null",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 135,
+            "description": "Observes changes to tracked data and sends the\ndidTrack action.",
+            "itemtype": "method",
+            "name": "_sendDidTrack",
+            "access": "private",
+            "tagname": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 153,
+            "description": "The action to send on `willTrack`",
+            "itemtype": "property",
+            "name": "willTrack",
+            "type": "String",
+            "default": "null",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 161,
+            "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
+            "itemtype": "method",
+            "name": "_sendWillTrack",
+            "access": "private",
+            "tagname": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 179,
+            "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
+            "itemtype": "method",
+            "name": "didContentHoverEnd",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "utils.nf.graph-mouse-action-context"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 195,
+            "description": "Sets up subscriptions to content hover events.",
+            "itemtype": "method",
+            "name": "_subscribeToContentHover",
+            "access": "private",
+            "tagname": "",
             "class": "mixins.graph-graphic-with-tracking-dot",
             "namespace": "mixins"
         },
@@ -4091,6 +4201,72 @@
             "namespace": "mixins"
         },
         {
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 28,
+            "description": "The x scale used by this component",
+            "itemtype": "property",
+            "name": "xScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "mixins.graph-requires-scale-source",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 36,
+            "description": "The y scale used by this component",
+            "itemtype": "property",
+            "name": "yScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "mixins.graph-requires-scale-source",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 52,
+            "description": "The zoom multiplier for the x scale",
+            "itemtype": "property",
+            "name": "scaleZoomX",
+            "type": "Number",
+            "default": "1",
+            "class": "mixins.graph-requires-scale-source",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 65,
+            "description": "The zoom multiplier for the y scale",
+            "itemtype": "property",
+            "name": "scaleZoomY",
+            "type": "Number",
+            "default": "1",
+            "class": "mixins.graph-requires-scale-source",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 78,
+            "description": "The offset, in pixels, for the x scale",
+            "itemtype": "property",
+            "name": "scaleOffsetX",
+            "type": "Number",
+            "default": "0",
+            "class": "mixins.graph-requires-scale-source",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-requires-scale-source.js",
+            "line": 91,
+            "description": "The offset, in pixels, for the y scale",
+            "itemtype": "property",
+            "name": "scaleOffsetY",
+            "type": "Number",
+            "default": "0",
+            "class": "mixins.graph-requires-scale-source",
+            "namespace": "mixins"
+        },
+        {
             "file": "app-addon/mixins/graph-selectable-graphic.js",
             "line": 15,
             "itemtype": "property",
@@ -4098,6 +4274,60 @@
             "deprecated": true,
             "deprecationMessage": "use `selected`",
             "class": "mixins.graph-selectable-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 9,
+            "description": "identifies the component as a table column registrar to its children",
+            "itemtype": "property",
+            "name": "isTableColumnRegistrar",
+            "type": "Boolean",
+            "default": "true",
+            "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 17,
+            "description": "The collection of columns registered",
+            "itemtype": "property",
+            "name": "columns",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 27,
+            "description": "Registers a column with the registrar",
+            "itemtype": "method",
+            "name": "registerColumn",
+            "params": [
+                {
+                    "name": "column",
+                    "description": "the column to register",
+                    "type": "components.nf-column"
+                }
+            ],
+            "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 36,
+            "description": "Unregisters a column from the registry",
+            "itemtype": "method",
+            "name": "unregisterColumn",
+            "params": [
+                {
+                    "name": "column",
+                    "description": "the column to unregister",
+                    "type": "components.nf-column"
+                }
+            ],
+            "class": "mixins.table-column-registrar",
             "namespace": "mixins"
         },
         {
@@ -4224,7 +4454,31 @@
         },
         {
             "file": "app-addon/utils/nf/graph-action-context.js",
-            "line": 56,
+            "line": 48,
+            "description": "The x scale used to calculate graph position.\nComes from `source` if available, otherwise comes from `graph`",
+            "itemtype": "property",
+            "name": "xScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 59,
+            "description": "The y scale used to calculate graph position.\nComes from `source` if available, otherwise comes from `graph`",
+            "itemtype": "property",
+            "name": "yScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-action-context.js",
+            "line": 70,
             "description": "The computed x position of the event relative to the graph content",
             "itemtype": "property",
             "name": "graphPositionX",
@@ -4236,7 +4490,7 @@
         },
         {
             "file": "app-addon/utils/nf/graph-action-context.js",
-            "line": 67,
+            "line": 81,
             "description": "The computed y position of the event relative to the graph content",
             "itemtype": "property",
             "name": "graphPositionY",
@@ -4248,7 +4502,7 @@
         },
         {
             "file": "app-addon/utils/nf/graph-action-context.js",
-            "line": 78,
+            "line": 92,
             "description": "The jQuery offset of the graph's element",
             "itemtype": "property",
             "name": "graphOffset",
@@ -4260,7 +4514,7 @@
         },
         {
             "file": "app-addon/utils/nf/graph-action-context.js",
-            "line": 88,
+            "line": 102,
             "description": "The computed event x position relative to the document",
             "itemtype": "property",
             "name": "pagePositionX",
@@ -4272,7 +4526,7 @@
         },
         {
             "file": "app-addon/utils/nf/graph-action-context.js",
-            "line": 98,
+            "line": 112,
             "description": "The computed event y position relative to the document",
             "itemtype": "property",
             "name": "pagePositionY",
@@ -4317,6 +4571,46 @@
             "module": "utils/nf/svg-dom"
         },
         {
+            "file": "app-addon/utils/nf/svg-dom.js",
+            "line": 64,
+            "description": "Triggers a download of an image rendered from the passed svg document",
+            "itemtype": "method",
+            "name": "downloadSvg",
+            "params": [
+                {
+                    "name": "svg",
+                    "description": "the svg document to render",
+                    "type": "SVGSVGElement"
+                }
+            ],
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/svg-dom"
+        },
+        {
+            "file": "app-addon/utils/nf/svg-dom.js",
+            "line": 76,
+            "itemtype": "method",
+            "name": "getMousePoint",
+            "params": [
+                {
+                    "name": "container",
+                    "description": "the container reference to get the mouse position from",
+                    "type": "SVGElement"
+                },
+                {
+                    "name": "e",
+                    "description": "A DOM mouse event",
+                    "type": "MouseEvent"
+                }
+            ],
+            "return": {
+                "description": "the [x,y] data of the mouse position relative to the container",
+                "type": "Array"
+            },
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/svg-dom"
+        },
+        {
             "file": "app-addon/utils/parse-property-expression.js",
             "line": 24,
             "itemtype": "method",
@@ -4337,5 +4631,18 @@
             "namespace": "utils"
         }
     ],
-    "warnings": []
+    "warnings": [
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:47"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:101"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:101"
+        }
+    ]
 }

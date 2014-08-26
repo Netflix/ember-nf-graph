@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -156,6 +160,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+import GraphTrackingActionContext from &#x27;../utils/nf/graph-tracking-action-context&#x27;;
 
 /**
   Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
@@ -191,83 +196,172 @@ export default Ember.Mixin.create({
     return typeof x === &#x27;number&#x27; &amp;&amp; typeof y === &#x27;number&#x27;;
   }),
 
-  updateTrackedData: function(){
+  /**
+    The action name to send to the controller when the &#x60;hoverChange&#x60; event fires
+    @property hoverChange
+    @type String
+    @default null
+  */
+  hoverChange: null,
+
+  /**
+    Event handler for content hoverChange event. Triggers &#x60;didHoverChange&#x60;.
+    @method didContentHoverChange
+    @params e {utils.nf.graph-mouse-action-context}
+    @private
+  */
+  didContentHoverChange: function(e){
+    var graph = this.get(&#x27;graph&#x27;);
+
+    this.trigger(&#x27;didHoverChange&#x27;, GraphTrackingActionContext.create({
+      mouseX: e.get(&#x27;mouseX&#x27;),
+      mouseY: e.get(&#x27;mouseY&#x27;),
+      source: this,
+      graph: graph,
+    }));
+  },
+
+  /**
+    Event handler for didHoverChange. Sends hoverChange action.
+    @method didHoverChange
+    @param e {utils.nf.graph-tracking-action-context}
+  */
+  didHoverChange: function(e) {
     var trackingMode = this.get(&#x27;trackingMode&#x27;);
-    var hoverDataX = this.get(&#x27;hoverData.x&#x27;);
-    var hoverDataY = this.get(&#x27;hoverData.y&#x27;);
-    var firstVisibleData = this.get(&#x27;firstVisibleData&#x27;);
-    var lastVisibleData = this.get(&#x27;lastVisibleData&#x27;);
-    var selected = this.get(&#x27;selected&#x27;);
-    var vx, vy;
-    var firstX = firstVisibleData ? firstVisibleData[0] : null;
-    var firstY = firstVisibleData ? firstVisibleData[1] : null;
-    var lastX = lastVisibleData ? lastVisibleData[0] : null;
-    var lastY = lastVisibleData ? lastVisibleData[1] : null;
-    var isHovered = typeof hoverDataX === &#x27;number&#x27; &amp;&amp;  typeof hoverDataY === &#x27;number&#x27;;
-
-    var setToHover = function(){
-      vx = hoverDataX;
-      vy = hoverDataY;
-    };
-
-    var snapFirstBehavior = function(){        
-      if(isHovered) {
-        setToHover();
-      } else {
-        vx = firstX;
-        vy = firstY;
-      }
-    };
-
-    var snapLastBehavior = function(){
-      if(isHovered) {
-        setToHover();
-      } else {
-        vx = lastX;
-        vy = lastY;
-      }
-    };
-
-    switch(trackingMode) {
-      case &#x27;none&#x27;:
-        break;
-      case &#x27;hover&#x27;:
-        if(isHovered) {
-          setToHover();
-        }
-        break;
-      case &#x27;selected-hover&#x27;:
-        if(selected &amp;&amp; isHovered) {
-          setToHover();
-        }
-        break;
-      case &#x27;snap-first&#x27;:
-        snapFirstBehavior();
-        break;
-      case &#x27;selected-snap-first&#x27;:
-        if(selected) {
-          snapFirstBehavior();
-        }
-        break;
-      case &#x27;snap-last&#x27;:
-        snapLastBehavior();
-        break;
-      case &#x27;selected-snap-last&#x27;:
-        if(selected) {
-          snapLastBehavior();
-        }
-        break;
+    if(!trackingMode || trackingMode === &#x27;none&#x27;) {
+      return;
     }
 
-    this.set(&#x27;trackedData&#x27;, {
-      x: vx,
-      y: vy
+    if(this.get(&#x27;selected&#x27;) &amp;&amp; 
+      (trackingMode === &#x27;selected-hover&#x27; ||
+      trackingMode === &#x27;selected-snap-first&#x27; || 
+      trackingMode === &#x27;selected-snap-last&#x27;)) {
+      this.set(&#x27;trackedData&#x27;, e.get(&#x27;nearestData&#x27;));
+    }
+
+    if(trackingMode === &#x27;hover&#x27; ||
+      trackingMode === &#x27;snap-first&#x27; ||
+      trackingMode === &#x27;snap-last&#x27;) {
+      this.set(&#x27;trackedData&#x27;, e.get(&#x27;nearestData&#x27;));
+    }
+
+    if(this.get(&#x27;hoverChange&#x27;)) {
+      this.sendAction(&#x27;hoverChange&#x27;, e);
+    }
+  },
+
+  /**
+    Name of the action to send on &#x60;hoverEnd&#x60;
+    @property hoverEnd
+    @type String
+    @default null
+  */
+  hoverEnd: null,
+
+  /**
+    Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.
+    @function didHoverEnd
+    @params e {Object} hover end event object.
+  */
+  didHoverEnd: function(e) {
+    var trackingMode = this.get(&#x27;trackingMode&#x27;);
+    var selected = this.get(&#x27;selected&#x27;);
+
+    if(trackingMode === &#x27;snap-last&#x27; || (selected &amp;&amp; trackingMode === &#x27;selected-snap-last&#x27;)) {
+      this.set(&#x27;trackedData&#x27;, this.get(&#x27;lastVisibleData&#x27;));
+    }
+
+    if(trackingMode === &#x27;snap-first&#x27; || (selected &amp;&amp; trackingMode === &#x27;selected-snap-first&#x27;)) {
+      this.set(&#x27;trackedData&#x27;, this.get(&#x27;firstVisibleData&#x27;));
+    }
+
+    if(this.get(&#x27;hoverEnd&#x27;)) {
+      this.sendAction(&#x27;hoverEnd&#x27;, {
+        originalEvent: e,
+        source: this,
+        graph: this.get(&#x27;graph&#x27;),
+      });
+    }
+  }.on(&#x27;didInsertElement&#x27;),
+
+  /**
+    The action to send on &#x60;didTrack&#x60;.
+    @property didTrack
+    @type String
+    @default null
+  */
+  didTrack: null,
+
+  /**
+    Observes changes to tracked data and sends the
+    didTrack action.
+    @method _sendDidTrack
+    @private
+  */
+  _sendDidTrack: function(){
+    if(this.get(&#x27;didTrack&#x27;)) {
+      this.sendAction(&#x27;didTrack&#x27;, {
+        x: this.get(&#x27;trackedData.x&#x27;),
+        y: this.get(&#x27;trackedData.y&#x27;),
+        data: this.get(&#x27;trackedData.data&#x27;),
+        source: this,
+        graph: this.get(&#x27;graph&#x27;),
+      });
+    }
+  }.observes(&#x27;trackedData&#x27;),
+
+  /**
+    The action to send on &#x60;willTrack&#x60;
+    @property willTrack
+    @type String
+    @default null
+  */
+  willTrack: null,
+
+  /**
+    Observes impending changes to trackedData and sends
+    the willTrack action.
+    @method _sendWillTrack
+    @private
+  */
+  _sendWillTrack: function(){
+    if(this.get(&#x27;willTrack&#x27;)) {
+      this.sendAction(&#x27;willTrack&#x27;, {
+        x: this.get(&#x27;trackedData.x&#x27;),
+        y: this.get(&#x27;trackedData.y&#x27;),
+        data: this.get(&#x27;trackedData.data&#x27;),
+        source: this,
+        graph: this.get(&#x27;graph&#x27;),
+      });
+    }
+  }.observesBefore(&#x27;trackedData&#x27;),
+
+  /**
+    Handles the graph-content&#x27;s hoverEnd event and triggers didHoverEnd
+    @method didContentHoverEnd
+    @param e {utils.nf.graph-mouse-action-context}
+    @private
+  */
+  didContentHoverEnd: function(e){
+    var graph = this.get(&#x27;graph&#x27;);
+
+    this.trigger(&#x27;didHoverEnd&#x27;, {
+      originalEvent: e,
+      source: this,
+      graph: graph,
     });
   },
 
-  _watchTrackingChanges: function(){
-    Ember.run.scheduleOnce(&#x27;render&#x27;, this, this.updateTrackedData);
-  }.observes(&#x27;trackingMode&#x27;, &#x27;hoverData.x&#x27;, &#x27;hoverData.y&#x27;, &#x27;firstVisibleData&#x27;, &#x27;lastVisibleData&#x27;, &#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
+  /**
+    Sets up subscriptions to content hover events.
+    @method _subscribeToContentHover
+    @private
+  */
+  _subscribeToContentHover: function(){
+    var content = this.get(&#x27;graph.content&#x27;);
+    content.on(&#x27;didHoverChange&#x27;, this, this.didContentHoverChange);
+    content.on(&#x27;didHoverEnd&#x27;, this, this.didContentHoverEnd);
+  }.on(&#x27;didInsertElement&#x27;),
 });
     </pre>
 </div>

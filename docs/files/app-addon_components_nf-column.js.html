@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -173,6 +177,18 @@ export default Ember.Component.extend({
 		@readonly
 	*/
 	isDataTableColumn: true,
+
+	header: null,
+
+	cell: null,
+
+	headerClassNames: function() {
+		return this.get(&#x27;header.classNames&#x27;) || [];
+	}.property(&#x27;header.classNames&#x27;),
+
+	cellClassNames: function(){
+		return this.get(&#x27;cell.classNames&#x27;) || [];
+	}.property(&#x27;cell.classNames&#x27;),
 
 	/**
 		Gets or sets the sort direction for the column.

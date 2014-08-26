@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -215,6 +219,20 @@ path cannot be reached.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_default">default</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_downloadSvg">downloadSvg</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getMousePoint">getMousePoint</a>
 
                                 
                                 
@@ -347,6 +365,223 @@ path cannot be reached.</p>
                     
                     <p>a function that when called with an object,
 will locate the value at the end of the expressed path.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_downloadSvg" class="method item">
+    <h3 class="name"><code>downloadSvg</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>svg</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_svg-dom.js.html#l64"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;svg-dom.js:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Triggers a download of an image rendered from the passed svg document</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">svg</code>
+                        <span class="type">SVGSVGElement</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the svg document to render</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_getMousePoint" class="method item">
+    <h3 class="name"><code>getMousePoint</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>container</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_svg-dom.js.html#l76"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;svg-dom.js:76</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">container</code>
+                        <span class="type">SVGElement</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the container reference to get the mouse position from</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">MouseEvent</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>A DOM mouse event</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Array</span>:
+                    
+                    <p>the [x,y] data of the mouse position relative to the container</p>
 
                 
             </div>

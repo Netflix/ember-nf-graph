@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -156,6 +160,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import GraphMouseActionContext from &#x27;../utils/nf/graph-mouse-action-context&#x27;;
 
 /**
   Container component for graphics to display in &#x60;nf-graph&#x60;. Represents
@@ -261,12 +266,64 @@ export default Ember.Component.extend(HasGraphParent, {
   }.property(&#x27;graph.yAxis.ticks&#x27;, &#x27;width&#x27;, &#x27;height&#x27;),
 
   /**
+    The name of the hoverChange action to fire
+    @property hoverChange
+    @type String
+    @default null
+  */
+  hoverChange: null,
+
+  _triggerHoverChange: function(e) {
+    this.trigger(&#x27;didHoverChange&#x27;, GraphMouseActionContext.create({
+      originalEvent: e,
+      source: this,
+      graph: this.get(&#x27;graph&#x27;),
+    }));
+
+    if(this.get(&#x27;hoverChange&#x27;)) {
+      this.sendAction(&#x27;hoverChange&#x27;, GraphMouseActionContext.create({
+        originalEvent: e,
+        source: this,
+        graph: this.get(&#x27;graph&#x27;),
+      }));
+    }
+  }.on(&#x27;mouseMove&#x27;),
+
+  /**
+    The name of the hoverEnd action to fire
+    @property hoverEnd
+    @type String
+    @default null
+  */
+  hoverEnd: null,
+
+  _triggerHoverEnd: function(e) {
+    this.trigger(&#x27;didHoverEnd&#x27;, GraphMouseActionContext.create({
+      originalEvent: e,
+      source: this,
+      graph: this.get(&#x27;graph&#x27;),
+    }));
+
+    if(this.get(&#x27;hoverEnd&#x27;)) {
+      this.sendAction(&#x27;hoverEnd&#x27;, GraphMouseActionContext.create({
+        originalEvent: e,
+        source: this,
+        graph: this.get(&#x27;graph&#x27;),
+      }));
+    }
+  }.on(&#x27;mouseOut&#x27;),
+
+  /**
     An array containing models to render fret lines
     @property frets
     @type Array
     @readonly
   */
   frets: Ember.computed.alias(&#x27;graph.xAxis.ticks&#x27;),
+
+  hasGraph: function(graph) {
+    graph.set(&#x27;content&#x27;, this);
+  },
 });
     </pre>
 </div>

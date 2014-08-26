@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -182,6 +186,7 @@ export default Ember.Mixin.create({
 	_getGraph: function(){
 		var graph = this.nearestWithProperty(&#x27;isGraph&#x27;);
 		this.set(&#x27;graph&#x27;, graph);
+		this.trigger(&#x27;hasGraph&#x27;, graph);
 	}.on(&#x27;init&#x27;),
 });
     </pre>

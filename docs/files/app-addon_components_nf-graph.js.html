@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -155,7 +159,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import GraphActionContext from &#x27;../utils/nf/graph-action-context&#x27;;
 
 var computedBool = Ember.computed.bool;
@@ -975,43 +979,6 @@ export default Ember.Component.extend({
   }.on(&#x27;willInsertElement&#x27;),
 
   /**
-    event handler for mouse movement inside the &#x60;graphContentGroup&#x60;
-    @method _contentMouseMove
-    @param e {MouseEvent} the DOM mouse event
-    @private
-  */
-  _contentMouseMove: function(e) {
-    var graphContentGroup = this.get(&#x27;graphContentGroup&#x27;);
-    var mouse = this.mousePoint(graphContentGroup[0], e);
-    this.set(&#x27;mouseX&#x27;, mouse[0]);
-    this.set(&#x27;mouseY&#x27;, mouse[1]);
-  },
-
-  /**
-    Event handler for mouse leaving the &#x60;graphContentGroup&#x60;
-    @method _contentMouseLeave
-    @private
-  */
-  _contentMouseLeave: function() {
-    this.set(&#x27;mouseX&#x27;, -1);
-    this.set(&#x27;mouseY&#x27;, -1);
-  },
-
-  /**
-    Gets the elements for the &#x60;svg&#x60; and &#x60;graphContentGroup&#x60; properties. Also wires up
-    DOM events for the graph. Fires on &#x60;didInsertElement&#x60;
-    @method _registerDOM
-    @private
-  */
-  _registerDOM: function () {
-    var graphContentGroup = this.$(&#x27;.nf-graph-content&#x27;);
-    this.set(&#x27;svg&#x27;, this.$(&#x27;svg&#x27;));
-    this.set(&#x27;graphContentGroup&#x27;, graphContentGroup);
-    graphContentGroup.on(&#x27;mousemove&#x27;, this._contentMouseMove.bind(this));
-    graphContentGroup.on(&#x27;mouseleave&#x27;, this._contentMouseLeave.bind(this));
-  }.on(&#x27;didInsertElement&#x27;),
-
-  /**
     Gets the mouse position relative to the container
     @method mousePoint
     @param container {SVGElement} the SVG element that contains the mouse event
@@ -1038,58 +1005,6 @@ export default Ember.Component.extend({
     @readonly
   */
   parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
-
-  /**
-    The x pixel value of the current mouse hover position.
-    Will be &#x60;-1&#x60; if the mouse is not hovering over the graph content
-    @property mouseX
-    @type Number
-    @default -1
-  */
-  mouseX: -1,
-
-  /**
-    The y pixel value of the current mouse hover position.
-    Will be &#x60;-1&#x60; if the mouse is not hovering over the graph content.
-    @property mouseY
-    @type Number
-    @default -1
-  */
-  mouseY: -1,
-
-  /**
-    Gets the x domain value at the current mouse x hover position.
-    @property hoverX
-    @readonly
-  */
-  hoverX: null,
-
-  /**
-    Gets teh y domain value at the current mouse y hover position.
-    @property hoverY
-    @readonly
-  */
-  hoverY: null,
-
-  /**
-    updates &#x60;hoverX&#x60; when &#x60;mouseX&#x60; changes or something causes the scale to change.
-    @method updateHoverX
-    @private
-  */
-  updateHoverX: observer(&#x27;mouseX&#x27;, &#x27;xScale&#x27;, function(mouseX, xScale){
-    var hx = mouseX !== -1 &amp;&amp; xScale &amp;&amp; xScale.invert ? xScale.invert(mouseX) : null;
-    this.set(&#x27;hoverX&#x27;, isNaN(hx) ? null : hx);
-  }),
-
-  /**
-    updates &#x60;hoverY&#x60; when &#x60;mouseY&#x60; changes or something causes the scale to change.
-    @method updateHoverY
-    @private
-  */  
-  updateHoverY: observer(&#x27;mouseY&#x27;, &#x27;yScale&#x27;, function(mouseY, yScale) {
-    var hy = mouseY !== -1 &amp;&amp; yScale &amp;&amp; yScale.invert ? yScale.invert(mouseY) : null;
-    this.set(&#x27;hoverY&#x27;, isNaN(hy) ? null : hy);
-  }),
 
   /**
     Selects the graphic passed. If &#x60;selectMultiple&#x60; is false, it will deselect the currently

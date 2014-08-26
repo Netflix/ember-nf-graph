@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -304,6 +308,20 @@
                         
                             <li class="index-item property">
                                 <a href="#property_x">x</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_xScale">xScale</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_yScale">yScale</a>
 
                                 
                                 
@@ -780,7 +798,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l78"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:78</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l92"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:92</code></a>
         
         </p>
 
@@ -825,7 +843,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l56"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:56</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l70"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:70</code></a>
         
         </p>
 
@@ -870,7 +888,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l67"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:67</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l81"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:81</code></a>
         
         </p>
 
@@ -915,7 +933,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l88"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:88</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l102"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:102</code></a>
         
         </p>
 
@@ -960,7 +978,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l98"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:98</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l112"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:112</code></a>
         
         </p>
 
@@ -1052,7 +1070,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l10"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:10</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l17"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:17</code></a>
         
         </p>
 
@@ -1062,7 +1080,7 @@ array items.</p>
     </div>
 
     <div class="description">
-        <p>Gets or sets the domain x value</p>
+        <p>Gets or sets the domain y value</p>
 
     </div>
 
@@ -1099,7 +1117,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l17"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:17</code></a>
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l10"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:10</code></a>
         
         </p>
 
@@ -1109,12 +1127,104 @@ array items.</p>
     </div>
 
     <div class="description">
-        <p>Gets or sets the domain y value</p>
+        <p>Gets or sets the domain x value</p>
 
     </div>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xScale" class="property item">
+    <h3 class="name"><code>xScale</code></h3>
+    <span class="type">d3.scale</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l48"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:48</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x scale used to calculate graph position.
+Comes from <code>source</code> if available, otherwise comes from <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yScale" class="property item">
+    <h3 class="name"><code>yScale</code></h3>
+    <span class="type">d3.scale</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l59"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:59</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y scale used to calculate graph position.
+Comes from <code>source</code> if available, otherwise comes from <code>graph</code></p>
+
+    </div>
+
     
 
     

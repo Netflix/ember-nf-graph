@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -156,7 +160,6 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
   A component that adds a &quot;crosshair&quot; to an &#x60;nf-graph&#x60; that follows the mouse
@@ -188,40 +191,46 @@ export default Ember.Component.extend(HasGraphParent, {
   width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
 
   /**
-    The x position, in pixels, of the crosshair center
+    The x position of the crosshairs
     @property x
     @type Number
-    @readonly
+    @default 0
   */
-  x: Ember.computed.alias(&#x27;graph.mouseX&#x27;),
+  x: 0,
 
   /**
-    The y position, in pixels, of the crosshair center
+    The y position of the crosshairs
     @property y
     @type Number
-    @readonly
+    @default 0
   */
-  y: Ember.computed.alias(&#x27;graph.mouseY&#x27;),
+  y: 0,
 
   /**
-    Determines visibility of horizontal &quot;x&quot; line.
-    @property xVisible
+    The visibility of the component
+    @property isVisible
     @type Boolean
-    @readonly
+    @default false
   */
-  xVisible: property(&#x27;y&#x27;, &#x27;graph.graphHeight&#x27;, function(y, graphHeight) {
-    return 0 &lt;= y &amp;&amp; y &lt;= graphHeight;
-  }),
+  isVisible: false,
 
-  /**
-    Determines visibility of vertical &quot;y&quot; line.
-    @property yVisible
-    @type Boolean
-    @readonly
-  */
-  yVisible: property(&#x27;x&#x27;, &#x27;graph.graphWidth&#x27;, function(x, graphWidth) {
-    return 0 &lt;= x &amp;&amp; x &lt;= graphWidth;
-  }),
+  didContentHoverChange: function(e) {
+    this.set(&#x27;isVisible&#x27;, true);
+    this.set(&#x27;x&#x27;, e.get(&#x27;mouseX&#x27;));
+    this.set(&#x27;y&#x27;, e.get(&#x27;mouseY&#x27;));
+  },
+
+  didContentHoverEnd: function() {
+    this.set(&#x27;isVisible&#x27;, false);
+  },
+
+  _setupBindings: function() {
+    var content = this.get(&#x27;graph.content&#x27;);
+    if(content) {
+      content.on(&#x27;didHoverChange&#x27;, this, this.didContentHoverChange);
+      content.on(&#x27;didHoverEnd&#x27;, this, this.didContentHoverEnd);
+    }
+  }.observes(&#x27;graph.content&#x27;),
 });
     </pre>
 </div>

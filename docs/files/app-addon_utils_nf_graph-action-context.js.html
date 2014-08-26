@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -201,10 +205,24 @@ export default Ember.Object.extend({
 	*/
 	data: null,
 
+	/**
+		The x scale used to calculate graph position.
+		Comes from &#x60;source&#x60; if available, otherwise comes from &#x60;graph&#x60;
+		@property xScale
+		@type d3.scale
+		@readonly
+	*/
 	xScale: function(){
 		return this.get(&#x27;source.xScale&#x27;) || this.get(&#x27;graph.xScale&#x27;);
 	}.property(&#x27;source.xScale&#x27;, &#x27;graph.xScale&#x27;),
 
+	/**
+		The y scale used to calculate graph position.
+		Comes from &#x60;source&#x60; if available, otherwise comes from &#x60;graph&#x60;
+		@property yScale
+		@type d3.scale
+		@readonly
+	*/
 	yScale: function(){
 		return this.get(&#x27;source.yScale&#x27;) || this.get(&#x27;graph.yScale&#x27;);
 	}.property(&#x27;source.yScale&#x27;, &#x27;graph.yScale&#x27;),

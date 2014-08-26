@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-range-marker.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/mixins/table-column-registrar.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -154,175 +154,53 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-range-marker.js</h1>
+                        <h1 class="file-heading">File: app-addon/mixins/table-column-registrar.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
-import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
-  Draws a rectangular strip with a templated label on an &#x60;nf-graph&#x60;.
-  Should always be used in conjunction with an &#x60;nf-range-markers&#x60; container component.
-  @namespace components
-  @class nf-range-marker
-  @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
-  @uses mixins.graph-requires-scale-source
+	Marks a component as a registry for table columns
+	@namespace mixins
+	@class table-column-registrar
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
-	tagName: &#x27;g&#x27;,
+export default Ember.Mixin.create({
+	/**
+		identifies the component as a table column registrar to its children
+		@property isTableColumnRegistrar
+		@type Boolean
+		@default true
+	*/
+	isTableColumnRegistrar: true,
 
-	attributeBindings: [&#x27;transform&#x27;],
+	/**
+		The collection of columns registered
+		@property columns
+		@type Array
+		@readonly
+	*/
+	columns: function(){
+		return [];
+	}.property(),
 
-	classNames: [&#x27;nf-range-marker&#x27;],
+	/**
+		Registers a column with the registrar
+		@method registerColumn
+		@param column {components.nf-column} the column to register
+	*/
+	registerColumn: function(column) {
+		this.get(&#x27;columns&#x27;).pushObject(column);
+	},
 
-  /**
-    The parent &#x60;nf-range-markers&#x60; component.
-    @property container
-    @type {components.nf-range-markers}
-    @default null
-  */
-  container: null,
-
-  /**
-    The minimum domain value for the range to mark.
-    @property xMin
-    @default 0
-  */
-	xMin: 0,
-
-  /**
-    The maximum domain value for the range to mark.
-    @property xMax
-    @default 0
-  */
-	xMax: 0,
-
-  /**
-    The spacing above the range marker.
-    @property marginTop
-    @type Number
-    @default 10
-  */
-	marginTop: 10,
-
-  /**
-    The spacing below the range marker.
-    @property marginBottom
-    @type Number
-    @default 3
-  */
-	marginBottom: 3,
-
-  /**
-    The height of the range marker.
-    @property height
-    @type Number
-    @default 10
-  */
-	height: 10,
-
-  /**
-    The computed x position of the range marker.
-    @property x
-    @type Number
-    @readonly
-  */
-  x: property(&#x27;xMin&#x27;, &#x27;xScale&#x27;, function(xMin, xScale) {
-  	return xScale(xMin);
-  }),
-
-  /**
-    The computed width of the range marker.
-    @property width
-    @type Number
-    @readonly
-  */
-  width: property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;xScale&#x27;, function(xMin, xMax, xScale) {
-  	return xScale(xMax) - xScale(xMin);
-  }),
-
-  /**
-    The computed y position of the range marker.
-    @property y
-    @type Number
-    @readonly
-  */
-  y: property(&#x27;container.orient&#x27;, &#x27;prevMarker.bottom&#x27;, &#x27;prevMarker.y&#x27;, &#x27;graph.graphHeight&#x27;, &#x27;totalHeight&#x27;, function(orient, prevBottom, prevY, graphHeight, totalHeight){
-  	prevBottom = prevBottom || 0;
-
-  	if(orient === &#x27;bottom&#x27;) {
-  		return (prevY || graphHeight) - totalHeight;
-  	}
-
-  	if(orient === &#x27;top&#x27;) {
-  		return prevBottom;
-  	}
-  }),
-
-  /**
-    The computed total height of the range marker including its margins.
-    @property totalHeight
-    @type Number
-    @readonly
-  */
-  totalHeight: property(&#x27;height&#x27;, &#x27;marginTop&#x27;, &#x27;marginBottom&#x27;, function(height, marginTop, marginBottom) {
-  	return height + marginTop + marginBottom;
-  }),
-
-  /**
-    The computed bottom of the range marker, not including the bottom margin.
-    @property bottom
-    @type Number
-    @readonly
-  */
-  bottom: property(&#x27;y&#x27;, &#x27;totalHeight&#x27;, function(y, totalHeight) {
-  	return y + totalHeight;
-  }),
-
-  /**
-    The computed SVG transform of the range marker container
-    @property transform
-    @type String
-    @readonly
-  */
-  transform: property(&#x27;y&#x27;, function(y) {
-  	return &#x27;translate(0 %@)&#x27;.fmt(y || 0);
-  }),
-
-  /**
-    The computed SVG transform fo the range marker label container.
-    @property labelTransform
-    @type String
-    @readonly
-  */
-  labelTransform: property(&#x27;x&#x27;, function(x){
-  	return &#x27;translate(%@ 0)&#x27;.fmt(x || 0);
-  }),
-
-  /**
-    Initialization function that registers the range marker with its parent 
-    and populates the container property
-    @method _setup
-    @private
-  */
-	_setup: function(){
-		var container = this.nearestWithProperty(&#x27;isRangeMarkerContainer&#x27;);
-		container.registerMarker(this);
-		this.set(&#x27;container&#x27;, container);
-	}.on(&#x27;init&#x27;),
-
-  /**
-    Unregisters the range marker from its parent when the range marker is destroyed.
-    @method _unregister
-    @private
-  */
-  _unregister: function() {
-    this.get(&#x27;container&#x27;).unregisterMarker(this);
-  }.on(&#x27;willDestroyElement&#x27;)
+	/**
+		Unregisters a column from the registry
+		@method unregisterColumn
+		@param column {components.nf-column} the column to unregister
+	*/
+	unregisterColumn: function(column) {
+		this.get(&#x27;columns&#x27;).removeObject(column);
+	},
 });
     </pre>
 </div>

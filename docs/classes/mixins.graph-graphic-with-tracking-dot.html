@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -158,7 +162,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l4"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:4</code></a>
+            Defined in: <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l5"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:5</code></a>
         </div>
     
 
@@ -186,6 +190,8 @@ or <a href="../classes/components.nf-area.html" class="crosslink">components.nf-
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
@@ -198,6 +204,63 @@ or <a href="../classes/components.nf-area.html" class="crosslink">components.nf-
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__sendDidTrack">_sendDidTrack</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__sendWillTrack">_sendWillTrack</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method__subscribeToContentHover">_subscribeToContentHover</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_didContentHoverChange">didContentHoverChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_didContentHoverEnd">didContentHoverEnd</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_didHoverChange">didHoverChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_didHoverEnd">didHoverEnd</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
                 <div class="index-section properties">
@@ -206,7 +269,35 @@ or <a href="../classes/components.nf-area.html" class="crosslink">components.nf-
                     <ul class="index-list properties">
                         
                             <li class="index-item property">
+                                <a href="#property_didTrack">didTrack</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_hoverChange">hoverChange</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_hoverEnd">hoverEnd</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_trackingMode">trackingMode</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_willTrack">willTrack</a>
 
                                 
                                 
@@ -222,10 +313,687 @@ or <a href="../classes/components.nf-area.html" class="crosslink">components.nf-
         </div>
 
         
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method__sendDidTrack" class="method item private">
+    <h3 class="name"><code>_sendDidTrack</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l135"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:135</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Observes changes to tracked data and sends the
+didTrack action.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__sendWillTrack" class="method item private">
+    <h3 class="name"><code>_sendWillTrack</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l161"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:161</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Observes impending changes to trackedData and sends
+the willTrack action.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method__subscribeToContentHover" class="method item private">
+    <h3 class="name"><code>_subscribeToContentHover</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l195"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:195</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets up subscriptions to content hover events.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_didContentHoverChange" class="method item private">
+    <h3 class="name"><code>didContentHoverChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l47"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:47</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event handler for content hoverChange event. Triggers <code>didHoverChange</code>.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">utils.nf.graph-mouse-action-context</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_didContentHoverEnd" class="method item private">
+    <h3 class="name"><code>didContentHoverEnd</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l179"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:179</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Handles the graph-content&#39;s hoverEnd event and triggers didHoverEnd</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">utils.nf.graph-mouse-action-context</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_didHoverChange" class="method item">
+    <h3 class="name"><code>didHoverChange</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l64"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:64</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event handler for didHoverChange. Sends hoverChange action.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">utils.nf.graph-tracking-action-context</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_didHoverEnd" class="method item">
+    <h3 class="name"><code>didHoverEnd</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l101"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:101</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>hover end event object.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
 
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_didTrack" class="property item">
+    <h3 class="name"><code>didTrack</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l127"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:127</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The action to send on <code>didTrack</code>.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_hoverChange" class="property item">
+    <h3 class="name"><code>hoverChange</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l39"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:39</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The action name to send to the controller when the <code>hoverChange</code> event fires</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_hoverEnd" class="property item">
+    <h3 class="name"><code>hoverEnd</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l93"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:93</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Name of the action to send on <code>hoverEnd</code></p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property_trackingMode" class="property item">
@@ -251,7 +1019,7 @@ or <a href="../classes/components.nf-area.html" class="crosslink">components.nf-
             
         
         
-        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:12</code></a>
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l13"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:13</code></a>
         
         </p>
 
@@ -280,6 +1048,53 @@ mixins.graph-selectable-graphic/selected:property</li>
 
     
         <p><strong>Default:</strong> &#x27;none&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_willTrack" class="property item">
+    <h3 class="name"><code>willTrack</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-graphic-with-tracking-dot.js.html#l153"><code>app-addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:153</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The action to send on <code>willTrack</code></p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     

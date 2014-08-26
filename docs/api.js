@@ -31,7 +31,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-has-graph-parent",
         "mixins.graph-line-utils",
         "mixins.graph-registered-graphic",
+        "mixins.graph-requires-scale-source",
         "mixins.graph-selectable-graphic",
+        "mixins.table-column-registrar",
         "utils.nf.nf-graph-action-context",
         "utils.parse-property-expression"
     ],

@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -217,11 +221,47 @@ export function svgToImageUrl(svg, callback) {
   img.src = url;  
 }
 
+/**
+  Triggers a download of an image rendered from the passed svg document
+  @method downloadSvg
+  @param svg {SVGSVGElement} the svg document to render
+*/
 export function downloadSvg(svg) {
   svgToImageUrl(svg, function(url) {
     var dlUrl = url.replace(&#x27;image/png&#x27;, &#x27;image/octet-stream&#x27;);
     location.href = dlUrl;
   });
+}
+
+/**
+  @method getMousePoint
+  @param container {SVGElement} the container reference to get the mouse position from
+  @param e {MouseEvent} A DOM mouse event
+  @return {Array} the [x,y] data of the mouse position relative to the container
+*/
+export function getMousePoint(container, e) {
+  var x, y;
+  
+  if(e &amp;&amp; e.hasOwnProperty(&#x27;clientX&#x27;) &amp;&amp; e.hasOwnProperty(&#x27;clientY&#x27;)) {
+    var svg = container.ownerSVGElement || container;
+    if (svg.createSVGPoint) {
+      var point = svg.createSVGPoint();
+      point.x = e.clientX;
+      point.y = e.clientY;
+      point = point.matrixTransform(container.getScreenCTM().inverse());
+      x = point.x;
+      y = point.y;
+    } else {
+      var rect = container.getBoundingClientRect();
+      x = e.clientX - rect.left - container.clientLeft; 
+      y = e.clientY - rect.top - container.clientTop;
+    }
+  }
+
+  return {
+    x: x,
+    y: y,
+  };
 }
     </pre>
 </div>

@@ -101,7 +101,11 @@
             
                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
             
+                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+            
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+            
+                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -156,7 +160,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
-import { property, observer } from &#x27;../utils/computed-property-helpers&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import { nearestIndexTo } from &#x27;../utils/nf/array-helpers&#x27;;
 
 /**
@@ -356,32 +360,16 @@ export default Ember.Mixin.create({
     return last;
   }),
 
-
-  /**
-    Sets the hoverIndex and hoverData properties when the graph&#x27;s &#x60;hoverX&#x60; property changes, or when 
-    the renderedData changes.
-    @method updateHoverIndex
-    @private
-  */
-  updateHoverIndex: observer(&#x27;graph.hoverX&#x27;, &#x27;renderedData.@each&#x27;, function(graphHoverX, renderedData) {
-    var index = -1;
-    if(!isNaN(graphHoverX)) {
-      if(renderedData &amp;&amp; renderedData.length &gt; 0) {
-        index = nearestIndexTo(renderedData, graphHoverX, function(d) {
-          return d ? d[0] : null;
-        });
-      }
+  getDataNearX: function(x) {
+    x = +x;
+    if(x === x) {
+      var renderedData = this.get(&#x27;renderedData&#x27;);
+      var index = nearestIndexTo(renderedData, x, function(d){
+        return d ? d[0] : null;
+      });
+      return index !== -1 ? renderedData[index] : null;
     }
-
-    this.set(&#x27;hoverIndex&#x27;, index);
-    var data = renderedData[index];
-
-    this.set(&#x27;hoverData&#x27;, data ? {
-      x: data[0],
-      y: data[1],
-      data: data.data,
-    } : null);
-  }),
+  },
 });
 
 function between(x, a, b) {
