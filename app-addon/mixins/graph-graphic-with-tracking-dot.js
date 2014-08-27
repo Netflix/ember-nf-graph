@@ -32,9 +32,48 @@ export default Ember.Mixin.create({
   */
   trackingMode: 'none',
 
+  trackedData: null,
+
+  isShouldTrack: Ember.computed.or('isSelectedHoverMode', 'isHoverMode'),
+
+  isSelectedHoverMode: property('trackingMode', function(mode) {
+    return mode === 'selected-hover' || mode === 'selected-snap-first' || mode === 'selected-snap-last';
+  }),
+
+  isHoverMode: property('trackingMode', function(mode) {
+    return mode === 'hover' || mode === 'snap-first' || mode === 'snap-last';
+  }),
+
+  hoverData: null,
+
+  isHovered: false,
+
   showTrackingDot: property('trackedData.x', 'trackedData.y', function(x, y) {
     return typeof x === 'number' && typeof y === 'number';
   }),
+
+  _updateHovered: function() {
+    if(this.get('isShouldTrack')) {
+      this.set('trackedData', this.get('hoverData.nearestData'));
+    }
+  }.observes('isShouldTrack', 'hoverData'),
+
+  _processUpdateUnhovered: function(){
+    if(!this.get('isHovered')) {
+      var mode = this.get('trackingMode');
+      var selected = this.get('selected');
+      if(mode === 'snap-last' || (selected && mode === 'selected-snap-last')) {
+        this.set('trackedData', this.get('lastVisibleData'));
+      }
+      if(mode === 'snap-first' || (selected && mode === 'selected-snap-first')) {
+        this.set('trackedData', this.get('firstVisibleData'));
+      }
+    }
+  },
+
+  _updateUnhovered: function(){
+    Ember.run.scheduleOnce('actions', this, this._processUpdateUnhovered);
+  }.observes('isHovered', 'trackingMode', 'firstVisibleData', 'lastVisibleData').on('didInsertElement'),
 
   /**
     The action name to send to the controller when the `hoverChange` event fires
@@ -67,18 +106,16 @@ export default Ember.Mixin.create({
     @param e {utils.nf.graph-tracking-action-context}
   */
   didHoverChange: function(e) {
-    var trackingMode = this.get('trackingMode');
+    var isHoverMode = this.get('isHoverMode');
+    var isSelectedHoverMode = this.get('isSelectedHoverMode');
+    var selected = this.get('selected');
 
-    if(this.get('selected') && 
-      (trackingMode === 'selected-hover' ||
-      trackingMode === 'selected-snap-first' || 
-      trackingMode === 'selected-snap-last')) {
-      this.set('trackedData', e.get('nearestData'));
+    if(!this.get('isHovered')) {
+      this.set('isHovered', true);
     }
-    else if(trackingMode === 'hover' ||
-      trackingMode === 'snap-first' ||
-      trackingMode === 'snap-last') {
-      this.set('trackedData', e.get('nearestData'));
+
+    if(isHoverMode || (selected && isSelectedHoverMode)) {
+      this.set('hoverData', e);
     }
 
     if(this.get('hoverChange')) {
@@ -100,7 +137,11 @@ export default Ember.Mixin.create({
     @params e {Object} hover end event object.
   */
   didHoverEnd: function(e) {
-    this.updateHoverEnd();
+    this.set('hoverData', null);
+
+    if(this.get('isHovered')) {
+      this.set('isHovered', false);
+    }
 
     if(this.get('hoverEnd')) {
       this.sendAction('hoverEnd', {
@@ -108,19 +149,6 @@ export default Ember.Mixin.create({
         source: this,
         graph: this.get('graph'),
       });
-    }
-  },
-
-  updateHoverEnd: function(){
-    var trackingMode = this.get('trackingMode');
-    var selected = this.get('selected');
-
-    if(trackingMode === 'snap-last' || (selected && trackingMode === 'selected-snap-last')) {
-      this.set('trackedData', this.get('lastVisibleData'));
-    }
-
-    if(trackingMode === 'snap-first' || (selected && trackingMode === 'selected-snap-first')) {
-      this.set('trackedData', this.get('firstVisibleData'));
     }
   },
 
@@ -201,6 +229,5 @@ export default Ember.Mixin.create({
     var content = this.get('graph.content');
     content.on('didHoverChange', this, this.didContentHoverChange);
     content.on('didHoverEnd', this, this.didContentHoverEnd);
-    this.updateHoverEnd();
   }.on('didInsertElement'),
 });

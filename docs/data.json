@@ -3933,7 +3933,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 188,
+            "line": 192,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
@@ -3985,7 +3985,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 39,
+            "line": 78,
             "description": "The action name to send to the controller when the `hoverChange` event fires",
             "itemtype": "property",
             "name": "hoverChange",
@@ -3996,7 +3996,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 47,
+            "line": 86,
             "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
             "itemtype": "method",
             "name": "didContentHoverChange",
@@ -4014,7 +4014,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 64,
+            "line": 103,
             "description": "Event handler for didHoverChange. Sends hoverChange action.",
             "itemtype": "method",
             "name": "didHoverChange",
@@ -4030,7 +4030,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 93,
+            "line": 126,
             "description": "Name of the action to send on `hoverEnd`",
             "itemtype": "property",
             "name": "hoverEnd",
@@ -4041,7 +4041,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 101,
+            "line": 134,
             "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
             "itemtype": "method",
             "name": "didHoverEnd",
@@ -4057,7 +4057,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 127,
+            "line": 155,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
@@ -4068,7 +4068,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 135,
+            "line": 163,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
@@ -4079,7 +4079,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 153,
+            "line": 181,
             "description": "The action to send on `willTrack`",
             "itemtype": "property",
             "name": "willTrack",
@@ -4090,7 +4090,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 161,
+            "line": 189,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -4101,7 +4101,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 179,
+            "line": 207,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -4119,10 +4119,10 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 195,
+            "line": 223,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
-            "name": "_subscribeToContentHover",
+            "name": "_initializeTrackingDot",
             "access": "private",
             "tagname": "",
             "class": "mixins.graph-graphic-with-tracking-dot",
@@ -4634,15 +4634,15 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:47"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:86"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:101"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:134"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:101"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:134"
         }
     ]
 }
