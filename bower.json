@@ -20,7 +20,7 @@
     "svg": "https://github.com/kbwood/svg.git",
     "jquery": "2.X"
   },
-  "version": "0.4.3",
+  "version": "0.4.4",
   "resolutions": {
     "ember": "1.7.0-beta.5"
   }
