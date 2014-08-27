@@ -151,7 +151,7 @@ export default Ember.Component.extend(HasGraphParent, {
         graph: this.get('graph'),
       }));
     }
-  }.on('mouseOut'),
+  }.on('mouseLeave'),
 
   /**
     An array containing models to render fret lines

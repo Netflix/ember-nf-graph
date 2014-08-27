@@ -100,6 +100,18 @@ export default Ember.Mixin.create({
     @params e {Object} hover end event object.
   */
   didHoverEnd: function(e) {
+    this.updateHoverEnd();
+
+    if(this.get('hoverEnd')) {
+      this.sendAction('hoverEnd', {
+        originalEvent: e,
+        source: this,
+        graph: this.get('graph'),
+      });
+    }
+  },
+
+  updateHoverEnd: function(){
     var trackingMode = this.get('trackingMode');
     var selected = this.get('selected');
 
@@ -110,15 +122,7 @@ export default Ember.Mixin.create({
     if(trackingMode === 'snap-first' || (selected && trackingMode === 'selected-snap-first')) {
       this.set('trackedData', this.get('firstVisibleData'));
     }
-
-    if(this.get('hoverEnd')) {
-      this.sendAction('hoverEnd', {
-        originalEvent: e,
-        source: this,
-        graph: this.get('graph'),
-      });
-    }
-  }.on('didInsertElement'),
+  },
 
   /**
     The action to send on `didTrack`.
@@ -190,12 +194,13 @@ export default Ember.Mixin.create({
 
   /**
     Sets up subscriptions to content hover events.
-    @method _subscribeToContentHover
+    @method _initializeTrackingDot
     @private
   */
-  _subscribeToContentHover: function(){
+  _initializeTrackingDot: function(){
     var content = this.get('graph.content');
     content.on('didHoverChange', this, this.didContentHoverChange);
     content.on('didHoverEnd', this, this.didContentHoverEnd);
+    this.updateHoverEnd();
   }.on('didInsertElement'),
 });

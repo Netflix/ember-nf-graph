@@ -13,13 +13,8 @@
 	{{#nf-graph-content}}
 		{{#nf-gg scaleZoomX=multiY scaleZoomY=multiY}}
 			{{nf-area selectable=1 selected=fooSelected data=lineData 
-				
-				author="Ben"
-
 				trackedDataKey="fooData"
-
 				didTrack="setTrackedData"
-
 				trackingMode="snap-last"}}
 			{{nf-vertical-line x=fooData.x}}
 			{{nf-horizontal-line y=fooData.y}}	

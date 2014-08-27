@@ -181,7 +181,11 @@ export default Ember.Mixin.create({
     if(first && xMin > first[0] && renderedData.length > 1) {
       first = renderedData[1];
     }
-    return first;
+    return first ? {
+      x: first[0],
+      y: first[1],
+      data: first.data,
+    } : null;
   }),
 
 
@@ -197,7 +201,11 @@ export default Ember.Mixin.create({
     if(last && xMax < last[0] && renderedData.length > 1) {
       last = renderedData[renderedData.length - 2];
     }
-    return last;
+    return last ? {
+      x: last[0],
+      y: last[1],
+      data: last.data,
+    }: null;
   }),
 
   getDataNearX: function(x) {
