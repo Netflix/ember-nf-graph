@@ -20,12 +20,23 @@
   width: 11px;
   height: 11px; }
 
-.nf-table .nf-sort-none .nf-sort-arrow {
-  visibility: hidden; }
-.nf-table .nf-sort-ascending .nf-sort-arrow {
-  visibility: visible; }
-.nf-table .nf-sort-descending .nf-sort-arrow {
-  visibility: visible; }
+.nf-table {
+  width: auto; }
+  .nf-table > table {
+    table-layout: fixed; }
+  .nf-table .nf-sort-none .nf-sort-arrow {
+    visibility: hidden; }
+  .nf-table .nf-sort-ascending .nf-sort-arrow {
+    visibility: visible; }
+  .nf-table .nf-sort-descending .nf-sort-arrow {
+    visibility: visible; }
+  .nf-table .nf-table-scrollable-header > table {
+    table-layout: fixed; }
+  .nf-table .nf-table-scrollable-body {
+    overflow: auto;
+    max-height: 300px; }
+    .nf-table .nf-table-scrollable-body > table {
+      table-layout: fixed; }
 
 .nf-graph > .background {
   fill: #f5f6f7; }

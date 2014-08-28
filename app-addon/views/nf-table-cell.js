@@ -5,7 +5,7 @@ var computedAlias = Ember.computed.alias;
 export default Ember.View.extend({
 	tagName: 'td',
 
-	attributeBindings: ['colspan'],
+	attributeBindings: ['colspan', 'style'],
 
 	column: null,
 
@@ -16,5 +16,15 @@ export default Ember.View.extend({
 	tableView: computedAlias('templateData.view'),
 
 	tableComponent: computedAlias('tableView.controller'),
+
+	style: function(){
+		var width = this.get('column.width');
+
+		if(typeof width === 'undefined' || width === null) {
+			return '';
+		}
+
+		return 'width:' + width;
+	}.property('column.width'),
 	
 });

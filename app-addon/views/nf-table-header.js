@@ -9,7 +9,7 @@ export default Ember.View.extend({
 
 	classNameBindings: ['column.sortClass'],
 
-	attributeBindings: ['colspan'],
+	attributeBindings: ['colspan', 'style'],
 
 	colspan: computedAlias('column.header.colspan'),
 
@@ -25,4 +25,14 @@ export default Ember.View.extend({
 			component.send('sort', this.get('column'));
 		}
 	}.on('click'),
+
+	style: function(){
+		var width = this.get('column.width');
+
+		if(typeof width === 'undefined' || width === null) {
+			return '';
+		}
+
+		return 'width:' + width;
+	}.property('column.width'),
 });

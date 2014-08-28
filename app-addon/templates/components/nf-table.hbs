@@ -1,50 +1,92 @@
 {{#if hasRendered}}
-  {{#if useGroupedTableLayout}}
-    <thead>
-      <tr>
-        {{#each column in columns}}
-          {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
-        {{/each}}
-      </tr>
-    </thead>
+  {{#if scrollable}}
+    {{#if useGroupedTableLayout}}
+    
+      <h1>😦 grouped scrollable tables not yet supported</h1>
+    
+    {{else}}
+      
+      {{!-- SCROLLABLE DEFAULT --}}
+      <div class="nf-table-scrollable-header">
+        <table>
+          <thead>
+            <tr>
+              {{#each column in columns}}
+                {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+              {{/each}}
+            </tr>
+          </thead>
+        </table>
+      </div>
 
-    <tbody>
-      {{#each group in sortedGroups}}
-        <tr class="nf-table-group">
-          {{#each column in tableGroup.columns}}
-            {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
-          {{/each}}
-        </tr>
-        {{#each row in group}}
-          <tr class="nf-table-group-child">
-            {{#each column in columns}}
-              {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+      <div class="nf-table-scrollable-body">
+        <table>
+          <tbody>
+            {{#each row in sortedRows}}
+              <tr>
+                {{#each column in columns}}
+                  {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                {{/each}}
+              </tr>
             {{/each}}
-          </tr>
-        {{/each}}
-      {{/each}}
-    </tbody>
+          </tbody>
+        </table>
+      </div>
+    {{/if}}
 
   {{else}}
 
-    <thead>
-      <tr>
-        {{#each column in columns}}
-          {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
-        {{/each}}
-      </tr>
-    </thead>
+    {{!-- GROUPED, NOT SCROLLED --}}
+    {{#if useGroupedTableLayout}}
+      <table>
+        <thead>
+          <tr>
+            {{#each column in columns}}
+              {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+            {{/each}}
+          </tr>
+        </thead>
 
-    <tbody>
-      {{#each row in sortedRows}}
-        <tr>
-          {{#each column in columns}}
-            {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+        <tbody>
+          {{#each group in sortedGroups}}
+            <tr class="nf-table-group">
+              {{#each column in tableGroup.columns}}
+                {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+              {{/each}}
+            </tr>
+            {{#each row in group}}
+              <tr class="nf-table-group-child">
+                {{#each column in columns}}
+                  {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                {{/each}}
+              </tr>
+            {{/each}}
           {{/each}}
-        </tr>
-      {{/each}}
-    </tbody>
+        </tbody>
+      </table>
+    {{else}}
 
+    {{!-- DEFAULT TABLE --}}
+      <table>
+        <thead>
+          <tr>
+            {{#each column in columns}}
+              {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+            {{/each}}
+          </tr>
+        </thead>
+  
+        <tbody>
+          {{#each row in sortedRows}}
+            <tr>
+              {{#each column in columns}}
+                {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+              {{/each}}
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{/if}}
   {{/if}}
 {{/if}}
 

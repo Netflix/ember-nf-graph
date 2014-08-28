@@ -22,13 +22,21 @@ export default Ember.Component.extend({
 
 	cell: null,
 
+	table: null,
+
+	width: undefined,
+
 	headerClassNames: function() {
-		return this.get('header.classNames') || [];
-	}.property('header.classNames'),
+		var classNames = this.get('classNames');
+		var headerClassNames = this.get('header.classNames') || [];
+		return classNames.concat(headerClassNames);
+	}.property('header.classNames', 'classNames'),
 
 	cellClassNames: function(){
-		return this.get('cell.classNames') || [];
-	}.property('cell.classNames'),
+		var classNames = this.get('classNames');
+		var cellClassNames = this.get('cell.classNames') || [];
+		return classNames.concat(cellClassNames);
+	}.property('cell.classNames', 'classNames'),
 
 	/**
 		Gets or sets the sort direction for the column.
@@ -99,6 +107,9 @@ export default Ember.Component.extend({
 		var registrar = this.nearestWithProperty('isTableColumnRegistrar');
 		this.set('columnRegistrar', registrar);
 		registrar.registerColumn(this);
+
+		var table = this.nearestWithProperty('isTable');
+		this.set('table', table);
 	}.on('init'),
 
 	_unregister: function(){

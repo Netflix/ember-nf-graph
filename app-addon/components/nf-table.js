@@ -87,7 +87,7 @@ import { naturalCompare } from '../utils/nf/array-helpers';
 	@uses mixins.table-column-registrar
 */
 export default Ember.Component.extend(TableColumnRegistrar, {
-	tagName: 'table',
+	tagName: 'div',
 
 	/**
 		Property used by child components to locate the table component.
@@ -112,6 +112,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@default null
 	*/
 	groupBy: null,
+
+	/**
+		Gets or sets whether the table has a scrollable layout.
+		@property scrollable
+		@type Boolean
+		@default false
+	*/
+	scrollable: false,
 
 	/**
 		Gets whether or not to use the grouped table layout

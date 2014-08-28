@@ -4,36 +4,44 @@
 	.test {
 		background: lime;
 	}
+
+	.small-column {
+		width: 100px;
+	}
+
+	.big-column {
+		width: 200px;
+	}
 </style>
 
-{{#nf-table rows=myData sortMultiple=1}}
-	{{#nf-column sortBy="row.blah"}}	
-{{!-- 		{{#nf-header class="test"}}
+{{#nf-table rows=myData sortMultiple=1 scrollable=1}}
+	{{#nf-column sortBy="row.blah" class="small-column"}}	
+		{{#nf-header class="test"}}
 			Blah <div class="nf-sort-arrow"></div>
-		{{/nf-header}} --}}
+		{{/nf-header}}
 		
 		{{#nf-cell}}
 			{{row.blah}}
 		{{/nf-cell}}
 	{{/nf-column}}
 
-	{{#nf-column sortBy="row.foo"}}
-{{!-- 		{{#nf-header}}
+	{{#nf-column sortBy="row.foo" class="big-column"}}
+		{{#nf-header}}
 			Foo <div class="nf-sort-arrow"></div>
-		{{/nf-header}} --}}
+		{{/nf-header}}
 		
 		{{#nf-cell}}
 			<a href="#" {{action 'fooCellClicked'}}>test</a>{{row.foo}}
 		{{/nf-cell}}
 	{{/nf-column}}
 	
-	{{#nf-column sortBy="row.bar" sortNatural=1}}	
-{{!-- 		{{#nf-header}}
+	{{#nf-column sortBy="row.bar" sortNatural=1 class="small-column"}}	
+		{{#nf-header}}
 			Bar <div class="nf-sort-arrow"></div>
-		{{/nf-header}} --}}
+		{{/nf-header}}
 
 		{{#nf-cell}}
 			{{row.bar}}
-		{{/nf-cell}}
+		{{/nf-cell}} 
 	{{/nf-column}}
 {{/nf-table}}

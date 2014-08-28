@@ -1,4 +1,10 @@
 .nf-table {
+	width: auto;
+
+	& > table {
+		table-layout: fixed;
+	}
+
 	.nf-sort-none {
 		.nf-sort-arrow {
 			visibility: hidden;
@@ -16,6 +22,22 @@
 		.nf-sort-arrow {
 			@extend .nf-icon.arrow-desc;
 			visibility: visible;
+		}
+	}
+
+	.nf-table-scrollable-header {
+		& > table {
+			table-layout: fixed;
+		}
+	}
+
+	.nf-table-scrollable-body {
+		overflow: auto;
+
+		max-height: 300px;
+
+		& > table {
+			table-layout: fixed;
 		}
 	}
 }
