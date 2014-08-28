@@ -14,6 +14,16 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	itemController: undefined,
 
+	/**
+		The name of the action to send when the group row is clicked.
+		Sends an object with `group`, `table` and `tableGroup` which are
+		the group data, the table component, and the table-group component, respectively.
+		@property rowAction
+		@type String
+		@default null
+	*/
+	rowAction: null,
+
 	_register: function(){
 		var table = this.nearestWithProperty('isTable');
 		table.set('tableGroup', this);

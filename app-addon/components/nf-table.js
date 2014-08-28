@@ -3,7 +3,7 @@ import multiSort from '../utils/multi-sort';
 import TableColumnRegistrar from '../mixins/table-column-registrar';
 import parsePropExpr from '../utils/parse-property-expression';
 import { naturalCompare } from '../utils/nf/array-helpers'; 
-
+import NfTableGroupController from '../controllers/nf-table-group-controller';
 /**
 	Composable table component with built-in sorting
 	
@@ -194,9 +194,10 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			return groups;
 		}, []);
 
-		var tableGroupingCtrl = Ember.ArrayController.create({
+		var tableGroupingCtrl = NfTableGroupController.create({
 			container: this.get('container'),
 			content: groups,
+			table: this,
 		});
 
 		var itemController = this.get('tableGroup.itemController');
@@ -208,6 +209,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		return tableGroupingCtrl;
 	}.property('rows.@each', 'sortMap', 'groupBy', 'tableGroup.itemController'),
 
+	groupRowAction: Ember.computed.alias('tableGroup.rowAction'),
 
 	/**
 		The data source for rows to display in this table.
@@ -285,6 +287,17 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	parentController: Ember.computed.alias('templateData.view.controller'),
 
+	/**
+		The name of the action to fire when a row is clicked.
+		Sends an object with the `row` and `table`.
+
+		For group rows, see {{#crossLink "components.nf-table-group/rowAction:property"}}{{/crossLink}}.
+		@property rowAction
+		@type String
+		@default null
+	*/
+	rowAction: null,
+
 	actions: {
 
 		/**
@@ -308,18 +321,12 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			}
 		},
 
-		/**
-			Handles the cell click action and sends the appropriate action to the view.
-			@method actions.cellClicked
-			@param row {Object} the data row from the the rows array
-			@param column {nf-column} the column component for the current column
-			@param group {Array} the array containing the group data (this is undefined if the table is not grouped)
-		*/
-		cellClicked: function(row, column, group) {
-			var cellAction = Ember.get(column, 'cell.action');
-			if(cellAction) {
-				this.get('parentController').send('cellClickAction', row, column, group);
-			}
+		rowClick: function(row, group){
+			this.sendAction('rowAction', row, group, this);
+		},
+
+		groupRowClick: function(group){
+			this.sendAction('groupRowAction', group, this);
 		},
 	},
 });

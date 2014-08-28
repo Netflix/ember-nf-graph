@@ -14,14 +14,16 @@
 	}
 </style>
 
-{{#nf-table rows=myData sortMultiple=1 scrollable=1 groupBy='blah'}}
-	{{#nf-table-group itemController="nf-table-group-test"}}
+{{#nf-table rows=myData sortMultiple=1 scrollable=1 
+	
+	rowAction="rowClicked"}}
+	{{!-- {{#nf-table-group itemController="nf-table-group-test" rowAction="groupClicked"}}
 		{{#nf-column sortBy="row.blah" class="small-column"}}	
 			{{#nf-cell}}
 				{{group.blah}}
 			{{/nf-cell}}
 		{{/nf-column}}
-	{{/nf-table-group}}
+	{{/nf-table-group}} --}}
 
 	{{#nf-column sortBy="row.foo" class="big-column"}}
 		{{#nf-header}}

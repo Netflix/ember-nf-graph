@@ -17,13 +17,13 @@
         <table>
           <tbody>
             {{#each group in sortedGroups}}
-              <tr class="nf-table-group">
+              <tr class="nf-table-group" {{action 'groupRowClick' group}}>
                 {{#each column in tableGroup.columns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
               </tr>
               {{#each row in group}}
-                <tr class="nf-table-group-child">
+                <tr class="nf-table-group-child" {{action 'rowClick' row group}}>
                   {{#each column in columns}}
                     {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                   {{/each}}
@@ -52,7 +52,7 @@
         <table>
           <tbody>
             {{#each row in sortedRows}}
-              <tr>
+              <tr {{action 'rowClick' row}}>
                 {{#each column in columns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
@@ -78,13 +78,13 @@
 
         <tbody>
           {{#each group in sortedGroups}}
-            <tr class="nf-table-group">
+            <tr class="nf-table-group" {{action 'groupRowClick' group}}>
               {{#each column in tableGroup.columns}}
                 {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
               {{/each}}
             </tr>
             {{#each row in group}}
-              <tr class="nf-table-group-child">
+              <tr class="nf-table-group-child" {{action 'rowClick' row group}}>
                 {{#each column in columns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
@@ -107,7 +107,7 @@
   
         <tbody>
           {{#each row in sortedRows}}
-            <tr>
+            <tr {{action 'rowClick' row}}>
               {{#each column in columns}}
                 {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
               {{/each}}
