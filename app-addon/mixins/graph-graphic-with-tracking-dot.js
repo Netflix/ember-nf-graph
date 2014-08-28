@@ -34,6 +34,8 @@ export default Ember.Mixin.create({
 
   trackedData: null,
 
+  trackingDotRadius: 2.5,
+
   isShouldTrack: Ember.computed.or('isSelectedHoverMode', 'isHoverMode'),
 
   isSelectedHoverMode: property('trackingMode', function(mode) {
@@ -73,7 +75,7 @@ export default Ember.Mixin.create({
 
   _updateUnhovered: function(){
     Ember.run.scheduleOnce('actions', this, this._processUpdateUnhovered);
-  }.observes('isHovered', 'trackingMode', 'firstVisibleData', 'lastVisibleData').on('didInsertElement'),
+  }.observes('isHovered', 'trackingMode', 'firstVisibleData', 'lastVisibleData', 'selected').on('didInsertElement'),
 
   /**
     The action name to send to the controller when the `hoverChange` event fires
