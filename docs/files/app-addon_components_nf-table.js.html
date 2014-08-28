@@ -200,20 +200,22 @@ import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;;
 	property.
 
 	Additionally, you can add grouping rows with the &#x60;{{nf-table-group}}&#x60; component, which allows you
-	to define the columns for the group rows. If you do this, you will need to create an ArrayController
+	to define the columns for the group rows. **If you do this, you will need to create an ArrayController**
 	for the group that will carry with it any computed properties you might need, such as a sum or average
-	aggregated over the group.
+	aggregated over the group. The array controller for your grouping must be assigned to the &#x60;itemController&#x60;
+	property on the &#x60;nf-table-group&#x60; component.
 
 				{{#nf-table rows=myData groupBy=&quot;baz&quot;}}
 					
-					{{#nf-table-group itemController=&quot;my-group-controller&quot;}}
-						
+					{{#nf-table-group itemController=&quot;my-group-row&quot;}}
+
 						{{#nf-column}}
 							{{#nf-cell colspan=&quot;2&quot;}}
-								Baz = {{group.groupValue}}
+								Baz: {{group.baz}}
+								Bars: {{group.barSum}}
 							{{/nf-cell}}
 						{{/nf-column}}
-
+					
 					{{/nf-table-group}}
 
 	      	{{#nf-column sortBy=&quot;foo&quot;}}
@@ -236,6 +238,22 @@ import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;;
 
 	      {{/nf-table}}
 
+	Which would need an accompanying array controller definition &#x60;my-group-row&#x60;:
+
+				export default Ember.ArrayController.extend({
+					// returns the first value from the array
+					baz: function(){
+						return this.get(&#x27;model&#x27;)[0].baz;
+					}.property(&#x27;model.@each&#x27;),
+
+					//gets the sum of all the bars
+					barSum: function() {
+						return this.get(&#x27;model&#x27;).reduce(function(sum, item) {
+							return sum + item.bar;
+						}, 0);
+					}.property(&#x27;model.@each.bar&#x27;),
+			  });
+
 	### Styling
 	
 	nf-table emits a &#x60;&lt;table&gt;&#x60; with a class of &#x60;nf-table&#x60; applied to it.
@@ -247,7 +265,7 @@ import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;;
 	@uses mixins.table-column-registrar
 */
 export default Ember.Component.extend(TableColumnRegistrar, {
-	tagName: &#x27;table&#x27;,
+	tagName: &#x27;div&#x27;,
 
 	/**
 		Property used by child components to locate the table component.
@@ -272,6 +290,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@default null
 	*/
 	groupBy: null,
+
+	/**
+		Gets or sets whether the table has a scrollable layout.
+		@property scrollable
+		@type Boolean
+		@default false
+	*/
+	scrollable: false,
 
 	/**
 		Gets whether or not to use the grouped table layout

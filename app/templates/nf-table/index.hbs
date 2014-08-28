@@ -14,16 +14,14 @@
 	}
 </style>
 
-{{#nf-table rows=myData sortMultiple=1 scrollable=1}}
-	{{#nf-column sortBy="row.blah" class="small-column"}}	
-		{{#nf-header class="test"}}
-			Blah <div class="nf-sort-arrow"></div>
-		{{/nf-header}}
-		
-		{{#nf-cell}}
-			{{row.blah}}
-		{{/nf-cell}}
-	{{/nf-column}}
+{{#nf-table rows=myData sortMultiple=1 scrollable=1 groupBy='blah'}}
+	{{#nf-table-group itemController="nf-table-group-test"}}
+		{{#nf-column sortBy="row.blah" class="small-column"}}	
+			{{#nf-cell}}
+				{{group.blah}}
+			{{/nf-cell}}
+		{{/nf-column}}
+	{{/nf-table-group}}
 
 	{{#nf-column sortBy="row.foo" class="big-column"}}
 		{{#nf-header}}
@@ -43,5 +41,15 @@
 		{{#nf-cell}}
 			{{row.bar}}
 		{{/nf-cell}} 
+	{{/nf-column}}
+
+
+	{{#nf-column sortBy="row.blah" class="small-column"}}	
+		{{#nf-header}}
+			💩
+		{{/nf-header}}
+		{{#nf-cell}}
+			BLAH: {{row.blah}}
+		{{/nf-cell}}
 	{{/nf-column}}
 {{/nf-table}}

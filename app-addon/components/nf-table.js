@@ -40,20 +40,22 @@ import { naturalCompare } from '../utils/nf/array-helpers';
 	property.
 
 	Additionally, you can add grouping rows with the `{{nf-table-group}}` component, which allows you
-	to define the columns for the group rows. If you do this, you will need to create an ArrayController
+	to define the columns for the group rows. **If you do this, you will need to create an ArrayController**
 	for the group that will carry with it any computed properties you might need, such as a sum or average
-	aggregated over the group.
+	aggregated over the group. The array controller for your grouping must be assigned to the `itemController`
+	property on the `nf-table-group` component.
 
 				{{#nf-table rows=myData groupBy="baz"}}
 					
-					{{#nf-table-group itemController="my-group-controller"}}
-						
+					{{#nf-table-group itemController="my-group-row"}}
+
 						{{#nf-column}}
 							{{#nf-cell colspan="2"}}
-								Baz = {{group.groupValue}}
+								Baz: {{group.baz}}
+								Bars: {{group.barSum}}
 							{{/nf-cell}}
 						{{/nf-column}}
-
+					
 					{{/nf-table-group}}
 
 	      	{{#nf-column sortBy="foo"}}
@@ -75,6 +77,22 @@ import { naturalCompare } from '../utils/nf/array-helpers';
 	      	{{/nf-column}}
 
 	      {{/nf-table}}
+
+	Which would need an accompanying array controller definition `my-group-row`:
+
+				export default Ember.ArrayController.extend({
+					// returns the first value from the array
+					baz: function(){
+						return this.get('model')[0].baz;
+					}.property('model.@each'),
+
+					//gets the sum of all the bars
+					barSum: function() {
+						return this.get('model').reduce(function(sum, item) {
+							return sum + item.bar;
+						}, 0);
+					}.property('model.@each.bar'),
+			  });
 
 	### Styling
 	

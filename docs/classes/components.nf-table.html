@@ -220,16 +220,18 @@ with fields <code>foo</code> and <code>bar</code>.</p>
 <p>If you wish to create a &quot;grouped table&quot;, you simply need to group the data with the <code>groupBy</code>
 property.</p>
 <p>Additionally, you can add grouping rows with the <code>{{nf-table-group}}</code> component, which allows you
-to define the columns for the group rows. If you do this, you will need to create an ArrayController
+to define the columns for the group rows. <strong>If you do this, you will need to create an ArrayController</strong>
 for the group that will carry with it any computed properties you might need, such as a sum or average
-aggregated over the group.</p>
+aggregated over the group. The array controller for your grouping must be assigned to the <code>itemController</code>
+property on the <code>nf-table-group</code> component.</p>
 <pre class="code prettyprint"><code>        {{#nf-table rows=myData groupBy=&quot;baz&quot;}}
 
-            {{#nf-table-group itemController=&quot;my-group-controller&quot;}}
+            {{#nf-table-group itemController=&quot;my-group-row&quot;}}
 
                 {{#nf-column}}
                     {{#nf-cell colspan=&quot;2&quot;}}
-                        Baz = {{group.groupValue}}
+                        Baz: {{group.baz}}
+                        Bars: {{group.barSum}}
                     {{/nf-cell}}
                 {{/nf-column}}
 
@@ -254,6 +256,20 @@ aggregated over the group.</p>
       {{/nf-column}}
 
   {{/nf-table}}</code></pre>
+<p>Which would need an accompanying array controller definition <code>my-group-row</code>:</p>
+<pre class="code prettyprint"><code>        export default Ember.ArrayController.extend({
+            // returns the first value from the array
+            baz: function(){
+                return this.get(&#39;model&#39;)[0].baz;
+            }.property(&#39;model.@each&#39;),
+
+            //gets the sum of all the bars
+            barSum: function() {
+                return this.get(&#39;model&#39;).reduce(function(sum, item) {
+                    return sum + item.bar;
+                }, 0);
+            }.property(&#39;model.@each.bar&#39;),
+      });</code></pre>
 <h3 id="styling">Styling</h3>
 <p>nf-table emits a <code>&lt;table&gt;</code> with a class of <code>nf-table</code> applied to it.</p>
 
@@ -360,6 +376,13 @@ aggregated over the group.</p>
                         
                             <li class="index-item property">
                                 <a href="#property_rows">rows</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_scrollable">scrollable</a>
 
                                 
                                 
@@ -475,7 +498,7 @@ aggregated over the group.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l285"><code>app-addon&#x2F;components&#x2F;nf-table.js:285</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l311"><code>app-addon&#x2F;components&#x2F;nf-table.js:311</code></a>
         
         </p>
 
@@ -596,7 +619,7 @@ aggregated over the group.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l264"><code>app-addon&#x2F;components&#x2F;nf-table.js:264</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l290"><code>app-addon&#x2F;components&#x2F;nf-table.js:290</code></a>
         
         </p>
 
@@ -888,7 +911,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l108"><code>app-addon&#x2F;components&#x2F;nf-table.js:108</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l126"><code>app-addon&#x2F;components&#x2F;nf-table.js:126</code></a>
         
         </p>
 
@@ -935,7 +958,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l92"><code>app-addon&#x2F;components&#x2F;nf-table.js:92</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l110"><code>app-addon&#x2F;components&#x2F;nf-table.js:110</code></a>
         
         </p>
 
@@ -1026,7 +1049,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l253"><code>app-addon&#x2F;components&#x2F;nf-table.js:253</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l279"><code>app-addon&#x2F;components&#x2F;nf-table.js:279</code></a>
         
         </p>
 
@@ -1072,7 +1095,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l186"><code>app-addon&#x2F;components&#x2F;nf-table.js:186</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l212"><code>app-addon&#x2F;components&#x2F;nf-table.js:212</code></a>
         
         </p>
 
@@ -1088,6 +1111,53 @@ up child templates to the proper controller.</p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_scrollable" class="property item">
+    <h3 class="name"><code>scrollable</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l134"><code>app-addon&#x2F;components&#x2F;nf-table.js:134</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether the table has a scrollable layout.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -1119,7 +1189,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l125"><code>app-addon&#x2F;components&#x2F;nf-table.js:125</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l151"><code>app-addon&#x2F;components&#x2F;nf-table.js:151</code></a>
         
         </p>
 
@@ -1164,7 +1234,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l240"><code>app-addon&#x2F;components&#x2F;nf-table.js:240</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l266"><code>app-addon&#x2F;components&#x2F;nf-table.js:266</code></a>
         
         </p>
 
@@ -1211,7 +1281,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l209"><code>app-addon&#x2F;components&#x2F;nf-table.js:209</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l235"><code>app-addon&#x2F;components&#x2F;nf-table.js:235</code></a>
         
         </p>
 
@@ -1256,7 +1326,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l197"><code>app-addon&#x2F;components&#x2F;nf-table.js:197</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l223"><code>app-addon&#x2F;components&#x2F;nf-table.js:223</code></a>
         
         </p>
 
@@ -1303,7 +1373,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l100"><code>app-addon&#x2F;components&#x2F;nf-table.js:100</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l118"><code>app-addon&#x2F;components&#x2F;nf-table.js:118</code></a>
         
         </p>
 
@@ -1352,7 +1422,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l116"><code>app-addon&#x2F;components&#x2F;nf-table.js:116</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l142"><code>app-addon&#x2F;components&#x2F;nf-table.js:142</code></a>
         
         </p>
 
