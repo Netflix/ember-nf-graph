@@ -163,7 +163,7 @@ import multiSort from &#x27;../utils/multi-sort&#x27;;
 import TableColumnRegistrar from &#x27;../mixins/table-column-registrar&#x27;;
 import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
 import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; 
-
+import NfTableGroupController from &#x27;../controllers/nf-table-group-controller&#x27;;
 /**
 	Composable table component with built-in sorting
 	
@@ -354,9 +354,10 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			return groups;
 		}, []);
 
-		var tableGroupingCtrl = Ember.ArrayController.create({
+		var tableGroupingCtrl = NfTableGroupController.create({
 			container: this.get(&#x27;container&#x27;),
 			content: groups,
+			table: this,
 		});
 
 		var itemController = this.get(&#x27;tableGroup.itemController&#x27;);
@@ -368,6 +369,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		return tableGroupingCtrl;
 	}.property(&#x27;rows.@each&#x27;, &#x27;sortMap&#x27;, &#x27;groupBy&#x27;, &#x27;tableGroup.itemController&#x27;),
 
+	groupRowAction: Ember.computed.alias(&#x27;tableGroup.rowAction&#x27;),
 
 	/**
 		The data source for rows to display in this table.
@@ -445,6 +447,17 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
+	/**
+		The name of the action to fire when a row is clicked.
+		Sends an object with the &#x60;row&#x60; and &#x60;table&#x60;.
+
+		For group rows, see {{#crossLink &quot;components.nf-table-group/rowAction:property&quot;}}{{/crossLink}}.
+		@property rowAction
+		@type String
+		@default null
+	*/
+	rowAction: null,
+
 	actions: {
 
 		/**
@@ -468,18 +481,12 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			}
 		},
 
-		/**
-			Handles the cell click action and sends the appropriate action to the view.
-			@method actions.cellClicked
-			@param row {Object} the data row from the the rows array
-			@param column {nf-column} the column component for the current column
-			@param group {Array} the array containing the group data (this is undefined if the table is not grouped)
-		*/
-		cellClicked: function(row, column, group) {
-			var cellAction = Ember.get(column, &#x27;cell.action&#x27;);
-			if(cellAction) {
-				this.get(&#x27;parentController&#x27;).send(&#x27;cellClickAction&#x27;, row, column, group);
-			}
+		rowClick: function(row, group){
+			this.sendAction(&#x27;rowAction&#x27;, row, group, this);
+		},
+
+		groupRowClick: function(group){
+			this.sendAction(&#x27;groupRowAction&#x27;, group, this);
 		},
 	},
 });

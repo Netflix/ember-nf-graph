@@ -2967,6 +2967,17 @@
             "namespace": "components"
         },
         {
+            "file": "app-addon/components/nf-table-group.js",
+            "line": 17,
+            "description": "The name of the action to send when the group row is clicked.\nSends an object with `group`, `table` and `tableGroup` which are\nthe group data, the table component, and the table-group component, respectively.",
+            "itemtype": "property",
+            "name": "rowAction",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-table-group",
+            "namespace": "components"
+        },
+        {
             "file": "app-addon/components/nf-table.js",
             "line": 110,
             "description": "Property used by child components to locate the table component.",
@@ -3036,7 +3047,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 212,
+            "line": 214,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
@@ -3046,7 +3057,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 223,
+            "line": 225,
             "description": "Gets or sets whether a multi sort is used.",
             "itemtype": "property",
             "name": "sortMultiple",
@@ -3057,7 +3068,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 235,
+            "line": 237,
             "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
             "itemtype": "property",
             "name": "sortMap",
@@ -3069,7 +3080,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 266,
+            "line": 268,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
@@ -3080,7 +3091,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 279,
+            "line": 281,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -3092,6 +3103,17 @@
         {
             "file": "app-addon/components/nf-table.js",
             "line": 290,
+            "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
+            "itemtype": "property",
+            "name": "rowAction",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 303,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
@@ -3100,32 +3122,6 @@
                     "name": "sortedColumn",
                     "description": "",
                     "type": "Nf-column"
-                }
-            ],
-            "class": "components.nf-table",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-table.js",
-            "line": 311,
-            "description": "Handles the cell click action and sends the appropriate action to the view.",
-            "itemtype": "method",
-            "name": "actions.cellClicked",
-            "params": [
-                {
-                    "name": "row",
-                    "description": "the data row from the the rows array",
-                    "type": "Object"
-                },
-                {
-                    "name": "column",
-                    "description": "the column component for the current column",
-                    "type": "Nf-column"
-                },
-                {
-                    "name": "group",
-                    "description": "the array containing the group data (this is undefined if the table is not grouped)",
-                    "type": "Array"
                 }
             ],
             "class": "components.nf-table",

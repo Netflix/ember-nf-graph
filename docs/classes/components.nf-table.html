@@ -302,13 +302,6 @@ property on the <code>nf-table-group</code> component.</p>
                     <ul class="index-list methods extends">
                         
                             <li class="index-item method">
-                                <a href="#method_actions.cellClicked">actions.cellClicked</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method">
                                 <a href="#method_actions.sort">actions.sort</a>
 
                                 
@@ -369,6 +362,13 @@ property on the <code>nf-table-group</code> component.</p>
                         
                             <li class="index-item property">
                                 <a href="#property_parentController">parentController</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_rowAction">rowAction</a>
 
                                 
                                 
@@ -444,139 +444,6 @@ property on the <code>nf-table-group</code> component.</p>
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_actions.cellClicked" class="method item">
-    <h3 class="name"><code>actions.cellClicked</code></h3>
-
-    
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-            
-                <li class="arg">
-                    
-                        <code>row</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>column</code>
-                    
-                </li>
-            
-                <li class="arg">
-                    
-                        <code>group</code>
-                    
-                </li>
-            
-            </ul><span class="paren">)</span>
-        </div>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-table.js.html#l311"><code>app-addon&#x2F;components&#x2F;nf-table.js:311</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Handles the cell click action and sends the appropriate action to the view.</p>
-
-    </div>
-
-    
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-            
-                <li class="param">
-                    
-                        <code class="param-name">row</code>
-                        <span class="type">Object</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the data row from the the rows array</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">column</code>
-                        <span class="type">Nf-column</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the column component for the current column</p>
-
-                    </div>
-
-                    
-                </li>
-            
-                <li class="param">
-                    
-                        <code class="param-name">group</code>
-                        <span class="type">Array</span>
-                    
-
-                    
-
-                    <div class="param-description">
-                        <p>the array containing the group data (this is undefined if the table is not grouped)</p>
-
-                    </div>
-
-                    
-                </li>
-            
-            </ul>
-        </div>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="method_actions.sort" class="method item">
     <h3 class="name"><code>actions.sort</code></h3>
 
@@ -619,7 +486,7 @@ property on the <code>nf-table-group</code> component.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l290"><code>app-addon&#x2F;components&#x2F;nf-table.js:290</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l303"><code>app-addon&#x2F;components&#x2F;nf-table.js:303</code></a>
         
         </p>
 
@@ -1049,7 +916,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l279"><code>app-addon&#x2F;components&#x2F;nf-table.js:279</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l281"><code>app-addon&#x2F;components&#x2F;nf-table.js:281</code></a>
         
         </p>
 
@@ -1064,6 +931,55 @@ up child templates to the proper controller.</p>
 
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_rowAction" class="property item">
+    <h3 class="name"><code>rowAction</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l290"><code>app-addon&#x2F;components&#x2F;nf-table.js:290</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The name of the action to fire when a row is clicked.
+Sends an object with the <code>row</code> and <code>table</code>.</p>
+<p>For group rows, see <a href="../classes/components.nf-table-group.html#property_rowAction" class="crosslink">rowAction</a>.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1095,7 +1011,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l212"><code>app-addon&#x2F;components&#x2F;nf-table.js:212</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l214"><code>app-addon&#x2F;components&#x2F;nf-table.js:214</code></a>
         
         </p>
 
@@ -1234,7 +1150,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l266"><code>app-addon&#x2F;components&#x2F;nf-table.js:266</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l268"><code>app-addon&#x2F;components&#x2F;nf-table.js:268</code></a>
         
         </p>
 
@@ -1281,7 +1197,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l235"><code>app-addon&#x2F;components&#x2F;nf-table.js:235</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l237"><code>app-addon&#x2F;components&#x2F;nf-table.js:237</code></a>
         
         </p>
 
@@ -1326,7 +1242,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l223"><code>app-addon&#x2F;components&#x2F;nf-table.js:223</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l225"><code>app-addon&#x2F;components&#x2F;nf-table.js:225</code></a>
         
         </p>
 
