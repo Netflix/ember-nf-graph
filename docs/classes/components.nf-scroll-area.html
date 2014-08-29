@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-column - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-scroll-area - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -158,19 +158,15 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-column Class</h1>
+                        <h1>components.nf-scroll-area Class</h1>
 <div class="box meta">
     
 
     
-        <div class="extends">
-            Extends Ember.Component
-        </div>
-    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-column.js.html#l3"><code>app-addon&#x2F;components&#x2F;nf-column.js:3</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-scroll-area.js.html#l4"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:4</code></a>
         </div>
     
 
@@ -186,7 +182,7 @@
 
 
 <div class="box intro">
-    <p>A column class to support <code>nf-table</code></p>
+    <p>A component that emits actions and events when scrolled or resized.</p>
 
 </div>
 
@@ -214,10 +210,17 @@
                 <div class="index-section methods">
                     <h3>Methods</h3>
 
-                    <ul class="index-list methods extends">
+                    <ul class="index-list methods">
                         
                             <li class="index-item method">
-                                <a href="#method_toggleSortDirection">toggleSortDirection</a>
+                                <a href="#method_createActionContext">createActionContext</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
+                                <a href="#method_updateMeasurements">updateMeasurements</a>
 
                                 
                                 
@@ -231,94 +234,80 @@
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties extends">
+                    <ul class="index-list properties">
                         
                             <li class="index-item property">
-                                <a href="#property_align">align</a>
+                                <a href="#property_actionData">actionData</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_alignmentClass">alignmentClass</a>
+                                <a href="#property_changeAction">changeAction</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_cell">cell</a>
+                                <a href="#property_height">height</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_cellClassNames">cellClassNames</a>
+                                <a href="#property_outerHeight">outerHeight</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_direction">direction</a>
+                                <a href="#property_outerWidth">outerWidth</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_header">header</a>
+                                <a href="#property_resizeAction">resizeAction</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_headerClassNames">headerClassNames</a>
+                                <a href="#property_scrollAction">scrollAction</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_isDataTableColumn">isDataTableColumn</a>
+                                <a href="#property_scrollHeight">scrollHeight</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_sortClass">sortClass</a>
+                                <a href="#property_scrollLeft">scrollLeft</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_sortDirection">sortDirection</a>
+                                <a href="#property_scrollTop">scrollTop</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_sortNatural">sortNatural</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_SORTS">SORTS</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_table">table</a>
+                                <a href="#property_tagName">tagName</a>
 
                                 
                                 
@@ -345,13 +334,27 @@
                 <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="method_toggleSortDirection" class="method item">
-    <h3 class="name"><code>toggleSortDirection</code></h3>
+                    <div id="method_createActionContext" class="method item">
+    <h3 class="name"><code>createActionContext</code></h3>
 
     
-        <span class="paren">()</span>
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>e</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
     
 
+    
+        <span class="returns-inline">
+            <span class="type"><a href="../classes/utils.nf.scroll-area-action-context.html" class="crosslink">utils.nf.scroll-area-action-context</a></span>
+        </span>
     
 
     
@@ -377,7 +380,7 @@
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l162"><code>app-addon&#x2F;components&#x2F;nf-column.js:162</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l160"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:160</code></a>
         
         </p>
 
@@ -388,7 +391,100 @@
     </div>
 
     <div class="description">
-        <p>Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.</p>
+        <p>Creates an action context to send with an action</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">e</code>
+                        <span class="type">Event</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the original event object if there is one</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type"><a href="../classes/utils.nf.scroll-area-action-context.html" class="crosslink">utils.nf.scroll-area-action-context</a></span>:
+                    
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_updateMeasurements" class="method item private">
+    <h3 class="name"><code>updateMeasurements</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l174"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:174</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Updates the measurement properties. You probably don&#39;t need to call this, ever.</p>
 
     </div>
 
@@ -408,8 +504,55 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_align" class="property item">
-    <h3 class="name"><code>align</code></h3>
+                    <div id="property_actionData" class="property item">
+    <h3 class="name"><code>actionData</code></h3>
+    <span class="type">Any</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l136"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:136</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The optional action data to send with the action contextl</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_changeAction" class="property item">
+    <h3 class="name"><code>changeAction</code></h3>
     <span class="type">String</span>
 
     
@@ -431,7 +574,7 @@
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l55"><code>app-addon&#x2F;components&#x2F;nf-column.js:55</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l36"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:36</code></a>
         
         </p>
 
@@ -441,13 +584,7 @@
     </div>
 
     <div class="description">
-        <p>Sets the alignment of the items in the column. Using this attribute
-adds appropriate styling for sort arrows.</p>
-<p>To make sort arrows appear for center and left alignment, the text you want
-the sort arrow to appear next to needs to be wrapped in <code>&lt;span class=&quot;nf-column-label&quot;&gt;&lt;/span&gt;</code></p>
-<p><strong>This property is completely optional, and is here as a convenience.</strong> 
-You don&#39;t need to use this property at all, if you which to add your own sort
-styling.</p>
+        <p>The name of the action to fire when scrolled <em>OR</em> resized</p>
 
     </div>
 
@@ -461,145 +598,8 @@ styling.</p>
 </div>
 
                 
-                    <div id="property_alignmentClass" class="property item">
-    <h3 class="name"><code>alignmentClass</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l72"><code>app-addon&#x2F;components&#x2F;nf-column.js:72</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed alignment class for aligning the column content and header</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_cell" class="property item">
-    <h3 class="name"><code>cell</code></h3>
-    <span class="type">Nf-cell</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-column.js:29</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The column&#39;s cell component</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_cellClassNames" class="property item">
-    <h3 class="name"><code>cellClassNames</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l95"><code>app-addon&#x2F;components&#x2F;nf-column.js:95</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The list of classes to apply to table cells</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_direction" class="property item">
-    <h3 class="name"><code>direction</code></h3>
+                    <div id="property_height" class="property item">
+    <h3 class="name"><code>height</code></h3>
     <span class="type">Number</span>
 
     
@@ -621,7 +621,7 @@ styling.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l133"><code>app-addon&#x2F;components&#x2F;nf-column.js:133</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l44"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:44</code></a>
         
         </p>
 
@@ -631,7 +631,7 @@ styling.</p>
     </div>
 
     <div class="description">
-        <p>The numeric value of <code>sortDirection</code></p>
+        <p>Gets or sets the height of the scroll area</p>
 
     </div>
 
@@ -643,9 +643,9 @@ styling.</p>
 </div>
 
                 
-                    <div id="property_header" class="property item">
-    <h3 class="name"><code>header</code></h3>
-    <span class="type">Nf-header</span>
+                    <div id="property_outerHeight" class="property item">
+    <h3 class="name"><code>outerHeight</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -666,7 +666,7 @@ styling.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-column.js:21</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l108"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:108</code></a>
         
         </p>
 
@@ -676,12 +676,12 @@ styling.</p>
     </div>
 
     <div class="description">
-        <p>The column&#39;s header component</p>
+        <p>Gets or sets the outerHeight of the area</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -690,9 +690,9 @@ styling.</p>
 </div>
 
                 
-                    <div id="property_headerClassNames" class="property item">
-    <h3 class="name"><code>headerClassNames</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_outerWidth" class="property item">
+    <h3 class="name"><code>outerWidth</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -713,7 +713,7 @@ styling.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l83"><code>app-addon&#x2F;components&#x2F;nf-column.js:83</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l122"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:122</code></a>
         
         </p>
 
@@ -723,10 +723,12 @@ styling.</p>
     </div>
 
     <div class="description">
-        <p>The list of classes to apply to table headers</p>
+        <p>Gets or sets the outerWidth of the area</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -735,56 +737,8 @@ styling.</p>
 </div>
 
                 
-                    <div id="property_isDataTableColumn" class="property item">
-    <h3 class="name"><code>isDataTableColumn</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l11"><code>app-addon&#x2F;components&#x2F;nf-column.js:11</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>used so child components <code>nf-cell</code> and <code>nf-header</code> can find this component
-and register themselves.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> true</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_sortClass" class="property item">
-    <h3 class="name"><code>sortClass</code></h3>
+                    <div id="property_resizeAction" class="property item">
+    <h3 class="name"><code>resizeAction</code></h3>
     <span class="type">String</span>
 
     
@@ -806,7 +760,7 @@ and register themselves.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l174"><code>app-addon&#x2F;components&#x2F;nf-column.js:174</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l28"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:28</code></a>
         
         </p>
 
@@ -816,33 +770,22 @@ and register themselves.</p>
     </div>
 
     <div class="description">
-        <p>Gets the CSS sort class to be applied to the column</p>
-<p>Possible return values are <code>nf-sort-ascending</code>, <code>nf-sort-descending</code> and <code>nf-sort-none</code>.</p>
+        <p>The name of the action to fire when resized</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;nf-sort-none&#x27;</p>
+        <p><strong>Default:</strong> null</p>
     
 
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code>column.set(&#39;sortDirection&#39;, &#39;asc&#39;);
-console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
-
-            </div>
-        </div>
     
 
     
 </div>
 
                 
-                    <div id="property_sortDirection" class="property item">
-    <h3 class="name"><code>sortDirection</code></h3>
+                    <div id="property_scrollAction" class="property item">
+    <h3 class="name"><code>scrollAction</code></h3>
     <span class="type">String</span>
 
     
@@ -864,7 +807,7 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l107"><code>app-addon&#x2F;components&#x2F;nf-column.js:107</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l20"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:20</code></a>
         
         </p>
 
@@ -874,166 +817,200 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
     </div>
 
     <div class="description">
-        <p>Gets or sets the sort direction for the column.</p>
-<p>Possible Values:</p>
-<ul>
-<li><code>&#39;asc&#39;</code> - sort ascending.</li>
-<li><code>&#39;desc&#39;</code> - sort descending.</li>
-<li><code>&#39;none&#39;</code> - (or any other value) no sort.</li>
-</ul>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> &#x27;none&#x27;</p>
-    
-
-    
-        <div class="example">
-            <h4>Example:</h4>
-
-            <div class="example-content">
-                <pre class="code prettyprint"><code> {{#nf-column sortDirection=&quot;asc&quot;}}</code></pre>
-
-            </div>
-        </div>
-    
-
-    
-</div>
-
-                
-                    <div id="property_sortNatural" class="property item">
-    <h3 class="name"><code>sortNatural</code></h3>
-    <span class="type">Boolean</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l125"><code>app-addon&#x2F;components&#x2F;nf-column.js:125</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets whether to use a natural sort.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> false</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_SORTS" class="property item">
-    <h3 class="name"><code>SORTS</code></h3>
-    <span class="type">Array</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l154"><code>app-addon&#x2F;components&#x2F;nf-column.js:154</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>List of available sort directions</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_table" class="property item">
-    <h3 class="name"><code>table</code></h3>
-    <span class="type">Nf-table</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-column.js.html#l37"><code>app-addon&#x2F;components&#x2F;nf-column.js:37</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The table component the column belongs to</p>
+        <p>The name of the action to fire when scrolled</p>
 
     </div>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_scrollHeight" class="property item">
+    <h3 class="name"><code>scrollHeight</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l99"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:99</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the scrollHeight of the area</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_scrollLeft" class="property item">
+    <h3 class="name"><code>scrollLeft</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l85"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:85</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets the scrollLeft of the area</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_scrollTop" class="property item">
+    <h3 class="name"><code>scrollTop</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l71"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:71</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets the scrollTop of the area</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_tagName" class="property item">
+    <h3 class="name"><code>tagName</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l10"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:10</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The tag name of the component</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;div&#x27;</p>
     
 
     
@@ -1044,7 +1021,7 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
                 
                     <div id="property_width" class="property item">
     <h3 class="name"><code>width</code></h3>
-    <span class="type">String</span>
+    <span class="type">Number</span>
 
     
 
@@ -1065,7 +1042,7 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
             
         
         
-        <a href="../files/app-addon_components_nf-column.js.html#l45"><code>app-addon&#x2F;components&#x2F;nf-column.js:45</code></a>
+        <a href="../files/app-addon_components_nf-scroll-area.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-scroll-area.js:58</code></a>
         
         </p>
 
@@ -1075,12 +1052,10 @@ console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending</code></pre>
     </div>
 
     <div class="description">
-        <p>Gets or sets the inline style width of both the header and the table cell.</p>
+        <p>Gets or sets the width of the scroll area</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     

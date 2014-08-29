@@ -240,3 +240,6 @@
 .nf-horizontal-line {
   stroke: #d3dbdd;
   stroke-width: 1px; }
+
+.nf-scroll-area {
+  overflow: auto; }

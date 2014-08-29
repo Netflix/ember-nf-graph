@@ -13,7 +13,7 @@
         </table>
       </div>
 
-      <div class="nf-table-scrollable-body">
+      {{#nf-scroll-area changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
             {{#each group in sortedGroups}}
@@ -32,7 +32,7 @@
             {{/each}}
           </tbody>
         </table>    
-      </div>
+      {{/nf-scroll-area}}
     {{else}}
       
       {{!-- SCROLLABLE DEFAULT --}}
@@ -48,7 +48,7 @@
         </table>
       </div>
 
-      <div class="nf-table-scrollable-body">
+      {{#nf-scroll-area changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
             {{#each row in sortedRows}}
@@ -60,7 +60,7 @@
             {{/each}}
           </tbody>
         </table>
-      </div>
+      {{/nf-scroll-area}}
     {{/if}}
 
   {{else}}

@@ -17,6 +17,7 @@
 length: {{cols.length}}
 
 {{#nf-table rows=myData sortMultiple=1 scrollable=1 
+	scrollAction="tableScrolled"
 	columns=cols
 	rowAction="rowClicked"}}
 	{{!-- {{#nf-table-group itemController="nf-table-group-test" rowAction="groupClicked"}}
@@ -55,4 +56,12 @@ length: {{cols.length}}
 	{{#each col in cols}}
 		<li {{action 'toggleSort' col}}>{{col.sortBy}} {{col.direction}}</li>
 	{{/each}}
+</ul>
+
+<ul>
+	<li>scrollTop: {{tableScroll.scrollTop}}</li>
+	<li>scrollTopMax: {{tableScroll.scrollTopMax}}</li>
+	<li>outerHeight: {{tableScroll.outerHeight}}</li>
+	<li>scrollHeight: {{tableScroll.scrollHeight}}</li>
+	<li>scrollTopPercentage: {{tableScroll.scrollTopPercentage}}</li>
 </ul>

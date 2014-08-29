@@ -180,6 +180,17 @@
                 "components": 1
             }
         },
+        "app-addon/components/nf-scroll-area.js": {
+            "name": "app-addon/components/nf-scroll-area.js",
+            "modules": {},
+            "classes": {
+                "components.nf-scroll-area": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
         "app-addon/components/nf-selection-box.js": {
             "name": "app-addon/components/nf-selection-box.js",
             "modules": {},
@@ -387,6 +398,17 @@
                 "utils.nf": 1
             }
         },
+        "app-addon/utils/nf/scroll-area-action-context.js": {
+            "name": "app-addon/utils/nf/scroll-area-action-context.js",
+            "modules": {},
+            "classes": {
+                "utils.nf.scroll-area-action-context": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            }
+        },
         "app-addon/utils/nf/svg-dom.js": {
             "name": "app-addon/utils/nf/svg-dom.js",
             "modules": {
@@ -429,6 +451,7 @@
                 "components.nf-range-marker": 1,
                 "components.nf-range-markers": 1,
                 "components.nf-right-tick": 1,
+                "components.nf-scroll-area": 1,
                 "components.nf-selection-box": 1,
                 "components.nf-table-group": 1,
                 "components.nf-table": 1,
@@ -446,14 +469,15 @@
                 "mixins.graph-requires-scale-source": 1,
                 "mixins.graph-selectable-graphic": 1,
                 "mixins.table-column-registrar": 1,
-                "utils.nf.nf-graph-action-context": 1
+                "utils.nf.nf-graph-action-context": 1,
+                "utils.nf.scroll-area-action-context": 1
             },
             "fors": {},
             "namespaces": {
                 "utils.nf": 1
             },
             "tag": "module",
-            "file": "app-addon/utils/nf/graph-action-context.js",
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
             "line": 3
         },
         "utils/nf/svg-dom": {
@@ -762,6 +786,20 @@
                 "mixins.graph-has-graph-parent",
                 "mixins.graph-requires-scale-source"
             ]
+        },
+        "components.nf-scroll-area": {
+            "name": "components.nf-scroll-area",
+            "shortname": "components.nf-scroll-area",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 4,
+            "description": "A component that emits actions and events when scrolled or resized."
         },
         "components.nf-selection-box": {
             "name": "components.nf-selection-box",
@@ -1101,6 +1139,20 @@
             "line": 3,
             "description": "Event object for graph events",
             "extends": "Ember.Object"
+        },
+        "utils.nf.scroll-area-action-context": {
+            "name": "utils.nf.scroll-area-action-context",
+            "shortname": "utils.nf.scroll-area-action-context",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf",
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 3,
+            "description": "Action context event object for an nf-scroll-area scroll event."
         },
         "utils.parse-property-expression": {
             "name": "utils.parse-property-expression",
@@ -2940,6 +2992,168 @@
             "namespace": "components"
         },
         {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 10,
+            "description": "The tag name of the component",
+            "itemtype": "property",
+            "name": "tagName",
+            "type": "String",
+            "default": "'div'",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 20,
+            "description": "The name of the action to fire when scrolled",
+            "itemtype": "property",
+            "name": "scrollAction",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 28,
+            "description": "The name of the action to fire when resized",
+            "itemtype": "property",
+            "name": "resizeAction",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 36,
+            "description": "The name of the action to fire when scrolled *OR* resized",
+            "itemtype": "property",
+            "name": "changeAction",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 44,
+            "description": "Gets or sets the height of the scroll area",
+            "itemtype": "property",
+            "name": "height",
+            "type": "Number",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 58,
+            "description": "Gets or sets the width of the scroll area",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 71,
+            "description": "Gets or sets the scrollTop of the area",
+            "itemtype": "property",
+            "name": "scrollTop",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 85,
+            "description": "Gets or sets the scrollLeft of the area",
+            "itemtype": "property",
+            "name": "scrollLeft",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 99,
+            "description": "Gets the scrollHeight of the area",
+            "itemtype": "property",
+            "name": "scrollHeight",
+            "type": "Number",
+            "default": "0",
+            "readonly": "",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 108,
+            "description": "Gets or sets the outerHeight of the area",
+            "itemtype": "property",
+            "name": "outerHeight",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 122,
+            "description": "Gets or sets the outerWidth of the area",
+            "itemtype": "property",
+            "name": "outerWidth",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 136,
+            "description": "The optional action data to send with the action contextl",
+            "itemtype": "property",
+            "name": "actionData",
+            "type": "Any",
+            "default": "null",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 160,
+            "description": "Creates an action context to send with an action",
+            "itemtype": "method",
+            "name": "createActionContext",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "the original event object if there is one",
+                    "type": "Event"
+                }
+            ],
+            "return": {
+                "description": "",
+                "type": "utils.nf.scroll-area-action-context"
+            },
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-scroll-area.js",
+            "line": 174,
+            "description": "Updates the measurement properties. You probably don't need to call this, ever.",
+            "itemtype": "method",
+            "name": "updateMeasurements",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-scroll-area",
+            "namespace": "components"
+        },
+        {
             "file": "app-addon/components/nf-selection-box.js",
             "line": 16,
             "description": "The duration of the transition in ms",
@@ -4659,6 +4873,161 @@
             "type": "Number",
             "readonly": "",
             "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 9,
+            "description": "The scroll top in pixels.",
+            "itemtype": "property",
+            "name": "scrollTop",
+            "type": "Number",
+            "default": "0",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 17,
+            "description": "The scroll height of the element.",
+            "itemtype": "property",
+            "name": "scrollHeight",
+            "type": "number",
+            "default": "0",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 25,
+            "description": "The outer height of the element",
+            "itemtype": "property",
+            "name": "outerHeight",
+            "type": "Number",
+            "default": "0",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 33,
+            "description": "The scroll left in pixels.",
+            "itemtype": "property",
+            "name": "scrollLeft",
+            "type": "Number",
+            "default": "0",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 41,
+            "description": "The scroll width of the element.",
+            "itemtype": "property",
+            "name": "scrollWidth",
+            "type": "number",
+            "default": "0",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 49,
+            "description": "The outer width of the element",
+            "itemtype": "property",
+            "name": "outerWidth",
+            "type": "Number",
+            "default": "0",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 57,
+            "description": "The calculated maximum value for scrollTop in pixels.",
+            "itemtype": "property",
+            "name": "scrollTopMax",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 67,
+            "description": "The calculated percentage, in decimals, of content scrolled.",
+            "itemtype": "property",
+            "name": "scrollTopPercentage",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 77,
+            "description": "The calculated maximum value for scrollTop in pixels.",
+            "itemtype": "property",
+            "name": "scrollLeftMax",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 87,
+            "description": "The calculated percentage, in decimals, of content scrolled.",
+            "itemtype": "property",
+            "name": "scrollLeftPercentage",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 97,
+            "description": "The component that fired the event",
+            "itemtype": "property",
+            "name": "source",
+            "type": "Ember.Component",
+            "default": "null",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 105,
+            "description": "The optional data to send with the action",
+            "itemtype": "property",
+            "name": "data",
+            "default": "null",
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/scroll-area-action-context.js",
+            "line": 112,
+            "description": "The original scroll event object",
+            "itemtype": "property",
+            "name": "originalEvent",
+            "type": "Event",
+            "default": "null",
+            "class": "utils.nf.scroll-area-action-context",
             "module": "utils/nf/array-helpers",
             "namespace": "utils.nf"
         },

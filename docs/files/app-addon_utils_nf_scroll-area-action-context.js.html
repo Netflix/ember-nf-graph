@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/svg-dom.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/scroll-area-action-context.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -158,115 +158,129 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/svg-dom.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/scroll-area-action-context.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/**
-  @module utils/nf/svg-dom
-*/
+import Ember from &#x27;ember&#x27;;
 
 /**
-  Traverses an element and all of its descendants, setting their
-  inline style property to whatever the computed style is.
-  @method inlineAllStyles
-  @param element {Element} the dom element to traverse.
-  @private
+	Action context event object for an nf-scroll-area scroll event.
+	@namespace utils.nf
+	@class scroll-area-action-context
 */
-function inlineAllStyles(element) {
-  var styles = getComputedStyle(element);
-  for(var key in styles) {
-    if(styles.hasOwnProperty(key)) {
-      element.style[key] = styles[key];
-    }
-  }
-  
-  for(var i = 0; i &lt; element.childNodes.length; i++) {
-    var node = element.childNodes[i];
-    if(node.nodeType === 1) {
-      inlineAllStyles(node);
-    }
-  }
-}
+export default Ember.Object.extend({
+	/**
+		The scroll top in pixels.
+		@property scrollTop
+		@type Number
+		@default 0
+	*/
+	scrollTop: 0,
 
-/**
-  Renders an SVG element to a Base64 encoded data URI.
-  @method svgToImageUrl
-  @param svg {SVGSVGElement} the svg element to render
-*/
-export function svgToImageUrl(svg, callback) {
-  var clone = svg.cloneNode(true);
-  var parent = svg.parentElement;
-  
-  var canvas = document.createElement(&#x27;canvas&#x27;);
-  canvas.setAttribute(&#x27;width&#x27;, svg.getAttribute(&#x27;width&#x27;));
-  canvas.setAttribute(&#x27;height&#x27;, svg.getAttribute(&#x27;height&#x27;));
-  var context = canvas.getContext(&#x27;2d&#x27;);
-  
-  parent.insertBefore(clone, svg);
-  clone.setAttribute(&#x27;xmlns&#x27;, &#x27;http://www.w3.org/2000/svg&#x27;);
+	/**
+		The scroll height of the element.
+		@property scrollHeight
+		@type number
+		@default 0
+	*/
+	scrollHeight: 0,
 
-  inlineAllStyles(clone);
-  
-  var img = new Image();  
-  var blob = new Blob([clone.outerHTML], { type: &#x27;image/svg+xml;charset=utf-8&#x27; });
-  clone.remove();
-  var url = URL.createObjectURL(blob);
-  
-  img.onload = function(){
-    context.drawImage(img, 0, 0);
-    URL.revokeObjectURL(url);
-    if(callback) {
-      callback(canvas.toDataURL());
-    }
-    canvas.remove();
-  };
-  
-  img.src = url;  
-}
+	/**
+		The outer height of the element
+		@property outerHeight
+		@type Number
+		@default 0
+	*/
+	outerHeight: 0,
 
-/**
-  Triggers a download of an image rendered from the passed svg document
-  @method downloadSvg
-  @param svg {SVGSVGElement} the svg document to render
-*/
-export function downloadSvg(svg) {
-  svgToImageUrl(svg, function(url) {
-    var dlUrl = url.replace(&#x27;image/png&#x27;, &#x27;image/octet-stream&#x27;);
-    location.href = dlUrl;
-  });
-}
+	/**
+		The scroll left in pixels.
+		@property scrollLeft
+		@type Number
+		@default 0
+	*/
+	scrollLeft: 0,
 
-/**
-  @method getMousePoint
-  @param container {SVGElement} the container reference to get the mouse position from
-  @param e {MouseEvent} A DOM mouse event
-  @return {Array} the [x,y] data of the mouse position relative to the container
-*/
-export function getMousePoint(container, e) {
-  var x, y;
-  
-  if(e &amp;&amp; e.hasOwnProperty(&#x27;clientX&#x27;) &amp;&amp; e.hasOwnProperty(&#x27;clientY&#x27;)) {
-    var svg = container.ownerSVGElement || container;
-    if (svg.createSVGPoint) {
-      var point = svg.createSVGPoint();
-      point.x = e.clientX;
-      point.y = e.clientY;
-      point = point.matrixTransform(container.getScreenCTM().inverse());
-      x = point.x;
-      y = point.y;
-    } else {
-      var rect = container.getBoundingClientRect();
-      x = e.clientX - rect.left - container.clientLeft; 
-      y = e.clientY - rect.top - container.clientTop;
-    }
-  }
+	/**
+		The scroll width of the element.
+		@property scrollWidth
+		@type number
+		@default 0
+	*/
+	scrollWidth: 0,
 
-  return {
-    x: x,
-    y: y,
-  };
-}
+	/**
+		The outer width of the element
+		@property outerWidth
+		@type Number
+		@default 0
+	*/
+	outerWidth: 0,
+
+	/**
+		The calculated maximum value for scrollTop in pixels.
+		@property scrollTopMax
+		@type Number
+		@readonly
+	*/
+	scrollTopMax: function(){
+		return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
+	}.property(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;),
+
+	/**
+		The calculated percentage, in decimals, of content scrolled.
+		@property scrollTopPercentage
+		@type Number
+		@readonly
+	*/
+	scrollTopPercentage: function() {
+		return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
+	}.property(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;),
+	
+	/**
+		The calculated maximum value for scrollTop in pixels.
+		@property scrollLeftMax
+		@type Number
+		@readonly
+	*/
+	scrollLeftMax: function(){
+		return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
+	}.property(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;),
+
+	/**
+		The calculated percentage, in decimals, of content scrolled.
+		@property scrollLeftPercentage
+		@type Number
+		@readonly
+	*/
+	scrollLeftPercentage: function() {
+		return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
+	}.property(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;),
+
+	/**
+		The component that fired the event
+		@property source
+		@type Ember.Component
+		@default null
+	*/
+	source: null,
+
+	/**
+		The optional data to send with the action
+		@property data
+		@default null
+	*/
+	data: null,
+
+	/**
+		The original scroll event object
+		@property originalEvent
+		@type Event
+		@default null
+	*/
+	originalEvent: null,
+});
     </pre>
 </div>
 

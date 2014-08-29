@@ -17,6 +17,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-range-marker",
         "components.nf-range-markers",
         "components.nf-right-tick",
+        "components.nf-scroll-area",
         "components.nf-selection-box",
         "components.nf-table",
         "components.nf-table-group",
@@ -35,6 +36,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-selectable-graphic",
         "mixins.table-column-registrar",
         "utils.nf.nf-graph-action-context",
+        "utils.nf.scroll-area-action-context",
         "utils.parse-property-expression"
     ],
     "modules": [

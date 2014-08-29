@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/svg-dom.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-scroll-area.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -158,115 +158,213 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/svg-dom.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-scroll-area.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/**
-  @module utils/nf/svg-dom
-*/
+import Ember from &#x27;ember&#x27;;
+import ScrollAreaActionContext from &#x27;../utils/nf/scroll-area-action-context&#x27;;
 
 /**
-  Traverses an element and all of its descendants, setting their
-  inline style property to whatever the computed style is.
-  @method inlineAllStyles
-  @param element {Element} the dom element to traverse.
-  @private
+	A component that emits actions and events when scrolled or resized.
+	@namespace components
+	@class nf-scroll-area
 */
-function inlineAllStyles(element) {
-  var styles = getComputedStyle(element);
-  for(var key in styles) {
-    if(styles.hasOwnProperty(key)) {
-      element.style[key] = styles[key];
-    }
-  }
-  
-  for(var i = 0; i &lt; element.childNodes.length; i++) {
-    var node = element.childNodes[i];
-    if(node.nodeType === 1) {
-      inlineAllStyles(node);
-    }
-  }
-}
+export default Ember.Component.extend({
+	/**
+		The tag name of the component
+		@property tagName
+		@type String
+		@default &#x27;div&#x27;
+	*/
+	tagName: &#x27;div&#x27;,
 
-/**
-  Renders an SVG element to a Base64 encoded data URI.
-  @method svgToImageUrl
-  @param svg {SVGSVGElement} the svg element to render
-*/
-export function svgToImageUrl(svg, callback) {
-  var clone = svg.cloneNode(true);
-  var parent = svg.parentElement;
-  
-  var canvas = document.createElement(&#x27;canvas&#x27;);
-  canvas.setAttribute(&#x27;width&#x27;, svg.getAttribute(&#x27;width&#x27;));
-  canvas.setAttribute(&#x27;height&#x27;, svg.getAttribute(&#x27;height&#x27;));
-  var context = canvas.getContext(&#x27;2d&#x27;);
-  
-  parent.insertBefore(clone, svg);
-  clone.setAttribute(&#x27;xmlns&#x27;, &#x27;http://www.w3.org/2000/svg&#x27;);
+	classNames: [&#x27;nf-scroll-area&#x27;],
 
-  inlineAllStyles(clone);
-  
-  var img = new Image();  
-  var blob = new Blob([clone.outerHTML], { type: &#x27;image/svg+xml;charset=utf-8&#x27; });
-  clone.remove();
-  var url = URL.createObjectURL(blob);
-  
-  img.onload = function(){
-    context.drawImage(img, 0, 0);
-    URL.revokeObjectURL(url);
-    if(callback) {
-      callback(canvas.toDataURL());
-    }
-    canvas.remove();
-  };
-  
-  img.src = url;  
-}
+	/**
+		The name of the action to fire when scrolled
+		@property scrollAction
+		@type String
+		@default null
+	*/
+	scrollAction: null,
 
-/**
-  Triggers a download of an image rendered from the passed svg document
-  @method downloadSvg
-  @param svg {SVGSVGElement} the svg document to render
-*/
-export function downloadSvg(svg) {
-  svgToImageUrl(svg, function(url) {
-    var dlUrl = url.replace(&#x27;image/png&#x27;, &#x27;image/octet-stream&#x27;);
-    location.href = dlUrl;
-  });
-}
+	/**
+		The name of the action to fire when resized
+		@property resizeAction
+		@type String
+		@default null
+	*/
+	resizeAction: null,
 
-/**
-  @method getMousePoint
-  @param container {SVGElement} the container reference to get the mouse position from
-  @param e {MouseEvent} A DOM mouse event
-  @return {Array} the [x,y] data of the mouse position relative to the container
-*/
-export function getMousePoint(container, e) {
-  var x, y;
-  
-  if(e &amp;&amp; e.hasOwnProperty(&#x27;clientX&#x27;) &amp;&amp; e.hasOwnProperty(&#x27;clientY&#x27;)) {
-    var svg = container.ownerSVGElement || container;
-    if (svg.createSVGPoint) {
-      var point = svg.createSVGPoint();
-      point.x = e.clientX;
-      point.y = e.clientY;
-      point = point.matrixTransform(container.getScreenCTM().inverse());
-      x = point.x;
-      y = point.y;
-    } else {
-      var rect = container.getBoundingClientRect();
-      x = e.clientX - rect.left - container.clientLeft; 
-      y = e.clientY - rect.top - container.clientTop;
-    }
-  }
+	/**
+		The name of the action to fire when scrolled *OR* resized
+		@property changeAction
+		@type String
+		@default null
+	*/
+	changeAction: null,
 
-  return {
-    x: x,
-    y: y,
-  };
-}
+	/**
+		Gets or sets the height of the scroll area
+		@property height
+		@type Number
+	*/
+	height: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._height = value;
+			this.$().height(value);
+		}
+		return this._height;
+	}.property(),
+
+
+	/**
+		Gets or sets the width of the scroll area
+		@property width
+		@type Number
+	*/
+	width: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._width = value;
+			this.$().width(value);
+		}
+		return this._width;
+	}.property(),
+
+	/**
+		Gets or sets the scrollTop of the area
+		@property scrollTop
+		@type Number
+		@default 0
+	*/
+	scrollTop: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._scrollTop = value;
+			this.$().scrollTop(value);
+		}
+		return this._scrollTop;
+	}.property(),
+
+	/**
+		Gets or sets the scrollLeft of the area
+		@property scrollLeft
+		@type Number
+		@default 0
+	*/
+	scrollLeft: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._scrollLeft = value;
+			this.$().scrollLeft(value);
+		}
+		return this._scrollLeft;
+	}.property(),
+
+	/**
+		Gets the scrollHeight of the area
+		@property scrollHeight
+		@type Number
+		@default 0
+		@readonly
+	*/
+	scrollHeight: 0,
+
+	/**
+		Gets or sets the outerHeight of the area
+		@property outerHeight
+		@type Number
+		@default 0
+	*/
+	outerHeight: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._outerHeight = value;
+			this.$().outerHeight(value);
+		}
+		return this._outerHeight;
+	}.property(),
+
+	/**
+		Gets or sets the outerWidth of the area
+		@property outerWidth
+		@type Number
+		@default 0
+	*/
+	outerWidth: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._outerWidth = value;
+			this.$().outerWidth(value);
+		}
+		return this._outerWidth;
+	}.property(),
+
+	/**
+		The optional action data to send with the action contextl
+		@property actionData
+		@type Any
+		@default null
+	*/
+	actionData: null,
+
+	_onScroll: function(e){
+		this.updateMeasurements();
+		var context = this.createActionContext(e);
+		this.trigger(&#x27;didScroll&#x27;, context);
+		this.sendAction(&#x27;scrollAction&#x27;, context);
+		this.sendAction(&#x27;changeAction&#x27;, context);
+	},
+
+	_onResize: function(e) {
+		this.updateMeasurements();
+		var context = this.createActionContext(e);
+		this.trigger(&#x27;didResize&#x27;, context);
+		this.sendAction(&#x27;resizeAction&#x27;, context);
+		this.sendAction(&#x27;changeAction&#x27;, context);
+	},
+
+	/**
+		Creates an action context to send with an action
+		@method createActionContext
+		@param e {Event} the original event object if there is one
+		@return {utils.nf.scroll-area-action-context}
+	*/
+	createActionContext: function(e){
+		var context = this.getProperties(&#x27;width&#x27;, &#x27;height&#x27;, &#x27;scrollLeft&#x27;, &#x27;scrollTop&#x27;, &#x27;scrollWidth&#x27;, &#x27;scrollHeight&#x27;, &#x27;outerWidth&#x27;, &#x27;outerHeight&#x27;);
+		context.data = this.get(&#x27;actionData&#x27;);
+		context.source = this;
+		context.originalEvent = e;
+		return ScrollAreaActionContext.create(context);
+	},
+
+	/**
+		Updates the measurement properties. You probably don&#x27;t need to call this, ever.
+		@method updateMeasurements
+		@private
+	*/
+	updateMeasurements: function(){
+		var elem = this.$();
+		this.set(&#x27;scrollTop&#x27;, elem.scrollTop());
+		this.set(&#x27;scrollHeight&#x27;, elem[0].scrollHeight);
+		this.set(&#x27;outerHeight&#x27;, elem.outerHeight());
+		this.set(&#x27;height&#x27;, elem.height());
+		this.set(&#x27;scrollLeft&#x27;, elem.scrollLeft());
+		this.set(&#x27;scrollWidth&#x27;, elem[0].scrollWidth);
+		this.set(&#x27;outerWidth&#x27;, elem.outerWidth());
+		this.set(&#x27;width&#x27;, elem.width());
+	},
+
+	_setupElement: function() {
+		var elem = this.$();
+		elem.on(&#x27;scroll&#x27;, this._onScroll.bind(this));
+		elem.on(&#x27;resize&#x27;, this._onResize.bind(this));
+		this.updateMeasurements();
+	}.on(&#x27;didInsertElement&#x27;),
+
+	_unsubscribeEvents: function(){
+		var elem = this.$();
+		elem.off(&#x27;scroll&#x27;, this._onScroll);
+		elem.off(&#x27;resize&#x27;, this._onResize);
+	}.on(&#x27;willDestroyElement&#x27;),
+});
     </pre>
 </div>
 

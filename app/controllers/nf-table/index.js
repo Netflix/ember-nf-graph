@@ -21,6 +21,10 @@ export default Ember.ObjectController.extend({
 			var i = sorts.indexOf(sortDir);
 			var j = (i + 1) % sorts.length;
 			column.set('sortDirection', sorts[j]);
-		}
+		},
+
+		tableScrolled: function(e) {
+			this.set('tableScroll', e);
+		},
 	},
 });

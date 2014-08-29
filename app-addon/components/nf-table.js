@@ -322,7 +322,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 						col.set('sortDirection', 'none');
 					}
 				});
-			}
+			}	
 
 			sortedColumn.toggleSortDirection();
 		},
@@ -333,6 +333,11 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 
 		groupRowClick: function(group){
 			this.sendAction('groupRowAction', group, this);
+		},
+
+		scrolled: function(e) {
+			e.data = this;
+			this.sendAction('scrollAction', e);
 		},
 	},
 });
