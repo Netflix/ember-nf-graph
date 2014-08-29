@@ -37,7 +37,83 @@
     max-height: 300px; }
     .nf-table .nf-table-scrollable-body > table {
       table-layout: fixed; }
+  .nf-table .nf-table-column {
+    padding: 5px; }
+  .nf-table .nf-table-column-right {
+    padding-right: 21px;
+    text-align: right; }
+  .nf-table th.nf-table-column-right.nf-sort-ascending {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII=");
+    background-repeat: no-repeat;
+    background-position: top 50% right 5px; }
+  .nf-table th.nf-table-column-right.nf-sort-descending {
+    background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD1JREFUeNpi/P//PwOxgAmbYFNTE1YTGEkxmQWfqXV1dYzUMRmbW5FNJ89kXCGAbDrpJuMzFdl0kkwGCDAAz0okjPDgwbIAAAAASUVORK5CYII=");
+    background-repeat: no-repeat;
+    background-position: top 50% right 5px; }
+  .nf-table .nf-table-column-left {
+    text-align: left; }
+  .nf-table th.nf-table-column-left.nf-sort-ascending .nf-column-label::after {
+    margin-left: 5px;
+    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII="); }
+  .nf-table th.nf-table-column-left.nf-sort-descending .nf-column-label::after {
+    margin-left: 5px;
+    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD1JREFUeNpi/P//PwOxgAmbYFNTE1YTGEkxmQWfqXV1dYzUMRmbW5FNJ89kXCGAbDrpJuMzFdl0kkwGCDAAz0okjPDgwbIAAAAASUVORK5CYII="); }
+  .nf-table .nf-table-column-center {
+    text-align: center; }
+  .nf-table th.nf-table-column-center.nf-sort-ascending .nf-column-label {
+    margin-right: -16px; }
+  .nf-table th.nf-table-column-center.nf-sort-ascending .nf-column-label::after {
+    margin-left: 5px;
+    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII="); }
+  .nf-table th.nf-table-column-center.nf-sort-descending .nf-column-label {
+    margin-right: -16px; }
+  .nf-table th.nf-table-column-center.nf-sort-descending .nf-column-label::after {
+    margin-left: 5px;
+    content: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAD1JREFUeNpi/P//PwOxgAmbYFNTE1YTGEkxmQWfqXV1dYzUMRmbW5FNJ89kXCGAbDrpJuMzFdl0kkwGCDAAz0okjPDgwbIAAAAASUVORK5CYII="); }
 
+/*
+.test-table th, .test-table td {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+
+.test-table th {
+  width: 200px;
+}
+
+.test-table .test-column-right {
+  padding-right: 20px;
+  text-align: right;
+}
+
+.test-table th.test-column-right.desc {
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII=);
+  background-repeat: no-repeat;
+  background-position: top 50% right 5px;
+}
+
+.test-table .test-column-center {
+  text-align: center;
+}
+.test-table th.test-column-center.desc .test-column-label {
+  margin-right: -16px; // 11 for image width and 5 for padding
+}
+
+.test-table th.test-column-center.desc .test-column-label::after {
+  margin-left: 5px;
+  content:  url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII=);
+}
+
+
+.test-table .test-column-left {
+  text-align: left;
+}
+
+.test-table th.test-column-left.desc .test-column-label::after {
+  margin-left: 5px;
+  content:  url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAsAAAALCAYAAACprHcmAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAEBJREFUeNpi/P//PwOxgAVENDU1EdRRV1fHyEiyyYRMB5kKoskzGZfpMFMpMxnddGRTSTaZCZsgrpAhyWSAAAMA5zAkjPWRYlAAAAAASUVORK5CYII=);
+}
+*/
 .nf-graph > .background {
   fill: #f5f6f7; }
 .nf-graph > .message {

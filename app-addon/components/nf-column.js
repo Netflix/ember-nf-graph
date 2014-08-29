@@ -50,6 +50,36 @@ export default Ember.Component.extend({
 	*/
 	width: undefined,
 
+	classNameBindings: [':nf-table-column', 'alignmentClass'],
+
+	/**
+		Sets the alignment of the items in the column. Using this attribute
+		adds appropriate styling for sort arrows.
+
+		To make sort arrows appear for center and left alignment, the text you want
+		the sort arrow to appear next to needs to be wrapped in `<span class="nf-column-label"></span>`
+
+		**This property is completely optional, and is here as a convenience.** 
+		You don't need to use this property at all, if you which to add your own sort
+		styling.
+
+		@property align
+		@type String
+		@default null
+	*/
+	align: null,
+
+	/**
+		The computed alignment class for aligning the column content and header
+		@property alignmentClass
+		@type String
+		@readonly
+	*/
+	alignmentClass: function(){
+		var align = this.get('align');
+		return align ? 'nf-table-column-' + align : '';
+	}.property('align'),
+
 	/**
 		The list of classes to apply to table headers
 		@property headerClassNames

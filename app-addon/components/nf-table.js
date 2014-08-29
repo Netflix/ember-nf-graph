@@ -13,7 +13,7 @@ import NfTableGroupController from '../controllers/nf-table-group-controller';
 
 	      	{{#nf-column sortField="foo"}}
 	      	  {{nf-header}}
-	      	  	Foo
+	      	  	<span class="nf-column-label">Foo</span>
 	      	  {{/nf-header}}
 	      	  {{#nf-cell}}
 	      			{{row.foo}}
@@ -22,7 +22,7 @@ import NfTableGroupController from '../controllers/nf-table-group-controller';
 
 	      	{{#nf-column sortField="foo"}}
 	      	  {{nf-header}}
-	      	  	Bar
+	      	  	<span class="nf-column-label">Bar</span>
 	      	  {{/nf-header}}
 	      	  {{#nf-cell}}
 	      			{{row.bar}}
@@ -60,7 +60,7 @@ import NfTableGroupController from '../controllers/nf-table-group-controller';
 
 	      	{{#nf-column sortBy="foo"}}
 	      	  {{nf-header}}
-	      	  	Foo
+	      	  	<span class="nf-column-label">Foo</span>
 	      	  {{/nf-header}}
 	      	  {{#nf-cell}}
 	      			{{row.foo}}
@@ -69,7 +69,7 @@ import NfTableGroupController from '../controllers/nf-table-group-controller';
 	      	
 	      	{{#nf-column sortBy="foo"}}
 	      	  {{nf-header}}
-	      	  	Bar
+	      	  	<span class="nf-column-label">Bar</span>
 	      	  {{/nf-header}}
 	      	  {{#nf-cell}}
 	      			{{row.bar}}
@@ -315,7 +315,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 					col.set('sortDirection', 0);
 				});
 			}
-			
+
 			sortedColumn.toggleSortDirection();
 		},
 

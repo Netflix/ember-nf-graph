@@ -27,9 +27,9 @@ length: {{cols.length}}
 		{{/nf-column}}
 	{{/nf-table-group}} --}}
 
-	{{#nf-column sortBy="foo" class="big-column"}}
+	{{#nf-column sortBy="foo" class="big-column" align="left"}}
 		{{#nf-header}}
-			Foo <div class="nf-sort-arrow"></div>
+			<span class="nf-column-label">Foo</span>
 		{{/nf-header}}
 		
 		{{#nf-cell}}
@@ -37,9 +37,9 @@ length: {{cols.length}}
 		{{/nf-cell}}
 	{{/nf-column}}
 	
-	{{#nf-column sortBy="bar" sortNatural=1 class="small-column"}}	
+	{{#nf-column sortBy="bar" sortNatural=1 class="small-column" align="right"}}	
 		{{#nf-header}}
-			Bar <div class="nf-sort-arrow"></div>
+			<span class="nf-column-label">Bar</span>
 		{{/nf-header}}
 
 		{{#nf-cell}}
