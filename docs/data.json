@@ -1231,7 +1231,73 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 41,
+            "line": 21,
+            "description": "The column's header component",
+            "itemtype": "property",
+            "name": "header",
+            "type": "nf-header",
+            "default": "null",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 29,
+            "description": "The column's cell component",
+            "itemtype": "property",
+            "name": "cell",
+            "type": "nf-cell",
+            "default": "null",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 37,
+            "description": "The table component the column belongs to",
+            "itemtype": "property",
+            "name": "table",
+            "type": "nf-table",
+            "default": "null",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 45,
+            "description": "Gets or sets the inline style width of both the header and the table cell.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 53,
+            "description": "The list of classes to apply to table headers",
+            "itemtype": "property",
+            "name": "headerClassNames",
+            "type": "Array",
+            "readonly": "",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 65,
+            "description": "The list of classes to apply to table cells",
+            "itemtype": "property",
+            "name": "cellClassNames",
+            "type": "Array",
+            "readonly": "",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 77,
             "description": "Gets or sets the sort direction for the column.\n\nPossible Values:\n\n- `'asc'` - sort ascending.\n- `'desc'` - sort descending.\n- `'none'` - (or any other value) no sort.",
             "itemtype": "property",
             "name": "sortDirection",
@@ -1245,7 +1311,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 59,
+            "line": 95,
             "description": "Gets or sets whether to use a natural sort.",
             "itemtype": "property",
             "name": "sortNatural",
@@ -1256,7 +1322,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 67,
+            "line": 103,
             "description": "The numeric value of `sortDirection`",
             "itemtype": "property",
             "name": "direction",
@@ -1267,7 +1333,27 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 88,
+            "line": 124,
+            "description": "List of available sort directions",
+            "itemtype": "property",
+            "name": "SORTS",
+            "constant": "",
+            "type": "Array",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 132,
+            "description": "Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.",
+            "itemtype": "method",
+            "name": "toggleSortDirection",
+            "class": "components.nf-column",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-column.js",
+            "line": 144,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",
@@ -4307,7 +4393,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 27,
+            "line": 33,
             "description": "Registers a column with the registrar",
             "itemtype": "method",
             "name": "registerColumn",
@@ -4323,7 +4409,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 36,
+            "line": 42,
             "description": "Unregisters a column from the registry",
             "itemtype": "method",
             "name": "unregisterColumn",
@@ -4639,6 +4725,10 @@
         }
     ],
     "warnings": [
+        {
+            "message": "unknown tag: constant",
+            "line": " app-addon/components/nf-column.js:124"
+        },
         {
             "message": "replacing incorrect tag: params with param",
             "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:88"

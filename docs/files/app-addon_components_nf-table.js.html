@@ -469,16 +469,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		sort: function(sortedColumn) {
 			var columns = this.get(&#x27;columns&#x27;);
 			var sortMultiple = this.get(&#x27;sortMultiple&#x27;);
-			var currentSortDir = sortedColumn.get(&#x27;direction&#x27;);
 
-			if(sortMultiple) {
-				sortedColumn.set(&#x27;sortDirection&#x27;, [&#x27;none&#x27;, &#x27;asc&#x27;, &#x27;desc&#x27;][currentSortDir + 1]);
-			} else {
+			if(!sortMultiple) {
 				columns.forEach(function(col) {
 					col.set(&#x27;sortDirection&#x27;, 0);
 				});
-				sortedColumn.set(&#x27;sortDirection&#x27;, [&#x27;asc&#x27;, &#x27;asc&#x27;, &#x27;desc&#x27;][currentSortDir + 1]);
 			}
+			
+			sortedColumn.toggleSortDirection();
 		},
 
 		rowClick: function(row, group){

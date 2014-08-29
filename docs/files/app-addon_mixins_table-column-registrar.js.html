@@ -180,9 +180,15 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	columns: function(){
-		return [];
-	}.property(),
+	columns: function(key, value) {
+		return this.get(&#x27;_columns&#x27;);
+	}.property(&#x27;_columns&#x27;),
+
+	visibleColumns: function(){
+		return this.get(&#x27;columns&#x27;).filter(function(column) {
+			return column.get(&#x27;isVisible&#x27;);
+		});
+	}.property(&#x27;columns.@each&#x27;),
 
 	/**
 		Registers a column with the registrar
@@ -201,6 +207,10 @@ export default Ember.Mixin.create({
 	unregisterColumn: function(column) {
 		this.get(&#x27;columns&#x27;).removeObject(column);
 	},
+
+	_initializeColumns: function() {
+		this.set(&#x27;_columns&#x27;, []);
+	}.on(&#x27;init&#x27;),
 });
     </pre>
 </div>

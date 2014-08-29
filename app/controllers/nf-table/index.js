@@ -13,5 +13,14 @@ export default Ember.ObjectController.extend({
 		groupClicked: function(group, table){
 			console.log('group clicked!', group, table);
 		},
+
+		toggleSort: function(column) {
+			var sortDir = column.get('sortDirection');
+			var sorts = ['desc', 'none', 'asc'];
+
+			var i = sorts.indexOf(sortDir);
+			var j = (i + 1) % sorts.length;
+			column.set('sortDirection', sorts[j]);
+		}
 	},
 });

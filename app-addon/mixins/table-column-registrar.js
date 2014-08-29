@@ -20,9 +20,15 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	columns: function(){
-		return [];
-	}.property(),
+	columns: function(key, value) {
+		return this.get('_columns');
+	}.property('_columns'),
+
+	visibleColumns: function(){
+		return this.get('columns').filter(function(column) {
+			return column.get('isVisible');
+		});
+	}.property('columns.@each'),
 
 	/**
 		Registers a column with the registrar
@@ -41,4 +47,8 @@ export default Ember.Mixin.create({
 	unregisterColumn: function(column) {
 		this.get('columns').removeObject(column);
 	},
+
+	_initializeColumns: function() {
+		this.set('_columns', []);
+	}.on('init'),
 });

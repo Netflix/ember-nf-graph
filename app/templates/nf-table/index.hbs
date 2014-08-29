@@ -14,8 +14,10 @@
 	}
 </style>
 
+length: {{cols.length}}
+
 {{#nf-table rows=myData sortMultiple=1 scrollable=1 
-	
+	columns=cols
 	rowAction="rowClicked"}}
 	{{!-- {{#nf-table-group itemController="nf-table-group-test" rowAction="groupClicked"}}
 		{{#nf-column sortBy="row.blah" class="small-column"}}	
@@ -25,7 +27,7 @@
 		{{/nf-column}}
 	{{/nf-table-group}} --}}
 
-	{{#nf-column sortBy="row.foo" class="big-column"}}
+	{{#nf-column sortBy="foo" class="big-column"}}
 		{{#nf-header}}
 			Foo <div class="nf-sort-arrow"></div>
 		{{/nf-header}}
@@ -35,7 +37,7 @@
 		{{/nf-cell}}
 	{{/nf-column}}
 	
-	{{#nf-column sortBy="row.bar" sortNatural=1 class="small-column"}}	
+	{{#nf-column sortBy="bar" sortNatural=1 class="small-column"}}	
 		{{#nf-header}}
 			Bar <div class="nf-sort-arrow"></div>
 		{{/nf-header}}
@@ -45,13 +47,12 @@
 		{{/nf-cell}} 
 	{{/nf-column}}
 
-
-	{{#nf-column sortBy="row.blah" class="small-column"}}	
-		{{#nf-header}}
-			💩
-		{{/nf-header}}
-		{{#nf-cell}}
-			BLAH: {{row.blah}}
-		{{/nf-cell}}
-	{{/nf-column}}
+	{{nf-column isVisible=0 sortBy="blah" name="blah sorter column"}}
 {{/nf-table}}
+
+
+<ul>
+	{{#each col in cols}}
+		<li {{action 'toggleSort' col}}>{{col.sortBy}} {{col.direction}}</li>
+	{{/each}}
+</ul>

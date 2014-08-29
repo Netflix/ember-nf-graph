@@ -18,20 +18,56 @@ export default Ember.Component.extend({
 	*/
 	isDataTableColumn: true,
 
+	/**
+		The column's header component
+		@property header
+		@type nf-header
+		@default null
+	*/
 	header: null,
 
+	/**
+		The column's cell component
+		@property cell
+		@type nf-cell
+		@default null
+	*/
 	cell: null,
 
+	/**
+		The table component the column belongs to
+		@property table
+		@type nf-table
+		@default null
+	*/
 	table: null,
 
+	/**
+		Gets or sets the inline style width of both the header and the table cell.
+		@property width
+		@type String
+		@default null
+	*/
 	width: undefined,
 
+	/**
+		The list of classes to apply to table headers
+		@property headerClassNames
+		@type Array
+		@readonly
+	*/
 	headerClassNames: function() {
 		var classNames = this.get('classNames');
 		var headerClassNames = this.get('header.classNames') || [];
 		return classNames.concat(headerClassNames);
 	}.property('header.classNames', 'classNames'),
 
+	/**
+		The list of classes to apply to table cells
+		@property cellClassNames
+		@type Array
+		@readonly
+	*/
 	cellClassNames: function(){
 		var classNames = this.get('classNames');
 		var cellClassNames = this.get('cell.classNames') || [];
@@ -84,6 +120,26 @@ export default Ember.Component.extend({
 
 		return 0;
 	}.property('sortDirection'),
+
+	/**
+		List of available sort directions
+		@property SORTS
+		@constant
+		@type Array
+	*/
+	SORTS: ['desc', 'none', 'asc'],
+
+	/**
+		Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.
+		@method toggleSortDirection
+	*/
+	toggleSortDirection: function() {
+		var SORTS = this.get('SORTS');
+		var sortDirection = this.get('sortDirection');
+		var i = SORTS.indexOf(sortDirection);
+		var next = SORTS[(i + 1) % SORTS.length];
+		this.set('sortDirection', next);
+	},
 
 	/**
 		Gets the CSS sort class to be applied to the column

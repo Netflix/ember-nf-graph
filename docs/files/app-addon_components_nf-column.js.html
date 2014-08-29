@@ -178,20 +178,56 @@ export default Ember.Component.extend({
 	*/
 	isDataTableColumn: true,
 
+	/**
+		The column&#x27;s header component
+		@property header
+		@type nf-header
+		@default null
+	*/
 	header: null,
 
+	/**
+		The column&#x27;s cell component
+		@property cell
+		@type nf-cell
+		@default null
+	*/
 	cell: null,
 
+	/**
+		The table component the column belongs to
+		@property table
+		@type nf-table
+		@default null
+	*/
 	table: null,
 
+	/**
+		Gets or sets the inline style width of both the header and the table cell.
+		@property width
+		@type String
+		@default null
+	*/
 	width: undefined,
 
+	/**
+		The list of classes to apply to table headers
+		@property headerClassNames
+		@type Array
+		@readonly
+	*/
 	headerClassNames: function() {
 		var classNames = this.get(&#x27;classNames&#x27;);
 		var headerClassNames = this.get(&#x27;header.classNames&#x27;) || [];
 		return classNames.concat(headerClassNames);
 	}.property(&#x27;header.classNames&#x27;, &#x27;classNames&#x27;),
 
+	/**
+		The list of classes to apply to table cells
+		@property cellClassNames
+		@type Array
+		@readonly
+	*/
 	cellClassNames: function(){
 		var classNames = this.get(&#x27;classNames&#x27;);
 		var cellClassNames = this.get(&#x27;cell.classNames&#x27;) || [];
@@ -244,6 +280,26 @@ export default Ember.Component.extend({
 
 		return 0;
 	}.property(&#x27;sortDirection&#x27;),
+
+	/**
+		List of available sort directions
+		@property SORTS
+		@constant
+		@type Array
+	*/
+	SORTS: [&#x27;desc&#x27;, &#x27;none&#x27;, &#x27;asc&#x27;],
+
+	/**
+		Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.
+		@method toggleSortDirection
+	*/
+	toggleSortDirection: function() {
+		var SORTS = this.get(&#x27;SORTS&#x27;);
+		var sortDirection = this.get(&#x27;sortDirection&#x27;);
+		var i = SORTS.indexOf(sortDirection);
+		var next = SORTS[(i + 1) % SORTS.length];
+		this.set(&#x27;sortDirection&#x27;, next);
+	},
 
 	/**
 		Gets the CSS sort class to be applied to the column
