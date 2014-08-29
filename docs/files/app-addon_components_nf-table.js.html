@@ -369,6 +369,12 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		return tableGroupingCtrl;
 	}.property(&#x27;rows.@each&#x27;, &#x27;sortMap&#x27;, &#x27;groupBy&#x27;, &#x27;tableGroup.itemController&#x27;),
 
+	/**
+		Alias for the rowAction on the nf-table-group
+		@property groupRowAction
+		@type String
+		@default null
+	*/
 	groupRowAction: Ember.computed.alias(&#x27;tableGroup.rowAction&#x27;),
 
 	/**
@@ -472,7 +478,9 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 
 			if(!sortMultiple) {
 				columns.forEach(function(col) {
-					col.set(&#x27;sortDirection&#x27;, 0);
+					if(col !== sortedColumn) {
+						col.set(&#x27;sortDirection&#x27;, &#x27;none&#x27;);
+					}
 				});
 			}
 
