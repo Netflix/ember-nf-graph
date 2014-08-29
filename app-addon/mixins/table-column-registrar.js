@@ -20,7 +20,7 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	columns: function(key, value) {
+	columns: function(key, value) { //jshint ignore:line (EMBER.bananaMode === true; key and value must be supplied to keep the computed property from being overwritten)
 		return this.get('_columns');
 	}.property('_columns'),
 
