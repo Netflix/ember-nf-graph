@@ -13,7 +13,7 @@
 
 
 {{#nf-graph width="400" height="300" xScaleType="ordinal"}}
-	{{#nf-x-axis tickFilter=xTickFilter}}
+	{{#nf-x-axis}}
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
@@ -22,7 +22,7 @@
 	{{/nf-y-axis}}
 
 	{{#nf-graph-content}}
-		{{nf-bars data=data trackingMode="hover" trackedData=poop}}
+		{{nf-bars data=data trackingMode="hover" trackedData=poop barClick="barClicked"}}
 		<circle r=10 {{bind-attr cx=poop.centerPositionX cy=poop.graphPositionY}}></circle>
 		{{nf-line data=data}}
 	{{/nf-graph-content}}

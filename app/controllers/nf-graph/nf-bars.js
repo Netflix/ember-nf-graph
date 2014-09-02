@@ -16,5 +16,11 @@ export default Ember.ObjectController.extend({
 		}
 		
 		return arr;
-	}.property()
+	}.property(),
+
+	actions: {
+		barClicked: function(barData) {
+			console.log('barData', barData);
+		},
+	}
 });

@@ -191,7 +191,14 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueXData: Ember.computed.uniq('graph.xData'),
+  uniqueXData: property('graph.xData.@each', function(xData) {
+    return xData.reduce(function(unique, d) {
+      if(unique.indexOf(d) === -1) {
+        unique.push(d);
+      }
+      return unique;
+    }, []);
+  }),
 
   /**
     The models for the ticks to display on the axis.

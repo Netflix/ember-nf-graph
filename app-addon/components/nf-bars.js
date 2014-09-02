@@ -63,11 +63,33 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 					y: h,
 					width: rangeBand,
 					height: graphHeight - h,
-					className: getBarClass(d.data)
+					className: getBarClass(d.data),
+					dataPoint: d,
 				};
 			});
 		}
 	),
 
+	/**
+		The name of the action to fire when a bar is clicked.
+		@property barClick
+		@type String
+		@default null
+	*/
+	barClick: null,
+
+	actions: {
+		nfBarClickBar: function(dataPoint) {
+			if(this.get('barClick')) {
+				this.sendAction('barClick', {
+					data: dataPoint.data,
+					x: dataPoint[0],
+					y: dataPoint[1],
+					source: this,
+					graph: this.get('graph'),
+				});
+			}
+		}
+	}
 
 });
