@@ -220,7 +220,7 @@ export default Ember.Mixin.create({
 
   _updateHovered: function() {
     if(this.get(&#x27;isShouldTrack&#x27;)) {
-      this.set(&#x27;trackedData&#x27;, this.get(&#x27;hoverData.nearestData&#x27;));
+      this.set(&#x27;trackedData&#x27;, this.get(&#x27;hoverData&#x27;));
     }
   }.observes(&#x27;isShouldTrack&#x27;, &#x27;hoverData&#x27;),
 

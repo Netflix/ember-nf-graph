@@ -545,7 +545,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-bars.js",
-            "line": 9,
+            "line": 10,
             "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***",
             "extends": "Ember.Component",
             "uses": [
@@ -1227,7 +1227,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 27,
+            "line": 28,
             "description": "The name of the property on each data item containing the className for the bar rectangle",
             "itemtype": "property",
             "name": "classprop",
@@ -1238,7 +1238,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 35,
+            "line": 36,
             "description": "Gets the function to get the classname from each data item.",
             "itemtype": "property",
             "name": "getBarClass",
@@ -1250,11 +1250,22 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 45,
+            "line": 46,
             "description": "The bar models used to render the bars.",
             "itemtype": "property",
             "name": "bars",
             "readonly": "",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 73,
+            "description": "The name of the action to fire when a bar is clicked.",
+            "itemtype": "property",
+            "name": "barClick",
+            "type": "String",
+            "default": "null",
             "class": "components.nf-bars",
             "namespace": "components"
         },
@@ -1529,7 +1540,7 @@
         },
         {
             "file": "app-addon/components/nf-dot.js",
-            "line": 44,
+            "line": 48,
             "description": "The computed center x coordinate of the circle",
             "itemtype": "property",
             "name": "cx",
@@ -1542,7 +1553,7 @@
         },
         {
             "file": "app-addon/components/nf-dot.js",
-            "line": 55,
+            "line": 59,
             "description": "The computed center y coordinate of the circle",
             "itemtype": "property",
             "name": "cy",
@@ -1555,7 +1566,7 @@
         },
         {
             "file": "app-addon/components/nf-dot.js",
-            "line": 66,
+            "line": 70,
             "description": "Toggles the visibility of the dot. If x or y are\nnot numbers, will return false.",
             "itemtype": "property",
             "name": "isVisible",
@@ -2596,7 +2607,7 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 34,
+            "line": 38,
             "description": "The calculated visibility of the component",
             "itemtype": "property",
             "name": "isVisible",
@@ -2618,7 +2629,7 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 58,
+            "line": 59,
             "description": "The calculated y coordinate",
             "itemtype": "property",
             "name": "rangeY",
@@ -2629,7 +2640,7 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 70,
+            "line": 72,
             "description": "The SVG transform of the component's `<g>` tag.",
             "itemtype": "property",
             "name": "transform",
@@ -3682,7 +3693,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 196,
+            "line": 203,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
@@ -3693,7 +3704,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 227,
+            "line": 234,
             "description": "Updates the graph's xAxis property on willInsertElement",
             "itemtype": "method",
             "name": "_updateGraphXAxis",
@@ -3704,7 +3715,7 @@
         },
         {
             "file": "app-addon/components/nf-x-axis.js",
-            "line": 236,
+            "line": 243,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",

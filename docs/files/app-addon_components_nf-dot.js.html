@@ -205,6 +205,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	r: 2.5,
 
+	hasX: Ember.computed.notEmpty(&#x27;x&#x27;),
+
+	hasY: Ember.computed.notEmpty(&#x27;y&#x27;),
+
 	/**
 		The computed center x coordinate of the circle
 		@property cx
@@ -212,8 +216,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	cx: property(&#x27;x&#x27;, &#x27;xScale&#x27;, function(x, xScale) {
-		return !isNaN(x) &amp;&amp; xScale ? xScale(x) : -1;
+	cx: property(&#x27;x&#x27;, &#x27;xScale&#x27;, &#x27;hasX&#x27;, function(x, xScale, hasX) {
+		return hasX &amp;&amp; xScale ? xScale(x) : -1;
 	}),
 
 	/**
@@ -223,8 +227,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	cy: property(&#x27;y&#x27;, &#x27;yScale&#x27;, function(y, yScale) {
-		return !isNaN(y) &amp;&amp; yScale ? yScale(y) : -1;
+	cy: property(&#x27;y&#x27;, &#x27;yScale&#x27;, &#x27;hasY&#x27;, function(y, yScale, hasY) {
+		return hasY &amp;&amp; yScale ? yScale(y) : -1;
 	}),
 
 	/**
@@ -234,9 +238,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	isVisible: property(&#x27;x&#x27;, &#x27;y&#x27;, function(x, y) {
-		return !(isNaN(x) || isNaN(y));
-	}),
+	isVisible: Ember.computed.and(&#x27;hasX&#x27;, &#x27;hasY&#x27;),
 });
     </pre>
 </div>

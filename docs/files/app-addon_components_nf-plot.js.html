@@ -195,17 +195,17 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	y: null,
 
+	hasX: Ember.computed.notEmpty(&#x27;x&#x27;),
+
+	hasY: Ember.computed.notEmpty(&#x27;y&#x27;),
+
 	/**
 		The calculated visibility of the component
 		@property isVisible
 		@type Boolean
 		@readonly
 	*/
-	isVisible: function(){
-		var x = this.get(&#x27;x&#x27;);
-		var y = this.get(&#x27;y&#x27;);
-		return !(isNaN(x) &amp;&amp; isNaN(y));
-	}.property(&#x27;x&#x27;, &#x27;y&#x27;),
+	isVisible: Ember.computed.and(&#x27;hasX&#x27;, &#x27;hasY&#x27;),
 
 	/**
 		The calculated x coordinate
@@ -216,7 +216,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	rangeX: function(){
 		var xScale = this.get(&#x27;xScale&#x27;);
 		var x = this.get(&#x27;x&#x27;);
-		return (xScale ? xScale(x) : 0) || 0;
+		var hasX = this.get(&#x27;hasX&#x27;);
+		return (hasX &amp;&amp; xScale ? xScale(x) : 0) || 0;
 	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
 
 	/**
@@ -228,7 +229,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	rangeY: function(){
 		var yScale = this.get(&#x27;yScale&#x27;);
 		var y = this.get(&#x27;y&#x27;);
-		return (yScale ? yScale(y) : 0) || 0;
+		var hasY = this.get(&#x27;hasY&#x27;);
+		return (hasY &amp;&amp; yScale ? yScale(y) : 0) || 0;
 	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
 
 	/**

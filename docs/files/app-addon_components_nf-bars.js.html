@@ -169,6 +169,7 @@ import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
 import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
+import GraphicWithTrackingDot from &#x27;../mixins/graph-graphic-with-tracking-dot&#x27;;
 
 /**
 	Adds a bar graph to an &#x60;nf-graph&#x60; component.
@@ -183,7 +184,7 @@ import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;
   @uses mixins.graph-data-graphic
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
 	tagName: &#x27;g&#x27;,
 
 	classNames: [&#x27;nf-bars&#x27;],
@@ -226,12 +227,34 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 					y: h,
 					width: rangeBand,
 					height: graphHeight - h,
-					className: getBarClass(d.data)
+					className: getBarClass(d.data),
+					dataPoint: d,
 				};
 			});
 		}
 	),
 
+	/**
+		The name of the action to fire when a bar is clicked.
+		@property barClick
+		@type String
+		@default null
+	*/
+	barClick: null,
+
+	actions: {
+		nfBarClickBar: function(dataPoint) {
+			if(this.get(&#x27;barClick&#x27;)) {
+				this.sendAction(&#x27;barClick&#x27;, {
+					data: dataPoint.data,
+					x: dataPoint[0],
+					y: dataPoint[1],
+					source: this,
+					graph: this.get(&#x27;graph&#x27;),
+				});
+			}
+		}
+	}
 
 });
     </pre>
