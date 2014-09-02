@@ -120,7 +120,25 @@ export default Ember.Component.extend({
 
 		     {{#nf-column sortDirection="asc"}}
 	*/
-	sortDirection: 'none',
+	sortDirection: function(key, value) {
+		if(arguments.length > 1) {
+			if(!this.get('columnRegistrar.sortMultiple')) {
+				if(value === 'asc' || value === 'desc') {
+					this.get('columnRegistrar.sortedColumns').forEach(function(col) {
+						if(col !== this) {
+							col.set('sortDirection', 'none');
+						}
+					}, this);
+				}
+			}
+
+			this._sortDirection = value;
+		}
+
+		return this._sortDirection;
+	}.property(),
+
+	_sortDirection: 'none',
 
 	/**
 		Gets or sets whether to use a natural sort.

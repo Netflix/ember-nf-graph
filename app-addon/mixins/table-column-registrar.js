@@ -6,6 +6,15 @@ import Ember from 'ember';
 	@class table-column-registrar
 */
 export default Ember.Mixin.create({
+
+	/**
+		Gets or sets whether a multi sort is used.
+		@property sortMultiple
+		@type Boolean
+		@default false
+	*/
+	sortMultiple: false,
+
 	/**
 		identifies the component as a table column registrar to its children
 		@property isTableColumnRegistrar
@@ -20,15 +29,33 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	columns: function(key, value) { //jshint ignore:line (EMBER.bananaMode === true; key and value must be supplied to keep the computed property from being overwritten)
+	columns: function(key, value) { //jshint ignore:line 
 		return this.get('_columns');
 	}.property('_columns'),
 
+	/**
+		The list of visible columns
+		@property visibleColumns
+		@type Array
+		@readonly
+	*/
 	visibleColumns: function(){
 		return this.get('columns').filter(function(column) {
 			return column.get('isVisible');
 		});
 	}.property('columns.@each'),
+
+	/**
+		The list of columns with an sort applied to them
+		@property sortedColumns
+		@type Array
+		@readonly
+	*/
+	sortedColumns: function(){
+		return this.get('columns').filter(function(col) {
+			return col.get('direction') !== 0;
+		});
+	}.property('columns.@each.sortDirection'),
 
 	/**
 		Registers a column with the registrar

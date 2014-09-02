@@ -228,14 +228,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 
 	hasRendered: false,
 
-	/**
-		Gets or sets whether a multi sort is used.
-		@property sortMultiple
-		@type Boolean
-		@default false
-	*/
-	sortMultiple: false,
-
 	_hasRendered: function() {
 		this.set('hasRendered', true);
 	}.on('willInsertElement'),
@@ -313,17 +305,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			@param sortedColumn {nf-column}
 		*/
 		sort: function(sortedColumn) {
-			var columns = this.get('columns');
-			var sortMultiple = this.get('sortMultiple');
-
-			if(!sortMultiple) {
-				columns.forEach(function(col) {
-					if(col !== sortedColumn) {
-						col.set('sortDirection', 'none');
-					}
-				});
-			}	
-
 			sortedColumn.toggleSortDirection();
 		},
 

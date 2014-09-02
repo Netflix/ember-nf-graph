@@ -1396,7 +1396,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 125,
+            "line": 143,
             "description": "Gets or sets whether to use a natural sort.",
             "itemtype": "property",
             "name": "sortNatural",
@@ -1407,7 +1407,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 133,
+            "line": 151,
             "description": "The numeric value of `sortDirection`",
             "itemtype": "property",
             "name": "direction",
@@ -1418,7 +1418,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 154,
+            "line": 172,
             "description": "List of available sort directions",
             "itemtype": "property",
             "name": "SORTS",
@@ -1429,7 +1429,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 162,
+            "line": 180,
             "description": "Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.",
             "itemtype": "method",
             "name": "toggleSortDirection",
@@ -1438,7 +1438,7 @@
         },
         {
             "file": "app-addon/components/nf-column.js",
-            "line": 174,
+            "line": 192,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",
@@ -3401,18 +3401,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 231,
-            "description": "Gets or sets whether a multi sort is used.",
-            "itemtype": "property",
-            "name": "sortMultiple",
-            "type": "Boolean",
-            "default": "false",
-            "class": "components.nf-table",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-table.js",
-            "line": 243,
+            "line": 235,
             "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
             "itemtype": "property",
             "name": "sortMap",
@@ -3424,7 +3413,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 274,
+            "line": 266,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
@@ -3435,7 +3424,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 287,
+            "line": 279,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -3446,7 +3435,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 296,
+            "line": 288,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -3457,7 +3446,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 309,
+            "line": 301,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
@@ -4629,7 +4618,18 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 9,
+            "line": 10,
+            "description": "Gets or sets whether a multi sort is used.",
+            "itemtype": "property",
+            "name": "sortMultiple",
+            "type": "Boolean",
+            "default": "false",
+            "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 18,
             "description": "identifies the component as a table column registrar to its children",
             "itemtype": "property",
             "name": "isTableColumnRegistrar",
@@ -4640,7 +4640,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 17,
+            "line": 26,
             "description": "The collection of columns registered",
             "itemtype": "property",
             "name": "columns",
@@ -4651,7 +4651,29 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 33,
+            "line": 36,
+            "description": "The list of visible columns",
+            "itemtype": "property",
+            "name": "visibleColumns",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 48,
+            "description": "The list of columns with an sort applied to them",
+            "itemtype": "property",
+            "name": "sortedColumns",
+            "type": "Array",
+            "readonly": "",
+            "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/table-column-registrar.js",
+            "line": 60,
             "description": "Registers a column with the registrar",
             "itemtype": "method",
             "name": "registerColumn",
@@ -4667,7 +4689,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 42,
+            "line": 69,
             "description": "Unregisters a column from the registry",
             "itemtype": "method",
             "name": "unregisterColumn",
@@ -5140,7 +5162,7 @@
     "warnings": [
         {
             "message": "unknown tag: constant",
-            "line": " app-addon/components/nf-column.js:154"
+            "line": " app-addon/components/nf-column.js:172"
         },
         {
             "message": "replacing incorrect tag: params with param",
