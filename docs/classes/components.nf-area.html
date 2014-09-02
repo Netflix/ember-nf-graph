@@ -55,6 +55,8 @@
             
                 <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
             
+                <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
@@ -108,6 +110,10 @@
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+            
+                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+            
+                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -326,6 +332,27 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
 
                     <ul class="index-list properties extends">
                         
+                            <li class="index-item property">
+                                <a href="#property_areaData">areaData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_areaFn">areaFn</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_d">d</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property inherited">
                                 <a href="#property_data">data</a>
 
@@ -368,6 +395,13 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_interpolator">interpolator</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property deprecated inherited">
                                 <a href="#property_isSelected">isSelected</a>
 
@@ -379,6 +413,27 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                         
                             <li class="index-item property inherited">
                                 <a href="#property_lastVisibleData">lastVisibleData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_nextArea">nextArea</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_nextYData">nextYData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_prevArea">prevArea</a>
 
                                 
                                 
@@ -1050,7 +1105,7 @@ the willTrack action.</p>
                 <li class="param">
                     
                         <code class="param-name">e</code>
-                        <span class="type">utils.nf.graph-mouse-action-context</span>
+                        <span class="type"><a href="../classes/utils.nf.graph-mouse-action-context.html" class="crosslink">utils.nf.graph-mouse-action-context</a></span>
                     
 
                     
@@ -1137,7 +1192,7 @@ the willTrack action.</p>
                 <li class="param">
                     
                         <code class="param-name">e</code>
-                        <span class="type">utils.nf.graph-mouse-action-context</span>
+                        <span class="type"><a href="../classes/utils.nf.graph-mouse-action-context.html" class="crosslink">utils.nf.graph-mouse-action-context</a></span>
                     
 
                     
@@ -1222,7 +1277,7 @@ the willTrack action.</p>
                 <li class="param">
                     
                         <code class="param-name">e</code>
-                        <span class="type">utils.nf.graph-tracking-action-context</span>
+                        <span class="type"><a href="../classes/utils.nf.graph-tracking-action-context.html" class="crosslink">utils.nf.graph-tracking-action-context</a></span>
                     
 
                     
@@ -1336,6 +1391,141 @@ the willTrack action.</p>
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_areaData" class="property item">
+    <h3 class="name"><code>areaData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l98"><code>app-addon&#x2F;components&#x2F;nf-area.js:98</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The current rendered data &quot;zipped&quot; together with the nextYData.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_areaFn" class="property item">
+    <h3 class="name"><code>areaFn</code></h3>
+    <span class="type">Function</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l111"><code>app-addon&#x2F;components&#x2F;nf-area.js:111</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets the area function to use to create the area SVG path data</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_d" class="property item">
+    <h3 class="name"><code>d</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-area.js:124</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The SVG path data for the area</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property_data" class="property item inherited">
@@ -1601,6 +1791,53 @@ that is actually visible within the x domain.</p>
 </div>
 
                 
+                    <div id="property_interpolator" class="property item">
+    <h3 class="name"><code>interpolator</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l35"><code>app-addon&#x2F;components&#x2F;nf-area.js:35</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The type of d3 interpolator to use to create the area</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> &#x27;linear&#x27;</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_isSelected" class="property item deprecated inherited">
     <h3 class="name"><code>isSelected</code></h3>
     <span class="type">Unknown</span>
@@ -1681,6 +1918,147 @@ that is actually visible within the x domain.</p>
 
     </div>
 
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_nextArea" class="property item">
+    <h3 class="name"><code>nextArea</code></h3>
+    <span class="type"><a href="../classes/components.nf-area.html" class="crosslink">components.nf-area</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l51"><code>app-addon&#x2F;components&#x2F;nf-area.js:51</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The next area in the stack, if this area is part of an <code>nf-area-stack</code></p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_nextYData" class="property item">
+    <h3 class="name"><code>nextYData</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l74"><code>app-addon&#x2F;components&#x2F;nf-area.js:74</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The computed set of next y values to use for the &quot;bottom&quot; of the graphed area.
+If the area is part of a stack, this will be the &quot;top&quot; of the next area in the stack,
+otherwise it will return an array of values at the &quot;bottom&quot; of the graph domain.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_prevArea" class="property item">
+    <h3 class="name"><code>prevArea</code></h3>
+    <span class="type"><a href="../classes/components.nf-area.html" class="crosslink">components.nf-area</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-area.js.html#l43"><code>app-addon&#x2F;components&#x2F;nf-area.js:43</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The previous area in the stack, if this area is part of an <code>nf-area-stack</code></p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     

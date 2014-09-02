@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/scroll-area-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/graph-tracking-action-context.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -164,108 +164,39 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/scroll-area-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/graph-tracking-action-context.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import { property } from &#x27;../computed-property-helpers&#x27;;
 
 /**
-	Action context event object for an nf-scroll-area scroll event.
+	An event context object generally returned by tracking events. Also used as
+	&#x60;trackedData&#x60; in components such as &#x60;nf-line&#x60;, &#x60;nf-area&#x60; and &#x60;nf-bars&#x60;.
+	
 	@namespace utils.nf
-	@class scroll-area-action-context
+	@class graph-tracking-action-context
 */
 export default Ember.Object.extend({
 	/**
-		The scroll top in pixels.
-		@property scrollTop
+		The mouse x position on the graph
+		@property mouseX
 		@type Number
-		@default 0
+		@default null
 	*/
-	scrollTop: 0,
+	mouseX: null,
 
 	/**
-		The scroll height of the element.
-		@property scrollHeight
-		@type number
-		@default 0
-	*/
-	scrollHeight: 0,
-
-	/**
-		The outer height of the element
-		@property outerHeight
+		The mouse y position on the graph
+		@property mouseX
 		@type Number
-		@default 0
-	*/
-	outerHeight: 0,
+		@default null
+	*/	
+	mouseY: null,
 
 	/**
-		The scroll left in pixels.
-		@property scrollLeft
-		@type Number
-		@default 0
-	*/
-	scrollLeft: 0,
-
-	/**
-		The scroll width of the element.
-		@property scrollWidth
-		@type number
-		@default 0
-	*/
-	scrollWidth: 0,
-
-	/**
-		The outer width of the element
-		@property outerWidth
-		@type Number
-		@default 0
-	*/
-	outerWidth: 0,
-
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollTopMax
-		@type Number
-		@readonly
-	*/
-	scrollTopMax: function(){
-		return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
-	}.property(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollTopPercentage
-		@type Number
-		@readonly
-	*/
-	scrollTopPercentage: function() {
-		return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
-	}.property(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;),
-	
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollLeftMax
-		@type Number
-		@readonly
-	*/
-	scrollLeftMax: function(){
-		return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
-	}.property(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollLeftPercentage
-		@type Number
-		@readonly
-	*/
-	scrollLeftPercentage: function() {
-		return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
-	}.property(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;),
-
-	/**
-		The component that fired the event
+		The component that triggered the event
 		@property source
 		@type Ember.Component
 		@default null
@@ -273,19 +204,110 @@ export default Ember.Object.extend({
 	source: null,
 
 	/**
-		The optional data to send with the action
-		@property data
+		The graph that the event belongs to
+		@property graph
+		@type components.nf-graph
 		@default null
 	*/
-	data: null,
+	graph: null,
 
 	/**
-		The original scroll event object
-		@property originalEvent
-		@type Event
-		@default null
+		The data calculated to be nearest to the mouse x position.
+		@propert nearestData
+		@type Object
+		@readonly
 	*/
-	originalEvent: null,
+	nearestData: property(&#x27;mouseX&#x27;, &#x27;source&#x27;, function(mouseX, source) {
+		mouseX = +mouseX;
+		if(source &amp;&amp; mouseX === mouseX) {
+			var d = source.getDataNearXRange(mouseX);
+			if(d) {
+				return {
+					x: d[0],
+					y: d[1],
+					data: d.data,
+				};
+			}
+		}
+		return null;
+	}),
+
+	/**
+		The x value nearest to the mouse x position
+		@property x
+		@readonly
+	*/
+	x: Ember.computed.oneWay(&#x27;nearestData.x&#x27;),
+
+	/**
+		The y value nearest to the mouse x position
+		@property y
+		@readonly
+	*/
+	y: Ember.computed.oneWay(&#x27;nearestData.y&#x27;),
+
+	/**
+		The data nearest to the mouse x position
+		@property data
+		@readonly
+	*/
+	data: Ember.computed.oneWay(&#x27;nearestData.data&#x27;),
+
+	/**
+		The position of the &#x60;x&#x60; value on the graph.
+		@property graphPositionX
+		@type Number
+		@readonly
+	*/
+	graphPositionX: property(&#x27;x&#x27;, &#x27;source.xScale&#x27;, function(x, xScale) {
+		return xScale ? xScale(x) : NaN;
+	}),
+
+	/**
+		The position of the &#x60;y&#x60; value on the graph.
+		@property graphPositionY
+		@type Number
+		@readonly
+	*/
+	graphPositionY: property(&#x27;y&#x27;, &#x27;source.yScale&#x27;, function(y, yScale) {
+		return yScale ? yScale(y) : NaN;
+	}),
+
+	/**
+		If the scale type is &#x60;ordinal&#x60;, this returns the centered position of &#x60;x&#x60; on the graph
+		@property centerPositionX
+		@type Number
+		@readonly
+	*/
+	centerPositionX: property(&#x27;graphPositionX&#x27;, &#x27;source.xScale&#x27;, function(posX, xScale) {
+		if(!xScale || !xScale.rangeRoundBands) {
+			return posX;
+		}
+
+		if(posX !== posX) {
+			return posX; //NaN
+		}
+
+		return posX + (xScale.rangeBand() / 2);
+	}),
+
+	/**
+		If the scale type is &#x60;ordinal&#x60;, this returns the centered position of &#x60;y&#x60; on the graph
+		@property centerPositionY
+		@type Number
+		@readonly
+	*/
+	centerPositionY: property(&#x27;graphPositionY&#x27;, &#x27;source.yScale&#x27;, function(posY, yScale) {
+		if(!yScale || !yScale.rangeRoundBands) {
+			return posY;
+		}
+
+		if(posY !== posY) {
+			return posY; //NaN
+		}
+
+		return posY + (yScale.rangeBand() / 2);
+	}),
 });
     </pre>
 </div>

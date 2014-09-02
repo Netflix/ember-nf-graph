@@ -55,6 +55,8 @@
             
                 <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
             
+                <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
@@ -108,6 +110,10 @@
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+            
+                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+            
+                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -196,10 +202,28 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     
     classNameBindings: [&#x27;:nf-area&#x27;, &#x27;selected&#x27;, &#x27;selectable&#x27;],
 
-    interpolator: &#x27;monotone&#x27;,
+    /**
+      The type of d3 interpolator to use to create the area
+      @property interpolator
+      @type String
+      @default &#x27;linear&#x27;
+    */
+    interpolator: &#x27;linear&#x27;,
 
+    /**
+      The previous area in the stack, if this area is part of an &#x60;nf-area-stack&#x60;
+      @property prevArea
+      @type components.nf-area
+      @default null
+    */
     prevArea: null,
 
+    /**
+      The next area in the stack, if this area is part of an &#x60;nf-area-stack&#x60;
+      @property nextArea
+      @type components.nf-area
+      @default null
+    */
     nextArea: null,
 
     _checkForAreaStackParent: function() {
@@ -217,6 +241,14 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     }.on(&#x27;willDestroyElement&#x27;),
 
+    /**
+      The computed set of next y values to use for the &quot;bottom&quot; of the graphed area.
+      If the area is part of a stack, this will be the &quot;top&quot; of the next area in the stack,
+      otherwise it will return an array of values at the &quot;bottom&quot; of the graph domain.
+      @property nextYData
+      @type Array
+      @readonly
+    */
     nextYData: property(&#x27;renderedData.@each&#x27;, &#x27;graph.yMin&#x27;, &#x27;nextArea.renderedData.@each&#x27;, 
       function(renderedData, yMin, nextRenderedData) { 
         var nextData = nextRenderedData || [];
@@ -233,6 +265,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     ),
 
+    /**
+      The current rendered data &quot;zipped&quot; together with the nextYData.
+      @property areaData
+      @type Array
+      @readonly
+    */
     areaData: property(&#x27;renderedData.@each&#x27;, &#x27;nextYData.@each&#x27;, function(renderedData, nextYData){
       return renderedData.map(function(r, i){
         return [r[0], r[1], nextYData[i]];
@@ -240,15 +278,25 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     }),
 
 
+    /**
+      Gets the area function to use to create the area SVG path data
+      @property areaFn
+      @type Function
+      @readonly
+    */
     areaFn: function(){
       var xScale = this.get(&#x27;xScale&#x27;);
       var yScale = this.get(&#x27;yScale&#x27;);
       var interpolator = this.get(&#x27;interpolator&#x27;);
       return this.createAreaFn(xScale, yScale, interpolator);
-    }.property(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;, &#x27;multiplierY&#x27;),
+    }.property(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;),
 
-    multiplierY: 1,
-
+    /**
+      The SVG path data for the area
+      @property d
+      @type String
+      @readonly
+    */
     d: function(){
       return this.get(&#x27;areaFn&#x27;)(this.get(&#x27;areaData&#x27;));
     }.property(&#x27;areaData&#x27;, &#x27;areaFn&#x27;),

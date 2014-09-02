@@ -31,8 +31,20 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	y: null,
 
+	/**
+		True if an `x` value is present (defined, not null and non-empty)
+		@property hasX
+		@type Boolean
+		@readonly
+	*/
 	hasX: Ember.computed.notEmpty('x'),
 
+	/**
+		True if an `y` value is present (defined, not null and non-empty)
+		@property hasY
+		@type Boolean
+		@readonly
+	*/
 	hasY: Ember.computed.notEmpty('y'),
 
 	/**

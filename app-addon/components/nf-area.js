@@ -32,10 +32,28 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     
     classNameBindings: [':nf-area', 'selected', 'selectable'],
 
-    interpolator: 'monotone',
+    /**
+      The type of d3 interpolator to use to create the area
+      @property interpolator
+      @type String
+      @default 'linear'
+    */
+    interpolator: 'linear',
 
+    /**
+      The previous area in the stack, if this area is part of an `nf-area-stack`
+      @property prevArea
+      @type components.nf-area
+      @default null
+    */
     prevArea: null,
 
+    /**
+      The next area in the stack, if this area is part of an `nf-area-stack`
+      @property nextArea
+      @type components.nf-area
+      @default null
+    */
     nextArea: null,
 
     _checkForAreaStackParent: function() {
@@ -53,6 +71,14 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     }.on('willDestroyElement'),
 
+    /**
+      The computed set of next y values to use for the "bottom" of the graphed area.
+      If the area is part of a stack, this will be the "top" of the next area in the stack,
+      otherwise it will return an array of values at the "bottom" of the graph domain.
+      @property nextYData
+      @type Array
+      @readonly
+    */
     nextYData: property('renderedData.@each', 'graph.yMin', 'nextArea.renderedData.@each', 
       function(renderedData, yMin, nextRenderedData) { 
         var nextData = nextRenderedData || [];
@@ -69,6 +95,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     ),
 
+    /**
+      The current rendered data "zipped" together with the nextYData.
+      @property areaData
+      @type Array
+      @readonly
+    */
     areaData: property('renderedData.@each', 'nextYData.@each', function(renderedData, nextYData){
       return renderedData.map(function(r, i){
         return [r[0], r[1], nextYData[i]];
@@ -76,15 +108,25 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     }),
 
 
+    /**
+      Gets the area function to use to create the area SVG path data
+      @property areaFn
+      @type Function
+      @readonly
+    */
     areaFn: function(){
       var xScale = this.get('xScale');
       var yScale = this.get('yScale');
       var interpolator = this.get('interpolator');
       return this.createAreaFn(xScale, yScale, interpolator);
-    }.property('xScale', 'yScale', 'interpolator', 'multiplierY'),
+    }.property('xScale', 'yScale', 'interpolator'),
 
-    multiplierY: 1,
-
+    /**
+      The SVG path data for the area
+      @property d
+      @type String
+      @readonly
+    */
     d: function(){
       return this.get('areaFn')(this.get('areaData'));
     }.property('areaData', 'areaFn'),

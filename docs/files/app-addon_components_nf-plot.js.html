@@ -55,6 +55,8 @@
             
                 <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
             
+                <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
+            
                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
             
                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
@@ -108,6 +110,10 @@
                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+            
+                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+            
+                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
             
                 <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
             
@@ -195,8 +201,20 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	y: null,
 
+	/**
+		True if an &#x60;x&#x60; value is present (defined, not null and non-empty)
+		@property hasX
+		@type Boolean
+		@readonly
+	*/
 	hasX: Ember.computed.notEmpty(&#x27;x&#x27;),
 
+	/**
+		True if an &#x60;y&#x60; value is present (defined, not null and non-empty)
+		@property hasY
+		@type Boolean
+		@readonly
+	*/
 	hasY: Ember.computed.notEmpty(&#x27;y&#x27;),
 
 	/**

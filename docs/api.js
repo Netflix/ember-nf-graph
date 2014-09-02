@@ -8,6 +8,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-column",
         "components.nf-crosshair",
         "components.nf-dot",
+        "components.nf-gg",
         "components.nf-graph",
         "components.nf-graph-content",
         "components.nf-header",
@@ -35,6 +36,8 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-requires-scale-source",
         "mixins.graph-selectable-graphic",
         "mixins.table-column-registrar",
+        "utils.nf.graph-mouse-action-context",
+        "utils.nf.graph-tracking-action-context",
         "utils.nf.nf-graph-action-context",
         "utils.nf.scroll-area-action-context",
         "utils.parse-property-expression"

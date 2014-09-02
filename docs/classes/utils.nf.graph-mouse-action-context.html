@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-vertical-line - Ember-CLI-Ember-DVC</title>
+    <title>utils.nf.graph-mouse-action-context - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -164,30 +164,15 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-vertical-line Class</h1>
+                        <h1>utils.nf.graph-mouse-action-context Class</h1>
 <div class="box meta">
     
-        <div class="uses">
-            Uses
-            <ul class="inline commas">
-                
-                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
-                
-                    <li><a href="mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
-                
-            </ul>
-        </div>
-    
 
-    
-        <div class="extends">
-            Extends Ember.Component
-        </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-vertical-line.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:6</code></a>
+            Defined in: <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l5"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:5</code></a>
         </div>
     
 
@@ -203,7 +188,7 @@
 
 
 <div class="box intro">
-    <p>Draws a vertical line on a graph at a given x domain value</p>
+    <p>Event context data for mouse hover events.</p>
 
 </div>
 
@@ -213,8 +198,6 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
-        
-            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
@@ -228,65 +211,50 @@
             <h2 class="off-left">Item Index</h2>
 
             
-                <div class="index-section methods">
-                    <h3>Methods</h3>
-
-                    <ul class="index-list methods extends">
-                        
-                            <li class="index-item method inherited">
-                                <a href="#method__getGraph">_getGraph</a>
-
-                                
-                                
-                            </li>
-                        
-                    </ul>
-                </div>
-            
 
             
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties extends">
+                    <ul class="index-list properties">
                         
-                            <li class="index-item property inherited">
+                            <li class="index-item property">
                                 <a href="#property_graph">graph</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property_lineX">lineX</a>
+                            <li class="index-item property">
+                                <a href="#property_mousePoint">mousePoint</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleOffsetX">scaleOffsetX</a>
+                            <li class="index-item property">
+                                <a href="#property_mouseX">mouseX</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleOffsetY">scaleOffsetY</a>
+                            <li class="index-item property">
+                                <a href="#property_mouseY">mouseY</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleZoomX">scaleZoomX</a>
+                            <li class="index-item property">
+                                <a href="#property_originalEvent">originalEvent</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleZoomY">scaleZoomY</a>
+                            <li class="index-item property">
+                                <a href="#property_source">source</a>
 
                                 
                                 
@@ -299,28 +267,21 @@
                                 
                             </li>
                         
-                            <li class="index-item property inherited">
+                            <li class="index-item property">
                                 <a href="#property_xScale">xScale</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property_y1">y1</a>
+                            <li class="index-item property">
+                                <a href="#property_y">y</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item property private">
-                                <a href="#property_y2">y2</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
+                            <li class="index-item property">
                                 <a href="#property_yScale">yScale</a>
 
                                 
@@ -337,123 +298,18 @@
         </div>
 
         
-            <div id="methods" class="api-class-tabpanel">
-                <h2 class="off-left">Methods</h2>
-
-                
-                    <div id="method__getGraph" class="method item inherited">
-    <h3 class="name"><code>_getGraph</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Initalization method that gets the <code>nf-graph</code> parent
-and assigns it to <code>graph</code></p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-            </div>
-        
 
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_graph" class="property item inherited">
+                    <div id="property_graph" class="property item">
     <h3 class="name"><code>graph</code></h3>
     <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
 
     
 
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The parent graph for a component.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_lineX" class="property item private">
-    <h3 class="name"><code>lineX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
     
 
     
@@ -471,7 +327,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l47"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:47</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l28"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:28</code></a>
         
         </p>
 
@@ -481,7 +337,54 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The calculated x coordinate of the vertical line</p>
+        <p>The nf-graph the event originated from</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_mousePoint" class="property item">
+    <h3 class="name"><code>mousePoint</code></h3>
+    <span class="type">Object</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l36"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:36</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The computed x and y coordinate of the mouse within the source component</p>
 
     </div>
 
@@ -493,8 +396,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_scaleOffsetX" class="property item inherited">
-    <h3 class="name"><code>scaleOffsetX</code></h3>
+                    <div id="property_mouseX" class="property item">
+    <h3 class="name"><code>mouseX</code></h3>
     <span class="type">Number</span>
 
     
@@ -508,12 +411,15 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetX">mixins.graph-requires-scale-source</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l78"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:78</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l48"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:48</code></a>
         
         </p>
 
@@ -523,12 +429,10 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The offset, in pixels, for the x scale</p>
+        <p>The x position of the mouse relative to the <code>source</code>.</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -537,8 +441,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_scaleOffsetY" class="property item inherited">
-    <h3 class="name"><code>scaleOffsetY</code></h3>
+                    <div id="property_mouseY" class="property item">
+    <h3 class="name"><code>mouseY</code></h3>
     <span class="type">Number</span>
 
     
@@ -552,12 +456,15 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetY">mixins.graph-requires-scale-source</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l91"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:91</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l56"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:56</code></a>
         
         </p>
 
@@ -567,12 +474,10 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The offset, in pixels, for the y scale</p>
+        <p>The y position of the mouse relative to the <code>source</code>.</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -581,9 +486,9 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_scaleZoomX" class="property item inherited">
-    <h3 class="name"><code>scaleZoomX</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_originalEvent" class="property item">
+    <h3 class="name"><code>originalEvent</code></h3>
+    <span class="type">MouseEvent</span>
 
     
 
@@ -596,12 +501,15 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomX">mixins.graph-requires-scale-source</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l52"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:52</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l12"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:12</code></a>
         
         </p>
 
@@ -611,12 +519,12 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The zoom multiplier for the x scale</p>
+        <p>The original mouse event</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 1</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -625,9 +533,9 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_scaleZoomY" class="property item inherited">
-    <h3 class="name"><code>scaleZoomY</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_source" class="property item">
+    <h3 class="name"><code>source</code></h3>
+    <span class="type">Ember.Component</span>
 
     
 
@@ -640,12 +548,15 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomY">mixins.graph-requires-scale-source</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l65"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:65</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l20"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:20</code></a>
         
         </p>
 
@@ -655,12 +566,12 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The zoom multiplier for the y scale</p>
+        <p>The component that fired the event.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 1</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -692,7 +603,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l39"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:39</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l64"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:64</code></a>
         
         </p>
 
@@ -702,12 +613,11 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The x domain value at which to draw the vertical line on the graph</p>
+        <p>The x domain value at the mouse x position.</p>
+<p>NOTE: Ordinal scales will return NaN.</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -716,7 +626,7 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_xScale" class="property item inherited">
+                    <div id="property_xScale" class="property item">
     <h3 class="name"><code>xScale</code></h3>
     <span class="type">d3.scale</span>
 
@@ -731,12 +641,15 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_xScale">mixins.graph-requires-scale-source</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l28"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:28</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l90"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:90</code></a>
         
         </p>
 
@@ -746,7 +659,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The x scale used by this component</p>
+        <p>The xScale used to compute x</p>
 
     </div>
 
@@ -758,14 +671,12 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_y1" class="property item private">
-    <h3 class="name"><code>y1</code></h3>
+                    <div id="property_y" class="property item">
+    <h3 class="name"><code>y</code></h3>
     <span class="type">Number</span>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -783,7 +694,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:21</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l77"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:77</code></a>
         
         </p>
 
@@ -793,56 +704,8 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The top y coordinate of the line</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 0</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_y2" class="property item private">
-    <h3 class="name"><code>y2</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l30"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:30</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The bottom y coordinate of the line</p>
+        <p>The y domain value at the mouse y position.</p>
+<p>NOTE: Ordinal scales will return NaN.</p>
 
     </div>
 
@@ -854,7 +717,7 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_yScale" class="property item inherited">
+                    <div id="property_yScale" class="property item">
     <h3 class="name"><code>yScale</code></h3>
     <span class="type">d3.scale</span>
 
@@ -869,12 +732,15 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_yScale">mixins.graph-requires-scale-source</a>:
+                
+                <p>
+                
+                Defined in
+                
             
         
         
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l36"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:36</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l100"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:100</code></a>
         
         </p>
 
@@ -884,7 +750,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The y scale used by this component</p>
+        <p>The yScale used to compute y</p>
 
     </div>
 

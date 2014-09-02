@@ -81,6 +81,17 @@
                 "components": 1
             }
         },
+        "app-addon/components/nf-gg.js": {
+            "name": "app-addon/components/nf-gg.js",
+            "modules": {},
+            "classes": {
+                "components.nf-gg": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
         "app-addon/components/nf-graph-content.js": {
             "name": "app-addon/components/nf-graph-content.js",
             "modules": {},
@@ -146,6 +157,13 @@
             "namespaces": {
                 "components": 1
             }
+        },
+        "app-addon/components/nf-plots.js": {
+            "name": "app-addon/components/nf-plots.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
         },
         "app-addon/components/nf-range-marker.js": {
             "name": "app-addon/components/nf-range-marker.js",
@@ -398,6 +416,28 @@
                 "utils.nf": 1
             }
         },
+        "app-addon/utils/nf/graph-mouse-action-context.js": {
+            "name": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "modules": {},
+            "classes": {
+                "utils.nf.graph-mouse-action-context": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            }
+        },
+        "app-addon/utils/nf/graph-tracking-action-context.js": {
+            "name": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "modules": {},
+            "classes": {
+                "utils.nf.graph-tracking-action-context": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            }
+        },
         "app-addon/utils/nf/scroll-area-action-context.js": {
             "name": "app-addon/utils/nf/scroll-area-action-context.js",
             "modules": {},
@@ -442,6 +482,7 @@
                 "components.nf-column": 1,
                 "components.nf-crosshair": 1,
                 "components.nf-dot": 1,
+                "components.nf-gg": 1,
                 "components.nf-graph-content": 1,
                 "components.nf-graph": 1,
                 "components.nf-header": 1,
@@ -470,6 +511,8 @@
                 "mixins.graph-selectable-graphic": 1,
                 "mixins.table-column-registrar": 1,
                 "utils.nf.nf-graph-action-context": 1,
+                "utils.nf.graph-mouse-action-context": 1,
+                "utils.nf.graph-tracking-action-context": 1,
                 "utils.nf.scroll-area-action-context": 1
             },
             "fors": {},
@@ -620,6 +663,25 @@
             "uses": [
                 "mixins.graph-has-graph-parent",
                 "mixins.graph-requires-scale-source"
+            ]
+        },
+        "components.nf-gg": {
+            "name": "components.nf-gg",
+            "shortname": "components.nf-gg",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-gg.js",
+            "line": 5,
+            "description": "A grouping tag that provides zooming and offset functionality to it's children.\n\n## Example\n\nThe following example will show a line of `someData` with a 2x zoom, offset by 30px in both x and y\ndirections:\n\n\t\t\t{{#nf-gg scaleZoomX=\"2\" scaleZoomY=\"2\" scaleOffsetX=\"30\" scaleOffsetY=\"30\"}}\n\t\t\t\t{{nf-line data=someData}}\n\t\t\t{{/nf-gg}}",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-require-scale-source"
             ]
         },
         "components.nf-graph-content": {
@@ -1010,6 +1072,7 @@
                 "components.nf-bars",
                 "components.nf-crosshair",
                 "components.nf-dot",
+                "components.nf-gg",
                 "components.nf-graph-content",
                 "components.nf-horizontal-line",
                 "components.nf-line",
@@ -1140,6 +1203,34 @@
             "description": "Event object for graph events",
             "extends": "Ember.Object"
         },
+        "utils.nf.graph-mouse-action-context": {
+            "name": "utils.nf.graph-mouse-action-context",
+            "shortname": "utils.nf.graph-mouse-action-context",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf",
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 5,
+            "description": "Event context data for mouse hover events."
+        },
+        "utils.nf.graph-tracking-action-context": {
+            "name": "utils.nf.graph-tracking-action-context",
+            "shortname": "utils.nf.graph-tracking-action-context",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf",
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 4,
+            "description": "An event context object generally returned by tracking events. Also used as\n`trackedData` in components such as `nf-line`, `nf-area` and `nf-bars`."
+        },
         "utils.nf.scroll-area-action-context": {
             "name": "utils.nf.scroll-area-action-context",
             "shortname": "utils.nf.scroll-area-action-context",
@@ -1223,6 +1314,83 @@
                 }
             ],
             "class": "components.nf-area-stack",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 35,
+            "description": "The type of d3 interpolator to use to create the area",
+            "itemtype": "property",
+            "name": "interpolator",
+            "type": "String",
+            "default": "'linear'",
+            "class": "components.nf-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 43,
+            "description": "The previous area in the stack, if this area is part of an `nf-area-stack`",
+            "itemtype": "property",
+            "name": "prevArea",
+            "type": "components.nf-area",
+            "default": "null",
+            "class": "components.nf-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 51,
+            "description": "The next area in the stack, if this area is part of an `nf-area-stack`",
+            "itemtype": "property",
+            "name": "nextArea",
+            "type": "components.nf-area",
+            "default": "null",
+            "class": "components.nf-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 74,
+            "description": "The computed set of next y values to use for the \"bottom\" of the graphed area.\nIf the area is part of a stack, this will be the \"top\" of the next area in the stack,\notherwise it will return an array of values at the \"bottom\" of the graph domain.",
+            "itemtype": "property",
+            "name": "nextYData",
+            "type": "Array",
+            "readonly": "",
+            "class": "components.nf-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 98,
+            "description": "The current rendered data \"zipped\" together with the nextYData.",
+            "itemtype": "property",
+            "name": "areaData",
+            "type": "Array",
+            "readonly": "",
+            "class": "components.nf-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 111,
+            "description": "Gets the area function to use to create the area SVG path data",
+            "itemtype": "property",
+            "name": "areaFn",
+            "type": "Function",
+            "readonly": "",
+            "class": "components.nf-area",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-area.js",
+            "line": 124,
+            "description": "The SVG path data for the area",
+            "itemtype": "property",
+            "name": "d",
+            "type": "String",
+            "readonly": "",
+            "class": "components.nf-area",
             "namespace": "components"
         },
         {
@@ -2607,7 +2775,29 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 38,
+            "line": 34,
+            "description": "True if an `x` value is present (defined, not null and non-empty)",
+            "itemtype": "property",
+            "name": "hasX",
+            "type": "Boolean",
+            "readonly": "",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 42,
+            "description": "True if an `y` value is present (defined, not null and non-empty)",
+            "itemtype": "property",
+            "name": "hasY",
+            "type": "Boolean",
+            "readonly": "",
+            "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plot.js",
+            "line": 50,
             "description": "The calculated visibility of the component",
             "itemtype": "property",
             "name": "isVisible",
@@ -2618,7 +2808,7 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 46,
+            "line": 58,
             "description": "The calculated x coordinate",
             "itemtype": "property",
             "name": "rangeX",
@@ -2629,7 +2819,7 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 59,
+            "line": 71,
             "description": "The calculated y coordinate",
             "itemtype": "property",
             "name": "rangeY",
@@ -2640,13 +2830,38 @@
         },
         {
             "file": "app-addon/components/nf-plot.js",
-            "line": 72,
+            "line": 84,
             "description": "The SVG transform of the component's `<g>` tag.",
             "itemtype": "property",
             "name": "transform",
             "type": "String",
             "readonly": "",
             "class": "components.nf-plot",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plots.js",
+            "line": 11,
+            "description": "The parent controller to use for template binding",
+            "itemtype": "property",
+            "name": "parentController",
+            "type": "Ember.Controller",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-range-marker",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-plots.js",
+            "line": 20,
+            "description": "The model for adding plots to the graph",
+            "itemtype": "property",
+            "name": "plotData",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-range-marker",
             "namespace": "components"
         },
         {
@@ -4753,7 +4968,54 @@
         },
         {
             "file": "app-addon/utils/nf/array-helpers.js",
-            "line": 96,
+            "line": 59,
+            "description": "breaks a string into an array of tokens in preparation for natural\ncomparison and sorting.",
+            "itemtype": "method",
+            "name": "naturalTokenize",
+            "params": [
+                {
+                    "name": "item",
+                    "description": "the value to tokenize",
+                    "type": "String"
+                }
+            ],
+            "return": {
+                "description": "an array of tokens found in the item",
+                "type": "Array"
+            },
+            "access": "private",
+            "tagname": "",
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers"
+        },
+        {
+            "file": "app-addon/utils/nf/array-helpers.js",
+            "line": 77,
+            "description": "A JavaScript sorting predicate for natural sorting.",
+            "itemtype": "method",
+            "name": "naturalCompare",
+            "params": [
+                {
+                    "name": "a",
+                    "description": "the value to compare to b",
+                    "type": "Any"
+                },
+                {
+                    "name": "b",
+                    "description": "the value to compare to a",
+                    "type": "Any"
+                }
+            ],
+            "return": {
+                "description": "`-1`, `0` or `1` if a is less than, equal to, or\n  greater than b, respectively.",
+                "type": "Number"
+            },
+            "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers"
+        },
+        {
+            "file": "app-addon/utils/nf/array-helpers.js",
+            "line": 112,
             "description": "Sorts the array \"naturally\". Meaning taking into account both\nalphabetical and numeric sorting within strings.",
             "itemtype": "method",
             "name": "natualSort",
@@ -4906,6 +5168,266 @@
             "type": "Number",
             "readonly": "",
             "class": "utils.nf.nf-graph-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 12,
+            "description": "The original mouse event",
+            "itemtype": "property",
+            "name": "originalEvent",
+            "type": "MouseEvent",
+            "default": "null",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 20,
+            "description": "The component that fired the event.",
+            "itemtype": "property",
+            "name": "source",
+            "type": "Ember.Component",
+            "default": "null",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 28,
+            "description": "The nf-graph the event originated from",
+            "itemtype": "property",
+            "name": "graph",
+            "type": "components.nf-graph",
+            "default": "null",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 36,
+            "description": "The computed x and y coordinate of the mouse within the source component",
+            "itemtype": "property",
+            "name": "mousePoint",
+            "type": "Object",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 48,
+            "description": "The x position of the mouse relative to the `source`.",
+            "itemtype": "property",
+            "name": "mouseX",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 56,
+            "description": "The y position of the mouse relative to the `source`.",
+            "itemtype": "property",
+            "name": "mouseY",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 64,
+            "description": "The x domain value at the mouse x position.\n\nNOTE: Ordinal scales will return NaN.",
+            "itemtype": "property",
+            "name": "x",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 77,
+            "description": "The y domain value at the mouse y position.\n\nNOTE: Ordinal scales will return NaN.",
+            "itemtype": "property",
+            "name": "y",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 90,
+            "description": "The xScale used to compute x",
+            "itemtype": "property",
+            "name": "xScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-mouse-action-context.js",
+            "line": 100,
+            "description": "The yScale used to compute y",
+            "itemtype": "property",
+            "name": "yScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "utils.nf.graph-mouse-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 12,
+            "description": "The mouse x position on the graph",
+            "itemtype": "property",
+            "name": "mouseX",
+            "type": "Number",
+            "default": "null",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 20,
+            "description": "The mouse y position on the graph",
+            "itemtype": "property",
+            "name": "mouseX",
+            "type": "Number",
+            "default": "null",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 28,
+            "description": "The component that triggered the event",
+            "itemtype": "property",
+            "name": "source",
+            "type": "Ember.Component",
+            "default": "null",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 36,
+            "description": "The graph that the event belongs to",
+            "itemtype": "property",
+            "name": "graph",
+            "type": "components.nf-graph",
+            "default": "null",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 44,
+            "description": "The data calculated to be nearest to the mouse x position.",
+            "propert": "nearestData",
+            "type": "Object",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 65,
+            "description": "The x value nearest to the mouse x position",
+            "itemtype": "property",
+            "name": "x",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 72,
+            "description": "The y value nearest to the mouse x position",
+            "itemtype": "property",
+            "name": "y",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 79,
+            "description": "The data nearest to the mouse x position",
+            "itemtype": "property",
+            "name": "data",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 86,
+            "description": "The position of the `x` value on the graph.",
+            "itemtype": "property",
+            "name": "graphPositionX",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 96,
+            "description": "The position of the `y` value on the graph.",
+            "itemtype": "property",
+            "name": "graphPositionY",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 106,
+            "description": "If the scale type is `ordinal`, this returns the centered position of `x` on the graph",
+            "itemtype": "property",
+            "name": "centerPositionX",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
+            "module": "utils/nf/array-helpers",
+            "namespace": "utils.nf"
+        },
+        {
+            "file": "app-addon/utils/nf/graph-tracking-action-context.js",
+            "line": 124,
+            "description": "If the scale type is `ordinal`, this returns the centered position of `y` on the graph",
+            "itemtype": "property",
+            "name": "centerPositionY",
+            "type": "Number",
+            "readonly": "",
+            "class": "utils.nf.graph-tracking-action-context",
             "module": "utils/nf/array-helpers",
             "namespace": "utils.nf"
         },
@@ -5175,6 +5697,14 @@
         {
             "message": "replacing incorrect tag: params with param",
             "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:136"
+        },
+        {
+            "message": "unknown tag: propert",
+            "line": " app-addon/utils/nf/graph-tracking-action-context.js:44"
+        },
+        {
+            "message": "Missing item type\nThe data calculated to be nearest to the mouse x position.",
+            "line": " app-addon/utils/nf/graph-tracking-action-context.js:44"
         }
     ]
 }

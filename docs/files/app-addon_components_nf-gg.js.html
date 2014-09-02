@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/scroll-area-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-gg.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -164,128 +164,36 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/scroll-area-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-gg.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
-	Action context event object for an nf-scroll-area scroll event.
-	@namespace utils.nf
-	@class scroll-area-action-context
+	A grouping tag that provides zooming and offset functionality to it&#x27;s children.
+
+	## Example
+
+	The following example will show a line of &#x60;someData&#x60; with a 2x zoom, offset by 30px in both x and y
+	directions:
+
+				{{#nf-gg scaleZoomX=&quot;2&quot; scaleZoomY=&quot;2&quot; scaleOffsetX=&quot;30&quot; scaleOffsetY=&quot;30&quot;}}
+					{{nf-line data=someData}}
+				{{/nf-gg}}
+
+	@namespace components
+	@class nf-gg
+	@extends Ember.Component
+	@uses mixins.graph-has-graph-parent
+	@uses mixins.graph-require-scale-source
 */
-export default Ember.Object.extend({
-	/**
-		The scroll top in pixels.
-		@property scrollTop
-		@type Number
-		@default 0
-	*/
-	scrollTop: 0,
-
-	/**
-		The scroll height of the element.
-		@property scrollHeight
-		@type number
-		@default 0
-	*/
-	scrollHeight: 0,
-
-	/**
-		The outer height of the element
-		@property outerHeight
-		@type Number
-		@default 0
-	*/
-	outerHeight: 0,
-
-	/**
-		The scroll left in pixels.
-		@property scrollLeft
-		@type Number
-		@default 0
-	*/
-	scrollLeft: 0,
-
-	/**
-		The scroll width of the element.
-		@property scrollWidth
-		@type number
-		@default 0
-	*/
-	scrollWidth: 0,
-
-	/**
-		The outer width of the element
-		@property outerWidth
-		@type Number
-		@default 0
-	*/
-	outerWidth: 0,
-
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollTopMax
-		@type Number
-		@readonly
-	*/
-	scrollTopMax: function(){
-		return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
-	}.property(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollTopPercentage
-		@type Number
-		@readonly
-	*/
-	scrollTopPercentage: function() {
-		return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
-	}.property(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;),
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+	tagName: &#x27;g&#x27;,
 	
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollLeftMax
-		@type Number
-		@readonly
-	*/
-	scrollLeftMax: function(){
-		return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
-	}.property(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollLeftPercentage
-		@type Number
-		@readonly
-	*/
-	scrollLeftPercentage: function() {
-		return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
-	}.property(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;),
-
-	/**
-		The component that fired the event
-		@property source
-		@type Ember.Component
-		@default null
-	*/
-	source: null,
-
-	/**
-		The optional data to send with the action
-		@property data
-		@default null
-	*/
-	data: null,
-
-	/**
-		The original scroll event object
-		@property originalEvent
-		@type Event
-		@default null
-	*/
-	originalEvent: null,
+	isScaleSource: true,
 });
     </pre>
 </div>

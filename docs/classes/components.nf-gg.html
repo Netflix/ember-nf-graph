@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-vertical-line - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-gg - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -164,7 +164,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-vertical-line Class</h1>
+                        <h1>components.nf-gg Class</h1>
 <div class="box meta">
     
         <div class="uses">
@@ -173,7 +173,7 @@
                 
                     <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                 
-                    <li><a href="mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+                    <li><a href="mixins.graph-require-scale-source.html">mixins.graph-require-scale-source</a></li>
                 
             </ul>
         </div>
@@ -187,7 +187,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-vertical-line.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:6</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-gg.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-gg.js:5</code></a>
         </div>
     
 
@@ -203,7 +203,13 @@
 
 
 <div class="box intro">
-    <p>Draws a vertical line on a graph at a given x domain value</p>
+    <p>A grouping tag that provides zooming and offset functionality to it&#39;s children.</p>
+<h2 id="example">Example</h2>
+<p>The following example will show a line of <code>someData</code> with a 2x zoom, offset by 30px in both x and y
+directions:</p>
+<pre class="code prettyprint"><code>        {{#nf-gg scaleZoomX=&quot;2&quot; scaleZoomY=&quot;2&quot; scaleOffsetX=&quot;30&quot; scaleOffsetY=&quot;30&quot;}}
+            {{nf-line data=someData}}
+        {{/nf-gg}}</code></pre>
 
 </div>
 
@@ -252,76 +258,6 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_lineX">lineX</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleOffsetX">scaleOffsetX</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleOffsetY">scaleOffsetY</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleZoomX">scaleZoomX</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_scaleZoomY">scaleZoomY</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_x">x</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_xScale">xScale</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_y1">y1</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_y2">y2</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property inherited">
-                                <a href="#property_yScale">yScale</a>
 
                                 
                                 
@@ -438,456 +374,6 @@ and assigns it to <code>graph</code></p>
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_lineX" class="property item private">
-    <h3 class="name"><code>lineX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l47"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:47</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The calculated x coordinate of the vertical line</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_scaleOffsetX" class="property item inherited">
-    <h3 class="name"><code>scaleOffsetX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetX">mixins.graph-requires-scale-source</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l78"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:78</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The offset, in pixels, for the x scale</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 0</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_scaleOffsetY" class="property item inherited">
-    <h3 class="name"><code>scaleOffsetY</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetY">mixins.graph-requires-scale-source</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l91"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:91</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The offset, in pixels, for the y scale</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 0</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_scaleZoomX" class="property item inherited">
-    <h3 class="name"><code>scaleZoomX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomX">mixins.graph-requires-scale-source</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l52"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:52</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The zoom multiplier for the x scale</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 1</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_scaleZoomY" class="property item inherited">
-    <h3 class="name"><code>scaleZoomY</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomY">mixins.graph-requires-scale-source</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l65"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:65</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The zoom multiplier for the y scale</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 1</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_x" class="property item">
-    <h3 class="name"><code>x</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l39"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:39</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The x domain value at which to draw the vertical line on the graph</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_xScale" class="property item inherited">
-    <h3 class="name"><code>xScale</code></h3>
-    <span class="type">d3.scale</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_xScale">mixins.graph-requires-scale-source</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l28"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:28</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The x scale used by this component</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_y1" class="property item private">
-    <h3 class="name"><code>y1</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:21</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The top y coordinate of the line</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 0</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_y2" class="property item private">
-    <h3 class="name"><code>y2</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-vertical-line.js.html#l30"><code>app-addon&#x2F;components&#x2F;nf-vertical-line.js:30</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The bottom y coordinate of the line</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_yScale" class="property item inherited">
-    <h3 class="name"><code>yScale</code></h3>
-    <span class="type">d3.scale</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                <p>Inherited from
-                <a href="../classes/mixins.graph-requires-scale-source.html#property_yScale">mixins.graph-requires-scale-source</a>:
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l36"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:36</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The y scale used by this component</p>
-
-    </div>
-
     
 
     

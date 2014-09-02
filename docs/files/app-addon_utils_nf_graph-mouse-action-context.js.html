@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/scroll-area-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/graph-mouse-action-context.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -164,108 +164,31 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/scroll-area-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/graph-mouse-action-context.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import { getMousePoint } from &#x27;./svg-dom&#x27;;
+import { property } from &#x27;../computed-property-helpers&#x27;;
 
 /**
-	Action context event object for an nf-scroll-area scroll event.
+	Event context data for mouse hover events.
+
 	@namespace utils.nf
-	@class scroll-area-action-context
+	@class graph-mouse-action-context
 */
 export default Ember.Object.extend({
 	/**
-		The scroll top in pixels.
-		@property scrollTop
-		@type Number
-		@default 0
+		The original mouse event
+		@property originalEvent
+		@type MouseEvent
+		@default null
 	*/
-	scrollTop: 0,
+	originalEvent: null,
 
 	/**
-		The scroll height of the element.
-		@property scrollHeight
-		@type number
-		@default 0
-	*/
-	scrollHeight: 0,
-
-	/**
-		The outer height of the element
-		@property outerHeight
-		@type Number
-		@default 0
-	*/
-	outerHeight: 0,
-
-	/**
-		The scroll left in pixels.
-		@property scrollLeft
-		@type Number
-		@default 0
-	*/
-	scrollLeft: 0,
-
-	/**
-		The scroll width of the element.
-		@property scrollWidth
-		@type number
-		@default 0
-	*/
-	scrollWidth: 0,
-
-	/**
-		The outer width of the element
-		@property outerWidth
-		@type Number
-		@default 0
-	*/
-	outerWidth: 0,
-
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollTopMax
-		@type Number
-		@readonly
-	*/
-	scrollTopMax: function(){
-		return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
-	}.property(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollTopPercentage
-		@type Number
-		@readonly
-	*/
-	scrollTopPercentage: function() {
-		return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
-	}.property(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;),
-	
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollLeftMax
-		@type Number
-		@readonly
-	*/
-	scrollLeftMax: function(){
-		return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
-	}.property(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollLeftPercentage
-		@type Number
-		@readonly
-	*/
-	scrollLeftPercentage: function() {
-		return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
-	}.property(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;),
-
-	/**
-		The component that fired the event
+		The component that fired the event.
 		@property source
 		@type Ember.Component
 		@default null
@@ -273,19 +196,86 @@ export default Ember.Object.extend({
 	source: null,
 
 	/**
-		The optional data to send with the action
-		@property data
+		The nf-graph the event originated from
+		@property graph
+		@type components.nf-graph
 		@default null
 	*/
-	data: null,
+	graph: null,
 
 	/**
-		The original scroll event object
-		@property originalEvent
-		@type Event
-		@default null
+		The computed x and y coordinate of the mouse within the source component
+		@property mousePoint
+		@type Object
+		@readonly
 	*/
-	originalEvent: null,
+	mousePoint: property(&#x27;source.element&#x27;, &#x27;originalEvent&#x27;, function(containerElement, e) {
+		if(containerElement &amp;&amp; e) {
+			return getMousePoint(containerElement, e);
+		}
+	}),
+
+	/**
+		The x position of the mouse relative to the &#x60;source&#x60;.
+		@property mouseX
+		@type Number
+		@readonly
+	*/
+	mouseX: Ember.computed.alias(&#x27;mousePoint.x&#x27;),
+
+	/**
+		The y position of the mouse relative to the &#x60;source&#x60;.
+		@property mouseY
+		@type Number
+		@readonly
+	*/
+	mouseY: Ember.computed.alias(&#x27;mousePoint.y&#x27;),
+
+	/**
+		The x domain value at the mouse x position.
+
+		NOTE: Ordinal scales will return NaN.
+
+		@property x
+		@type Number
+		@readonly
+	*/
+	x: property(&#x27;xScale&#x27;, &#x27;mouseX&#x27;, function(scale, mouse) {
+		return scale &amp;&amp; scale.invert ? scale.invert(mouse) : NaN;
+	}),
+
+	/**
+		The y domain value at the mouse y position.
+
+		NOTE: Ordinal scales will return NaN.
+		
+		@property y
+		@type Number
+		@readonly
+	*/
+	y: property(&#x27;yScale&#x27;, &#x27;mouseY&#x27;, function(scale, mouse) {
+		return scale &amp;&amp; scale.invert ? scale.invert(mouse) : NaN;
+	}),
+
+	/**
+		The xScale used to compute x
+		@property xScale
+		@type d3.scale
+		@readonly
+	*/
+	xScale: property(&#x27;source.xScale&#x27;, &#x27;graph.xScale&#x27;, function(sourceScale, graphScale) {
+		return sourceScale || graphScale;
+	}),
+
+	/**
+		The yScale used to compute y
+		@property yScale
+		@type d3.scale
+		@readonly
+	*/
+	yScale: property(&#x27;source.yScale&#x27;, &#x27;graph.yScale&#x27;, function(sourceScale, graphScale) {
+		return sourceScale || graphScale;
+	}),
 });
     </pre>
 </div>

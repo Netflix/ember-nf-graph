@@ -56,6 +56,14 @@ export function nearestIndexTo(arr, val, mappingFn) {
 
 var NATURAL_SORT_REGEXP = /[+-]?\d+\.?\d*|\S+/g;
 
+/**
+  breaks a string into an array of tokens in preparation for natural
+  comparison and sorting.
+  @method naturalTokenize
+  @param item {String} the value to tokenize
+  @return {Array} an array of tokens found in the item
+  @private
+*/
 function naturalTokenize(item) {
   NATURAL_SORT_REGEXP.lastIndex = 0;
   var matches;
@@ -66,6 +74,14 @@ function naturalTokenize(item) {
   return tokens;
 }
 
+/**
+  A JavaScript sorting predicate for natural sorting.
+  @method naturalCompare
+  @param a {Any} the value to compare to b
+  @param b {Any} the value to compare to a
+  @return {Number} `-1`, `0` or `1` if a is less than, equal to, or
+    greater than b, respectively.
+*/
 export function naturalCompare(a, b) {
   var aTokens = naturalTokenize(a);
   var bTokens = naturalTokenize(b);

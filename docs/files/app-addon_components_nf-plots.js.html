@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/scroll-area-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-plots.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -164,128 +164,54 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/scroll-area-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-plots.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import DataGraphic from &#x27;../mixins/graph-data-graphic&#x27;;
+import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
-/**
-	Action context event object for an nf-scroll-area scroll event.
-	@namespace utils.nf
-	@class scroll-area-action-context
-*/
-export default Ember.Object.extend({
-	/**
-		The scroll top in pixels.
-		@property scrollTop
-		@type Number
-		@default 0
-	*/
-	scrollTop: 0,
+export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleSource, {
+	tagName: &#x27;g&#x27;,
 
-	/**
-		The scroll height of the element.
-		@property scrollHeight
-		@type number
-		@default 0
-	*/
-	scrollHeight: 0,
-
-	/**
-		The outer height of the element
-		@property outerHeight
-		@type Number
-		@default 0
-	*/
-	outerHeight: 0,
-
-	/**
-		The scroll left in pixels.
-		@property scrollLeft
-		@type Number
-		@default 0
-	*/
-	scrollLeft: 0,
-
-	/**
-		The scroll width of the element.
-		@property scrollWidth
-		@type number
-		@default 0
-	*/
-	scrollWidth: 0,
-
-	/**
-		The outer width of the element
-		@property outerWidth
-		@type Number
-		@default 0
-	*/
-	outerWidth: 0,
-
-	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollTopMax
-		@type Number
-		@readonly
-	*/
-	scrollTopMax: function(){
-		return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
-	}.property(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;),
-
-	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollTopPercentage
-		@type Number
-		@readonly
-	*/
-	scrollTopPercentage: function() {
-		return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
-	}.property(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;),
+	classNames: [&#x27;nf-plots&#x27;],
 	
 	/**
-		The calculated maximum value for scrollTop in pixels.
-		@property scrollLeftMax
-		@type Number
+		The parent controller to use for template binding
+		@property parentController
+		@type Ember.Controller
 		@readonly
+		@private
 	*/
-	scrollLeftMax: function(){
-		return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
-	}.property(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;),
+	parentController: Ember.computed.alias(&#x27;templateData.view.controller&#x27;),
 
 	/**
-		The calculated percentage, in decimals, of content scrolled.
-		@property scrollLeftPercentage
-		@type Number
+		The model for adding plots to the graph
+		@property plotData
 		@readonly
+		@private
 	*/
-	scrollLeftPercentage: function() {
-		return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
-	}.property(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;),
+	plotData: function(){
+		var renderedData = this.get(&#x27;renderedData&#x27;);
+		if(renderedData &amp;&amp; Ember.isArray(renderedData)) {
+			return renderedData.map(function(d) {
+				return {
+					x: d[0],
+					y: d[1],
+					data: d.data,
+				};
+			});
+		}
+	}.property(&#x27;renderedData.@each&#x27;),
 
-	/**
-		The component that fired the event
-		@property source
-		@type Ember.Component
-		@default null
-	*/
-	source: null,
 
-	/**
-		The optional data to send with the action
-		@property data
-		@default null
-	*/
-	data: null,
-
-	/**
-		The original scroll event object
-		@property originalEvent
-		@type Event
-		@default null
-	*/
-	originalEvent: null,
+	actions: {
+		itemClicked: function(e) {
+			this.sendAction(&#x27;action&#x27;, e);
+		},
+	},
 });
     </pre>
 </div>
