@@ -41,6 +41,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	r: 2.5,
 
+	hasX: Ember.computed.notEmpty('x'),
+
+	hasY: Ember.computed.notEmpty('y'),
+
 	/**
 		The computed center x coordinate of the circle
 		@property cx
@@ -48,8 +52,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	cx: property('x', 'xScale', function(x, xScale) {
-		return !isNaN(x) && xScale ? xScale(x) : -1;
+	cx: property('x', 'xScale', 'hasX', function(x, xScale, hasX) {
+		return hasX && xScale ? xScale(x) : -1;
 	}),
 
 	/**
@@ -59,8 +63,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	cy: property('y', 'yScale', function(y, yScale) {
-		return !isNaN(y) && yScale ? yScale(y) : -1;
+	cy: property('y', 'yScale', 'hasY', function(y, yScale, hasY) {
+		return hasY && yScale ? yScale(y) : -1;
 	}),
 
 	/**
@@ -70,7 +74,5 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	isVisible: property('x', 'y', function(x, y) {
-		return !(isNaN(x) || isNaN(y));
-	}),
+	isVisible: Ember.computed.and('hasX', 'hasY'),
 });

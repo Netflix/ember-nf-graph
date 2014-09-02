@@ -31,17 +31,17 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	y: null,
 
+	hasX: Ember.computed.notEmpty('x'),
+
+	hasY: Ember.computed.notEmpty('y'),
+
 	/**
 		The calculated visibility of the component
 		@property isVisible
 		@type Boolean
 		@readonly
 	*/
-	isVisible: function(){
-		var x = this.get('x');
-		var y = this.get('y');
-		return !(isNaN(x) && isNaN(y));
-	}.property('x', 'y'),
+	isVisible: Ember.computed.and('hasX', 'hasY'),
 
 	/**
 		The calculated x coordinate
@@ -52,7 +52,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	rangeX: function(){
 		var xScale = this.get('xScale');
 		var x = this.get('x');
-		return (xScale ? xScale(x) : 0) || 0;
+		var hasX = this.get('hasX');
+		return (hasX && xScale ? xScale(x) : 0) || 0;
 	}.property('x', 'xScale'),
 
 	/**
@@ -64,7 +65,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	rangeY: function(){
 		var yScale = this.get('yScale');
 		var y = this.get('y');
-		return (yScale ? yScale(y) : 0) || 0;
+		var hasY = this.get('hasY');
+		return (hasY && yScale ? yScale(y) : 0) || 0;
 	}.property('y', 'yScale'),
 
 	/**

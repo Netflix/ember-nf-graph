@@ -208,6 +208,21 @@ export default Ember.Mixin.create({
     }: null;
   }),
 
+  getDataNearXRange: function(rangeX) {
+    var xScale = this.get('xScale');
+    var isLinear = xScale && xScale.invert;
+    if(isLinear) {
+      return this.getDataNearX(xScale.invert(rangeX));
+    } else {
+      //ordinal
+      var range = this.get('graph.xRange');
+      var v = Math.abs(rangeX - range[0]) / Math.abs(range[1] - range[0]);
+      var renderedData = this.get('renderedData');
+      var i = Math.floor(v * renderedData.length);
+      return renderedData[i];
+    }
+  },
+
   getDataNearX: function(x) {
     x = +x;
     if(x === x) {

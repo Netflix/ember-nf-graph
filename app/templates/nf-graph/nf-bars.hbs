@@ -22,7 +22,8 @@
 	{{/nf-y-axis}}
 
 	{{#nf-graph-content}}
-		{{nf-bars data=data}}
+		{{nf-bars data=data trackingMode="hover" trackedData=poop}}
+		<circle r=10 {{bind-attr cx=poop.centerPositionX cy=poop.graphPositionY}}></circle>
 		{{nf-line data=data}}
 	{{/nf-graph-content}}
 {{/nf-graph}}

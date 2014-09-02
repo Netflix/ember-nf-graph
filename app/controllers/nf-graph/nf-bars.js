@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+	poop: null,
+	
 	data: function() {
 		var arr = [];
 		var str = 'abcdefg';
