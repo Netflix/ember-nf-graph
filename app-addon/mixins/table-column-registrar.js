@@ -31,6 +31,10 @@ export default Ember.Mixin.create({
 	*/
 	columns: Ember.computed.oneWay('_columns'),
 
+	_columns: function(){
+		return [];
+	}.property(),
+
 	/**
 		The list of visible columns
 		@property visibleColumns
@@ -71,9 +75,5 @@ export default Ember.Mixin.create({
 	*/
 	unregisterColumn: function(column) {
 		this.get('columns').removeObject(column);
-	},
-
-	init: function() {
-		this.set('_columns', []);
 	},
 });
