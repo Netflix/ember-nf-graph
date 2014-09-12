@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>utils.nf.graph-mouse-action-context - Ember-CLI-Ember-DVC</title>
+    <title>utils.nf.graph-mouse-event - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -164,15 +164,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>utils.nf.graph-mouse-action-context Class</h1>
+                        <h1>utils.nf.graph-mouse-event Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends Graph-position
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l5"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:5</code></a>
+            Defined in: <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l4"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:4</code></a>
         </div>
     
 
@@ -188,7 +192,8 @@
 
 
 <div class="box intro">
-    <p>Event context data for mouse hover events.</p>
+    <p>An event context object generally returned by tracking events. Also used as
+<code>trackedData</code> in components such as <code>nf-line</code>, <code>nf-area</code> and <code>nf-bars</code>.</p>
 
 </div>
 
@@ -198,6 +203,8 @@
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
@@ -211,22 +218,51 @@
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method private">
+                                <a href="#method__getMousePoint">_getMousePoint</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
-                            <li class="index-item property">
-                                <a href="#property_graph">graph</a>
+                            <li class="index-item property private">
+                                <a href="#property__mousePoint">_mousePoint</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_mousePoint">mousePoint</a>
+                                <a href="#property_data">data</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_graphContentElement">graphContentElement</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_mousePosition">mousePosition</a>
 
                                 
                                 
@@ -247,14 +283,14 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_originalEvent">originalEvent</a>
+                                <a href="#property_nearestDataPoint">nearestDataPoint</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_source">source</a>
+                                <a href="#property_originalEvent">originalEvent</a>
 
                                 
                                 
@@ -268,21 +304,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_xScale">xScale</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
                                 <a href="#property_y">y</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_yScale">yScale</a>
 
                                 
                                 
@@ -298,15 +320,24 @@
         </div>
 
         
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="property_graph" class="property item">
-    <h3 class="name"><code>graph</code></h3>
-    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+                    <div id="method__getMousePoint" class="method item private">
+    <h3 class="name"><code>_getMousePoint</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
 
     
 
@@ -327,9 +358,10 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l28"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:28</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l21"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:21</code></a>
         
         </p>
+
 
         
 
@@ -337,12 +369,10 @@
     </div>
 
     <div class="description">
-        <p>The nf-graph the event originated from</p>
+        <p>Method used to get the mouse position relative to a container</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -351,9 +381,64 @@
 </div>
 
                 
-                    <div id="property_mousePoint" class="property item">
-    <h3 class="name"><code>mousePoint</code></h3>
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property__mousePoint" class="property item private">
+    <h3 class="name"><code>_mousePoint</code></h3>
     <span class="type">Object</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l28"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:28</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The coordinates of the mouse relative to eh nf-graph-content</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_data" class="property item">
+    <h3 class="name"><code>data</code></h3>
+    <span class="type">Unknown</span>
 
     
 
@@ -374,7 +459,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l36"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:36</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l112"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:112</code></a>
         
         </p>
 
@@ -384,7 +469,98 @@
     </div>
 
     <div class="description">
-        <p>The computed x and y coordinate of the mouse within the source component</p>
+        <p>The data carried by the nearest data point to the mouse position
+along the x axis.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_graphContentElement" class="property item">
+    <h3 class="name"><code>graphContentElement</code></h3>
+    <span class="type">SVGGElement</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l39"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:39</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The nf-graph-content element of the nf-graph</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_mousePosition" class="property item">
+    <h3 class="name"><code>mousePosition</code></h3>
+    <span class="type">Graph-position</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l63"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:63</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>A positioning object for the mouse position</p>
 
     </div>
 
@@ -419,7 +595,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l48"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:48</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l47"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:47</code></a>
         
         </p>
 
@@ -429,7 +605,7 @@
     </div>
 
     <div class="description">
-        <p>The x position of the mouse relative to the <code>source</code>.</p>
+        <p>The mouse x position relative to the graph content</p>
 
     </div>
 
@@ -464,7 +640,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l56"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:56</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l55"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:55</code></a>
         
         </p>
 
@@ -474,7 +650,52 @@
     </div>
 
     <div class="description">
-        <p>The y position of the mouse relative to the <code>source</code>.</p>
+        <p>The mouse y position relative to the graph content</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_nearestDataPoint" class="property item">
+    <h3 class="name"><code>nearestDataPoint</code></h3>
+    <span class="type">Array</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l78"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:78</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The raw data point nearest the mouse.graphX position</p>
 
     </div>
 
@@ -509,7 +730,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l12"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:12</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l13"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:13</code></a>
         
         </p>
 
@@ -519,54 +740,7 @@
     </div>
 
     <div class="description">
-        <p>The original mouse event</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_source" class="property item">
-    <h3 class="name"><code>source</code></h3>
-    <span class="type">Ember.Component</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l20"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:20</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The component that fired the event.</p>
+        <p>The original event that triggered the action or ember event</p>
 
     </div>
 
@@ -582,7 +756,7 @@
                 
                     <div id="property_x" class="property item">
     <h3 class="name"><code>x</code></h3>
-    <span class="type">Number</span>
+    <span class="type">Unknown</span>
 
     
 
@@ -603,7 +777,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l64"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:64</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l90"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:90</code></a>
         
         </p>
 
@@ -613,53 +787,8 @@
     </div>
 
     <div class="description">
-        <p>The x domain value at the mouse x position.</p>
-<p>NOTE: Ordinal scales will return NaN.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_xScale" class="property item">
-    <h3 class="name"><code>xScale</code></h3>
-    <span class="type">d3.scale</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l90"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:90</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The xScale used to compute x</p>
+        <p>The x domain value at the nearest data point to the mouse position
+along the x axis.</p>
 
     </div>
 
@@ -673,7 +802,7 @@
                 
                     <div id="property_y" class="property item">
     <h3 class="name"><code>y</code></h3>
-    <span class="type">Number</span>
+    <span class="type">Unknown</span>
 
     
 
@@ -694,7 +823,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l77"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:77</code></a>
+        <a href="../files/app-addon_utils_nf_graph-mouse-event.js.html#l101"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-event.js:101</code></a>
         
         </p>
 
@@ -704,53 +833,8 @@
     </div>
 
     <div class="description">
-        <p>The y domain value at the mouse y position.</p>
-<p>NOTE: Ordinal scales will return NaN.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_yScale" class="property item">
-    <h3 class="name"><code>yScale</code></h3>
-    <span class="type">d3.scale</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-mouse-action-context.js.html#l100"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-mouse-action-context.js:100</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The yScale used to compute y</p>
+        <p>The y domain value at the nearest data point to the mouse position
+along the x axis.</p>
 
     </div>
 

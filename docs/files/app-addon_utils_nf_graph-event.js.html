@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/graph-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/graph-event.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -164,130 +164,34 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/graph-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/graph-event.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+import GraphPosition from &#x27;./graph-position&#x27;;
 
 /**
 	Event object for graph events
 	@namespace utils.nf
-	@class nf-graph-action-context
-	@extends Ember.Object
+	@class graph-event
+	@extends graph-position
 */
-export default Ember.Object.extend({
+export default GraphPosition.extend({
 	/**
-		Gets or sets the domain x value
-		@property x
+		The original event that triggered this event or action
+		@property originalEvent
+		@type Event
 		@default null
 	*/
-	x: null,
+	originalEvent: null,
 
 	/**
-		Gets or sets the domain y value
-		@property x
-		@default null
-	*/
-	y: null,
-
-	/**
-		The nf-graph component of the event
-		@property graph
-		@type components.nf-graph
-		@default null
-	*/
-	graph: null,
-
-	/**
-		The source component for the event.
-		@property source
-		@type Ember.Component
-		@default null
-	*/
-	source: null,
-
-	/**
-		Item data for the event and/or additional data.
+		A data value passed with the event
 		@property data
-		@type Object
+		@type any
 		@default null
 	*/
 	data: null,
-
-	/**
-		The x scale used to calculate graph position.
-		Comes from &#x60;source&#x60; if available, otherwise comes from &#x60;graph&#x60;
-		@property xScale
-		@type d3.scale
-		@readonly
-	*/
-	xScale: function(){
-		return this.get(&#x27;source.xScale&#x27;) || this.get(&#x27;graph.xScale&#x27;);
-	}.property(&#x27;source.xScale&#x27;, &#x27;graph.xScale&#x27;),
-
-	/**
-		The y scale used to calculate graph position.
-		Comes from &#x60;source&#x60; if available, otherwise comes from &#x60;graph&#x60;
-		@property yScale
-		@type d3.scale
-		@readonly
-	*/
-	yScale: function(){
-		return this.get(&#x27;source.yScale&#x27;) || this.get(&#x27;graph.yScale&#x27;);
-	}.property(&#x27;source.yScale&#x27;, &#x27;graph.yScale&#x27;),
-
-	/**
-		The computed x position of the event relative to the graph content
-		@property graphPositionX
-		@type Number
-		@readonly
-	*/
-	graphPositionX: function() {
-		var xScale = this.get(&#x27;xScale&#x27;);
-		return xScale ? xScale(this.get(&#x27;x&#x27;)) : NaN;
-	}.property(&#x27;xScale&#x27;, &#x27;x&#x27;),
-
-	/**
-		The computed y position of the event relative to the graph content
-		@property graphPositionY
-		@type Number
-		@readonly
-	*/
-	graphPositionY: function() {
-		var yScale = this.get(&#x27;yScale&#x27;);
-		return yScale ? yScale(this.get(&#x27;y&#x27;)) : NaN;
-	}.property(&#x27;yScale&#x27;, &#x27;y&#x27;),
-
-	/**
-		The jQuery offset of the graph&#x27;s element
-		@property graphOffset
-		@type Object
-		@readonly
-	*/
-	graphOffset: function(){
-		return this.get(&#x27;graph&#x27;).$().offset();
-	}.property(&#x27;graph&#x27;),
-
-	/**
-		The computed event x position relative to the document
-		@property pagePositionX
-		@type Number
-		@readonly
-	*/
-	pagePositionX: function(){
-		return this.get(&#x27;graphPositionX&#x27;) + this.get(&#x27;graph.graphX&#x27;) + this.get(&#x27;graphOffset.left&#x27;);
-	}.property(&#x27;graphPositionX&#x27;, &#x27;graph.graphX&#x27;, &#x27;graphOffset.left&#x27;),
-
-	/**
-		The computed event y position relative to the document
-		@property pagePositionY
-		@type Number
-		@readonly
-	*/
-	pagePositionY: function(){
-		return this.get(&#x27;graphPositionY&#x27;) + this.get(&#x27;graph.graphY&#x27;) + this.get(&#x27;graphOffset.top&#x27;);
-	}.property(&#x27;graphPositionY&#x27;, &#x27;graph.graphY&#x27;, &#x27;graphOffset.top&#x27;),
 });
     </pre>
 </div>

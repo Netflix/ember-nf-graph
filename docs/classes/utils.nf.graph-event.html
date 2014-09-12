@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>utils.nf.nf-graph-action-context - Ember-CLI-Ember-DVC</title>
+    <title>utils.nf.graph-event - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -164,19 +164,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>utils.nf.nf-graph-action-context Class</h1>
+                        <h1>utils.nf.graph-event Class</h1>
 <div class="box meta">
     
 
     
         <div class="extends">
-            Extends Ember.Object
+            Extends Graph-position
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l3"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:3</code></a>
+            Defined in: <a href="../files/app-addon_utils_nf_graph-event.js.html#l3"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-event.js:3</code></a>
         </div>
     
 
@@ -275,77 +275,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_graph">graph</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_graphOffset">graphOffset</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_graphPositionX">graphPositionX</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_graphPositionY">graphPositionY</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_pagePositionX">pagePositionX</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_pagePositionY">pagePositionY</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_source">source</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_x">x</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_x">x</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_xScale">xScale</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_yScale">yScale</a>
+                                <a href="#property_originalEvent">originalEvent</a>
 
                                 
                                 
@@ -947,7 +877,7 @@ array items.</p>
                 
                     <div id="property_data" class="property item">
     <h3 class="name"><code>data</code></h3>
-    <span class="type">Object</span>
+    <span class="type">Any</span>
 
     
 
@@ -968,7 +898,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l40"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:40</code></a>
+        <a href="../files/app-addon_utils_nf_graph-event.js.html#l18"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-event.js:18</code></a>
         
         </p>
 
@@ -978,7 +908,7 @@ array items.</p>
     </div>
 
     <div class="description">
-        <p>Item data for the event and/or additional data.</p>
+        <p>A data value passed with the event</p>
 
     </div>
 
@@ -992,9 +922,9 @@ array items.</p>
 </div>
 
                 
-                    <div id="property_graph" class="property item">
-    <h3 class="name"><code>graph</code></h3>
-    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+                    <div id="property_originalEvent" class="property item">
+    <h3 class="name"><code>originalEvent</code></h3>
+    <span class="type">Event</span>
 
     
 
@@ -1015,7 +945,7 @@ array items.</p>
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l24"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:24</code></a>
+        <a href="../files/app-addon_utils_nf_graph-event.js.html#l10"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-event.js:10</code></a>
         
         </p>
 
@@ -1025,470 +955,12 @@ array items.</p>
     </div>
 
     <div class="description">
-        <p>The nf-graph component of the event</p>
+        <p>The original event that triggered this event or action</p>
 
     </div>
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_graphOffset" class="property item">
-    <h3 class="name"><code>graphOffset</code></h3>
-    <span class="type">Object</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l92"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:92</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The jQuery offset of the graph&#39;s element</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_graphPositionX" class="property item">
-    <h3 class="name"><code>graphPositionX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l70"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:70</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed x position of the event relative to the graph content</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_graphPositionY" class="property item">
-    <h3 class="name"><code>graphPositionY</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l81"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:81</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed y position of the event relative to the graph content</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_pagePositionX" class="property item">
-    <h3 class="name"><code>pagePositionX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l102"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:102</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed event x position relative to the document</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_pagePositionY" class="property item">
-    <h3 class="name"><code>pagePositionY</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l112"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:112</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed event y position relative to the document</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_source" class="property item">
-    <h3 class="name"><code>source</code></h3>
-    <span class="type">Ember.Component</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l32"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:32</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The source component for the event.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_x" class="property item">
-    <h3 class="name"><code>x</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l17"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:17</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets the domain y value</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_x" class="property item">
-    <h3 class="name"><code>x</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l10"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:10</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Gets or sets the domain x value</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_xScale" class="property item">
-    <h3 class="name"><code>xScale</code></h3>
-    <span class="type">d3.scale</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l48"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:48</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The x scale used to calculate graph position.
-Comes from <code>source</code> if available, otherwise comes from <code>graph</code></p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_yScale" class="property item">
-    <h3 class="name"><code>yScale</code></h3>
-    <span class="type">d3.scale</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-action-context.js.html#l59"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-action-context.js:59</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The y scale used to calculate graph position.
-Comes from <code>source</code> if available, otherwise comes from <code>graph</code></p>
-
-    </div>
-
     
 
     

@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -170,7 +170,7 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
-import GraphTrackingActionContext from &#x27;../utils/nf/graph-tracking-action-context&#x27;;
+import GraphMouseEvent from &#x27;../utils/nf/graph-mouse-event&#x27;;
 
 /**
   Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
@@ -258,13 +258,13 @@ export default Ember.Mixin.create({
   /**
     Event handler for content hoverChange event. Triggers &#x60;didHoverChange&#x60;.
     @method didContentHoverChange
-    @params e {utils.nf.graph-mouse-action-context}
+    @params e {utils.nf.graph-mouse-event}
     @private
   */
   didContentHoverChange: function(e){
     var graph = this.get(&#x27;graph&#x27;);
 
-    this.trigger(&#x27;didHoverChange&#x27;, GraphTrackingActionContext.create({
+    this.trigger(&#x27;didHoverChange&#x27;, GraphMouseEvent.create({
       mouseX: e.get(&#x27;mouseX&#x27;),
       mouseY: e.get(&#x27;mouseY&#x27;),
       source: this,
@@ -275,7 +275,7 @@ export default Ember.Mixin.create({
   /**
     Event handler for didHoverChange. Sends hoverChange action.
     @method didHoverChange
-    @param e {utils.nf.graph-tracking-action-context}
+    @param e {utils.nf.graph-mouse-event}
   */
   didHoverChange: function(e) {
     var isHoverMode = this.get(&#x27;isHoverMode&#x27;);

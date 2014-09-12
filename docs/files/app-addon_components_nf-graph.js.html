@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -170,7 +170,6 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import { property } from &#x27;../utils/computed-property-helpers&#x27;;
-import GraphActionContext from &#x27;../utils/nf/graph-action-context&#x27;;
 
 var computedBool = Ember.computed.bool;
 
@@ -1063,28 +1062,6 @@ export default Ember.Component.extend({
     this.set(&#x27;graphics&#x27;, []);
     this.set(&#x27;selected&#x27;, this.selectMultiple ? [] : null);
   }.on(&#x27;init&#x27;),
-
-  /**
-    Builds an action context to send to the controller.
-    @method createActionContext
-    @param x Domain value x
-    @param y Domain value y
-    @param source {Ember.Component} the component that is firing the event
-    @param data {Object} item data for the event.
-    @param originalEvent {Event} the original event object, if there is one.
-    @return {utils.nf.graph-action-context} a context to send with &#x60;sendAction&#x60;
-    @private
-  */
-  createActionContext: function(x, y, source, data, originalEvent){
-    return GraphActionContext.create({
-      x: x,
-      y: y,
-      graph: this,
-      source: source,
-      data: data,
-      originalEvent: originalEvent,
-    });
-  },
 });
 
     </pre>

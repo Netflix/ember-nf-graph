@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/graph-tracking-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/graph-mouse-event.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -164,150 +164,128 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/graph-tracking-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/graph-mouse-event.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { property } from &#x27;../computed-property-helpers&#x27;;
-
+import GraphPosition from &#x27;./graph-position&#x27;;
+import { getMousePoint } from &#x27;./svg-dom&#x27;;
 /**
 	An event context object generally returned by tracking events. Also used as
 	&#x60;trackedData&#x60; in components such as &#x60;nf-line&#x60;, &#x60;nf-area&#x60; and &#x60;nf-bars&#x60;.
 	
 	@namespace utils.nf
-	@class graph-tracking-action-context
+	@class graph-mouse-event
+	@extends graph-position
 */
-export default Ember.Object.extend({
+export default GraphPosition.extend({
 	/**
-		The mouse x position on the graph
-		@property mouseX
-		@type Number
+		The original event that triggered the action or ember event
+		@property originalEvent
+		@type MouseEvent
 		@default null
 	*/
-	mouseX: null,
+	originalEvent: null,
 
 	/**
-		The mouse y position on the graph
-		@property mouseX
-		@type Number
-		@default null
-	*/	
-	mouseY: null,
-
-	/**
-		The component that triggered the event
-		@property source
-		@type Ember.Component
-		@default null
+		Method used to get the mouse position relative to a container
+		@method _getMousePoint
+		@private
 	*/
-	source: null,
+	_getMousePoint: getMousePoint,
 
 	/**
-		The graph that the event belongs to
-		@property graph
-		@type components.nf-graph
-		@default null
-	*/
-	graph: null,
-
-	/**
-		The data calculated to be nearest to the mouse x position.
-		@propert nearestData
+		The coordinates of the mouse relative to eh nf-graph-content
+		@property _mousePoint
 		@type Object
 		@readonly
+		@private
 	*/
-	nearestData: property(&#x27;mouseX&#x27;, &#x27;source&#x27;, function(mouseX, source) {
-		mouseX = +mouseX;
-		if(source &amp;&amp; mouseX === mouseX) {
-			var d = source.getDataNearXRange(mouseX);
-			if(d) {
-				return {
-					x: d[0],
-					y: d[1],
-					data: d.data,
-				};
-			}
-		}
-		return null;
-	}),
+	_mousePoint: function(){
+		return this._getMousePoint(this.get(&#x27;graphContentElement&#x27;), this.get(&#x27;originalEvent&#x27;));
+	}.property(&#x27;originalEvent&#x27;, &#x27;graphContentElement&#x27;),
 
 	/**
-		The x value nearest to the mouse x position
+		The nf-graph-content element of the nf-graph
+		@property graphContentElement
+		@type SVGGElement
+		@readonly
+	*/
+	graphContentElement: Ember.computed.oneWay(&#x27;graph.content.element&#x27;),
+
+	/**
+		The mouse x position relative to the graph content
+		@property mouseX
+		@type Number
+		@readonly
+	*/
+	mouseX: Ember.computed.oneWay(&#x27;_mousePoint.x&#x27;),
+
+	/**
+		The mouse y position relative to the graph content
+		@property mouseY
+		@type Number
+		@readonly
+	*/
+	mouseY: Ember.computed.oneWay(&#x27;_mousePoint.y&#x27;),
+
+	/**
+		A positioning object for the mouse position
+		@property mousePosition
+		@type graph-position
+		@readonly
+	*/
+	mousePosition: function(){
+		return GraphPosition.create({
+			graphX: this.get(&#x27;mouseX&#x27;),
+			graphY: this.get(&#x27;mouseY&#x27;),
+			source: this.get(&#x27;source&#x27;),
+			graph: this.get(&#x27;graph&#x27;),
+		});
+	}.property(&#x27;mouseX&#x27;, &#x27;mouseY&#x27;, &#x27;source&#x27;, &#x27;graph&#x27;),
+
+	/**
+		The raw data point nearest the mouse.graphX position
+		@property nearestDataPoint
+		@type Array
+		@readonly
+	*/
+	nearestDataPoint: function() {
+		var mouseX = this.get(&#x27;mouseX&#x27;);
+		var source = this.get(&#x27;source&#x27;);
+		return source ? source.getDataNearXRange(mouseX) : undefined;
+	}.property(&#x27;source&#x27;, &#x27;mouse.graphX&#x27;),
+
+	/**
+		The x domain value at the nearest data point to the mouse position
+		along the x axis.
 		@property x
 		@readonly
 	*/
-	x: Ember.computed.oneWay(&#x27;nearestData.x&#x27;),
+	x: function() {
+		var nearestDataPoint = this.get(&#x27;nearestDataPoint&#x27;);
+		return nearestDataPoint ? nearestDataPoint[0] : undefined;
+	}.property(&#x27;nearestDataPoint&#x27;),
 
 	/**
-		The y value nearest to the mouse x position
+		The y domain value at the nearest data point to the mouse position
+		along the x axis.
 		@property y
 		@readonly
 	*/
-	y: Ember.computed.oneWay(&#x27;nearestData.y&#x27;),
+	y: function() {
+		var nearestDataPoint = this.get(&#x27;nearestDataPoint&#x27;);
+		return nearestDataPoint ? nearestDataPoint[1] : undefined;
+	}.property(&#x27;nearestDataPoint&#x27;),
 
 	/**
-		The data nearest to the mouse x position
+		The data carried by the nearest data point to the mouse position
+		along the x axis.
 		@property data
 		@readonly
 	*/
-	data: Ember.computed.oneWay(&#x27;nearestData.data&#x27;),
-
-	/**
-		The position of the &#x60;x&#x60; value on the graph.
-		@property graphPositionX
-		@type Number
-		@readonly
-	*/
-	graphPositionX: property(&#x27;x&#x27;, &#x27;source.xScale&#x27;, function(x, xScale) {
-		return xScale ? xScale(x) : NaN;
-	}),
-
-	/**
-		The position of the &#x60;y&#x60; value on the graph.
-		@property graphPositionY
-		@type Number
-		@readonly
-	*/
-	graphPositionY: property(&#x27;y&#x27;, &#x27;source.yScale&#x27;, function(y, yScale) {
-		return yScale ? yScale(y) : NaN;
-	}),
-
-	/**
-		If the scale type is &#x60;ordinal&#x60;, this returns the centered position of &#x60;x&#x60; on the graph
-		@property centerPositionX
-		@type Number
-		@readonly
-	*/
-	centerPositionX: property(&#x27;graphPositionX&#x27;, &#x27;source.xScale&#x27;, function(posX, xScale) {
-		if(!xScale || !xScale.rangeRoundBands) {
-			return posX;
-		}
-
-		if(posX !== posX) {
-			return posX; //NaN
-		}
-
-		return posX + (xScale.rangeBand() / 2);
-	}),
-
-	/**
-		If the scale type is &#x60;ordinal&#x60;, this returns the centered position of &#x60;y&#x60; on the graph
-		@property centerPositionY
-		@type Number
-		@readonly
-	*/
-	centerPositionY: property(&#x27;graphPositionY&#x27;, &#x27;source.yScale&#x27;, function(posY, yScale) {
-		if(!yScale || !yScale.rangeRoundBands) {
-			return posY;
-		}
-
-		if(posY !== posY) {
-			return posY; //NaN
-		}
-
-		return posY + (yScale.rangeBand() / 2);
-	}),
+	data: Ember.computed.oneWay(&#x27;nearestDataPoint.data&#x27;),
 });
     </pre>
 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/utils/nf/graph-mouse-action-context.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/utils/nf/graph-position.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -164,118 +164,213 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/utils/nf/graph-mouse-action-context.js</h1>
+                        <h1 class="file-heading">File: app-addon/utils/nf/graph-position.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { getMousePoint } from &#x27;./svg-dom&#x27;;
-import { property } from &#x27;../computed-property-helpers&#x27;;
 
 /**
-	Event context data for mouse hover events.
-
+	Position calculation class for nf-graph related events
 	@namespace utils.nf
-	@class graph-mouse-action-context
+	@class graph-position
+	@extends Ember.Object
 */
 export default Ember.Object.extend({
 	/**
-		The original mouse event
-		@property originalEvent
-		@type MouseEvent
-		@default null
-	*/
-	originalEvent: null,
-
-	/**
-		The component that fired the event.
-		@property source
-		@type Ember.Component
-		@default null
-	*/
-	source: null,
-
-	/**
-		The nf-graph the event originated from
 		@property graph
-		@type components.nf-graph
+		@type component.nf-graph
 		@default null
 	*/
 	graph: null,
 
 	/**
-		The computed x and y coordinate of the mouse within the source component
-		@property mousePoint
-		@type Object
-		@readonly
+		@property source
+		@type Ember.Component
 	*/
-	mousePoint: property(&#x27;source.element&#x27;, &#x27;originalEvent&#x27;, function(containerElement, e) {
-		if(containerElement &amp;&amp; e) {
-			return getMousePoint(containerElement, e);
+	source: null,
+
+	/**
+		The x position relative to graph
+		@property graphX
+		@type Number
+	*/
+	graphX: function(key, value) {
+		var x = this._x;
+		if(arguments.length &gt; 1) {
+			this._graphX = value;
+		} else {
+			var scale = this.get(&#x27;xScale&#x27;);
+			if(scale) {
+				this._graphX = scale(x);
+			}
 		}
-	}),
+		return this._graphX || NaN;
+	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
 
 	/**
-		The x position of the mouse relative to the &#x60;source&#x60;.
-		@property mouseX
+		The y position relative to graph
+		@property graphY
 		@type Number
-		@readonly
 	*/
-	mouseX: Ember.computed.alias(&#x27;mousePoint.x&#x27;),
+	graphY: function(key, value) {
+		var y = this._y;
+		if(arguments.length &gt; 1) {
+			this._graphY = value;
+		} else {
+			var scale = this.get(&#x27;yScale&#x27;);
+			if(scale) {
+				this._graphY = scale(y);
+			}
+		}
+		return this._graphY || NaN;
+	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
 
 	/**
-		The y position of the mouse relative to the &#x60;source&#x60;.
-		@property mouseY
-		@type Number
-		@readonly
-	*/
-	mouseY: Ember.computed.alias(&#x27;mousePoint.y&#x27;),
-
-	/**
-		The x domain value at the mouse x position.
-
-		NOTE: Ordinal scales will return NaN.
-
+		The x domain value
 		@property x
 		@type Number
-		@readonly
 	*/
-	x: property(&#x27;xScale&#x27;, &#x27;mouseX&#x27;, function(scale, mouse) {
-		return scale &amp;&amp; scale.invert ? scale.invert(mouse) : NaN;
-	}),
+	x: function(key, value) {
+		var graphX = this._graphX;
+		if(arguments.length &gt; 1) {
+			this._x = value;
+		} else {
+			var scale = this.get(&#x27;xScale&#x27;);
+			if (scale &amp;&amp; scale.invert){
+				this._x = scale.invert(graphX);
+			} 
+		}
+		return this._x || NaN;
+	}.property(&#x27;graphX&#x27;, &#x27;xScale&#x27;),
 
 	/**
-		The y domain value at the mouse y position.
-
-		NOTE: Ordinal scales will return NaN.
-		
+		The y domain value
 		@property y
 		@type Number
-		@readonly
 	*/
-	y: property(&#x27;yScale&#x27;, &#x27;mouseY&#x27;, function(scale, mouse) {
-		return scale &amp;&amp; scale.invert ? scale.invert(mouse) : NaN;
-	}),
+	y: function(key, value) {
+		var graphY = this._graphY;
+		if(arguments.length &gt; 1) {
+			this._y = value;
+		} else {
+			var scale = this.get(&#x27;yScale&#x27;);
+			if (scale &amp;&amp; scale.invert){
+				this._y = scale.invert(graphY);
+			} 
+		}
+		return this._y || NaN;
+	}.property(&#x27;graphY&#x27;, &#x27;yScale&#x27;),
 
 	/**
-		The xScale used to compute x
+		The x position relative to the document
+		@property pageX
+		@type Number
+	*/
+	pageX: function(){
+		var offset = this.get(&#x27;graphOffset&#x27;);
+		if(offset) {
+			var graphX = this.get(&#x27;graphX&#x27;) || 0;
+			var graphContentX = this.get(&#x27;graphContentX&#x27;) || 0;
+			return offset.left + graphX + graphContentX;
+		}
+	}.property(&#x27;graphX&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentX&#x27;),
+
+	/**
+		The y position relative to the document
+		@property pageY
+		@type Number
+	*/
+	pageY: function(){
+		var offset = this.get(&#x27;graphOffset&#x27;);
+		if(offset) {
+			var graphY = this.get(&#x27;graphY&#x27;) || 0;
+			var graphContentY = this.get(&#x27;graphContentY&#x27;) || 0;
+			return offset.top + graphY + graphContentY;
+		}
+	}.property(&#x27;graphY&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentY&#x27;),
+
+	/**
+		The x scale from either the source or graph used to calculate positions
 		@property xScale
 		@type d3.scale
 		@readonly
 	*/
-	xScale: property(&#x27;source.xScale&#x27;, &#x27;graph.xScale&#x27;, function(sourceScale, graphScale) {
-		return sourceScale || graphScale;
-	}),
+	xScale: function(){
+		return this.get(&#x27;source.xScale&#x27;) || this.get(&#x27;graph.xScale&#x27;);
+	}.property(&#x27;graph.xScale&#x27;, &#x27;source.xScale&#x27;),
 
 	/**
-		The yScale used to compute y
+		The y scale from either the source or graph used to calculate positions
 		@property yScale
 		@type d3.scale
 		@readonly
 	*/
-	yScale: property(&#x27;source.yScale&#x27;, &#x27;graph.yScale&#x27;, function(sourceScale, graphScale) {
-		return sourceScale || graphScale;
-	}),
+	yScale: function(){
+		return this.get(&#x27;source.yScale&#x27;) || this.get(&#x27;graph.yScale&#x27;);
+	}.property(&#x27;graph.yScale&#x27;, &#x27;source.yScale&#x27;),
+
+	/**
+		The JQuery offset of the graph element
+		@property graphOffset
+		@type Object
+		@readonly
+	*/
+	graphOffset: function(){
+		var graph = this.get(&#x27;graph&#x27;);
+		if(graph) {
+			var content = graph.$(&#x27;.nf-graph-content&#x27;);
+			return content ? content.offset() : undefined;
+		}
+	}.property(&#x27;graph&#x27;),
+
+	/**
+		The center point at x. Use in case of requiring a center point 
+		and using ordinal scale.
+		@property centerX
+		@type Number
+	*/
+	centerX: function(){
+		var scale = this.get(&#x27;xScale&#x27;);
+		var graphX = this.get(&#x27;graphX&#x27;);
+		if(scale &amp;&amp; scale.rangeBand) {
+			var rangeBand = scale.rangeBand();
+			return graphX + (rangeBand / 2);
+		}
+		return graphX;
+	}.property(&#x27;xScale&#x27;, &#x27;graphX&#x27;),
+
+	/**
+		The center point at y. Use in case of requiring a center point 
+		and using ordinal scale.
+		@property centerY
+		@type Number
+	*/
+	centerY: function(){
+		var scale = this.get(&#x27;yScale&#x27;);
+		var graphY = this.get(&#x27;graphY&#x27;);
+		if(scale &amp;&amp; scale.rangeBand) {
+			var rangeBand = scale.rangeBand();
+			return graphY + (rangeBand / 2);
+		}
+		return graphY;
+	}.property(&#x27;yScale&#x27;, &#x27;graphY&#x27;),
+
+	/**
+		The x position of the nf-graph-content within the nf-graph
+		@property _graphContentX
+		@type Number
+		@private
+	*/
+	_graphContentX: Ember.computed.oneWay(&#x27;graph.graphX&#x27;),
+
+	/**
+		The y position of the nf-graph-content within the nf-graph
+		@property _graphContentY
+		@type Number
+		@private
+	*/
+	_graphContentY: Ember.computed.oneWay(&#x27;graph.graphY&#x27;),
 });
     </pre>
 </div>

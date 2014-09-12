@@ -36,9 +36,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-requires-scale-source",
         "mixins.graph-selectable-graphic",
         "mixins.table-column-registrar",
-        "utils.nf.graph-mouse-action-context",
-        "utils.nf.graph-tracking-action-context",
-        "utils.nf.nf-graph-action-context",
+        "utils.nf.graph-event",
+        "utils.nf.graph-mouse-event",
+        "utils.nf.graph-position",
         "utils.nf.scroll-area-action-context",
         "utils.parse-property-expression"
     ],

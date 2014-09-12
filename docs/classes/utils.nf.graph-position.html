@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>utils.nf.graph-tracking-action-context - Ember-CLI-Ember-DVC</title>
+    <title>utils.nf.graph-position - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -111,11 +111,11 @@
             
                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
             
-                <li><a href="../classes/utils.nf.graph-mouse-action-context.html">utils.nf.graph-mouse-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
             
-                <li><a href="../classes/utils.nf.graph-tracking-action-context.html">utils.nf.graph-tracking-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
             
-                <li><a href="../classes/utils.nf.nf-graph-action-context.html">utils.nf.nf-graph-action-context</a></li>
+                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
             
                 <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
             
@@ -164,15 +164,19 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>utils.nf.graph-tracking-action-context Class</h1>
+                        <h1>utils.nf.graph-position Class</h1>
 <div class="box meta">
     
 
     
+        <div class="extends">
+            Extends Ember.Object
+        </div>
+    
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l4"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:4</code></a>
+            Defined in: <a href="../files/app-addon_utils_nf_graph-position.js.html#l3"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:3</code></a>
         </div>
     
 
@@ -188,8 +192,7 @@
 
 
 <div class="box intro">
-    <p>An event context object generally returned by tracking events. Also used as
-<code>trackedData</code> in components such as <code>nf-line</code>, <code>nf-area</code> and <code>nf-bars</code>.</p>
+    <p>Position calculation class for nf-graph related events</p>
 
 </div>
 
@@ -217,24 +220,31 @@
                 <div class="index-section properties">
                     <h3>Properties</h3>
 
-                    <ul class="index-list properties">
+                    <ul class="index-list properties extends">
                         
-                            <li class="index-item property">
-                                <a href="#property_centerPositionX">centerPositionX</a>
+                            <li class="index-item property private">
+                                <a href="#property__graphContentX">_graphContentX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__graphContentY">_graphContentY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_centerPositionY">centerPositionY</a>
+                                <a href="#property_centerX">centerX</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_data">data</a>
+                                <a href="#property_centerY">centerY</a>
 
                                 
                                 
@@ -248,28 +258,35 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_graphPositionX">graphPositionX</a>
+                                <a href="#property_graphOffset">graphOffset</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_graphPositionY">graphPositionY</a>
+                                <a href="#property_graphX">graphX</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_mouseX">mouseX</a>
+                                <a href="#property_graphY">graphY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_mouseX">mouseX</a>
+                                <a href="#property_pageX">pageX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_pageY">pageY</a>
 
                                 
                                 
@@ -290,7 +307,21 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_xScale">xScale</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_y">y</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_yScale">yScale</a>
 
                                 
                                 
@@ -312,8 +343,102 @@
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property_centerPositionX" class="property item">
-    <h3 class="name"><code>centerPositionX</code></h3>
+                    <div id="property__graphContentX" class="property item private">
+    <h3 class="name"><code>_graphContentX</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l189"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:189</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x position of the nf-graph-content within the nf-graph</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__graphContentY" class="property item private">
+    <h3 class="name"><code>_graphContentY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l197"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:197</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y position of the nf-graph-content within the nf-graph</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_centerX" class="property item">
+    <h3 class="name"><code>centerX</code></h3>
     <span class="type">Number</span>
 
     
@@ -335,7 +460,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l106"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:106</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l157"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:157</code></a>
         
         </p>
 
@@ -345,7 +470,8 @@
     </div>
 
     <div class="description">
-        <p>If the scale type is <code>ordinal</code>, this returns the centered position of <code>x</code> on the graph</p>
+        <p>The center point at x. Use in case of requiring a center point 
+and using ordinal scale.</p>
 
     </div>
 
@@ -357,8 +483,8 @@
 </div>
 
                 
-                    <div id="property_centerPositionY" class="property item">
-    <h3 class="name"><code>centerPositionY</code></h3>
+                    <div id="property_centerY" class="property item">
+    <h3 class="name"><code>centerY</code></h3>
     <span class="type">Number</span>
 
     
@@ -380,7 +506,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l124"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:124</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l173"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:173</code></a>
         
         </p>
 
@@ -390,52 +516,8 @@
     </div>
 
     <div class="description">
-        <p>If the scale type is <code>ordinal</code>, this returns the centered position of <code>y</code> on the graph</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_data" class="property item">
-    <h3 class="name"><code>data</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l79"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:79</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The data nearest to the mouse x position</p>
+        <p>The center point at y. Use in case of requiring a center point 
+and using ordinal scale.</p>
 
     </div>
 
@@ -449,7 +531,7 @@
                 
                     <div id="property_graph" class="property item">
     <h3 class="name"><code>graph</code></h3>
-    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+    <span class="type">component.nf-graph</span>
 
     
 
@@ -470,7 +552,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l36"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:36</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l10"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:10</code></a>
         
         </p>
 
@@ -480,8 +562,7 @@
     </div>
 
     <div class="description">
-        <p>The graph that the event belongs to</p>
-
+        
     </div>
 
     
@@ -494,9 +575,9 @@
 </div>
 
                 
-                    <div id="property_graphPositionX" class="property item">
-    <h3 class="name"><code>graphPositionX</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_graphOffset" class="property item">
+    <h3 class="name"><code>graphOffset</code></h3>
+    <span class="type">Object</span>
 
     
 
@@ -517,7 +598,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l86"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:86</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l143"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:143</code></a>
         
         </p>
 
@@ -527,7 +608,7 @@
     </div>
 
     <div class="description">
-        <p>The position of the <code>x</code> value on the graph.</p>
+        <p>The JQuery offset of the graph element</p>
 
     </div>
 
@@ -539,8 +620,8 @@
 </div>
 
                 
-                    <div id="property_graphPositionY" class="property item">
-    <h3 class="name"><code>graphPositionY</code></h3>
+                    <div id="property_graphX" class="property item">
+    <h3 class="name"><code>graphX</code></h3>
     <span class="type">Number</span>
 
     
@@ -562,7 +643,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l96"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:96</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l23"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:23</code></a>
         
         </p>
 
@@ -572,7 +653,7 @@
     </div>
 
     <div class="description">
-        <p>The position of the <code>y</code> value on the graph.</p>
+        <p>The x position relative to graph</p>
 
     </div>
 
@@ -584,8 +665,8 @@
 </div>
 
                 
-                    <div id="property_mouseX" class="property item">
-    <h3 class="name"><code>mouseX</code></h3>
+                    <div id="property_graphY" class="property item">
+    <h3 class="name"><code>graphY</code></h3>
     <span class="type">Number</span>
 
     
@@ -607,7 +688,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l12"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:12</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l41"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:41</code></a>
         
         </p>
 
@@ -617,12 +698,10 @@
     </div>
 
     <div class="description">
-        <p>The mouse x position on the graph</p>
+        <p>The y position relative to graph</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -631,8 +710,8 @@
 </div>
 
                 
-                    <div id="property_mouseX" class="property item">
-    <h3 class="name"><code>mouseX</code></h3>
+                    <div id="property_pageX" class="property item">
+    <h3 class="name"><code>pageX</code></h3>
     <span class="type">Number</span>
 
     
@@ -654,7 +733,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l20"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:20</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l95"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:95</code></a>
         
         </p>
 
@@ -664,12 +743,55 @@
     </div>
 
     <div class="description">
-        <p>The mouse y position on the graph</p>
+        <p>The x position relative to the document</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_pageY" class="property item">
+    <h3 class="name"><code>pageY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l109"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:109</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y position relative to the document</p>
+
+    </div>
+
     
 
     
@@ -701,7 +823,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l28"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:28</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l17"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:17</code></a>
         
         </p>
 
@@ -711,12 +833,9 @@
     </div>
 
     <div class="description">
-        <p>The component that triggered the event</p>
-
+        
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -727,7 +846,7 @@
                 
                     <div id="property_x" class="property item">
     <h3 class="name"><code>x</code></h3>
-    <span class="type">Unknown</span>
+    <span class="type">Number</span>
 
     
 
@@ -748,7 +867,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l65"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:65</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l59"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:59</code></a>
         
         </p>
 
@@ -758,7 +877,52 @@
     </div>
 
     <div class="description">
-        <p>The x value nearest to the mouse x position</p>
+        <p>The x domain value</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xScale" class="property item">
+    <h3 class="name"><code>xScale</code></h3>
+    <span class="type">d3.scale</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l123"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:123</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x scale from either the source or graph used to calculate positions</p>
 
     </div>
 
@@ -772,7 +936,7 @@
                 
                     <div id="property_y" class="property item">
     <h3 class="name"><code>y</code></h3>
-    <span class="type">Unknown</span>
+    <span class="type">Number</span>
 
     
 
@@ -793,7 +957,7 @@
             
         
         
-        <a href="../files/app-addon_utils_nf_graph-tracking-action-context.js.html#l72"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-tracking-action-context.js:72</code></a>
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l77"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:77</code></a>
         
         </p>
 
@@ -803,7 +967,52 @@
     </div>
 
     <div class="description">
-        <p>The y value nearest to the mouse x position</p>
+        <p>The y domain value</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yScale" class="property item">
+    <h3 class="name"><code>yScale</code></h3>
+    <span class="type">d3.scale</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_graph-position.js.html#l133"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;graph-position.js:133</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y scale from either the source or graph used to calculate positions</p>
 
     </div>
 
