@@ -29,10 +29,16 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	columns: Ember.computed.oneWay('_columns'),
+	columns: function(key, value){
+		if(arguments.length > 1) {
+			this._columns = value;
+		}
 
-	_columns: function(){
-		return [];
+		if(!Ember.isArray(this._columns)) {
+			this._columns = [];
+		}
+		
+		return this._columns;
 	}.property(),
 
 	/**
