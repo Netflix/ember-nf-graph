@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import { property } from '../computed-property-helpers';
+import { getMousePoint } from './svg-dom';
 
 /**
 	An event context object generally returned by tracking events. Also used as
@@ -9,21 +10,63 @@ import { property } from '../computed-property-helpers';
 	@class graph-tracking-action-context
 */
 export default Ember.Object.extend({
+	originalEvent: null,
+
+	mousePointFromEvent: function(){
+		var e = this.get('originalEvent');
+		var graph = this.get('graph');
+		if(graph && e.toString() === '[object MouseEvent]') {
+			return getMousePoint(graph.$('.nf-graph-container')[0], e);
+		}
+	}.property('graph', 'originalEvent'),
+
 	/**
 		The mouse x position on the graph
-		@property mouseX
+		@property mousePositionX
 		@type Number
 		@default null
 	*/
-	mouseX: null,
+	mousePositionX: function(key, value) {
+		var mousePoint = this.get('mousePointFromEvent');
+
+		if(mousePoint) {
+			return mousePoint.x;
+		}
+
+		if(arguments.length > 1) {
+			this._mousePositionX = value;
+		}
+		return this._mousePositionX;
+	}.property('mousePointFromEvent'),
 
 	/**
 		The mouse y position on the graph
-		@property mouseX
+		@property mousePositionY
 		@type Number
 		@default null
 	*/	
-	mouseY: null,
+	mousePositionY: function(key, value) {
+		var mousePoint = this.get('mousePointFromEvent');
+
+		if(mousePoint) {
+			return mousePoint.y;
+		}
+
+		if(arguments.length > 1) {
+			this._mousePositionY = value;
+		}
+		return this._mousePositionY;
+	}.property('mousePointFromEvent'),
+
+	mouseX: function(){
+		var xScale = this.get('xScale');
+		return xScale && xScale.invert ? xScale.invert(this.get('mousePositionX')) : NaN;
+	}.property('mousePositionX', 'xScale').readOnly(),
+
+	mouseY: function(){
+		var yScale = this.get('yScale');
+		return yScale && yScale.invert ? yScale.invert(this.get('mousePositionY')) : NaN;
+	}.property('mousePositionY', 'yScale').readOnly(),
 
 	/**
 		The component that triggered the event
@@ -46,11 +89,14 @@ export default Ember.Object.extend({
 		@propert nearestData
 		@type Object
 		@readonly
+		@private
 	*/
-	nearestData: property('mouseX', 'source', function(mouseX, source) {
-		mouseX = +mouseX;
-		if(source && mouseX === mouseX) {
-			var d = source.getDataNearXRange(mouseX);
+	nearestData: function() {
+		var mousePositionX = this.get('mousePositionX');
+		var source = this.get('source');
+		mousePositionX = +mousePositionX;
+		if(source && mousePositionX === mousePositionX) {
+			var d = source.getDataNearXRange(mousePositionX);
 			if(d) {
 				return {
 					x: d[0],
@@ -60,7 +106,7 @@ export default Ember.Object.extend({
 			}
 		}
 		return null;
-	}),
+	}.property('mousePositionX', 'source').readOnly(),
 
 	/**
 		The x value nearest to the mouse x position
@@ -85,21 +131,21 @@ export default Ember.Object.extend({
 
 	/**
 		The position of the `x` value on the graph.
-		@property graphPositionX
+		@property positionX
 		@type Number
 		@readonly
 	*/
-	graphPositionX: property('x', 'source.xScale', function(x, xScale) {
+	positionX: property('x', 'source.xScale', function(x, xScale) {
 		return xScale ? xScale(x) : NaN;
 	}),
 
 	/**
 		The position of the `y` value on the graph.
-		@property graphPositionY
+		@property positionY
 		@type Number
 		@readonly
 	*/
-	graphPositionY: property('y', 'source.yScale', function(y, yScale) {
+	positionY: property('y', 'source.yScale', function(y, yScale) {
 		return yScale ? yScale(y) : NaN;
 	}),
 
@@ -109,7 +155,7 @@ export default Ember.Object.extend({
 		@type Number
 		@readonly
 	*/
-	centerPositionX: property('graphPositionX', 'source.xScale', function(posX, xScale) {
+	centerPositionX: property('positionX', 'source.xScale', function(posX, xScale) {
 		if(!xScale || !xScale.rangeRoundBands) {
 			return posX;
 		}
@@ -127,7 +173,7 @@ export default Ember.Object.extend({
 		@type Number
 		@readonly
 	*/
-	centerPositionY: property('graphPositionY', 'source.yScale', function(posY, yScale) {
+	centerPositionY: property('positionY', 'source.yScale', function(posY, yScale) {
 		if(!yScale || !yScale.rangeRoundBands) {
 			return posY;
 		}

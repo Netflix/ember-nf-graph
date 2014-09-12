@@ -1,0 +1,8 @@
+{{#each group in groups}}
+	<g class="nf-grouped-bars-group" {{action 'groupClicked' group.data}}>
+		{{#each bar in group.bars}}
+			<rect {{bind-attr class=":nf-grouped-bars-bar bar.className" x=bar.x y=bar.y width=bar.width height=bar.height}} 
+				{{action 'barClicked' bar.yKey bar.yValue group.data}}></rect>
+		{{/each}}
+	</g>
+{{/each}}

@@ -29,9 +29,7 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	columns: function(key, value) { //jshint ignore:line 
-		return this.get('_columns');
-	}.property('_columns'),
+	columns: Ember.computed.oneWay('_columns'),
 
 	/**
 		The list of visible columns
@@ -43,7 +41,7 @@ export default Ember.Mixin.create({
 		return this.get('columns').filter(function(column) {
 			return column.get('isVisible');
 		});
-	}.property('columns.@each'),
+	}.property('columns.@each.isVisible'),
 
 	/**
 		The list of columns with an sort applied to them
@@ -75,7 +73,7 @@ export default Ember.Mixin.create({
 		this.get('columns').removeObject(column);
 	},
 
-	_initializeColumns: function() {
+	init: function() {
 		this.set('_columns', []);
-	}.on('init'),
+	},
 });

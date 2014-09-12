@@ -106,8 +106,8 @@ export default Ember.Object.extend({
 		@readonly
 	*/
 	pagePositionX: function(){
-		return this.get('graphPositionX') + this.get('graph.graphX') + this.get('graphOffset.left');
-	}.property('graphPositionX', 'graph.graphX', 'graphOffset.left'),
+		return this.get('graphPositionX') + this.get('graph').get('graphX') + this.get('graphOffset').left;
+	}.property('graphPositionX', 'graph.graphX', 'graphOffset'),
 
 	/**
 		The computed event y position relative to the document
@@ -116,6 +116,6 @@ export default Ember.Object.extend({
 		@readonly
 	*/
 	pagePositionY: function(){
-		return this.get('graphPositionY') + this.get('graph.graphY') + this.get('graphOffset.top');
-	}.property('graphPositionY', 'graph.graphY', 'graphOffset.top'),
+		return this.get('graphPositionY') + this.get('graph').get('graphY') + this.get('graphOffset').top;
+	}.property('graphPositionY', 'graph.graphY', 'graphOffset'),
 });

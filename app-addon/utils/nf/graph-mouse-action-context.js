@@ -18,48 +18,20 @@ export default Ember.Object.extend({
 	originalEvent: null,
 
 	/**
-		The component that fired the event.
-		@property source
-		@type Ember.Component
-		@default null
-	*/
-	source: null,
-
-	/**
-		The nf-graph the event originated from
-		@property graph
-		@type components.nf-graph
-		@default null
-	*/
-	graph: null,
-
-	/**
 		The computed x and y coordinate of the mouse within the source component
 		@property mousePoint
 		@type Object
 		@readonly
 	*/
-	mousePoint: property('source.element', 'originalEvent', function(containerElement, e) {
+	mousePoint: function(){
+		var source = this.get('source');
+		var containerElement = source ? source.get('element') : null;
+		var e = this.get('originalEvent');
 		if(containerElement && e) {
 			return getMousePoint(containerElement, e);
 		}
-	}),
+	}.property('source.element', 'originalEvent'),
 
-	/**
-		The x position of the mouse relative to the `source`.
-		@property mouseX
-		@type Number
-		@readonly
-	*/
-	mouseX: Ember.computed.alias('mousePoint.x'),
-
-	/**
-		The y position of the mouse relative to the `source`.
-		@property mouseY
-		@type Number
-		@readonly
-	*/
-	mouseY: Ember.computed.alias('mousePoint.y'),
 
 	/**
 		The x domain value at the mouse x position.
@@ -70,7 +42,7 @@ export default Ember.Object.extend({
 		@type Number
 		@readonly
 	*/
-	x: property('xScale', 'mouseX', function(scale, mouse) {
+	x: property('xScale', 'graphPositionX', function(scale, mouse) {
 		return scale && scale.invert ? scale.invert(mouse) : NaN;
 	}),
 
@@ -83,9 +55,13 @@ export default Ember.Object.extend({
 		@type Number
 		@readonly
 	*/
-	y: property('yScale', 'mouseY', function(scale, mouse) {
+	y: property('yScale', 'graphPositionY', function(scale, mouse) {
 		return scale && scale.invert ? scale.invert(mouse) : NaN;
 	}),
+
+	graphPositionX: Ember.computed.oneWay('mousePoint.x'),
+
+	graphPositionY: Ember.computed.oneWay('mousePoint.y'),
 
 	/**
 		The xScale used to compute x
