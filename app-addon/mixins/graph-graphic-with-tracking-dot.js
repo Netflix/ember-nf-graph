@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
-import GraphTrackingActionContext from '../utils/nf/graph-tracking-action-context';
+import GraphMouseEvent from '../utils/nf/graph-mouse-event';
 
 /**
   Adds tracking dot functionality to a component such as {{#crossLink "components.nf-line"}}{{/crossLink}}
@@ -88,13 +88,13 @@ export default Ember.Mixin.create({
   /**
     Event handler for content hoverChange event. Triggers `didHoverChange`.
     @method didContentHoverChange
-    @params e {utils.nf.graph-mouse-action-context}
+    @params e {utils.nf.graph-mouse-event}
     @private
   */
   didContentHoverChange: function(e){
     var graph = this.get('graph');
 
-    this.trigger('didHoverChange', GraphTrackingActionContext.create({
+    this.trigger('didHoverChange', GraphMouseEvent.create({
       mouseX: e.get('mouseX'),
       mouseY: e.get('mouseY'),
       source: this,
@@ -105,7 +105,7 @@ export default Ember.Mixin.create({
   /**
     Event handler for didHoverChange. Sends hoverChange action.
     @method didHoverChange
-    @param e {utils.nf.graph-tracking-action-context}
+    @param e {utils.nf.graph-mouse-event}
   */
   didHoverChange: function(e) {
     var isHoverMode = this.get('isHoverMode');

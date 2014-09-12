@@ -13,8 +13,8 @@
 	{{#nf-graph-content}}
 		{{#nf-gg scaleZoomX=multiY scaleZoomY=multiY}}
 			{{nf-area selectable=1 selected=fooSelected data=lineData 
-				trackedDataKey="fooData"
-				didTrack="setTrackedData"
+				trackedData=fooData
+				hoverData=fooHovered
 				trackingMode="snap-last"}}
 			{{nf-vertical-line x=fooData.x}}
 			{{nf-horizontal-line y=fooData.y}}	

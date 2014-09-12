@@ -1,6 +1,6 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
-import GraphMouseActionContext from '../utils/nf/graph-mouse-action-context';
+import GraphMouseEvent from '../utils/nf/graph-mouse-event';
 
 /**
   Container component for graphics to display in `nf-graph`. Represents
@@ -114,18 +114,16 @@ export default Ember.Component.extend(HasGraphParent, {
   hoverChange: null,
 
   _triggerHoverChange: function(e) {
-    this.trigger('didHoverChange', GraphMouseActionContext.create({
+    var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
       graph: this.get('graph'),
-    }));
+    });
+
+    this.trigger('didHoverChange', context);
 
     if(this.get('hoverChange')) {
-      this.sendAction('hoverChange', GraphMouseActionContext.create({
-        originalEvent: e,
-        source: this,
-        graph: this.get('graph'),
-      }));
+      this.sendAction('hoverChange', context);
     }
   }.on('mouseMove'),
 
@@ -138,18 +136,15 @@ export default Ember.Component.extend(HasGraphParent, {
   hoverEnd: null,
 
   _triggerHoverEnd: function(e) {
-    this.trigger('didHoverEnd', GraphMouseActionContext.create({
+    var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
       graph: this.get('graph'),
-    }));
+    });
+    this.trigger('didHoverEnd', context);
 
     if(this.get('hoverEnd')) {
-      this.sendAction('hoverEnd', GraphMouseActionContext.create({
-        originalEvent: e,
-        source: this,
-        graph: this.get('graph'),
-      }));
+      this.sendAction('hoverEnd', context);
     }
   }.on('mouseLeave'),
 

@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequireScaleSource from '../mixins/graph-requires-scale-source';
+import GraphEvent from '../utils/nf/graph-event';
 
 /**
 	Plots a group tag on a graph at a given x and y domain coordinate.
@@ -94,8 +95,14 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	data: null,
 
 	click: function(e) {
-		var props = this.getProperties('x', 'y', 'element', 'data');
-		var context = this.get('graph').createActionContext(props.x, props.y, this, props.data, e);
+		var context = GraphEvent.create({
+			x: this.get('x'),
+			y: this.get('y'),
+			data: this.get('data'),
+			source: this,
+			graph: this.get('graph'),
+			originalEvent: e,
+		});
 		this.sendAction('action', context);
 	},
 });

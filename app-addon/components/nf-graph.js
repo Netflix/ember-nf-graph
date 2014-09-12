@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import { property } from '../utils/computed-property-helpers';
-import GraphActionContext from '../utils/nf/graph-action-context';
 
 var computedBool = Ember.computed.bool;
 
@@ -893,26 +892,4 @@ export default Ember.Component.extend({
     this.set('graphics', []);
     this.set('selected', this.selectMultiple ? [] : null);
   }.on('init'),
-
-  /**
-    Builds an action context to send to the controller.
-    @method createActionContext
-    @param x Domain value x
-    @param y Domain value y
-    @param source {Ember.Component} the component that is firing the event
-    @param data {Object} item data for the event.
-    @param originalEvent {Event} the original event object, if there is one.
-    @return {utils.nf.graph-action-context} a context to send with `sendAction`
-    @private
-  */
-  createActionContext: function(x, y, source, data, originalEvent){
-    return GraphActionContext.create({
-      x: x,
-      y: y,
-      graph: this,
-      source: source,
-      data: data,
-      originalEvent: originalEvent,
-    });
-  },
 });

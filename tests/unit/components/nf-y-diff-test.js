@@ -9,18 +9,13 @@ test('nf-y-diff y positioning', function(){
 	var graph, yDiff;
 
 	Ember.run(function(){
-		graph = NfGraph.create({
+		yDiff = NfYDiff.create({
+			a: 100,
+			b: 200,
 			yScale: function(x) {
 				return x;
 			}
 		});
-
-		yDiff = NfYDiff.create({
-			a: 100,
-			b: 200,
-		});
-
-		yDiff.set('graph', graph);
 	});
 
 	equal(yDiff.get('y'), 100);

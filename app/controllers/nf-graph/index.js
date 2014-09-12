@@ -50,15 +50,5 @@ export default Ember.ObjectController.extend({
 
 			console.log('showData', e);
 		},
-
-		setTrackedData: function(e) {
-			var key = e.source.trackedDataKey;
-			this.set(key, e);
-		},
-
-		setHoverData: function(e) {
-			var key = e.source.hoverDataKey;
-			this.set(key, e);
-		},
 	}
 });
