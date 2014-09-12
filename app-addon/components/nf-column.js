@@ -122,13 +122,17 @@ export default Ember.Component.extend({
 	*/
 	sortDirection: function(key, value) {
 		if(arguments.length > 1) {
-			if(!this.get('columnRegistrar.sortMultiple')) {
+			var colReg = this.get('columnRegistrar');
+			if(colReg && !colReg.get('sortMultiple')) {
 				if(value === 'asc' || value === 'desc') {
-					this.get('columnRegistrar.sortedColumns').forEach(function(col) {
-						if(col !== this) {
-							col.set('sortDirection', 'none');
-						}
-					}, this);
+					var sortedColumns = colReg.get('sortedColumns');
+					if(sortedColumns) {
+						sortedColumns.forEach(function(col) {
+							if(col !== this) {
+								col.set('sortDirection', 'none');
+							}
+						}, this);
+					}
 				}
 			}
 

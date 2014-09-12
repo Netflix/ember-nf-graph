@@ -37,7 +37,7 @@ export default Ember.Mixin.create({
 		if(!Ember.isArray(this._columns)) {
 			this._columns = [];
 		}
-		
+
 		return this._columns;
 	}.property(),
 
@@ -47,11 +47,9 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	visibleColumns: function(){
-		return this.get('columns').filter(function(column) {
-			return column.get('isVisible');
-		});
-	}.property('columns.@each.isVisible'),
+	visibleColumns: Ember.computed.filter('columns', function(col){
+		return col.get('isVisible');
+	}),
 
 	/**
 		The list of columns with an sort applied to them
@@ -59,11 +57,9 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	sortedColumns: function(){
-		return this.get('columns').filter(function(col) {
-			return col.get('direction') !== 0;
-		});
-	}.property('columns.@each.sortDirection'),
+	sortedColumns: Ember.computed.filter('columns', function(col) {
+		return col.get('direction') !== 0;
+	}),
 
 	/**
 		Registers a column with the registrar
