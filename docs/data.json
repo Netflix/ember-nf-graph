@@ -4852,7 +4852,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 59,
+            "line": 61,
             "description": "The list of columns with an sort applied to them",
             "itemtype": "property",
             "name": "sortedColumns",
@@ -4863,7 +4863,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 69,
+            "line": 73,
             "description": "Registers a column with the registrar",
             "itemtype": "method",
             "name": "registerColumn",
@@ -4879,7 +4879,7 @@
         },
         {
             "file": "app-addon/mixins/table-column-registrar.js",
-            "line": 78,
+            "line": 82,
             "description": "Unregisters a column from the registry",
             "itemtype": "method",
             "name": "unregisterColumn",
