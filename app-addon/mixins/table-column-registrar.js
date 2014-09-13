@@ -52,9 +52,11 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	visibleColumns: Ember.computed.filter('_columns', function(col){
-		return col.get('isVisible');
-	}),
+	visibleColumns: function(){
+		return this.get('_columns').filter(function(col) {
+			return col.get('isVisible');
+		})
+	}.property('_columns.@each.isVisible'),
 
 	/**
 		The list of columns with an sort applied to them
@@ -62,9 +64,11 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	sortedColumns: Ember.computed.filter('_columns', function(col) {
-		return col.get('direction') !== 0;
-	}),
+	sortedColumns: function(){
+		return this.get('_columns').filter(function(col) {
+			return col.get('direction') !== 0;
+		});
+	}.property('_columns.@each.direction'),
 
 	/**
 		Registers a column with the registrar

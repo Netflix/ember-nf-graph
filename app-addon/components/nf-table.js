@@ -207,7 +207,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		}
 
 		return tableGroupingCtrl;
-	}.property('rows.@each', 'sortMap', 'groupBy', 'tableGroup.itemController'),
+	}.property('rows.[]', 'sortMap', 'groupBy', 'tableGroup.itemController'),
 
 	/**
 		Alias for the rowAction on the nf-table-group
