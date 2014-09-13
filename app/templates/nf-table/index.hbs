@@ -52,12 +52,14 @@ length: {{cols.length}}
 {{/nf-table}}
 
 
+<h3>cols</h3>
 <ul>
 	{{#each col in cols}}
 		<li {{action 'toggleSort' col}}>{{col.sortBy}} {{col.direction}}</li>
 	{{/each}}
 </ul>
 
+<h3>other</h3>
 <ul>
 	<li>scrollTop: {{tableScroll.scrollTop}}</li>
 	<li>scrollTopMax: {{tableScroll.scrollTopMax}}</li>

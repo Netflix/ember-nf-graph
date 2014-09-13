@@ -24,22 +24,27 @@ export default Ember.Mixin.create({
 	isTableColumnRegistrar: true,
 
 	/**
-		The collection of columns registered
+		An emitted list of columns
 		@property columns
 		@type Array
 		@readonly
 	*/
-	columns: function(key, value){
-		if(arguments.length > 1) {
-			this._columns = value;
-		}
+	columns: null,
 
-		if(!Ember.isArray(this._columns)) {
-			this._columns = [];
-		}
-
-		return this._columns;
+	/**
+		The collection of columns registered
+		@property _columns
+		@type Array
+		@readonly
+		@private
+	*/
+	_columns: function(key, value) { //jshint ignore:line
+		return [];
 	}.property(),
+
+	emitColumns: function() {
+		this.set('columns', this.get('_columns'));
+	}.observes('_columns.[]'),
 
 	/**
 		The list of visible columns
@@ -47,7 +52,7 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	visibleColumns: Ember.computed.filter('columns', function(col){
+	visibleColumns: Ember.computed.filter('_columns', function(col){
 		return col.get('isVisible');
 	}),
 
@@ -57,7 +62,7 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	sortedColumns: Ember.computed.filter('columns', function(col) {
+	sortedColumns: Ember.computed.filter('_columns', function(col) {
 		return col.get('direction') !== 0;
 	}),
 
@@ -67,7 +72,7 @@ export default Ember.Mixin.create({
 		@param column {components.nf-column} the column to register
 	*/
 	registerColumn: function(column) {
-		this.get('columns').pushObject(column);
+		this.get('_columns').pushObject(column);
 	},
 
 	/**
@@ -76,6 +81,6 @@ export default Ember.Mixin.create({
 		@param column {components.nf-column} the column to unregister
 	*/
 	unregisterColumn: function(column) {
-		this.get('columns').removeObject(column);
+		this.get('_columns').removeObject(column);
 	},
 });

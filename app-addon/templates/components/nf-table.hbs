@@ -5,7 +5,7 @@
         <table>
           <thead>
             <tr>
-              {{#each column in columns}}
+              {{#each column in visibleColumns}}
                 {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
               {{/each}}
             </tr>
