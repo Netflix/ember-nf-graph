@@ -194,12 +194,27 @@ export default Ember.Mixin.create({
 	isTableColumnRegistrar: true,
 
 	/**
-		The collection of columns registered
+		An emitted list of columns
 		@property columns
 		@type Array
 		@readonly
 	*/
-	columns: Ember.computed.oneWay(&#x27;_columns&#x27;),
+	columns: null,
+
+	/**
+		The collection of columns registered
+		@property _columns
+		@type Array
+		@readonly
+		@private
+	*/
+	_columns: function(key, value) { //jshint ignore:line
+		return [];
+	}.property(),
+
+	emitColumns: function() {
+		this.set(&#x27;columns&#x27;, this.get(&#x27;_columns&#x27;));
+	}.observes(&#x27;_columns.[]&#x27;),
 
 	/**
 		The list of visible columns
@@ -207,11 +222,9 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	visibleColumns: function(){
-		return this.get(&#x27;columns&#x27;).filter(function(column) {
-			return column.get(&#x27;isVisible&#x27;);
-		});
-	}.property(&#x27;columns.@each.isVisible&#x27;),
+	visibleColumns: Ember.computed.filter(&#x27;_columns&#x27;, function(col){
+		return col.get(&#x27;isVisible&#x27;);
+	}),
 
 	/**
 		The list of columns with an sort applied to them
@@ -219,11 +232,9 @@ export default Ember.Mixin.create({
 		@type Array
 		@readonly
 	*/
-	sortedColumns: function(){
-		return this.get(&#x27;columns&#x27;).filter(function(col) {
-			return col.get(&#x27;direction&#x27;) !== 0;
-		});
-	}.property(&#x27;columns.@each.sortDirection&#x27;),
+	sortedColumns: Ember.computed.filter(&#x27;_columns&#x27;, function(col) {
+		return col.get(&#x27;direction&#x27;) !== 0;
+	}),
 
 	/**
 		Registers a column with the registrar
@@ -231,7 +242,7 @@ export default Ember.Mixin.create({
 		@param column {components.nf-column} the column to register
 	*/
 	registerColumn: function(column) {
-		this.get(&#x27;columns&#x27;).pushObject(column);
+		this.get(&#x27;_columns&#x27;).pushObject(column);
 	},
 
 	/**
@@ -240,11 +251,7 @@ export default Ember.Mixin.create({
 		@param column {components.nf-column} the column to unregister
 	*/
 	unregisterColumn: function(column) {
-		this.get(&#x27;columns&#x27;).removeObject(column);
-	},
-
-	init: function() {
-		this.set(&#x27;_columns&#x27;, []);
+		this.get(&#x27;_columns&#x27;).removeObject(column);
 	},
 });
     </pre>

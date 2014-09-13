@@ -409,7 +409,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@private
 	*/
 	sortMap: function(){
-		return this.get(&#x27;columns&#x27;).reduce(function(sortMap, col) {
+		return this.get(&#x27;_columns&#x27;).reduce(function(sortMap, col) {
 			var direction = col.get(&#x27;direction&#x27;);
 			if(direction) {
 				var sortBy = col.get(&#x27;sortBy&#x27;);
@@ -431,7 +431,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			}
 			return sortMap;
 		}, []);
-	}.property(&#x27;columns.@each.sortDirection&#x27;, &#x27;columns.@each.sortBy&#x27;),
+	}.property(&#x27;_columns.@each.sortDirection&#x27;, &#x27;_columns.@each.sortBy&#x27;),
 
 	/**
 		A computed property returning a sorted copy of &#x60;rows&#x60;
