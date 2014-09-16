@@ -95,7 +95,7 @@ export default Ember.Mixin.create({
     var graph = this.get('graph');
 
     this.trigger('didHoverChange', GraphMouseEvent.create({
-      originalEvent: e,
+      originalEvent: e.get('originalEvent'),
       source: this,
       graph: graph,
     }));
@@ -146,7 +146,7 @@ export default Ember.Mixin.create({
 
     if(this.get('hoverEnd')) {
       this.sendAction('hoverEnd', {
-        originalEvent: e,
+        originalEvent: e.get('originalEvent'),
         source: this,
         graph: this.get('graph'),
       });

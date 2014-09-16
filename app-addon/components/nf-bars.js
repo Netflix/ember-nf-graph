@@ -67,6 +67,25 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 	*/
 	graphHeight: Ember.computed.oneWay('graph.graphHeight'),
 
+	barWidth: function(){
+		var xScale = this.get('xScale');
+		return xScale && xScale.rangeBand ? xScale.rangeBand() : 0;
+	}.property('xScale'),
+
+	groupOffsetX: function(){
+		var group = this.get('group');
+		var groupIndex = this.get('groupIndex');
+		return group ? group.getBarOffsetX(groupIndex) : 0;
+	}.property('group', 'groupIndex'),
+
+	getBarXPosition: function() {
+		var xScale = this.get('xScale');
+		var groupOffsetX = this.get('groupOffsetX');
+		return function(x) {
+			return groupOffsetX + (xScale ? xScale(x) : 0);
+		};
+	}.property('xScale', 'groupOffsetX'),
+
 	/**
 		The bar models used to render the bars.
 		@property bars
@@ -78,25 +97,26 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		var renderedData = this.get('renderedData');
 		var graphHeight = this.get('graphHeight');
 		var getBarClass = this.get('getBarClass');
+		var getBarXPosition = this.get('getBarXPosition');
 
 		if(!xScale || !yScale || !Ember.isArray(renderedData)) {
 			return null;
 		}
 
-		var rangeBand = xScale.rangeBand();
+		var barWidth = this.get('barWidth');
 
 		return renderedData.map(function(d) {
 			var h = yScale(d[1]);
 			return {
-				x: xScale(d[0]),
+				x: getBarXPosition(d[0]),
 				y: h,
-				width: rangeBand,
+				width: barWidth,
 				height: graphHeight - h,
 				className: getBarClass(d.data),
 				dataPoint: d,
 			};
 		});
-	}.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass'),
+	}.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass', 'barWidth'),
 
 	/**
 		The name of the action to fire when a bar is clicked.
