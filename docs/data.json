@@ -1454,6 +1454,28 @@
         {
             "file": "app-addon/components/nf-bars.js",
             "line": 70,
+            "description": "A scale provided by nf-bars-group to offset the bar rectangle output",
+            "itemtype": "property",
+            "name": "barScale",
+            "type": "d3.scale",
+            "readonly": "",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 78,
+            "description": "The width of each bar.",
+            "itemtype": "property",
+            "name": "barWidth",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 107,
             "description": "The bar models used to render the bars.",
             "itemtype": "property",
             "name": "bars",
@@ -1463,7 +1485,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 101,
+            "line": 139,
             "description": "The name of the action to fire when a bar is clicked.",
             "itemtype": "property",
             "name": "barClick",

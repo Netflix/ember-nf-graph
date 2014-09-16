@@ -329,12 +329,6 @@ export default Ember.Component.extend(HasGraphParent, {
   hasGraph: function(graph) {
     graph.set(&#x27;content&#x27;, this);
   },
-
-  didInsertElement: function(){
-    this.$().on(&#x27;mousemove&#x27;, function(){
-      console.log(&#x27;mouse is moving!&#x27;);
-    });
-  },
 });
     </pre>
 </div>
