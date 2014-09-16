@@ -265,8 +265,7 @@ export default Ember.Mixin.create({
     var graph = this.get(&#x27;graph&#x27;);
 
     this.trigger(&#x27;didHoverChange&#x27;, GraphMouseEvent.create({
-      mouseX: e.get(&#x27;mouseX&#x27;),
-      mouseY: e.get(&#x27;mouseY&#x27;),
+      originalEvent: e,
       source: this,
       graph: graph,
     }));

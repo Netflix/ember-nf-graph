@@ -283,7 +283,7 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   hoverChange: null,
 
-  _triggerHoverChange: function(e) {
+  mouseMove: function(e) {
     var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
@@ -295,7 +295,7 @@ export default Ember.Component.extend(HasGraphParent, {
     if(this.get(&#x27;hoverChange&#x27;)) {
       this.sendAction(&#x27;hoverChange&#x27;, context);
     }
-  }.on(&#x27;mouseMove&#x27;),
+  },
 
   /**
     The name of the hoverEnd action to fire
@@ -305,7 +305,7 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   hoverEnd: null,
 
-  _triggerHoverEnd: function(e) {
+  mouseLeave: function(e) {
     var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
@@ -316,7 +316,7 @@ export default Ember.Component.extend(HasGraphParent, {
     if(this.get(&#x27;hoverEnd&#x27;)) {
       this.sendAction(&#x27;hoverEnd&#x27;, context);
     }
-  }.on(&#x27;mouseLeave&#x27;),
+  },
 
   /**
     An array containing models to render fret lines
@@ -328,6 +328,12 @@ export default Ember.Component.extend(HasGraphParent, {
 
   hasGraph: function(graph) {
     graph.set(&#x27;content&#x27;, this);
+  },
+
+  didInsertElement: function(){
+    this.$().on(&#x27;mousemove&#x27;, function(){
+      console.log(&#x27;mouse is moving!&#x27;);
+    });
   },
 });
     </pre>

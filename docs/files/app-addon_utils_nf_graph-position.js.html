@@ -196,12 +196,12 @@ export default Ember.Object.extend({
 		@type Number
 	*/
 	graphX: function(key, value) {
-		var x = this._x;
 		if(arguments.length &gt; 1) {
 			this._graphX = value;
 		} else {
 			var scale = this.get(&#x27;xScale&#x27;);
 			if(scale) {
+				var x = this.get(&#x27;x&#x27;);
 				this._graphX = scale(x);
 			}
 		}
@@ -214,12 +214,12 @@ export default Ember.Object.extend({
 		@type Number
 	*/
 	graphY: function(key, value) {
-		var y = this._y;
 		if(arguments.length &gt; 1) {
 			this._graphY = value;
 		} else {
 			var scale = this.get(&#x27;yScale&#x27;);
 			if(scale) {
+				var y = this.get(&#x27;y&#x27;);
 				this._graphY = scale(y);
 			}
 		}
@@ -232,12 +232,12 @@ export default Ember.Object.extend({
 		@type Number
 	*/
 	x: function(key, value) {
-		var graphX = this._graphX;
 		if(arguments.length &gt; 1) {
 			this._x = value;
 		} else {
 			var scale = this.get(&#x27;xScale&#x27;);
 			if (scale &amp;&amp; scale.invert){
+				var graphX = this.get(&#x27;graphX&#x27;);
 				this._x = scale.invert(graphX);
 			} 
 		}
@@ -250,12 +250,12 @@ export default Ember.Object.extend({
 		@type Number
 	*/
 	y: function(key, value) {
-		var graphY = this._graphY;
 		if(arguments.length &gt; 1) {
 			this._y = value;
 		} else {
 			var scale = this.get(&#x27;yScale&#x27;);
 			if (scale &amp;&amp; scale.invert){
+				var graphY = this.get(&#x27;graphY&#x27;);
 				this._y = scale.invert(graphY);
 			} 
 		}
@@ -362,7 +362,7 @@ export default Ember.Object.extend({
 		@type Number
 		@private
 	*/
-	_graphContentX: Ember.computed.oneWay(&#x27;graph.graphX&#x27;),
+	graphContentX: Ember.computed.oneWay(&#x27;graph.graphX&#x27;),
 
 	/**
 		The y position of the nf-graph-content within the nf-graph
@@ -370,7 +370,7 @@ export default Ember.Object.extend({
 		@type Number
 		@private
 	*/
-	_graphContentY: Ember.computed.oneWay(&#x27;graph.graphY&#x27;),
+	graphContentY: Ember.computed.oneWay(&#x27;graph.graphY&#x27;),
 });
     </pre>
 </div>

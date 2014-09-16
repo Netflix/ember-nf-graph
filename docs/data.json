@@ -588,7 +588,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-bars.js",
-            "line": 10,
+            "line": 9,
             "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***",
             "extends": "Ember.Component",
             "uses": [
@@ -1397,7 +1397,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 28,
+            "line": 27,
             "description": "The name of the property on each data item containing the className for the bar rectangle",
             "itemtype": "property",
             "name": "classprop",
@@ -1408,7 +1408,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 36,
+            "line": 35,
             "description": "Gets the function to get the classname from each data item.",
             "itemtype": "property",
             "name": "getBarClass",
@@ -1421,6 +1421,39 @@
         {
             "file": "app-addon/components/nf-bars.js",
             "line": 46,
+            "description": "The nf-bars-group this belongs to, if any.",
+            "itemtype": "property",
+            "name": "group",
+            "type": "components.nf-bars-group",
+            "default": "null",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 54,
+            "description": "The index of this component within the group, if any.",
+            "itemtype": "property",
+            "name": "groupIndex",
+            "type": "Number",
+            "default": "null",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 62,
+            "description": "The graph content height",
+            "itemtype": "property",
+            "name": "graphHeight",
+            "type": "Number",
+            "readonly": "",
+            "class": "components.nf-bars",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-bars.js",
+            "line": 70,
             "description": "The bar models used to render the bars.",
             "itemtype": "property",
             "name": "bars",
@@ -1430,7 +1463,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 73,
+            "line": 101,
             "description": "The name of the action to fire when a bar is clicked.",
             "itemtype": "property",
             "name": "barClick",
@@ -4531,7 +4564,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 105,
+            "line": 104,
             "description": "Event handler for didHoverChange. Sends hoverChange action.",
             "itemtype": "method",
             "name": "didHoverChange",
@@ -4547,7 +4580,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 128,
+            "line": 127,
             "description": "Name of the action to send on `hoverEnd`",
             "itemtype": "property",
             "name": "hoverEnd",
@@ -4558,7 +4591,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 136,
+            "line": 135,
             "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
             "itemtype": "method",
             "name": "didHoverEnd",
@@ -4574,7 +4607,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 157,
+            "line": 156,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
@@ -4585,7 +4618,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 165,
+            "line": 164,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
@@ -4596,7 +4629,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 183,
+            "line": 182,
             "description": "The action to send on `willTrack`",
             "itemtype": "property",
             "name": "willTrack",
@@ -4607,7 +4640,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 191,
+            "line": 190,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -4618,7 +4651,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 209,
+            "line": 208,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -4636,7 +4669,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 225,
+            "line": 224,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_initializeTrackingDot",
@@ -5139,7 +5172,7 @@
         },
         {
             "file": "app-addon/utils/nf/graph-mouse-event.js",
-            "line": 101,
+            "line": 102,
             "description": "The y domain value at the nearest data point to the mouse position\nalong the x axis.",
             "itemtype": "property",
             "name": "y",
@@ -5150,7 +5183,7 @@
         },
         {
             "file": "app-addon/utils/nf/graph-mouse-event.js",
-            "line": 112,
+            "line": 114,
             "description": "The data carried by the nearest data point to the mouse position\nalong the x axis.",
             "itemtype": "property",
             "name": "data",
@@ -5591,11 +5624,11 @@
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:136"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:135"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:136"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:135"
         }
     ]
 }
