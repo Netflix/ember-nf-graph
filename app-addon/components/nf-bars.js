@@ -67,20 +67,34 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 	*/
 	graphHeight: Ember.computed.oneWay('graph.graphHeight'),
 
+	/**
+		A scale provided by nf-bars-group to offset the bar rectangle output
+		@property barScale
+		@type d3.scale
+		@readonly
+	*/
+	barScale: Ember.computed.oneWay('group.barScale'),
+
+	/**
+		The width of each bar.
+		@property barWidth
+		@type Number
+		@readonly
+	*/
 	barWidth: function(){
-		var barScale = this.get('group.barScale');
+		var barScale = this.get('barScale');
 		if(barScale) {
 			return barScale.rangeBand();
 		}
 		var xScale = this.get('xScale');
 		return xScale && xScale.rangeBand ? xScale.rangeBand() : 0;
-	}.property('xScale', 'group.barScale'),
+	}.property('xScale', 'barScale'),
 
 	groupOffsetX: function(){
-		var barScale = this.get('group.barScale');
+		var barScale = this.get('barScale');
 		var groupIndex = this.get('groupIndex');
 		return barScale ? barScale(groupIndex) : 0;
-	}.property('group.barScale', 'groupIndex'),
+	}.property('barScale', 'groupIndex'),
 
 	getBarXPosition: function() {
 		var xScale = this.get('xScale');
