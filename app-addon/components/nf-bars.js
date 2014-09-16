@@ -68,15 +68,19 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 	graphHeight: Ember.computed.oneWay('graph.graphHeight'),
 
 	barWidth: function(){
+		var barScale = this.get('group.barScale');
+		if(barScale) {
+			return barScale.rangeBand();
+		}
 		var xScale = this.get('xScale');
 		return xScale && xScale.rangeBand ? xScale.rangeBand() : 0;
-	}.property('xScale'),
+	}.property('xScale', 'group.barScale'),
 
 	groupOffsetX: function(){
-		var group = this.get('group');
+		var barScale = this.get('group.barScale');
 		var groupIndex = this.get('groupIndex');
-		return group ? group.getBarOffsetX(groupIndex) : 0;
-	}.property('group', 'groupIndex'),
+		return barScale ? barScale(groupIndex) : 0;
+	}.property('group.barScale', 'groupIndex'),
 
 	getBarXPosition: function() {
 		var xScale = this.get('xScale');
@@ -125,6 +129,13 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		@default null
 	*/
 	barClick: null,
+
+	_registerBars: function(){
+		var group = this.nearestWithProperty('isBarsGroup');
+		if(group && group.registerBars) {
+			group.registerBars(this);
+		}
+	}.on('init'),
 
 	actions: {
 		nfBarClickBar: function(dataPoint) {

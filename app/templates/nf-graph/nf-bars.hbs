@@ -8,11 +8,14 @@
 	.foo-bar-2 {
 		fill: lime;
 	}
+	.boring-bars rect {
+		fill: gray;
+	}
 </style>
 <h2>nf-bars</h2>
 
 
-{{#nf-graph width="400" height="300" xScaleType="ordinal"}}
+{{#nf-graph width="400" height="300" xScaleType="ordinal" xOrdinalPadding="0.5"}}
 	{{#nf-x-axis}}
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
@@ -22,7 +25,10 @@
 	{{/nf-y-axis}}
 
 	{{#nf-graph-content}}
-		{{nf-bars data=data trackingMode="hover" trackedData=poop barClick="barClicked"}}
+		{{#nf-bars-group}}
+			{{nf-bars data=data trackingMode="hover" class="boring-bars" trackedData=poop barClick="barClicked"}}
+			{{nf-bars data=data trackingMode="hover" yprop="y2" trackedData=poop barClick="barClicked"}}
+		{{/nf-bars-group}}
 		<circle r=10 {{bind-attr cx=poop.centerX cy=poop.centerY}}></circle>
 		{{nf-line data=data}}
 	{{/nf-graph-content}}

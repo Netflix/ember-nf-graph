@@ -51,12 +51,6 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 			.rangeRoundBands([0, groupWidth], groupPadding, groupOuterPadding);
 	}.property('groupWidth', 'barsDomain.[]', 'groupPadding', 'groupOuterPadding'),
 
-	getBarsOffsetX: function(bars) {
-		var index = bars.get('groupIndex');
-		var scale = this.get('barScale');
-		return scale(index);
-	},
-
 	barsWidth: function() {
 		var scale = this.get('barScale');
 		return scale && scale.rangeBand ? scale.rangeBand() : NaN;

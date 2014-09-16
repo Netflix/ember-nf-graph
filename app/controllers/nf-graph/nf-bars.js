@@ -11,7 +11,9 @@ export default Ember.ObjectController.extend({
 			arr.push({
 				x: str[i],
 				y: (i+1) * 100,
-				className: 'foo-bar-' + (i % 3)
+				y2: Math.random() * 800,
+				className2: 'foo-bar-2',
+				className: 'foo-bar-' + (i % 3),
 			});
 		}
 		
