@@ -88,3 +88,49 @@ test('x, y and data should be derived from nearestDataPoint', function(){
 	equal(subject.get('y'), 2);
 	equal(subject.get('data'), 'weee');
 });
+
+test('setting graph, source and originalEvent only', function() {
+	var e = {};
+	var graph = {};
+	var source = {
+		getDataNearXRange: function(xpos) {
+			var result = [1, 2];
+			result.data = { foo: 'bar' };
+			return result;
+		}
+	};
+
+	var mockGetMousePoint = function(container, e) {
+		return {
+			x: 11,
+			y: 13,
+		};
+	};
+
+	var identity = function(x) { return x; };
+
+	var subject = GraphMouseEvent.create({
+		originalEvent: e,
+		_getMousePoint: mockGetMousePoint,
+		graph: graph,
+		source: source,
+		graphOffset: {
+			left: 23,
+			top: 31,
+		},
+		graphContentX: 71,
+		graphContentY: 61,
+		xScale: identity,
+		yScale: identity,
+	});
+
+	equal(subject.get('mouseX'), 11);
+	equal(subject.get('mouseY'), 13);
+	equal(subject.get('graphX'), 1, 'graphX');
+	equal(subject.get('graphY'), 2, 'graphY');
+	equal(subject.get('pageX'), 1 + 23 + 71, 'pageX');
+	equal(subject.get('pageY'), 2 + 31 + 61, 'pageY');
+	equal(subject.get('x'), 1, 'x');
+	equal(subject.get('y'), 2, 'y');
+	deepEqual(subject.get('data'), { foo: 'bar' });
+});

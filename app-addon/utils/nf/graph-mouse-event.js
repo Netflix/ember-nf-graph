@@ -95,7 +95,8 @@ export default GraphPosition.extend({
 	*/
 	x: function() {
 		var nearestDataPoint = this.get('nearestDataPoint');
-		return nearestDataPoint ? nearestDataPoint[0] : undefined;
+		this._x =  nearestDataPoint ? nearestDataPoint[0] : undefined;
+		return this._x;
 	}.property('nearestDataPoint'),
 
 	/**
@@ -106,7 +107,8 @@ export default GraphPosition.extend({
 	*/
 	y: function() {
 		var nearestDataPoint = this.get('nearestDataPoint');
-		return nearestDataPoint ? nearestDataPoint[1] : undefined;
+		this._y = nearestDataPoint ? nearestDataPoint[1] : undefined;
+		return this._y;
 	}.property('nearestDataPoint'),
 
 	/**

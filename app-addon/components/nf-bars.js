@@ -3,7 +3,6 @@ import HasGraphParent from '../mixins/graph-has-graph-parent';
 import DataGraphic from '../mixins/graph-data-graphic';
 import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import parsePropExpr from '../utils/parse-property-expression';
-import { property } from '../utils/computed-property-helpers';
 import RequireScaleSource from '../mixins/graph-requires-scale-source';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 
@@ -39,36 +38,65 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		@readonly
 		@private
 	*/
-	getBarClass: property('classprop', function(classprop) {
-		return parsePropExpr(classprop);
-	}),
+	getBarClass: function() {
+		var classprop = this.get('classprop');
+		return classprop ? parsePropExpr(classprop) : null;
+	}.property('classprop'),
+
+	/**
+		The nf-bars-group this belongs to, if any.
+		@property group
+		@type components.nf-bars-group
+		@default null
+	*/
+	group: null,
+
+	/**
+		The index of this component within the group, if any.
+		@property groupIndex
+		@type Number
+		@default null
+	*/
+	groupIndex: null,
+
+	/**
+		The graph content height
+		@property graphHeight
+		@type Number
+		@readonly
+	*/
+	graphHeight: Ember.computed.oneWay('graph.graphHeight'),
 
 	/**
 		The bar models used to render the bars.
 		@property bars
 		@readonly
 	*/
-	bars: property('xScale', 'yScale', 'renderedData.@each', 'graph.graphHeight', 'getBarClass',
-		function(xScale, yScale, renderedData, graphHeight, getBarClass) {
-			if(!xScale || !yScale || !renderedData) {
-				return null;
-			}
+	bars: function(){
+		var xScale = this.get('xScale');
+		var yScale = this.get('yScale');
+		var renderedData = this.get('renderedData');
+		var graphHeight = this.get('graphHeight');
+		var getBarClass = this.get('getBarClass');
 
-			var rangeBand = xScale.rangeBand();
-
-			return renderedData.map(function(d) {
-				var h = yScale(d[1]);
-				return {
-					x: xScale(d[0]),
-					y: h,
-					width: rangeBand,
-					height: graphHeight - h,
-					className: getBarClass(d.data),
-					dataPoint: d,
-				};
-			});
+		if(!xScale || !yScale || !Ember.isArray(renderedData)) {
+			return null;
 		}
-	),
+
+		var rangeBand = xScale.rangeBand();
+
+		return renderedData.map(function(d) {
+			var h = yScale(d[1]);
+			return {
+				x: xScale(d[0]),
+				y: h,
+				width: rangeBand,
+				height: graphHeight - h,
+				className: getBarClass(d.data),
+				dataPoint: d,
+			};
+		});
+	}.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass'),
 
 	/**
 		The name of the action to fire when a bar is clicked.

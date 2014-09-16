@@ -55,7 +55,7 @@ export default Ember.Mixin.create({
 	visibleColumns: function(){
 		return this.get('_columns').filter(function(col) {
 			return col.get('isVisible');
-		})
+		});
 	}.property('_columns.@each.isVisible'),
 
 	/**
