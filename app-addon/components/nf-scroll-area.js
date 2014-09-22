@@ -189,15 +189,19 @@ export default Ember.Component.extend({
 	},
 
 	_setupElement: function() {
-		var elem = this.$();
-		elem.on('scroll', this._onScroll.bind(this));
-		elem.on('resize', this._onResize.bind(this));
+		var elem = this.get('element');
+		if(elem) {
+			elem.addEventListener('scroll', this._onScroll.bind(this));
+			elem.addEventListener('resize', this._onResize.bind(this));
+		}
 		this.updateMeasurements();
 	}.on('didInsertElement'),
 
 	_unsubscribeEvents: function(){
-		var elem = this.$();
-		elem.off('scroll', this._onScroll);
-		elem.off('resize', this._onResize);
+		var elem = this.get('element');
+		if(elem) {
+			elem.removeEventListener('scroll', this._onScroll);
+			elem.removeEventListener('resize', this._onResize);
+		}
 	}.on('willDestroyElement'),
 });
