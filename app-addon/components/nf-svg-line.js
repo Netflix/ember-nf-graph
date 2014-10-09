@@ -5,7 +5,7 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 /**
 	Draws a basic line between two points on the graph. 
 	@namespace components
-	@class nf-basic-line
+	@class nf-svg-line
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
@@ -13,7 +13,7 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	tagName: 'line',
 
-	classNames: ['nf-basic-line'],
+	classNames: ['nf-svg-line'],
 
 	attributeBindings: ['svgX0', 'svgX1', 'svgY0', 'svgY1'],
 

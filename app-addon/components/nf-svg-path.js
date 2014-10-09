@@ -5,7 +5,7 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 /**
 	An SVG path primitive that plots based on a graph's scale.
 	@namespace components
-	@class nf-path
+	@class nf-svg-path
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
@@ -13,7 +13,7 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	type: 'path',
 
-	classNames: ['nf-path'],
+	classNames: ['nf-svg-path'],
 
 	attributeBindings: ['d'],
 
@@ -31,7 +31,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 						[50, 50],
 						[100, 100]
 					]
-					
+
 	@property points
 	@type Array
 	*/

@@ -5,13 +5,18 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 /**
 	A rectangle that plots using domain values from the graph. Uses an SVGPathElement
 	to plot the rectangle, to allow for rectangles with "negative" heights.
+	@namespace components
+	@class nf-svg-rect
+	@extends Ember.Component
+	@uses mixins.graph-has-graph-parent
+	@uses mixins.graph-requires-scale-source
 */
 export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	tagName: 'path',
 
 	attributeBindings: ['d'],
 
-	classNames: ['nf-rect'],
+	classNames: ['nf-svg-rect'],
 
 	/**
 		The domain x value to place the rect at.

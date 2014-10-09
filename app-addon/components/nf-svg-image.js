@@ -6,7 +6,7 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 	An image to be displayed in a graph with that takes domain based measurements and
 	uses the scale of the graph. Creates an `<image class="nf-image"/>` SVG element.
 	@namespace components
-	@class nf-image
+	@class nf-svg-image
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
@@ -14,7 +14,7 @@ import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	tagName: 'image',
 
-	classNames: ['nf-image'],
+	classNames: ['nf-svg-image'],
 	
 	//HACK: for now xlink:href needs to be bound elsewhere.
 	attributeBindings: ['svgX:x', 'svgY:y', 'svgWidth:width', 'svgHeight:height'],
