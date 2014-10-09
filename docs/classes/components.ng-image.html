@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>mixins.graph-data-graphic - Ember-CLI-Ember-DVC</title>
+    <title>components.ng-image - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,19 +166,30 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>mixins.graph-data-graphic Class</h1>
+                        <h1>components.ng-image Class</h1>
 <div class="box meta">
+    
+        <div class="uses">
+            Uses
+            <ul class="inline commas">
+                
+                    <li><a href="mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                
+                    <li><a href="mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+                
+            </ul>
+        </div>
     
 
     
         <div class="extends">
-            Extends Ember.Mixin
+            Extends Ember.Component
         </div>
     
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l6"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:6</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-image.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-image.js:5</code></a>
         </div>
     
 
@@ -194,11 +205,8 @@
 
 
 <div class="box intro">
-    <p>This is mixed in to  child components that need to register data
-with the graph. Includes methods for extracting, sorting and scrubbing data
-for use in graphing components.</p>
-<p>Requires <a href="../classes/mixins.graph-registered-graphic.html" class="crosslink">mixins.graph-registered-graphic</a> and 
-<a href="../classes/mixins.graph-has-graph-parent.html" class="crosslink">mixins.graph-has-graph-parent</a></p>
+    <p>An image to be displayed in a graph with that takes domain based measurements and
+uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quot;/&gt;</code> SVG element.</p>
 
 </div>
 
@@ -208,6 +216,8 @@ for use in graphing components.</p>
     <ul class="api-class-tabs">
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
+        
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
         
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
@@ -221,6 +231,21 @@ for use in graphing components.</p>
             <h2 class="off-left">Item Index</h2>
 
             
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                        
+                            <li class="index-item method inherited">
+                                <a href="#method__getGraph">_getGraph</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
+            
 
             
                 <div class="index-section properties">
@@ -228,36 +253,85 @@ for use in graphing components.</p>
 
                     <ul class="index-list properties extends">
                         
-                            <li class="index-item property">
-                                <a href="#property_data">data</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_graph">graph</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_firstSortedData">firstSortedData</a>
+                                <a href="#property_height">height</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_scaleOffsetX">scaleOffsetX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_scaleOffsetY">scaleOffsetY</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_scaleZoomX">scaleZoomX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_scaleZoomY">scaleZoomY</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_lastVisibleData">lastVisibleData</a>
+                                <a href="#property_src">src</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_renderedData">renderedData</a>
+                                <a href="#property_svgHeight">svgHeight</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_sortedData">sortedData</a>
+                                <a href="#property_svgWidth">svgWidth</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_svgX">svgX</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_svgY">svgY</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_width">width</a>
 
                                 
                                 
@@ -270,15 +344,8 @@ for use in graphing components.</p>
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_xData">xData</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_xPropFn">xPropFn</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_xScale">xScale</a>
 
                                 
                                 
@@ -291,15 +358,8 @@ for use in graphing components.</p>
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_yData">yData</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_yPropFn">yPropFn</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_yScale">yScale</a>
 
                                 
                                 
@@ -315,15 +375,22 @@ for use in graphing components.</p>
         </div>
 
         
-
-        
-            <div id="properties" class="api-class-tabpanel">
-                <h2 class="off-left">Properties</h2>
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
 
                 
-                    <div id="property_data" class="property item">
-    <h3 class="name"><code>data</code></h3>
-    <span class="type">Array</span>
+                    <div id="method__getGraph" class="method item inherited">
+    <h3 class="name"><code>_getGraph</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
 
     
 
@@ -336,15 +403,64 @@ for use in graphing components.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l21"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:21</code></a>
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l20"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code></p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+            </div>
+        
+
+        
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_graph" class="property item inherited">
+    <h3 class="name"><code>graph</code></h3>
+    <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#property_graph">mixins.graph-has-graph-parent</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-has-graph-parent.js.html#l12"><code>app-addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:12</code></a>
         
         </p>
 
@@ -354,7 +470,7 @@ for use in graphing components.</p>
     </div>
 
     <div class="description">
-        <p>Gets or sets the data used by the component to plot itself.</p>
+        <p>The parent graph for a component.</p>
 
     </div>
 
@@ -368,9 +484,9 @@ for use in graphing components.</p>
 </div>
 
                 
-                    <div id="property_firstSortedData" class="property item">
-    <h3 class="name"><code>firstSortedData</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_height" class="property item">
+    <h3 class="name"><code>height</code></h3>
+    <span class="type">Unknown</span>
 
     
 
@@ -391,7 +507,7 @@ for use in graphing components.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l172"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:172</code></a>
+        <a href="../files/app-addon_components_nf-image.js.html#l54"><code>app-addon&#x2F;components&#x2F;nf-image.js:54</code></a>
         
         </p>
 
@@ -401,11 +517,14 @@ for use in graphing components.</p>
     </div>
 
     <div class="description">
-        <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
-that is actually visible within the x domain.</p>
+        <p>The height as a domain value. Does not 
+handle ordinal scales. To set a pixel value, just
+set <code>svgHeight</code> directly.</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -414,9 +533,9 @@ that is actually visible within the x domain.</p>
 </div>
 
                 
-                    <div id="property_lastVisibleData" class="property item">
-    <h3 class="name"><code>lastVisibleData</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_scaleOffsetX" class="property item inherited">
+    <h3 class="name"><code>scaleOffsetX</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -429,15 +548,12 @@ that is actually visible within the x domain.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetX">mixins.graph-requires-scale-source</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l192"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:192</code></a>
+        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l78"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:78</code></a>
         
         </p>
 
@@ -447,11 +563,12 @@ that is actually visible within the x domain.</p>
     </div>
 
     <div class="description">
-        <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
-that is actually visible within the x domain.</p>
+        <p>The offset, in pixels, for the x scale</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -460,9 +577,9 @@ that is actually visible within the x domain.</p>
 </div>
 
                 
-                    <div id="property_renderedData" class="property item">
-    <h3 class="name"><code>renderedData</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_scaleOffsetY" class="property item inherited">
+    <h3 class="name"><code>scaleOffsetY</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -475,15 +592,12 @@ that is actually visible within the x domain.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetY">mixins.graph-requires-scale-source</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l145"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:145</code></a>
+        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l91"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:91</code></a>
         
         </p>
 
@@ -493,11 +607,12 @@ that is actually visible within the x domain.</p>
     </div>
 
     <div class="description">
-        <p>The list of data points from mixins.graph-data-graphc/sortedData:property that
-fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
+        <p>The offset, in pixels, for the y scale</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -506,9 +621,9 @@ fits within the x domain, plus up to one data point outside of that domain in ea
 </div>
 
                 
-                    <div id="property_sortedData" class="property item">
-    <h3 class="name"><code>sortedData</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_scaleZoomX" class="property item inherited">
+    <h3 class="name"><code>scaleZoomX</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -521,15 +636,12 @@ fits within the x domain, plus up to one data point outside of that domain in ea
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomX">mixins.graph-requires-scale-source</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l92"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:92</code></a>
+        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l52"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:52</code></a>
         
         </p>
 
@@ -539,14 +651,12 @@ fits within the x domain, plus up to one data point outside of that domain in ea
     </div>
 
     <div class="description">
-        <p>The sorted and mapped data pulled from <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-An array of arrays, structures as so:</p>
-<pre class="code prettyprint"><code>  [[x,y],[x,y],[x,y]];</code></pre>
-<p><strong> each inner array also has a property <code>data</code> on it, containing the original data object </strong></p>
-<p>When this property is computed, it also updates the <code>xData</code> and <code>yData</code> properties of the graphic.</p>
+        <p>The zoom multiplier for the x scale</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> 1</p>
     
 
     
@@ -555,8 +665,52 @@ An array of arrays, structures as so:</p>
 </div>
 
                 
-                    <div id="property_x" class="property item">
-    <h3 class="name"><code>x</code></h3>
+                    <div id="property_scaleZoomY" class="property item inherited">
+    <h3 class="name"><code>scaleZoomY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomY">mixins.graph-requires-scale-source</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l65"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:65</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The zoom multiplier for the y scale</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 1</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_src" class="property item">
+    <h3 class="name"><code>src</code></h3>
     <span class="type">String</span>
 
     
@@ -578,7 +732,7 @@ An array of arrays, structures as so:</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l30"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:30</code></a>
+        <a href="../files/app-addon_components_nf-image.js.html#l68"><code>app-addon&#x2F;components&#x2F;nf-image.js:68</code></a>
         
         </p>
 
@@ -588,14 +742,10 @@ An array of arrays, structures as so:</p>
     </div>
 
     <div class="description">
-        <p>The path of the property on each object in 
-<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-to use as x data to plot on the graph.</p>
+        <p>The image source url</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> &#x27;x&#x27;</p>
     
 
     
@@ -604,9 +754,9 @@ to use as x data to plot on the graph.</p>
 </div>
 
                 
-                    <div id="property_xData" class="property item">
-    <h3 class="name"><code>xData</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_svgHeight" class="property item">
+    <h3 class="name"><code>svgHeight</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -627,7 +777,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l76"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:76</code></a>
+        <a href="../files/app-addon_components_nf-image.js.html#l133"><code>app-addon&#x2F;components&#x2F;nf-image.js:133</code></a>
         
         </p>
 
@@ -637,7 +787,7 @@ to use as x data to plot on the graph.</p>
     </div>
 
     <div class="description">
-        <p>Gets the x values from the <code>sortedData</code>.</p>
+        <p>The height, in pixels of the image.</p>
 
     </div>
 
@@ -649,9 +799,9 @@ to use as x data to plot on the graph.</p>
 </div>
 
                 
-                    <div id="property_xPropFn" class="property item">
-    <h3 class="name"><code>xPropFn</code></h3>
-    <span class="type">Function</span>
+                    <div id="property_svgWidth" class="property item">
+    <h3 class="name"><code>svgWidth</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -672,7 +822,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l52"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:52</code></a>
+        <a href="../files/app-addon_components_nf-image.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-image.js:124</code></a>
         
         </p>
 
@@ -682,8 +832,234 @@ to use as x data to plot on the graph.</p>
     </div>
 
     <div class="description">
-        <p>The function to get the x value from each 
-<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+        <p>The width, in pixels, of the image.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_svgX" class="property item">
+    <h3 class="name"><code>svgX</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-image.js.html#l106"><code>app-addon&#x2F;components&#x2F;nf-image.js:106</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The pixel value at which to plot the image.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_svgY" class="property item">
+    <h3 class="name"><code>svgY</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-image.js.html#l115"><code>app-addon&#x2F;components&#x2F;nf-image.js:115</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The pixel value at which to plot the image.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_width" class="property item">
+    <h3 class="name"><code>width</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-image.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-image.js:38</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The width as a domain value. Does not handle ordinal
+scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x" class="property item">
+    <h3 class="name"><code>x</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-image.js.html#l22"><code>app-addon&#x2F;components&#x2F;nf-image.js:22</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The domain x value to place the image at.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_xScale" class="property item inherited">
+    <h3 class="name"><code>xScale</code></h3>
+    <span class="type">d3.scale</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-requires-scale-source.html#property_xScale">mixins.graph-requires-scale-source</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l28"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:28</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x scale used by this component</p>
 
     </div>
 
@@ -697,7 +1073,7 @@ to use as x data to plot on the graph.</p>
                 
                     <div id="property_y" class="property item">
     <h3 class="name"><code>y</code></h3>
-    <span class="type">String</span>
+    <span class="type">Unknown</span>
 
     
 
@@ -718,7 +1094,7 @@ to use as x data to plot on the graph.</p>
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l41"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:41</code></a>
+        <a href="../files/app-addon_components_nf-image.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-image.js:29</code></a>
         
         </p>
 
@@ -728,14 +1104,12 @@ to use as x data to plot on the graph.</p>
     </div>
 
     <div class="description">
-        <p>The path of the property on each object in 
-<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-to use as y data to plot on the graph.</p>
+        <p>The domain y value to place the image at.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> &#x27;y&#x27;</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -744,9 +1118,9 @@ to use as y data to plot on the graph.</p>
 </div>
 
                 
-                    <div id="property_yData" class="property item">
-    <h3 class="name"><code>yData</code></h3>
-    <span class="type">Array</span>
+                    <div id="property_yScale" class="property item inherited">
+    <h3 class="name"><code>yScale</code></h3>
+    <span class="type">d3.scale</span>
 
     
 
@@ -759,15 +1133,12 @@ to use as y data to plot on the graph.</p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/mixins.graph-requires-scale-source.html#property_yScale">mixins.graph-requires-scale-source</a>:
             
         
         
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l84"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:84</code></a>
+        <a href="../files/app-addon_mixins_graph-requires-scale-source.js.html#l36"><code>app-addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:36</code></a>
         
         </p>
 
@@ -777,53 +1148,7 @@ to use as y data to plot on the graph.</p>
     </div>
 
     <div class="description">
-        <p>Gets the y values from the <code>sortedData</code></p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_yPropFn" class="property item">
-    <h3 class="name"><code>yPropFn</code></h3>
-    <span class="type">Function</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_mixins_graph-data-graphic.js.html#l64"><code>app-addon&#x2F;mixins&#x2F;graph-data-graphic.js:64</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The function to get the y value from each 
-<a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+        <p>The y scale used by this component</p>
 
     </div>
 

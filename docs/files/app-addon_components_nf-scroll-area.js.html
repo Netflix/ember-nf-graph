@@ -91,6 +91,8 @@
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
             
+                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
+            
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
@@ -218,11 +220,10 @@ export default Ember.Component.extend({
 	*/
 	height: function(key, value) {
 		if(arguments.length &gt; 1) {
-			this._height = value;
 			this.$().height(value);
 		}
-		return this._height;
-	}.property(),
+		return this.$().height();
+	}.property().volatile(),
 
 
 	/**
@@ -232,11 +233,10 @@ export default Ember.Component.extend({
 	*/
 	width: function(key, value) {
 		if(arguments.length &gt; 1) {
-			this._width = value;
 			this.$().width(value);
 		}
-		return this._width;
-	}.property(),
+		return this.$().width();
+	}.property().volatile(),
 
 	/**
 		Gets or sets the scrollTop of the area
@@ -246,11 +246,10 @@ export default Ember.Component.extend({
 	*/
 	scrollTop: function(key, value) {
 		if(arguments.length &gt; 1) {
-			this._scrollTop = value;
 			this.$().scrollTop(value);
 		}
-		return this._scrollTop;
-	}.property(),
+		return this.$().scrollTop();
+	}.property().volatile(),
 
 	/**
 		Gets or sets the scrollLeft of the area
@@ -260,11 +259,10 @@ export default Ember.Component.extend({
 	*/
 	scrollLeft: function(key, value) {
 		if(arguments.length &gt; 1) {
-			this._scrollLeft = value;
 			this.$().scrollLeft(value);
 		}
-		return this._scrollLeft;
-	}.property(),
+		return this.$().scrollLeft();
+	}.property().volatile(),
 
 	/**
 		Gets the scrollHeight of the area
@@ -283,11 +281,10 @@ export default Ember.Component.extend({
 	*/
 	outerHeight: function(key, value) {
 		if(arguments.length &gt; 1) {
-			this._outerHeight = value;
 			this.$().outerHeight(value);
 		}
-		return this._outerHeight;
-	}.property(),
+		return this.$().outerHeight();
+	}.property().volatile(),
 
 	/**
 		Gets or sets the outerWidth of the area
@@ -297,11 +294,10 @@ export default Ember.Component.extend({
 	*/
 	outerWidth: function(key, value) {
 		if(arguments.length &gt; 1) {
-			this._outerWidth = value;
 			this.$().outerWidth(value);
 		}
-		return this._outerWidth;
-	}.property(),
+		return this.$().outerWidth();
+	}.property().volatile(),
 
 	/**
 		The optional action data to send with the action contextl
@@ -312,7 +308,6 @@ export default Ember.Component.extend({
 	actionData: null,
 
 	_onScroll: function(e){
-		this.updateMeasurements();
 		var context = this.createActionContext(e);
 		this.trigger(&#x27;didScroll&#x27;, context);
 		this.sendAction(&#x27;scrollAction&#x27;, context);
@@ -320,7 +315,6 @@ export default Ember.Component.extend({
 	},
 
 	_onResize: function(e) {
-		this.updateMeasurements();
 		var context = this.createActionContext(e);
 		this.trigger(&#x27;didResize&#x27;, context);
 		this.sendAction(&#x27;resizeAction&#x27;, context);
@@ -341,34 +335,22 @@ export default Ember.Component.extend({
 		return ScrollAreaActionContext.create(context);
 	},
 
-	/**
-		Updates the measurement properties. You probably don&#x27;t need to call this, ever.
-		@method updateMeasurements
-		@private
-	*/
-	updateMeasurements: function(){
-		var elem = this.$();
-		this.set(&#x27;scrollTop&#x27;, elem.scrollTop());
-		this.set(&#x27;scrollHeight&#x27;, elem[0].scrollHeight);
-		this.set(&#x27;outerHeight&#x27;, elem.outerHeight());
-		this.set(&#x27;height&#x27;, elem.height());
-		this.set(&#x27;scrollLeft&#x27;, elem.scrollLeft());
-		this.set(&#x27;scrollWidth&#x27;, elem[0].scrollWidth);
-		this.set(&#x27;outerWidth&#x27;, elem.outerWidth());
-		this.set(&#x27;width&#x27;, elem.width());
-	},
 
 	_setupElement: function() {
-		var elem = this.$();
-		elem.on(&#x27;scroll&#x27;, this._onScroll.bind(this));
-		elem.on(&#x27;resize&#x27;, this._onResize.bind(this));
+		var elem = this.get(&#x27;element&#x27;);
+		if(elem) {
+			elem.addEventListener(&#x27;scroll&#x27;, this._onScroll.bind(this));
+			elem.addEventListener(&#x27;resize&#x27;, this._onResize.bind(this));
+		}
 		this.updateMeasurements();
 	}.on(&#x27;didInsertElement&#x27;),
 
 	_unsubscribeEvents: function(){
-		var elem = this.$();
-		elem.off(&#x27;scroll&#x27;, this._onScroll);
-		elem.off(&#x27;resize&#x27;, this._onResize);
+		var elem = this.get(&#x27;element&#x27;);
+		if(elem) {
+			elem.removeEventListener(&#x27;scroll&#x27;, this._onScroll);
+			elem.removeEventListener(&#x27;resize&#x27;, this._onResize);
+		}
 	}.on(&#x27;willDestroyElement&#x27;),
 });
     </pre>

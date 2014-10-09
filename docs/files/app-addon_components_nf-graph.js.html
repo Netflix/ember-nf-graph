@@ -91,6 +91,8 @@
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
             
+                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
+            
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
@@ -237,7 +239,7 @@ var scaleProperty = function(axis) {
       var scale = scaleFactory();
 
       if(scaleType === &#x27;ordinal&#x27;) {
-        scale = scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+        scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
       } else {        
         scale = scale.domain(domain).range(range).clamp(true);
       }

@@ -26,6 +26,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-x-axis",
         "components.nf-y-axis",
         "components.nf-y-diff",
+        "components.ng-image",
         "mixins.graph-area-utils",
         "mixins.graph-data-graphic",
         "mixins.graph-data-position-utils",

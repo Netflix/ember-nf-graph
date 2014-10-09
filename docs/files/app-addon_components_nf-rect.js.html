@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/mixins/graph-registered-graphic.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-rect.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -166,45 +166,125 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/mixins/graph-registered-graphic.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-rect.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import RequiresScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 
 /**
-	@namespace mixins
-	@class graph-registered-graphic
-	@extends Ember.Mixin
+	A rectangle that plots using domain values from the graph. Uses an SVGPathElement
+	to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights.
 */
-export default Ember.Mixin.create({
+export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+	tagName: &#x27;path&#x27;,
+
+	attributeBindings: [&#x27;d&#x27;],
+
+	classNames: [&#x27;nf-rect&#x27;],
 
 	/**
-		calls {{#crossLink &quot;components.nf-graph/registerGraphic&quot;}}{{/crossLink}} on
-		&#x60;didInsertElement&#x60;.
-		@method _registerGraphic
-		@private
+		The domain x value to place the rect at.
+		@property x
+		@default null
 	*/
-	_registerGraphic: function() {
-		var graph = this.get(&#x27;graph&#x27;);
-		if(graph) {
-			graph.registerGraphic(this);
-		}
-	}.on(&#x27;didInsertElement&#x27;),
+	x: null,
 
 	/**
-		calls {{#crossLink &quot;components.nf-graph/unregisterGraphic&quot;}}{{/crossLink}} on
-		&#x60;didInsertElement&#x60;.
-		@method _unregisterGraphic
-		@private
+		The domain y value to place the rect at.
+		@property y
+		@default null
 	*/
-	_unregisterGraphic: function(){
-		var graph = this.get(&#x27;graph&#x27;);
-		if(graph) {
-			graph.unregisterGraphic(this);
+	y: null,
+
+	_width: 0,
+
+	/**
+		The width as a domain value. If xScale is ordinal, 
+		then this value is the indice offset to which to draw the 
+		rectangle. In other words, if it&#x27;s &#x60;2&#x60;, then draw the rectangle
+		to two ordinals past whatever &#x60;x&#x60; is set to.
+		@property width
+		@type Number
+		@default 0
+	*/
+	width: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._width = +value;
 		}
-	}.on(&#x27;willDestroyElement&#x27;)
+		return this._width;
+	}.property(),
+
+	_height: 0,
+
+	/**
+		The height as a domain value. If the yScale is ordinal,
+		this value is the indice offset to which to draw the rectangle.
+		For example, if the height is &#x60;3&#x60; then draw the rectangle
+		to two ordinals passed whatever &#x60;y&#x60; is set to.
+		@property height
+		@type Number
+		@default 0
+	*/
+	height: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._height = +value;
+		}
+		return this._height;
+	}.property(),
+
+	x1: function(){
+		var xScale = this.get(&#x27;xScale&#x27;);
+		var w = this.get(&#x27;width&#x27;);
+		var x = this.get(&#x27;x&#x27;);
+		if(xScale.rangeBands) {
+			var domain = xScale.domain();
+			var fromIndex = domain.indexOf(x);
+			var toIndex = fromIndex + w;
+			return normalizeScale(xScale, domain[toIndex]);
+		} else {
+			x = +x || 0;
+			return normalizeScale(xScale, w + x);
+		}
+	}.property(&#x27;width&#x27;, &#x27;x&#x27;, &#x27;xScale&#x27;),
+
+	y1: function(){
+		var yScale = this.get(&#x27;yScale&#x27;);
+		var h = this.get(&#x27;height&#x27;);
+		var y = this.get(&#x27;y&#x27;);
+		if(yScale.rangeBands) {
+			var domain = yScale.domain();
+			var fromIndex = domain.indexOf(y);
+			var toIndex = fromIndex + h;
+			return normalizeScale(yScale, domain[toIndex]);
+		} else {
+			y = +y || 0;
+			return normalizeScale(yScale, h + y);
+		}
+	}.property(&#x27;height&#x27;, &#x27;y&#x27;, &#x27;yScale&#x27;),
+
+	x0: function(){
+		return normalizeScale(this.get(&#x27;xScale&#x27;), this.get(&#x27;x&#x27;));
+	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
+
+	y0: function() {
+		return normalizeScale(this.get(&#x27;yScale&#x27;), this.get(&#x27;y&#x27;));
+	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
+
+	d: function(){
+		var x0 = this.get(&#x27;x0&#x27;);
+		var y0 = this.get(&#x27;y0&#x27;);
+		var x1 = this.get(&#x27;x1&#x27;);
+		var y1 = this.get(&#x27;y1&#x27;);
+		return &#x27;M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2&#x27;.fmt(x0, y0, x1, y1);
+	}.property(&#x27;x0&#x27;, &#x27;y0&#x27;, &#x27;x1&#x27;, &#x27;y1&#x27;),
 });
+
+function normalizeScale(scale, val) {
+	return (scale ? scale(val) : 0) || 0;
+}
     </pre>
 </div>
 
