@@ -31,6 +31,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 						[50, 50],
 						[100, 100]
 					]
+					
 	@property points
 	@type Array
 	*/
