@@ -33,19 +33,34 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	*/
 	y: null,
 
+	_width: 0,
+
 	/**
 		The width as a domain value
 		@property width
-		@default null
+		@type Number
+		@default 0
 	*/
-	width: null,
+	width: function(key, value) {
+		if(arguments.length > 1) {
+			this._width = Math.max(0, +value) || 0;
+		}
+		return this._width;
+	}.property(),
+
+	_height: 0,
 
 	/**
 		The height as a domain value
 		@property height
 		@default null
 	*/
-	height: null,
+	height: function(key, value) {
+		if(arguments.length > 1) {
+			this._height = Math.max(0, +value) || 0;
+		}
+		return this._height;
+	}.property(),
 
 	/**
 		The image source url
@@ -61,47 +76,47 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		return $elem.attr('xlink:href');
 	}.property(),
 
-	/**
-		The computed x pixel position of the image.
-		@property svgX
-		@type Number
-		@readonly
-	*/
-	svgX: function(){
-		var scale = this.get('xScale');
-		return (scale ? scale(this.get('x')) : 0) || 0;
+	x0: function(){
+		return normalizeScale(this.get('xScale'), this.get('x'));
 	}.property('x', 'xScale'),
 
-	/**
-		The computed y pixel position of the image.
-		@property svgY
-		@type Number
-		@readonly
-	*/
-	svgY: function(){
-		var scale = this.get('yScale');
-		return (scale ? scale(this.get('y')) : 0) || 0;
+	y0: function(){
+		return normalizeScale(this.get('yScale'), this.get('y'));
 	}.property('y', 'yScale'),
 
-	/**
-		The computed width in pixels of the image.
-		@property svgWidth
-		@type Number
-		@readonly
-	*/
-	svgWidth: function(){
+	x1: function(){
 		var scale = this.get('xScale');
-		return (scale ? scale(this.get('width')) : 0) || 0;
-	}.property('width', 'xScale'),
+		if(scale.rangeBands) {
+			throw new Error('nf-image does not support ordinal scales');
+		}
+		return normalizeScale(scale, this.get('width') + this.get('x'));
+	}.property('xScale', 'width', 'x'),
 
-	/**
-		The computed height in pixels of the image.
-		@property svgHeight
-		@type Number
-		@readonly
-	*/
-	svgHeight: function(){
+	y1: function(){
 		var scale = this.get('yScale');
-		return (scale ? scale(this.get('height')) : 0) || 0;
-	}.property('height', 'yScale'),
+		if(scale.rangeBands) {
+			throw new Error('nf-image does not support ordinal scales');
+		}
+		return normalizeScale(scale, this.get('height') + this.get('y'));
+	}.property('yScale', 'height', 'y'),
+
+	svgX: function(){
+		return Math.min(this.get('x0'), this.get('x1'));
+	}.property('x0', 'x1'),
+
+	svgY: function(){
+		return Math.min(this.get('y0'), this.get('y1'));
+	}.property('y0', 'y1'),
+
+	svgWidth: function(){
+		return Math.abs(this.get('x0') - this.get('x1'));
+	}.property('x0', 'x1'),
+
+	svgHeight: function(){
+		return Math.abs(this.get('y0') - this.get('y1'));
+	}.property('y0', 'y1'),
 });
+
+function normalizeScale(scale, val) {
+	return (scale ? scale(val) : 0) || 0;
+}
