@@ -48,7 +48,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		var groupOuterPadding = this.get('groupOuterPadding');
 		return d3.scale.ordinal()
 			.domain(barsDomain)
-			.rangeRoundBands([0, groupWidth], groupPadding, groupOuterPadding);
+			.rangeBands([0, groupWidth], groupPadding, groupOuterPadding);
 	}.property('groupWidth', 'barsDomain.[]', 'groupPadding', 'groupOuterPadding'),
 
 	barsWidth: function() {

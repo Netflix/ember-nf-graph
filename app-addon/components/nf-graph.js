@@ -67,7 +67,7 @@ var scaleProperty = function(axis) {
       var scale = scaleFactory();
 
       if(scaleType === 'ordinal') {
-        scale = scale.domain(domain).rangeRoundBands(range, ordinalPadding, ordinalOuterPadding);
+        scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
       } else {        
         scale = scale.domain(domain).range(range).clamp(true);
       }
