@@ -48,11 +48,10 @@ export default Ember.Component.extend({
 	*/
 	height: function(key, value) {
 		if(arguments.length > 1) {
-			this._height = value;
 			this.$().height(value);
 		}
-		return this._height;
-	}.property(),
+		return this.$().height();
+	}.property().volatile(),
 
 
 	/**
@@ -62,11 +61,10 @@ export default Ember.Component.extend({
 	*/
 	width: function(key, value) {
 		if(arguments.length > 1) {
-			this._width = value;
 			this.$().width(value);
 		}
-		return this._width;
-	}.property(),
+		return this.$().width();
+	}.property().volatile(),
 
 	/**
 		Gets or sets the scrollTop of the area
@@ -76,11 +74,10 @@ export default Ember.Component.extend({
 	*/
 	scrollTop: function(key, value) {
 		if(arguments.length > 1) {
-			this._scrollTop = value;
 			this.$().scrollTop(value);
 		}
-		return this._scrollTop;
-	}.property(),
+		return this.$().scrollTop();
+	}.property().volatile(),
 
 	/**
 		Gets or sets the scrollLeft of the area
@@ -90,11 +87,10 @@ export default Ember.Component.extend({
 	*/
 	scrollLeft: function(key, value) {
 		if(arguments.length > 1) {
-			this._scrollLeft = value;
 			this.$().scrollLeft(value);
 		}
-		return this._scrollLeft;
-	}.property(),
+		return this.$().scrollLeft();
+	}.property().volatile(),
 
 	/**
 		Gets the scrollHeight of the area
@@ -113,11 +109,10 @@ export default Ember.Component.extend({
 	*/
 	outerHeight: function(key, value) {
 		if(arguments.length > 1) {
-			this._outerHeight = value;
 			this.$().outerHeight(value);
 		}
-		return this._outerHeight;
-	}.property(),
+		return this.$().outerHeight();
+	}.property().volatile(),
 
 	/**
 		Gets or sets the outerWidth of the area
@@ -127,11 +122,10 @@ export default Ember.Component.extend({
 	*/
 	outerWidth: function(key, value) {
 		if(arguments.length > 1) {
-			this._outerWidth = value;
 			this.$().outerWidth(value);
 		}
-		return this._outerWidth;
-	}.property(),
+		return this.$().outerWidth();
+	}.property().volatile(),
 
 	/**
 		The optional action data to send with the action contextl
@@ -142,7 +136,6 @@ export default Ember.Component.extend({
 	actionData: null,
 
 	_onScroll: function(e){
-		this.updateMeasurements();
 		var context = this.createActionContext(e);
 		this.trigger('didScroll', context);
 		this.sendAction('scrollAction', context);
@@ -150,7 +143,6 @@ export default Ember.Component.extend({
 	},
 
 	_onResize: function(e) {
-		this.updateMeasurements();
 		var context = this.createActionContext(e);
 		this.trigger('didResize', context);
 		this.sendAction('resizeAction', context);
@@ -171,22 +163,6 @@ export default Ember.Component.extend({
 		return ScrollAreaActionContext.create(context);
 	},
 
-	/**
-		Updates the measurement properties. You probably don't need to call this, ever.
-		@method updateMeasurements
-		@private
-	*/
-	updateMeasurements: function(){
-		var elem = this.$();
-		this.set('scrollTop', elem.scrollTop());
-		this.set('scrollHeight', elem[0].scrollHeight);
-		this.set('outerHeight', elem.outerHeight());
-		this.set('height', elem.height());
-		this.set('scrollLeft', elem.scrollLeft());
-		this.set('scrollWidth', elem[0].scrollWidth);
-		this.set('outerWidth', elem.outerWidth());
-		this.set('width', elem.width());
-	},
 
 	_setupElement: function() {
 		var elem = this.get('element');
