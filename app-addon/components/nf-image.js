@@ -36,7 +36,8 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	_width: 0,
 
 	/**
-		The width as a domain value
+		The width as a domain value. Does not handle ordinal
+		scales. To set a pixel value, set `svgWidth` directly.
 		@property width
 		@type Number
 		@default 0
@@ -51,7 +52,9 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	_height: 0,
 
 	/**
-		The height as a domain value
+		The height as a domain value. Does not 
+		handle ordinal scales. To set a pixel value, just
+		set `svgHeight` directly.
 		@property height
 		@default null
 	*/
@@ -100,18 +103,38 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		return normalizeScale(scale, this.get('height') + this.get('y'));
 	}.property('yScale', 'height', 'y'),
 
+	/**
+		The pixel value at which to plot the image.
+		@property svgX
+		@type Number
+	*/
 	svgX: function(){
 		return Math.min(this.get('x0'), this.get('x1'));
 	}.property('x0', 'x1'),
 
+	/**
+		The pixel value at which to plot the image.
+		@property svgY
+		@type Number
+	*/
 	svgY: function(){
 		return Math.min(this.get('y0'), this.get('y1'));
 	}.property('y0', 'y1'),
 
+	/**
+		The width, in pixels, of the image.
+		@property svgWidth
+		@type Number
+	*/
 	svgWidth: function(){
 		return Math.abs(this.get('x0') - this.get('x1'));
 	}.property('x0', 'x1'),
 
+	/**
+		The height, in pixels of the image.
+		@property svgHeight
+		@type Number
+	*/
 	svgHeight: function(){
 		return Math.abs(this.get('y0') - this.get('y1'));
 	}.property('y0', 'y1'),

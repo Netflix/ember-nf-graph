@@ -30,7 +30,10 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	_width: 0,
 
 	/**
-		The width as a domain value
+		The width as a domain value. If xScale is ordinal, 
+		then this value is the indice offset to which to draw the 
+		rectangle. In other words, if it's `2`, then draw the rectangle
+		to two ordinals past whatever `x` is set to.
 		@property width
 		@type Number
 		@default 0
@@ -45,7 +48,10 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	_height: 0,
 
 	/**
-		The height as a domain value
+		The height as a domain value. If the yScale is ordinal,
+		this value is the indice offset to which to draw the rectangle.
+		For example, if the height is `3` then draw the rectangle
+		to two ordinals passed whatever `y` is set to.
 		@property height
 		@type Number
 		@default 0
@@ -59,24 +65,32 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
 	x1: function(){
 		var xScale = this.get('xScale');
-		if(xScale.rangeBands) {
-			throw new Error('nf-rect does not support ordinal scales');
-		}
 		var w = this.get('width');
-		var x = +this.get('x') || 0;
-
-		return normalizeScale(xScale, w + x);
+		var x = this.get('x');
+		if(xScale.rangeBands) {
+			var domain = xScale.domain();
+			var fromIndex = domain.indexOf(x);
+			var toIndex = fromIndex + w;
+			return normalizeScale(xScale, domain[toIndex]);
+		} else {
+			x = +x || 0;
+			return normalizeScale(xScale, w + x);
+		}
 	}.property('width', 'x', 'xScale'),
 
 	y1: function(){
 		var yScale = this.get('yScale');
-		if(yScale.rangeBands) {
-			throw new Error('nf-rect does not support ordinal scales');
-		}
 		var h = this.get('height');
-		var y = +this.get('y') || 0;
-
-		return normalizeScale(yScale, h + y);
+		var y = this.get('y');
+		if(yScale.rangeBands) {
+			var domain = yScale.domain();
+			var fromIndex = domain.indexOf(y);
+			var toIndex = fromIndex + h;
+			return normalizeScale(yScale, domain[toIndex]);
+		} else {
+			y = +y || 0;
+			return normalizeScale(yScale, h + y);
+		}
 	}.property('height', 'y', 'yScale'),
 
 	x0: function(){
