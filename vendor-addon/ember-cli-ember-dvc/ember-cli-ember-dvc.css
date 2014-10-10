@@ -191,11 +191,11 @@
   visibility: visible;
   cursor: default; }
 
-.nf-y-diff.positive rect {
+.nf-y-diff.positive .nf-y-diff-rect {
   fill: lime; }
 .nf-y-diff.positive text {
   fill: black; }
-.nf-y-diff.negative rect {
+.nf-y-diff.negative .nf-y-diff-rect {
   fill: #ca0000; }
 .nf-y-diff.negative text {
   fill: white; }

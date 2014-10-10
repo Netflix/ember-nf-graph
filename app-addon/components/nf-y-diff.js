@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
-import { property } from '../utils/computed-property-helpers';
 import RequireScaleSource from '../mixins/graph-requires-scale-source';
+import { normalizeScale } from '../utils/nf/scale-utils';
 
 /**
 	Draws a box underneath (or over) the y axis to between the given `a` and `b`
@@ -65,39 +65,29 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@type Number
 		@readonly
 	*/
-	yCenter: property('height', 'y', function(height, y) {
-		return y + (height / 2) || 0;
-	}),
+	yCenter: function(){
+		var yA = +this.get('yA') || 0;
+		var yB = +this.get('yB') || 0;
+		return (yA + yB) / 2;
+	}.property('yA', 'yB'),
 
 	/**
-		The calculated top of the difference box, in pixels
-		@property y
+		The y pixel value of b.
+		@property yB
 		@type Number
-		@readonly
 	*/
-	y: property('yScale', 'a', 'b', function(yScale, a, b) {
-		if(!yScale) {
-			return 0;
-		}
-		a = a || 0;
-		b = b || 0;
-		return Math.min(yScale(a), yScale(b)) || 0;
-	}),
+	yB: function(){
+		return normalizeScale(this.get('yScale'), this.get('b'));
+	}.property('yScale', 'b'),
 
 	/**
-		The calculated height of the difference box, in pixels.
-		@property height
+		The y pixel value of a.
+		@property yA
 		@type Number
-		@readonly
 	*/
-	height: property('yScale', 'a', 'b', function(yScale, a, b) {
-		if(!yScale) {
-			return 0;
-		}
-		a = a || 0;
-		b = b || 0;
-		return Math.abs(yScale(a) - yScale(b));
-	}),
+	yA: function() {
+		return normalizeScale(this.get('yScale'), this.get('a'));
+	}.property('yScale', 'a'),
 
 	/**
 		The SVG transformation of the component.
@@ -114,9 +104,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@type Number
 		@readonly
 	*/
-	diff: property('a', 'b', function(a, b){
-		return b - a;
-	}),
+	diff: function(){
+		return +this.get('b') - this.get('a');
+	}.property('a', 'b'),
 
 	/**
 		Returns `true` if `diff` is a positive number
@@ -157,9 +147,20 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@type Number
 		@readonly
 	*/
-	contentX: property('isOrientRight', 'width', 'contentPadding', function(isOrientRight, width, contentPadding) {
-		return isOrientRight ? width - contentPadding : contentPadding;
-	}),
+	contentX: function(){
+		var contentPadding = this.get('contentPadding');
+		var width = this.get('width');
+		return this.get('isOrientRight') ? width - contentPadding : contentPadding;
+	}.property('isOrientRight', 'width', 'contentPadding'),
+
+	rectPath: function(){
+		var x = 0;
+		var w = +this.get('width') || 0;
+		var x2 = x + w;
+		var yA = +this.get('yA') || 0;
+		var yB = +this.get('yB') || 0;
+		return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x, yA, x2, yB);
+	}.property('yA', 'yB', 'width'),
 
 	/**
 		The SVG transformation used to position the content container.
@@ -168,72 +169,77 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	contentTransform: property('yCenter', 'contentX', function(yCenter, contentX) {
-		return 'translate(%@ %@)'.fmt(contentX, yCenter);
-	}),
+	contentTransform: function(){
+		return 'translate(%@ %@)'.fmt(this.get('contentX'), this.get('yCenter'));
+	}.property('contentX', 'yCenter'),
 
 	/**
-		Begins the the D3 transition to adjust the vertical positions of the diff box
-		@method _transitionalUpdate
-		@private
+		Sets up the d3 related elements when component is inserted 
+		into the DOM
+		@method didInsertElement
 	*/
-	_transitionalUpdate: function(){
-		var y = this.get('y');
-		var height = this.get('height');
+	didInsertElement: function(){
+		var element = this.get('element');
+		var g = d3.select(element);
+		
+		var rectPath = this.get('rectPath');
+		var rect = g.insert('path', ':first-child')
+			.attr('class', 'nf-y-diff-rect')
+			.attr('d', rectPath);
+
 		var contentTransform = this.get('contentTransform');
-		var duration = this.duration;
-		var elem = this.get('elem');
+		var content = g.select('.nf-y-diff-content');
+		content.attr('transform', contentTransform);
 
-		if(elem) {
-			var d3Elem = d3.select(elem);
-
-			d3Elem.selectAll('.nf-y-diff rect')
-				.transition()
-				.duration(duration)
-				.attr('height', height)
-				.attr('y', y);
-
-			d3Elem.selectAll('.nf-y-diff-content')
-				.transition()
-				.duration(duration)
-				.attr('transform', contentTransform);
-		}
+		this.set('rectElement', rect);
+		this.set('contentElement', content);
 	},
 
 	/**
-		Updates the elements horizontal positions using D3.
-		@method _nonTransitionalUpdate
-		@private
+		Performs the transition (animation) of the elements.
+		@method doTransition
 	*/
-	_nonTransitionalUpdate: function(){
+	doTransition: function(){
+		var duration = this.get('duration');
+		var rectPath = this.get('rectPath');
 		var contentTransform = this.get('contentTransform');
-		var elem = this.get('elem');
-		if(elem) {
-			d3.select(elem).selectAll('.nf-y-diff-content')
-				.attr('transform', contentTransform);
-		}
+		var rectElement = this.get('rectElement');
+		var contentElement = this.get('contentElement');
+
+		rectElement.transition().duration(duration)
+			.attr('d', rectPath);
+
+		contentElement.transition().duration(duration)
+			.attr('transform', contentTransform);
 	},
 
 	/**
-		Schedules a transition when `a` or `b` changes, and when the component is initialized.
-		@method _triggerUpdates
-		@private
+		Schedules a transition once at afterRender.
+		@method transition
 	*/
-	_triggerUpdates: function() {
-		Ember.run.scheduleOnce('afterRender', this, this._transitionalUpdate);
+	transition: function(){
+		Ember.run.scheduleOnce('afterRender', this, this.doTransition);
 	}.observes('a', 'b').on('init'),
 
+	/**
+		Updates to d3 managed DOM elments that do
+		not require transitioning, because they're width-related.
+		@method doAdjustWidth
+	*/
+	doAdjustWidth: function(){
+		var contentElement = this.get('contentElement');
+		var contentTransform = this.get('contentTransform');
+		contentElement.attr('transform', contentTransform);
+	},
 
 	/**
-		Schedules non-transitioned properties on the elements to update when underlying values are changed.
-		@method _triggerNonTransitionalUpdate
-		@private
+		Schedules a call to `doAdjustWidth` on afterRender
+		@method adjustWidth
 	*/
-	_triggerNonTransitionalUpdate: function(){
-		Ember.run.scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
+	adjustWidth: function(){
+		Ember.run.scheduleOnce('afterRender', this, this.doAdjustWidth);
 	}.observes('isOrientRight', 'width', 'contentPadding').on('init'),
-
-	_getElement: function(){
-		this.set('elem', this.$()[0]);
-	}.on('didInsertElement'),
 });
+
+
+

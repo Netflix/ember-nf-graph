@@ -1,6 +1,6 @@
 .nf-y-diff {
   &.positive {
-    rect {
+    .nf-y-diff-rect {
       fill: lime;
     }
 
@@ -10,7 +10,7 @@
   }
 
   &.negative {
-    rect {
+    .nf-y-diff-rect {
       fill: $red;
     }
 
@@ -27,7 +27,6 @@
   }
 
   &.orient-right {
-
     .nf-y-diff-content {
       text {
         text-anchor: end;

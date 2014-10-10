@@ -258,29 +258,36 @@ domain values. Component content is used to template a label in that box.</p>
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__nonTransitionalUpdate">_nonTransitionalUpdate</a>
+                            <li class="index-item method">
+                                <a href="#method_adjustWidth">adjustWidth</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__transitionalUpdate">_transitionalUpdate</a>
+                            <li class="index-item method">
+                                <a href="#method_didInsertElement">didInsertElement</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__triggerNonTransitionalUpdate">_triggerNonTransitionalUpdate</a>
+                            <li class="index-item method">
+                                <a href="#method_doAdjustWidth">doAdjustWidth</a>
 
                                 
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__triggerUpdates">_triggerUpdates</a>
+                            <li class="index-item method">
+                                <a href="#method_doTransition">doTransition</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_transition">transition</a>
 
                                 
                                 
@@ -347,13 +354,6 @@ domain values. Component content is used to template a label in that box.</p>
                         
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_height">height</a>
 
                                 
                                 
@@ -430,7 +430,14 @@ domain values. Component content is used to template a label in that box.</p>
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_y">y</a>
+                                <a href="#property_yA">yA</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_yB">yB</a>
 
                                 
                                 
@@ -517,8 +524,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__nonTransitionalUpdate" class="method item private">
-    <h3 class="name"><code>_nonTransitionalUpdate</code></h3>
+                    <div id="method_adjustWidth" class="method item">
+    <h3 class="name"><code>adjustWidth</code></h3>
 
     
         <span class="paren">()</span>
@@ -528,8 +535,6 @@ and assigns it to <code>graph</code></p>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -551,7 +556,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l203"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:203</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l235"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:235</code></a>
         
         </p>
 
@@ -562,7 +567,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Updates the elements horizontal positions using D3.</p>
+        <p>Schedules a call to <code>doAdjustWidth</code> on afterRender</p>
 
     </div>
 
@@ -574,8 +579,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__transitionalUpdate" class="method item private">
-    <h3 class="name"><code>_transitionalUpdate</code></h3>
+                    <div id="method_didInsertElement" class="method item">
+    <h3 class="name"><code>didInsertElement</code></h3>
 
     
         <span class="paren">()</span>
@@ -585,8 +590,6 @@ and assigns it to <code>graph</code></p>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -608,7 +611,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l175"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:175</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l176"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:176</code></a>
         
         </p>
 
@@ -619,7 +622,8 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Begins the the D3 transition to adjust the vertical positions of the diff box</p>
+        <p>Sets up the d3 related elements when component is inserted 
+into the DOM</p>
 
     </div>
 
@@ -631,8 +635,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__triggerNonTransitionalUpdate" class="method item private">
-    <h3 class="name"><code>_triggerNonTransitionalUpdate</code></h3>
+                    <div id="method_doAdjustWidth" class="method item">
+    <h3 class="name"><code>doAdjustWidth</code></h3>
 
     
         <span class="paren">()</span>
@@ -642,8 +646,6 @@ and assigns it to <code>graph</code></p>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -665,7 +667,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l227"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:227</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l224"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:224</code></a>
         
         </p>
 
@@ -676,7 +678,8 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Schedules non-transitioned properties on the elements to update when underlying values are changed.</p>
+        <p>Updates to d3 managed DOM elments that do
+not require transitioning, because they&#39;re width-related.</p>
 
     </div>
 
@@ -688,8 +691,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__triggerUpdates" class="method item private">
-    <h3 class="name"><code>_triggerUpdates</code></h3>
+                    <div id="method_doTransition" class="method item">
+    <h3 class="name"><code>doTransition</code></h3>
 
     
         <span class="paren">()</span>
@@ -699,8 +702,6 @@ and assigns it to <code>graph</code></p>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -722,7 +723,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l217"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:217</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l198"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:198</code></a>
         
         </p>
 
@@ -733,7 +734,62 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Schedules a transition when <code>a</code> or <code>b</code> changes, and when the component is initialized.</p>
+        <p>Performs the transition (animation) of the elements.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_transition" class="method item">
+    <h3 class="name"><code>transition</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l216"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:216</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Schedules a transition once at afterRender.</p>
 
     </div>
 
@@ -919,7 +975,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l164"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:164</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l165"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:165</code></a>
         
         </p>
 
@@ -964,7 +1020,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l154"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:154</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l144"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:144</code></a>
         
         </p>
 
@@ -1009,7 +1065,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l111"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:111</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l101"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:101</code></a>
         
         </p>
 
@@ -1122,51 +1178,6 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_height" class="property item">
-    <h3 class="name"><code>height</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l87"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:87</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The calculated height of the difference box, in pixels.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_isOrientRight" class="property item">
     <h3 class="name"><code>isOrientRight</code></h3>
     <span class="type">Boolean</span>
@@ -1190,7 +1201,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l129"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:129</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l119"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:119</code></a>
         
         </p>
 
@@ -1235,7 +1246,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l121"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:121</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l111"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:111</code></a>
         
         </p>
 
@@ -1282,7 +1293,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l145"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:145</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l135"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:135</code></a>
         
         </p>
 
@@ -1505,7 +1516,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l102"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:102</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l92"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:92</code></a>
         
         </p>
 
@@ -1550,7 +1561,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l137"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:137</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l127"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:127</code></a>
         
         </p>
 
@@ -1614,8 +1625,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_y" class="property item">
-    <h3 class="name"><code>y</code></h3>
+                    <div id="property_yA" class="property item">
+    <h3 class="name"><code>yA</code></h3>
     <span class="type">Number</span>
 
     
@@ -1637,7 +1648,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-y-diff.js.html#l72"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:72</code></a>
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l83"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:83</code></a>
         
         </p>
 
@@ -1647,7 +1658,52 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The calculated top of the difference box, in pixels</p>
+        <p>The y pixel value of a.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_yB" class="property item">
+    <h3 class="name"><code>yB</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-y-diff.js.html#l74"><code>app-addon&#x2F;components&#x2F;nf-y-diff.js:74</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y pixel value of b.</p>
 
     </div>
 
