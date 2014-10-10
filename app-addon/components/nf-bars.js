@@ -6,6 +6,7 @@ import parsePropExpr from '../utils/parse-property-expression';
 import RequireScaleSource from '../mixins/graph-requires-scale-source';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
 import { normalizeScale } from '../utils/nf/scale-utils';
+import { getRectPath } from '../utils/nf/svg-dom';
 
 /**
 	Adds a bar graph to an `nf-graph` component.
@@ -114,18 +115,17 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 			return null;
 		}
 
-		var barWidth = this.get('barWidth');
+		var w = this.get('barWidth');
 
 		return renderedData.map(function(d) {
-			var h = normalizeScale(yScale, d[1]);
-			var barClass = getBarClass ? getBarClass(d.data) : undefined;
+			var barClass = 'nf-bars-bar' + getBarClass ? ' ' + getBarClass(d.data) : '';
+			var x = normalizeScale(xScale, d[0]) + groupOffsetX;
+			var y = normalizeScale(yScale, d[1]);
+			var h = graphHeight - y;
 			return {
-				x: normalizeScale(xScale, d[1]) + groupOffsetX,
-				y: h,
-				width: barWidth,
-				height: graphHeight - h,
+				path: getRectPath(x, y, w, h),
 				className: barClass,
-				dataPoint: d,
+				data: d,
 			};
 		});
 	}.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass', 'barWidth', 'groupOffsetX'),

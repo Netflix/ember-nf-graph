@@ -103,3 +103,22 @@ export function getMousePoint(container, e) {
     y: y,
   };
 }
+
+/**
+  Creates an SVG path string for a rectangle
+  @method getRectPath
+  @param x the x position of the rectangle
+  @param y {Number} the y position of the rectangle
+  @param w {Number} the width of the rectangle
+  @param h {Number} the height of the rectangle
+  @return {String} the svg path string for the rectangle
+*/
+export function getRectPath(x, y, w, h) {
+  x = +x || 0;
+  y = +y || 0;
+  w = +w || 0;
+  h = +h || 0;
+  var x2 = w + x;
+  var y2 = h + y;
+  return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x, y, x2, y2);
+}
