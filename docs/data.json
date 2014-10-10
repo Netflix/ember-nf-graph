@@ -1173,7 +1173,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 6,
+            "line": 5,
             "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}",
             "extends": "Ember.Mixin"
         },
@@ -1206,7 +1206,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 5,
+            "line": 4,
             "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
@@ -1308,7 +1308,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 21,
+            "line": 23,
             "description": "Adds functionality to identify a parent control that will provide an x and\ny scale, then adds scaling properties to the component it's mixed in to."
         },
         "mixins.graph-selectable-graphic": {
@@ -4787,7 +4787,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 21,
+            "line": 20,
             "description": "Gets or sets the data used by the component to plot itself.",
             "itemtype": "property",
             "name": "data",
@@ -4798,7 +4798,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 30,
+            "line": 29,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as x data to plot on the graph.",
             "itemtype": "property",
             "name": "x",
@@ -4809,7 +4809,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 41,
+            "line": 40,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as y data to plot on the graph.",
             "itemtype": "property",
             "name": "y",
@@ -4820,7 +4820,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 52,
+            "line": 51,
             "description": "The function to get the x value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "xPropFn",
@@ -4831,7 +4831,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 64,
+            "line": 63,
             "description": "The function to get the y value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "yPropFn",
@@ -4842,7 +4842,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 76,
+            "line": 75,
             "description": "Gets the x values from the `sortedData`.",
             "itemtype": "property",
             "name": "xData",
@@ -4853,7 +4853,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 84,
+            "line": 83,
             "description": "Gets the y values from the `sortedData`",
             "itemtype": "property",
             "name": "yData",
@@ -4864,7 +4864,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 92,
+            "line": 91,
             "description": "The sorted and mapped data pulled from {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nAn array of arrays, structures as so:\n\n      [[x,y],[x,y],[x,y]];\n\n** each inner array also has a property `data` on it, containing the original data object **\n\nWhen this property is computed, it also updates the `xData` and `yData` properties of the graphic.",
             "itemtype": "property",
             "name": "sortedData",
@@ -4875,7 +4875,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 145,
+            "line": 143,
             "description": "The list of data points from {{#crossLink \"mixins.graph-data-graphc/sortedData:property\"}}{{/crossLink}} that\nfits within the x domain, plus up to one data point outside of that domain in each direction.",
             "itemtype": "property",
             "name": "renderedData",
@@ -4886,7 +4886,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 172,
+            "line": 176,
             "description": "The first element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "firstSortedData",
@@ -4897,7 +4897,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 192,
+            "line": 198,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
@@ -4938,7 +4938,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 13,
+            "line": 12,
             "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'none': no tracking behavior\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
             "itemtype": "property",
             "name": "trackingMode",
@@ -4949,7 +4949,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 80,
+            "line": 84,
             "description": "The action name to send to the controller when the `hoverChange` event fires",
             "itemtype": "property",
             "name": "hoverChange",
@@ -4960,7 +4960,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 88,
+            "line": 92,
             "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
             "itemtype": "method",
             "name": "didContentHoverChange",
@@ -4978,7 +4978,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 104,
+            "line": 108,
             "description": "Event handler for didHoverChange. Sends hoverChange action.",
             "itemtype": "method",
             "name": "didHoverChange",
@@ -4994,7 +4994,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 127,
+            "line": 131,
             "description": "Name of the action to send on `hoverEnd`",
             "itemtype": "property",
             "name": "hoverEnd",
@@ -5005,7 +5005,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 135,
+            "line": 139,
             "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
             "itemtype": "method",
             "name": "didHoverEnd",
@@ -5021,7 +5021,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 156,
+            "line": 160,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
@@ -5032,7 +5032,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 164,
+            "line": 168,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
@@ -5043,7 +5043,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 182,
+            "line": 186,
             "description": "The action to send on `willTrack`",
             "itemtype": "property",
             "name": "willTrack",
@@ -5054,7 +5054,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 190,
+            "line": 194,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -5065,7 +5065,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 208,
+            "line": 212,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -5083,7 +5083,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 224,
+            "line": 228,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_initializeTrackingDot",
@@ -5166,7 +5166,7 @@
         },
         {
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 28,
+            "line": 30,
             "description": "The x scale used by this component",
             "itemtype": "property",
             "name": "xScale",
@@ -5177,7 +5177,7 @@
         },
         {
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 36,
+            "line": 38,
             "description": "The y scale used by this component",
             "itemtype": "property",
             "name": "yScale",
@@ -5188,7 +5188,7 @@
         },
         {
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 52,
+            "line": 54,
             "description": "The zoom multiplier for the x scale",
             "itemtype": "property",
             "name": "scaleZoomX",
@@ -5199,7 +5199,7 @@
         },
         {
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 65,
+            "line": 67,
             "description": "The zoom multiplier for the y scale",
             "itemtype": "property",
             "name": "scaleZoomY",
@@ -5210,7 +5210,7 @@
         },
         {
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 78,
+            "line": 80,
             "description": "The offset, in pixels, for the x scale",
             "itemtype": "property",
             "name": "scaleOffsetX",
@@ -5221,7 +5221,7 @@
         },
         {
             "file": "app-addon/mixins/graph-requires-scale-source.js",
-            "line": 91,
+            "line": 93,
             "description": "The offset, in pixels, for the y scale",
             "itemtype": "property",
             "name": "scaleOffsetY",
@@ -6093,15 +6093,15 @@
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:88"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:92"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:135"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:139"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:135"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:139"
         }
     ]
 }

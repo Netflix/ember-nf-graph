@@ -350,7 +350,6 @@ export default Ember.Component.extend({
 			elem.addEventListener(&#x27;scroll&#x27;, this._onScroll.bind(this));
 			elem.addEventListener(&#x27;resize&#x27;, this._onResize.bind(this));
 		}
-		this.updateMeasurements();
 	}.on(&#x27;didInsertElement&#x27;),
 
 	_unsubscribeEvents: function(){

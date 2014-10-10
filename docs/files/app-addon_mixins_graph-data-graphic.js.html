@@ -180,7 +180,6 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import { nearestIndexTo } from &#x27;../utils/nf/array-helpers&#x27;;
 
 /**
@@ -321,7 +320,6 @@ export default Ember.Mixin.create({
     return mapped;
   }.property(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;),
 
-
   /**
     The list of data points from {{#crossLink &quot;mixins.graph-data-graphc/sortedData:property&quot;}}{{/crossLink}} that
     fits within the x domain, plus up to one data point outside of that domain in each direction.
@@ -329,7 +327,13 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  renderedData: property(&#x27;sortedData.@each&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;, function(sortedData, xScaleType, xMin, xMax) {
+  renderedData: function(){
+    var sortedData = this.get(&#x27;sortedData&#x27;);
+    var graph = this.get(&#x27;graph&#x27;);
+    var xScaleType = graph.get(&#x27;xScaleType&#x27;);
+    var xMin = graph.get(&#x27;xMin&#x27;);
+    var xMax = graph.get(&#x27;xMax&#x27;);
+
     if(!sortedData || sortedData.length === 0) {
       return [];
     }
@@ -347,7 +351,7 @@ export default Ember.Mixin.create({
 
       return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
     });
-  }),
+  }.property(&#x27;sortedData.@each&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;),
 
   /**
     The first element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
@@ -356,7 +360,9 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  firstVisibleData: property(&#x27;renderedData.@each&#x27;, &#x27;xMin&#x27;, function(renderedData, xMin) {
+  firstVisibleData: function() {
+    var renderedData = this.get(&#x27;renderedData&#x27;);
+    var xMin = this.get(&#x27;xMin&#x27;);
     var first = renderedData[0];
     if(first &amp;&amp; xMin &gt; first[0] &amp;&amp; renderedData.length &gt; 1) {
       first = renderedData[1];
@@ -366,7 +372,7 @@ export default Ember.Mixin.create({
       y: first[1],
       data: first.data,
     } : null;
-  }),
+  }.property(&#x27;renderedData.@each&#x27;, &#x27;xMin&#x27;),
 
 
   /**
@@ -376,7 +382,9 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  lastVisibleData: property(&#x27;renderedData.@each&#x27;, &#x27;xMax&#x27;, function(renderedData, xMax) {
+  lastVisibleData: function(){
+    var renderedData = this.get(&#x27;renderedData&#x27;);
+    var xMax = this.get(&#x27;xMax&#x27;);
     var last = renderedData[renderedData.length - 1];
     if(last &amp;&amp; xMax &lt; last[0] &amp;&amp; renderedData.length &gt; 1) {
       last = renderedData[renderedData.length - 2];
@@ -386,7 +394,7 @@ export default Ember.Mixin.create({
       y: last[1],
       data: last.data,
     }: null;
-  }),
+  }.property(&#x27;renderedData.@each&#x27;, &#x27;xMax&#x27;),
 
   getDataNearXRange: function(rangeX) {
     var xScale = this.get(&#x27;xScale&#x27;);
