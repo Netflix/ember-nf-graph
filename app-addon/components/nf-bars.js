@@ -5,6 +5,7 @@ import RegisteredGraphic from '../mixins/graph-registered-graphic';
 import parsePropExpr from '../utils/parse-property-expression';
 import RequireScaleSource from '../mixins/graph-requires-scale-source';
 import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
+import { normalizeScale } from '../utils/nf/scale-utils';
 
 /**
 	Adds a bar graph to an `nf-graph` component.
@@ -93,16 +94,8 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 	groupOffsetX: function(){
 		var barScale = this.get('barScale');
 		var groupIndex = this.get('groupIndex');
-		return barScale ? barScale(groupIndex) : 0;
+		return normalizeScale(barScale, groupIndex);
 	}.property('barScale', 'groupIndex'),
-
-	getBarXPosition: function() {
-		var xScale = this.get('xScale');
-		var groupOffsetX = this.get('groupOffsetX');
-		return function(x) {
-			return groupOffsetX + (xScale ? xScale(x) : 0);
-		};
-	}.property('xScale', 'groupOffsetX'),
 
 	/**
 		The bar models used to render the bars.
@@ -115,7 +108,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		var renderedData = this.get('renderedData');
 		var graphHeight = this.get('graphHeight');
 		var getBarClass = this.get('getBarClass');
-		var getBarXPosition = this.get('getBarXPosition');
+		var groupOffsetX = this.get('groupOffsetX');
 
 		if(!xScale || !yScale || !Ember.isArray(renderedData)) {
 			return null;
@@ -124,17 +117,18 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		var barWidth = this.get('barWidth');
 
 		return renderedData.map(function(d) {
-			var h = yScale(d[1]);
+			var h = normalizeScale(yScale, d[1]);
+			var barClass = getBarClass ? getBarClass(d.data) : undefined;
 			return {
-				x: getBarXPosition(d[0]),
+				x: normalizeScale(xScale, d[1]) + groupOffsetX,
 				y: h,
 				width: barWidth,
 				height: graphHeight - h,
-				className: getBarClass(d.data),
+				className: barClass,
 				dataPoint: d,
 			};
 		});
-	}.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass', 'barWidth'),
+	}.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass', 'barWidth', 'groupOffsetX'),
 
 	/**
 		The name of the action to fire when a bar is clicked.

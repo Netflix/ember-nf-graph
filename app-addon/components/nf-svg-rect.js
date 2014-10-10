@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
+import { normalizeScale } from '../utils/nf/scale-utils';
 
 /**
 	A rectangle that plots using domain values from the graph. Uses an SVGPathElement
@@ -114,7 +115,3 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x0, y0, x1, y1);
 	}.property('x0', 'y0', 'x1', 'y1'),
 });
-
-function normalizeScale(scale, val) {
-	return (scale ? scale(val) : 0) || 0;
-}

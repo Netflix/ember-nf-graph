@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
+import { normalizeScale } from '../utils/nf/scale-utils';
 
 /**
 	An image to be displayed in a graph with that takes domain based measurements and
@@ -139,7 +140,3 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		return Math.abs(this.get('y0') - this.get('y1'));
 	}.property('y0', 'y1'),
 });
-
-function normalizeScale(scale, val) {
-	return (scale ? scale(val) : 0) || 0;
-}

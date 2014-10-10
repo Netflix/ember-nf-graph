@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
+import { normalizeScale } from '../utils/nf/scale-utils';
 
 /**
 	An SVG path primitive that plots based on a graph's scale.
@@ -76,7 +77,3 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		}
 	}.property('svgPoints'),
 });
-
-function normalizeScale(scale, val) {
-	return (scale ? scale(val) : 0) || 0;
-}

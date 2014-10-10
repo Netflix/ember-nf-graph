@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
+import { normalizeScale } from '../utils/nf/scale-utils';
 
 /**
 	Draws a basic line between two points on the graph. 
@@ -81,7 +82,3 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		return normalizeScale(this.get('yScale'), this.get('y1'));
 	}.property('y1', 'yScale'),
 });
-
-function normalizeScale(scale, val) {
-	return (scale ? scale(val) : 0) || 0;
-}
