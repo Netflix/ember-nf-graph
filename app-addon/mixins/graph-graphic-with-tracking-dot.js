@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from '../utils/computed-property-helpers';
 import GraphMouseEvent from '../utils/nf/graph-mouse-event';
 
 /**
@@ -38,21 +37,26 @@ export default Ember.Mixin.create({
 
   isShouldTrack: Ember.computed.or('isSelectedHoverMode', 'isHoverMode'),
 
-  isSelectedHoverMode: property('trackingMode', function(mode) {
+  isSelectedHoverMode: function(){
+    var mode = this.get('trackingMode');
     return mode === 'selected-hover' || mode === 'selected-snap-first' || mode === 'selected-snap-last';
-  }),
+  }.property('trackingMode'),
 
-  isHoverMode: property('trackingMode', function(mode) {
+  isHoverMode: function(){
+    var mode = this.get('trackingMode');
     return mode === 'hover' || mode === 'snap-first' || mode === 'snap-last';
-  }),
+  }.property('trackingMode'),
 
   hoverData: null,
 
   isHovered: false,
 
-  showTrackingDot: property('trackedData.x', 'trackedData.y', function(x, y) {
-    return typeof x === 'number' && typeof y === 'number';
-  }),
+  showTrackingDot: function(){
+    var trackedData = this.get('trackedData');
+    var x = trackedData.get('x');
+    var y = trackedData.get('y');
+    return +x === +x && +y === +y;
+  }.property('trackedData.x', 'trackedData.y'),
 
   _updateHovered: function() {
     if(this.get('isShouldTrack')) {
