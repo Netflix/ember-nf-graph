@@ -4,7 +4,7 @@ import { test } from 'ember-qunit';
 
 module('utils/nf/tracked-array-property');
 
-test('it keep the same references to everything', function(){
+test('it keep the same references to the underlying array', function(){
 	var foo = { id: 1, name: 'foo' };
 	var bar = { id: 2, name: 'bar' };
 	var baz = { id: 3, name: 'baz' };
@@ -12,7 +12,9 @@ test('it keep the same references to everything', function(){
 	var MyClass = Ember.Object.extend({
 		arr1: null,
 
-		trackedArr: trackedArrayProperty('arr1', 'id'),
+		arr1Key: 'id',
+		
+		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
 	});
 
 	var obj = MyClass.create({
@@ -27,9 +29,6 @@ test('it keep the same references to everything', function(){
 
 
 	equal(original, after);
-	equal(obj.get('trackedArr')[0], foo);
-	equal(obj.get('trackedArr')[1], bar);
-	equal(obj.get('trackedArr')[2], baz);
 });
 
 
@@ -41,7 +40,9 @@ test('it should remove items that no longer exist in the source', function() {
 	var MyClass = Ember.Object.extend({
 		arr1: null,
 
-		trackedArr: trackedArrayProperty('arr1', 'id'),
+		arr1Key: 'id',
+		
+		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
 	});
 
 	var obj = MyClass.create({
@@ -69,7 +70,9 @@ test('it should not give a crap what order anything is in', function() {
 	var MyClass = Ember.Object.extend({
 		arr1: null,
 
-		trackedArr: trackedArrayProperty('arr1', 'id'),
+		arr1Key: 'id',
+		
+		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
 	});
 
 	var obj = MyClass.create({
@@ -98,7 +101,9 @@ test('it should update the properties it finds', function() {
 	var MyClass = Ember.Object.extend({
 		arr1: null,
 
-		trackedArr: trackedArrayProperty('arr1', 'id'),
+		arr1Key: 'id',
+		
+		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
 	});
 
 	var obj = MyClass.create({

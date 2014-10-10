@@ -1,37 +1,49 @@
 import Ember from 'ember';
 
-function trackedArrayProperty(arraySourceProp, trackBy) {
-	var isTrackByIndex = !trackBy;
-	var keyFn = isTrackByIndex ? function(d, i) {
-		return i;
-	} : function(d) {
-		return d[trackBy];
-	};
 
-	var arraySourceDependency = isTrackByIndex ? 
-		arraySourceProp + '.@each.' + trackBy :
-		arraySourceProp + '.[]';
+function trackedArrayProperty(arraySourceProp, trackByProp) {
+	var arraySourceDependency = arraySourceProp + '.[]';
 
 	var trackingHash = {};
+	var keys = [];
 	var array = [];
 
 	return function(){
+		var trackBy = trackByProp ? this.get(trackByProp) : null;
+		var isTrackByIndex = !trackBy;
+		var keyFn = isTrackByIndex ? function(d, i) {
+			return i;
+		} : function(d) {
+			return d[trackBy];
+		};
+
 		var source = this.get(arraySourceProp);
 		if(Ember.isArray(source)) {
-			var trackedKeys = [];
+
+			var sourceKeys = [];
 			source.forEach(function(d, i) {
 				var key = keyFn(d, i);
-				trackedKeys.push(key);
+				sourceKeys.push(key);
+
 				var tracked = trackingHash[key];
-				if(!tracked) {
+				
+				if(typeof tracked !== 'undefined') {
+					Ember.mixin(array[tracked], d);
+				} else {
 					array.pushObject(d);
+					keys.push(key);
+					trackingHash[key] = array.length - 1;					
 				}
-				trackingHash[key] = true;
 			});
 
 			array.forEach(function(d, i) {
 				var key = keyFn(d, i);
-				if(trackedKeys.indexOf(key) === -1) {
+				if(sourceKeys.indexOf(key) === -1) {
+					var index = trackingHash[key];
+					for(var j = index; j < keys.length; j++) {
+						var updateKey = keys[j];
+						trackingHash[updateKey]--;
+					}
 					array.removeObject(d);
 					delete trackingHash[key];
 				}
