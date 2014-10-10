@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
-import { property } from '../utils/computed-property-helpers';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
 
 /**
@@ -141,7 +140,6 @@ export default Ember.Mixin.create({
     return mapped;
   }.property('data.@each', 'xPropFn', 'yPropFn'),
 
-
   /**
     The list of data points from {{#crossLink "mixins.graph-data-graphc/sortedData:property"}}{{/crossLink}} that
     fits within the x domain, plus up to one data point outside of that domain in each direction.
@@ -149,7 +147,13 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  renderedData: property('sortedData.@each', 'graph.xScaleType', 'graph.xMin', 'graph.xMax', function(sortedData, xScaleType, xMin, xMax) {
+  renderedData: function(){
+    var sortedData = this.get('sortedData');
+    var graph = this.get('graph');
+    var xScaleType = graph.get('xScaleType');
+    var xMin = graph.get('xMin');
+    var xMax = graph.get('xMax');
+
     if(!sortedData || sortedData.length === 0) {
       return [];
     }
@@ -167,7 +171,7 @@ export default Ember.Mixin.create({
 
       return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
     });
-  }),
+  }.property('sortedData.@each', 'graph.xScaleType', 'graph.xMin', 'graph.xMax'),
 
   /**
     The first element from {{#crossLink "mixins.graph-data-graphic/renderedData:property"}}{{/crossLink}}
@@ -176,7 +180,9 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  firstVisibleData: property('renderedData.@each', 'xMin', function(renderedData, xMin) {
+  firstVisibleData: function() {
+    var renderedData = this.get('renderedData');
+    var xMin = this.get('xMin');
     var first = renderedData[0];
     if(first && xMin > first[0] && renderedData.length > 1) {
       first = renderedData[1];
@@ -186,7 +192,7 @@ export default Ember.Mixin.create({
       y: first[1],
       data: first.data,
     } : null;
-  }),
+  }.property('renderedData.@each', 'xMin'),
 
 
   /**
@@ -196,7 +202,9 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  lastVisibleData: property('renderedData.@each', 'xMax', function(renderedData, xMax) {
+  lastVisibleData: function(){
+    var renderedData = this.get('renderedData');
+    var xMax = this.get('xMax');
     var last = renderedData[renderedData.length - 1];
     if(last && xMax < last[0] && renderedData.length > 1) {
       last = renderedData[renderedData.length - 2];
@@ -206,7 +214,7 @@ export default Ember.Mixin.create({
       y: last[1],
       data: last.data,
     }: null;
-  }),
+  }.property('renderedData.@each', 'xMax'),
 
   getDataNearXRange: function(rangeX) {
     var xScale = this.get('xScale');
