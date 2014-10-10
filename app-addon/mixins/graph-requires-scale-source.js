@@ -1,8 +1,10 @@
 import Ember from 'ember';
-import { property } from '../utils/computed-property-helpers';
 
-var scaleProperty = function(xScaleKey, zoomKey, offsetKey){
-	return property(xScaleKey, zoomKey, offsetKey, function(scale, zoom, offset) {
+var scaleProperty = function(scaleKey, zoomKey, offsetKey){
+	return function() {
+		var scale = this.get(scaleKey);
+		var zoom = this.get(zoomKey);
+		var offset = this.get(offsetKey);
 		if(zoom === 1 && offset === 0) {
 			return scale;
 		}
@@ -15,7 +17,7 @@ var scaleProperty = function(xScaleKey, zoomKey, offsetKey){
 		copy.range([range[0] - offset, range[1] - offset]);
 
 		return copy;
-	});
+	}.property(scaleKey, zoomKey, offsetKey);
 };
 
 /**
