@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.ng-image - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-svg-rect - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -79,6 +79,14 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+            
+                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+            
+                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+            
+                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+            
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
@@ -90,8 +98,6 @@
                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
-            
-                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
             
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
@@ -126,6 +132,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
@@ -166,7 +174,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.ng-image Class</h1>
+                        <h1>components.nf-svg-rect Class</h1>
 <div class="box meta">
     
         <div class="uses">
@@ -189,7 +197,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-image.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-image.js:5</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-svg-rect.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:6</code></a>
         </div>
     
 
@@ -205,8 +213,8 @@
 
 
 <div class="box intro">
-    <p>An image to be displayed in a graph with that takes domain based measurements and
-uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quot;/&gt;</code> SVG element.</p>
+    <p>A rectangle that plots using domain values from the graph. Uses an SVGPathElement
+to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights.</p>
 
 </div>
 
@@ -290,41 +298,6 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
                         
                             <li class="index-item property inherited">
                                 <a href="#property_scaleZoomY">scaleZoomY</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_src">src</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_svgHeight">svgHeight</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_svgWidth">svgWidth</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_svgX">svgX</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_svgY">svgY</a>
 
                                 
                                 
@@ -486,7 +459,7 @@ and assigns it to <code>graph</code></p>
                 
                     <div id="property_height" class="property item">
     <h3 class="name"><code>height</code></h3>
-    <span class="type">Unknown</span>
+    <span class="type">Number</span>
 
     
 
@@ -507,7 +480,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-image.js.html#l54"><code>app-addon&#x2F;components&#x2F;nf-image.js:54</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l56"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:56</code></a>
         
         </p>
 
@@ -517,14 +490,15 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The height as a domain value. Does not 
-handle ordinal scales. To set a pixel value, just
-set <code>svgHeight</code> directly.</p>
+        <p>The height as a domain value. If the yScale is ordinal,
+this value is the indice offset to which to draw the rectangle.
+For example, if the height is <code>3</code> then draw the rectangle
+to two ordinals passed whatever <code>y</code> is set to.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> null</p>
+        <p><strong>Default:</strong> 0</p>
     
 
     
@@ -709,231 +683,6 @@ set <code>svgHeight</code> directly.</p>
 </div>
 
                 
-                    <div id="property_src" class="property item">
-    <h3 class="name"><code>src</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-image.js.html#l68"><code>app-addon&#x2F;components&#x2F;nf-image.js:68</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The image source url</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_svgHeight" class="property item">
-    <h3 class="name"><code>svgHeight</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-image.js.html#l133"><code>app-addon&#x2F;components&#x2F;nf-image.js:133</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The height, in pixels of the image.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_svgWidth" class="property item">
-    <h3 class="name"><code>svgWidth</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-image.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-image.js:124</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The width, in pixels, of the image.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_svgX" class="property item">
-    <h3 class="name"><code>svgX</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-image.js.html#l106"><code>app-addon&#x2F;components&#x2F;nf-image.js:106</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The pixel value at which to plot the image.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_svgY" class="property item">
-    <h3 class="name"><code>svgY</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-image.js.html#l115"><code>app-addon&#x2F;components&#x2F;nf-image.js:115</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The pixel value at which to plot the image.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_width" class="property item">
     <h3 class="name"><code>width</code></h3>
     <span class="type">Number</span>
@@ -957,7 +706,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-image.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-image.js:38</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:38</code></a>
         
         </p>
 
@@ -967,8 +716,10 @@ set <code>svgHeight</code> directly.</p>
     </div>
 
     <div class="description">
-        <p>The width as a domain value. Does not handle ordinal
-scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
+        <p>The width as a domain value. If xScale is ordinal, 
+then this value is the indice offset to which to draw the 
+rectangle. In other words, if it&#39;s <code>2</code>, then draw the rectangle
+to two ordinals past whatever <code>x</code> is set to.</p>
 
     </div>
 
@@ -1005,7 +756,7 @@ scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-image.js.html#l22"><code>app-addon&#x2F;components&#x2F;nf-image.js:22</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l22"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:22</code></a>
         
         </p>
 
@@ -1015,7 +766,7 @@ scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
     </div>
 
     <div class="description">
-        <p>The domain x value to place the image at.</p>
+        <p>The domain x value to place the rect at.</p>
 
     </div>
 
@@ -1094,7 +845,7 @@ scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-image.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-image.js:29</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:29</code></a>
         
         </p>
 
@@ -1104,7 +855,7 @@ scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
     </div>
 
     <div class="description">
-        <p>The domain y value to place the image at.</p>
+        <p>The domain y value to place the rect at.</p>
 
     </div>
 

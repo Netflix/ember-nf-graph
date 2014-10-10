@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-range-marker - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-svg-line - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -174,7 +174,7 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1>components.nf-range-marker Class</h1>
+                        <h1>components.nf-svg-line Class</h1>
 <div class="box meta">
     
         <div class="uses">
@@ -197,7 +197,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-range-marker.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:6</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-svg-line.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:6</code></a>
         </div>
     
 
@@ -213,8 +213,7 @@
 
 
 <div class="box intro">
-    <p>Draws a rectangular strip with a templated label on an <code>nf-graph</code>.
-Should always be used in conjunction with an <code>nf-range-markers</code> container component.</p>
+    <p>Draws a basic line between two points on the graph.</p>
 
 </div>
 
@@ -251,20 +250,6 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__setup">_setup</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__unregister">_unregister</a>
-
-                                
-                                
-                            </li>
-                        
                     </ul>
                 </div>
             
@@ -275,64 +260,8 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
 
                     <ul class="index-list properties extends">
                         
-                            <li class="index-item property">
-                                <a href="#property_bottom">bottom</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_container">container</a>
-
-                                
-                                
-                            </li>
-                        
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_height">height</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_labelTransform">labelTransform</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_marginBottom">marginBottom</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_marginTop">marginTop</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_parentController">parentController</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property private">
-                                <a href="#property_plotData">plotData</a>
 
                                 
                                 
@@ -367,42 +296,42 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_totalHeight">totalHeight</a>
+                                <a href="#property_svgX0">svgX0</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_transform">transform</a>
+                                <a href="#property_svgX1">svgX1</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_width">width</a>
+                                <a href="#property_svgY0">svgY0</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_x">x</a>
+                                <a href="#property_svgY1">svgY1</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_xMax">xMax</a>
+                                <a href="#property_x0">x0</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_xMin">xMin</a>
+                                <a href="#property_x1">x1</a>
 
                                 
                                 
@@ -416,7 +345,14 @@ Should always be used in conjunction with an <code>nf-range-markers</code> conta
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_y">y</a>
+                                <a href="#property_y0">y0</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_y1">y1</a>
 
                                 
                                 
@@ -496,219 +432,12 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__setup" class="method item private">
-    <h3 class="name"><code>_setup</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l146"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:146</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Initialization function that registers the range marker with its parent 
-and populates the container property</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="method__unregister" class="method item private">
-    <h3 class="name"><code>_unregister</code></h3>
-
-    
-        <span class="paren">()</span>
-    
-
-    
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l158"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:158</code></a>
-        
-        </p>
-
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>Unregisters the range marker from its parent when the range marker is destroyed.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
             </div>
         
 
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
-
-                
-                    <div id="property_bottom" class="property item">
-    <h3 class="name"><code>bottom</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l116"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:116</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed bottom of the range marker, not including the bottom margin.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_container" class="property item">
-    <h3 class="name"><code>container</code></h3>
-    <span class="type"><a href="../classes/components.nf-range-markers.html" class="crosslink">components.nf-range-markers</a></span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l22"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:22</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The parent <code>nf-range-markers</code> component.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
 
                 
                     <div id="property_graph" class="property item inherited">
@@ -747,286 +476,6 @@ and populates the container property</p>
 
     
         <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_height" class="property item">
-    <h3 class="name"><code>height</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l60"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:60</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The height of the range marker.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 10</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_labelTransform" class="property item">
-    <h3 class="name"><code>labelTransform</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l136"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:136</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed SVG transform fo the range marker label container.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_marginBottom" class="property item">
-    <h3 class="name"><code>marginBottom</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l52"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:52</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The spacing below the range marker.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 3</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_marginTop" class="property item">
-    <h3 class="name"><code>marginTop</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l44"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:44</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The spacing above the range marker.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> 10</p>
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_parentController" class="property item private">
-    <h3 class="name"><code>parentController</code></h3>
-    <span class="type">Ember.Controller</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-plots.js.html#l11"><code>app-addon&#x2F;components&#x2F;nf-plots.js:11</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The parent controller to use for template binding</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_plotData" class="property item private">
-    <h3 class="name"><code>plotData</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-        <span class="flag private">private</span>
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-plots.js.html#l20"><code>app-addon&#x2F;components&#x2F;nf-plots.js:20</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The model for adding plots to the graph</p>
-
-    </div>
-
     
 
     
@@ -1211,8 +660,8 @@ and populates the container property</p>
 </div>
 
                 
-                    <div id="property_totalHeight" class="property item">
-    <h3 class="name"><code>totalHeight</code></h3>
+                    <div id="property_svgX0" class="property item">
+    <h3 class="name"><code>svgX0</code></h3>
     <span class="type">Number</span>
 
     
@@ -1234,7 +683,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l106"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:106</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l49"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:49</code></a>
         
         </p>
 
@@ -1244,7 +693,7 @@ and populates the container property</p>
     </div>
 
     <div class="description">
-        <p>The computed total height of the range marker including its margins.</p>
+        <p>The pixel value to plot the SVGLineElement&#39;s x0 at.</p>
 
     </div>
 
@@ -1256,53 +705,8 @@ and populates the container property</p>
 </div>
 
                 
-                    <div id="property_transform" class="property item">
-    <h3 class="name"><code>transform</code></h3>
-    <span class="type">String</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l126"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:126</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed SVG transform of the range marker container</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_width" class="property item">
-    <h3 class="name"><code>width</code></h3>
+                    <div id="property_svgX1" class="property item">
+    <h3 class="name"><code>svgX1</code></h3>
     <span class="type">Number</span>
 
     
@@ -1324,7 +728,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l78"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:78</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:58</code></a>
         
         </p>
 
@@ -1334,7 +738,7 @@ and populates the container property</p>
     </div>
 
     <div class="description">
-        <p>The computed width of the range marker.</p>
+        <p>The pixel value to plot the SVGLineElement&#39;s x1 at.</p>
 
     </div>
 
@@ -1346,8 +750,8 @@ and populates the container property</p>
 </div>
 
                 
-                    <div id="property_x" class="property item">
-    <h3 class="name"><code>x</code></h3>
+                    <div id="property_svgY0" class="property item">
+    <h3 class="name"><code>svgY0</code></h3>
     <span class="type">Number</span>
 
     
@@ -1369,7 +773,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l68"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:68</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l67"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:67</code></a>
         
         </p>
 
@@ -1379,7 +783,7 @@ and populates the container property</p>
     </div>
 
     <div class="description">
-        <p>The computed x position of the range marker.</p>
+        <p>The pixel value to plot the SVGLineElement&#39;s y0 at.</p>
 
     </div>
 
@@ -1391,8 +795,53 @@ and populates the container property</p>
 </div>
 
                 
-                    <div id="property_xMax" class="property item">
-    <h3 class="name"><code>xMax</code></h3>
+                    <div id="property_svgY1" class="property item">
+    <h3 class="name"><code>svgY1</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l76"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:76</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The pixel value to plot the SVGLineElement&#39;s y1 at.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x0" class="property item">
+    <h3 class="name"><code>x0</code></h3>
     <span class="type">Unknown</span>
 
     
@@ -1414,7 +863,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l37"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:37</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:21</code></a>
         
         </p>
 
@@ -1424,12 +873,12 @@ and populates the container property</p>
     </div>
 
     <div class="description">
-        <p>The maximum domain value for the range to mark.</p>
+        <p>The domain value to plot the SVGLineElement&#39;s x0 at.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 0</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1438,8 +887,8 @@ and populates the container property</p>
 </div>
 
                 
-                    <div id="property_xMin" class="property item">
-    <h3 class="name"><code>xMin</code></h3>
+                    <div id="property_x1" class="property item">
+    <h3 class="name"><code>x1</code></h3>
     <span class="type">Unknown</span>
 
     
@@ -1461,7 +910,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l30"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:30</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l28"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:28</code></a>
         
         </p>
 
@@ -1471,12 +920,12 @@ and populates the container property</p>
     </div>
 
     <div class="description">
-        <p>The minimum domain value for the range to mark.</p>
+        <p>The domain value to plot the SVGLineElement&#39;s x1 at.</p>
 
     </div>
 
     
-        <p><strong>Default:</strong> 0</p>
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1527,9 +976,9 @@ and populates the container property</p>
 </div>
 
                 
-                    <div id="property_y" class="property item">
-    <h3 class="name"><code>y</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_y0" class="property item">
+    <h3 class="name"><code>y0</code></h3>
+    <span class="type">Unknown</span>
 
     
 
@@ -1550,7 +999,7 @@ and populates the container property</p>
             
         
         
-        <a href="../files/app-addon_components_nf-range-marker.js.html#l88"><code>app-addon&#x2F;components&#x2F;nf-range-marker.js:88</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l35"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:35</code></a>
         
         </p>
 
@@ -1560,10 +1009,59 @@ and populates the container property</p>
     </div>
 
     <div class="description">
-        <p>The computed y position of the range marker.</p>
+        <p>The domain value to plot the SVGLineElement&#39;s y0 at.</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y1" class="property item">
+    <h3 class="name"><code>y1</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:42</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The domain value to plot the SVGLineElement&#39;s y1 at.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     

@@ -79,6 +79,14 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+            
+                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+            
+                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+            
+                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+            
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
@@ -90,8 +98,6 @@
                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
-            
-                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
             
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
@@ -126,6 +132,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
@@ -177,6 +185,8 @@ import RegisteredGraphic from &#x27;../mixins/graph-registered-graphic&#x27;;
 import parsePropExpr from &#x27;../utils/parse-property-expression&#x27;;
 import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 import GraphicWithTrackingDot from &#x27;../mixins/graph-graphic-with-tracking-dot&#x27;;
+import { normalizeScale } from &#x27;../utils/nf/scale-utils&#x27;;
+import { getRectPath } from &#x27;../utils/nf/svg-dom&#x27;;
 
 /**
 	Adds a bar graph to an &#x60;nf-graph&#x60; component.
@@ -265,16 +275,8 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 	groupOffsetX: function(){
 		var barScale = this.get(&#x27;barScale&#x27;);
 		var groupIndex = this.get(&#x27;groupIndex&#x27;);
-		return barScale ? barScale(groupIndex) : 0;
+		return normalizeScale(barScale, groupIndex);
 	}.property(&#x27;barScale&#x27;, &#x27;groupIndex&#x27;),
-
-	getBarXPosition: function() {
-		var xScale = this.get(&#x27;xScale&#x27;);
-		var groupOffsetX = this.get(&#x27;groupOffsetX&#x27;);
-		return function(x) {
-			return groupOffsetX + (xScale ? xScale(x) : 0);
-		};
-	}.property(&#x27;xScale&#x27;, &#x27;groupOffsetX&#x27;),
 
 	/**
 		The bar models used to render the bars.
@@ -287,26 +289,26 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 		var renderedData = this.get(&#x27;renderedData&#x27;);
 		var graphHeight = this.get(&#x27;graphHeight&#x27;);
 		var getBarClass = this.get(&#x27;getBarClass&#x27;);
-		var getBarXPosition = this.get(&#x27;getBarXPosition&#x27;);
+		var groupOffsetX = this.get(&#x27;groupOffsetX&#x27;);
 
 		if(!xScale || !yScale || !Ember.isArray(renderedData)) {
 			return null;
 		}
 
-		var barWidth = this.get(&#x27;barWidth&#x27;);
+		var w = this.get(&#x27;barWidth&#x27;);
 
 		return renderedData.map(function(d) {
-			var h = yScale(d[1]);
+			var barClass = &#x27;nf-bars-bar&#x27; + getBarClass ? &#x27; &#x27; + getBarClass(d.data) : &#x27;&#x27;;
+			var x = normalizeScale(xScale, d[0]) + groupOffsetX;
+			var y = normalizeScale(yScale, d[1]);
+			var h = graphHeight - y;
 			return {
-				x: getBarXPosition(d[0]),
-				y: h,
-				width: barWidth,
-				height: graphHeight - h,
-				className: getBarClass(d.data),
-				dataPoint: d,
+				path: getRectPath(x, y, w, h),
+				className: barClass,
+				data: d,
 			};
 		});
-	}.property(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;renderedData.[]&#x27;, &#x27;graphHeight&#x27;, &#x27;getBarClass&#x27;, &#x27;barWidth&#x27;),
+	}.property(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;renderedData.[]&#x27;, &#x27;graphHeight&#x27;, &#x27;getBarClass&#x27;, &#x27;barWidth&#x27;, &#x27;groupOffsetX&#x27;),
 
 	/**
 		The name of the action to fire when a bar is clicked.

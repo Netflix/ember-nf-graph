@@ -79,6 +79,14 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+            
+                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+            
+                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+            
+                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+            
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
@@ -90,8 +98,6 @@
                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
-            
-                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
             
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
@@ -126,6 +132,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
@@ -180,7 +188,7 @@
 
     
         
-            Module: <a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a>
+            Module: <a href="../modules/scale-utils.html">scale-utils</a>
         
     
 
@@ -201,6 +209,8 @@
         <li class="api-class-tab index"><a href="#index">Index</a></li>
 
         
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+        
         
             <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
         
@@ -212,6 +222,21 @@
         <div id="index" class="api-class-tabpanel index">
             <h2 class="off-left">Item Index</h2>
 
+            
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                        
+                            <li class="index-item method">
+                                <a href="#method_normalizeScale">normalizeScale</a>
+
+                                
+                                
+                            </li>
+                        
+                    </ul>
+                </div>
             
 
             
@@ -320,6 +345,141 @@
             
         </div>
 
+        
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                
+                    <div id="method_normalizeScale" class="method item">
+    <h3 class="name"><code>normalizeScale</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>scale</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>val</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_scale-utils.js.html#l7"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;scale-utils.js:7</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Ensures the output of a scale function is something palatable by SVG.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">scale</code>
+                        <span class="type">d3.scale</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the scale to use to get the value</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">val</code>
+                        <span class="type">Any</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the value to transform with the scale</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">Number</span>:
+                    
+                    <p>the output of the scale function, but if NaN, it will return 0.</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+            </div>
         
 
         

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-y-axis.js - Ember-CLI-Ember-DVC</title>
+    <title>app-addon/components/nf-svg-rect.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -174,253 +174,127 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-y-axis.js</h1>
+                        <h1 class="file-heading">File: app-addon/components/nf-svg-rect.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
-import HasGraphParent  from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import RequiresScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
+import { normalizeScale } from &#x27;../utils/nf/scale-utils&#x27;;
 
 /**
-  A component for adding a templated y axis to an &#x60;nf-graph&#x60; component.
-  All items contained within this component are used to template each tick mark on the 
-  rendered graph. Tick values are supplied to the inner scope of this component on the
-  view template via &#x60;tick&#x60;.
-  
-  ### Styling
-  
-  The main container will have a &#x60;nf-y-axis&#x60; class.
-  A &#x60;orient-left&#x60; or &#x60;orient-right&#x60; container will be applied to the container
-  depending on the &#x60;orient&#x60; setting.
-
-  Ticks are positioned via a &#x60;&lt;g&gt;&#x60; tag, that will contain whatever is passed into it via
-  templating, along with the tick line. &#x60;&lt;text&gt;&#x60; tags within tick templates do have some 
-  default styling applied to them to position them appropriately based off of orientation.
-
-  ### Example
-
-        {{#nf-graph width=500 height=300}}
-          {{#nf-y-axis width=40}}
-            &lt;text&gt;y is {{tick.value}}&lt;/text&gt;
-          {{/nf-y-axis}}
-        {{/nf-graph}}
-
-
-  @namespace components
-  @class nf-y-axis
-  @uses mixins.graph-has-graph-parent
-  @uses mixins.graph-requires-scale-source
+	A rectangle that plots using domain values from the graph. Uses an SVGPathElement
+	to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights.
+	@namespace components
+	@class nf-svg-rect
+	@extends Ember.Component
+	@uses mixins.graph-has-graph-parent
+	@uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
-  tagName: &#x27;g&#x27;,
+export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+	tagName: &#x27;path&#x27;,
 
-  /**
-    The number of ticks to display
-    @property tickCount
-    @type Number
-    @default 5
-  */
-  tickCount: 5,
+	attributeBindings: [&#x27;d&#x27;],
 
-  /**
-    The length of the tick&#x27;s accompanying line.
-    @property tickLength
-    @type Number
-    @default 5
-  */
-  tickLength: 5,
+	classNames: [&#x27;nf-svg-rect&#x27;],
 
-  /**
-    The distance between the tick line and the origin tick&#x27;s templated output
-    @property tickPadding
-    @type Number
-    @default 3
-  */
-  tickPadding: 3,
+	/**
+		The domain x value to place the rect at.
+		@property x
+		@default null
+	*/
+	x: null,
 
-  /**
-    The total width of the y axis
-    @property width
-    @type Number
-    @default 40
-  */
-  width: 40,
+	/**
+		The domain y value to place the rect at.
+		@property y
+		@default null
+	*/
+	y: null,
 
-  /**
-    The orientation of the y axis. Possible values are &#x60;&#x27;left&#x27;&#x60; and &#x60;&#x27;right&#x27;&#x60;
-    @property orient
-    @type String
-    @default &#x27;left&#x27;
-  */
-  orient: &#x27;left&#x27;,
+	_width: 0,
 
-  attributeBindings: [&#x27;transform&#x27;],
+	/**
+		The width as a domain value. If xScale is ordinal, 
+		then this value is the indice offset to which to draw the 
+		rectangle. In other words, if it&#x27;s &#x60;2&#x60;, then draw the rectangle
+		to two ordinals past whatever &#x60;x&#x60; is set to.
+		@property width
+		@type Number
+		@default 0
+	*/
+	width: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._width = +value;
+		}
+		return this._width;
+	}.property(),
 
-  classNameBindings: [&#x27;:nf-y-axis&#x27;, &#x27;isOrientRight:orient-right:orient-left&#x27;],
-  
-  _tickFilter: null,
+	_height: 0,
 
-  /**
-    An optional filtering function to allow more control over what tick marks are displayed.
-    The function should have exactly the same signature as the function you&#x27;d use for an
-    &#x60;Array.prototype.filter()&#x60;.
-  
-    @property tickFilter
-    @type Function
-    @default null
-    @example
-  
-          {{#nf-y-axis tickFilter=myFilter}} 
-            &lt;text&gt;{{tick.value}}&lt;/text&gt;
-          {{/nf-y-axis}}
-  
-    And on your controller:
-    
-          myFilter: function(tick, index, ticks) {
-            return tick.value &lt; 1000;
-          },
-  
-    The above example will filter down the set of ticks to only those that are less than 1000.
-  */
-  tickFilter: function(name, value) {
-    if(arguments.length &gt; 1) {
-      this._tickFilter = value;
-    }
-    return this._tickFilter;
-  }.property(),
+	/**
+		The height as a domain value. If the yScale is ordinal,
+		this value is the indice offset to which to draw the rectangle.
+		For example, if the height is &#x60;3&#x60; then draw the rectangle
+		to two ordinals passed whatever &#x60;y&#x60; is set to.
+		@property height
+		@type Number
+		@default 0
+	*/
+	height: function(key, value) {
+		if(arguments.length &gt; 1) {
+			this._height = +value;
+		}
+		return this._height;
+	}.property(),
 
-  /**
-    computed property. returns true if &#x60;orient&#x60; is equal to &#x60;&#x27;right&#x27;&#x60;.
-    @property isOrientRight
-    @type Boolean
-    @readonly
-  */
-  isOrientRight: Ember.computed.equal(&#x27;orient&#x27;, &#x27;right&#x27;),
+	x1: function(){
+		var xScale = this.get(&#x27;xScale&#x27;);
+		var w = this.get(&#x27;width&#x27;);
+		var x = this.get(&#x27;x&#x27;);
+		if(xScale.rangeBands) {
+			var domain = xScale.domain();
+			var fromIndex = domain.indexOf(x);
+			var toIndex = fromIndex + w;
+			return normalizeScale(xScale, domain[toIndex]);
+		} else {
+			x = +x || 0;
+			return normalizeScale(xScale, w + x);
+		}
+	}.property(&#x27;width&#x27;, &#x27;x&#x27;, &#x27;xScale&#x27;),
 
+	y1: function(){
+		var yScale = this.get(&#x27;yScale&#x27;);
+		var h = this.get(&#x27;height&#x27;);
+		var y = this.get(&#x27;y&#x27;);
+		if(yScale.rangeBands) {
+			var domain = yScale.domain();
+			var fromIndex = domain.indexOf(y);
+			var toIndex = fromIndex + h;
+			return normalizeScale(yScale, domain[toIndex]);
+		} else {
+			y = +y || 0;
+			return normalizeScale(yScale, h + y);
+		}
+	}.property(&#x27;height&#x27;, &#x27;y&#x27;, &#x27;yScale&#x27;),
 
-  /**
-    The SVG transform for positioning the component.
-    @property transform
-    @type String
-    @readonly
-  */
-  transform: function(){
-    var x = this.get(&#x27;x&#x27;);
-    var y = this.get(&#x27;y&#x27;);
-    return &#x27;translate(%@ %@)&#x27;.fmt(x, y);
-  }.property(&#x27;x&#x27;, &#x27;y&#x27;),
+	x0: function(){
+		return normalizeScale(this.get(&#x27;xScale&#x27;), this.get(&#x27;x&#x27;));
+	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
 
-  /**
-    The x position of the component
-    @property x
-    @type Number
-    @readonly
-  */
-  x: function(){
-    var orient = this.get(&#x27;orient&#x27;);
-    if(orient !== &#x27;left&#x27;) {
-      return this.get(&#x27;graph.width&#x27;) - this.get(&#x27;width&#x27;) - this.get(&#x27;graph.paddingRight&#x27;);
-    }
-    return this.get(&#x27;graph.paddingLeft&#x27;);
-  }.property(&#x27;orient&#x27;, &#x27;graph.width&#x27;, &#x27;width&#x27;, &#x27;graph.paddingLeft&#x27;, &#x27;graph.paddingRight&#x27;),
+	y0: function() {
+		return normalizeScale(this.get(&#x27;yScale&#x27;), this.get(&#x27;y&#x27;));
+	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
 
-  /**
-    The y position of the component
-    @property y
-    @type Number
-    @readonly
-  */
-  y: Ember.computed.alias(&#x27;graph.graphY&#x27;),
-
-  /** 
-    the height of the component
-    @property height
-    @type Number
-    @readonly
-  */
-  height: Ember.computed.alias(&#x27;graph.height&#x27;),
-
-  /**
-    Function to create the tick values. Can be overriden to provide specific values.
-    @method tickFactory
-    @param yScale {Function} a d3 scale function
-    @param tickCount {Number} the number of ticks desired
-    @param uniqueYData {Array} all y data represented, filted to be unique (used for ordinal cases)
-    @param yScaleType {String} the scale type of the containing graph.
-    @return {Array} an array of domain values at which ticks should be placed.
-  */
-  tickFactory: function(yScale, tickCount, uniqueYData, yScaleType) {
-    var ticks = yScaleType === &#x27;ordinal&#x27; ? uniqueYData : yScale.ticks(tickCount);
-    if (yScaleType === &#x27;log&#x27;) {
-      var step = Math.round(ticks.length / tickCount);
-      ticks = ticks.filter(function (tick, i) {
-        return i % step === 0;
-      });
-    }
-    return ticks;
-  },
-
-  /**
-    All y data from the graph, filtered to unique values.
-    @property uniqueYData
-    @type Array
-    @readonly
-  */
-  uniqueYData: Ember.computed.uniq(&#x27;graph.yData&#x27;),
-
-  /** 
-    The ticks to be displayed.
-    @property ticks
-    @type Array
-    @readonly
-  */
-  ticks: property(&#x27;yScale&#x27;, &#x27;tickCount&#x27;, &#x27;graph.yScaleType&#x27;, &#x27;tickPadding&#x27;, &#x27;axisLineX&#x27;, &#x27;tickLength&#x27;, &#x27;isOrientRight&#x27;, &#x27;tickFilter&#x27;, &#x27;uniqueYData&#x27;,
-    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
-      var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
-      var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
-      var x2 = axisLineX;
-      var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
-
-      var result = ticks.map(function (tick) {
-        return {
-          value: tick,
-          y: yScale(tick),
-          x1: x1,
-          x2: x2,
-          labelx: labelx,
-        };
-      });
-
-      if(tickFilter) {
-        result = result.filter(tickFilter);
-      }
-
-      return result;
-    }
-  ),
-
-  /**
-    The x position of the axis line.
-    @property axisLineX
-    @type Number
-    @readonly
-  */
-  axisLineX: property(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, function(isOrientRight, width){
-    return isOrientRight ? 0 : width;
-  }),
-
-  /**
-    sets graph&#x27;s yAxis property on willInsertElement
-    @method _updateGraphYAxis
-    @private
-  */
-  _updateGraphYAxis: function(){
-    this.set(&#x27;graph.yAxis&#x27;, this);
-  }.on(&#x27;willInsertElement&#x27;)
+	d: function(){
+		var x0 = this.get(&#x27;x0&#x27;);
+		var y0 = this.get(&#x27;y0&#x27;);
+		var x1 = this.get(&#x27;x1&#x27;);
+		var y1 = this.get(&#x27;y1&#x27;);
+		return &#x27;M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2&#x27;.fmt(x0, y0, x1, y1);
+	}.property(&#x27;x0&#x27;, &#x27;y0&#x27;, &#x27;x1&#x27;, &#x27;y1&#x27;),
 });
-
     </pre>
 </div>
 

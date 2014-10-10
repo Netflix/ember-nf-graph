@@ -136,17 +136,6 @@
                 "components": 1
             }
         },
-        "app-addon/components/nf-image.js": {
-            "name": "app-addon/components/nf-image.js",
-            "modules": {},
-            "classes": {
-                "components.ng-image": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
         "app-addon/components/nf-line.js": {
             "name": "app-addon/components/nf-line.js",
             "modules": {},
@@ -198,13 +187,6 @@
                 "components": 1
             }
         },
-        "app-addon/components/nf-rect.js": {
-            "name": "app-addon/components/nf-rect.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "app-addon/components/nf-right-tick.js": {
             "name": "app-addon/components/nf-right-tick.js",
             "modules": {},
@@ -232,6 +214,50 @@
             "modules": {},
             "classes": {
                 "components.nf-selection-box": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-svg-image.js": {
+            "name": "app-addon/components/nf-svg-image.js",
+            "modules": {},
+            "classes": {
+                "components.nf-svg-image": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-svg-line.js": {
+            "name": "app-addon/components/nf-svg-line.js",
+            "modules": {},
+            "classes": {
+                "components.nf-svg-line": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-svg-path.js": {
+            "name": "app-addon/components/nf-svg-path.js",
+            "modules": {},
+            "classes": {
+                "components.nf-svg-path": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
+        "app-addon/components/nf-svg-rect.js": {
+            "name": "app-addon/components/nf-svg-rect.js",
+            "modules": {},
+            "classes": {
+                "components.nf-svg-rect": 1
             },
             "fors": {},
             "namespaces": {
@@ -456,6 +482,17 @@
                 "utils.nf": 1
             }
         },
+        "app-addon/utils/nf/scale-utils.js": {
+            "name": "app-addon/utils/nf/scale-utils.js",
+            "modules": {
+                "scale-utils": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            }
+        },
         "app-addon/utils/nf/scroll-area-action-context.js": {
             "name": "app-addon/utils/nf/scroll-area-action-context.js",
             "modules": {},
@@ -505,7 +542,6 @@
                 "components.nf-graph": 1,
                 "components.nf-header": 1,
                 "components.nf-horizontal-line": 1,
-                "components.ng-image": 1,
                 "components.nf-line": 1,
                 "components.nf-plot": 1,
                 "components.nf-range-marker": 1,
@@ -513,6 +549,10 @@
                 "components.nf-right-tick": 1,
                 "components.nf-scroll-area": 1,
                 "components.nf-selection-box": 1,
+                "components.nf-svg-image": 1,
+                "components.nf-svg-line": 1,
+                "components.nf-svg-path": 1,
+                "components.nf-svg-rect": 1,
                 "components.nf-table-group": 1,
                 "components.nf-table": 1,
                 "components.nf-vertical-line": 1,
@@ -531,7 +571,20 @@
                 "mixins.table-column-registrar": 1,
                 "utils.nf.graph-event": 1,
                 "utils.nf.graph-mouse-event": 1,
-                "utils.nf.graph-position": 1,
+                "utils.nf.graph-position": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "utils.nf": 1
+            },
+            "tag": "module",
+            "file": "app-addon/utils/nf/graph-position.js",
+            "line": 3
+        },
+        "scale-utils": {
+            "name": "scale-utils",
+            "submodules": {},
+            "classes": {
                 "utils.nf.scroll-area-action-context": 1
             },
             "fors": {},
@@ -540,7 +593,8 @@
             },
             "tag": "module",
             "file": "app-addon/utils/nf/scroll-area-action-context.js",
-            "line": 3
+            "line": 3,
+            "description": "utilities for dealing with d3 scales"
         },
         "utils/nf/svg-dom": {
             "name": "utils/nf/svg-dom",
@@ -607,7 +661,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-bars.js",
-            "line": 9,
+            "line": 11,
             "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***",
             "extends": "Ember.Component",
             "uses": [
@@ -769,25 +823,6 @@
                 "mixins.graph-requires-scale-source"
             ]
         },
-        "components.ng-image": {
-            "name": "components.ng-image",
-            "shortname": "components.ng-image",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "utils/nf/array-helpers",
-            "namespace": "components",
-            "file": "app-addon/components/nf-image.js",
-            "line": 5,
-            "description": "An image to be displayed in a graph with that takes domain based measurements and\nuses the scale of the graph. Creates an `<image class=\"nf-image\"/>` SVG element.",
-            "extends": "Ember.Component",
-            "uses": [
-                "mixins.graph-has-graph-parent",
-                "mixins.graph-requires-scale-source"
-            ]
-        },
         "components.nf-line": {
             "name": "components.nf-line",
             "shortname": "components.nf-line",
@@ -914,6 +949,82 @@
             "file": "app-addon/components/nf-selection-box.js",
             "line": 5,
             "description": "Draws a rectangle on an `nf-graph` given domain values `xMin`, `xMax`, `yMin` and `yMax`.",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-requires-scale-source"
+            ]
+        },
+        "components.nf-svg-image": {
+            "name": "components.nf-svg-image",
+            "shortname": "components.nf-svg-image",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 6,
+            "description": "An image to be displayed in a graph with that takes domain based measurements and\nuses the scale of the graph. Creates an `<image class=\"nf-image\"/>` SVG element.",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-requires-scale-source"
+            ]
+        },
+        "components.nf-svg-line": {
+            "name": "components.nf-svg-line",
+            "shortname": "components.nf-svg-line",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 6,
+            "description": "Draws a basic line between two points on the graph.",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-requires-scale-source"
+            ]
+        },
+        "components.nf-svg-path": {
+            "name": "components.nf-svg-path",
+            "shortname": "components.nf-svg-path",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-svg-path.js",
+            "line": 6,
+            "description": "An SVG path primitive that plots based on a graph's scale.",
+            "extends": "Ember.Component",
+            "uses": [
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-requires-scale-source"
+            ]
+        },
+        "components.nf-svg-rect": {
+            "name": "components.nf-svg-rect",
+            "shortname": "components.nf-svg-rect",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "components",
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 6,
+            "description": "A rectangle that plots using domain values from the graph. Uses an SVGPathElement\nto plot the rectangle, to allow for rectangles with \"negative\" heights.",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
@@ -1113,13 +1224,16 @@
                 "components.nf-gg",
                 "components.nf-graph-content",
                 "components.nf-horizontal-line",
-                "components.ng-image",
                 "components.nf-line",
                 "components.nf-plot",
                 "components.nf-range-marker",
                 "components.nf-range-markers",
                 "components.nf-right-tick",
                 "components.nf-selection-box",
+                "components.nf-svg-image",
+                "components.nf-svg-line",
+                "components.nf-svg-path",
+                "components.nf-svg-rect",
                 "components.nf-vertical-line",
                 "components.nf-x-axis",
                 "components.nf-y-axis",
@@ -1177,12 +1291,15 @@
                 "components.nf-bars",
                 "components.nf-dot",
                 "components.nf-horizontal-line",
-                "components.ng-image",
                 "components.nf-line",
                 "components.nf-plot",
                 "components.nf-range-marker",
                 "components.nf-right-tick",
                 "components.nf-selection-box",
+                "components.nf-svg-image",
+                "components.nf-svg-line",
+                "components.nf-svg-path",
+                "components.nf-svg-rect",
                 "components.nf-vertical-line",
                 "components.nf-x-axis",
                 "components.nf-y-axis",
@@ -1281,7 +1398,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf",
             "file": "app-addon/utils/nf/scroll-area-action-context.js",
             "line": 3,
@@ -1437,7 +1554,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 27,
+            "line": 29,
             "description": "The name of the property on each data item containing the className for the bar rectangle",
             "itemtype": "property",
             "name": "classprop",
@@ -1448,7 +1565,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 35,
+            "line": 37,
             "description": "Gets the function to get the classname from each data item.",
             "itemtype": "property",
             "name": "getBarClass",
@@ -1460,7 +1577,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 46,
+            "line": 48,
             "description": "The nf-bars-group this belongs to, if any.",
             "itemtype": "property",
             "name": "group",
@@ -1471,7 +1588,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 54,
+            "line": 56,
             "description": "The index of this component within the group, if any.",
             "itemtype": "property",
             "name": "groupIndex",
@@ -1482,7 +1599,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 62,
+            "line": 64,
             "description": "The graph content height",
             "itemtype": "property",
             "name": "graphHeight",
@@ -1493,7 +1610,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 70,
+            "line": 72,
             "description": "A scale provided by nf-bars-group to offset the bar rectangle output",
             "itemtype": "property",
             "name": "barScale",
@@ -1504,7 +1621,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 78,
+            "line": 80,
             "description": "The width of each bar.",
             "itemtype": "property",
             "name": "barWidth",
@@ -1515,7 +1632,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 107,
+            "line": 101,
             "description": "The bar models used to render the bars.",
             "itemtype": "property",
             "name": "bars",
@@ -1525,7 +1642,7 @@
         },
         {
             "file": "app-addon/components/nf-bars.js",
-            "line": 139,
+            "line": 133,
             "description": "The name of the action to fire when a bar is clicked.",
             "itemtype": "property",
             "name": "barClick",
@@ -2754,97 +2871,6 @@
             "namespace": "components"
         },
         {
-            "file": "app-addon/components/nf-image.js",
-            "line": 22,
-            "description": "The domain x value to place the image at.",
-            "itemtype": "property",
-            "name": "x",
-            "default": "null",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 29,
-            "description": "The domain y value to place the image at.",
-            "itemtype": "property",
-            "name": "y",
-            "default": "null",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 38,
-            "description": "The width as a domain value. Does not handle ordinal\nscales. To set a pixel value, set `svgWidth` directly.",
-            "itemtype": "property",
-            "name": "width",
-            "type": "Number",
-            "default": "0",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 54,
-            "description": "The height as a domain value. Does not \nhandle ordinal scales. To set a pixel value, just\nset `svgHeight` directly.",
-            "itemtype": "property",
-            "name": "height",
-            "default": "null",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 68,
-            "description": "The image source url",
-            "itemtype": "property",
-            "name": "src",
-            "type": "String",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 106,
-            "description": "The pixel value at which to plot the image.",
-            "itemtype": "property",
-            "name": "svgX",
-            "type": "Number",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 115,
-            "description": "The pixel value at which to plot the image.",
-            "itemtype": "property",
-            "name": "svgY",
-            "type": "Number",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 124,
-            "description": "The width, in pixels, of the image.",
-            "itemtype": "property",
-            "name": "svgWidth",
-            "type": "Number",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-image.js",
-            "line": 133,
-            "description": "The height, in pixels of the image.",
-            "itemtype": "property",
-            "name": "svgHeight",
-            "type": "Number",
-            "class": "components.ng-image",
-            "namespace": "components"
-        },
-        {
             "file": "app-addon/components/nf-line.js",
             "line": 29,
             "description": "The type of D3 interpolator to use to create the line.",
@@ -3253,55 +3279,6 @@
             "namespace": "components"
         },
         {
-            "file": "app-addon/components/nf-rect.js",
-            "line": 5,
-            "description": "A rectangle that plots using domain values from the graph. Uses an SVGPathElement\nto plot the rectangle, to allow for rectangles with \"negative\" heights.",
-            "class": "components.nf-right-tick",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-rect.js",
-            "line": 16,
-            "description": "The domain x value to place the rect at.",
-            "itemtype": "property",
-            "name": "x",
-            "default": "null",
-            "class": "components.nf-right-tick",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-rect.js",
-            "line": 23,
-            "description": "The domain y value to place the rect at.",
-            "itemtype": "property",
-            "name": "y",
-            "default": "null",
-            "class": "components.nf-right-tick",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-rect.js",
-            "line": 32,
-            "description": "The width as a domain value. If xScale is ordinal, \nthen this value is the indice offset to which to draw the \nrectangle. In other words, if it's `2`, then draw the rectangle\nto two ordinals past whatever `x` is set to.",
-            "itemtype": "property",
-            "name": "width",
-            "type": "Number",
-            "default": "0",
-            "class": "components.nf-right-tick",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-rect.js",
-            "line": 50,
-            "description": "The height as a domain value. If the yScale is ordinal,\nthis value is the indice offset to which to draw the rectangle.\nFor example, if the height is `3` then draw the rectangle\nto two ordinals passed whatever `y` is set to.",
-            "itemtype": "property",
-            "name": "height",
-            "type": "Number",
-            "default": "0",
-            "class": "components.nf-right-tick",
-            "namespace": "components"
-        },
-        {
             "file": "app-addon/components/nf-right-tick.js",
             "line": 26,
             "description": "The transition duration in milliseconds",
@@ -3689,6 +3666,249 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-selection-box",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 23,
+            "description": "The domain x value to place the image at.",
+            "itemtype": "property",
+            "name": "x",
+            "default": "null",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 30,
+            "description": "The domain y value to place the image at.",
+            "itemtype": "property",
+            "name": "y",
+            "default": "null",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 39,
+            "description": "The width as a domain value. Does not handle ordinal\nscales. To set a pixel value, set `svgWidth` directly.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 55,
+            "description": "The height as a domain value. Does not \nhandle ordinal scales. To set a pixel value, just\nset `svgHeight` directly.",
+            "itemtype": "property",
+            "name": "height",
+            "default": "null",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 69,
+            "description": "The image source url",
+            "itemtype": "property",
+            "name": "src",
+            "type": "String",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 107,
+            "description": "The pixel value at which to plot the image.",
+            "itemtype": "property",
+            "name": "svgX",
+            "type": "Number",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 116,
+            "description": "The pixel value at which to plot the image.",
+            "itemtype": "property",
+            "name": "svgY",
+            "type": "Number",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 125,
+            "description": "The width, in pixels, of the image.",
+            "itemtype": "property",
+            "name": "svgWidth",
+            "type": "Number",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-image.js",
+            "line": 134,
+            "description": "The height, in pixels of the image.",
+            "itemtype": "property",
+            "name": "svgHeight",
+            "type": "Number",
+            "class": "components.nf-svg-image",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 21,
+            "description": "The domain value to plot the SVGLineElement's x0 at.",
+            "itemtype": "property",
+            "name": "x0",
+            "default": "null",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 28,
+            "description": "The domain value to plot the SVGLineElement's x1 at.",
+            "itemtype": "property",
+            "name": "x1",
+            "default": "null",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 35,
+            "description": "The domain value to plot the SVGLineElement's y0 at.",
+            "itemtype": "property",
+            "name": "y0",
+            "default": "null",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 42,
+            "description": "The domain value to plot the SVGLineElement's y1 at.",
+            "itemtype": "property",
+            "name": "y1",
+            "default": "null",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 49,
+            "description": "The pixel value to plot the SVGLineElement's x0 at.",
+            "itemtype": "property",
+            "name": "svgX0",
+            "type": "Number",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 58,
+            "description": "The pixel value to plot the SVGLineElement's x1 at.",
+            "itemtype": "property",
+            "name": "svgX1",
+            "type": "Number",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 67,
+            "description": "The pixel value to plot the SVGLineElement's y0 at.",
+            "itemtype": "property",
+            "name": "svgY0",
+            "type": "Number",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 76,
+            "description": "The pixel value to plot the SVGLineElement's y1 at.",
+            "itemtype": "property",
+            "name": "svgY1",
+            "type": "Number",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-path.js",
+            "line": 21,
+            "description": "The array of points to use to plot the path. This is an array of arrays, in the following format:\n\n\t\t\t// specify path pen commands\n\t\t\t[\n\t\t\t\t[50, 50, 'L'],\n\t\t\t\t[100, 100, 'L']\n\t\t\t]\n\n\t\t\t// or they will default to 'L'\n\t\t\t[\n\t\t\t\t[50, 50],\n\t\t\t\t[100, 100]\n\t\t\t]",
+            "itemtype": "property",
+            "name": "points",
+            "type": "Array",
+            "class": "components.nf-svg-path",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-path.js",
+            "line": 41,
+            "description": "The data points mapped to scale",
+            "itemtype": "property",
+            "name": "svgPoints",
+            "type": "Array",
+            "class": "components.nf-svg-path",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-path.js",
+            "line": 60,
+            "description": "The raw svg path d attribute output",
+            "itemtype": "property",
+            "name": "d",
+            "type": "String",
+            "class": "components.nf-svg-path",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 22,
+            "description": "The domain x value to place the rect at.",
+            "itemtype": "property",
+            "name": "x",
+            "default": "null",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 29,
+            "description": "The domain y value to place the rect at.",
+            "itemtype": "property",
+            "name": "y",
+            "default": "null",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 38,
+            "description": "The width as a domain value. If xScale is ordinal, \nthen this value is the indice offset to which to draw the \nrectangle. In other words, if it's `2`, then draw the rectangle\nto two ordinals past whatever `x` is set to.",
+            "itemtype": "property",
+            "name": "width",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 56,
+            "description": "The height as a domain value. If the yScale is ordinal,\nthis value is the indice offset to which to draw the rectangle.\nFor example, if the height is `3` then draw the rectangle\nto two ordinals passed whatever `y` is set to.",
+            "itemtype": "property",
+            "name": "height",
+            "type": "Number",
+            "default": "0",
+            "class": "components.nf-svg-rect",
             "namespace": "components"
         },
         {
@@ -5555,6 +5775,31 @@
             "namespace": "utils.nf"
         },
         {
+            "file": "app-addon/utils/nf/scale-utils.js",
+            "line": 7,
+            "description": "Ensures the output of a scale function is something palatable by SVG.",
+            "itemtype": "method",
+            "name": "normalizeScale",
+            "params": [
+                {
+                    "name": "scale",
+                    "description": "the scale to use to get the value",
+                    "type": "d3.scale"
+                },
+                {
+                    "name": "val",
+                    "description": "the value to transform with the scale",
+                    "type": "Any"
+                }
+            ],
+            "return": {
+                "description": "the output of the scale function, but if NaN, it will return 0.",
+                "type": "Number"
+            },
+            "class": "utils.nf.scroll-area-action-context",
+            "module": "scale-utils"
+        },
+        {
             "file": "app-addon/utils/nf/scroll-area-action-context.js",
             "line": 9,
             "description": "The scroll top in pixels.",
@@ -5563,7 +5808,7 @@
             "type": "Number",
             "default": "0",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5575,7 +5820,7 @@
             "type": "number",
             "default": "0",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5587,7 +5832,7 @@
             "type": "Number",
             "default": "0",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5599,7 +5844,7 @@
             "type": "Number",
             "default": "0",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5611,7 +5856,7 @@
             "type": "number",
             "default": "0",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5623,7 +5868,7 @@
             "type": "Number",
             "default": "0",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5635,7 +5880,7 @@
             "type": "Number",
             "readonly": "",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5647,7 +5892,7 @@
             "type": "Number",
             "readonly": "",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5659,7 +5904,7 @@
             "type": "Number",
             "readonly": "",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5671,7 +5916,7 @@
             "type": "Number",
             "readonly": "",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5683,7 +5928,7 @@
             "type": "Ember.Component",
             "default": "null",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5694,7 +5939,7 @@
             "name": "data",
             "default": "null",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5706,7 +5951,7 @@
             "type": "Event",
             "default": "null",
             "class": "utils.nf.scroll-area-action-context",
-            "module": "utils/nf/array-helpers",
+            "module": "scale-utils",
             "namespace": "utils.nf"
         },
         {
@@ -5784,6 +6029,40 @@
             "module": "utils/nf/svg-dom"
         },
         {
+            "file": "app-addon/utils/nf/svg-dom.js",
+            "line": 107,
+            "description": "Creates an SVG path string for a rectangle",
+            "itemtype": "method",
+            "name": "getRectPath",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "the x position of the rectangle"
+                },
+                {
+                    "name": "y",
+                    "description": "the y position of the rectangle",
+                    "type": "Number"
+                },
+                {
+                    "name": "w",
+                    "description": "the width of the rectangle",
+                    "type": "Number"
+                },
+                {
+                    "name": "h",
+                    "description": "the height of the rectangle",
+                    "type": "Number"
+                }
+            ],
+            "return": {
+                "description": "the svg path string for the rectangle",
+                "type": "String"
+            },
+            "class": "utils.parse-property-expression",
+            "module": "utils/nf/svg-dom"
+        },
+        {
             "file": "app-addon/utils/parse-property-expression.js",
             "line": 24,
             "itemtype": "method",
@@ -5820,10 +6099,6 @@
         {
             "message": "replacing incorrect tag: params with param",
             "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:135"
-        },
-        {
-            "message": "Missing item type\nA rectangle that plots using domain values from the graph. Uses an SVGPathElement\nto plot the rectangle, to allow for rectangles with \"negative\" heights.",
-            "line": " app-addon/components/nf-rect.js:5"
         }
     ]
 }

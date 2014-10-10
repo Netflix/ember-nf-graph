@@ -79,6 +79,14 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+            
+                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+            
+                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+            
+                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+            
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
@@ -90,8 +98,6 @@
                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
-            
-                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
             
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
@@ -126,6 +132,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
@@ -245,6 +253,13 @@ path cannot be reached.</p>
                         
                             <li class="index-item method">
                                 <a href="#method_getMousePoint">getMousePoint</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_getRectPath">getRectPath</a>
 
                                 
                                 
@@ -594,6 +609,179 @@ will locate the value at the end of the expressed path.</p>
                         <span class="type">Array</span>:
                     
                     <p>the [x,y] data of the mouse position relative to the container</p>
+
+                
+            </div>
+        </div>
+    
+
+    
+</div>
+
+                
+                    <div id="method_getRectPath" class="method item">
+    <h3 class="name"><code>getRectPath</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>x</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>y</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>w</code>
+                    
+                </li>
+            
+                <li class="arg">
+                    
+                        <code>h</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+        <span class="returns-inline">
+            <span class="type">String</span>
+        </span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_utils_nf_svg-dom.js.html#l107"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;svg-dom.js:107</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Creates an SVG path string for a rectangle</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">x</code>
+                        <span class="type">Object</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the x position of the rectangle</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">y</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the y position of the rectangle</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">w</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the width of the rectangle</p>
+
+                    </div>
+
+                    
+                </li>
+            
+                <li class="param">
+                    
+                        <code class="param-name">h</code>
+                        <span class="type">Number</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>the height of the rectangle</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                
+                    
+                        <span class="type">String</span>:
+                    
+                    <p>the svg path string for the rectangle</p>
 
                 
             </div>

@@ -20,13 +20,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-right-tick",
         "components.nf-scroll-area",
         "components.nf-selection-box",
+        "components.nf-svg-image",
+        "components.nf-svg-line",
+        "components.nf-svg-path",
+        "components.nf-svg-rect",
         "components.nf-table",
         "components.nf-table-group",
         "components.nf-vertical-line",
         "components.nf-x-axis",
         "components.nf-y-axis",
         "components.nf-y-diff",
-        "components.ng-image",
         "mixins.graph-area-utils",
         "mixins.graph-data-graphic",
         "mixins.graph-data-position-utils",
@@ -44,10 +47,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "utils.parse-property-expression"
     ],
     "modules": [
+        "scale-utils",
         "utils_nf_array-helpers",
         "utils_nf_svg-dom"
     ],
     "allModules": [
+        {
+            "displayName": "scale-utils",
+            "name": "scale-utils",
+            "description": "utilities for dealing with d3 scales"
+        },
         {
             "displayName": "utils/nf/array-helpers",
             "name": "utils_nf_array-helpers"

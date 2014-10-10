@@ -79,6 +79,14 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+            
+                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+            
+                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+            
+                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+            
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
@@ -90,8 +98,6 @@
                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
-            
-                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
             
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
@@ -126,6 +132,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
@@ -274,6 +282,25 @@ export function getMousePoint(container, e) {
     x: x,
     y: y,
   };
+}
+
+/**
+  Creates an SVG path string for a rectangle
+  @method getRectPath
+  @param x the x position of the rectangle
+  @param y {Number} the y position of the rectangle
+  @param w {Number} the width of the rectangle
+  @param h {Number} the height of the rectangle
+  @return {String} the svg path string for the rectangle
+*/
+export function getRectPath(x, y, w, h) {
+  x = +x || 0;
+  y = +y || 0;
+  w = +w || 0;
+  h = +h || 0;
+  var x2 = w + x;
+  var y2 = h + y;
+  return &#x27;M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2&#x27;.fmt(x, y, x2, y2);
 }
     </pre>
 </div>

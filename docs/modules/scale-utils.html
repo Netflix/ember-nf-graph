@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app-addon/components/nf-image.js - Ember-CLI-Ember-DVC</title>
+    <title>scale-utils - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -79,6 +79,14 @@
             
                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
             
+                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+            
+                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+            
+                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+            
+                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+            
                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
             
                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
@@ -90,8 +98,6 @@
                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
             
                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
-            
-                <li><a href="../classes/components.ng-image.html">components.ng-image</a></li>
             
                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
             
@@ -126,6 +132,8 @@
             </ul>
 
             <ul id="api-modules" class="apis modules">
+            
+                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
             
                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
             
@@ -166,156 +174,50 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-                        <h1 class="file-heading">File: app-addon/components/nf-image.js</h1>
+                        <h1>scale-utils Module</h1>
+<div class="box clearfix meta">
+    
 
-<div class="file">
-    <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import RequiresScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
+    
 
-/**
-	An image to be displayed in a graph with that takes domain based measurements and
-	uses the scale of the graph. Creates an &#x60;&lt;image class=&quot;nf-image&quot;/&gt;&#x60; SVG element.
-	@namespace components
-	@class ng-image
-	@extends Ember.Component
-	@uses mixins.graph-has-graph-parent
-	@uses mixins.graph-requires-scale-source
-*/
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
-	tagName: &#x27;image&#x27;,
+    
+        <div class="foundat">
+            Defined in: <a href="../files/app-addon_utils_nf_scroll-area-action-context.js.html#l3"><code>app-addon&#x2F;utils&#x2F;nf&#x2F;scroll-area-action-context.js:3</code></a>
+        </div>
+    
 
-	classNames: [&#x27;nf-image&#x27;],
-	
-	//HACK: for now xlink:href needs to be bound elsewhere.
-	attributeBindings: [&#x27;svgX:x&#x27;, &#x27;svgY:y&#x27;, &#x27;svgWidth:width&#x27;, &#x27;svgHeight:height&#x27;],
+    
+</div>
 
-	/**
-		The domain x value to place the image at.
-		@property x
-		@default null
-	*/
-	x: null,
 
-	/**
-		The domain y value to place the image at.
-		@property y
-		@default null
-	*/
-	y: null,
 
-	_width: 0,
+<div class="box intro">
+    <p>utilities for dealing with d3 scales</p>
 
-	/**
-		The width as a domain value. Does not handle ordinal
-		scales. To set a pixel value, set &#x60;svgWidth&#x60; directly.
-		@property width
-		@type Number
-		@default 0
-	*/
-	width: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._width = Math.max(0, +value) || 0;
-		}
-		return this._width;
-	}.property(),
+</div>
 
-	_height: 0,
 
-	/**
-		The height as a domain value. Does not 
-		handle ordinal scales. To set a pixel value, just
-		set &#x60;svgHeight&#x60; directly.
-		@property height
-		@default null
-	*/
-	height: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._height = Math.max(0, +value) || 0;
-		}
-		return this._height;
-	}.property(),
 
-	/**
-		The image source url
-		@property src
-		@type String
-	*/
-	src: function(key, value) {
-		//HACK: because attributeBindings doesn&#x27;t currently work with namespaced attributes.
-		var $elem = this.$();
-		if(arguments.length &gt; 1) {
-			$elem.attr(&#x27;xlink:href&#x27;, value);
-		}
-		return $elem.attr(&#x27;xlink:href&#x27;);
-	}.property(),
+<div class="yui3-g">
+    <div class="yui3-u-1-2">
+        
+            <p>This module provides the following classes:</p>
 
-	x0: function(){
-		return normalizeScale(this.get(&#x27;xScale&#x27;), this.get(&#x27;x&#x27;));
-	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
+            <ul class="module-classes">
+            
+                <li class="module-class">
+                    <a href="../classes/utils.nf.scroll-area-action-context.html">
+                        utils.nf.scroll-area-action-context
+                    </a>
+                </li>
+            
+            </ul>
+        
+    </div>
 
-	y0: function(){
-		return normalizeScale(this.get(&#x27;yScale&#x27;), this.get(&#x27;y&#x27;));
-	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
-
-	x1: function(){
-		var scale = this.get(&#x27;xScale&#x27;);
-		if(scale.rangeBands) {
-			throw new Error(&#x27;nf-image does not support ordinal scales&#x27;);
-		}
-		return normalizeScale(scale, this.get(&#x27;width&#x27;) + this.get(&#x27;x&#x27;));
-	}.property(&#x27;xScale&#x27;, &#x27;width&#x27;, &#x27;x&#x27;),
-
-	y1: function(){
-		var scale = this.get(&#x27;yScale&#x27;);
-		if(scale.rangeBands) {
-			throw new Error(&#x27;nf-image does not support ordinal scales&#x27;);
-		}
-		return normalizeScale(scale, this.get(&#x27;height&#x27;) + this.get(&#x27;y&#x27;));
-	}.property(&#x27;yScale&#x27;, &#x27;height&#x27;, &#x27;y&#x27;),
-
-	/**
-		The pixel value at which to plot the image.
-		@property svgX
-		@type Number
-	*/
-	svgX: function(){
-		return Math.min(this.get(&#x27;x0&#x27;), this.get(&#x27;x1&#x27;));
-	}.property(&#x27;x0&#x27;, &#x27;x1&#x27;),
-
-	/**
-		The pixel value at which to plot the image.
-		@property svgY
-		@type Number
-	*/
-	svgY: function(){
-		return Math.min(this.get(&#x27;y0&#x27;), this.get(&#x27;y1&#x27;));
-	}.property(&#x27;y0&#x27;, &#x27;y1&#x27;),
-
-	/**
-		The width, in pixels, of the image.
-		@property svgWidth
-		@type Number
-	*/
-	svgWidth: function(){
-		return Math.abs(this.get(&#x27;x0&#x27;) - this.get(&#x27;x1&#x27;));
-	}.property(&#x27;x0&#x27;, &#x27;x1&#x27;),
-
-	/**
-		The height, in pixels of the image.
-		@property svgHeight
-		@type Number
-	*/
-	svgHeight: function(){
-		return Math.abs(this.get(&#x27;y0&#x27;) - this.get(&#x27;y1&#x27;));
-	}.property(&#x27;y0&#x27;, &#x27;y1&#x27;),
-});
-
-function normalizeScale(scale, val) {
-	return (scale ? scale(val) : 0) || 0;
-}
-    </pre>
+    <div class="yui3-u-1-2">
+        
+    </div>
 </div>
 
                     </div>
