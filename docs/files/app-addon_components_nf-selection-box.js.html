@@ -180,8 +180,9 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
-import { property } from &#x27;../utils/computed-property-helpers&#x27;;
 import RequireScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
+import { normalizeScale } from &#x27;../utils/nf/scale-utils&#x27;;
+
 /**
 	Draws a rectangle on an &#x60;nf-graph&#x60; given domain values &#x60;xMin&#x60;, &#x60;xMax&#x60;, &#x60;yMin&#x60; and &#x60;yMax&#x60;.
 	@namespace components
@@ -232,102 +233,86 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	classNames: [&#x27;nf-selection-box&#x27;],
 
 	/**
-		The computed x position of the box.
-		@property x
+		The x pixel position of xMin
+		@property x0
 		@type Number
-		@readonly
 	*/
-	x: property(&#x27;xMin&#x27;, &#x27;xScale&#x27;, function(xMin, xScale){
-		return xScale(xMin) || 0;
-	}),
+	x0: function(){
+		return normalizeScale(this.get(&#x27;xScale&#x27;), this.get(&#x27;xMin&#x27;));
+	}.property(&#x27;xMin&#x27;, &#x27;xScale&#x27;),
 
 	/**
-		The computed y position of the box.
-		@property y
+		The x pixel position of xMax
+		@property x1
 		@type Number
-		@readonly
 	*/
-	y: property(&#x27;yMax&#x27;, &#x27;yScale&#x27;, function(yMax, yScale) {
-		return yScale(yMax) || 0;
-	}),
+	x1: function(){
+		return normalizeScale(this.get(&#x27;xScale&#x27;), this.get(&#x27;xMax&#x27;));
+	}.property(&#x27;xMax&#x27;, &#x27;xScale&#x27;),
 
 	/**
-		The computed width of the box.
-		@property width
+		The y pixel position of yMin
+		@property y0
 		@type Number
-		@readonly
 	*/
-	width: property(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;xScale&#x27;, function(xMin, xMax, xScale){
-		var x0 = xScale(xMin);
-		var x1 = xScale(xMax);
-		return Math.abs(x1 - x0) || 0;
-	}),
+	y0: function(){
+		return normalizeScale(this.get(&#x27;yScale&#x27;), this.get(&#x27;yMin&#x27;));
+	}.property(&#x27;yMin&#x27;, &#x27;yScale&#x27;),
 
 	/**
-		The computed height of the box
-		@property width
-		@type number
-		@readonly
+		The y pixel position of yMax
+		@property y1
+		@type Number
 	*/
-	height: property(&#x27;yMin&#x27;, &#x27;yMax&#x27;, &#x27;yScale&#x27;, function(yMin, yMax, yScale){
-		var y0 = yScale(yMin);
-		var y1 = yScale(yMax);
-		return Math.abs(y1 - y0) || 0;
-	}),
+	y1: function(){
+		return normalizeScale(this.get(&#x27;yScale&#x27;), this.get(&#x27;yMax&#x27;));
+	}.property(&#x27;yMax&#x27;, &#x27;yScale&#x27;),
 
 	/**
-		Gets the updated position of the box, and begins a transition to that position
-		@method updatePosition
+		The SVG path string for the box&#x27;s rectangle.
+		@property rectPath
+		@type String
 	*/
-	updatePosition: function(){
-		var x = this.get(&#x27;x&#x27;);
-		var y = this.get(&#x27;y&#x27;);
-		var width = this.get(&#x27;width&#x27;);
-		var height = this.get(&#x27;height&#x27;);
-		var transition = this.get(&#x27;transition&#x27;);
-		var g = this.get(&#x27;g&#x27;);
-		var rect = this.get(&#x27;rect&#x27;);
+	rectPath: function(){
+		return &#x27;M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2&#x27;.fmt(this.get(&#x27;x0&#x27;), this.get(&#x27;y0&#x27;), this.get(&#x27;x1&#x27;), this.get(&#x27;y1&#x27;));
+	}.property(&#x27;x0&#x27;, &#x27;x1&#x27;, &#x27;y0&#x27;, &#x27;y1&#x27;),
 
-		g.transition(transition)
-			.attr(&#x27;transform&#x27;, &#x27;translate(%@ %@)&#x27;.fmt(x, y));
+	/**
+		Updates the position of the box with a transition
+		@method doUpdatePosition
+	*/
+	doUpdatePosition: function(){
+		var boxRect = this.get(&#x27;boxRectElement&#x27;);
+		var rectPath = this.get(&#x27;rectPath&#x27;);
+		var duration = this.get(&#x27;duration&#x27;);
 
-		rect.transition(transition)
-			.attr(&#x27;width&#x27;, width)
-			.attr(&#x27;height&#x27;, height);
+		boxRect.transition().duration(duration)
+			.attr(&#x27;d&#x27;, rectPath);
 	},
 
 	/**
-		Observes values supplied to xMin, xMax, yMin and yMax and schedules an
-		update to the position of the box.
-		@method _triggerPositionUpdate
+		Schedules an update to the position of the box after render.
+		@method updatePosition
 		@private
 	*/
-
-	_triggerPositionUpdate: function(){
-		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.updatePosition);
+	updatePosition: function(){
+		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.doUpdatePosition);
 	}.observes(&#x27;xMin&#x27;, &#x27;xMax&#x27;, &#x27;yMin&#x27;, &#x27;yMax&#x27;),
 
 	/**
-		Sets up the box&#x27;s initial position on didInsertElement
-		@method _initializePosition
-		@private
+		Sets up the required d3 elements after component
+		is inserted into the DOM
+		@method didInsertElement
 	*/
-	_initializePosition: function(){
-		var g = d3.select(this.$()[0]);
-		var rect = g.selectAll(&#x27;rect&#x27;).data([0]);
-		
-		var x = this.get(&#x27;x&#x27;);
-		var y = this.get(&#x27;y&#x27;);
-		var width = this.get(&#x27;width&#x27;);
-		var height = this.get(&#x27;height&#x27;);
+	didInsertElement: function(){
+		var element = this.get(&#x27;element&#x27;);
+		var g = d3.select(element);
+		var boxRect = g.append(&#x27;path&#x27;)
+			.attr(&#x27;class&#x27;, &#x27;nf-selection-box-rect&#x27;)
+			.attr(&#x27;d&#x27;, this.get(&#x27;rectPath&#x27;));
 
-		g.attr(&#x27;transform&#x27;, &#x27;translate(%@ %@)&#x27;.fmt(x, y));
-		rect.attr(&#x27;width&#x27;, width).attr(&#x27;height&#x27;, height);
-		
-		this.set(&#x27;g&#x27;, g);
-		this.set(&#x27;rect&#x27;, rect);
-		this.updatePosition();
-	}.on(&#x27;didInsertElement&#x27;),
+		this.set(&#x27;boxRectElement&#x27;, boxRect);
+	},
 });
     </pre>
 </div>

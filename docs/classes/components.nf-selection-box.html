@@ -197,7 +197,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-selection-box.js.html#l5"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:5</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-selection-box.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:6</code></a>
         </div>
     
 
@@ -250,21 +250,21 @@
                                 
                             </li>
                         
-                            <li class="index-item method private">
-                                <a href="#method__initializePosition">_initializePosition</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item method private">
-                                <a href="#method__triggerPositionUpdate">_triggerPositionUpdate</a>
+                            <li class="index-item method">
+                                <a href="#method_didInsertElement">didInsertElement</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item method">
+                                <a href="#method_doUpdatePosition">doUpdatePosition</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method private">
                                 <a href="#method_updatePosition">updatePosition</a>
 
                                 
@@ -290,6 +290,13 @@
                         
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_rectPath">rectPath</a>
 
                                 
                                 
@@ -324,21 +331,14 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_width">width</a>
+                                <a href="#property_x0">x0</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_width">width</a>
-
-                                
-                                
-                            </li>
-                        
-                            <li class="index-item property">
-                                <a href="#property_x">x</a>
+                                <a href="#property_x1">x1</a>
 
                                 
                                 
@@ -366,7 +366,14 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_y">y</a>
+                                <a href="#property_y0">y0</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_y1">y1</a>
 
                                 
                                 
@@ -460,8 +467,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__initializePosition" class="method item private">
-    <h3 class="name"><code>_initializePosition</code></h3>
+                    <div id="method_didInsertElement" class="method item">
+    <h3 class="name"><code>didInsertElement</code></h3>
 
     
         <span class="paren">()</span>
@@ -471,8 +478,6 @@ and assigns it to <code>graph</code></p>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -494,7 +499,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l130"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:130</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l122"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:122</code></a>
         
         </p>
 
@@ -505,7 +510,8 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Sets up the box&#39;s initial position on didInsertElement</p>
+        <p>Sets up the required d3 elements after component
+is inserted into the DOM</p>
 
     </div>
 
@@ -517,8 +523,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="method__triggerPositionUpdate" class="method item private">
-    <h3 class="name"><code>_triggerPositionUpdate</code></h3>
+                    <div id="method_doUpdatePosition" class="method item">
+    <h3 class="name"><code>doUpdatePosition</code></h3>
 
     
         <span class="paren">()</span>
@@ -528,8 +534,6 @@ and assigns it to <code>graph</code></p>
 
     
 
-    
-        <span class="flag private">private</span>
     
 
     
@@ -551,7 +555,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l119"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:119</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l100"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:100</code></a>
         
         </p>
 
@@ -562,8 +566,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Observes values supplied to xMin, xMax, yMin and yMax and schedules an
-update to the position of the box.</p>
+        <p>Updates the position of the box with a transition</p>
 
     </div>
 
@@ -575,7 +578,7 @@ update to the position of the box.</p>
 </div>
 
                 
-                    <div id="method_updatePosition" class="method item">
+                    <div id="method_updatePosition" class="method item private">
     <h3 class="name"><code>updatePosition</code></h3>
 
     
@@ -587,6 +590,8 @@ update to the position of the box.</p>
     
 
     
+        <span class="flag private">private</span>
+    
 
     
 
@@ -607,7 +612,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l98"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:98</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l113"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:113</code></a>
         
         </p>
 
@@ -618,7 +623,7 @@ update to the position of the box.</p>
     </div>
 
     <div class="description">
-        <p>Gets the updated position of the box, and begins a transition to that position</p>
+        <p>Schedules an update to the position of the box after render.</p>
 
     </div>
 
@@ -661,7 +666,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l16"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:16</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l17"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:17</code></a>
         
         </p>
 
@@ -721,6 +726,51 @@ update to the position of the box.</p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_rectPath" class="property item">
+    <h3 class="name"><code>rectPath</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l91"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:91</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The SVG path string for the box&#39;s rectangle.</p>
+
+    </div>
+
     
 
     
@@ -905,8 +955,8 @@ update to the position of the box.</p>
 </div>
 
                 
-                    <div id="property_width" class="property item">
-    <h3 class="name"><code>width</code></h3>
+                    <div id="property_x0" class="property item">
+    <h3 class="name"><code>x0</code></h3>
     <span class="type">Number</span>
 
     
@@ -928,7 +978,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l86"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:86</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l55"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:55</code></a>
         
         </p>
 
@@ -938,7 +988,7 @@ update to the position of the box.</p>
     </div>
 
     <div class="description">
-        <p>The computed height of the box</p>
+        <p>The x pixel position of xMin</p>
 
     </div>
 
@@ -950,8 +1000,8 @@ update to the position of the box.</p>
 </div>
 
                 
-                    <div id="property_width" class="property item">
-    <h3 class="name"><code>width</code></h3>
+                    <div id="property_x1" class="property item">
+    <h3 class="name"><code>x1</code></h3>
     <span class="type">Number</span>
 
     
@@ -973,7 +1023,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l74"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:74</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l64"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:64</code></a>
         
         </p>
 
@@ -983,52 +1033,7 @@ update to the position of the box.</p>
     </div>
 
     <div class="description">
-        <p>The computed width of the box.</p>
-
-    </div>
-
-    
-
-    
-
-    
-</div>
-
-                
-                    <div id="property_x" class="property item">
-    <h3 class="name"><code>x</code></h3>
-    <span class="type">Number</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l54"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:54</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The computed x position of the box.</p>
+        <p>The x pixel position of xMax</p>
 
     </div>
 
@@ -1063,7 +1068,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l31"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:31</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l32"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:32</code></a>
         
         </p>
 
@@ -1110,7 +1115,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l24"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:24</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l25"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:25</code></a>
         
         </p>
 
@@ -1176,8 +1181,8 @@ update to the position of the box.</p>
 </div>
 
                 
-                    <div id="property_y" class="property item">
-    <h3 class="name"><code>y</code></h3>
+                    <div id="property_y0" class="property item">
+    <h3 class="name"><code>y0</code></h3>
     <span class="type">Number</span>
 
     
@@ -1199,7 +1204,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l64"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:64</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l73"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:73</code></a>
         
         </p>
 
@@ -1209,7 +1214,52 @@ update to the position of the box.</p>
     </div>
 
     <div class="description">
-        <p>The computed y position of the box.</p>
+        <p>The y pixel position of yMin</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y1" class="property item">
+    <h3 class="name"><code>y1</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l82"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:82</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y pixel position of yMax</p>
 
     </div>
 
@@ -1244,7 +1294,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l45"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:45</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l46"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:46</code></a>
         
         </p>
 
@@ -1291,7 +1341,7 @@ update to the position of the box.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-selection-box.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:38</code></a>
+        <a href="../files/app-addon_components_nf-selection-box.js.html#l39"><code>app-addon&#x2F;components&#x2F;nf-selection-box.js:39</code></a>
         
         </p>
 

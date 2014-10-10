@@ -222,7 +222,7 @@
   stroke-width: 1px;
   visibility: visible; }
 
-.nf-selection-box > rect {
+.nf-selection-box-rect {
   fill: none;
   stroke: #999999;
   stroke-width: 1; }
