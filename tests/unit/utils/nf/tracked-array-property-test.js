@@ -109,32 +109,3 @@ test('it should update the properties it finds', function() {
 
 	equal(obj.get('trackedArr')[0].name, 'foo2');
 });
-
-
-test('it should add $$trackedKey to every record', function() {
-	var foo = { id: 1, name: 'foo' };
-	var bar = { id: 2, name: 'bar' };
-	var baz = { id: 3, name: 'baz' };
-
-	var MyClass = Ember.Object.extend({
-		arr1: null,
-
-		arr1Key: 'id',
-		
-		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
-	});
-
-	var obj = MyClass.create({
-		arr1: [foo, bar, baz]
-	});
-
-	var foo2 = { id: 1, name: 'foo2' };
-
-	obj.set('arr1', [foo2, baz, bar]);
-
-	var after = obj.get('trackedArr');
-	console.log(after);
-	equal(obj.get('trackedArr')[0].$$trackedKey, 1);
-});
-
-

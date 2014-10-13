@@ -16,7 +16,7 @@
 
 length: {{cols.length}}
 
-{{#nf-table rows=myData scrollable=1 
+{{#nf-table rows=myData scrollable=1
 	scrollAction="tableScrolled"
 	columns=cols
 	rowAction="rowClicked"}}
@@ -48,6 +48,15 @@ length: {{cols.length}}
 		{{/nf-cell}} 
 	{{/nf-column}}
 
+	{{#nf-column}}
+		{{#nf-header}}
+			input test
+		{{/nf-header}}
+		{{#nf-cell}}
+			{{input type="text" value=row.foo}}
+		{{/nf-cell}}
+	{{/nf-column}}
+
 	{{nf-column isVisible=0 sortBy="blah" name="blah sorter column"}}
 {{/nf-table}}
 
@@ -66,4 +75,12 @@ length: {{cols.length}}
 	<li>outerHeight: {{tableScroll.outerHeight}}</li>
 	<li>scrollHeight: {{tableScroll.scrollHeight}}</li>
 	<li>scrollTopPercentage: {{tableScroll.scrollTopPercentage}}</li>
+</ul>
+
+<h3>Original foos</h3>
+
+<ul>
+	{{#each item in myData}}
+		<li>{{item.foo}}</li>
+	{{/each}}
 </ul>

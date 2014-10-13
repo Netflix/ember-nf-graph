@@ -30,10 +30,8 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 				if(typeof tracked !== 'undefined') {
 					Ember.mixin(array[tracked], d);
 				} else {
-					var copy = {};
-					Ember.mixin(copy, d);
-					copy.$$trackedKey = key;
-					array.pushObject(copy);
+					d.__meta__trackedKey = key;
+					array.pushObject(d);
 					keys.push(key);
 					trackingHash[key] = array.length - 1;					
 				}

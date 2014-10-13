@@ -33,5 +33,7 @@ function createMultiSort(sorts) {
 }
 
 export default function multiSort(arr, sorts) {  
-  arr.sort(createMultiSort(sorts));
+  if(Array.isArray(arr) && Array.isArray(sorts) && sorts.length > 0 && arr.length > 1) {
+    arr.sort(createMultiSort(sorts));
+  }
 }

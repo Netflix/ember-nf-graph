@@ -51,8 +51,8 @@
       {{#nf-scroll-area changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
-            {{#each row in sortedRows}}
-              <tr {{action 'rowClick' row}}>
+            {{#each row in trackedRows}}
+              <tr {{action 'rowClick' row}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                 {{#each column in visibleColumns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
@@ -106,8 +106,8 @@
         </thead>
   
         <tbody>
-          {{#each row in sortedRows}}
-            <tr {{action 'rowClick' row}}>
+          {{#each row in trackedRows}}
+            <tr {{action 'rowClick' row}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
               {{#each column in visibleColumns}}
                 {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
               {{/each}}

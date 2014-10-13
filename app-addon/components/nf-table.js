@@ -4,6 +4,8 @@ import TableColumnRegistrar from '../mixins/table-column-registrar';
 import parsePropExpr from '../utils/parse-property-expression';
 import { naturalCompare } from '../utils/nf/array-helpers'; 
 import NfTableGroupController from '../controllers/nf-table-group-controller';
+import trackedArrayProperty from '../utils/nf/tracked-array-property';
+
 /**
 	Composable table component with built-in sorting
 	
@@ -240,7 +242,52 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	trackBy: undefined,
 
-	renderRows: trackedArrayProperty('rowsStep1', 'trackBy'),
+	/**
+		The rows to render, tracked by whatever field is listed in teh trackBy property
+		@property trackedRows
+		@type Array
+		@readonly
+		@private
+	*/
+	trackedRows: trackedArrayProperty('rows', 'trackBy'),
+
+	/**
+		Triggers the `willSort` and `didSort` events. Also calls `doSort`
+		@method onSort
+	*/
+	onSort: function(){
+		this.trigger('willSort');
+		this.doSort();
+		this.trigger('didSort');
+	},
+
+	/**
+		Performs the sort by reorganizing the DOM. If you want to use some other 
+		method of sorting, this is the guy you'll need to override.
+		@method doSort
+	*/
+	doSort: function(){
+		var sortableElems = this.$('[data-nf-table-sort-key]');
+		if(Ember.isArray(sortableElems) && sortableElems.length > 1) {
+			var sortedRows = this.get('sortedRows');
+			var trackBy = this.get('trackBy');
+			if(sortedRows) {
+				sortedRows.forEach(function(row) {
+					var key = trackBy ? Ember.get(row, trackBy) : row.__meta__originalIndex;
+					var elem = sortableElems.filter('[data-nf-table-sort-key="' + key + '"]');
+					elem.parent().append(elem);
+				});
+			}
+		}
+	},
+
+	/**
+		Observes changes to column sorts and fires the `onSort` method afterRender
+		@method observeSortChanges
+	*/
+	observeSortChanges: function(){
+		Ember.run.scheduleOnce('afterRender', this, this.onSort);
+	}.observes('_columns.@each.sortDirection', '_columns.@each.sortBy'),
 
 	/**
 		Gets the an array of sorts, in order to be processed when sorting the rows.
@@ -282,9 +329,15 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	sortedRows: function(){
 		var sortMap = this.get('sortMap');
 		var rowsCopy = this.get('rows').slice();
+		var trackBy = this.get('trackBy');
+		if(!trackBy) {
+			rowsCopy.forEach(function(d, i) {
+				d.__meta__originalIndex = i;
+			});
+		}
 		multiSort(rowsCopy, sortMap);
 		return rowsCopy;
-	}.property('rows.@each', 'sortMap'),
+	}.property('rows.[]', 'sortMap'),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire
