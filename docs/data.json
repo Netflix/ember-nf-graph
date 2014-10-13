@@ -1059,7 +1059,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-table.js",
-            "line": 7,
+            "line": 9,
             "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n      {{#nf-table rows=myData}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Foo</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Bar</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nThe example above will create a sortable table from an array `myData` containing objects\nwith fields `foo` and `bar`.\n\n### Grouped Example\n\nIf you wish to create a \"grouped table\", you simply need to group the data with the `groupBy`\nproperty.\n\nAdditionally, you can add grouping rows with the `{{nf-table-group}}` component, which allows you\nto define the columns for the group rows. **If you do this, you will need to create an ArrayController**\nfor the group that will carry with it any computed properties you might need, such as a sum or average\naggregated over the group. The array controller for your grouping must be assigned to the `itemController`\nproperty on the `nf-table-group` component.\n\n\t\t\t{{#nf-table rows=myData groupBy=\"baz\"}}\n\t\t\t\t\n\t\t\t\t{{#nf-table-group itemController=\"my-group-row\"}}\n\n\t\t\t\t\t{{#nf-column}}\n\t\t\t\t\t\t{{#nf-cell colspan=\"2\"}}\n\t\t\t\t\t\t\tBaz: {{group.baz}}\n\t\t\t\t\t\t\tBars: {{group.barSum}}\n\t\t\t\t\t\t{{/nf-cell}}\n\t\t\t\t\t{{/nf-column}}\n\t\t\t\t\n\t\t\t\t{{/nf-table-group}}\n\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Foo</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      \t\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Bar</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nWhich would need an accompanying array controller definition `my-group-row`:\n\n\t\t\texport default Ember.ArrayController.extend({\n\t\t\t\t// returns the first value from the array\n\t\t\t\tbaz: function(){\n\t\t\t\t\treturn this.get('model')[0].baz;\n\t\t\t\t}.property('model.@each'),\n\n\t\t\t\t//gets the sum of all the bars\n\t\t\t\tbarSum: function() {\n\t\t\t\t\treturn this.get('model').reduce(function(sum, item) {\n\t\t\t\t\t\treturn sum + item.bar;\n\t\t\t\t\t}, 0);\n\t\t\t\t}.property('model.@each.bar'),\n\t\t  });\n\n### Styling\n\nnf-table emits a `<table>` with a class of `nf-table` applied to it.",
             "extends": "Ember.Component",
             "uses": [
@@ -3937,7 +3937,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 110,
+            "line": 112,
             "description": "Property used by child components to locate the table component.",
             "itemtype": "property",
             "name": "isTable",
@@ -3948,7 +3948,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 118,
+            "line": 120,
             "description": "Gets the nf-table-group component if one is present.",
             "itemtype": "property",
             "name": "tableGroup",
@@ -3959,7 +3959,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 126,
+            "line": 128,
             "description": "The expression used to locate the values in the rows to group by.",
             "itemtype": "property",
             "name": "groupBy",
@@ -3970,7 +3970,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 134,
+            "line": 136,
             "description": "Gets or sets whether the table has a scrollable layout.",
             "itemtype": "property",
             "name": "scrollable",
@@ -3981,7 +3981,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 142,
+            "line": 144,
             "description": "Gets whether or not to use the grouped table layout",
             "itemtype": "property",
             "name": "useGroupedTableLayout",
@@ -3994,7 +3994,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 151,
+            "line": 153,
             "description": "Gets an array of grouped and sorted data, represented as an array of arrays.",
             "itemtype": "property",
             "name": "sortedGroups",
@@ -4005,7 +4005,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 212,
+            "line": 214,
             "description": "Alias for the rowAction on the nf-table-group",
             "itemtype": "property",
             "name": "groupRowAction",
@@ -4016,7 +4016,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 220,
+            "line": 222,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
@@ -4026,7 +4026,58 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 235,
+            "line": 237,
+            "description": "The property on each row item to track data by. If undefined, will track by index.",
+            "itemtype": "property",
+            "name": "trackBy",
+            "type": "String",
+            "default": "undefined",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 245,
+            "description": "The rows to render, tracked by whatever field is listed in teh trackBy property",
+            "itemtype": "property",
+            "name": "trackedRows",
+            "type": "Array",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 254,
+            "description": "Triggers the `willSort` and `didSort` events. Also calls `doSort`",
+            "itemtype": "method",
+            "name": "onSort",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 264,
+            "description": "Performs the sort by reorganizing the DOM. If you want to use some other \nmethod of sorting, this is the guy you'll need to override.",
+            "itemtype": "method",
+            "name": "doSort",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 284,
+            "description": "Observes changes to column sorts and fires the `onSort` method afterRender",
+            "itemtype": "method",
+            "name": "observeSortChanges",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 292,
             "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
             "itemtype": "property",
             "name": "sortMap",
@@ -4038,7 +4089,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 266,
+            "line": 323,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
@@ -4049,7 +4100,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 279,
+            "line": 342,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -4060,7 +4111,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 288,
+            "line": 351,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -4071,7 +4122,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 301,
+            "line": 364,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
@@ -4949,7 +5000,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 84,
+            "line": 86,
             "description": "The action name to send to the controller when the `hoverChange` event fires",
             "itemtype": "property",
             "name": "hoverChange",
@@ -4960,7 +5011,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 92,
+            "line": 94,
             "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
             "itemtype": "method",
             "name": "didContentHoverChange",
@@ -4978,7 +5029,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 108,
+            "line": 110,
             "description": "Event handler for didHoverChange. Sends hoverChange action.",
             "itemtype": "method",
             "name": "didHoverChange",
@@ -4994,7 +5045,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 131,
+            "line": 133,
             "description": "Name of the action to send on `hoverEnd`",
             "itemtype": "property",
             "name": "hoverEnd",
@@ -5005,7 +5056,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 139,
+            "line": 141,
             "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
             "itemtype": "method",
             "name": "didHoverEnd",
@@ -5021,7 +5072,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 160,
+            "line": 162,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
@@ -5032,7 +5083,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 168,
+            "line": 170,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
@@ -5043,7 +5094,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 186,
+            "line": 188,
             "description": "The action to send on `willTrack`",
             "itemtype": "property",
             "name": "willTrack",
@@ -5054,7 +5105,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 194,
+            "line": 196,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -5065,7 +5116,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 212,
+            "line": 214,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -5083,7 +5134,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 228,
+            "line": 230,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_initializeTrackingDot",
@@ -6093,15 +6144,15 @@
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:92"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:94"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:139"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:141"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:139"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:141"
         }
     ]
 }
