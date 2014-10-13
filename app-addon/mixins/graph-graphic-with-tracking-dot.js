@@ -53,9 +53,11 @@ export default Ember.Mixin.create({
 
   showTrackingDot: function(){
     var trackedData = this.get('trackedData');
-    var x = trackedData.get('x');
-    var y = trackedData.get('y');
-    return +x === +x && +y === +y;
+    if(trackedData) {
+      var x = trackedData.get('x');
+      var y = trackedData.get('y');
+      return +x === +x && +y === +y;
+    }
   }.property('trackedData.x', 'trackedData.y'),
 
   _updateHovered: function() {

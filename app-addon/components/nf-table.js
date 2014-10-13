@@ -233,6 +233,16 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	}.on('willInsertElement'),
 
 	/**
+		The property on each row item to track data by. If undefined, will track by index.
+		@property trackBy
+		@type String
+		@default undefined
+	*/
+	trackBy: undefined,
+
+	renderRows: trackedArrayProperty('rowsStep1', 'trackBy'),
+
+	/**
 		Gets the an array of sorts, in order to be processed when sorting the rows.
 		@property sortMap
 		@readonly
