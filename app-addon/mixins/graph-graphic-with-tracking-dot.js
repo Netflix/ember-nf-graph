@@ -1,6 +1,8 @@
 import Ember from 'ember';
 import GraphMouseEvent from '../utils/nf/graph-mouse-event';
 
+var get = Ember.get;
+
 /**
   Adds tracking dot functionality to a component such as {{#crossLink "components.nf-line"}}{{/crossLink}}
   or {{#crossLink "components.nf-area"}}{{/crossLink}}
@@ -54,8 +56,8 @@ export default Ember.Mixin.create({
   showTrackingDot: function(){
     var trackedData = this.get('trackedData');
     if(trackedData) {
-      var x = trackedData.get('x');
-      var y = trackedData.get('y');
+      var x = get(trackedData, 'x');
+      var y = get(trackedData, 'y');
       return +x === +x && +y === +y;
     }
   }.property('trackedData.x', 'trackedData.y'),
