@@ -109,3 +109,25 @@ test('it should update the properties it finds', function() {
 
 	equal(obj.get('trackedArr')[0].name, 'foo2');
 });
+
+test('what happens when the source is undefined', function(){
+	var foo = { id: 1, name: 'foo' };
+	var bar = { id: 2, name: 'bar' };
+	var baz = { id: 3, name: 'baz' };
+
+	var MyClass = Ember.Object.extend({
+		arr1: undefined,
+
+		arr1Key: 'id',
+		
+		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
+	});
+
+	var obj = MyClass.create({
+		arr1: undefined,
+	});
+
+	obj.set('arr1', [ foo ]);
+	
+	deepEqual(obj.get('trackedArr'), [ foo ]);	
+})
