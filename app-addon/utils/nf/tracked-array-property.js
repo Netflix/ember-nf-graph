@@ -1,14 +1,17 @@
 import Ember from 'ember';
 
+var farkle = 0;
 
 function trackedArrayProperty(arraySourceProp, trackByProp) {
 	var arraySourceDependency = arraySourceProp + '.[]';
-
-	var trackingHash = {};
-	var keys = [];
-	var array = [];
+	var trackingMetaProp = '__meta__tracking_%@_%@'.fmt(arraySourceProp, trackByProp);
 
 	return function(){
+		var meta = this.get(trackingMetaProp) || {};
+		var keys = meta.keys || [];
+		var array = meta.array || [];
+		var trackingHash = meta.trackingHash || {};
+
 		var trackBy = trackByProp ? this.get(trackByProp) : null;
 		var isTrackByIndex = !trackBy;
 		var keyFn = isTrackByIndex ? function(d, i) {
@@ -18,6 +21,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 		};
 
 		var source = this.get(arraySourceProp);
+
 		if(Ember.isArray(source)) {
 
 			var sourceKeys = [];
@@ -50,7 +54,13 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 				}
 			});
 		}
-		
+
+		this.set(trackingMetaProp, {
+			keys: keys,
+			trackingHash: trackingHash,
+			array: array,
+		});
+
 		return array;
 	}.property(arraySourceDependency);
 }

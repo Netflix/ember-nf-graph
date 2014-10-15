@@ -27,7 +27,7 @@ test('it keep the same references to the underlying array', function(){
 
 	var after = obj.get('trackedArr');
 
-	equal(original, after);
+	ok(original === after, 'not the same reference');
 });
 
 
@@ -132,7 +132,6 @@ test('what happens when the source is undefined', function(){
 	deepEqual(obj.get('trackedArr'), [ foo ]);	
 });
 
-// this was added because of a bug where I was tracking keys on a static reference.
 test('two tracked arrays on one object', function(){
 	var foo = { id: 1, name: 'foo' };
 	var bar = { id: 2, name: 'bar' };
@@ -161,4 +160,28 @@ test('two tracked arrays on one object', function(){
 	
 	deepEqual(obj.get('trackedArr1'), [ foo ]);	
 	deepEqual(obj.get('trackedArr2'), [ bar ]);	
+});
+
+test('two instances of an object with a trackedArrayProperty', function(){
+	var foo = { id: 1, name: 'foo' };
+	var bar = { id: 2, name: 'bar' };
+	var baz = { id: 3, name: 'baz' };
+
+	var MyClass = Ember.Object.extend({
+		arr1: undefined,
+
+		arr1Key: 'id',
+		
+		trackedArr: trackedArrayProperty('arr1', 'arr1Key'),
+	});
+
+	var a = MyClass.create({});
+
+	var b = MyClass.create({});
+
+	a.set('arr1', [ foo ]);
+	b.set('arr1', [ bar, baz ]);
+	
+	deepEqual(a.get('trackedArr'), [ foo ]);	
+	deepEqual(b.get('trackedArr'), [ bar, baz ]);
 });
