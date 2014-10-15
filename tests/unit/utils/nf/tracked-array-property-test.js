@@ -130,4 +130,35 @@ test('what happens when the source is undefined', function(){
 	obj.set('arr1', [ foo ]);
 	
 	deepEqual(obj.get('trackedArr'), [ foo ]);	
-})
+});
+
+// this was added because of a bug where I was tracking keys on a static reference.
+test('two tracked arrays on one object', function(){
+	var foo = { id: 1, name: 'foo' };
+	var bar = { id: 2, name: 'bar' };
+	var baz = { id: 3, name: 'baz' };
+
+	var MyClass = Ember.Object.extend({
+		arr1: undefined,
+
+		arr1Key: 'id',
+		
+		trackedArr1: trackedArrayProperty('arr1', 'arr1Key'),
+
+		arr2: undefined,
+
+		arr2Key: undefined,
+		
+		trackedArr2: trackedArrayProperty('arr2', 'arr2Key'),
+	});
+
+	var obj = MyClass.create({
+		arr1: [ foo ],
+		arr2: [ bar ],
+	});
+
+	obj.set('arr1', [ foo ]);
+	
+	deepEqual(obj.get('trackedArr1'), [ foo ]);	
+	deepEqual(obj.get('trackedArr2'), [ bar ]);	
+});

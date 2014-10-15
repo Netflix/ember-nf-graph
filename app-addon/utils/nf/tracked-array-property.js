@@ -49,9 +49,9 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 					delete trackingHash[key];
 				}
 			});
-
-			return array;
 		}
+		
+		return array;
 	}.property(arraySourceDependency);
 }
 
