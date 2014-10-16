@@ -16,7 +16,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
 	classNames: ['nf-svg-line'],
 
-	attributeBindings: ['svgX0', 'svgX1', 'svgY0', 'svgY1'],
+	attributeBindings: ['svgX0:x0', 'svgX1:x1', 'svgY0:y0', 'svgY1:y1'],
 
 	/**
 		The domain value to plot the SVGLineElement's x0 at.
