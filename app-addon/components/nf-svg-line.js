@@ -16,14 +16,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
 	classNames: ['nf-svg-line'],
 
-	attributeBindings: ['svgX0:x0', 'svgX1:x1', 'svgY0:y0', 'svgY1:y1'],
-
-	/**
-		The domain value to plot the SVGLineElement's x0 at.
-		@property x0
-		@default null
-	*/
-	x0: null,
+	attributeBindings: ['svgX1:x1', 'svgX2:x2', 'svgY1:y1', 'svgY2:y2'],
 
 	/**
 		The domain value to plot the SVGLineElement's x1 at.
@@ -33,11 +26,11 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	x1: null,
 
 	/**
-		The domain value to plot the SVGLineElement's y0 at.
-		@property y0
+		The domain value to plot the SVGLineElement's x2 at.
+		@property x2
 		@default null
 	*/
-	y0: null,
+	x2: null,
 
 	/**
 		The domain value to plot the SVGLineElement's y1 at.
@@ -47,14 +40,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	y1: null,
 
 	/**
-		The pixel value to plot the SVGLineElement's x0 at.
-		@property svgX0
-		@type Number
+		The domain value to plot the SVGLineElement's y2 at.
+		@property y2
+		@default null
 	*/
-	svgX0: function(){
-		return normalizeScale(this.get('xScale'), this.get('x0'));
-	}.property('x0', 'xScale'),
-	
+	y2: null,
+
 	/**
 		The pixel value to plot the SVGLineElement's x1 at.
 		@property svgX1
@@ -63,16 +54,16 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	svgX1: function(){
 		return normalizeScale(this.get('xScale'), this.get('x1'));
 	}.property('x1', 'xScale'),
-
+	
 	/**
-		The pixel value to plot the SVGLineElement's y0 at.
-		@property svgY0
+		The pixel value to plot the SVGLineElement's x2 at.
+		@property svgX2
 		@type Number
 	*/
-	svgY0: function(){
-		return normalizeScale(this.get('yScale'), this.get('y0'));
-	}.property('y0', 'yScale'),
-	
+	svgX2: function(){
+		return normalizeScale(this.get('xScale'), this.get('x2'));
+	}.property('x2', 'xScale'),
+
 	/**
 		The pixel value to plot the SVGLineElement's y1 at.
 		@property svgY1
@@ -81,4 +72,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	svgY1: function(){
 		return normalizeScale(this.get('yScale'), this.get('y1'));
 	}.property('y1', 'yScale'),
+	
+	/**
+		The pixel value to plot the SVGLineElement's y2 at.
+		@property svgY2
+		@type Number
+	*/
+	svgY2: function(){
+		return normalizeScale(this.get('yScale'), this.get('y2'));
+	}.property('y2', 'yScale'),
 });
