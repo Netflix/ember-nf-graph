@@ -185,6 +185,8 @@
                 
                     <li><a href="mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
                 
+                    <li><a href="mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+                
             </ul>
         </div>
     
@@ -197,7 +199,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-svg-line.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:6</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-svg-line.js.html#l7"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:7</code></a>
         </div>
     
 
@@ -250,6 +252,13 @@
                                 
                             </li>
                         
+                            <li class="index-item method private inherited">
+                                <a href="#method__updateGraphSelected">_updateGraphSelected</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -264,6 +273,15 @@
                                 <a href="#property_graph">graph</a>
 
                                 
+                                
+                            </li>
+                        
+                            <li class="index-item property deprecated inherited">
+                                <a href="#property_isSelected">isSelected</a>
+
+                                
+                                
+                                    <span class="flag deprecated">deprecated</span>
                                 
                             </li>
                         
@@ -295,8 +313,15 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
-                                <a href="#property_svgX0">svgX0</a>
+                            <li class="index-item property inherited">
+                                <a href="#property_selectable">selectable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_selected">selected</a>
 
                                 
                                 
@@ -310,7 +335,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_svgY0">svgY0</a>
+                                <a href="#property_svgX2">svgX2</a>
 
                                 
                                 
@@ -324,7 +349,7 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_x0">x0</a>
+                                <a href="#property_svgY2">svgY2</a>
 
                                 
                                 
@@ -332,6 +357,13 @@
                         
                             <li class="index-item property">
                                 <a href="#property_x1">x1</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_x2">x2</a>
 
                                 
                                 
@@ -345,14 +377,14 @@
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_y0">y0</a>
+                                <a href="#property_y1">y1</a>
 
                                 
                                 
                             </li>
                         
                             <li class="index-item property">
-                                <a href="#property_y1">y1</a>
+                                <a href="#property_y2">y2</a>
 
                                 
                                 
@@ -432,6 +464,62 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
+                    <div id="method__updateGraphSelected" class="method item private inherited">
+    <h3 class="name"><code>_updateGraphSelected</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#method__updateGraphSelected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l39"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Makes calls to the parent nf-graph to update it&#39;s
+<code>selected</code> property. Observes changes to <code>selected</code> and also 
+fires on <code>didInsertElement</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
             </div>
         
 
@@ -476,6 +564,52 @@ and assigns it to <code>graph</code></p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_isSelected" class="property item deprecated inherited">
+    <h3 class="name"><code>isSelected</code></h3>
+    <span class="type">Unknown</span>
+
+    
+        <span class="flag deprecated" title="use &#x60;selected&#x60;">deprecated</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_isSelected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l32"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:32</code></a>
+        
+        </p>
+
+        
+            <p>Deprecated: use &#x60;selected&#x60;</p>
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Alias of selected</p>
+
+    </div>
+
     
 
     
@@ -660,9 +794,9 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_svgX0" class="property item">
-    <h3 class="name"><code>svgX0</code></h3>
-    <span class="type">Number</span>
+                    <div id="property_selectable" class="property item inherited">
+    <h3 class="name"><code>selectable</code></h3>
+    <span class="type">Boolean</span>
 
     
 
@@ -675,15 +809,12 @@ and assigns it to <code>graph</code></p>
     <div class="meta">
         
             
-                
-                <p>
-                
-                Defined in
-                
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_selectable">mixins.graph-selectable-graphic</a>:
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l49"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:49</code></a>
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l14"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:14</code></a>
         
         </p>
 
@@ -693,10 +824,58 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The pixel value to plot the SVGLineElement&#39;s x0 at.</p>
+        <p>Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
+via some action (usually click). The component will then show up in the nf-graph parent&#39;s selected 
+property.</p>
 
     </div>
 
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_selected" class="property item inherited">
+    <h3 class="name"><code>selected</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_selected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l24"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:24</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether or not the graphic is selected.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
     
 
     
@@ -728,7 +907,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:58</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l57"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:57</code></a>
         
         </p>
 
@@ -750,8 +929,8 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_svgY0" class="property item">
-    <h3 class="name"><code>svgY0</code></h3>
+                    <div id="property_svgX2" class="property item">
+    <h3 class="name"><code>svgX2</code></h3>
     <span class="type">Number</span>
 
     
@@ -773,7 +952,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l67"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:67</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l66"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:66</code></a>
         
         </p>
 
@@ -783,7 +962,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The pixel value to plot the SVGLineElement&#39;s y0 at.</p>
+        <p>The pixel value to plot the SVGLineElement&#39;s x2 at.</p>
 
     </div>
 
@@ -818,7 +997,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l76"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:76</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l75"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:75</code></a>
         
         </p>
 
@@ -840,9 +1019,9 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_x0" class="property item">
-    <h3 class="name"><code>x0</code></h3>
-    <span class="type">Unknown</span>
+                    <div id="property_svgY2" class="property item">
+    <h3 class="name"><code>svgY2</code></h3>
+    <span class="type">Number</span>
 
     
 
@@ -863,7 +1042,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l21"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:21</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l84"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:84</code></a>
         
         </p>
 
@@ -873,12 +1052,10 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>The domain value to plot the SVGLineElement&#39;s x0 at.</p>
+        <p>The pixel value to plot the SVGLineElement&#39;s y2 at.</p>
 
     </div>
 
-    
-        <p><strong>Default:</strong> null</p>
     
 
     
@@ -910,7 +1087,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l28"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:28</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:29</code></a>
         
         </p>
 
@@ -921,6 +1098,53 @@ and assigns it to <code>graph</code></p>
 
     <div class="description">
         <p>The domain value to plot the SVGLineElement&#39;s x1 at.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x2" class="property item">
+    <h3 class="name"><code>x2</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l36"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:36</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The domain value to plot the SVGLineElement&#39;s x2 at.</p>
 
     </div>
 
@@ -976,53 +1200,6 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
-                    <div id="property_y0" class="property item">
-    <h3 class="name"><code>y0</code></h3>
-    <span class="type">Unknown</span>
-
-    
-
-    
-
-    
-
-    
-
-    <div class="meta">
-        
-            
-                
-                <p>
-                
-                Defined in
-                
-            
-        
-        
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l35"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:35</code></a>
-        
-        </p>
-
-        
-
-        
-    </div>
-
-    <div class="description">
-        <p>The domain value to plot the SVGLineElement&#39;s y0 at.</p>
-
-    </div>
-
-    
-        <p><strong>Default:</strong> null</p>
-    
-
-    
-
-    
-</div>
-
-                
                     <div id="property_y1" class="property item">
     <h3 class="name"><code>y1</code></h3>
     <span class="type">Unknown</span>
@@ -1046,7 +1223,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-line.js.html#l42"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:42</code></a>
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l43"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:43</code></a>
         
         </p>
 
@@ -1057,6 +1234,53 @@ and assigns it to <code>graph</code></p>
 
     <div class="description">
         <p>The domain value to plot the SVGLineElement&#39;s y1 at.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y2" class="property item">
+    <h3 class="name"><code>y2</code></h3>
+    <span class="type">Unknown</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-line.js.html#l50"><code>app-addon&#x2F;components&#x2F;nf-svg-line.js:50</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The domain value to plot the SVGLineElement&#39;s y2 at.</p>
 
     </div>
 

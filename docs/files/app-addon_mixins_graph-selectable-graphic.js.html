@@ -182,30 +182,57 @@ import Ember from &#x27;ember&#x27;;
 import { backedProperty } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
- * @namespace mixins
- * @class graph-selectable-graphic
- * @extends Ember.Mixin
- */
+  Adds functionality to a component to make it a selectable graphic
+  within it&#x27;s parent nf-graph.
+  @namespace mixins
+  @class graph-selectable-graphic
+  @extends Ember.Mixin
+*/
 export default Ember.Mixin.create({
   _selected: false,
+
+  /**
+    Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
+    via some action (usually click). The component will then show up in the nf-graph parent&#x27;s selected 
+    property.
+    @property selectable
+    @type Boolean
+    @default false
+  */
   selectable: false,
 
+  /**
+    Gets or sets whether or not the graphic is selected.
+    @property selected
+    @type Boolean
+    @default false
+  */
   selected: backedProperty(&#x27;_selected&#x27;),
 
   /**
+    Alias of selected
     @property isSelected
     @deprecated use &#x60;selected&#x60;
   */
   isSelected: Ember.computed.alias(&#x27;selected&#x27;),
 
+  /**
+    Makes calls to the parent nf-graph to update it&#x27;s
+    &#x60;selected&#x60; property. Observes changes to &#x60;selected&#x60; and also 
+    fires on &#x60;didInsertElement&#x60;.
+    @method _updateGraphSelected
+    @private
+  */
   _updateGraphSelected: function() {
-    var selected = this.get(&#x27;selected&#x27;);
-    var graph = this.get(&#x27;graph&#x27;);
-    if(selected) {
-      graph.selectGraphic(this);
-    } else {
-      graph.deselectGraphic(this);
-    }
+    Ember.run.once(this, function(){
+      var selected = this.get(&#x27;selected&#x27;);
+      var graph = this.get(&#x27;graph&#x27;);
+      if(selected) {
+        graph.selectGraphic(this);
+      } else {
+        graph.deselectGraphic(this);
+      }
+    });
   }.observes(&#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
 });
     </pre>

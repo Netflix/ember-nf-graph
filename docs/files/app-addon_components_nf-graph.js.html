@@ -913,9 +913,7 @@ export default Ember.Component.extend({
     @default false
     @readonly
    */
-  hasData: property(&#x27;graphics&#x27;, function(graphics) {
-    return graphics &amp;&amp; graphics.length &gt; 0;
-  }),
+  hasData: Ember.computed.notEmpty(&#x27;graphics&#x27;),
 
   /**
     The x coordinate position of the graph content

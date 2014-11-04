@@ -749,12 +749,13 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-gg.js",
-            "line": 5,
+            "line": 6,
             "description": "A grouping tag that provides zooming and offset functionality to it's children.\n\n## Example\n\nThe following example will show a line of `someData` with a 2x zoom, offset by 30px in both x and y\ndirections:\n\n\t\t\t{{#nf-gg scaleZoomX=\"2\" scaleZoomY=\"2\" scaleOffsetX=\"30\" scaleOffsetY=\"30\"}}\n\t\t\t\t{{nf-line data=someData}}\n\t\t\t{{/nf-gg}}",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
-                "mixins.graph-require-scale-source"
+                "mixins.graph-require-scale-source",
+                "mixins.graph-selecteble-graphic"
             ]
         },
         "components.nf-graph-content": {
@@ -966,12 +967,13 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 6,
+            "line": 7,
             "description": "An image to be displayed in a graph with that takes domain based measurements and\nuses the scale of the graph. Creates an `<image class=\"nf-image\"/>` SVG element.",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
-                "mixins.graph-requires-scale-source"
+                "mixins.graph-requires-scale-source",
+                "mixins.graph-selectable-graphic"
             ]
         },
         "components.nf-svg-line": {
@@ -985,12 +987,13 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 6,
+            "line": 7,
             "description": "Draws a basic line between two points on the graph.",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
-                "mixins.graph-requires-scale-source"
+                "mixins.graph-requires-scale-source",
+                "mixins.graph-selectable-graphic"
             ]
         },
         "components.nf-svg-path": {
@@ -1004,12 +1007,13 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-svg-path.js",
-            "line": 6,
+            "line": 7,
             "description": "An SVG path primitive that plots based on a graph's scale.",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
-                "mixins.graph-requires-scale-source"
+                "mixins.graph-requires-scale-source",
+                "mixins.graph-selectable-graphic"
             ]
         },
         "components.nf-svg-rect": {
@@ -1023,12 +1027,13 @@
             "module": "utils/nf/array-helpers",
             "namespace": "components",
             "file": "app-addon/components/nf-svg-rect.js",
-            "line": 6,
+            "line": 7,
             "description": "A rectangle that plots using domain values from the graph. Uses an SVGPathElement\nto plot the rectangle, to allow for rectangles with \"negative\" heights.",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
-                "mixins.graph-requires-scale-source"
+                "mixins.graph-requires-scale-source",
+                "mixins.graph-selectable-graphic"
             ]
         },
         "components.nf-table-group": {
@@ -1206,7 +1211,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 4,
+            "line": 6,
             "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
@@ -1320,12 +1325,17 @@
             "plugin_for": [],
             "extension_for": [
                 "components.nf-area",
-                "components.nf-line"
+                "components.nf-line",
+                "components.nf-svg-image",
+                "components.nf-svg-line",
+                "components.nf-svg-path",
+                "components.nf-svg-rect"
             ],
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-selectable-graphic.js",
             "line": 4,
+            "description": "Adds functionality to a component to make it a selectable graphic\nwithin it's parent nf-graph.",
             "extends": "Ember.Mixin"
         },
         "mixins.table-column-registrar": {
@@ -2677,7 +2687,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 740,
+            "line": 738,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
@@ -2688,7 +2698,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 756,
+            "line": 754,
             "description": "The y coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphY",
@@ -2699,7 +2709,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 771,
+            "line": 769,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
@@ -2710,7 +2720,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 786,
+            "line": 784,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
@@ -2721,7 +2731,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 801,
+            "line": 799,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
@@ -2732,7 +2742,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 811,
+            "line": 809,
             "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
             "itemtype": "method",
             "name": "_notifyHasRendered",
@@ -2743,7 +2753,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 820,
+            "line": 818,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -2768,7 +2778,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 840,
+            "line": 838,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -2779,7 +2789,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 848,
+            "line": 846,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -2795,7 +2805,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 869,
+            "line": 867,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -2811,7 +2821,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 886,
+            "line": 884,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
@@ -3674,7 +3684,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 23,
+            "line": 31,
             "description": "The domain x value to place the image at.",
             "itemtype": "property",
             "name": "x",
@@ -3684,7 +3694,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 30,
+            "line": 38,
             "description": "The domain y value to place the image at.",
             "itemtype": "property",
             "name": "y",
@@ -3694,7 +3704,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 39,
+            "line": 47,
             "description": "The width as a domain value. Does not handle ordinal\nscales. To set a pixel value, set `svgWidth` directly.",
             "itemtype": "property",
             "name": "width",
@@ -3705,7 +3715,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 55,
+            "line": 63,
             "description": "The height as a domain value. Does not \nhandle ordinal scales. To set a pixel value, just\nset `svgHeight` directly.",
             "itemtype": "property",
             "name": "height",
@@ -3715,7 +3725,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 69,
+            "line": 77,
             "description": "The image source url",
             "itemtype": "property",
             "name": "src",
@@ -3725,7 +3735,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 107,
+            "line": 115,
             "description": "The pixel value at which to plot the image.",
             "itemtype": "property",
             "name": "svgX",
@@ -3735,7 +3745,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 116,
+            "line": 124,
             "description": "The pixel value at which to plot the image.",
             "itemtype": "property",
             "name": "svgY",
@@ -3745,7 +3755,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 125,
+            "line": 133,
             "description": "The width, in pixels, of the image.",
             "itemtype": "property",
             "name": "svgWidth",
@@ -3755,7 +3765,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-image.js",
-            "line": 134,
+            "line": 142,
             "description": "The height, in pixels of the image.",
             "itemtype": "property",
             "name": "svgHeight",
@@ -3765,17 +3775,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 21,
-            "description": "The domain value to plot the SVGLineElement's x0 at.",
-            "itemtype": "property",
-            "name": "x0",
-            "default": "null",
-            "class": "components.nf-svg-line",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-svg-line.js",
-            "line": 28,
+            "line": 29,
             "description": "The domain value to plot the SVGLineElement's x1 at.",
             "itemtype": "property",
             "name": "x1",
@@ -3785,17 +3785,17 @@
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 35,
-            "description": "The domain value to plot the SVGLineElement's y0 at.",
+            "line": 36,
+            "description": "The domain value to plot the SVGLineElement's x2 at.",
             "itemtype": "property",
-            "name": "y0",
+            "name": "x2",
             "default": "null",
             "class": "components.nf-svg-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 42,
+            "line": 43,
             "description": "The domain value to plot the SVGLineElement's y1 at.",
             "itemtype": "property",
             "name": "y1",
@@ -3805,17 +3805,17 @@
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 49,
-            "description": "The pixel value to plot the SVGLineElement's x0 at.",
+            "line": 50,
+            "description": "The domain value to plot the SVGLineElement's y2 at.",
             "itemtype": "property",
-            "name": "svgX0",
-            "type": "Number",
+            "name": "y2",
+            "default": "null",
             "class": "components.nf-svg-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 58,
+            "line": 57,
             "description": "The pixel value to plot the SVGLineElement's x1 at.",
             "itemtype": "property",
             "name": "svgX1",
@@ -3825,17 +3825,17 @@
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 67,
-            "description": "The pixel value to plot the SVGLineElement's y0 at.",
+            "line": 66,
+            "description": "The pixel value to plot the SVGLineElement's x2 at.",
             "itemtype": "property",
-            "name": "svgY0",
+            "name": "svgX2",
             "type": "Number",
             "class": "components.nf-svg-line",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-svg-line.js",
-            "line": 76,
+            "line": 75,
             "description": "The pixel value to plot the SVGLineElement's y1 at.",
             "itemtype": "property",
             "name": "svgY1",
@@ -3844,8 +3844,18 @@
             "namespace": "components"
         },
         {
+            "file": "app-addon/components/nf-svg-line.js",
+            "line": 84,
+            "description": "The pixel value to plot the SVGLineElement's y2 at.",
+            "itemtype": "property",
+            "name": "svgY2",
+            "type": "Number",
+            "class": "components.nf-svg-line",
+            "namespace": "components"
+        },
+        {
             "file": "app-addon/components/nf-svg-path.js",
-            "line": 21,
+            "line": 23,
             "description": "The array of points to use to plot the path. This is an array of arrays, in the following format:\n\n\t\t\t// specify path pen commands\n\t\t\t[\n\t\t\t\t[50, 50, 'L'],\n\t\t\t\t[100, 100, 'L']\n\t\t\t]\n\n\t\t\t// or they will default to 'L'\n\t\t\t[\n\t\t\t\t[50, 50],\n\t\t\t\t[100, 100]\n\t\t\t]",
             "itemtype": "property",
             "name": "points",
@@ -3855,7 +3865,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-path.js",
-            "line": 41,
+            "line": 43,
             "description": "The data points mapped to scale",
             "itemtype": "property",
             "name": "svgPoints",
@@ -3865,7 +3875,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-path.js",
-            "line": 60,
+            "line": 68,
             "description": "The raw svg path d attribute output",
             "itemtype": "property",
             "name": "d",
@@ -3875,7 +3885,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-rect.js",
-            "line": 22,
+            "line": 24,
             "description": "The domain x value to place the rect at.",
             "itemtype": "property",
             "name": "x",
@@ -3885,7 +3895,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-rect.js",
-            "line": 29,
+            "line": 31,
             "description": "The domain y value to place the rect at.",
             "itemtype": "property",
             "name": "y",
@@ -3895,7 +3905,7 @@
         },
         {
             "file": "app-addon/components/nf-svg-rect.js",
-            "line": 38,
+            "line": 40,
             "description": "The width as a domain value. If xScale is ordinal, \nthen this value is the indice offset to which to draw the \nrectangle. In other words, if it's `2`, then draw the rectangle\nto two ordinals past whatever `x` is set to.",
             "itemtype": "property",
             "name": "width",
@@ -3906,12 +3916,71 @@
         },
         {
             "file": "app-addon/components/nf-svg-rect.js",
-            "line": 56,
+            "line": 58,
             "description": "The height as a domain value. If the yScale is ordinal,\nthis value is the indice offset to which to draw the rectangle.\nFor example, if the height is `3` then draw the rectangle\nto two ordinals passed whatever `y` is set to.",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "default": "0",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 74,
+            "description": "The x value of the bottom right corner of the rectangle.",
+            "itemtype": "property",
+            "name": "x1",
+            "type": "Number",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 94,
+            "description": "The y value of the bottom right corner of the rectangle",
+            "itemtype": "property",
+            "name": "y1",
+            "type": "Number",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 114,
+            "description": "The x value of the top right corner of the rectangle",
+            "itemtype": "property",
+            "name": "x0",
+            "type": "Number",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 123,
+            "description": "The y value of the top right corner of the rectangle.",
+            "itemtype": "property",
+            "name": "y0",
+            "type": "Number",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 132,
+            "description": "The SVG path data for the rectangle",
+            "itemtype": "property",
+            "name": "d",
+            "type": "String",
+            "class": "components.nf-svg-rect",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-svg-rect.js",
+            "line": 145,
+            "description": "Click event handler. Toggles selected if selectable.",
+            "itemtype": "method",
+            "name": "click",
             "class": "components.nf-svg-rect",
             "namespace": "components"
         },
@@ -4989,7 +5058,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 12,
+            "line": 14,
             "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'none': no tracking behavior\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
             "itemtype": "property",
             "name": "trackingMode",
@@ -5000,7 +5069,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 86,
+            "line": 88,
             "description": "The action name to send to the controller when the `hoverChange` event fires",
             "itemtype": "property",
             "name": "hoverChange",
@@ -5011,7 +5080,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 94,
+            "line": 96,
             "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
             "itemtype": "method",
             "name": "didContentHoverChange",
@@ -5029,7 +5098,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 110,
+            "line": 112,
             "description": "Event handler for didHoverChange. Sends hoverChange action.",
             "itemtype": "method",
             "name": "didHoverChange",
@@ -5045,7 +5114,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 133,
+            "line": 135,
             "description": "Name of the action to send on `hoverEnd`",
             "itemtype": "property",
             "name": "hoverEnd",
@@ -5056,7 +5125,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 141,
+            "line": 143,
             "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
             "itemtype": "method",
             "name": "didHoverEnd",
@@ -5072,7 +5141,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 162,
+            "line": 164,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
@@ -5083,7 +5152,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 170,
+            "line": 172,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
@@ -5094,7 +5163,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 188,
+            "line": 190,
             "description": "The action to send on `willTrack`",
             "itemtype": "property",
             "name": "willTrack",
@@ -5105,7 +5174,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 196,
+            "line": 198,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -5116,7 +5185,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 214,
+            "line": 216,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -5134,7 +5203,7 @@
         },
         {
             "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 230,
+            "line": 232,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_initializeTrackingDot",
@@ -5283,11 +5352,45 @@
         },
         {
             "file": "app-addon/mixins/graph-selectable-graphic.js",
-            "line": 15,
+            "line": 14,
+            "description": "Gets or sets whether or not the graphic is \"selectable\". Meaning can be \"selected\" on the nf-graph \nvia some action (usually click). The component will then show up in the nf-graph parent's selected \nproperty.",
+            "itemtype": "property",
+            "name": "selectable",
+            "type": "Boolean",
+            "default": "false",
+            "class": "mixins.graph-selectable-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-selectable-graphic.js",
+            "line": 24,
+            "description": "Gets or sets whether or not the graphic is selected.",
+            "itemtype": "property",
+            "name": "selected",
+            "type": "Boolean",
+            "default": "false",
+            "class": "mixins.graph-selectable-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-selectable-graphic.js",
+            "line": 32,
+            "description": "Alias of selected",
             "itemtype": "property",
             "name": "isSelected",
             "deprecated": true,
             "deprecationMessage": "use `selected`",
+            "class": "mixins.graph-selectable-graphic",
+            "namespace": "mixins"
+        },
+        {
+            "file": "app-addon/mixins/graph-selectable-graphic.js",
+            "line": 39,
+            "description": "Makes calls to the parent nf-graph to update it's\n`selected` property. Observes changes to `selected` and also \nfires on `didInsertElement`.",
+            "itemtype": "method",
+            "name": "_updateGraphSelected",
+            "access": "private",
+            "tagname": "",
             "class": "mixins.graph-selectable-graphic",
             "namespace": "mixins"
         },
@@ -6144,15 +6247,15 @@
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:94"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:96"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:141"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:143"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:141"
+            "line": " app-addon/mixins/graph-graphic-with-tracking-dot.js:143"
         }
     ]
 }

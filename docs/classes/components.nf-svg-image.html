@@ -185,6 +185,8 @@
                 
                     <li><a href="mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
                 
+                    <li><a href="mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+                
             </ul>
         </div>
     
@@ -197,7 +199,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-svg-image.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:6</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-svg-image.js.html#l7"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:7</code></a>
         </div>
     
 
@@ -251,6 +253,13 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
                                 
                             </li>
                         
+                            <li class="index-item method private inherited">
+                                <a href="#method__updateGraphSelected">_updateGraphSelected</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -272,6 +281,15 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
                                 <a href="#property_height">height</a>
 
                                 
+                                
+                            </li>
+                        
+                            <li class="index-item property deprecated inherited">
+                                <a href="#property_isSelected">isSelected</a>
+
+                                
+                                
+                                    <span class="flag deprecated">deprecated</span>
                                 
                             </li>
                         
@@ -298,6 +316,20 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
                         
                             <li class="index-item property inherited">
                                 <a href="#property_scaleZoomY">scaleZoomY</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_selectable">selectable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_selected">selected</a>
 
                                 
                                 
@@ -440,6 +472,62 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
+                    <div id="method__updateGraphSelected" class="method item private inherited">
+    <h3 class="name"><code>_updateGraphSelected</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#method__updateGraphSelected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l39"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Makes calls to the parent nf-graph to update it&#39;s
+<code>selected</code> property. Observes changes to <code>selected</code> and also 
+fires on <code>didInsertElement</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
             </div>
         
 
@@ -515,7 +603,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l55"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:55</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l63"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:63</code></a>
         
         </p>
 
@@ -533,6 +621,52 @@ set <code>svgHeight</code> directly.</p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_isSelected" class="property item deprecated inherited">
+    <h3 class="name"><code>isSelected</code></h3>
+    <span class="type">Unknown</span>
+
+    
+        <span class="flag deprecated" title="use &#x60;selected&#x60;">deprecated</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_isSelected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l32"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:32</code></a>
+        
+        </p>
+
+        
+            <p>Deprecated: use &#x60;selected&#x60;</p>
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Alias of selected</p>
+
+    </div>
+
     
 
     
@@ -717,6 +851,96 @@ set <code>svgHeight</code> directly.</p>
 </div>
 
                 
+                    <div id="property_selectable" class="property item inherited">
+    <h3 class="name"><code>selectable</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_selectable">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l14"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:14</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
+via some action (usually click). The component will then show up in the nf-graph parent&#39;s selected 
+property.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_selected" class="property item inherited">
+    <h3 class="name"><code>selected</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_selected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l24"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:24</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether or not the graphic is selected.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_src" class="property item">
     <h3 class="name"><code>src</code></h3>
     <span class="type">String</span>
@@ -740,7 +964,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l69"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:69</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l77"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:77</code></a>
         
         </p>
 
@@ -785,7 +1009,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l134"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:134</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l142"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:142</code></a>
         
         </p>
 
@@ -830,7 +1054,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l125"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:125</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l133"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:133</code></a>
         
         </p>
 
@@ -875,7 +1099,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l107"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:107</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l115"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:115</code></a>
         
         </p>
 
@@ -920,7 +1144,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l116"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:116</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l124"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:124</code></a>
         
         </p>
 
@@ -965,7 +1189,7 @@ set <code>svgHeight</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l39"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:39</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l47"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:47</code></a>
         
         </p>
 
@@ -1013,7 +1237,7 @@ scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l23"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:23</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l31"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:31</code></a>
         
         </p>
 
@@ -1102,7 +1326,7 @@ scales. To set a pixel value, set <code>svgWidth</code> directly.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-image.js.html#l30"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:30</code></a>
+        <a href="../files/app-addon_components_nf-svg-image.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-svg-image.js:38</code></a>
         
         </p>
 

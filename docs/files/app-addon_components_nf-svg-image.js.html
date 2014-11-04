@@ -182,6 +182,7 @@ import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
 import RequiresScaleSource from &#x27;../mixins/graph-requires-scale-source&#x27;;
 import { normalizeScale } from &#x27;../utils/nf/scale-utils&#x27;;
+import SelectableGraphic from &#x27;../mixins/graph-selectable-graphic&#x27;;
 
 /**
 	An image to be displayed in a graph with that takes domain based measurements and
@@ -191,14 +192,21 @@ import { normalizeScale } from &#x27;../utils/nf/scale-utils&#x27;;
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
+	@uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
 	tagName: &#x27;image&#x27;,
 
-	classNames: [&#x27;nf-svg-image&#x27;],
+	classNameBindings: [&#x27;:nf-svg-image&#x27;, &#x27;selectable&#x27;, &#x27;selected&#x27;],
 	
 	//HACK: for now xlink:href needs to be bound elsewhere.
 	attributeBindings: [&#x27;svgX:x&#x27;, &#x27;svgY:y&#x27;, &#x27;svgWidth:width&#x27;, &#x27;svgHeight:height&#x27;],
+
+	click: function(){
+		if(this.get(&#x27;selectable&#x27;)) {
+			this.toggleProperty(&#x27;selected&#x27;);
+		}
+	},
 
 	/**
 		The domain x value to place the image at.

@@ -185,6 +185,8 @@
                 
                     <li><a href="mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
                 
+                    <li><a href="mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+                
             </ul>
         </div>
     
@@ -197,7 +199,7 @@
 
     
         <div class="foundat">
-            Defined in: <a href="../files/app-addon_components_nf-svg-rect.js.html#l6"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:6</code></a>
+            Defined in: <a href="../files/app-addon_components_nf-svg-rect.js.html#l7"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:7</code></a>
         </div>
     
 
@@ -251,6 +253,20 @@ to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights
                                 
                             </li>
                         
+                            <li class="index-item method private inherited">
+                                <a href="#method__updateGraphSelected">_updateGraphSelected</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_click">click</a>
+
+                                
+                                
+                            </li>
+                        
                     </ul>
                 </div>
             
@@ -260,6 +276,13 @@ to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights
                     <h3>Properties</h3>
 
                     <ul class="index-list properties extends">
+                        
+                            <li class="index-item property">
+                                <a href="#property_d">d</a>
+
+                                
+                                
+                            </li>
                         
                             <li class="index-item property inherited">
                                 <a href="#property_graph">graph</a>
@@ -272,6 +295,15 @@ to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights
                                 <a href="#property_height">height</a>
 
                                 
+                                
+                            </li>
+                        
+                            <li class="index-item property deprecated inherited">
+                                <a href="#property_isSelected">isSelected</a>
+
+                                
+                                
+                                    <span class="flag deprecated">deprecated</span>
                                 
                             </li>
                         
@@ -303,6 +335,20 @@ to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights
                                 
                             </li>
                         
+                            <li class="index-item property inherited">
+                                <a href="#property_selectable">selectable</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property inherited">
+                                <a href="#property_selected">selected</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property">
                                 <a href="#property_width">width</a>
 
@@ -317,6 +363,20 @@ to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_x0">x0</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_x1">x1</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property inherited">
                                 <a href="#property_xScale">xScale</a>
 
@@ -326,6 +386,20 @@ to plot the rectangle, to allow for rectangles with &quot;negative&quot; heights
                         
                             <li class="index-item property">
                                 <a href="#property_y">y</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_y0">y0</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
+                                <a href="#property_y1">y1</a>
 
                                 
                                 
@@ -405,12 +479,168 @@ and assigns it to <code>graph</code></p>
 </div>
 
                 
+                    <div id="method__updateGraphSelected" class="method item private inherited">
+    <h3 class="name"><code>_updateGraphSelected</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#method__updateGraphSelected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l39"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:39</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Makes calls to the parent nf-graph to update it&#39;s
+<code>selected</code> property. Observes changes to <code>selected</code> and also 
+fires on <code>didInsertElement</code>.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_click" class="method item">
+    <h3 class="name"><code>click</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l145"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:145</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Click event handler. Toggles selected if selectable.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
             </div>
         
 
         
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
+
+                
+                    <div id="property_d" class="property item">
+    <h3 class="name"><code>d</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l132"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:132</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The SVG path data for the rectangle</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
 
                 
                     <div id="property_graph" class="property item inherited">
@@ -480,7 +710,7 @@ and assigns it to <code>graph</code></p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-rect.js.html#l56"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:56</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l58"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:58</code></a>
         
         </p>
 
@@ -499,6 +729,52 @@ to two ordinals passed whatever <code>y</code> is set to.</p>
 
     
         <p><strong>Default:</strong> 0</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_isSelected" class="property item deprecated inherited">
+    <h3 class="name"><code>isSelected</code></h3>
+    <span class="type">Unknown</span>
+
+    
+        <span class="flag deprecated" title="use &#x60;selected&#x60;">deprecated</span>
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_isSelected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l32"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:32</code></a>
+        
+        </p>
+
+        
+            <p>Deprecated: use &#x60;selected&#x60;</p>
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Alias of selected</p>
+
+    </div>
+
     
 
     
@@ -683,6 +959,96 @@ to two ordinals passed whatever <code>y</code> is set to.</p>
 </div>
 
                 
+                    <div id="property_selectable" class="property item inherited">
+    <h3 class="name"><code>selectable</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_selectable">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l14"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:14</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
+via some action (usually click). The component will then show up in the nf-graph parent&#39;s selected 
+property.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_selected" class="property item inherited">
+    <h3 class="name"><code>selected</code></h3>
+    <span class="type">Boolean</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                <p>Inherited from
+                <a href="../classes/mixins.graph-selectable-graphic.html#property_selected">mixins.graph-selectable-graphic</a>:
+            
+        
+        
+        <a href="../files/app-addon_mixins_graph-selectable-graphic.js.html#l24"><code>app-addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:24</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Gets or sets whether or not the graphic is selected.</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="property_width" class="property item">
     <h3 class="name"><code>width</code></h3>
     <span class="type">Number</span>
@@ -706,7 +1072,7 @@ to two ordinals passed whatever <code>y</code> is set to.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-rect.js.html#l38"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:38</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l40"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:40</code></a>
         
         </p>
 
@@ -756,7 +1122,7 @@ to two ordinals past whatever <code>x</code> is set to.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-rect.js.html#l22"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:22</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l24"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:24</code></a>
         
         </p>
 
@@ -772,6 +1138,96 @@ to two ordinals past whatever <code>x</code> is set to.</p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x0" class="property item">
+    <h3 class="name"><code>x0</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l114"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:114</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x value of the top right corner of the rectangle</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_x1" class="property item">
+    <h3 class="name"><code>x1</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l74"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:74</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The x value of the bottom right corner of the rectangle.</p>
+
+    </div>
+
     
 
     
@@ -845,7 +1301,7 @@ to two ordinals past whatever <code>x</code> is set to.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-svg-rect.js.html#l29"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:29</code></a>
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l31"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:31</code></a>
         
         </p>
 
@@ -861,6 +1317,96 @@ to two ordinals past whatever <code>x</code> is set to.</p>
 
     
         <p><strong>Default:</strong> null</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y0" class="property item">
+    <h3 class="name"><code>y0</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l123"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:123</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y value of the top right corner of the rectangle.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_y1" class="property item">
+    <h3 class="name"><code>y1</code></h3>
+    <span class="type">Number</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-svg-rect.js.html#l94"><code>app-addon&#x2F;components&#x2F;nf-svg-rect.js:94</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>The y value of the bottom right corner of the rectangle</p>
+
+    </div>
+
     
 
     
