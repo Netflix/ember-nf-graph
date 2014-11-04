@@ -179,6 +179,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import { naturalCompare } from &#x27;../utils/nf/array-helpers&#x27;; 
 
 /**
 	Marks a component as a registry for table columns
@@ -221,6 +222,37 @@ export default Ember.Mixin.create({
 	_columns: function(key, value) { //jshint ignore:line
 		return [];
 	}.property(),
+
+	/**
+		Gets the an array of sorts, in order to be processed when sorting the rows.
+		@property sortMap
+		@readonly
+		@private
+	*/
+	sortMap: function(){
+		return this.get(&#x27;_columns&#x27;).reduce(function(sortMap, col) {
+			var direction = col.get(&#x27;direction&#x27;);
+			if(direction) {
+				var sortBy = col.get(&#x27;sortBy&#x27;);
+				if(sortBy) {
+					sortBy = sortBy.replace(/^row\./, &#x27;&#x27;);
+					if(col.get(&#x27;sortNatural&#x27;)) {
+						sortMap.push(function(a, b){
+							var ax = Ember.get(a, sortBy);
+							var bx = Ember.get(b, sortBy);
+							return naturalCompare(ax, bx) * direction;
+						});
+					} else {
+						sortMap.push({
+							by: sortBy,
+							direction: direction,
+						});
+					}
+				}
+			}
+			return sortMap;
+		}, []);
+	}.property(&#x27;_columns.@each.sortDirection&#x27;, &#x27;_columns.@each.sortBy&#x27;),
 
 	emitColumns: function() {
 		this.set(&#x27;columns&#x27;, this.get(&#x27;_columns&#x27;));
