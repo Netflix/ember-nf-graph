@@ -2,7 +2,6 @@ import Ember from 'ember';
 import multiSort from '../utils/multi-sort';
 import TableColumnRegistrar from '../mixins/table-column-registrar';
 import parsePropExpr from '../utils/parse-property-expression';
-import { naturalCompare } from '../utils/nf/array-helpers'; 
 import NfTableGroupController from '../controllers/nf-table-group-controller';
 import trackedArrayProperty from '../utils/nf/tracked-array-property';
 
@@ -134,6 +133,23 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	groupBy: null,
 
 	/**
+		The type of grouping to perform with the groupBy
+
+		# options
+		- `'flat'`: (default) rows data is flattened and groups are aggregated by matching
+								the property specified with `groupBy`. For example, if `groupBy="foo"` rows
+								will be grouped by all rows with a `foo` property that matches.
+		- `'hierarchy'`: rows data is already in parent/child format. Parent rows contain child rows on 
+								the property specified with `groupBy`. For example, if `groupBy="children"`, each row
+								in the base rows data array will be a grouping row, and the	array of items under 
+								`children` will be used as the "child" rows of each group.
+		@property groupFrom
+		@type String
+		@default 'flat'
+	*/
+	groupFrom: 'flat',
+
+	/**
 		Gets or sets whether the table has a scrollable layout.
 		@property scrollable
 		@type Boolean
@@ -150,20 +166,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	useGroupedTableLayout: Ember.computed.bool('groupBy'),
 
-	/**
-		Gets an array of grouped and sorted data, represented as an array of arrays.
-		@property sortedGroups
-		@type Array
-		@readonly
-	*/
-	sortedGroups: function() {
-		var sortMap = this.get('sortMap');
-		var rows = this.get('rows');
-		var groupBy = this.get('groupBy');
-		if(!groupBy || !rows || rows.length === 0) {
-			return null;
-		}
-
+	getGroupsFromFlattened: function(rows, groupBy, sortMap){
 		var alreadyGrouping = sortMap.any(function(x) {
 			return x.by === groupBy;
 		});
@@ -182,19 +185,54 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		var group;
 		var groupByExpr = parsePropExpr(groupBy);
 
-		var groups = rowsCopy.reduce(function(groups, d) {
+		return rowsCopy.reduce(function(groups, d) {
 			var groupVal = groupByExpr(d) || null;
 
 			if(groupVal !== prevGroupVal) {
-				group = [];
-				group.groupValue = groupVal;
+				group = {
+					_groupChildren: [],
+					_groupValue: groupVal,
+				};
 				groups.push(group);
 				prevGroupVal = groupVal;
 			}
 
-			group.push(d);
+			group._groupChildren.push(d);
 			return groups;
 		}, []);
+	},
+
+	getGroupsFromHierarchy: function(rows, groupBy, sortMap) {
+		var rowsCopy = rows.slice();
+		var groupSortMap = this.get('tableGroup.sortMap');
+		multiSort(rowsCopy, groupSortMap);
+		rowsCopy.forEach(function(row) {
+			var childRows = (Ember.get(row, groupBy) || []).slice();
+			multiSort(childRows, sortMap);
+			Ember.set(row, '_groupChildren', childRows);
+		});
+		return rowsCopy;
+	},
+
+	/**
+		Gets an array of grouped and sorted data, represented as an array of arrays.
+		@property sortedGroups
+		@type Array
+		@readonly
+	*/
+	sortedGroups: function() {
+		var sortMap 	= this.get('sortMap');
+		var rows 			= this.get('rows');
+		var groupBy 	= this.get('groupBy');
+		var groupFrom = this.get('groupFrom');
+
+		if(!groupBy || !rows || rows.length === 0) {
+			return null;
+		}
+
+		var groups = groupFrom === 'hierarchy' ? 
+			this.getGroupsFromHierarchy(rows, groupBy, sortMap) :
+			this.getGroupsFromFlattened(rows, groupBy, sortMap);
 
 		var tableGroupingCtrl = NfTableGroupController.create({
 			container: this.get('container'),
@@ -209,7 +247,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		}
 
 		return tableGroupingCtrl;
-	}.property('rows.[]', 'sortMap', 'groupBy', 'tableGroup.itemController'),
+	}.property('rows.[]', 'sortMap', 'groupBy', 'groupFrom', 'tableGroup.itemController'),
 
 	/**
 		Alias for the rowAction on the nf-table-group
@@ -288,37 +326,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	observeSortChanges: function(){
 		Ember.run.scheduleOnce('afterRender', this, this.onSort);
 	}.observes('_columns.@each.sortDirection', '_columns.@each.sortBy'),
-
-	/**
-		Gets the an array of sorts, in order to be processed when sorting the rows.
-		@property sortMap
-		@readonly
-		@private
-	*/
-	sortMap: function(){
-		return this.get('_columns').reduce(function(sortMap, col) {
-			var direction = col.get('direction');
-			if(direction) {
-				var sortBy = col.get('sortBy');
-				sortBy = sortBy.replace(/^row\./, '');
-				if(sortBy) {
-					if(col.get('sortNatural')) {
-						sortMap.push(function(a, b){
-							var ax = Ember.get(a, sortBy);
-							var bx = Ember.get(b, sortBy);
-							return naturalCompare(ax, bx) * direction;
-						});
-					} else {
-						sortMap.push({
-							by: sortBy,
-							direction: direction,
-						});
-					}
-				}
-			}
-			return sortMap;
-		}, []);
-	}.property('_columns.@each.sortDirection', '_columns.@each.sortBy'),
 
 	/**
 		A computed property returning a sorted copy of `rows`

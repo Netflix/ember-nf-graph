@@ -1,7 +1,5 @@
 import Ember from 'ember';
 
-var farkle = 0;
-
 function trackedArrayProperty(arraySourceProp, trackByProp) {
 	var arraySourceDependency = arraySourceProp + '.[]';
 	var trackingMetaProp = '__meta__tracking_%@_%@'.fmt(arraySourceProp, trackByProp);

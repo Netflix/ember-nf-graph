@@ -16,15 +16,17 @@
 
 length: {{cols.length}}
 
+{{!-- itemController="nf-table-group-test"  --}}
 {{#nf-table rows=myData scrollable=1
 	scrollAction="tableScrolled"
 	columns=cols
-	groupBy="blah"
+	groupBy="children"
+	groupFrom="hierarchy"
 	rowAction="rowClicked"}}
-	{{#nf-table-group itemController="nf-table-group-test" rowAction="groupClicked"}}
-		{{#nf-column sortBy="row.blah" class="small-column"}}	
+	{{#nf-table-group rowAction="groupClicked"}}
+		{{#nf-column sortBy="name" sortNatural=1 sortDirection="desc" class="small-column"}}	
 			{{#nf-cell}}
-				{{group.blah}}
+				{{group.name}}
 			{{/nf-cell}}
 		{{/nf-column}}
 	{{/nf-table-group}}

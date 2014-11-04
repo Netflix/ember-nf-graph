@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import { naturalCompare } from '../utils/nf/array-helpers'; 
 
 /**
 	Marks a component as a registry for table columns
@@ -41,6 +42,37 @@ export default Ember.Mixin.create({
 	_columns: function(key, value) { //jshint ignore:line
 		return [];
 	}.property(),
+
+	/**
+		Gets the an array of sorts, in order to be processed when sorting the rows.
+		@property sortMap
+		@readonly
+		@private
+	*/
+	sortMap: function(){
+		return this.get('_columns').reduce(function(sortMap, col) {
+			var direction = col.get('direction');
+			if(direction) {
+				var sortBy = col.get('sortBy');
+				if(sortBy) {
+					sortBy = sortBy.replace(/^row\./, '');
+					if(col.get('sortNatural')) {
+						sortMap.push(function(a, b){
+							var ax = Ember.get(a, sortBy);
+							var bx = Ember.get(b, sortBy);
+							return naturalCompare(ax, bx) * direction;
+						});
+					} else {
+						sortMap.push({
+							by: sortBy,
+							direction: direction,
+						});
+					}
+				}
+			}
+			return sortMap;
+		}, []);
+	}.property('_columns.@each.sortDirection', '_columns.@each.sortBy'),
 
 	emitColumns: function() {
 		this.set('columns', this.get('_columns'));

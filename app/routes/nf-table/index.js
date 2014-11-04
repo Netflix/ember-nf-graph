@@ -1,7 +1,30 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-	model: function(){
+	getHierarchicalRows: function(){
+		var myData = [];
+		var p, c, parent;
+
+		for(p = 0; p < 4; p++) {
+			parent = {
+				name: 'parent ' + p,
+				children: []
+			};
+			for(c = 0; c < 5; c++) {
+				parent.children.push({
+					id: c+1,
+					foo: Math.random() * 100,
+					bar: 'Bar ' + c,
+					blah: 'Blah' + (c % 2),
+				});
+			}
+			myData.push(parent);
+		}
+
+		return myData;
+	},
+
+	getFlatRows: function(){
 		var myData = [];
 		var i;
 
@@ -14,8 +37,13 @@ export default Ember.Route.extend({
 			});
 		}
 
+		return myData;
+	},
+
+	model: function(){
 		return {
-			myData: myData
+			myData: this.getHierarchicalRows()
 		};
 	}
+
 });

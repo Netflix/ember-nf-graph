@@ -22,7 +22,7 @@
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
               </tr>
-              {{#each row in group}}
+              {{#each row in group._groupChildren}}
                 <tr class="nf-table-group-child" {{action 'rowClick' row group}}>
                   {{#each column in visibleColumns}}
                     {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
@@ -83,7 +83,7 @@
                 {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
               {{/each}}
             </tr>
-            {{#each row in group}}
+            {{#each row in group._groupChildren}}
               <tr class="nf-table-group-child" {{action 'rowClick' row group}}>
                 {{#each column in visibleColumns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
