@@ -2,6 +2,7 @@ import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 import { normalizeScale } from '../utils/nf/scale-utils';
+import SelectableGraphic from '../mixins/graph-selectable-graphic';
 
 /**
 	A rectangle that plots using domain values from the graph. Uses an SVGPathElement
@@ -11,13 +12,14 @@ import { normalizeScale } from '../utils/nf/scale-utils';
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
+	@uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
 	tagName: 'path',
 
 	attributeBindings: ['d'],
 
-	classNames: ['nf-svg-rect'],
+	classNameBindings: [':nf-svg-rect', 'selectable', 'selected'],
 
 	/**
 		The domain x value to place the rect at.
@@ -69,6 +71,11 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		return this._height;
 	}.property(),
 
+	/**
+		The x value of the bottom right corner of the rectangle.
+		@property x1
+		@type Number
+	*/
 	x1: function(){
 		var xScale = this.get('xScale');
 		var w = this.get('width');
@@ -84,6 +91,11 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		}
 	}.property('width', 'x', 'xScale'),
 
+	/**
+		The y value of the bottom right corner of the rectangle
+		@property y1
+		@type Number
+	*/
 	y1: function(){
 		var yScale = this.get('yScale');
 		var h = this.get('height');
@@ -99,14 +111,29 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		}
 	}.property('height', 'y', 'yScale'),
 
+	/**
+		The x value of the top right corner of the rectangle
+		@property x0
+		@type Number
+	*/
 	x0: function(){
 		return normalizeScale(this.get('xScale'), this.get('x'));
 	}.property('x', 'xScale'),
 
+	/**
+		The y value of the top right corner of the rectangle.
+		@property y0
+		@type Number
+	*/
 	y0: function() {
 		return normalizeScale(this.get('yScale'), this.get('y'));
 	}.property('y', 'yScale'),
 
+	/**
+		The SVG path data for the rectangle
+		@property d
+		@type String
+	*/
 	d: function(){
 		var x0 = this.get('x0');
 		var y0 = this.get('y0');
@@ -114,4 +141,14 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 		var y1 = this.get('y1');
 		return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x0, y0, x1, y1);
 	}.property('x0', 'y0', 'x1', 'y1'),
+
+	/**
+		Click event handler. Toggles selected if selectable.
+		@method click
+	*/
+	click: function(){
+		if(this.get('selectable')) {
+			this.toggleProperty('selected');
+		}
+	}
 });

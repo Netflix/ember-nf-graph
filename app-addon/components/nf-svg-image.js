@@ -2,6 +2,7 @@ import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 import { normalizeScale } from '../utils/nf/scale-utils';
+import SelectableGraphic from '../mixins/graph-selectable-graphic';
 
 /**
 	An image to be displayed in a graph with that takes domain based measurements and
@@ -11,14 +12,21 @@ import { normalizeScale } from '../utils/nf/scale-utils';
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
+	@uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
 	tagName: 'image',
 
-	classNames: ['nf-svg-image'],
+	classNameBindings: [':nf-svg-image', 'selectable', 'selected'],
 	
 	//HACK: for now xlink:href needs to be bound elsewhere.
 	attributeBindings: ['svgX:x', 'svgY:y', 'svgWidth:width', 'svgHeight:height'],
+
+	click: function(){
+		if(this.get('selectable')) {
+			this.toggleProperty('selected');
+		}
+	},
 
 	/**
 		The domain x value to place the image at.

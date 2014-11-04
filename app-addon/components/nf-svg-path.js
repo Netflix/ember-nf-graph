@@ -2,6 +2,7 @@ import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequiresScaleSource from '../mixins/graph-requires-scale-source';
 import { normalizeScale } from '../utils/nf/scale-utils';
+import SelectableGraphic from '../mixins/graph-selectable-graphic';
 
 /**
 	An SVG path primitive that plots based on a graph's scale.
@@ -10,11 +11,12 @@ import { normalizeScale } from '../utils/nf/scale-utils';
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-requires-scale-source
+	@uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
 	type: 'path',
 
-	classNames: ['nf-svg-path'],
+	classNameBindings: [':nf-svg-path', 'selectable', 'selected'],
 
 	attributeBindings: ['d'],
 
@@ -56,6 +58,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 			});
 		} 
 	}.property('points.[]', 'xScale', 'yScale'),
+
+	click: function(){
+		if(this.get('selectable')) {
+			this.toggleProperty('selected');
+		}
+	},
 
 	/**
 		The raw svg path d attribute output

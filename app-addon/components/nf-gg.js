@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent from '../mixins/graph-has-graph-parent';
 import RequireScaleSource from '../mixins/graph-requires-scale-source';
+import SelectableGraphic from '../mixins/graph-selectable-graphic';
 
 /**
 	A grouping tag that provides zooming and offset functionality to it's children.
@@ -19,9 +20,18 @@ import RequireScaleSource from '../mixins/graph-requires-scale-source';
 	@extends Ember.Component
 	@uses mixins.graph-has-graph-parent
 	@uses mixins.graph-require-scale-source
+	@uses mixins.graph-selecteble-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RequireScaleSource, SelectableGraphic, {
 	tagName: 'g',
 	
+	classNameBindings: [':nf-gg', 'selectable', 'selected'],
+
 	isScaleSource: true,
+
+	click: function() {
+		if(this.get('selectable')) {
+			this.toggleProperty('selected');
+		}
+	}
 });
