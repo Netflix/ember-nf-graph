@@ -239,4 +239,17 @@ export default Ember.Mixin.create({
     content.on('didHoverChange', this, this.didContentHoverChange);
     content.on('didHoverEnd', this, this.didContentHoverEnd);
   }.on('didInsertElement'),
+
+  /**
+    Tears down subscriptions to content hover events.
+    @method _teardownTrackingDot
+    @private
+  */
+  _teardownTrackingDot: function(){
+    var content = this.get('graph.content');
+    if(content) {
+      content.off('didHoverChange', this, this.didContentHoverChange);
+      content.off('didHoverEnd', this, this.didContentHoverEnd);
+    }
+  }.on('willDestroyElement')
 });
