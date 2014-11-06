@@ -5212,6 +5212,17 @@
             "namespace": "mixins"
         },
         {
+            "file": "app-addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 243,
+            "description": "Tears down subscriptions to content hover events.",
+            "itemtype": "method",
+            "name": "_teardownTrackingDot",
+            "access": "private",
+            "tagname": "",
+            "class": "mixins.graph-graphic-with-tracking-dot",
+            "namespace": "mixins"
+        },
+        {
             "file": "app-addon/mixins/graph-has-graph-parent.js",
             "line": 12,
             "description": "The parent graph for a component.",
