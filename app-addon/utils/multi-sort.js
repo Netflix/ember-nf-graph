@@ -1,5 +1,7 @@
 
-import parsePropExpression from './parse-property-expression';
+import Ember from 'ember';
+
+var get = Ember.get;
 
 function createMultiSort(sorts) {
 	var initialSort = function() { return 0; };
@@ -9,10 +11,14 @@ function createMultiSort(sorts) {
   	var getProp;
   	switch(typeof sort) {
   		case 'string':
-  			getProp = parsePropExpression(sort);
+  			getProp = function(o) {
+          return get(o, sort);
+        };
   			break;
   		case 'object':
-  			getProp = parsePropExpression(sort.by);
+  			getProp = function(o) {
+          return get(o, sort.by);
+        };
   			dir = sort.direction;
   			break;
   		case 'function':
