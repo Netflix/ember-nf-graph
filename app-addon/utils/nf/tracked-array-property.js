@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
+var get = Ember.get;
+
 function trackedArrayProperty(arraySourceProp, trackByProp) {
 	var arraySourceDependency = arraySourceProp + '.[]';
 	var trackingMetaProp = '__meta__tracking_%@_%@'.fmt(arraySourceProp, trackByProp);
@@ -15,7 +17,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 		var keyFn = isTrackByIndex ? function(d, i) {
 			return i;
 		} : function(d) {
-			return d[trackBy];
+			return get(d, trackBy);
 		};
 
 		var source = this.get(arraySourceProp);
