@@ -281,7 +281,7 @@ property on the <code>nf-table-group</code> component.</p>
             // returns the first value from the array
             baz: function(){
                 return this.get(&#39;model&#39;)[0].baz;
-            }.property(&#39;model.@each&#39;),
+            }.property(&#39;model.@each.baz&#39;),
 
             //gets the sum of all the bars
             barSum: function() {
@@ -450,6 +450,13 @@ property on the <code>nf-table-group</code> component.</p>
                                 
                             </li>
                         
+                            <li class="index-item property">
+                                <a href="#property_sortedAction">sortedAction</a>
+
+                                
+                                
+                            </li>
+                        
                             <li class="index-item property inherited">
                                 <a href="#property_sortedColumns">sortedColumns</a>
 
@@ -576,7 +583,7 @@ property on the <code>nf-table-group</code> component.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l371"><code>app-addon&#x2F;components&#x2F;nf-table.js:371</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l397"><code>app-addon&#x2F;components&#x2F;nf-table.js:397</code></a>
         
         </p>
 
@@ -655,7 +662,7 @@ of the pass column to the appropriate value based on the <code>sortType</code>.<
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l302"><code>app-addon&#x2F;components&#x2F;nf-table.js:302</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l306"><code>app-addon&#x2F;components&#x2F;nf-table.js:306</code></a>
         
         </p>
 
@@ -711,7 +718,7 @@ method of sorting, this is the guy you&#39;ll need to override.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l322"><code>app-addon&#x2F;components&#x2F;nf-table.js:322</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l326"><code>app-addon&#x2F;components&#x2F;nf-table.js:326</code></a>
         
         </p>
 
@@ -766,7 +773,7 @@ method of sorting, this is the guy you&#39;ll need to override.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l292"><code>app-addon&#x2F;components&#x2F;nf-table.js:292</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l296"><code>app-addon&#x2F;components&#x2F;nf-table.js:296</code></a>
         
         </p>
 
@@ -1182,7 +1189,7 @@ method of sorting, this is the guy you&#39;ll need to override.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l252"><code>app-addon&#x2F;components&#x2F;nf-table.js:252</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l256"><code>app-addon&#x2F;components&#x2F;nf-table.js:256</code></a>
         
         </p>
 
@@ -1320,7 +1327,7 @@ method of sorting, this is the guy you&#39;ll need to override.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l349"><code>app-addon&#x2F;components&#x2F;nf-table.js:349</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l366"><code>app-addon&#x2F;components&#x2F;nf-table.js:366</code></a>
         
         </p>
 
@@ -1366,7 +1373,7 @@ up child templates to the proper controller.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l358"><code>app-addon&#x2F;components&#x2F;nf-table.js:358</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l375"><code>app-addon&#x2F;components&#x2F;nf-table.js:375</code></a>
         
         </p>
 
@@ -1415,7 +1422,7 @@ Sends an object with the <code>row</code> and <code>table</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l260"><code>app-addon&#x2F;components&#x2F;nf-table.js:260</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l264"><code>app-addon&#x2F;components&#x2F;nf-table.js:264</code></a>
         
         </p>
 
@@ -1478,6 +1485,54 @@ Sends an object with the <code>row</code> and <code>table</code>.</p>
 
     
         <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_sortedAction" class="property item">
+    <h3 class="name"><code>sortedAction</code></h3>
+    <span class="type">String</span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/app-addon_components_nf-table.js.html#l386"><code>app-addon&#x2F;components&#x2F;nf-table.js:386</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>An action to be fired when the rows are sorted.
+Passes the sorted rows (or groups)</p>
+
+    </div>
+
+    
+        <p><strong>Default:</strong> null</p>
     
 
     
@@ -1596,7 +1651,7 @@ Sends an object with the <code>row</code> and <code>table</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l330"><code>app-addon&#x2F;components&#x2F;nf-table.js:330</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l334"><code>app-addon&#x2F;components&#x2F;nf-table.js:334</code></a>
         
         </p>
 
@@ -1776,7 +1831,7 @@ Sends an object with the <code>row</code> and <code>table</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l275"><code>app-addon&#x2F;components&#x2F;nf-table.js:275</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l279"><code>app-addon&#x2F;components&#x2F;nf-table.js:279</code></a>
         
         </p>
 
@@ -1825,7 +1880,7 @@ Sends an object with the <code>row</code> and <code>table</code>.</p>
             
         
         
-        <a href="../files/app-addon_components_nf-table.js.html#l283"><code>app-addon&#x2F;components&#x2F;nf-table.js:283</code></a>
+        <a href="../files/app-addon_components_nf-table.js.html#l287"><code>app-addon&#x2F;components&#x2F;nf-table.js:287</code></a>
         
         </p>
 

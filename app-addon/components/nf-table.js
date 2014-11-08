@@ -85,7 +85,7 @@ import trackedArrayProperty from '../utils/nf/tracked-array-property';
 					// returns the first value from the array
 					baz: function(){
 						return this.get('model')[0].baz;
-					}.property('model.@each'),
+					}.property('model.@each.baz'),
 
 					//gets the sum of all the bars
 					barSum: function() {
@@ -234,6 +234,10 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			this.getGroupsFromHierarchy(rows, groupBy, sortMap) :
 			this.getGroupsFromFlattened(rows, groupBy, sortMap);
 
+		if(this.get('sortedAction')) {
+			this.sendAction('sortedAction', groups);
+		}
+		
 		var tableGroupingCtrl = NfTableGroupController.create({
 			container: this.get('container'),
 			content: groups,
@@ -343,8 +347,21 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 			});
 		}
 		multiSort(rowsCopy, sortMap);
+		if(this.get('sortedAction')) {
+			this.sendAction('sortedAction', rowsCopy);
+		}
 		return rowsCopy;
 	}.property('rows.[]', 'sortMap'),
+
+	emitSortedInner: function(){
+		if(this.get('groupBy')) {
+			return this.get('sortedGroups');
+		} else {
+			return this.get('sortedRows');
+		}
+	}.property('sortedRows.[]', 'sortedGroups.[]', 'groupBy'),
+
+	emitSorted: Ember.computed.oneWay('emitSortedInner'),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire
@@ -365,6 +382,15 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@default null
 	*/
 	rowAction: null,
+
+	/**
+		An action to be fired when the rows are sorted.
+		Passes the sorted rows (or groups)
+		@property sortedAction
+		@type String
+		@default null
+	*/
+	sortedAction: null,
 
 	actions: {
 

@@ -16,12 +16,13 @@
 
 length: {{cols.length}}
 
-{{!-- itemController="nf-table-group-test"  --}}
+{{!-- itemController="nf-table-group-test" groupBy="children"
+	groupFrom="hierarchy" --}}
 {{#nf-table rows=myData scrollable=1
 	scrollAction="tableScrolled"
 	columns=cols
-	groupBy="children"
-	groupFrom="hierarchy"
+	
+	emitSorted=watSorted
 	rowAction="rowClicked"}}
 	{{#nf-table-group rowAction="groupClicked"}}
 		{{#nf-column sortBy="name" sortNatural=1 sortDirection="desc" class="small-column"}}	
@@ -80,10 +81,10 @@ length: {{cols.length}}
 	<li>scrollTopPercentage: {{tableScroll.scrollTopPercentage}}</li>
 </ul>
 
-<h3>Original foos</h3>
+<h3>sorted emit?</h3>
 
 <ul>
-	{{#each item in myData}}
+	{{#each item in watSorted}}
 		<li>{{item.foo}}</li>
 	{{/each}}
 </ul>
