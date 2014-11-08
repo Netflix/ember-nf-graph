@@ -60,7 +60,7 @@ export default Ember.Mixin.create({
   */
 	xPropFn: function() {
     var xprop = this.get('xprop');
-		return xprop ? parsePropertyExpr(xprop)) : noop;
+		return xprop ? parsePropertyExpr(xprop) : noop;
 	}.property('xprop'),
 
   /**
