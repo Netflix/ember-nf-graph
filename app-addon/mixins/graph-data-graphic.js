@@ -2,6 +2,8 @@ import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
 
+var noop = function(){};
+
 /**
   This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
   with the graph. Includes methods for extracting, sorting and scrubbing data
@@ -57,7 +59,8 @@ export default Ember.Mixin.create({
     @readonly
   */
 	xPropFn: function() {
-		return parsePropertyExpr(this.get('xprop'));
+    var xprop = this.get('xprop');
+		return xprop ? parsePropertyExpr(xprop)) : noop;
 	}.property('xprop'),
 
   /**
@@ -69,7 +72,8 @@ export default Ember.Mixin.create({
     @readonly
   */
 	yPropFn: function() {
-		return parsePropertyExpr(this.get('yprop'));
+    var yprop = this.get('yprop');
+		return yprop ? parsePropertyExpr(yprop) : noop;
 	}.property('yprop'),
 
   /**
