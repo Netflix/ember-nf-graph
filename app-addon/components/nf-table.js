@@ -316,6 +316,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 				sortedRows.forEach(function(row) {
 					var key = row.__meta__trackedKey; //HACK: from tracked-array-property
 					var elem = sortableElems.filter('[data-nf-table-sort-key="' + key + '"]');
+					elem.parent().empty();
 					elem.parent().append(elem);
 				});
 			}
