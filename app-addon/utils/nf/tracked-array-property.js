@@ -8,9 +8,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 
 	return function(){
 		var meta = this.get(trackingMetaProp) || {};
-		var keys = meta.keys || [];
 		var array = meta.array || [];
-		var trackingHash = meta.trackingHash || {};
 
 		var trackBy = trackByProp ? this.get(trackByProp) : null;
 		var isTrackByIndex = !trackBy;
@@ -28,42 +26,34 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 			source.forEach(function(d, i) {
 				var key = keyFn(d, i);
 				sourceKeys.push(key);
-
-				var tracked = trackingHash[key];
 				
-				if(typeof tracked !== 'undefined') {
-					Ember.mixin(array[tracked], d);
+				var found = array.find(function(x) {
+					return keyFn(x) === key;
+				});
+				
+				d.__meta__trackedKey = key;
+				
+				if(found) {
+					Ember.mixin(found, d);
 				} else {
-					d.__meta__trackedKey = key;
 					array.pushObject(d);
-					keys.push(key);
-					trackingHash[key] = array.length - 1;					
 				}
 			});
 
 			array.forEach(function(d, i) {
 				var key = keyFn(d, i);
 				if(sourceKeys.indexOf(key) === -1) {
-					var index = trackingHash[key];
-					for(var j = index; j < keys.length; j++) {
-						var updateKey = keys[j];
-						trackingHash[updateKey]--;
-					}
 					array.removeObject(d);
-					delete trackingHash[key];
 				}
 			});
 		}
 
 		this.set(trackingMetaProp, {
-			keys: keys,
-			trackingHash: trackingHash,
 			array: array,
 		});
 
 		return array;
 	}.property(arraySourceDependency);
 }
-
 
 export default trackedArrayProperty;

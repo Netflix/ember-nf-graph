@@ -339,7 +339,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	sortedRows: function(){
 		var sortMap = this.get('sortMap');
 		var rowsCopy = this.get('trackedRows').slice();
-		var trackBy = this.get('trackBy');
 		multiSort(rowsCopy, sortMap);
 		if(this.get('sortedAction')) {
 			this.sendAction('sortedAction', rowsCopy);
