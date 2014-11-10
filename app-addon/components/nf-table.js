@@ -312,10 +312,9 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		var sortableElems = this.$('[data-nf-table-sort-key]');
 		if(Ember.isArray(sortableElems) && sortableElems.length > 1) {
 			var sortedRows = this.get('sortedRows');
-			var trackBy = this.get('trackBy');
 			if(sortedRows) {
 				sortedRows.forEach(function(row) {
-					var key = trackBy ? Ember.get(row, trackBy) : row.__meta__originalIndex;
+					var key = row.__meta__trackedKey; //HACK: from tracked-array-property
 					var elem = sortableElems.filter('[data-nf-table-sort-key="' + key + '"]');
 					elem.parent().append(elem);
 				});
@@ -339,19 +338,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	sortedRows: function(){
 		var sortMap = this.get('sortMap');
-		var rowsCopy = this.get('rows').slice();
+		var rowsCopy = this.get('trackedRows').slice();
 		var trackBy = this.get('trackBy');
-		if(!trackBy) {
-			rowsCopy.forEach(function(d, i) {
-				d.__meta__originalIndex = i;
-			});
-		}
 		multiSort(rowsCopy, sortMap);
 		if(this.get('sortedAction')) {
 			this.sendAction('sortedAction', rowsCopy);
 		}
 		return rowsCopy;
-	}.property('rows.[]', 'sortMap'),
+	}.property('trackedRows.[]', 'sortMap'),
 
 	emitSortedInner: function(){
 		if(this.get('groupBy')) {

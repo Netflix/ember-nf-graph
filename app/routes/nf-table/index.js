@@ -42,7 +42,7 @@ export default Ember.Route.extend({
 
 	model: function(){
 		return {
-			myData: this.getHierarchicalRows()
+			myData: this.getFlatRows()
 		};
 	}
 
