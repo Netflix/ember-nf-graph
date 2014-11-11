@@ -311,13 +311,13 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	doSort: function(){
 		var sortableElems = this.$('[data-nf-table-sort-key]');
 		if(Ember.isArray(sortableElems) && sortableElems.length > 1) {
+			var parent = sortableElems.parent().empty();
 			var sortedRows = this.get('sortedRows');
-			if(sortedRows) {
+			if(Ember.isArray(sortedRows)) {
 				sortedRows.forEach(function(row) {
 					var key = row.__meta__trackedKey; //HACK: from tracked-array-property
 					var elem = sortableElems.filter('[data-nf-table-sort-key="' + key + '"]');
-					elem.parent().empty();
-					elem.parent().append(elem);
+					parent.append(elem);
 				});
 			}
 		}
