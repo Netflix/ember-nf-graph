@@ -201,16 +201,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	doTransition: function(){
 		var duration = this.get('duration');
-		var rectPath = this.get('rectPath');
-		var contentTransform = this.get('contentTransform');
 		var rectElement = this.get('rectElement');
 		var contentElement = this.get('contentElement');
 
-		rectElement.transition().duration(duration)
-			.attr('d', rectPath);
+		if(rectElement) {
+			rectElement.transition().duration(duration)
+				.attr('d', this.get('rectPath'));
+		}
 
-		contentElement.transition().duration(duration)
-			.attr('transform', contentTransform);
+		if(contentElement) {
+			contentElement.transition().duration(duration)
+				.attr('transform', this.get('contentTransform'));
+		}
 	},
 
 	/**
@@ -218,7 +220,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@method transition
 	*/
 	transition: function(){
-		Ember.run.scheduleOnce('afterRender', this, this.doTransition);
+		Ember.run.once(this, this.doTransition);
 	}.observes('a', 'b').on('init'),
 
 	/**
@@ -228,8 +230,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	doAdjustWidth: function(){
 		var contentElement = this.get('contentElement');
-		var contentTransform = this.get('contentTransform');
-		contentElement.attr('transform', contentTransform);
+		if(contentElement) {
+			var contentTransform = this.get('contentTransform');
+			contentElement.attr('transform', contentTransform);
+		}
 	},
 
 	/**
@@ -237,8 +241,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@method adjustWidth
 	*/
 	adjustWidth: function(){
-		Ember.run.scheduleOnce('afterRender', this, this.doAdjustWidth);
-	}.observes('isOrientRight', 'width', 'contentPadding').on('init'),
+		Ember.run.once(this, this.doAdjustWidth);
+	}.observes('isOrientRight', 'width', 'contentPadding').on('didInsertElement'),
 });
 
 

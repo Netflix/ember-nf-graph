@@ -2,17 +2,20 @@ import Ember from 'ember';
 
 var get = Ember.get;
 
-function trackedArrayProperty(arraySourceProp, trackByProp) {
+function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 	var arraySourceDependency = arraySourceProp + '.[]';
-	var trackingMetaProp = '__meta__tracking_%@_%@'.fmt(arraySourceProp, trackByProp);
+
+	backingField = backingField || '_%@_trackBy_%@'.fmt(arraySourceProp, trackByProp);
 
 	return function(){
-		var meta = this.get(trackingMetaProp) || {};
-		var array = meta.array || [];
+		var array = this.get(backingField);
+
+		if(!Ember.isArray(array)){
+			array = Ember.A();
+		}
 
 		var trackBy = trackByProp ? this.get(trackByProp) : null;
-		var isTrackByIndex = !trackBy;
-		var keyFn = isTrackByIndex ? function(d, i) {
+		var keyFn = !trackBy ? function(d, i) {
 			return i;
 		} : function(d) {
 			return get(d, trackBy);
@@ -20,19 +23,20 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 
 		var source = this.get(arraySourceProp);
 
-		if(Ember.isArray(source)) {
-
+		if(!Ember.isArray(source) || source.length === 0) {
+			array = Ember.A();
+		} else {
 			var sourceKeys = [];
 			source.forEach(function(d, i) {
 				var key = keyFn(d, i);
-				sourceKeys.push(key);
+				sourceKeys.pushObject(key);
 				
 				var found = array.find(function(x) {
 					return keyFn(x) === key;
 				});
 				
-				d.__meta__trackedKey = key;
-				
+				Ember.set(d, '__meta__trackedKey', key);
+
 				if(found) {
 					Ember.mixin(found, d);
 				} else {
@@ -48,10 +52,8 @@ function trackedArrayProperty(arraySourceProp, trackByProp) {
 			});
 		}
 
-		this.set(trackingMetaProp, {
-			array: array,
-		});
-
+		this.set(backingField, array);
+		
 		return array;
 	}.property(arraySourceDependency);
 }

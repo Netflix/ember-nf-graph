@@ -193,11 +193,11 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 					_groupChildren: [],
 					_groupValue: groupVal,
 				};
-				groups.push(group);
+				groups.pushObject(group);
 				prevGroupVal = groupVal;
 			}
 
-			group._groupChildren.push(d);
+			group._groupChildren.pushObject(d);
 			return groups;
 		}, []);
 	},

@@ -66,7 +66,7 @@ test('multiSort should work with expressions', function(){
 		{ foo: { bar: [1, 5]}, blah: { baz: [2, 1]} },
 	];
 
-	multiSort(data, ['foo.bar[1]', 'blah.baz[1]']);
+	multiSort(data, ['foo.bar.1', 'blah.baz.1']);
 
 	deepEqual(data, [
 		{ foo: { bar: [1, 5]}, blah: { baz: [2, 1]} },
