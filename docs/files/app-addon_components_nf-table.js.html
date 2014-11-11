@@ -373,11 +373,11 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 					_groupChildren: [],
 					_groupValue: groupVal,
 				};
-				groups.push(group);
+				groups.pushObject(group);
 				prevGroupVal = groupVal;
 			}
 
-			group._groupChildren.push(d);
+			group._groupChildren.pushObject(d);
 			return groups;
 		}, []);
 	},
@@ -489,17 +489,14 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@method doSort
 	*/
 	doSort: function(){
-		var sortableElems = this.$(&#x27;[data-nf-table-sort-key]&#x27;);
-		if(Ember.isArray(sortableElems) &amp;&amp; sortableElems.length &gt; 1) {
-			var sortedRows = this.get(&#x27;sortedRows&#x27;);
-			var trackBy = this.get(&#x27;trackBy&#x27;);
-			if(sortedRows) {
-				sortedRows.forEach(function(row) {
-					var key = trackBy ? Ember.get(row, trackBy) : row.__meta__originalIndex;
-					var elem = sortableElems.filter(&#x27;[data-nf-table-sort-key=&quot;&#x27; + key + &#x27;&quot;]&#x27;);
-					elem.parent().append(elem);
-				});
-			}
+		var sortedRows = this.get(&#x27;sortedRows&#x27;);
+		if(Ember.isArray(sortedRows)) {
+			sortedRows.forEach(function(row) {
+				var key = Ember.get(row, &#x27;__meta__trackedKey&#x27;); //HACK: from tracked-array-property
+				var elem = this.$(&#x27;[data-nf-table-sort-key=&quot;&#x27; + key + &#x27;&quot;]&#x27;);
+				var parent = elem.parent();
+				elem.detach().appendTo(parent);
+			}, this);
 		}
 	},
 
@@ -519,29 +516,13 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	sortedRows: function(){
 		var sortMap = this.get(&#x27;sortMap&#x27;);
-		var rowsCopy = this.get(&#x27;rows&#x27;).slice();
-		var trackBy = this.get(&#x27;trackBy&#x27;);
-		if(!trackBy) {
-			rowsCopy.forEach(function(d, i) {
-				d.__meta__originalIndex = i;
-			});
-		}
+		var rowsCopy = this.get(&#x27;trackedRows&#x27;).slice();
 		multiSort(rowsCopy, sortMap);
 		if(this.get(&#x27;sortedAction&#x27;)) {
 			this.sendAction(&#x27;sortedAction&#x27;, rowsCopy);
 		}
 		return rowsCopy;
-	}.property(&#x27;rows.[]&#x27;, &#x27;sortMap&#x27;),
-
-	emitSortedInner: function(){
-		if(this.get(&#x27;groupBy&#x27;)) {
-			return this.get(&#x27;sortedGroups&#x27;);
-		} else {
-			return this.get(&#x27;sortedRows&#x27;);
-		}
-	}.property(&#x27;sortedRows.[]&#x27;, &#x27;sortedGroups.[]&#x27;, &#x27;groupBy&#x27;),
-
-	emitSorted: Ember.computed.oneWay(&#x27;emitSortedInner&#x27;),
+	}.property(&#x27;trackedRows.[]&#x27;, &#x27;sortMap&#x27;),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire

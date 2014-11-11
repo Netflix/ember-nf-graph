@@ -381,16 +381,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	doTransition: function(){
 		var duration = this.get(&#x27;duration&#x27;);
-		var rectPath = this.get(&#x27;rectPath&#x27;);
-		var contentTransform = this.get(&#x27;contentTransform&#x27;);
 		var rectElement = this.get(&#x27;rectElement&#x27;);
 		var contentElement = this.get(&#x27;contentElement&#x27;);
 
-		rectElement.transition().duration(duration)
-			.attr(&#x27;d&#x27;, rectPath);
+		if(rectElement) {
+			rectElement.transition().duration(duration)
+				.attr(&#x27;d&#x27;, this.get(&#x27;rectPath&#x27;));
+		}
 
-		contentElement.transition().duration(duration)
-			.attr(&#x27;transform&#x27;, contentTransform);
+		if(contentElement) {
+			contentElement.transition().duration(duration)
+				.attr(&#x27;transform&#x27;, this.get(&#x27;contentTransform&#x27;));
+		}
 	},
 
 	/**
@@ -398,7 +400,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@method transition
 	*/
 	transition: function(){
-		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.doTransition);
+		Ember.run.once(this, this.doTransition);
 	}.observes(&#x27;a&#x27;, &#x27;b&#x27;).on(&#x27;init&#x27;),
 
 	/**
@@ -408,8 +410,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	doAdjustWidth: function(){
 		var contentElement = this.get(&#x27;contentElement&#x27;);
-		var contentTransform = this.get(&#x27;contentTransform&#x27;);
-		contentElement.attr(&#x27;transform&#x27;, contentTransform);
+		if(contentElement) {
+			var contentTransform = this.get(&#x27;contentTransform&#x27;);
+			contentElement.attr(&#x27;transform&#x27;, contentTransform);
+		}
 	},
 
 	/**
@@ -417,8 +421,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@method adjustWidth
 	*/
 	adjustWidth: function(){
-		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.doAdjustWidth);
-	}.observes(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;).on(&#x27;init&#x27;),
+		Ember.run.once(this, this.doAdjustWidth);
+	}.observes(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, &#x27;contentPadding&#x27;).on(&#x27;didInsertElement&#x27;),
 });
 
 

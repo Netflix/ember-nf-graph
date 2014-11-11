@@ -1178,7 +1178,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 5,
+            "line": 7,
             "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}",
             "extends": "Ember.Mixin"
         },
@@ -4148,7 +4148,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 326,
+            "line": 323,
             "description": "Observes changes to column sorts and fires the `onSort` method afterRender",
             "itemtype": "method",
             "name": "observeSortChanges",
@@ -4157,7 +4157,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 334,
+            "line": 331,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
@@ -4168,7 +4168,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 366,
+            "line": 347,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -4179,7 +4179,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 375,
+            "line": 356,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -4190,7 +4190,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 386,
+            "line": 367,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -4201,7 +4201,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 397,
+            "line": 378,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
@@ -4860,7 +4860,7 @@
         },
         {
             "file": "app-addon/components/nf-y-diff.js",
-            "line": 216,
+            "line": 218,
             "description": "Schedules a transition once at afterRender.",
             "itemtype": "method",
             "name": "transition",
@@ -4869,7 +4869,7 @@
         },
         {
             "file": "app-addon/components/nf-y-diff.js",
-            "line": 224,
+            "line": 226,
             "description": "Updates to d3 managed DOM elments that do\nnot require transitioning, because they're width-related.",
             "itemtype": "method",
             "name": "doAdjustWidth",
@@ -4878,7 +4878,7 @@
         },
         {
             "file": "app-addon/components/nf-y-diff.js",
-            "line": 235,
+            "line": 239,
             "description": "Schedules a call to `doAdjustWidth` on afterRender",
             "itemtype": "method",
             "name": "adjustWidth",
@@ -4917,7 +4917,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 20,
+            "line": 22,
             "description": "Gets or sets the data used by the component to plot itself.",
             "itemtype": "property",
             "name": "data",
@@ -4928,7 +4928,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 29,
+            "line": 31,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as x data to plot on the graph.",
             "itemtype": "property",
             "name": "x",
@@ -4939,7 +4939,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 40,
+            "line": 42,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as y data to plot on the graph.",
             "itemtype": "property",
             "name": "y",
@@ -4950,7 +4950,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 51,
+            "line": 53,
             "description": "The function to get the x value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "xPropFn",
@@ -4961,7 +4961,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 63,
+            "line": 66,
             "description": "The function to get the y value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "yPropFn",
@@ -4972,7 +4972,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 75,
+            "line": 79,
             "description": "Gets the x values from the `sortedData`.",
             "itemtype": "property",
             "name": "xData",
@@ -4983,7 +4983,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 83,
+            "line": 87,
             "description": "Gets the y values from the `sortedData`",
             "itemtype": "property",
             "name": "yData",
@@ -4994,7 +4994,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 91,
+            "line": 95,
             "description": "The sorted and mapped data pulled from {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nAn array of arrays, structures as so:\n\n      [[x,y],[x,y],[x,y]];\n\n** each inner array also has a property `data` on it, containing the original data object **\n\nWhen this property is computed, it also updates the `xData` and `yData` properties of the graphic.",
             "itemtype": "property",
             "name": "sortedData",
@@ -5005,7 +5005,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 143,
+            "line": 147,
             "description": "The list of data points from {{#crossLink \"mixins.graph-data-graphc/sortedData:property\"}}{{/crossLink}} that\nfits within the x domain, plus up to one data point outside of that domain in each direction.",
             "itemtype": "property",
             "name": "renderedData",
@@ -5016,7 +5016,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 176,
+            "line": 180,
             "description": "The first element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "firstSortedData",
@@ -5027,7 +5027,7 @@
         },
         {
             "file": "app-addon/mixins/graph-data-graphic.js",
-            "line": 198,
+            "line": 202,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
