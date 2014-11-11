@@ -18,7 +18,7 @@ test('nf-y-diff y positioning', function(){
 		});
 	});
 
-	equal(yDiff.get('y'), 100);
+	equal(yDiff.get('yA'), 100);
 });
 
 test('x content positioning when yAxis orient left', function() {
