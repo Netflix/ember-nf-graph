@@ -31,8 +31,8 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 				var key = keyFn(d, i);
 				sourceKeys.pushObject(key);
 				
-				var found = array.find(function(x) {
-					return keyFn(x) === key;
+				var found = array.find(function(x, i) {
+					return keyFn(x, i) === key;
 				});
 				
 				Ember.set(d, '__meta__trackedKey', key);
@@ -44,12 +44,14 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 				}
 			});
 
-			array.forEach(function(d, i) {
+			var d, i;
+			for(i = array.length - 1; i >= 0; i--) {
+				d = array[i];
 				var key = keyFn(d, i);
 				if(sourceKeys.indexOf(key) === -1) {
 					array.removeObject(d);
 				}
-			});
+			}
 		}
 
 		this.set(backingField, array);
