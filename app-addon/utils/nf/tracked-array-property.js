@@ -38,7 +38,12 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 				Ember.set(d, '__meta__trackedKey', key);
 
 				if(found) {
-					Ember.mixin(found, d);
+					Ember.keys(d).forEach(function(k) {
+						var v = get(d, k);
+						if(get(found, k) !== v) {
+							Ember.set(found, k, v);
+						}
+					});
 				} else {
 					array.pushObject(d);
 				}
