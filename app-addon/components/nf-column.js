@@ -89,7 +89,7 @@ export default Ember.Component.extend({
 	headerClassNames: function() {
 		var classNames = this.get('classNames');
 		var headerClassNames = this.get('header.classNames') || [];
-		return classNames.concat(headerClassNames);
+		return classNames.concat(headerClassNames).join(' ');
 	}.property('header.classNames', 'classNames'),
 
 	/**
@@ -101,7 +101,7 @@ export default Ember.Component.extend({
 	cellClassNames: function(){
 		var classNames = this.get('classNames');
 		var cellClassNames = this.get('cell.classNames') || [];
-		return classNames.concat(cellClassNames);
+		return classNames.concat(cellClassNames).join(' ');
 	}.property('cell.classNames', 'classNames'),
 
 	/**
