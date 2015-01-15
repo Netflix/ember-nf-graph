@@ -14,7 +14,7 @@ export default Ember.Route.extend({
 
 function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 	var p = yStart || 0;
-	return d3.range(count).map(function(d, i) {
+	return range(count).map(function(d, i) {
 		var y = p + (Math.random() * variance) - (variance / 2);
 		y = Math.min(yMax, Math.max(yMin, y));
 		p = y;
@@ -23,4 +23,13 @@ function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 			y: y
 		};
 	});
+}
+
+function range(count) {
+	var output = [];
+	var i = 0;
+	while(i < count) {
+		output.push(i++);
+	}
+	return output;
 }

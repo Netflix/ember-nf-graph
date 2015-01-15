@@ -12,7 +12,7 @@
     "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.2",
     "ember-qunit-notifications": "^0.0.1",
     "ember-cli-test-loader": "rjackson/ember-cli-test-loader#0.0.2",
-    "d3": "~3.4.8",
+    "d3": "~3.5.3",
     "ember-handlebars-svg": "~0.3.2",
     "d3mber": "~0.1.1"
   },
@@ -23,6 +23,7 @@
   "version": "0.4.52",
   "resolutions": {
     "ember": "1.7.0-beta.5",
-    "handlebars": "~1.3.0"
+    "handlebars": "~1.3.0",
+    "d3": "~3.4.8"
   }
 }
