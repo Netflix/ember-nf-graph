@@ -741,15 +741,15 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphX: property(
-    'paddingLeft', 'yAxis.width', 'yAxis.orient', 
-    function (paddingLeft, yAxisWidth, yAxisOrient) {
-      if(yAxisOrient === 'right') {
-        return paddingLeft;
-      }
-      return paddingLeft + yAxisWidth;
+  graphX: function() {
+    var paddingLeft = this.get('paddingLeft');
+    var yAxisWidth = this.get('yAxis.width') || 0;
+    var yAxisOrient = this.get('yAxisOrient');
+    if(yAxisOrient === 'right') {
+      return paddingLeft;
     }
-  ),
+    return paddingLeft + yAxisWidth;
+  }.property('paddingLeft', 'yAxis.width', 'yAxis.orient'),
 
   /** 
     The y coordinate position of the graph content
@@ -757,14 +757,15 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphY: property('paddingTop', 'xAxis.orient', 'xAxis.height', 
-    function (paddingTop, xAxisOrient, xAxisHeight) {
-      if(xAxisOrient === 'top') {
-        return xAxisHeight + paddingTop;
-      }
-      return paddingTop;
+  graphY: function(){
+    var paddingTop = this.get('paddingTop');
+    var xAxisOrient = this.get('xAxis.orient');
+    if(xAxisOrient === 'top') {
+      var xAxisHeight = this.get('xAxis.height') || 0;
+      return xAxisHeight + paddingTop;
     }
-  ),
+    return paddingTop;
+  }.property('paddingTop', 'xAxis.orient', 'xAxis.height'), 
 
   /**
     The width, in pixels, of the graph content
