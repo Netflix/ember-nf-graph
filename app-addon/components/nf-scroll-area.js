@@ -42,29 +42,24 @@ export default Ember.Component.extend({
 	changeAction: null,
 
 	/**
-		Gets or sets the height of the scroll area
-		@property height
-		@type Number
+		Gets or sets the scrollTop by percentage (decimal) of
+		scrollHeight
+		@property scrollTopPercentage
+		@type {Number}
 	*/
-	height: function(key, value) {
+	scrollTopPercentage: function(key, value) {
 		if(arguments.length > 1) {
-			this.$().height(value);
+			this._scrollTopPercentage = value;
 		}
-		return this.$().height();
+		return this._scrollTopPercentage;
 	}.property().volatile(),
 
-
-	/**
-		Gets or sets the width of the scroll area
-		@property width
-		@type Number
-	*/
-	width: function(key, value) {
-		if(arguments.length > 1) {
-			this.$().width(value);
+	_updateScrollTop: function(){
+		if(this.get('element')) {
+			var scrollTop = this.get('scrollTopPercentage') * this.get('element').scrollHeight;
+			this.set('scrollTop', scrollTop);
 		}
-		return this.$().width();
-	}.property().volatile(),
+	}.observes('scrollTopPercentage').on('didInsertElement'),
 
 	/**
 		Gets or sets the scrollTop of the area
@@ -72,60 +67,18 @@ export default Ember.Component.extend({
 		@type Number
 		@default 0
 	*/
-	scrollTop: function(key, value) {
+	scrollTop: function(key, value){
 		if(arguments.length > 1) {
-			this.$().scrollTop(value);
+			this._scrollTop = value;
 		}
-		return this.$().scrollTop();
+		return this._scrollTop;
 	}.property().volatile(),
 
-	/**
-		Gets or sets the scrollLeft of the area
-		@property scrollLeft
-		@type Number
-		@default 0
-	*/
-	scrollLeft: function(key, value) {
-		if(arguments.length > 1) {
-			this.$().scrollLeft(value);
+	_updateScroll: function(){
+		if(this.get('element')) {
+			this.$().scrollTop(this.get('scrollTop'));
 		}
-		return this.$().scrollLeft();
-	}.property().volatile(),
-
-	/**
-		Gets the scrollHeight of the area
-		@property scrollHeight
-		@type Number
-		@default 0
-		@readonly
-	*/
-	scrollHeight: 0,
-
-	/**
-		Gets or sets the outerHeight of the area
-		@property outerHeight
-		@type Number
-		@default 0
-	*/
-	outerHeight: function(key, value) {
-		if(arguments.length > 1) {
-			this.$().outerHeight(value);
-		}
-		return this.$().outerHeight();
-	}.property().volatile(),
-
-	/**
-		Gets or sets the outerWidth of the area
-		@property outerWidth
-		@type Number
-		@default 0
-	*/
-	outerWidth: function(key, value) {
-		if(arguments.length > 1) {
-			this.$().outerWidth(value);
-		}
-		return this.$().outerWidth();
-	}.property().volatile(),
+	}.observes('scrollTop').on('didInsertElement'),
 
 	/**
 		The optional action data to send with the action contextl
@@ -137,6 +90,8 @@ export default Ember.Component.extend({
 
 	_onScroll: function(e){
 		var context = this.createActionContext(e);
+		this._scrollTop = e.scrollTop;
+		this._scrollTopPercentage = e.scrollTop / e.scrollHeight;
 		this.trigger('didScroll', context);
 		this.sendAction('scrollAction', context);
 		this.sendAction('changeAction', context);
@@ -144,6 +99,8 @@ export default Ember.Component.extend({
 
 	_onResize: function(e) {
 		var context = this.createActionContext(e);
+		this._scrollTop = e.scrollTop;
+		this._scrollTopPercentage = e.scrollTop / e.scrollHeight;
 		this.trigger('didResize', context);
 		this.sendAction('resizeAction', context);
 		this.sendAction('changeAction', context);
@@ -156,13 +113,23 @@ export default Ember.Component.extend({
 		@return {utils.nf.scroll-area-action-context}
 	*/
 	createActionContext: function(e){
-		var context = this.getProperties('width', 'height', 'scrollLeft', 'scrollTop', 'scrollWidth', 'scrollHeight', 'outerWidth', 'outerHeight');
+		var elem = this.$();
+		var context = {
+			width: elem.width(),
+			height: elem.height(),
+			scrollLeft: elem.scrollLeft(),
+			scrollTop: elem.scrollTop(),
+			scrollWidth: elem[0].scrollWidth,
+			scrollHeight: elem[0].scrollHeight,
+			outerWidth: elem.outerWidth(),
+			outerHeight: elem.outerHeight()
+		};
+
 		context.data = this.get('actionData');
 		context.source = this;
 		context.originalEvent = e;
 		return ScrollAreaActionContext.create(context);
 	},
-
 
 	_setupElement: function() {
 		var elem = this.get('element');

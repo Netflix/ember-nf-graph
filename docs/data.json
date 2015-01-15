@@ -3448,26 +3448,16 @@
         {
             "file": "app-addon/components/nf-scroll-area.js",
             "line": 44,
-            "description": "Gets or sets the height of the scroll area",
+            "description": "Gets or sets the scrollTop by percentage (decimal) of\nscrollHeight",
             "itemtype": "property",
-            "name": "height",
-            "type": "Number",
+            "name": "scrollTopPercentage",
+            "type": "{Number}",
             "class": "components.nf-scroll-area",
             "namespace": "components"
         },
         {
             "file": "app-addon/components/nf-scroll-area.js",
-            "line": 57,
-            "description": "Gets or sets the width of the scroll area",
-            "itemtype": "property",
-            "name": "width",
-            "type": "Number",
-            "class": "components.nf-scroll-area",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-scroll-area.js",
-            "line": 69,
+            "line": 64,
             "description": "Gets or sets the scrollTop of the area",
             "itemtype": "property",
             "name": "scrollTop",
@@ -3478,52 +3468,7 @@
         },
         {
             "file": "app-addon/components/nf-scroll-area.js",
-            "line": 82,
-            "description": "Gets or sets the scrollLeft of the area",
-            "itemtype": "property",
-            "name": "scrollLeft",
-            "type": "Number",
-            "default": "0",
-            "class": "components.nf-scroll-area",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-scroll-area.js",
-            "line": 95,
-            "description": "Gets the scrollHeight of the area",
-            "itemtype": "property",
-            "name": "scrollHeight",
-            "type": "Number",
-            "default": "0",
-            "readonly": "",
-            "class": "components.nf-scroll-area",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-scroll-area.js",
-            "line": 104,
-            "description": "Gets or sets the outerHeight of the area",
-            "itemtype": "property",
-            "name": "outerHeight",
-            "type": "Number",
-            "default": "0",
-            "class": "components.nf-scroll-area",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-scroll-area.js",
-            "line": 117,
-            "description": "Gets or sets the outerWidth of the area",
-            "itemtype": "property",
-            "name": "outerWidth",
-            "type": "Number",
-            "default": "0",
-            "class": "components.nf-scroll-area",
-            "namespace": "components"
-        },
-        {
-            "file": "app-addon/components/nf-scroll-area.js",
-            "line": 130,
+            "line": 83,
             "description": "The optional action data to send with the action contextl",
             "itemtype": "property",
             "name": "actionData",
@@ -3534,7 +3479,7 @@
         },
         {
             "file": "app-addon/components/nf-scroll-area.js",
-            "line": 152,
+            "line": 109,
             "description": "Creates an action context to send with an action",
             "itemtype": "method",
             "name": "createActionContext",
@@ -4007,6 +3952,28 @@
         {
             "file": "app-addon/components/nf-table.js",
             "line": 112,
+            "description": "Gets or sets the scroll of the underlying \nscroll area if there is one.",
+            "itemtype": "property",
+            "name": "scrollTop",
+            "type": "{Number}",
+            "default": "0",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 121,
+            "description": "Gets or sets the scroll by percentage\nof scrollHeight of the underlying \nscroll area if there is one.",
+            "itemtype": "property",
+            "name": "scrollTopPercentage",
+            "type": "{Number}",
+            "default": "0",
+            "class": "components.nf-table",
+            "namespace": "components"
+        },
+        {
+            "file": "app-addon/components/nf-table.js",
+            "line": 131,
             "description": "Property used by child components to locate the table component.",
             "itemtype": "property",
             "name": "isTable",
@@ -4017,7 +3984,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 120,
+            "line": 139,
             "description": "Gets the nf-table-group component if one is present.",
             "itemtype": "property",
             "name": "tableGroup",
@@ -4028,7 +3995,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 128,
+            "line": 147,
             "description": "The expression used to locate the values in the rows to group by.",
             "itemtype": "property",
             "name": "groupBy",
@@ -4039,7 +4006,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 136,
+            "line": 155,
             "description": "The type of grouping to perform with the groupBy\n\n# options\n- `'flat'`: (default) rows data is flattened and groups are aggregated by matching\n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"foo\"` rows\n\t\t\t\t\t\twill be grouped by all rows with a `foo` property that matches.\n- `'hierarchy'`: rows data is already in parent/child format. Parent rows contain child rows on \n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"children\"`, each row\n\t\t\t\t\t\tin the base rows data array will be a grouping row, and the\tarray of items under \n\t\t\t\t\t\t`children` will be used as the \"child\" rows of each group.",
             "itemtype": "property",
             "name": "groupFrom",
@@ -4050,7 +4017,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 153,
+            "line": 172,
             "description": "Gets or sets whether the table has a scrollable layout.",
             "itemtype": "property",
             "name": "scrollable",
@@ -4061,7 +4028,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 161,
+            "line": 180,
             "description": "The name of an item controller for the rows",
             "itemtype": "property",
             "name": "itemController",
@@ -4072,7 +4039,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 169,
+            "line": 188,
             "description": "Gets whether or not to use the grouped table layout",
             "itemtype": "property",
             "name": "useGroupedTableLayout",
@@ -4085,7 +4052,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 238,
+            "line": 257,
             "description": "Alias for the rowAction on the nf-table-group",
             "itemtype": "property",
             "name": "groupRowAction",
@@ -4096,7 +4063,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 246,
+            "line": 265,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
@@ -4106,7 +4073,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 261,
+            "line": 280,
             "description": "The property on each row item to track data by. If undefined, will track by index.",
             "itemtype": "property",
             "name": "trackBy",
@@ -4117,7 +4084,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 280,
+            "line": 299,
             "description": "The rows to render, tracked by whatever field is listed in teh trackBy property",
             "itemtype": "property",
             "name": "trackedRows",
@@ -4130,7 +4097,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 289,
+            "line": 308,
             "description": "Triggers the `willSort` and `didSort` events. Also calls `doSort`",
             "itemtype": "method",
             "name": "onSort",
@@ -4139,7 +4106,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 299,
+            "line": 318,
             "description": "Performs the sort by reorganizing the DOM. If you want to use some other \nmethod of sorting, this is the guy you'll need to override.",
             "itemtype": "method",
             "name": "doSort",
@@ -4148,7 +4115,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 326,
+            "line": 345,
             "description": "Observes changes to column sorts and fires the `onSort` method afterRender",
             "itemtype": "method",
             "name": "observeSortChanges",
@@ -4157,7 +4124,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 334,
+            "line": 353,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
@@ -4168,7 +4135,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 350,
+            "line": 369,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -4179,7 +4146,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 359,
+            "line": 378,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -4190,7 +4157,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 370,
+            "line": 389,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -4201,7 +4168,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 381,
+            "line": 400,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",

@@ -13,7 +13,10 @@
         </table>
       </div>
 
-      {{#nf-scroll-area changeAction="scrolled" class="nf-table-scrollable-body"}}
+      {{#nf-scroll-area 
+        scrollTop=scrollTop 
+        scrollTopPercentage=scrollTopPercentage 
+        changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
             {{#each group in groupsController}}
@@ -48,7 +51,10 @@
         </table>
       </div>
 
-      {{#nf-scroll-area changeAction="scrolled" class="nf-table-scrollable-body"}}
+      {{#nf-scroll-area 
+        scrollTop=scrollTop 
+        scrollTopPercentage=scrollTopPercentage 
+        changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
             {{#each row in trackedRows}}

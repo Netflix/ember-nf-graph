@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
+	scrollTo: 0,
+
 	actions: {
 		fooCellClicked: function(row, column, group) {
 			console.log('foo clicked', row, column, group);
@@ -26,5 +28,9 @@ export default Ember.ObjectController.extend({
 		tableScrolled: function(e) {
 			this.set('tableScroll', e);
 		},
+
+		scrollyScrolly: function(){
+			this.set('scrollTo', this.get('scrollTo') + 0.2);
+		}
 	},
 });

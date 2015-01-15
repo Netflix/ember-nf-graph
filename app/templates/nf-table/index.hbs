@@ -16,11 +16,12 @@
 
 length: {{cols.length}}
 
+<button {{action 'scrollyScrolly'}}>Scroll?</button>
 {{!-- itemController="nf-table-group-test" groupBy="children"
 	groupFrom="hierarchy" --}}
-{{#nf-table rows=myData scrollable=0
-	
+{{#nf-table rows=myData scrollable=1
 	scrollAction="tableScrolled"
+	scrollTopPercentage=scrollTo
 	columns=cols
 	itemController="nf-table-rows-test"
 	emitSorted=watSorted

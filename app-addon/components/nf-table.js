@@ -110,6 +110,25 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	tagName: 'div',
 
 	/**
+		Gets or sets the scroll of the underlying 
+		scroll area if there is one.
+		@property scrollTop
+		@type {Number}
+		@default 0
+	*/
+	scrollTop: 0,
+
+	/**
+		Gets or sets the scroll by percentage
+		of scrollHeight of the underlying 
+		scroll area if there is one.
+		@property scrollTopPercentage
+		@type {Number}
+		@default 0
+	*/
+	scrollTopPercentage: 0,
+
+	/**
 		Property used by child components to locate the table component.
 		@property isTable
 		@type Boolean
