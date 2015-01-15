@@ -18,13 +18,14 @@ length: {{cols.length}}
 
 {{!-- itemController="nf-table-group-test" groupBy="children"
 	groupFrom="hierarchy" --}}
-{{#nf-table rows=myData scrollable=1
+{{#nf-table rows=myData scrollable=0
+	
 	scrollAction="tableScrolled"
 	columns=cols
-	
+	itemController="nf-table-rows-test"
 	emitSorted=watSorted
 	rowAction="rowClicked"}}
-	{{#nf-table-group rowAction="groupClicked"}}
+	{{#nf-table-group rowAction="groupClicked" itemController="nf-table-group-test"}}
 		{{#nf-column sortBy="name" sortNatural=1 sortDirection="desc" class="small-column"}}	
 			{{#nf-cell}}
 				{{group.name}}
@@ -48,7 +49,7 @@ length: {{cols.length}}
 		{{/nf-header}}
 
 		{{#nf-cell}}
-			{{row.bar}}
+			{{row.bar}} (plus: {{row.barPlus}})
 		{{/nf-cell}} 
 	{{/nf-column}}
 

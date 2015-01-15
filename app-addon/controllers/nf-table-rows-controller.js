@@ -8,12 +8,5 @@ export default Ember.ArrayController.extend({
 				table.sendAction('rowAction', row, group, table);
 			}
 		},
-
-		groupRowClick: function(group){
-			var table = this.get('table');
-			if(table) {
-				table.sendAction('groupRowAction', group, table);
-			}
-		},
 	}
 });

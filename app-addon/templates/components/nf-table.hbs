@@ -16,14 +16,14 @@
       {{#nf-scroll-area changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
-            {{#each group in sortedGroups}}
-              <tr class="nf-table-group" {{action 'groupRowClick' group}}>
+            {{#each group in groupsController}}
+              <tr class="nf-table-group" {{action 'groupRowClick' group}} {{bind-attr data-nf-table-group-key=group.model.groupKey}}>
                 {{#each column in tableGroup.visibleColumns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
               </tr>
-              {{#each row in group._groupChildren}}
-                <tr class="nf-table-group-child" {{action 'rowClick' row group}}>
+              {{#each row in group}}
+                <tr class="nf-table-group-child" {{action 'rowClick' row group}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                   {{#each column in visibleColumns}}
                     {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                   {{/each}}
@@ -77,14 +77,14 @@
         </thead>
 
         <tbody>
-          {{#each group in sortedGroups}}
-            <tr class="nf-table-group" {{action 'groupRowClick' group}}>
+          {{#each group in groupsController}}
+            <tr class="nf-table-group" {{action 'groupRowClick' group}} {{bind-attr data-nf-table-group-key=group.model.groupKey}}>
               {{#each column in tableGroup.visibleColumns}}
                 {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
               {{/each}}
             </tr>
-            {{#each row in group._groupChildren}}
-              <tr class="nf-table-group-child" {{action 'rowClick' row group}}>
+            {{#each row in group}}
+              <tr class="nf-table-group-child" {{action 'rowClick' row group}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                 {{#each column in visibleColumns}}
                   {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
                 {{/each}}
