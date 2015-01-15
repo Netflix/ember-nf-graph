@@ -744,7 +744,7 @@ export default Ember.Component.extend({
   graphX: function() {
     var paddingLeft = this.get('paddingLeft');
     var yAxisWidth = this.get('yAxis.width') || 0;
-    var yAxisOrient = this.get('yAxisOrient');
+    var yAxisOrient = this.get('yAxis.orient');
     if(yAxisOrient === 'right') {
       return paddingLeft;
     }
@@ -803,9 +803,9 @@ export default Ember.Component.extend({
     @type String
     @readonly
    */
-  graphTransform: property('graphX', 'graphY', function (graphX, graphY) {
-    return 'translate(%@, %@)'.fmt(graphX, graphY);
-  }),
+  graphTransform: function(){
+    return 'translate(%@, %@)'.fmt(this.get('graphX'), this.get('graphY'));
+  }.property('graphX', 'graphY'),
 
   /**
     Sets `hasRendered` to `true` on `willInsertElement`.
