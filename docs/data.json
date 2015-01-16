@@ -2709,7 +2709,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 769,
+            "line": 770,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
@@ -2720,7 +2720,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 784,
+            "line": 785,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
@@ -2731,7 +2731,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 799,
+            "line": 800,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
@@ -2742,7 +2742,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 809,
+            "line": 810,
             "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
             "itemtype": "method",
             "name": "_notifyHasRendered",
@@ -2753,7 +2753,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 818,
+            "line": 819,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -2778,7 +2778,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 838,
+            "line": 839,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -2789,7 +2789,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 846,
+            "line": 847,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -2805,7 +2805,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 867,
+            "line": 868,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -2821,7 +2821,7 @@
         },
         {
             "file": "app-addon/components/nf-graph.js",
-            "line": 884,
+            "line": 885,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",

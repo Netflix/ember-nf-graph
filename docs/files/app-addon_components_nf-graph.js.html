@@ -921,15 +921,15 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphX: property(
-    &#x27;paddingLeft&#x27;, &#x27;yAxis.width&#x27;, &#x27;yAxis.orient&#x27;, 
-    function (paddingLeft, yAxisWidth, yAxisOrient) {
-      if(yAxisOrient === &#x27;right&#x27;) {
-        return paddingLeft;
-      }
-      return paddingLeft + yAxisWidth;
+  graphX: function() {
+    var paddingLeft = this.get(&#x27;paddingLeft&#x27;);
+    var yAxisWidth = this.get(&#x27;yAxis.width&#x27;) || 0;
+    var yAxisOrient = this.get(&#x27;yAxis.orient&#x27;);
+    if(yAxisOrient === &#x27;right&#x27;) {
+      return paddingLeft;
     }
-  ),
+    return paddingLeft + yAxisWidth;
+  }.property(&#x27;paddingLeft&#x27;, &#x27;yAxis.width&#x27;, &#x27;yAxis.orient&#x27;),
 
   /** 
     The y coordinate position of the graph content
@@ -937,14 +937,15 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphY: property(&#x27;paddingTop&#x27;, &#x27;xAxis.orient&#x27;, &#x27;xAxis.height&#x27;, 
-    function (paddingTop, xAxisOrient, xAxisHeight) {
-      if(xAxisOrient === &#x27;top&#x27;) {
-        return xAxisHeight + paddingTop;
-      }
-      return paddingTop;
+  graphY: function(){
+    var paddingTop = this.get(&#x27;paddingTop&#x27;);
+    var xAxisOrient = this.get(&#x27;xAxis.orient&#x27;);
+    if(xAxisOrient === &#x27;top&#x27;) {
+      var xAxisHeight = this.get(&#x27;xAxis.height&#x27;) || 0;
+      return xAxisHeight + paddingTop;
     }
-  ),
+    return paddingTop;
+  }.property(&#x27;paddingTop&#x27;, &#x27;xAxis.orient&#x27;, &#x27;xAxis.height&#x27;), 
 
   /**
     The width, in pixels, of the graph content
@@ -982,9 +983,9 @@ export default Ember.Component.extend({
     @type String
     @readonly
    */
-  graphTransform: property(&#x27;graphX&#x27;, &#x27;graphY&#x27;, function (graphX, graphY) {
-    return &#x27;translate(%@, %@)&#x27;.fmt(graphX, graphY);
-  }),
+  graphTransform: function(){
+    return &#x27;translate(%@, %@)&#x27;.fmt(this.get(&#x27;graphX&#x27;), this.get(&#x27;graphY&#x27;));
+  }.property(&#x27;graphX&#x27;, &#x27;graphY&#x27;),
 
   /**
     Sets &#x60;hasRendered&#x60; to &#x60;true&#x60; on &#x60;willInsertElement&#x60;.
