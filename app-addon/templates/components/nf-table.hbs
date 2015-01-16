@@ -6,7 +6,7 @@
           <thead>
             <tr>
               {{#each column in visibleColumns}}
-                {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+                {{view 'nf-table-header' column=column class=column.headerClassNames controller=parentController}}
               {{/each}}
             </tr>
           </thead>
@@ -22,13 +22,13 @@
             {{#each group in groupsController}}
               <tr class="nf-table-group" {{action 'groupRowClick' group}} {{bind-attr data-nf-table-group-key=group.model.groupKey}}>
                 {{#each column in tableGroup.visibleColumns}}
-                  {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                  {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
                 {{/each}}
               </tr>
               {{#each row in group}}
                 <tr class="nf-table-group-child" {{action 'rowClick' row group}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                   {{#each column in visibleColumns}}
-                    {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                    {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
                   {{/each}}
                 </tr>
               {{/each}}
@@ -44,7 +44,7 @@
           <thead>
             <tr>
               {{#each column in visibleColumns}}
-                {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+                {{view 'nf-table-header' column=column class=column.headerClassNames controller=parentController}}
               {{/each}}
             </tr>
           </thead>
@@ -60,7 +60,7 @@
             {{#each row in trackedRows}}
               <tr {{action 'rowClick' row}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                 {{#each column in visibleColumns}}
-                  {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                  {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
                 {{/each}}
               </tr>
             {{/each}}
@@ -77,7 +77,7 @@
         <thead>
           <tr>
             {{#each column in visibleColumns}}
-              {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+              {{view 'nf-table-header' column=column class=column.headerClassNames controller=parentController}}
             {{/each}}
           </tr>
         </thead>
@@ -86,13 +86,13 @@
           {{#each group in groupsController}}
             <tr class="nf-table-group" {{action 'groupRowClick' group}} {{bind-attr data-nf-table-group-key=group.model.groupKey}}>
               {{#each column in tableGroup.visibleColumns}}
-                {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
               {{/each}}
             </tr>
             {{#each row in group}}
               <tr class="nf-table-group-child" {{action 'rowClick' row group}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                 {{#each column in visibleColumns}}
-                  {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                  {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
                 {{/each}}
               </tr>
             {{/each}}
@@ -106,7 +106,7 @@
         <thead>
           <tr>
             {{#each column in visibleColumns}}
-              {{view 'nf-table-header' column=column classNames=column.headerClassNames controller=parentController}}
+              {{view 'nf-table-header' column=column class=column.headerClassNames controller=parentController}}
             {{/each}}
           </tr>
         </thead>
@@ -115,7 +115,7 @@
           {{#each row in trackedRows}}
             <tr {{action 'rowClick' row}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
               {{#each column in visibleColumns}}
-                {{view 'nf-table-cell' column=column classNames=column.cellClassNames controller=parentController}}
+                {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
               {{/each}}
             </tr>
           {{/each}}
