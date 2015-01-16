@@ -710,9 +710,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  yRange: property('graphHeight', function (graphHeight) {
-    return [graphHeight, 0];
-  }),
+  yRange: function(){ 
+    return [this.get('graphHeight'), 0];
+  }.property('graphHeight'),
 
   /**
     The x range of the graph in pixels. The min and max pixel values
@@ -721,9 +721,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  xRange: property('graphWidth', function (graphWidth) {
-    return [0, graphWidth];
-  }),
+  xRange: function(){
+    return [0, this.get('graphWidth')];
+  }.property('graphWidth'),
 
   /**
     Returns `true` if the graph has data to render. Data is conveyed
@@ -773,14 +773,13 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphWidth: property('width', 'paddingRight', 'paddingLeft', 'yAxis.width',
-    function (width, paddingLeft, paddingRight, yAxisWidth) {
-      paddingRight = paddingRight || 0;
-      paddingLeft = paddingLeft || 0;
-      yAxisWidth = yAxisWidth || 0;
-      return width - paddingRight - paddingLeft - yAxisWidth;
-    }
-  ),
+  graphWidth: function() {
+    var paddingRight = this.get('paddingRight') || 0;
+    var paddingLeft = this.get('paddingLeft') || 0;
+    var yAxisWidth = this.get('yAxisWidth') || 0;
+    var width = this.get('width') || 0;
+    return Math.max(0, width - paddingRight - paddingLeft - yAxisWidth);
+  }.property('width', 'paddingRight', 'paddingLeft', 'yAxis.width'),
 
   /**
     The height, in pixels, of the graph content
@@ -788,14 +787,13 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphHeight: property('height', 'paddingTop', 'paddingBottom', 'xAxis.height',
-    function (height, paddingTop, paddingBottom, xAxisHeight) {
-      paddingTop = paddingTop || 0;
-      paddingBottom = paddingBottom || 0;
-      xAxisHeight = xAxisHeight || 0;
-      return height - paddingTop - paddingBottom - xAxisHeight;
-    }
-  ),
+  graphHeight: function(){
+    var paddingTop = this.get('paddingTop') || 0;
+    var paddingBottom = this.get('paddingBottom') || 0;
+    var xAxisHeight = this.get('xAxisHeight') || 0;
+    var height = this.get('height') || 0;
+    return Math.max(0, height - paddingTop - paddingBottom - xAxisHeight);
+  }.property('height', 'paddingTop', 'paddingBottom', 'xAxis.height'),
 
   /**
     An SVG transform to position the graph content
