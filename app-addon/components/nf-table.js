@@ -286,14 +286,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	trackBy: undefined,
 
 	rowController: function(){
-		var ctrl = this.container.lookup('controller:nf-table-rows-controller');
-		ctrl.set('content', this.get('rows'));
-		ctrl.set('table', this);
-		var itemController = this.get('itemController');
-		if(itemController) {
-			ctrl.set('itemController', itemController);
-		}
-		return ctrl;
+		return this._getArrayController(this.get('rows'), 'nf-table-rows-controller', 'itemController');
 	}.property('rows', 'itemController'),
 
 	/**
