@@ -4084,7 +4084,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 299,
+            "line": 292,
             "description": "The rows to render, tracked by whatever field is listed in teh trackBy property",
             "itemtype": "property",
             "name": "trackedRows",
@@ -4097,7 +4097,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 308,
+            "line": 301,
             "description": "Triggers the `willSort` and `didSort` events. Also calls `doSort`",
             "itemtype": "method",
             "name": "onSort",
@@ -4106,7 +4106,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 318,
+            "line": 311,
             "description": "Performs the sort by reorganizing the DOM. If you want to use some other \nmethod of sorting, this is the guy you'll need to override.",
             "itemtype": "method",
             "name": "doSort",
@@ -4115,7 +4115,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 345,
+            "line": 338,
             "description": "Observes changes to column sorts and fires the `onSort` method afterRender",
             "itemtype": "method",
             "name": "observeSortChanges",
@@ -4124,7 +4124,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 353,
+            "line": 346,
             "description": "A computed property returning a sorted copy of `rows`",
             "itemtype": "property",
             "name": "sortedRows",
@@ -4135,7 +4135,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 369,
+            "line": 362,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -4146,7 +4146,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 378,
+            "line": 371,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -4157,7 +4157,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 389,
+            "line": 382,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -4168,7 +4168,7 @@
         },
         {
             "file": "app-addon/components/nf-table.js",
-            "line": 400,
+            "line": 393,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
