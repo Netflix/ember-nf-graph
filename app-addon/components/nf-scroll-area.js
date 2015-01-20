@@ -55,8 +55,9 @@ export default Ember.Component.extend({
 	}.property().volatile(),
 
 	_updateScrollTop: function(){
-		if(this.get('element')) {
-			var scrollTop = this.get('scrollTopPercentage') * this.get('element').scrollHeight;
+		var element = this.get('element');
+		if(element) {
+			var scrollTop = this.get('scrollTopPercentage') * (element.scrollHeight - this.$().outerHeight());
 			this.set('scrollTop', scrollTop);
 		}
 	}.observes('scrollTopPercentage').on('didInsertElement'),
