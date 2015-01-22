@@ -776,7 +776,7 @@ export default Ember.Component.extend({
   graphWidth: function() {
     var paddingRight = this.get('paddingRight') || 0;
     var paddingLeft = this.get('paddingLeft') || 0;
-    var yAxisWidth = this.get('yAxisWidth') || 0;
+    var yAxisWidth = this.get('yAxis.width') || 0;
     var width = this.get('width') || 0;
     return Math.max(0, width - paddingRight - paddingLeft - yAxisWidth);
   }.property('width', 'paddingRight', 'paddingLeft', 'yAxis.width'),
@@ -790,7 +790,7 @@ export default Ember.Component.extend({
   graphHeight: function(){
     var paddingTop = this.get('paddingTop') || 0;
     var paddingBottom = this.get('paddingBottom') || 0;
-    var xAxisHeight = this.get('xAxisHeight') || 0;
+    var xAxisHeight = this.get('xAxis.height') || 0;
     var height = this.get('height') || 0;
     return Math.max(0, height - paddingTop - paddingBottom - xAxisHeight);
   }.property('height', 'paddingTop', 'paddingBottom', 'xAxis.height'),
