@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>app/components/nf-range-markers.js - Ember-CLI-Ember-DVC</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Ember-CLI-Ember-DVC" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/components.nf-area.html">components.nf-area</a></li>
+                                <li><a href="../classes/components.nf-area-stack.html">components.nf-area-stack</a></li>
+                                <li><a href="../classes/components.nf-bars.html">components.nf-bars</a></li>
+                                <li><a href="../classes/components.nf-cell.html">components.nf-cell</a></li>
+                                <li><a href="../classes/components.nf-column.html">components.nf-column</a></li>
+                                <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
+                                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+                                <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
+                                <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
+                                <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
+                                <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+                                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
+                                <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
+                                <li><a href="../classes/components.nf-plot.html">components.nf-plot</a></li>
+                                <li><a href="../classes/components.nf-range-marker.html">components.nf-range-marker</a></li>
+                                <li><a href="../classes/components.nf-range-markers.html">components.nf-range-markers</a></li>
+                                <li><a href="../classes/components.nf-right-tick.html">components.nf-right-tick</a></li>
+                                <li><a href="../classes/components.nf-scroll-area.html">components.nf-scroll-area</a></li>
+                                <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
+                                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+                                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+                                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+                                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+                                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+                                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
+                                <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
+                                <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
+                                <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
+                                <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
+                                <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
+                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
+                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
+                                <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                                <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
+                                <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
+                                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+                                <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+                                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+                                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
+                                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
+                                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
+                                <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
+                                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
+                                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+                                <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: app/components/nf-range-markers.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+import HasGraphParent from &#x27;../mixins/graph-has-graph-parent&#x27;;
+import { property } from &#x27;../utils/computed-property-helpers&#x27;;
+
+/**
+	A container and manager for &#x60;nf-range-marker&#x60; components.
+	Used to draw an association between &#x60;nf-range-marker&#x60; components so they 
+	can be laid out in a manner in which they don&#x27;t collide.
+	@namespace components
+	@class nf-range-markers
+	@extends Ember.Component
+  @uses mixins.graph-has-graph-parent
+*/
+export default Ember.Component.extend(HasGraphParent, {
+	tagName: &#x27;g&#x27;,
+	
+	/**
+		Used by &#x60;nf-range-marker&#x60; to identify the &#x60;nf-range-markers&#x60; container
+		@property isRangeMarkerContainer
+		@type Boolean
+		@default true
+		@readonly
+	*/
+	isRangeMarkerContainer: true,
+
+	/**
+		Sets the orientation of the range markers.
+
+		- &#x60;&#x27;bottom&#x27;&#x60; - Range markers start at the bottom and stack upward
+		- &#x60;&#x27;top&#x27;&#x60; - Range markers start at the top and stack downward
+		@property orient
+		@type String
+		@default &#x27;bottom&#x27;
+	*/
+	orient: &#x27;bottom&#x27;,
+
+	/**
+		The margin, in pixels, between the markers
+		@property markerMargin
+		@type Number
+		@default 10
+	*/
+	markerMargin: 10,
+
+	/**
+		The marker components registered with this container
+		@property markers
+		@type Array
+		@readonly
+	*/
+	markers: property(function(){
+		return [];
+	}),
+
+	/**
+		Adds the passed marker to the &#x60;markers&#x60; list, and sets the &#x60;prevMarker&#x60; and &#x60;nextMarker&#x60;
+		properties on the marker component and it&#x27;s neighbor.
+		@method registerMarker
+		@param marker {nf-range-marker} the range marker to register with this container
+	*/
+	registerMarker: function(marker) {
+		var markers = this.get(&#x27;markers&#x27;);
+		var prevMarker = markers[markers.length - 1];
+		
+		if(prevMarker) {
+			marker.set(&#x27;prevMarker&#x27;, prevMarker);
+			prevMarker.set(&#x27;nextMarker&#x27;, marker);
+		}
+
+		markers.pushObject(marker);
+	},
+
+	/**
+		Removes the marker from the &#x60;markers&#x60; list. Also updates the &#x60;nextMarker&#x60; and &#x60;prevMarker&#x60;
+		properties of it&#x27;s neighboring components.
+		@method unregisterMarker
+		@param marker {nf-range-marker} the range marker to remove from the &#x60;markers&#x60; list.
+	*/
+	unregisterMarker: function(marker) {
+		if(marker) {
+			var next = marker.nextMarker;
+			var prev = marker.prevMarker;
+			if(prev) {
+				prev.set(&#x27;nextMarker&#x27;, next);
+			}
+			if(next) {
+				next.set(&#x27;prevMarker&#x27;, prev);
+			}
+			this.get(&#x27;markers&#x27;).removeObject(marker);
+		}
+	},
+});
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>utils.nf.graph-event - Ember-CLI-Ember-DVC</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Ember-CLI-Ember-DVC" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/components.nf-area.html">components.nf-area</a></li>
+                                <li><a href="../classes/components.nf-area-stack.html">components.nf-area-stack</a></li>
+                                <li><a href="../classes/components.nf-bars.html">components.nf-bars</a></li>
+                                <li><a href="../classes/components.nf-cell.html">components.nf-cell</a></li>
+                                <li><a href="../classes/components.nf-column.html">components.nf-column</a></li>
+                                <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
+                                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+                                <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
+                                <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
+                                <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
+                                <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+                                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
+                                <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
+                                <li><a href="../classes/components.nf-plot.html">components.nf-plot</a></li>
+                                <li><a href="../classes/components.nf-range-marker.html">components.nf-range-marker</a></li>
+                                <li><a href="../classes/components.nf-range-markers.html">components.nf-range-markers</a></li>
+                                <li><a href="../classes/components.nf-right-tick.html">components.nf-right-tick</a></li>
+                                <li><a href="../classes/components.nf-scroll-area.html">components.nf-scroll-area</a></li>
+                                <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
+                                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+                                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+                                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+                                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+                                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+                                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
+                                <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
+                                <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
+                                <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
+                                <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
+                                <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
+                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
+                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
+                                <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                                <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
+                                <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
+                                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+                                <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+                                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+                                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
+                                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
+                                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
+                                <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
+                                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
+                                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+                                <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>utils.nf.graph-event Class</h1>
+<div class="box meta">
+
+        <div class="extends">
+            Extends Graph-position
+        </div>
+
+        <div class="foundat">
+            Defined in: <a href="../files/app_utils_nf_graph-event.js.html#l3"><code>app&#x2F;utils&#x2F;nf&#x2F;graph-event.js:3</code></a>
+        </div>
+
+            Module: <a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a>
+
+</div>
+
+
+<div class="box intro">
+    <p>Event object for graph events</p>
+
+</div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods extends">
+                            <li class="index-item method private">
+                                <a href="#method_identity">identity</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_natualSort">natualSort</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_naturalCompare">naturalCompare</a>
+
+                            </li>
+                            <li class="index-item method private">
+                                <a href="#method_naturalTokenize">naturalTokenize</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_nearestIndexTo">nearestIndexTo</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties extends">
+                            <li class="index-item property">
+                                <a href="#property_data">data</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_originalEvent">originalEvent</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+<div id="method_identity" class="method item private">
+    <h3 class="name"><code>identity</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>x</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Any</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/app_utils_nf_array-helpers.js.html#l5"><code>app&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:5</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>returns whatever you pass into it.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">x</code>
+                        <span class="type">Any</span>
+
+
+                    <div class="param-description">
+                         
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Any</span>:
+                    <p>x</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_natualSort" class="method item">
+    <h3 class="name"><code>natualSort</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>arr</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/app_utils_nf_array-helpers.js.html#l112"><code>app&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:112</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Sorts the array &quot;naturally&quot;. Meaning taking into account both
+alphabetical and numeric sorting within strings.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">arr</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the array to sort</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+<div id="method_naturalCompare" class="method item">
+    <h3 class="name"><code>naturalCompare</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>a</code>
+                </li>
+                <li class="arg">
+                        <code>b</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Number</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/app_utils_nf_array-helpers.js.html#l77"><code>app&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:77</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>A JavaScript sorting predicate for natural sorting.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">a</code>
+                        <span class="type">Any</span>
+
+
+                    <div class="param-description">
+                        <p>the value to compare to b</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">b</code>
+                        <span class="type">Any</span>
+
+
+                    <div class="param-description">
+                        <p>the value to compare to a</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Number</span>:
+                    <p><code>-1</code>, <code>0</code> or <code>1</code> if a is less than, equal to, or
+  greater than b, respectively.</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_naturalTokenize" class="method item private">
+    <h3 class="name"><code>naturalTokenize</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>item</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Array</span>
+        </span>
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/app_utils_nf_array-helpers.js.html#l59"><code>app&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:59</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>breaks a string into an array of tokens in preparation for natural
+comparison and sorting.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">item</code>
+                        <span class="type">String</span>
+
+
+                    <div class="param-description">
+                        <p>the value to tokenize</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Array</span>:
+                    <p>an array of tokens found in the item</p>
+
+            </div>
+        </div>
+
+
+</div>
+<div id="method_nearestIndexTo" class="method item">
+    <h3 class="name"><code>nearestIndexTo</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>arr</code>
+                </li>
+                <li class="arg">
+                        <code>val</code>
+                </li>
+                <li class="arg">
+                        <code>mappingFn</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/app_utils_nf_array-helpers.js.html#l16"><code>app&#x2F;utils&#x2F;nf&#x2F;array-helpers.js:16</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Performs a binary search on the array and finds the nearest index to the value passed.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">arr</code>
+                        <span class="type">Array</span>
+
+
+                    <div class="param-description">
+                        <p>the <em>sorted</em> array to search.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">val</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>the value to find the nearest index to.</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">mappingFn</code>
+                        <span class="type">Function</span>
+
+
+                    <div class="param-description">
+                        <p>an optional function for pulling values out of the 
+array items.</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+
+
+</div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_data" class="property item">
+                        <h3 class="name"><code>data</code></h3>
+                        <span class="type">Any</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_utils_nf_graph-event.js.html#l18"><code>app&#x2F;utils&#x2F;nf&#x2F;graph-event.js:18</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>A data value passed with the event</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_originalEvent" class="property item">
+                        <h3 class="name"><code>originalEvent</code></h3>
+                        <span class="type">Event</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_utils_nf_graph-event.js.html#l10"><code>app&#x2F;utils&#x2F;nf&#x2F;graph-event.js:10</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The original event that triggered this event or action</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+            </div>
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

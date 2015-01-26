@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>app/components/nf-column.js - Ember-CLI-Ember-DVC</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="icon" href="../assets/favicon.ico">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><img src="../assets/css/logo.png" title="Ember-CLI-Ember-DVC" width="117" height="52"></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: </em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                            <li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/components.nf-area.html">components.nf-area</a></li>
+                                <li><a href="../classes/components.nf-area-stack.html">components.nf-area-stack</a></li>
+                                <li><a href="../classes/components.nf-bars.html">components.nf-bars</a></li>
+                                <li><a href="../classes/components.nf-cell.html">components.nf-cell</a></li>
+                                <li><a href="../classes/components.nf-column.html">components.nf-column</a></li>
+                                <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
+                                <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
+                                <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
+                                <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
+                                <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
+                                <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
+                                <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
+                                <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
+                                <li><a href="../classes/components.nf-plot.html">components.nf-plot</a></li>
+                                <li><a href="../classes/components.nf-range-marker.html">components.nf-range-marker</a></li>
+                                <li><a href="../classes/components.nf-range-markers.html">components.nf-range-markers</a></li>
+                                <li><a href="../classes/components.nf-right-tick.html">components.nf-right-tick</a></li>
+                                <li><a href="../classes/components.nf-scroll-area.html">components.nf-scroll-area</a></li>
+                                <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
+                                <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
+                                <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
+                                <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
+                                <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
+                                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+                                <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
+                                <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
+                                <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
+                                <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
+                                <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
+                                <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
+                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
+                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
+                                <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
+                                <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
+                                <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
+                                <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
+                                <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
+                                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+                                <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
+                                <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
+                                <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
+                                <li><a href="../classes/utils.nf.scroll-area-action-context.html">utils.nf.scroll-area-action-context</a></li>
+                                <li><a href="../classes/utils.parse-property-expression.html">utils.parse-property-expression</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/scale-utils.html">scale-utils</a></li>
+                                <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
+                                <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1 class="file-heading">File: app/components/nf-column.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+import Ember from &#x27;ember&#x27;;
+
+/**
+	A column class to support &#x60;nf-table&#x60;
+	@namespace components
+	@class nf-column
+	@extends Ember.Component
+*/
+export default Ember.Component.extend({
+
+	/**
+		used so child components &#x60;nf-cell&#x60; and &#x60;nf-header&#x60; can find this component
+		and register themselves.
+		@property isDataTableColumn
+		@type Boolean
+		@default true
+		@readonly
+	*/
+	isDataTableColumn: true,
+
+	/**
+		The column&#x27;s header component
+		@property header
+		@type nf-header
+		@default null
+	*/
+	header: null,
+
+	/**
+		The column&#x27;s cell component
+		@property cell
+		@type nf-cell
+		@default null
+	*/
+	cell: null,
+
+	/**
+		The table component the column belongs to
+		@property table
+		@type nf-table
+		@default null
+	*/
+	table: null,
+
+	/**
+		Gets or sets the inline style width of both the header and the table cell.
+		@property width
+		@type String
+		@default null
+	*/
+	width: undefined,
+
+	classNameBindings: [&#x27;:nf-table-column&#x27;, &#x27;alignmentClass&#x27;],
+
+	/**
+		Sets the alignment of the items in the column. Using this attribute
+		adds appropriate styling for sort arrows.
+
+		To make sort arrows appear for center and left alignment, the text you want
+		the sort arrow to appear next to needs to be wrapped in &#x60;&lt;span class=&quot;nf-column-label&quot;&gt;&lt;/span&gt;&#x60;
+
+		**This property is completely optional, and is here as a convenience.** 
+		You don&#x27;t need to use this property at all, if you which to add your own sort
+		styling.
+
+		@property align
+		@type String
+		@default null
+	*/
+	align: null,
+
+	/**
+		The computed alignment class for aligning the column content and header
+		@property alignmentClass
+		@type String
+		@readonly
+	*/
+	alignmentClass: function(){
+		var align = this.get(&#x27;align&#x27;);
+		return align ? &#x27;nf-table-column-&#x27; + align : &#x27;&#x27;;
+	}.property(&#x27;align&#x27;),
+
+	/**
+		The list of classes to apply to table headers
+		@property headerClassNames
+		@type Array
+		@readonly
+	*/
+	headerClassNames: function() {
+		var classNames = this.get(&#x27;classNames&#x27;);
+		var headerClassNames = this.get(&#x27;header.classNames&#x27;) || [];
+		return classNames.concat(headerClassNames).join(&#x27; &#x27;);
+	}.property(&#x27;header.classNames&#x27;, &#x27;classNames&#x27;),
+
+	/**
+		The list of classes to apply to table cells
+		@property cellClassNames
+		@type Array
+		@readonly
+	*/
+	cellClassNames: function(){
+		var classNames = this.get(&#x27;classNames&#x27;);
+		var cellClassNames = this.get(&#x27;cell.classNames&#x27;) || [];
+		return classNames.concat(cellClassNames).join(&#x27; &#x27;);
+	}.property(&#x27;cell.classNames&#x27;, &#x27;classNames&#x27;),
+
+	/**
+		Gets or sets the sort direction for the column.
+
+		Possible Values:
+
+		- &#x60;&#x27;asc&#x27;&#x60; - sort ascending.
+		- &#x60;&#x27;desc&#x27;&#x60; - sort descending.
+		- &#x60;&#x27;none&#x27;&#x60; - (or any other value) no sort.
+		
+		@property sortDirection
+		@type String
+		@default &#x27;none&#x27;
+		@example
+
+		     {{#nf-column sortDirection=&quot;asc&quot;}}
+	*/
+	sortDirection: function(key, value) {
+		if(arguments.length &gt; 1) {
+			var colReg = this.get(&#x27;columnRegistrar&#x27;);
+			if(colReg &amp;&amp; !colReg.get(&#x27;sortMultiple&#x27;)) {
+				if(value === &#x27;asc&#x27; || value === &#x27;desc&#x27;) {
+					var sortedColumns = colReg.get(&#x27;sortedColumns&#x27;);
+					if(sortedColumns) {
+						sortedColumns.forEach(function(col) {
+							if(col !== this) {
+								col.set(&#x27;sortDirection&#x27;, &#x27;none&#x27;);
+							}
+						}, this);
+					}
+				}
+			}
+
+			this._sortDirection = value;
+		}
+
+		return this._sortDirection;
+	}.property(),
+
+	_sortDirection: &#x27;none&#x27;,
+
+	/**
+		Gets or sets whether to use a natural sort.
+		@property sortNatural
+		@type Boolean
+		@default false
+	*/
+	sortNatural: false,
+
+	/**
+		The numeric value of &#x60;sortDirection&#x60;
+		@property direction
+		@type number
+		@readonly
+	*/
+	direction: function(){
+		var sortDirection = this.get(&#x27;sortDirection&#x27;);
+		sortDirection = &#x27;string&#x27; === typeof sortDirection ? sortDirection.toLowerCase() : &#x27;&#x27;;
+		
+		if(sortDirection === &#x27;asc&#x27;) {
+			return 1;
+		}
+		
+		if(sortDirection === &#x27;desc&#x27;) {
+			return -1;
+		}
+
+		return 0;
+	}.property(&#x27;sortDirection&#x27;),
+
+	/**
+		List of available sort directions
+		@property SORTS
+		@constant
+		@type Array
+	*/
+	SORTS: [&#x27;desc&#x27;, &#x27;none&#x27;, &#x27;asc&#x27;],
+
+	/**
+		Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.
+		@method toggleSortDirection
+	*/
+	toggleSortDirection: function() {
+		var SORTS = this.get(&#x27;SORTS&#x27;);
+		var sortDirection = this.get(&#x27;sortDirection&#x27;);
+		var i = SORTS.indexOf(sortDirection);
+		var next = SORTS[(i + 1) % SORTS.length];
+		this.set(&#x27;sortDirection&#x27;, next);
+	},
+
+	/**
+		Gets the CSS sort class to be applied to the column
+
+		Possible return values are &#x60;nf-sort-ascending&#x60;, &#x60;nf-sort-descending&#x60; and &#x60;nf-sort-none&#x60;.
+
+		@property sortClass
+		@type String
+		@default &#x27;nf-sort-none&#x27;
+		@example
+
+		    column.set(&#x27;sortDirection&#x27;, &#x27;asc&#x27;);
+		    console.log(column.get(&#x27;sortClass&#x27;)); // nf-sort-ascending
+	*/
+	sortClass: function() {
+		var dir = this.get(&#x27;direction&#x27;);
+		return &#x27;nf-sort-&#x27; + ([&#x27;descending&#x27;, &#x27;none&#x27;, &#x27;ascending&#x27;][dir+1]);
+	}.property(&#x27;sortDirection&#x27;),
+
+	_register: function(){
+		var registrar = this.nearestWithProperty(&#x27;isTableColumnRegistrar&#x27;);
+		this.set(&#x27;columnRegistrar&#x27;, registrar);
+		registrar.registerColumn(this);
+
+		var table = this.nearestWithProperty(&#x27;isTable&#x27;);
+		this.set(&#x27;table&#x27;, table);
+	}.on(&#x27;init&#x27;),
+
+	_unregister: function(){
+		this.get(&#x27;columnRegistrar&#x27;).unregisterColumn(this);
+	}.on(&#x27;willDestroyElement&#x27;)
+});
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
