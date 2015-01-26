@@ -1,8 +1,0 @@
-{
-    "name": "Ember-CLI-Ember-DVC",
-    "description": "Ember Data Visualization Components for Ember-CLI",
-    "options": {
-        "outdir": "./docs",
-        "paths": ["app-addon/"]
-    }
-}
