@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import RequireScaleSource from '../mixins/graph-requires-scale-source';
-import GraphEvent from '../utils/nf/graph-event';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
+import GraphEvent from 'ember-cli-ember-dvc/utils/nf/graph-event';
 
 /**
 	Plots a group tag on a graph at a given x and y domain coordinate.

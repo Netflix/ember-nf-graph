@@ -1,13 +1,13 @@
 import Ember from 'ember';
-import Selectable from '../mixins/graph-selectable-graphic';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import RegisteredGraphic from '../mixins/graph-registered-graphic';
-import DataGraphic from '../mixins/graph-data-graphic';
-import AreaUtils from '../mixins/graph-area-utils';
-import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
-import RequireScaleSource from '../mixins/graph-requires-scale-source';
+import Selectable from 'ember-cli-ember-dvc/mixins/graph-selectable-graphic';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import RegisteredGraphic from 'ember-cli-ember-dvc/mixins/graph-registered-graphic';
+import DataGraphic from 'ember-cli-ember-dvc/mixins/graph-data-graphic';
+import AreaUtils from 'ember-cli-ember-dvc/mixins/graph-area-utils';
+import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-with-tracking-dot';
+import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
-import { property } from '../utils/computed-property-helpers';
+import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 
 /**
   Adds an area graph to an `nf-graph` component.

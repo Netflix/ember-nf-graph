@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import { property } from '../utils/computed-property-helpers';
-import RequireScaleSource from '../mixins/graph-requires-scale-source';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
+import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
 /**
   A component for adding a templated x axis to an `nf-graph` component.

@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import RequireScaleSource from '../mixins/graph-requires-scale-source';
-import { normalizeScale } from '../utils/nf/scale-utils';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
+import { normalizeScale } from 'ember-cli-ember-dvc/utils/nf/scale-utils';
 
 /**
 	Draws a box underneath (or over) the y axis to between the given `a` and `b`

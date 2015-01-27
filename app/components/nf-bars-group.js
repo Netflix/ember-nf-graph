@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import RequiresScaleSource from '../mixins/graph-requires-scale-source';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import RequiresScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
 export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 	tagName: 'g',

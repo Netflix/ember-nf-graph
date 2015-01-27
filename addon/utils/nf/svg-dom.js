@@ -1,3 +1,4 @@
+/* globals getComputedStyle, Image, Blob, URL */
 /**
   @module utils/nf/svg-dom
 */

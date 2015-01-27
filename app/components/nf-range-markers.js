@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import { property } from '../utils/computed-property-helpers';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 
 /**
 	A container and manager for `nf-range-marker` components.

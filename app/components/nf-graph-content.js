@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import GraphMouseEvent from '../utils/nf/graph-mouse-event';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import GraphMouseEvent from 'ember-cli-ember-dvc/utils/nf/graph-mouse-event';
 
 /**
   Container component for graphics to display in `nf-graph`. Represents

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import { property } from '../utils/computed-property-helpers';
+import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 
 var computedBool = Ember.computed.bool;
 

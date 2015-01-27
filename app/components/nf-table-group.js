@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import TableColumnRegistrar from '../mixins/table-column-registrar';
+import TableColumnRegistrar from 'ember-cli-ember-dvc/mixins/table-column-registrar';
 
 /**
 	A component for defining a grouping row on an `nf-table`.

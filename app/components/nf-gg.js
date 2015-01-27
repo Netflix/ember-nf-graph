@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import RequireScaleSource from '../mixins/graph-requires-scale-source';
-import SelectableGraphic from '../mixins/graph-selectable-graphic';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
+import SelectableGraphic from 'ember-cli-ember-dvc/mixins/graph-selectable-graphic';
 
 /**
 	A grouping tag that provides zooming and offset functionality to it's children.

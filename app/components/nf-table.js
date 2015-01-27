@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import multiSort from '../utils/multi-sort';
-import TableColumnRegistrar from '../mixins/table-column-registrar';
-import trackedArrayProperty from '../utils/nf/tracked-array-property';
+import multiSort from 'ember-cli-ember-dvc/utils/multi-sort';
+import TableColumnRegistrar from 'ember-cli-ember-dvc/mixins/table-column-registrar';
+import trackedArrayProperty from 'ember-cli-ember-dvc/utils/nf/tracked-array-property';
 
 var get = Ember.get;
 var set = Ember.set;

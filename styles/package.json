@@ -1,0 +1,19 @@
+{
+  "name": "styles",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf ../vendor/ember-cli-ember-dvc && broccoli build ../vendor/ember-cli-ember-dvc"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "broccoli": "^0.13.3",
+    "broccoli-export-tree": "^0.3.2",
+    "broccoli-merge-trees": "^0.2.1",
+    "broccoli-sass": "^0.3.3",
+    "broccoli-sass-image-compiler": "^0.1.4"
+  }
+}

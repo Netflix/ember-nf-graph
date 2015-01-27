@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import HasGraphParent from '../mixins/graph-has-graph-parent';
-import DataGraphic from '../mixins/graph-data-graphic';
-import LineUtils from '../mixins/graph-line-utils';
-import SelectableGraphic from '../mixins/graph-selectable-graphic';
-import RegisteredGraphic from '../mixins/graph-registered-graphic';
-import GraphicWithTrackingDot from '../mixins/graph-graphic-with-tracking-dot';
-import RequireScaleSource from '../mixins/graph-requires-scale-source';
-import { property } from '../utils/computed-property-helpers';
+import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
+import DataGraphic from 'ember-cli-ember-dvc/mixins/graph-data-graphic';
+import LineUtils from 'ember-cli-ember-dvc/mixins/graph-line-utils';
+import SelectableGraphic from 'ember-cli-ember-dvc/mixins/graph-selectable-graphic';
+import RegisteredGraphic from 'ember-cli-ember-dvc/mixins/graph-registered-graphic';
+import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-with-tracking-dot';
+import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
+import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 
 /**
   A line graphic for `nf-graph`. Displays a line for the data it's passed.

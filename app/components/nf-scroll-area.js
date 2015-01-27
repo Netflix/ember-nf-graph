@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import ScrollAreaActionContext from '../utils/nf/scroll-area-action-context';
+import ScrollAreaActionContext from 'ember-cli-ember-dvc/utils/nf/scroll-area-action-context';
 
 /**
 	A component that emits actions and events when scrolled or resized.
