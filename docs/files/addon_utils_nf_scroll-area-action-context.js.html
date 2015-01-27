@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/mixins/graph-selectable-graphic.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/utils/nf/scroll-area-action-context.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,66 +121,128 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/mixins/graph-selectable-graphic.js</h1>
+<h1 class="file-heading">File: addon/utils/nf/scroll-area-action-context.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import { backedProperty } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
-  Adds functionality to a component to make it a selectable graphic
-  within it&#x27;s parent nf-graph.
-  @namespace mixins
-  @class graph-selectable-graphic
-  @extends Ember.Mixin
+	Action context event object for an nf-scroll-area scroll event.
+	@namespace utils.nf
+	@class scroll-area-action-context
 */
-export default Ember.Mixin.create({
-  _selected: false,
+export default Ember.Object.extend({
+	/**
+		The scroll top in pixels.
+		@property scrollTop
+		@type Number
+		@default 0
+	*/
+	scrollTop: 0,
 
-  /**
-    Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
-    via some action (usually click). The component will then show up in the nf-graph parent&#x27;s selected 
-    property.
-    @property selectable
-    @type Boolean
-    @default false
-  */
-  selectable: false,
+	/**
+		The scroll height of the element.
+		@property scrollHeight
+		@type number
+		@default 0
+	*/
+	scrollHeight: 0,
 
-  /**
-    Gets or sets whether or not the graphic is selected.
-    @property selected
-    @type Boolean
-    @default false
-  */
-  selected: backedProperty(&#x27;_selected&#x27;),
+	/**
+		The outer height of the element
+		@property outerHeight
+		@type Number
+		@default 0
+	*/
+	outerHeight: 0,
 
-  /**
-    Alias of selected
-    @property isSelected
-    @deprecated use &#x60;selected&#x60;
-  */
-  isSelected: Ember.computed.alias(&#x27;selected&#x27;),
+	/**
+		The scroll left in pixels.
+		@property scrollLeft
+		@type Number
+		@default 0
+	*/
+	scrollLeft: 0,
 
-  /**
-    Makes calls to the parent nf-graph to update it&#x27;s
-    &#x60;selected&#x60; property. Observes changes to &#x60;selected&#x60; and also 
-    fires on &#x60;didInsertElement&#x60;.
-    @method _updateGraphSelected
-    @private
-  */
-  _updateGraphSelected: function() {
-    Ember.run.once(this, function(){
-      var selected = this.get(&#x27;selected&#x27;);
-      var graph = this.get(&#x27;graph&#x27;);
-      if(selected) {
-        graph.selectGraphic(this);
-      } else {
-        graph.deselectGraphic(this);
-      }
-    });
-  }.observes(&#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
+	/**
+		The scroll width of the element.
+		@property scrollWidth
+		@type number
+		@default 0
+	*/
+	scrollWidth: 0,
+
+	/**
+		The outer width of the element
+		@property outerWidth
+		@type Number
+		@default 0
+	*/
+	outerWidth: 0,
+
+	/**
+		The calculated maximum value for scrollTop in pixels.
+		@property scrollTopMax
+		@type Number
+		@readonly
+	*/
+	scrollTopMax: function(){
+		return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
+	}.property(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;),
+
+	/**
+		The calculated percentage, in decimals, of content scrolled.
+		@property scrollTopPercentage
+		@type Number
+		@readonly
+	*/
+	scrollTopPercentage: function() {
+		return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
+	}.property(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;),
+	
+	/**
+		The calculated maximum value for scrollTop in pixels.
+		@property scrollLeftMax
+		@type Number
+		@readonly
+	*/
+	scrollLeftMax: function(){
+		return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
+	}.property(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;),
+
+	/**
+		The calculated percentage, in decimals, of content scrolled.
+		@property scrollLeftPercentage
+		@type Number
+		@readonly
+	*/
+	scrollLeftPercentage: function() {
+		return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
+	}.property(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;),
+
+	/**
+		The component that fired the event
+		@property source
+		@type Ember.Component
+		@default null
+	*/
+	source: null,
+
+	/**
+		The optional data to send with the action
+		@property data
+		@default null
+	*/
+	data: null,
+
+	/**
+		The original scroll event object
+		@property originalEvent
+		@type Event
+		@default null
+	*/
+	originalEvent: null,
 });
     </pre>
 </div>

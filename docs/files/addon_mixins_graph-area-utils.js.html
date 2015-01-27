@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/utils/nf/scale-utils.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/mixins/graph-area-utils.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,28 +121,54 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/utils/nf/scale-utils.js</h1>
+<h1 class="file-heading">File: addon/mixins/graph-area-utils.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-/**
-	utilities for dealing with d3 scales
-	@namespace utils.nf
-	@module scale-utils
-*/
+import Ember from &#x27;ember&#x27;;
 
 /**
-	Ensures the output of a scale function is something palatable by SVG.
-	@method normalizeScale
-	@param scale {d3.scale} the scale to use to get the value
-	@param val {any} the value to transform with the scale
-	@return {Number} the output of the scale function, but if NaN, it will return 0.
+  Utility functions for drawing an area.
+  
+  @namespace mixins
+  @class graph-area-utils
+  @extends Ember.Mixin
 */
-function normalizeScale(scale, val) {
-	return (scale ? scale(val) : 0) || 0;
-}
+export default Ember.Mixin.create({
 
-export { normalizeScale };
+  /**
+    Creates a d3 area function from a given set of scales and an interpolator
+
+    @method createAreaFn
+    @param xScale {Function} a d3 scale
+    @param yScale {Function} a d3 scale
+    @param interpolator {String} the name of the d3 interpolator to use.
+    @return {Function} a function that when called will create SVG path data.
+  */
+	createAreaFn: function(xScale, yScale, interpolator) {
+      var interp = interpolator || &#x27;linear&#x27;;
+      var xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
+      var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
+
+      return function(data) {
+        if(!data || data.length === 0) {
+          return &#x27;M0,0&#x27;;
+        }
+
+        return d3.svg.area()
+          .x(function (d) {
+            return (xScale(d[0]) || 0) + xMod;
+          })
+          .y0(function (d) {
+            return (yScale(d[1]) || 0) + yMod;
+          })
+          .y1(function (d) {
+            return (yScale(d[2]) || 0) + yMod;
+          })
+          .interpolate(interp)(data);
+      };
+	}
+});
     </pre>
 </div>
                     </div>

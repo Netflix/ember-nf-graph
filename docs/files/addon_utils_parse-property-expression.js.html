@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/mixins/graph-data-graphic.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/utils/parse-property-expression.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,261 +121,81 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/mixins/graph-data-graphic.js</h1>
+<h1 class="file-heading">File: addon/utils/parse-property-expression.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
-import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
-import { nearestIndexTo } from &#x27;../utils/nf/array-helpers&#x27;;
-
-var noop = function(){};
-
 /**
-  This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
-  with the graph. Includes methods for extracting, sorting and scrubbing data
-  for use in graphing components.
+  A function that will parse a path expression into a &quot;getter&quot; function that
+  can retrieve a value from that path off of any object when called.
 
-  Requires {{#crossLink &quot;mixins.graph-registered-graphic&quot;}}{{/crossLink}} and 
-  {{#crossLink &quot;mixins.graph-has-graph-parent&quot;}}{{/crossLink}}
+  ### Example
+        
+        import parsePropertyExpr from &#x27;utils/parse-property-expr&#x27;;
 
-  @namespace mixins
-  @class graph-data-graphic
-  @extends Ember.Mixin
+        var test = { foo: { bar: [&#x27;apple&#x27;, &#x27;banana&#x27;] } };
+        var getFooBar1 = parsePropertyExpr(&#x27;foo.bar[1]&#x27;);
+        var result = getFooBar1(test);
+        console.log(result); // &quot;banana&quot;
+
+  ### Notes
+
+  Will return &#x60;undefined&#x60; if the nothing is at the end of the path, or the
+  path cannot be reached.
+
+  @namespace utils
+  @class parse-property-expression
 */
-export default Ember.Mixin.create({
-	isDataGraphic: true,
 
-  /**
-    Gets or sets the data used by the component to plot itself.
 
-    @property data
-    @type Array
-    @default null
-  */
-  data: null,
-
-  /**
-    The path of the property on each object in 
-    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
-    to use as x data to plot on the graph.
-
-    @property x
-    @type String
-    @default &#x27;x&#x27;
-  */
-	xprop: &#x27;x&#x27;,
-
-  /**
-    The path of the property on each object in 
-    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
-    to use as y data to plot on the graph.
-
-    @property y
-    @type String
-    @default &#x27;y&#x27;
-  */
-	yprop: &#x27;y&#x27;,
-
-  /**
-    The function to get the x value from each 
-    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} object
-
-    @property xPropFn
-    @type Function
-    @readonly
-  */
-	xPropFn: function() {
-    var xprop = this.get(&#x27;xprop&#x27;);
-		return xprop ? parsePropertyExpr(xprop) : noop;
-	}.property(&#x27;xprop&#x27;),
-
-  /**
-    The function to get the y value from each 
-    {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}} object
-
-    @property yPropFn
-    @type Function
-    @readonly
-  */
-	yPropFn: function() {
-    var yprop = this.get(&#x27;yprop&#x27;);
-		return yprop ? parsePropertyExpr(yprop) : noop;
-	}.property(&#x27;yprop&#x27;),
-
-  /**
-    Gets the x values from the &#x60;sortedData&#x60;.
-    @property xData
-    @type Array
-    @readonly
-  */
-  xData: null,
-
-  /**
-    Gets the y values from the &#x60;sortedData&#x60;
-    @property yData
-    @type Array
-    @readonly
-  */
-  yData: null,
-
-  /**
-    The sorted and mapped data pulled from {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
-    An array of arrays, structures as so:
-
-          [[x,y],[x,y],[x,y]];
-
-    ** each inner array also has a property &#x60;data&#x60; on it, containing the original data object **
-
-    When this property is computed, it also updates the &#x60;xData&#x60; and &#x60;yData&#x60; properties of the graphic.
-    @property sortedData
-    @type Array
-    @readonly
-  */
-	sortedData: function(){
-    var data = this.get(&#x27;data&#x27;);
-    var xPropFn = this.get(&#x27;xPropFn&#x27;);
-    var yPropFn = this.get(&#x27;yPropFn&#x27;);
-    var xScaleType = this.get(&#x27;xScaleType&#x27;);
-
-    if(!data) {
-      return null;
+/**  
+  @method default
+  @param expr {String} the expression to parse
+  @return {Function} a function that when called with an object,
+  will locate the value at the end of the expressed path.
+*/
+export default function parsePropertyExpression(expr) {
+  var c, i;
+  var isIndex = false;
+  var token = &#x27;&#x27;;
+  var tokens = [];
+  var addToken = function(){
+    if(token === &#x27;&#x27;) {
+      return;
     }
-
-    var mapped = data.map(function(d, i) {
-      var item = [xPropFn(d), yPropFn(d)];
-    	item.data = d;
-    	item.origIndex = i;
-    	return item;
-    });
-
-    if(xScaleType !== &#x27;ordinal&#x27;) {
-      mapped.sort(function(a, b) {
-      	var ax = a[0];
-        var bx = b[0];
-        return ax === bx ? 0 : (ax &gt; bx) ? 1 : -1;
-      });
+    if(isIndex) {
+      token = +token;
     }
-
-    var xData = [];
-    var yData = [];
-    
-    mapped.forEach(function(d) {
-      xData.push(d[0]);
-      yData.push(d[1]);
-    });
-
-    this.set(&#x27;xData&#x27;, xData);
-    this.set(&#x27;yData&#x27;, yData);
-    
-    return mapped;
-  }.property(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;),
-
-  /**
-    The list of data points from {{#crossLink &quot;mixins.graph-data-graphc/sortedData:property&quot;}}{{/crossLink}} that
-    fits within the x domain, plus up to one data point outside of that domain in each direction.
-    @property renderedData
-    @type Array
-    @readonly
-  */
-  renderedData: function(){
-    var sortedData = this.get(&#x27;sortedData&#x27;);
-    var graph = this.get(&#x27;graph&#x27;);
-    var xScaleType = graph.get(&#x27;xScaleType&#x27;);
-    var xMin = graph.get(&#x27;xMin&#x27;);
-    var xMax = graph.get(&#x27;xMax&#x27;);
-
-    if(!sortedData || sortedData.length === 0) {
-      return [];
-    }
-
-    if(xScaleType === &#x27;ordinal&#x27;) {
-      return sortedData.slice();
-    }
-
-    return sortedData.filter(function(d, i) {
-      var x = d[0];
-      var prev = sortedData[i-1];
-      var next = sortedData[i+1];
-      var prevX = prev ? prev[0] : null;
-      var nextX = next ? next[0] : null;
-
-      return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
-    });
-  }.property(&#x27;sortedData.@each&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;graph.xMin&#x27;, &#x27;graph.xMax&#x27;),
-
-  /**
-    The first element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
-    that is actually visible within the x domain.
-    @property firstSortedData
-    @type Array
-    @readonly
-  */
-  firstVisibleData: function() {
-    var renderedData = this.get(&#x27;renderedData&#x27;);
-    var xMin = this.get(&#x27;xMin&#x27;);
-    var first = renderedData[0];
-    if(first &amp;&amp; xMin &gt; first[0] &amp;&amp; renderedData.length &gt; 1) {
-      first = renderedData[1];
-    }
-    return first ? {
-      x: first[0],
-      y: first[1],
-      data: first.data,
-    } : null;
-  }.property(&#x27;renderedData.@each&#x27;, &#x27;xMin&#x27;),
-
-
-  /**
-    The last element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
-    that is actually visible within the x domain.
-    @property lastVisibleData
-    @type Array
-    @readonly
-  */
-  lastVisibleData: function(){
-    var renderedData = this.get(&#x27;renderedData&#x27;);
-    var xMax = this.get(&#x27;xMax&#x27;);
-    var last = renderedData[renderedData.length - 1];
-    if(last &amp;&amp; xMax &lt; last[0] &amp;&amp; renderedData.length &gt; 1) {
-      last = renderedData[renderedData.length - 2];
-    }
-    return last ? {
-      x: last[0],
-      y: last[1],
-      data: last.data,
-    }: null;
-  }.property(&#x27;renderedData.@each&#x27;, &#x27;xMax&#x27;),
-
-  getDataNearXRange: function(rangeX) {
-    var xScale = this.get(&#x27;xScale&#x27;);
-    var isLinear = xScale &amp;&amp; xScale.invert;
-    if(isLinear) {
-      return this.getDataNearX(xScale.invert(rangeX));
+    tokens.push(token);
+    token = &#x27;&#x27;;
+    isIndex = c === &#x27;[&#x27;;    
+  };
+  
+  for(i = 0; i &lt; expr.length; i++) {
+    c = expr[i];
+    if(&#x27;[].&#x27;.indexOf(c) &gt;= 0) {
+      addToken();
     } else {
-      //ordinal
-      var range = this.get(&#x27;graph.xRange&#x27;);
-      var v = Math.abs(rangeX - range[0]) / Math.abs(range[1] - range[0]);
-      var renderedData = this.get(&#x27;renderedData&#x27;);
-      var i = Math.floor(v * renderedData.length);
-      return renderedData[i];
+      token += c;
     }
-  },
-
-  getDataNearX: function(x) {
-    x = +x;
-    if(x === x) {
-      var renderedData = this.get(&#x27;renderedData&#x27;);
-      var index = nearestIndexTo(renderedData, x, function(d){
-        return d ? d[0] : null;
-      });
-      return index !== -1 ? renderedData[index] : null;
+  }
+  
+  addToken();
+  
+  return function(obj){
+    var i, next;
+    var result = obj[tokens[0]];
+    if(result) {
+      for(i = 1; i &lt; tokens.length; i++) {
+        next = result[tokens[i]];
+        if(typeof next !== &#x27;object&#x27;) {
+          return next;
+        }
+        result = next;
+      }
     }
-  },
-});
-
-function between(x, a, b) {
-  return a &lt;= x &amp;&amp; x &lt;= b;
+    return result;
+  };
 }
     </pre>
 </div>

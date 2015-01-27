@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/mixins/graph-graphic-with-tracking-dot.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/mixins/graph-data-position-utils.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,264 +121,68 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/mixins/graph-graphic-with-tracking-dot.js</h1>
+<h1 class="file-heading">File: addon/mixins/graph-data-position-utils.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import GraphMouseEvent from &#x27;../utils/nf/graph-mouse-event&#x27;;
 
-var get = Ember.get;
 
+
+// gets the data nearest to the xValue provided.
+function nearestToXValue(xValue, sortedData) {
+	if(!sortedData || sortedData.length === 0) {
+		return null;
+	}
+	var i, current, next;
+
+	for(i = 0; i &lt; sortedData.length; i++) {
+		current = sortedData[i];
+		next = i &lt; sortedData.length - 1 ? sortedData[i+1] : null;
+		if(xValue === current[0]) {
+			return current;
+		}
+
+		if(xValue &lt; current[0]) {
+			return (!next || Math.abs(current[0] - xValue) &lt;= Math.abs(next[0] - xValue)) ? current : next;
+		}
+	}
+	
+	return null;
+}
 /**
-  Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
-  or {{#crossLink &quot;components.nf-area&quot;}}{{/crossLink}}
-  
-  @namespace mixins
-  @class graph-graphic-with-tracking-dot
-  */
+	Collection of utility functions for dealing with devining positions given certain
+	scales and domain data.
+
+	@namespace mixins
+	@class graph-data-position-utils
+	@extends Ember.Mixin
+*/
 export default Ember.Mixin.create({
-  /**
-    Gets or sets the tracking mode of the component.
+	
+	/**
+		Searches a given array for a data point nearest an x coordinate, given a specific scale.
 
-    Possible values are:
+		@method getNearestDataToXPosition
+		@param rangeX {Number} an x pixel value of a point relative to the top left
+				corner of the graph content.
+		@param sortedData {Array} the {{#crossLink &quot;mixins.graph-data-graphic/sortedData:property&quot;}}{{/crossLink}}
+				to search for the nearest data.
+		@param xScale the {{#crossLink &quot;components.nf-graph/xScale:property&quot;}}{{/crossLink}} used to convert the pixel
+				x value into a domain value with which to search the array.
+		@return {Array} The data point found to be nearest the rangeX x position passed.
+	*/
+	getNearestDataToXPosition: function(rangeX, sortedData, xScale) {
+		if(xScale.invert) {
+			var domainX = xScale.invert(rangeX);
+			return nearestToXValue(domainX, sortedData);
+		}
 
-    - &#x27;none&#x27;: no tracking behavior
-    - &#x27;hover&#x27;: only track while mouse hover
-    - &#x27;snap-last&#x27;: track while mouse hover, but snap to the last data element when not hovering
-    - &#x27;snap-first&#x27;: track while mouse hover, but snap to the first data element when not hovering
-    - &#x27;selected-hover&#x27;: The same as &#x60;&#x27;hover&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-    - &#x27;selected-snap-last&#x27;: The same as &#x60;&#x27;snap-last&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-    - &#x27;selected-snap-first&#x27;: The same as &#x60;&#x27;snap-first&#x27;&#x60; tracking mode, but only when the compononent is 
-    {{#crossLink &quot;mixins.graph-selectable-graphic/selected:property&quot;}}{{/crossLink}}
-
-    @property trackingMode
-    @type String
-    @default &#x27;none&#x27;
-  */
-  trackingMode: &#x27;none&#x27;,
-
-  trackedData: null,
-
-  trackingDotRadius: 2.5,
-
-  isShouldTrack: Ember.computed.or(&#x27;isSelectedHoverMode&#x27;, &#x27;isHoverMode&#x27;),
-
-  isSelectedHoverMode: function(){
-    var mode = this.get(&#x27;trackingMode&#x27;);
-    return mode === &#x27;selected-hover&#x27; || mode === &#x27;selected-snap-first&#x27; || mode === &#x27;selected-snap-last&#x27;;
-  }.property(&#x27;trackingMode&#x27;),
-
-  isHoverMode: function(){
-    var mode = this.get(&#x27;trackingMode&#x27;);
-    return mode === &#x27;hover&#x27; || mode === &#x27;snap-first&#x27; || mode === &#x27;snap-last&#x27;;
-  }.property(&#x27;trackingMode&#x27;),
-
-  hoverData: null,
-
-  isHovered: false,
-
-  showTrackingDot: function(){
-    var trackedData = this.get(&#x27;trackedData&#x27;);
-    if(trackedData) {
-      var x = get(trackedData, &#x27;x&#x27;);
-      var y = get(trackedData, &#x27;y&#x27;);
-      return +x === +x &amp;&amp; +y === +y;
-    }
-  }.property(&#x27;trackedData.x&#x27;, &#x27;trackedData.y&#x27;),
-
-  _updateHovered: function() {
-    if(this.get(&#x27;isShouldTrack&#x27;)) {
-      this.set(&#x27;trackedData&#x27;, this.get(&#x27;hoverData&#x27;));
-    }
-  }.observes(&#x27;isShouldTrack&#x27;, &#x27;hoverData&#x27;),
-
-  _processUpdateUnhovered: function(){
-    if(!this.get(&#x27;isHovered&#x27;)) {
-      var mode = this.get(&#x27;trackingMode&#x27;);
-      var selected = this.get(&#x27;selected&#x27;);
-      if(mode === &#x27;snap-last&#x27; || (selected &amp;&amp; mode === &#x27;selected-snap-last&#x27;)) {
-        this.set(&#x27;trackedData&#x27;, this.get(&#x27;lastVisibleData&#x27;));
-      }
-      if(mode === &#x27;snap-first&#x27; || (selected &amp;&amp; mode === &#x27;selected-snap-first&#x27;)) {
-        this.set(&#x27;trackedData&#x27;, this.get(&#x27;firstVisibleData&#x27;));
-      }
-    }
-  },
-
-  _updateUnhovered: function(){
-    Ember.run.scheduleOnce(&#x27;actions&#x27;, this, this._processUpdateUnhovered);
-  }.observes(&#x27;isHovered&#x27;, &#x27;trackingMode&#x27;, &#x27;firstVisibleData&#x27;, &#x27;lastVisibleData&#x27;, &#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
-
-  /**
-    The action name to send to the controller when the &#x60;hoverChange&#x60; event fires
-    @property hoverChange
-    @type String
-    @default null
-  */
-  hoverChange: null,
-
-  /**
-    Event handler for content hoverChange event. Triggers &#x60;didHoverChange&#x60;.
-    @method didContentHoverChange
-    @params e {utils.nf.graph-mouse-event}
-    @private
-  */
-  didContentHoverChange: function(e){
-    var graph = this.get(&#x27;graph&#x27;);
-
-    this.trigger(&#x27;didHoverChange&#x27;, GraphMouseEvent.create({
-      originalEvent: e.get(&#x27;originalEvent&#x27;),
-      source: this,
-      graph: graph,
-    }));
-  },
-
-  /**
-    Event handler for didHoverChange. Sends hoverChange action.
-    @method didHoverChange
-    @param e {utils.nf.graph-mouse-event}
-  */
-  didHoverChange: function(e) {
-    var isHoverMode = this.get(&#x27;isHoverMode&#x27;);
-    var isSelectedHoverMode = this.get(&#x27;isSelectedHoverMode&#x27;);
-    var selected = this.get(&#x27;selected&#x27;);
-
-    if(!this.get(&#x27;isHovered&#x27;)) {
-      this.set(&#x27;isHovered&#x27;, true);
-    }
-
-    if(isHoverMode || (selected &amp;&amp; isSelectedHoverMode)) {
-      this.set(&#x27;hoverData&#x27;, e);
-    }
-
-    if(this.get(&#x27;hoverChange&#x27;)) {
-      this.sendAction(&#x27;hoverChange&#x27;, e);
-    }
-  },
-
-  /**
-    Name of the action to send on &#x60;hoverEnd&#x60;
-    @property hoverEnd
-    @type String
-    @default null
-  */
-  hoverEnd: null,
-
-  /**
-    Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.
-    @function didHoverEnd
-    @params e {Object} hover end event object.
-  */
-  didHoverEnd: function(e) {
-    this.set(&#x27;hoverData&#x27;, null);
-
-    if(this.get(&#x27;isHovered&#x27;)) {
-      this.set(&#x27;isHovered&#x27;, false);
-    }
-
-    if(this.get(&#x27;hoverEnd&#x27;)) {
-      this.sendAction(&#x27;hoverEnd&#x27;, {
-        originalEvent: e.get(&#x27;originalEvent&#x27;),
-        source: this,
-        graph: this.get(&#x27;graph&#x27;),
-      });
-    }
-  },
-
-  /**
-    The action to send on &#x60;didTrack&#x60;.
-    @property didTrack
-    @type String
-    @default null
-  */
-  didTrack: null,
-
-  /**
-    Observes changes to tracked data and sends the
-    didTrack action.
-    @method _sendDidTrack
-    @private
-  */
-  _sendDidTrack: function(){
-    if(this.get(&#x27;didTrack&#x27;)) {
-      this.sendAction(&#x27;didTrack&#x27;, {
-        x: this.get(&#x27;trackedData.x&#x27;),
-        y: this.get(&#x27;trackedData.y&#x27;),
-        data: this.get(&#x27;trackedData.data&#x27;),
-        source: this,
-        graph: this.get(&#x27;graph&#x27;),
-      });
-    }
-  }.observes(&#x27;trackedData&#x27;),
-
-  /**
-    The action to send on &#x60;willTrack&#x60;
-    @property willTrack
-    @type String
-    @default null
-  */
-  willTrack: null,
-
-  /**
-    Observes impending changes to trackedData and sends
-    the willTrack action.
-    @method _sendWillTrack
-    @private
-  */
-  _sendWillTrack: function(){
-    if(this.get(&#x27;willTrack&#x27;)) {
-      this.sendAction(&#x27;willTrack&#x27;, {
-        x: this.get(&#x27;trackedData.x&#x27;),
-        y: this.get(&#x27;trackedData.y&#x27;),
-        data: this.get(&#x27;trackedData.data&#x27;),
-        source: this,
-        graph: this.get(&#x27;graph&#x27;),
-      });
-    }
-  }.observesBefore(&#x27;trackedData&#x27;),
-
-  /**
-    Handles the graph-content&#x27;s hoverEnd event and triggers didHoverEnd
-    @method didContentHoverEnd
-    @param e {utils.nf.graph-mouse-action-context}
-    @private
-  */
-  didContentHoverEnd: function(e){
-    var graph = this.get(&#x27;graph&#x27;);
-
-    this.trigger(&#x27;didHoverEnd&#x27;, {
-      originalEvent: e,
-      source: this,
-      graph: graph,
-    });
-  },
-
-  /**
-    Sets up subscriptions to content hover events.
-    @method _initializeTrackingDot
-    @private
-  */
-  _initializeTrackingDot: function(){
-    var content = this.get(&#x27;graph.content&#x27;);
-    content.on(&#x27;didHoverChange&#x27;, this, this.didContentHoverChange);
-    content.on(&#x27;didHoverEnd&#x27;, this, this.didContentHoverEnd);
-  }.on(&#x27;didInsertElement&#x27;),
-
-  /**
-    Tears down subscriptions to content hover events.
-    @method _teardownTrackingDot
-    @private
-  */
-  _teardownTrackingDot: function(){
-    var content = this.get(&#x27;graph.content&#x27;);
-    if(content) {
-      content.off(&#x27;didHoverChange&#x27;, this, this.didContentHoverChange);
-      content.off(&#x27;didHoverEnd&#x27;, this, this.didContentHoverEnd);
-    }
-  }.on(&#x27;willDestroyElement&#x27;)
+		// it&#x27;s ordinal
+		var range = xScale.range();
+		var index = Math.round((rangeX - range[0]) / (range[1] - range[0]));
+		return xScale.domain()[index];
+	}
 });
     </pre>
 </div>

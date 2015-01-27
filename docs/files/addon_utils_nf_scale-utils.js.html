@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/mixins/graph-registered-graphic.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/utils/nf/scale-utils.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,45 +121,28 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/mixins/graph-registered-graphic.js</h1>
+<h1 class="file-heading">File: addon/utils/nf/scale-utils.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
-import Ember from &#x27;ember&#x27;;
+/**
+	utilities for dealing with d3 scales
+	@namespace utils.nf
+	@module scale-utils
+*/
 
 /**
-	@namespace mixins
-	@class graph-registered-graphic
-	@extends Ember.Mixin
+	Ensures the output of a scale function is something palatable by SVG.
+	@method normalizeScale
+	@param scale {d3.scale} the scale to use to get the value
+	@param val {any} the value to transform with the scale
+	@return {Number} the output of the scale function, but if NaN, it will return 0.
 */
-export default Ember.Mixin.create({
+function normalizeScale(scale, val) {
+	return (scale ? scale(val) : 0) || 0;
+}
 
-	/**
-		calls {{#crossLink &quot;components.nf-graph/registerGraphic&quot;}}{{/crossLink}} on
-		&#x60;didInsertElement&#x60;.
-		@method _registerGraphic
-		@private
-	*/
-	_registerGraphic: function() {
-		var graph = this.get(&#x27;graph&#x27;);
-		if(graph) {
-			graph.registerGraphic(this);
-		}
-	}.on(&#x27;didInsertElement&#x27;),
-
-	/**
-		calls {{#crossLink &quot;components.nf-graph/unregisterGraphic&quot;}}{{/crossLink}} on
-		&#x60;didInsertElement&#x60;.
-		@method _unregisterGraphic
-		@private
-	*/
-	_unregisterGraphic: function(){
-		var graph = this.get(&#x27;graph&#x27;);
-		if(graph) {
-			graph.unregisterGraphic(this);
-		}
-	}.on(&#x27;willDestroyElement&#x27;)
-});
+export { normalizeScale };
     </pre>
 </div>
                     </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/mixins/graph-data-position-utils.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/mixins/graph-has-graph-parent.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,68 +121,40 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/mixins/graph-data-position-utils.js</h1>
+<h1 class="file-heading">File: addon/mixins/graph-has-graph-parent.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
-
-
-// gets the data nearest to the xValue provided.
-function nearestToXValue(xValue, sortedData) {
-	if(!sortedData || sortedData.length === 0) {
-		return null;
-	}
-	var i, current, next;
-
-	for(i = 0; i &lt; sortedData.length; i++) {
-		current = sortedData[i];
-		next = i &lt; sortedData.length - 1 ? sortedData[i+1] : null;
-		if(xValue === current[0]) {
-			return current;
-		}
-
-		if(xValue &lt; current[0]) {
-			return (!next || Math.abs(current[0] - xValue) &lt;= Math.abs(next[0] - xValue)) ? current : next;
-		}
-	}
-	
-	return null;
-}
 /**
-	Collection of utility functions for dealing with devining positions given certain
-	scales and domain data.
+	Adds initialization code to graph the &#x60;nf-graph&#x60; parent
+	to a component that is to be contained in an &#x60;nf-graph&#x60;.
 
 	@namespace mixins
-	@class graph-data-position-utils
-	@extends Ember.Mixin
-*/
+	@class graph-has-graph-parent
+	*/
 export default Ember.Mixin.create({
 	
 	/**
-		Searches a given array for a data point nearest an x coordinate, given a specific scale.
+		The parent graph for a component.
+		@property graph
+		@type components.nf-graph
+		@default null
+		*/
+	graph: null,
 
-		@method getNearestDataToXPosition
-		@param rangeX {Number} an x pixel value of a point relative to the top left
-				corner of the graph content.
-		@param sortedData {Array} the {{#crossLink &quot;mixins.graph-data-graphic/sortedData:property&quot;}}{{/crossLink}}
-				to search for the nearest data.
-		@param xScale the {{#crossLink &quot;components.nf-graph/xScale:property&quot;}}{{/crossLink}} used to convert the pixel
-				x value into a domain value with which to search the array.
-		@return {Array} The data point found to be nearest the rangeX x position passed.
-	*/
-	getNearestDataToXPosition: function(rangeX, sortedData, xScale) {
-		if(xScale.invert) {
-			var domainX = xScale.invert(rangeX);
-			return nearestToXValue(domainX, sortedData);
-		}
-
-		// it&#x27;s ordinal
-		var range = xScale.range();
-		var index = Math.round((rangeX - range[0]) / (range[1] - range[0]));
-		return xScale.domain()[index];
-	}
+	/**
+		Initalization method that gets the &#x60;nf-graph&#x60; parent
+		and assigns it to &#x60;graph&#x60;
+		
+		@method _getGraph
+		*/
+	_getGraph: function(){
+		var graph = this.nearestWithProperty(&#x27;isGraph&#x27;);
+		this.set(&#x27;graph&#x27;, graph);
+		this.trigger(&#x27;hasGraph&#x27;, graph);
+	}.on(&#x27;init&#x27;),
 });
     </pre>
 </div>

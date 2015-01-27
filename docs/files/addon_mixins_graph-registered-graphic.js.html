@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/utils/nf/graph-position.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/mixins/graph-registered-graphic.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,213 +121,44 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/utils/nf/graph-position.js</h1>
+<h1 class="file-heading">File: addon/mixins/graph-registered-graphic.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 
 /**
-	Position calculation class for nf-graph related events
-	@namespace utils.nf
-	@class graph-position
-	@extends Ember.Object
+	@namespace mixins
+	@class graph-registered-graphic
+	@extends Ember.Mixin
 */
-export default Ember.Object.extend({
-	/**
-		@property graph
-		@type component.nf-graph
-		@default null
-	*/
-	graph: null,
+export default Ember.Mixin.create({
 
 	/**
-		@property source
-		@type Ember.Component
+		calls {{#crossLink &quot;components.nf-graph/registerGraphic&quot;}}{{/crossLink}} on
+		&#x60;didInsertElement&#x60;.
+		@method _registerGraphic
+		@private
 	*/
-	source: null,
-
-	/**
-		The x position relative to graph
-		@property graphX
-		@type Number
-	*/
-	graphX: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._graphX = value;
-		} else {
-			var scale = this.get(&#x27;xScale&#x27;);
-			if(scale) {
-				var x = this.get(&#x27;x&#x27;);
-				this._graphX = scale(x);
-			}
-		}
-		return this._graphX || NaN;
-	}.property(&#x27;x&#x27;, &#x27;xScale&#x27;),
-
-	/**
-		The y position relative to graph
-		@property graphY
-		@type Number
-	*/
-	graphY: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._graphY = value;
-		} else {
-			var scale = this.get(&#x27;yScale&#x27;);
-			if(scale) {
-				var y = this.get(&#x27;y&#x27;);
-				this._graphY = scale(y);
-			}
-		}
-		return this._graphY || NaN;
-	}.property(&#x27;y&#x27;, &#x27;yScale&#x27;),
-
-	/**
-		The x domain value
-		@property x
-		@type Number
-	*/
-	x: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._x = value;
-		} else {
-			var scale = this.get(&#x27;xScale&#x27;);
-			if (scale &amp;&amp; scale.invert){
-				var graphX = this.get(&#x27;graphX&#x27;);
-				this._x = scale.invert(graphX);
-			} 
-		}
-		return this._x || NaN;
-	}.property(&#x27;graphX&#x27;, &#x27;xScale&#x27;),
-
-	/**
-		The y domain value
-		@property y
-		@type Number
-	*/
-	y: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._y = value;
-		} else {
-			var scale = this.get(&#x27;yScale&#x27;);
-			if (scale &amp;&amp; scale.invert){
-				var graphY = this.get(&#x27;graphY&#x27;);
-				this._y = scale.invert(graphY);
-			} 
-		}
-		return this._y || NaN;
-	}.property(&#x27;graphY&#x27;, &#x27;yScale&#x27;),
-
-	/**
-		The x position relative to the document
-		@property pageX
-		@type Number
-	*/
-	pageX: function(){
-		var offset = this.get(&#x27;graphOffset&#x27;);
-		if(offset) {
-			var graphX = this.get(&#x27;graphX&#x27;) || 0;
-			var graphContentX = this.get(&#x27;graphContentX&#x27;) || 0;
-			return offset.left + graphX + graphContentX;
-		}
-	}.property(&#x27;graphX&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentX&#x27;),
-
-	/**
-		The y position relative to the document
-		@property pageY
-		@type Number
-	*/
-	pageY: function(){
-		var offset = this.get(&#x27;graphOffset&#x27;);
-		if(offset) {
-			var graphY = this.get(&#x27;graphY&#x27;) || 0;
-			var graphContentY = this.get(&#x27;graphContentY&#x27;) || 0;
-			return offset.top + graphY + graphContentY;
-		}
-	}.property(&#x27;graphY&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentY&#x27;),
-
-	/**
-		The x scale from either the source or graph used to calculate positions
-		@property xScale
-		@type d3.scale
-		@readonly
-	*/
-	xScale: function(){
-		return this.get(&#x27;source.xScale&#x27;) || this.get(&#x27;graph.xScale&#x27;);
-	}.property(&#x27;graph.xScale&#x27;, &#x27;source.xScale&#x27;),
-
-	/**
-		The y scale from either the source or graph used to calculate positions
-		@property yScale
-		@type d3.scale
-		@readonly
-	*/
-	yScale: function(){
-		return this.get(&#x27;source.yScale&#x27;) || this.get(&#x27;graph.yScale&#x27;);
-	}.property(&#x27;graph.yScale&#x27;, &#x27;source.yScale&#x27;),
-
-	/**
-		The JQuery offset of the graph element
-		@property graphOffset
-		@type Object
-		@readonly
-	*/
-	graphOffset: function(){
+	_registerGraphic: function() {
 		var graph = this.get(&#x27;graph&#x27;);
 		if(graph) {
-			var content = graph.$(&#x27;.nf-graph-content&#x27;);
-			return content ? content.offset() : undefined;
+			graph.registerGraphic(this);
 		}
-	}.property(&#x27;graph&#x27;),
+	}.on(&#x27;didInsertElement&#x27;),
 
 	/**
-		The center point at x. Use in case of requiring a center point 
-		and using ordinal scale.
-		@property centerX
-		@type Number
-	*/
-	centerX: function(){
-		var scale = this.get(&#x27;xScale&#x27;);
-		var graphX = this.get(&#x27;graphX&#x27;);
-		if(scale &amp;&amp; scale.rangeBand) {
-			var rangeBand = scale.rangeBand();
-			return graphX + (rangeBand / 2);
-		}
-		return graphX;
-	}.property(&#x27;xScale&#x27;, &#x27;graphX&#x27;),
-
-	/**
-		The center point at y. Use in case of requiring a center point 
-		and using ordinal scale.
-		@property centerY
-		@type Number
-	*/
-	centerY: function(){
-		var scale = this.get(&#x27;yScale&#x27;);
-		var graphY = this.get(&#x27;graphY&#x27;);
-		if(scale &amp;&amp; scale.rangeBand) {
-			var rangeBand = scale.rangeBand();
-			return graphY + (rangeBand / 2);
-		}
-		return graphY;
-	}.property(&#x27;yScale&#x27;, &#x27;graphY&#x27;),
-
-	/**
-		The x position of the nf-graph-content within the nf-graph
-		@property _graphContentX
-		@type Number
+		calls {{#crossLink &quot;components.nf-graph/unregisterGraphic&quot;}}{{/crossLink}} on
+		&#x60;didInsertElement&#x60;.
+		@method _unregisterGraphic
 		@private
 	*/
-	graphContentX: Ember.computed.oneWay(&#x27;graph.graphX&#x27;),
-
-	/**
-		The y position of the nf-graph-content within the nf-graph
-		@property _graphContentY
-		@type Number
-		@private
-	*/
-	graphContentY: Ember.computed.oneWay(&#x27;graph.graphY&#x27;),
+	_unregisterGraphic: function(){
+		var graph = this.get(&#x27;graph&#x27;);
+		if(graph) {
+			graph.unregisterGraphic(this);
+		}
+	}.on(&#x27;willDestroyElement&#x27;)
 });
     </pre>
 </div>

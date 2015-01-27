@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>app/mixins/graph-requires-scale-source.js - Ember-CLI-Ember-DVC</title>
+    <title>addon/mixins/graph-selectable-graphic.js - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -121,119 +121,66 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: app/mixins/graph-requires-scale-source.js</h1>
+<h1 class="file-heading">File: addon/mixins/graph-selectable-graphic.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-
-var scaleProperty = function(scaleKey, zoomKey, offsetKey){
-	return function() {
-		var scale = this.get(scaleKey);
-		var zoom = this.get(zoomKey);
-		var offset = this.get(offsetKey);
-		if(zoom === 1 &amp;&amp; offset === 0) {
-			return scale;
-		}
-
-		var copy = scale.copy();
-		var domain = copy.domain();
-		copy.domain([domain[0] / zoom, domain[1] / zoom]);
-
-		var range = copy.range();
-		copy.range([range[0] - offset, range[1] - offset]);
-
-		return copy;
-	}.property(scaleKey, zoomKey, offsetKey);
-};
+import { backedProperty } from &#x27;../utils/computed-property-helpers&#x27;;
 
 /**
-	Adds functionality to identify a parent control that will provide an x and
-	y scale, then adds scaling properties to the component it&#x27;s mixed in to.
-	@namespace mixins
-	@class graph-requires-scale-source
+  Adds functionality to a component to make it a selectable graphic
+  within it&#x27;s parent nf-graph.
+  @namespace mixins
+  @class graph-selectable-graphic
+  @extends Ember.Mixin
 */
 export default Ember.Mixin.create({
-	/**
-		The x scale used by this component
-		@property xScale
-		@type d3.scale
-		@readonly
-	*/
-	xScale: scaleProperty(&#x27;scaleSource.xScale&#x27;, &#x27;scaleZoomX&#x27;, &#x27;scaleOffsetX&#x27;),
-	
-	/**
-		The y scale used by this component
-		@property yScale
-		@type d3.scale
-		@readonly
-	*/
-	yScale: scaleProperty(&#x27;scaleSource.yScale&#x27;, &#x27;scaleZoomY&#x27;, &#x27;scaleOffsetY&#x27;),
+  _selected: false,
 
-	_scaleOffsetX: 0,
+  /**
+    Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
+    via some action (usually click). The component will then show up in the nf-graph parent&#x27;s selected 
+    property.
+    @property selectable
+    @type Boolean
+    @default false
+  */
+  selectable: false,
 
-	_scaleOffsetY: 0,
+  /**
+    Gets or sets whether or not the graphic is selected.
+    @property selected
+    @type Boolean
+    @default false
+  */
+  selected: backedProperty(&#x27;_selected&#x27;),
 
-	_scaleZoomX: 1,
+  /**
+    Alias of selected
+    @property isSelected
+    @deprecated use &#x60;selected&#x60;
+  */
+  isSelected: Ember.computed.alias(&#x27;selected&#x27;),
 
-	_scaleZoomY: 1,
-
-	/**
-		The zoom multiplier for the x scale
-		@property scaleZoomX
-		@type Number
-		@default 1
-	*/
-	scaleZoomX: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._scaleZoomX = +value;
-		}
-		return this._scaleZoomX || 1;
-	}.property(),
-
-	/**
-		The zoom multiplier for the y scale
-		@property scaleZoomY
-		@type Number
-		@default 1
-	*/
-	scaleZoomY: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._scaleZoomY = +value;
-		}
-		return this._scaleZoomY || 1;
-	}.property(),
-
-	/**
-		The offset, in pixels, for the x scale
-		@property scaleOffsetX
-		@type Number
-		@default 0
-	*/
-	scaleOffsetX: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._scaleOffsetX = +value;
-		}
-		return this._scaleOffsetX || 0;
-	}.property(),
-
-	/**
-		The offset, in pixels, for the y scale
-		@property scaleOffsetY
-		@type Number
-		@default 0
-	*/
-	scaleOffsetY: function(key, value) {
-		if(arguments.length &gt; 1) {
-			this._scaleOffsetY = +value;
-		}
-		return this._scaleOffsetY || 0;
-	}.property(),
-
-	_getScaleSource: function(){
-		var scaleSource = this.nearestWithProperty(&#x27;isScaleSource&#x27;);
-		this.set(&#x27;scaleSource&#x27;, scaleSource);
-	}.on(&#x27;init&#x27;),
+  /**
+    Makes calls to the parent nf-graph to update it&#x27;s
+    &#x60;selected&#x60; property. Observes changes to &#x60;selected&#x60; and also 
+    fires on &#x60;didInsertElement&#x60;.
+    @method _updateGraphSelected
+    @private
+  */
+  _updateGraphSelected: function() {
+    Ember.run.once(this, function(){
+      var selected = this.get(&#x27;selected&#x27;);
+      var graph = this.get(&#x27;graph&#x27;);
+      if(selected) {
+        graph.selectGraphic(this);
+      } else {
+        graph.deselectGraphic(this);
+      }
+    });
+  }.observes(&#x27;selected&#x27;).on(&#x27;didInsertElement&#x27;),
 });
     </pre>
 </div>
