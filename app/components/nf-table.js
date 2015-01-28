@@ -105,8 +105,13 @@ var set = Ember.set;
 	@class nf-table
 	@extends Ember.Component
 	@uses mixins.table-column-registrar
+	@deprecated
 */
 export default Ember.Component.extend(TableColumnRegistrar, {
+	_gripe: function(){
+		Ember.warn('nf-table is deprecated due to performance issues with Ember and {{#each}} with views and components');
+	}.on('init'),
+
 	tagName: 'div',
 
 	/**
