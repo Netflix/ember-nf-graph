@@ -12,7 +12,7 @@ var set = Ember.set;
 	
 	### Basic Example
 
-				{{#nf-table-manager rows=myData groupBy="baz" dataChange="actionName"}}
+				{{#nf-table-manager rows=myData groupBy="baz" groupsUpdated="actionName"}}
 	      	{{#nf-column-manager sortBy="foo"}}
 	      	  <span class="nf-column-label">Foo</span>
 	      	{{/nf-column-manager}}
@@ -30,7 +30,6 @@ var set = Ember.set;
 	@namespace components
 	@class nf-table-manager
 	@extends Ember.Component
-	@deprecated
 */
 export default Ember.Component.extend(TableManagement, {
 	tagName: 'div',
@@ -217,6 +216,22 @@ export default Ember.Component.extend(TableManagement, {
 		@readonly
 	*/
 	groups: null,
+
+	/**
+		The name of the action to send when grouped data is updated in any way (sorted, added to, etc)
+		@property groupsUpdated
+		@type {String}
+		@default null
+	*/
+	groupsUpdated: null,
+
+	/**
+		The name of the action to send when columns are updated
+		@property columnsUpdated
+		@type {String}
+		@default null
+	*/
+	columnsUpdated: null,
 
 	/**
 		The collection of columns registered
