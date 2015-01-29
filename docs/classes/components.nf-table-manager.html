@@ -131,7 +131,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/app_components_nf-table-manager.js.html#l9"><code>app&#x2F;components&#x2F;nf-table-manager.js:9</code></a>
+            Defined in: <a href="../files/app_components_nf-table-manager.js.html#l10"><code>app&#x2F;components&#x2F;nf-table-manager.js:10</code></a>
         </div>
 
             Module: <a href="../modules/multi-sort.html">multi-sort</a>
@@ -148,13 +148,13 @@
     <p>Composable table component with built-in sorting</p>
 <h3 id="basic-example">Basic Example</h3>
 <pre class="code prettyprint"><code>        {{#nf-table-manager rows=myData groupBy=&quot;baz&quot; dataChange=&quot;actionName&quot;}}
-      {{#nf-column sortBy=&quot;foo&quot;}}
+      {{#nf-column-manager sortBy=&quot;foo&quot;}}
         &lt;span class=&quot;nf-column-label&quot;&gt;Foo&lt;/span&gt;
-      {{/nf-column}}
+      {{/nf-column-manager}}
 
       {{#nf-column sortBy=&quot;foo&quot;}}
         &lt;span class=&quot;nf-column-label&quot;&gt;Bar&lt;/span&gt;
-      {{/nf-column}}
+      {{/nf-column-manager}}
   {{/nf-table-manager}}
 </code></pre><h3 id="styling">Styling</h3>
 <p>nf-table renders a structure of <code>div.nf-table-manager &gt; table &gt; thead &gt; tr &gt; th.nf-header.nf-table-column</code></p>
@@ -214,10 +214,6 @@
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_groupRowAction">groupRowAction</a>
-
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_groups">groups</a>
 
                             </li>
@@ -255,10 +251,6 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_sortedAction">sortedAction</a>
-
-                            </li>
-                            <li class="index-item property private">
-                                <a href="#property_sortMap">sortMap</a>
 
                             </li>
                             <li class="index-item property">
@@ -303,7 +295,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/app_components_nf-table-manager.js.html#l391"><code>app&#x2F;components&#x2F;nf-table-manager.js:391</code></a>
+        <a href="../files/app_components_nf-table-manager.js.html#l232"><code>app&#x2F;components&#x2F;nf-table-manager.js:232</code></a>
         </p>
 
 
@@ -357,7 +349,7 @@
     <div class="meta">
                 <p>
                 Defined in
-        <a href="../files/app_components_nf-table-manager.js.html#l400"><code>app&#x2F;components&#x2F;nf-table-manager.js:400</code></a>
+        <a href="../files/app_components_nf-table-manager.js.html#l241"><code>app&#x2F;components&#x2F;nf-table-manager.js:241</code></a>
         </p>
 
 
@@ -407,7 +399,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l344"><code>app&#x2F;components&#x2F;nf-table-manager.js:344</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l221"><code>app&#x2F;components&#x2F;nf-table-manager.js:221</code></a>
                             </p>
                     
                     
@@ -432,7 +424,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l326"><code>app&#x2F;components&#x2F;nf-table-manager.js:326</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l203"><code>app&#x2F;components&#x2F;nf-table-manager.js:203</code></a>
                             </p>
                     
                     
@@ -458,7 +450,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l64"><code>app&#x2F;components&#x2F;nf-table-manager.js:64</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l65"><code>app&#x2F;components&#x2F;nf-table-manager.js:65</code></a>
                             </p>
                     
                     
@@ -484,7 +476,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l72"><code>app&#x2F;components&#x2F;nf-table-manager.js:72</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l73"><code>app&#x2F;components&#x2F;nf-table-manager.js:73</code></a>
                             </p>
                     
                     
@@ -520,7 +512,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l114"><code>app&#x2F;components&#x2F;nf-table-manager.js:114</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l115"><code>app&#x2F;components&#x2F;nf-table-manager.js:115</code></a>
                             </p>
                     
                     
@@ -528,32 +520,6 @@
                     
                         <div class="description">
                             <p>The optional name of an item controller to use on each grouping</p>
-                    
-                        </div>
-                    
-                            <p><strong>Default:</strong> null</p>
-                    
-                    
-                    </div>
-                    <div id="property_groupRowAction" class="property item">
-                        <h3 class="name"><code>groupRowAction</code></h3>
-                        <span class="type">String</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l136"><code>app&#x2F;components&#x2F;nf-table-manager.js:136</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Alias for the rowAction on the nf-table-group</p>
                     
                         </div>
                     
@@ -572,7 +538,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l335"><code>app&#x2F;components&#x2F;nf-table-manager.js:335</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l212"><code>app&#x2F;components&#x2F;nf-table-manager.js:212</code></a>
                             </p>
                     
                     
@@ -598,7 +564,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l318"><code>app&#x2F;components&#x2F;nf-table-manager.js:318</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l195"><code>app&#x2F;components&#x2F;nf-table-manager.js:195</code></a>
                             </p>
                     
                     
@@ -624,7 +590,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l56"><code>app&#x2F;components&#x2F;nf-table-manager.js:56</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l57"><code>app&#x2F;components&#x2F;nf-table-manager.js:57</code></a>
                             </p>
                     
                     
@@ -650,7 +616,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l97"><code>app&#x2F;components&#x2F;nf-table-manager.js:97</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l98"><code>app&#x2F;components&#x2F;nf-table-manager.js:98</code></a>
                             </p>
                     
                     
@@ -676,7 +642,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l290"><code>app&#x2F;components&#x2F;nf-table-manager.js:290</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l167"><code>app&#x2F;components&#x2F;nf-table-manager.js:167</code></a>
                             </p>
                     
                     
@@ -704,7 +670,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l144"><code>app&#x2F;components&#x2F;nf-table-manager.js:144</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l124"><code>app&#x2F;components&#x2F;nf-table-manager.js:124</code></a>
                             </p>
                     
                     
@@ -730,7 +696,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l89"><code>app&#x2F;components&#x2F;nf-table-manager.js:89</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l90"><code>app&#x2F;components&#x2F;nf-table-manager.js:90</code></a>
                             </p>
                     
                     
@@ -756,7 +722,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l37"><code>app&#x2F;components&#x2F;nf-table-manager.js:37</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l38"><code>app&#x2F;components&#x2F;nf-table-manager.js:38</code></a>
                             </p>
                     
                     
@@ -783,7 +749,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l46"><code>app&#x2F;components&#x2F;nf-table-manager.js:46</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l47"><code>app&#x2F;components&#x2F;nf-table-manager.js:47</code></a>
                             </p>
                     
                     
@@ -811,7 +777,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l301"><code>app&#x2F;components&#x2F;nf-table-manager.js:301</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l178"><code>app&#x2F;components&#x2F;nf-table-manager.js:178</code></a>
                             </p>
                     
                     
@@ -827,32 +793,6 @@
                     
                     
                     </div>
-                    <div id="property_sortMap" class="property item private">
-                        <h3 class="name"><code>sortMap</code></h3>
-                        <span class="type">Unknown</span>
-                    
-                    
-                            <span class="flag private">private</span>
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l359"><code>app&#x2F;components&#x2F;nf-table-manager.js:359</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Gets the an array of sorts, in order to be processed when sorting the rows.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_sortMultiple" class="property item">
                         <h3 class="name"><code>sortMultiple</code></h3>
                         <span class="type">Boolean</span>
@@ -864,7 +804,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l310"><code>app&#x2F;components&#x2F;nf-table-manager.js:310</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l187"><code>app&#x2F;components&#x2F;nf-table-manager.js:187</code></a>
                             </p>
                     
                     
@@ -890,7 +830,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l282"><code>app&#x2F;components&#x2F;nf-table-manager.js:282</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l159"><code>app&#x2F;components&#x2F;nf-table-manager.js:159</code></a>
                             </p>
                     
                     
@@ -917,7 +857,7 @@
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-table-manager.js.html#l105"><code>app&#x2F;components&#x2F;nf-table-manager.js:105</code></a>
+                            <a href="../files/app_components_nf-table-manager.js.html#l106"><code>app&#x2F;components&#x2F;nf-table-manager.js:106</code></a>
                             </p>
                     
                     

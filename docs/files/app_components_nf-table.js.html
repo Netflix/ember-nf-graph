@@ -131,6 +131,7 @@ import Ember from &#x27;ember&#x27;;
 import multiSort from &#x27;ember-cli-ember-dvc/utils/multi-sort&#x27;;
 import TableColumnRegistrar from &#x27;ember-cli-ember-dvc/mixins/table-column-registrar&#x27;;
 import trackedArrayProperty from &#x27;ember-cli-ember-dvc/utils/nf/tracked-array-property&#x27;;
+import TableManagement from &#x27;ember-cli-ember-dvc/mixins/table-management&#x27;;
 
 var get = Ember.get;
 var set = Ember.set;
@@ -236,7 +237,7 @@ var set = Ember.set;
 	@uses mixins.table-column-registrar
 	@deprecated
 */
-export default Ember.Component.extend(TableColumnRegistrar, {
+export default Ember.Component.extend(TableColumnRegistrar, TableManagement, {
 	_gripe: function(){
 		Ember.warn(&#x27;nf-table can have poor performance due to issues with {{#each}} and dynamic views and components&#x27;);
 	}.on(&#x27;init&#x27;),
@@ -320,6 +321,15 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	itemController: null,
 
 	/**
+		The name of the grouped items item controller from the nf-table-group component,
+		if present
+		@property groupItemController
+		@type {String}
+		@readonly
+	*/
+	groupItemController: Ember.computed.oneWay(&#x27;tableGroup.itemController&#x27;),
+
+	/**
 		Gets whether or not to use the grouped table layout
 		@property useGroupedTableLayout
 		@type Boolean
@@ -328,65 +338,9 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	useGroupedTableLayout: Ember.computed.bool(&#x27;groupBy&#x27;),
 
-	_getArrayController: function(content, ctrlName, itemControllerProp) {
-		var CtrlClass = this.container.lookupFactory(&#x27;controller:&#x27; + ctrlName);
-		var ctrl = CtrlClass.create({
-			content: content,
-			table: this
-		});
-		if(this.get(itemControllerProp)) {
-			ctrl.set(&#x27;itemController&#x27;, this.get(itemControllerProp));
-		}
-		return ctrl;
-	},
-
-	getGroupsFromFlattened: function(rows, groupBy) {
-		var groups = [];
-		var groupsHash = {};
-		var groupsCtrl = this._getArrayController(groups, &#x27;nf-table-group-controller&#x27;, &#x27;tableGroup.itemController&#x27;);
-
-		rows.forEach(function(row) {
-			var groupKey = get(row, groupBy);
-			var rowsCtrl = groupsHash[groupKey];
-			if(!rowsCtrl) {
-				rowsCtrl = groupsHash[groupKey] = this._getArrayController([], &#x27;nf-table-rows-controller&#x27;, &#x27;itemController&#x27;);
-				rowsCtrl.set(&#x27;groupKey&#x27;, groupKey);
-				groups.pushObject(rowsCtrl);
-			}
-			rowsCtrl.get(&#x27;content&#x27;).pushObject(row);
-			set(row, &#x27;groupController&#x27;, rowsCtrl);
-		}, this);
-
-		groupsCtrl.sortBy(&#x27;groupKey&#x27;);
-		return groupsCtrl;
-	},
-
-	getGroupsFromHierarchy: function(rows, groupBy) {
-		var groups = [];
-		var groupsCtrl = this._getArrayController(groups, &#x27;nf-table-group-controller&#x27;, &#x27;tableGroup.itemController&#x27;);
-
-		rows.forEach(function(row) {
-			var childRows = get(row, groupBy);
-			var childRowsCtrl = this._getArrayController(childRows, &#x27;nf-table-rows-controller&#x27;, &#x27;itemController&#x27;);
-			childRows.forEach(function(childRow) {
-				childRow.set(&#x27;groupController&#x27;, childRowsCtrl);
-			});
-			groups.pushObject(childRowsCtrl);
-		});
-
-		return groupsCtrl;
-	},
-
-	groupsController: function() {
-		var rows = this.get(&#x27;rows&#x27;);
-		var groupBy = this.get(&#x27;groupBy&#x27;);
-		var groupFrom = this.get(&#x27;groupFrom&#x27;);
-		if(groupFrom === &#x27;hierarchy&#x27;) {
-			return this.getGroupsFromHierarchy(rows, groupBy);
-		} else {
-			return this.getGroupsFromFlattened(rows, groupBy);
-		}
-	}.property(&#x27;rows&#x27;, &#x27;groupBy&#x27;, &#x27;groupFrom&#x27;, &#x27;tableGroup.itemController&#x27;, &#x27;itemController&#x27;),
+	groups: function() {
+		return this.getGroups();
+	}.property(&#x27;rows&#x27;, &#x27;_columns.@each.sortDirection&#x27;, &#x27;_columns.@each.sortBy&#x27;, &#x27;groupBy&#x27;, &#x27;groupFrom&#x27;, &#x27;groupItemController&#x27;, &#x27;itemController&#x27;),
 
 	/**
 		Alias for the rowAction on the nf-table-group
@@ -419,10 +373,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	trackBy: undefined,
 
-	rowController: function(){
-		return this._getArrayController(this.get(&#x27;rows&#x27;), &#x27;nf-table-rows-controller&#x27;, &#x27;itemController&#x27;);
-	}.property(&#x27;rows&#x27;, &#x27;itemController&#x27;),
-
 	/**
 		The rows to render, tracked by whatever field is listed in teh trackBy property
 		@property trackedRows
@@ -431,67 +381,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@private
 	*/
 	trackedRows: trackedArrayProperty(&#x27;rowController&#x27;, &#x27;trackBy&#x27;),
-
-	/**
-		Triggers the &#x60;willSort&#x60; and &#x60;didSort&#x60; events. Also calls &#x60;doSort&#x60;
-		@method onSort
-	*/
-	onSort: function(){
-		this.trigger(&#x27;willSort&#x27;);
-		this.doSort();
-		this.trigger(&#x27;didSort&#x27;);
-	},
-
-	/**
-		Performs the sort by reorganizing the DOM. If you want to use some other 
-		method of sorting, this is the guy you&#x27;ll need to override.
-		@method doSort
-	*/
-	doSort: function(){
-		var sortedRows = this.get(&#x27;sortedRows&#x27;);
-		if(Ember.isArray(sortedRows)) {
-			if(this.get(&#x27;useGroupedTableLayout&#x27;)) {
-				sortedRows.forEach(function(row) {
-					var key = get(row, &#x27;__meta__trackedKey&#x27;); //HACK: from tracked-array-property
-					var groupKey = get(row, &#x27;groupController.groupKey&#x27;);
-					var elem = this.$(&#x27;[data-nf-table-sort-key=&quot;&#x27; + key + &#x27;&quot;]&#x27;);
-					var groupElem = this.$(&#x27;[data-nf-table-group-key=&quot;&#x27; + groupKey + &#x27;&quot;]&#x27;);
-					elem.detach().insertAfter(groupElem);
-				}, this);
-			} else {
-				sortedRows.forEach(function(row) {
-					var key = get(row, &#x27;__meta__trackedKey&#x27;); //HACK: from tracked-array-property
-					var elem = this.$(&#x27;[data-nf-table-sort-key=&quot;&#x27; + key + &#x27;&quot;]&#x27;);
-					var parent = elem.parent();
-					elem.detach().appendTo(parent);
-				}, this);
-			}
-		}
-	},
-
-	/**
-		Observes changes to column sorts and fires the &#x60;onSort&#x60; method afterRender
-		@method observeSortChanges
-	*/
-	observeSortChanges: function(){
-		Ember.run.scheduleOnce(&#x27;afterRender&#x27;, this, this.onSort);
-	}.observes(&#x27;_columns.@each.sortDirection&#x27;, &#x27;_columns.@each.sortBy&#x27;),
-
-	/**
-		A computed property returning a sorted copy of &#x60;rows&#x60;
-		@property sortedRows
-		@type Array
-		@readonly
-	*/
-	sortedRows: function(){
-		var sortMap = this.get(&#x27;sortMap&#x27;);
-		var rowsCopy = this.get(&#x27;trackedRows&#x27;).slice();
-		multiSort(sortMap)(rowsCopy);
-		if(this.get(&#x27;sortedAction&#x27;)) {
-			this.sendAction(&#x27;sortedAction&#x27;, rowsCopy);
-		}
-		return rowsCopy;
-	}.property(&#x27;trackedRows.[]&#x27;, &#x27;sortMap&#x27;),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire

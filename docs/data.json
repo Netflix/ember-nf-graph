@@ -114,6 +114,13 @@
                 "mixins": 1
             }
         },
+        "addon/mixins/table-management.js": {
+            "name": "addon/mixins/table-management.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
         "addon/utils/nf/array-helpers.js": {
             "name": "addon/utils/nf/array-helpers.js",
             "modules": {
@@ -1399,8 +1406,8 @@
             "module": "multi-sort",
             "namespace": "components",
             "file": "app/components/nf-table-manager.js",
-            "line": 9,
-            "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n\t\t\t{{#nf-table-manager rows=myData groupBy=\"baz\" dataChange=\"actionName\"}}\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  <span class=\"nf-column-label\">Foo</span>\n      \t{{/nf-column}}\n      \t\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  <span class=\"nf-column-label\">Bar</span>\n      \t{{/nf-column}}\n      {{/nf-table-manager}}\n\n### Styling\n\nnf-table renders a structure of `div.nf-table-manager > table > thead > tr > th.nf-header.nf-table-column`",
+            "line": 10,
+            "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n\t\t\t{{#nf-table-manager rows=myData groupBy=\"baz\" dataChange=\"actionName\"}}\n      \t{{#nf-column-manager sortBy=\"foo\"}}\n      \t  <span class=\"nf-column-label\">Foo</span>\n      \t{{/nf-column-manager}}\n      \t\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  <span class=\"nf-column-label\">Bar</span>\n      \t{{/nf-column-manager}}\n      {{/nf-table-manager}}\n\n### Styling\n\nnf-table renders a structure of `div.nf-table-manager > table > thead > tr > th.nf-header.nf-table-column`",
             "extends": "Ember.Component",
             "deprecated": true
         },
@@ -1415,7 +1422,7 @@
             "module": "multi-sort",
             "namespace": "components",
             "file": "app/components/nf-table.js",
-            "line": 9,
+            "line": 10,
             "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n      {{#nf-table rows=myData}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Foo</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Bar</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nThe example above will create a sortable table from an array `myData` containing objects\nwith fields `foo` and `bar`.\n\n### Grouped Example\n\nIf you wish to create a \"grouped table\", you simply need to group the data with the `groupBy`\nproperty.\n\nAdditionally, you can add grouping rows with the `{{nf-table-group}}` component, which allows you\nto define the columns for the group rows. **If you do this, you will need to create an ArrayController**\nfor the group that will carry with it any computed properties you might need, such as a sum or average\naggregated over the group. The array controller for your grouping must be assigned to the `itemController`\nproperty on the `nf-table-group` component.\n\n\t\t\t{{#nf-table rows=myData groupBy=\"baz\"}}\n\t\t\t\t\n\t\t\t\t{{#nf-table-group itemController=\"my-group-row\"}}\n\n\t\t\t\t\t{{#nf-column}}\n\t\t\t\t\t\t{{#nf-cell colspan=\"2\"}}\n\t\t\t\t\t\t\tBaz: {{group.baz}}\n\t\t\t\t\t\t\tBars: {{group.barSum}}\n\t\t\t\t\t\t{{/nf-cell}}\n\t\t\t\t\t{{/nf-column}}\n\t\t\t\t\n\t\t\t\t{{/nf-table-group}}\n\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Foo</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      \t\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Bar</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nWhich would need an accompanying array controller definition `my-group-row`:\n\n\t\t\texport default Ember.ArrayController.extend({\n\t\t\t\t// returns the first value from the array\n\t\t\t\tbaz: function(){\n\t\t\t\t\treturn this.get('model')[0].baz;\n\t\t\t\t}.property('model.@each.baz'),\n\n\t\t\t\t//gets the sum of all the bars\n\t\t\t\tbarSum: function() {\n\t\t\t\t\treturn this.get('model').reduce(function(sum, item) {\n\t\t\t\t\t\treturn sum + item.bar;\n\t\t\t\t\t}, 0);\n\t\t\t\t}.property('model.@each.bar'),\n\t\t  });\n\n### Styling\n\nnf-table emits a `<table>` with a class of `nf-table` applied to it.",
             "extends": "Ember.Component",
             "uses": [
@@ -2078,19 +2085,7 @@
         },
         {
             "file": "addon/mixins/table-column-registrar.js",
-            "line": 46,
-            "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
-            "itemtype": "property",
-            "name": "sortMap",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 88,
+            "line": 57,
             "description": "The list of visible columns",
             "itemtype": "property",
             "name": "visibleColumns",
@@ -2101,7 +2096,7 @@
         },
         {
             "file": "addon/mixins/table-column-registrar.js",
-            "line": 100,
+            "line": 69,
             "description": "The list of columns with an sort applied to them",
             "itemtype": "property",
             "name": "sortedColumns",
@@ -2112,7 +2107,7 @@
         },
         {
             "file": "addon/mixins/table-column-registrar.js",
-            "line": 112,
+            "line": 81,
             "description": "Registers a column with the registrar",
             "itemtype": "method",
             "name": "registerColumn",
@@ -2128,7 +2123,7 @@
         },
         {
             "file": "addon/mixins/table-column-registrar.js",
-            "line": 121,
+            "line": 90,
             "description": "Unregisters a column from the registry",
             "itemtype": "method",
             "name": "unregisterColumn",
@@ -2140,6 +2135,18 @@
                 }
             ],
             "class": "mixins.table-column-registrar",
+            "namespace": "mixins"
+        },
+        {
+            "file": "addon/mixins/table-management.js",
+            "line": 14,
+            "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
+            "itemtype": "property",
+            "name": "sortMap",
+            "readonly": "",
+            "access": "private",
+            "tagname": "",
+            "class": "utils.nf.graph-event",
             "namespace": "mixins"
         },
         {
@@ -5757,7 +5764,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 37,
+            "line": 38,
             "description": "Gets or sets the scroll of the underlying \nscroll area if there is one.",
             "itemtype": "property",
             "name": "scrollTop",
@@ -5769,7 +5776,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 46,
+            "line": 47,
             "description": "Gets or sets the scroll by percentage\nof scrollHeight of the underlying \nscroll area if there is one.",
             "itemtype": "property",
             "name": "scrollTopPercentage",
@@ -5781,7 +5788,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 56,
+            "line": 57,
             "description": "Property used by child components to locate the table component.",
             "itemtype": "property",
             "name": "isTableManager",
@@ -5793,7 +5800,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 64,
+            "line": 65,
             "description": "The expression used to locate the values in the rows to group by.",
             "itemtype": "property",
             "name": "groupBy",
@@ -5805,7 +5812,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 72,
+            "line": 73,
             "description": "The type of grouping to perform with the groupBy\n\n# options\n- `'flat'`: (default) rows data is flattened and groups are aggregated by matching\n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"foo\"` rows\n\t\t\t\t\t\twill be grouped by all rows with a `foo` property that matches.\n- `'hierarchy'`: rows data is already in parent/child format. Parent rows contain child rows on \n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"children\"`, each row\n\t\t\t\t\t\tin the base rows data array will be a grouping row, and the\tarray of items under \n\t\t\t\t\t\t`children` will be used as the \"child\" rows of each group.",
             "itemtype": "property",
             "name": "groupFrom",
@@ -5817,7 +5824,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 89,
+            "line": 90,
             "description": "Gets or sets whether the table has a scrollable layout.",
             "itemtype": "property",
             "name": "scrollable",
@@ -5829,7 +5836,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 97,
+            "line": 98,
             "description": "The name of an item controller for the rows",
             "itemtype": "property",
             "name": "itemController",
@@ -5841,7 +5848,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 105,
+            "line": 106,
             "description": "Gets whether or not to use the grouped table layout",
             "itemtype": "property",
             "name": "useGroupedTableLayout",
@@ -5855,7 +5862,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 114,
+            "line": 115,
             "description": "The optional name of an item controller to use on each grouping",
             "itemtype": "property",
             "name": "groupItemController",
@@ -5867,19 +5874,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 136,
-            "description": "Alias for the rowAction on the nf-table-group",
-            "itemtype": "property",
-            "name": "groupRowAction",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 144,
+            "line": 124,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
@@ -5890,7 +5885,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 282,
+            "line": 159,
             "description": "The property on each row item to track data by. If undefined, will track by index.",
             "itemtype": "property",
             "name": "trackBy",
@@ -5902,7 +5897,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 290,
+            "line": 167,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -5914,7 +5909,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 301,
+            "line": 178,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -5926,7 +5921,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 310,
+            "line": 187,
             "description": "Gets or sets whether a multi sort is used.",
             "itemtype": "property",
             "name": "sortMultiple",
@@ -5938,7 +5933,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 318,
+            "line": 195,
             "description": "identifies the component as a table column registrar to its children",
             "itemtype": "property",
             "name": "isTableColumnRegistrar",
@@ -5950,7 +5945,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 326,
+            "line": 203,
             "description": "The columns for the table, actually emited to the view context.",
             "itemtype": "property",
             "name": "columns",
@@ -5963,7 +5958,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 335,
+            "line": 212,
             "description": "The grouped and sorted data, actually emited to the view context.",
             "itemtype": "property",
             "name": "groups",
@@ -5976,7 +5971,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 344,
+            "line": 221,
             "description": "The collection of columns registered",
             "itemtype": "property",
             "name": "columns",
@@ -5990,20 +5985,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 359,
-            "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
-            "itemtype": "property",
-            "name": "sortMap",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 391,
+            "line": 232,
             "description": "Registers a column with the registrar",
             "itemtype": "method",
             "name": "registerColumn",
@@ -6020,7 +6002,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 400,
+            "line": 241,
             "description": "Unregisters a column from the registry",
             "itemtype": "method",
             "name": "unregisterColumn",
@@ -6037,7 +6019,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 117,
+            "line": 118,
             "description": "Gets or sets the scroll of the underlying \nscroll area if there is one.",
             "itemtype": "property",
             "name": "scrollTop",
@@ -6049,7 +6031,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 126,
+            "line": 127,
             "description": "Gets or sets the scroll by percentage\nof scrollHeight of the underlying \nscroll area if there is one.",
             "itemtype": "property",
             "name": "scrollTopPercentage",
@@ -6061,7 +6043,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 136,
+            "line": 137,
             "description": "Property used by child components to locate the table component.",
             "itemtype": "property",
             "name": "isTable",
@@ -6073,7 +6055,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 144,
+            "line": 145,
             "description": "Gets the nf-table-group component if one is present.",
             "itemtype": "property",
             "name": "tableGroup",
@@ -6085,7 +6067,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 152,
+            "line": 153,
             "description": "The expression used to locate the values in the rows to group by.",
             "itemtype": "property",
             "name": "groupBy",
@@ -6097,7 +6079,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 160,
+            "line": 161,
             "description": "The type of grouping to perform with the groupBy\n\n# options\n- `'flat'`: (default) rows data is flattened and groups are aggregated by matching\n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"foo\"` rows\n\t\t\t\t\t\twill be grouped by all rows with a `foo` property that matches.\n- `'hierarchy'`: rows data is already in parent/child format. Parent rows contain child rows on \n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"children\"`, each row\n\t\t\t\t\t\tin the base rows data array will be a grouping row, and the\tarray of items under \n\t\t\t\t\t\t`children` will be used as the \"child\" rows of each group.",
             "itemtype": "property",
             "name": "groupFrom",
@@ -6109,7 +6091,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 177,
+            "line": 178,
             "description": "Gets or sets whether the table has a scrollable layout.",
             "itemtype": "property",
             "name": "scrollable",
@@ -6121,7 +6103,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 185,
+            "line": 186,
             "description": "The name of an item controller for the rows",
             "itemtype": "property",
             "name": "itemController",
@@ -6133,7 +6115,19 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 193,
+            "line": 194,
+            "description": "The name of the grouped items item controller from the nf-table-group component,\nif present",
+            "itemtype": "property",
+            "name": "groupItemController",
+            "type": "{String}",
+            "readonly": "",
+            "class": "components.nf-table",
+            "module": "multi-sort",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-table.js",
+            "line": 203,
             "description": "Gets whether or not to use the grouped table layout",
             "itemtype": "property",
             "name": "useGroupedTableLayout",
@@ -6147,7 +6141,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 262,
+            "line": 216,
             "description": "Alias for the rowAction on the nf-table-group",
             "itemtype": "property",
             "name": "groupRowAction",
@@ -6159,7 +6153,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 270,
+            "line": 224,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
@@ -6170,7 +6164,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 285,
+            "line": 239,
             "description": "The property on each row item to track data by. If undefined, will track by index.",
             "itemtype": "property",
             "name": "trackBy",
@@ -6182,7 +6176,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 297,
+            "line": 247,
             "description": "The rows to render, tracked by whatever field is listed in teh trackBy property",
             "itemtype": "property",
             "name": "trackedRows",
@@ -6196,49 +6190,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 306,
-            "description": "Triggers the `willSort` and `didSort` events. Also calls `doSort`",
-            "itemtype": "method",
-            "name": "onSort",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 316,
-            "description": "Performs the sort by reorganizing the DOM. If you want to use some other \nmethod of sorting, this is the guy you'll need to override.",
-            "itemtype": "method",
-            "name": "doSort",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 343,
-            "description": "Observes changes to column sorts and fires the `onSort` method afterRender",
-            "itemtype": "method",
-            "name": "observeSortChanges",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 351,
-            "description": "A computed property returning a sorted copy of `rows`",
-            "itemtype": "property",
-            "name": "sortedRows",
-            "type": "Array",
-            "readonly": "",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 367,
+            "line": 256,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -6250,7 +6202,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 376,
+            "line": 265,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -6262,7 +6214,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 387,
+            "line": 276,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -6274,7 +6226,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 398,
+            "line": 287,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",
