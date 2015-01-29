@@ -15,7 +15,12 @@ export default Ember.ArrayController.extend({
 				content.sort(customSort);
 			}
 		}
+		this.set('_arrangedContent', content);
 	},
+
+	arrangedContent: function(){
+		return this.get('_arrangedContent');
+	}.property('_arrangedContent'),
 
 	_contentOrSortChanged: function() {
 		Ember.run.once(this, this._performSort);
