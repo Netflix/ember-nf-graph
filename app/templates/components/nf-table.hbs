@@ -19,7 +19,7 @@
         changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
-            {{#each group in groupsController}}
+            {{#each group in groups}}
               <tr class="nf-table-group" {{action 'groupRowClick' group}} {{bind-attr data-nf-table-group-key=group.model.groupKey}}>
                 {{#each column in tableGroup.visibleColumns}}
                   {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
@@ -57,7 +57,7 @@
         changeAction="scrolled" class="nf-table-scrollable-body"}}
         <table>
           <tbody>
-            {{#each row in trackedRows}}
+            {{#each row in groups.firstObject}}
               <tr {{action 'rowClick' row}} {{bind-attr data-nf-table-sort-key=row.__meta__trackedKey}}>
                 {{#each column in visibleColumns}}
                   {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
@@ -83,7 +83,7 @@
         </thead>
 
         <tbody>
-          {{#each group in groupsController}}
+          {{#each group in groups}}
             <tr class="nf-table-group" {{action 'groupRowClick' group}} {{bind-attr data-nf-table-group-key=group.model.groupKey}}>
               {{#each column in tableGroup.visibleColumns}}
                 {{view 'nf-table-cell' column=column class=column.cellClassNames controller=parentController}}
@@ -105,7 +105,7 @@
       <table>
         <thead>
           <tr>
-            {{#each column in visibleColumns}}
+            {{#each column in groups.firstObject}}
               {{view 'nf-table-header' column=column class=column.headerClassNames controller=parentController}}
             {{/each}}
           </tr>

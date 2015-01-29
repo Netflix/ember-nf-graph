@@ -43,37 +43,6 @@ export default Ember.Mixin.create({
 		return [];
 	}.property(),
 
-	/**
-		Gets the an array of sorts, in order to be processed when sorting the rows.
-		@property sortMap
-		@readonly
-		@private
-	*/
-	sortMap: function(){
-		return this.get('_columns').reduce(function(sortMap, col) {
-			var direction = col.get('direction');
-			if(direction) {
-				var sortBy = col.get('sortBy');
-				if(sortBy) {
-					sortBy = sortBy.replace(/^row\./, '');
-					if(col.get('sortNatural')) {
-						sortMap.push(function(a, b){
-							var ax = Ember.get(a, sortBy);
-							var bx = Ember.get(b, sortBy);
-							return naturalCompare(ax, bx) * direction;
-						});
-					} else {
-						sortMap.push({
-							by: sortBy,
-							direction: direction,
-						});
-					}
-				}
-			}
-			return sortMap;
-		}, []);
-	}.property('_columns.@each.sortDirection', '_columns.@each.sortBy'),
-
 	//HACK: forces columns to be pushed out of the component to the view context.
 	emitColumns: function(){
 		var columns = this.get('_columns');

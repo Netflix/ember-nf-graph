@@ -2,6 +2,7 @@ import Ember from 'ember';
 import multiSort from 'ember-cli-ember-dvc/utils/multi-sort';
 import trackedArrayProperty from 'ember-cli-ember-dvc/utils/nf/tracked-array-property';
 import { naturalCompare } from 'ember-cli-ember-dvc/utils/nf/array-helpers';
+import TableManagement from 'ember-cli-ember-dvc/mixins/table-management';
 
 var get = Ember.get;
 var set = Ember.set;
@@ -12,13 +13,13 @@ var set = Ember.set;
 	### Basic Example
 
 				{{#nf-table-manager rows=myData groupBy="baz" dataChange="actionName"}}
-	      	{{#nf-column sortBy="foo"}}
+	      	{{#nf-column-manager sortBy="foo"}}
 	      	  <span class="nf-column-label">Foo</span>
-	      	{{/nf-column}}
+	      	{{/nf-column-manager}}
 	      	
 	      	{{#nf-column sortBy="foo"}}
 	      	  <span class="nf-column-label">Bar</span>
-	      	{{/nf-column}}
+	      	{{/nf-column-manager}}
 	      {{/nf-table-manager}}
 
 	### Styling
@@ -31,7 +32,7 @@ var set = Ember.set;
 	@extends Ember.Component
 	@deprecated
 */
-export default Ember.Component.extend({
+export default Ember.Component.extend(TableManagement, {
 	tagName: 'div',
 
 	/**
@@ -119,27 +120,6 @@ export default Ember.Component.extend({
 	*/
 	groupItemController: null,
 
-	_getArrayController: function(content, ctrlName, itemControllerProp) {
-		var CtrlClass = this.container.lookupFactory('controller:' + ctrlName);
-		var ctrl = CtrlClass.create({
-			content: content,
-			table: this
-		});
-		var itemController = itemControllerProp && this.get(itemControllerProp);
-		if(itemController) {
-			ctrl.set('itemController', itemController);
-		}
-		return ctrl;
-	},
-
-
-	/**
-		Alias for the rowAction on the nf-table-group
-		@property groupRowAction
-		@type {String}
-		@default null
-	*/
-	groupRowAction: Ember.computed.alias('tableGroup.rowAction'),
 
 	/**
 		The data source for rows to display in this table.
@@ -147,109 +127,6 @@ export default Ember.Component.extend({
 		@default null
 	*/
 	rows: null,
-
-	getGroups: function() {
-		var rows = this.get('rows');
-		var itemController = this.get('itemController');
-		var groupBy = this.get('groupBy');
-		var groupFrom = this.get('groupFrom');
-		var trackBy = this.get('trackBy');
-		var sortFn = this.get('sortFn');
-
-		Ember.run(this, function(){
-			if(!this._groups) {
-				var groupItemController = this.get('groupItemController');
-				this._groups = this._getArrayController([], 'nf-table-group-controller', groupItemController);
-				this._groups.set('sortProperties', ['groupKey']);
-			}
-
-			var sortChanged = this._groups.get('sortFn') !== this.get('sortFn');
-			if(sortChanged) {
-				this._groups.get('content').clear();
-				this._groups.set('sortFn', this.get('sortFn'));
-			}
-
-			if(Ember.isArray(rows)) {
-				var trackedKeys = new Map();
-				var groupKeys = new Map();
-				var groupsContent = this._groups.get('content');
-
-				// if the rows data provided is hierarchical, flatten it.
-				if(groupFrom === 'hierarchy') {
-					var flattened = rows.reduce([], (flat, outer, g) => {
-						var inner = get(outer, groupBy);
-						if(Ember.isArray(inner)) {
-							inner.forEach(row => {
-								set(row, '__groupKey', g)
-								flat.pushObject(row);
-							})
-						}
-						return flat;
-					})
-
-					rows = flattened;
-					groupBy = '__groupKey';
-				}
-
-				var getTrackingKey = (row, index) => {
-					return trackBy ? get(row, trackBy) : index;
-				};
-
-				// group and reconcile rows and groups
-				rows.forEach((row, ri) => {
-					var groupKey = groupBy ? get(row, groupBy) : 'ungrouped';
-					var trackingKey = getTrackingKey(row, ri);
-					trackedKeys[trackingKey] = true;
-					groupKeys[groupKey] = true;
-
-					// if there's already a rows controller, add to it.
-					var rowsController = groupsContent.find(rc => rc.get('groupKey') === groupKey);
-					if(!rowsController) {
-						rowsController = this._getArrayController([], 'nf-table-rows-controller', itemController);
-						rowsController.set('groupKey', groupKey);
-						rowsController.set('customSort', sortFn);
-						groupsContent.pushObject(rowsController);
-					}
-
-					var rowsContent = rowsController.get('content');
-
-					var foundRow = rowsContent.find((r, i) => trackingKey === getTrackingKey(r, i));
-					if(foundRow) {
-						// if there's already a row with a matching tracking key (found with trackBy) update it.
-						Ember.keys(row).forEach(key => {
-							var val = get(row, key);
-							if(get(foundRow, key) !== val) {
-								set(foundRow, key, val);
-							}
-						});
-					} else {
-						// otherwise add this one.
-						rowsContent.pushObject(row);
-					}
-				}, this);
-
-				// remove groups and rows that were not provided
-				groupsContent.forEach(rowsController => {
-					// if nothing was grouped by a particular group key, 
-					// remove it's rowsController
-					if(!groupKeys[rowsController.get('groupKey')]) {
-						groupsContent.remove(rowsController);
-						rowsController.destroy();
-					} else {
-						var rowsContent = rowsController.get('content');
-						rowsContent.forEach((r, i) => {
-							// if nothing was tracked by a row's tracking key
-							// remove the row from the row controller
-							if(!trackedKeys[getTrackingKey(r, i)]) {
-								rowsContent.removeObject(r);
-							}
-						}, this);
-					}
-				}, this);
-			}
-		});
-		return this._groups;
-	},
 
 	emitDataChange: function(){
 		var groups = this.getGroups();
@@ -351,42 +228,6 @@ export default Ember.Component.extend({
 	_columns: function(key, value) { //jshint ignore:line
 		return [];
 	}.property(),
-
-	sortFn: function() {
-		return multiSort(this.get('sortMap'));
-	}.property('sortMap.[]'),
-
-	/**
-		Gets the an array of sorts, in order to be processed when sorting the rows.
-		@property sortMap
-		@readonly
-		@private
-	*/
-	sortMap: function(){
-		return this.get('_columns').reduce(function(sortMap, col) {
-			var direction = col.get('direction');
-			if(direction) {
-				var sortBy = col.get('sortBy');
-				if(sortBy) {
-					sortBy = sortBy.replace(/^row\./, '');
-
-					if(col.get('sortNatural')) {
-						sortMap.push(function(a, b){
-							var ax = Ember.get(a, sortBy);
-							var bx = Ember.get(b, sortBy);
-							return naturalCompare(ax, bx) * direction;
-						});
-					} else {
-						sortMap.push({
-							by: sortBy,
-							direction: direction,
-						});
-					}
-				}
-			}
-			return sortMap;
-		}, []);
-	}.property('_columns.@each.sortDirection', '_columns.@each.sortBy'),
 
 	/**
 		Registers a column with the registrar

@@ -2,6 +2,7 @@ import Ember from 'ember';
 import multiSort from 'ember-cli-ember-dvc/utils/multi-sort';
 import TableColumnRegistrar from 'ember-cli-ember-dvc/mixins/table-column-registrar';
 import trackedArrayProperty from 'ember-cli-ember-dvc/utils/nf/tracked-array-property';
+import TableManagement from 'ember-cli-ember-dvc/mixins/table-management';
 
 var get = Ember.get;
 var set = Ember.set;
@@ -107,7 +108,7 @@ var set = Ember.set;
 	@uses mixins.table-column-registrar
 	@deprecated
 */
-export default Ember.Component.extend(TableColumnRegistrar, {
+export default Ember.Component.extend(TableColumnRegistrar, TableManagement, {
 	_gripe: function(){
 		Ember.warn('nf-table can have poor performance due to issues with {{#each}} and dynamic views and components');
 	}.on('init'),
@@ -191,6 +192,15 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	itemController: null,
 
 	/**
+		The name of the grouped items item controller from the nf-table-group component,
+		if present
+		@property groupItemController
+		@type {String}
+		@readonly
+	*/
+	groupItemController: Ember.computed.oneWay('tableGroup.itemController'),
+
+	/**
 		Gets whether or not to use the grouped table layout
 		@property useGroupedTableLayout
 		@type Boolean
@@ -199,65 +209,9 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	useGroupedTableLayout: Ember.computed.bool('groupBy'),
 
-	_getArrayController: function(content, ctrlName, itemControllerProp) {
-		var CtrlClass = this.container.lookupFactory('controller:' + ctrlName);
-		var ctrl = CtrlClass.create({
-			content: content,
-			table: this
-		});
-		if(this.get(itemControllerProp)) {
-			ctrl.set('itemController', this.get(itemControllerProp));
-		}
-		return ctrl;
-	},
-
-	getGroupsFromFlattened: function(rows, groupBy) {
-		var groups = [];
-		var groupsHash = {};
-		var groupsCtrl = this._getArrayController(groups, 'nf-table-group-controller', 'tableGroup.itemController');
-
-		rows.forEach(function(row) {
-			var groupKey = get(row, groupBy);
-			var rowsCtrl = groupsHash[groupKey];
-			if(!rowsCtrl) {
-				rowsCtrl = groupsHash[groupKey] = this._getArrayController([], 'nf-table-rows-controller', 'itemController');
-				rowsCtrl.set('groupKey', groupKey);
-				groups.pushObject(rowsCtrl);
-			}
-			rowsCtrl.get('content').pushObject(row);
-			set(row, 'groupController', rowsCtrl);
-		}, this);
-
-		groupsCtrl.sortBy('groupKey');
-		return groupsCtrl;
-	},
-
-	getGroupsFromHierarchy: function(rows, groupBy) {
-		var groups = [];
-		var groupsCtrl = this._getArrayController(groups, 'nf-table-group-controller', 'tableGroup.itemController');
-
-		rows.forEach(function(row) {
-			var childRows = get(row, groupBy);
-			var childRowsCtrl = this._getArrayController(childRows, 'nf-table-rows-controller', 'itemController');
-			childRows.forEach(function(childRow) {
-				childRow.set('groupController', childRowsCtrl);
-			});
-			groups.pushObject(childRowsCtrl);
-		});
-
-		return groupsCtrl;
-	},
-
-	groupsController: function() {
-		var rows = this.get('rows');
-		var groupBy = this.get('groupBy');
-		var groupFrom = this.get('groupFrom');
-		if(groupFrom === 'hierarchy') {
-			return this.getGroupsFromHierarchy(rows, groupBy);
-		} else {
-			return this.getGroupsFromFlattened(rows, groupBy);
-		}
-	}.property('rows', 'groupBy', 'groupFrom', 'tableGroup.itemController', 'itemController'),
+	groups: function() {
+		return this.getGroups();
+	}.property('rows', '_columns.@each.sortDirection', '_columns.@each.sortBy', 'groupBy', 'groupFrom', 'groupItemController', 'itemController'),
 
 	/**
 		Alias for the rowAction on the nf-table-group
@@ -290,10 +244,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	*/
 	trackBy: undefined,
 
-	rowController: function(){
-		return this._getArrayController(this.get('rows'), 'nf-table-rows-controller', 'itemController');
-	}.property('rows', 'itemController'),
-
 	/**
 		The rows to render, tracked by whatever field is listed in teh trackBy property
 		@property trackedRows
@@ -302,67 +252,6 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 		@private
 	*/
 	trackedRows: trackedArrayProperty('rowController', 'trackBy'),
-
-	/**
-		Triggers the `willSort` and `didSort` events. Also calls `doSort`
-		@method onSort
-	*/
-	onSort: function(){
-		this.trigger('willSort');
-		this.doSort();
-		this.trigger('didSort');
-	},
-
-	/**
-		Performs the sort by reorganizing the DOM. If you want to use some other 
-		method of sorting, this is the guy you'll need to override.
-		@method doSort
-	*/
-	doSort: function(){
-		var sortedRows = this.get('sortedRows');
-		if(Ember.isArray(sortedRows)) {
-			if(this.get('useGroupedTableLayout')) {
-				sortedRows.forEach(function(row) {
-					var key = get(row, '__meta__trackedKey'); //HACK: from tracked-array-property
-					var groupKey = get(row, 'groupController.groupKey');
-					var elem = this.$('[data-nf-table-sort-key="' + key + '"]');
-					var groupElem = this.$('[data-nf-table-group-key="' + groupKey + '"]');
-					elem.detach().insertAfter(groupElem);
-				}, this);
-			} else {
-				sortedRows.forEach(function(row) {
-					var key = get(row, '__meta__trackedKey'); //HACK: from tracked-array-property
-					var elem = this.$('[data-nf-table-sort-key="' + key + '"]');
-					var parent = elem.parent();
-					elem.detach().appendTo(parent);
-				}, this);
-			}
-		}
-	},
-
-	/**
-		Observes changes to column sorts and fires the `onSort` method afterRender
-		@method observeSortChanges
-	*/
-	observeSortChanges: function(){
-		Ember.run.scheduleOnce('afterRender', this, this.onSort);
-	}.observes('_columns.@each.sortDirection', '_columns.@each.sortBy'),
-
-	/**
-		A computed property returning a sorted copy of `rows`
-		@property sortedRows
-		@type Array
-		@readonly
-	*/
-	sortedRows: function(){
-		var sortMap = this.get('sortMap');
-		var rowsCopy = this.get('trackedRows').slice();
-		multiSort(sortMap)(rowsCopy);
-		if(this.get('sortedAction')) {
-			this.sendAction('sortedAction', rowsCopy);
-		}
-		return rowsCopy;
-	}.property('trackedRows.[]', 'sortMap'),
 
 	/**
 		A computed alias returning the controller of the current view. Used to wire
