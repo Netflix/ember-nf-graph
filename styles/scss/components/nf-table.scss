@@ -92,7 +92,7 @@ $imagePadding: 5px;
 		text-align: center;
 	}
 
-	th.nf-table-column-center {
+	th.nf-table-column, th.nf-table-column-center {
 		&.nf-sort-ascending {
 			.nf-column-label {
 				margin-right: -1 * ($arrow-asc_width + $imagePadding);

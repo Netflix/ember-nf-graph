@@ -109,7 +109,7 @@ var set = Ember.set;
 */
 export default Ember.Component.extend(TableColumnRegistrar, {
 	_gripe: function(){
-		Ember.warn('nf-table is deprecated due to performance issues with Ember and {{#each}} with views and components');
+		Ember.warn('nf-table can have poor performance due to issues with {{#each}} and dynamic views and components');
 	}.on('init'),
 
 	tagName: 'div',
@@ -357,7 +357,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	sortedRows: function(){
 		var sortMap = this.get('sortMap');
 		var rowsCopy = this.get('trackedRows').slice();
-		multiSort(rowsCopy, sortMap);
+		multiSort(sortMap)(rowsCopy);
 		if(this.get('sortedAction')) {
 			this.sendAction('sortedAction', rowsCopy);
 		}

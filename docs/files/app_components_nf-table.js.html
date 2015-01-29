@@ -63,6 +63,7 @@
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
                                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
                                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+                                <li><a href="../classes/components.nf-table-manager.html">components.nf-table-manager</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -85,6 +86,7 @@
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/multi-sort.html">multi-sort</a></li>
                                 <li><a href="../modules/scale-utils.html">scale-utils</a></li>
                                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
                                 <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
@@ -232,8 +234,13 @@ var set = Ember.set;
 	@class nf-table
 	@extends Ember.Component
 	@uses mixins.table-column-registrar
+	@deprecated
 */
 export default Ember.Component.extend(TableColumnRegistrar, {
+	_gripe: function(){
+		Ember.warn(&#x27;nf-table can have poor performance due to issues with {{#each}} and dynamic views and components&#x27;);
+	}.on(&#x27;init&#x27;),
+
 	tagName: &#x27;div&#x27;,
 
 	/**
@@ -479,7 +486,7 @@ export default Ember.Component.extend(TableColumnRegistrar, {
 	sortedRows: function(){
 		var sortMap = this.get(&#x27;sortMap&#x27;);
 		var rowsCopy = this.get(&#x27;trackedRows&#x27;).slice();
-		multiSort(rowsCopy, sortMap);
+		multiSort(sortMap)(rowsCopy);
 		if(this.get(&#x27;sortedAction&#x27;)) {
 			this.sendAction(&#x27;sortedAction&#x27;, rowsCopy);
 		}

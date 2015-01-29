@@ -1,0 +1,22 @@
+<h2>nf-table-manager</h2>
+
+{{#nf-table-manager rows=myData groups=tableGroups}}
+	
+	{{#nf-column-manager sortBy="foo"}}
+		<span class="nf-column-label">Foo</span>
+	{{/nf-column-manager}}
+
+	{{#nf-column-manager sortBy="bar" sortNatural=1}}
+		<span class="nf-column-label">Bar</span>
+	{{/nf-column-manager}}
+{{/nf-table-manager}}
+
+{{#each group in tableGroups}}
+	<h4>Group {{group.groupKey}}</h4>
+
+	<ul>
+		{{#each row in group}}
+			<li>{{row.foo}} {{row.bar}} {{row.blah}}</li>
+		{{/each}}
+	</ul>
+{{/each}}

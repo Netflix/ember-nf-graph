@@ -3,7 +3,13 @@ import Ember from 'ember';
 
 var get = Ember.get;
 
-function createMultiSort(sorts) {
+/**
+  @module multi-sort
+  @method default
+  @param {Array} sorts the array of sort properties and directions
+  @return {Function} a function to use to sort an array
+*/
+export default function multiSort(sorts) {
 	var initialSort = function() { return 0; };
   
   return sorts.map(function(sort) {
@@ -36,10 +42,4 @@ function createMultiSort(sorts) {
       return tmp(a, b) || sortFn(a, b);
     };    
   }, initialSort);
-}
-
-export default function multiSort(arr, sorts) {  
-  if(Array.isArray(arr) && Array.isArray(sorts) && sorts.length > 0 && arr.length > 1) {
-    arr.sort(createMultiSort(sorts));
-  }
 }

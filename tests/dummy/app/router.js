@@ -15,6 +15,10 @@ Router.map(function() {
 		this.route('/');
 	});
 
+	this.resource('nf-table-manager', function(){
+		this.route('/');
+	});
+
 	this.resource('nf-inline-graph', function(){
 		this.route('/');
 	});

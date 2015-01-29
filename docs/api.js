@@ -26,6 +26,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-svg-rect",
         "components.nf-table",
         "components.nf-table-group",
+        "components.nf-table-manager",
         "components.nf-vertical-line",
         "components.nf-x-axis",
         "components.nf-y-axis",
@@ -47,11 +48,16 @@ YUI.add("yuidoc-meta", function(Y) {
         "utils.parse-property-expression"
     ],
     "modules": [
+        "multi-sort",
         "scale-utils",
         "utils_nf_array-helpers",
         "utils_nf_svg-dom"
     ],
     "allModules": [
+        {
+            "displayName": "multi-sort",
+            "name": "multi-sort"
+        },
         {
             "displayName": "scale-utils",
             "name": "scale-utils",

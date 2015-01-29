@@ -74,8 +74,15 @@ export default Ember.Mixin.create({
 		}, []);
 	}.property('_columns.@each.sortDirection', '_columns.@each.sortBy'),
 
-	emitColumns: function() {
-		this.set('columns', this.get('_columns'));
+	//HACK: forces columns to be pushed out of the component to the view context.
+	emitColumns: function(){
+		var columns = this.get('_columns');
+		this.set('columns', columns);
+		this.sendAction('columnsUpdated', columns);
+	},
+
+	_columnsUpdated: function() {
+		Ember.run.once(this, this.emitColumns);
 	}.observes('_columns.[]'),
 
 	/**

@@ -63,6 +63,7 @@
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
                                 <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
                                 <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
+                                <li><a href="../classes/components.nf-table-manager.html">components.nf-table-manager</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -85,6 +86,7 @@
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/multi-sort.html">multi-sort</a></li>
                                 <li><a href="../modules/scale-utils.html">scale-utils</a></li>
                                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
                                 <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
@@ -132,7 +134,7 @@
             Defined in: <a href="../files/app_components_nf-column.js.html#l3"><code>app&#x2F;components&#x2F;nf-column.js:3</code></a>
         </div>
 
-            Module: <a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a>
+            Module: <a href="../modules/multi-sort.html">multi-sort</a>
 
 </div>
 
@@ -163,6 +165,10 @@
                                 <a href="#method_toggleSortDirection">toggleSortDirection</a>
 
                             </li>
+                            <li class="index-item method">
+                                <a href="#method_toggleSortDirection">toggleSortDirection</a>
+
+                            </li>
                     </ul>
                 </div>
 
@@ -175,6 +181,14 @@
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_align">align</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_alignmentClass">alignmentClass</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_alignmentClass">alignmentClass</a>
 
                             </li>
@@ -184,6 +198,10 @@
                             </li>
                             <li class="index-item property">
                                 <a href="#property_cellClassNames">cellClassNames</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_direction">direction</a>
 
                             </li>
                             <li class="index-item property">
@@ -207,7 +225,19 @@
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_sortClass">sortClass</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_sortDirection">sortDirection</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_sortDirection">sortDirection</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_sortNatural">sortNatural</a>
 
                             </li>
                             <li class="index-item property">
@@ -219,7 +249,19 @@
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_SORTS">SORTS</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_table">table</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_tableManager">tableManager</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_width">width</a>
 
                             </li>
                             <li class="index-item property">
@@ -235,6 +277,37 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method_toggleSortDirection" class="method item">
+    <h3 class="name"><code>toggleSortDirection</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/app_components_nf-column-manager.js.html#l135"><code>app&#x2F;components&#x2F;nf-column-manager.js:135</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.</p>
+
+    </div>
+
+
+
+
+</div>
 <div id="method_toggleSortDirection" class="method item">
     <h3 class="name"><code>toggleSortDirection</code></h3>
 
@@ -300,6 +373,63 @@
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_align" class="property item">
+                        <h3 class="name"><code>align</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l30"><code>app&#x2F;components&#x2F;nf-column-manager.js:30</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Sets the alignment of the items in the column. Using this attribute
+                    adds appropriate styling for sort arrows.</p>
+                    <p>To make sort arrows appear for center and left alignment, the text you want
+                    the sort arrow to appear next to needs to be wrapped in <code>&lt;span class=&quot;nf-column-label&quot;&gt;&lt;/span&gt;</code></p>
+                    <p><strong>This property is completely optional, and is here as a convenience.</strong> 
+                    You don&#39;t need to use this property at all, if you which to add your own sort
+                    styling.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_alignmentClass" class="property item">
+                        <h3 class="name"><code>alignmentClass</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l47"><code>app&#x2F;components&#x2F;nf-column-manager.js:47</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The computed alignment class for aligning the column content and header</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>
@@ -391,6 +521,31 @@
                                     <p>
                                     Defined in
                             <a href="../files/app_components_nf-column.js.html#l155"><code>app&#x2F;components&#x2F;nf-column.js:155</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The numeric value of <code>sortDirection</code></p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_direction" class="property item">
+                        <h3 class="name"><code>direction</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l106"><code>app&#x2F;components&#x2F;nf-column-manager.js:106</code></a>
                             </p>
                     
                     
@@ -518,6 +673,42 @@
                             </div>
                     
                     </div>
+                    <div id="property_sortClass" class="property item">
+                        <h3 class="name"><code>sortClass</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l151"><code>app&#x2F;components&#x2F;nf-column-manager.js:151</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets the CSS sort class to be applied to the column</p>
+                    <p>Possible return values are <code>nf-sort-ascending</code>, <code>nf-sort-descending</code> and <code>nf-sort-none</code>.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;nf-sort-none&#x27;</p>
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <pre class="code prettyprint"><code>column.set(&#39;sortDirection&#39;, &#39;asc&#39;);
+                    console.log(column.get(&#39;sortClass&#39;)); // nf-sort-ascending
+                    </code></pre>
+                                </div>
+                            </div>
+                    
+                    </div>
                     <div id="property_sortDirection" class="property item">
                         <h3 class="name"><code>sortDirection</code></h3>
                         <span class="type">String</span>
@@ -558,6 +749,72 @@
                             </div>
                     
                     </div>
+                    <div id="property_sortDirection" class="property item">
+                        <h3 class="name"><code>sortDirection</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l58"><code>app&#x2F;components&#x2F;nf-column-manager.js:58</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets the sort direction for the column.</p>
+                    <p>Possible Values:</p>
+                    <ul>
+                    <li><code>&#39;asc&#39;</code> - sort ascending.</li>
+                    <li><code>&#39;desc&#39;</code> - sort descending.</li>
+                    <li><code>&#39;none&#39;</code> - (or any other value) no sort.</li>
+                    </ul>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;none&#x27;</p>
+                    
+                            <div class="example">
+                                <h4>Example:</h4>
+                    
+                                <div class="example-content">
+                                    <pre class="code prettyprint"><code> {{#nf-column sortDirection=&quot;asc&quot;}}
+                    </code></pre>
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="property_sortNatural" class="property item">
+                        <h3 class="name"><code>sortNatural</code></h3>
+                        <span class="type">Boolean</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l98"><code>app&#x2F;components&#x2F;nf-column-manager.js:98</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets whether to use a natural sort.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
                     <div id="property_sortNatural" class="property item">
                         <h3 class="name"><code>sortNatural</code></h3>
                         <span class="type">Boolean</span>
@@ -581,6 +838,31 @@
                         </div>
                     
                             <p><strong>Default:</strong> false</p>
+                    
+                    
+                    </div>
+                    <div id="property_SORTS" class="property item">
+                        <h3 class="name"><code>SORTS</code></h3>
+                        <span class="type">Array</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l127"><code>app&#x2F;components&#x2F;nf-column-manager.js:127</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>List of available sort directions</p>
+                    
+                        </div>
+                    
                     
                     
                     </div>
@@ -635,6 +917,32 @@
                     
                     
                     </div>
+                    <div id="property_tableManager" class="property item">
+                        <h3 class="name"><code>tableManager</code></h3>
+                        <span class="type">Nf-table-manager</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l12"><code>app&#x2F;components&#x2F;nf-column-manager.js:12</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The table manager component the column belongs to</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
                     <div id="property_width" class="property item">
                         <h3 class="name"><code>width</code></h3>
                         <span class="type">String</span>
@@ -647,6 +955,32 @@
                                     <p>
                                     Defined in
                             <a href="../files/app_components_nf-column.js.html#l45"><code>app&#x2F;components&#x2F;nf-column.js:45</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets the inline style width of both the header and the table cell.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_width" class="property item">
+                        <h3 class="name"><code>width</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-column-manager.js.html#l20"><code>app&#x2F;components&#x2F;nf-column-manager.js:20</code></a>
                             </p>
                     
                     
