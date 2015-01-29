@@ -43,14 +43,14 @@ export default Ember.Mixin.create({
 		}, []);
 	}.property('_columns.@each.sortDirection', '_columns.@each.sortBy'),
 
-	_getArrayController: function(content, ctrlName, itemControllerProp) {
+	_getArrayController: function(content, ctrlName, itemControllerName) {
 		var CtrlClass = this.container.lookupFactory('controller:' + ctrlName);
 		var ctrl = CtrlClass.create({
 			content: content,
 			table: this
 		});
-		if(this.get(itemControllerProp)) {
-			ctrl.set('itemController', this.get(itemControllerProp));
+		if(itemControllerName) {
+			ctrl.set('itemController', itemControllerName);
 		}
 		return ctrl;
 	},
