@@ -135,7 +135,8 @@ export default Ember.Component.extend(TableManagement, {
 
 	_dataChanged: function(){
 		Ember.run.once(this, this.emitDataChange);
-	}.observes('rows.[]', '_columns.@each.sortDirection', '_columns.@each.sortBy', 'groupBy', 'trackBy', 'groupFrom', 'itemController', 'groupItemController'),
+	}.observes('rows.[]', '_columns.@each.sortDirection', '_columns.@each.sortBy', 'groupBy', 
+		'trackBy', 'groupFrom', 'itemController', 'groupItemController', 'filterFunction'),
 
 	emitColumnChange: function(){
 		var columns = this.get('_columns');
