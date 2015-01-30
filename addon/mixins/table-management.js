@@ -166,7 +166,7 @@ export default Ember.Mixin.create({
 					} else {
 						var rowsContent = rowsController.get('content');
 						var i, r;
-						for(i = rowsContent.length; i >= 0; i--) {
+						for(i = rowsContent.length - 1; i >= 0; i--) {
 							r = rowsContent[i];
 							// if nothing was tracked by a row's tracking key
 							// remove the row from the row controller
