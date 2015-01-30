@@ -1,6 +1,6 @@
 {
   "name": "ember-cli-ember-dvc",
-  "version": "0.5.14",
+  "version": "0.5.15",
   "directories": {
     "doc": "doc",
     "test": "tests"
