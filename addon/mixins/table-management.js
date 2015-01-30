@@ -165,13 +165,15 @@ export default Ember.Mixin.create({
 						rowsController.destroy();
 					} else {
 						var rowsContent = rowsController.get('content');
-						rowsContent.forEach(function (r, i) {
+						var i, r;
+						for(i = rowsContent.length; i >= 0; i--) {
+							r = rowsContent[i];
 							// if nothing was tracked by a row's tracking key
 							// remove the row from the row controller
 							if(!trackedKeys[getTrackingKey(r, i)]) {
 								rowsContent.removeObject(r);
 							}
-						}, this);
+						}
 					}
 				}, this);
 			}
