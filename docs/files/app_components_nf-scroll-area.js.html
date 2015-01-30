@@ -55,7 +55,6 @@
                                 <li><a href="../classes/components.nf-range-marker.html">components.nf-range-marker</a></li>
                                 <li><a href="../classes/components.nf-range-markers.html">components.nf-range-markers</a></li>
                                 <li><a href="../classes/components.nf-right-tick.html">components.nf-right-tick</a></li>
-                                <li><a href="../classes/components.nf-scroll-area.html">components.nf-scroll-area</a></li>
                                 <li><a href="../classes/components.nf-selection-box.html">components.nf-selection-box</a></li>
                                 <li><a href="../classes/components.nf-svg-image.html">components.nf-svg-image</a></li>
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
@@ -68,6 +67,7 @@
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
                                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
+                                <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
                                 <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
@@ -134,13 +134,13 @@ import ScrollAreaActionContext from &#x27;ember-cli-ember-dvc/utils/nf/scroll-ar
 /**
 	A component that emits actions and events when scrolled or resized.
 	@namespace components
-	@class nf-scroll-area
+	@class {nf-scroll-area}
 */
 export default Ember.Component.extend({
 	/**
 		The tag name of the component
 		@property tagName
-		@type String
+		@type {String}
 		@default &#x27;div&#x27;
 	*/
 	tagName: &#x27;div&#x27;,
@@ -150,7 +150,7 @@ export default Ember.Component.extend({
 	/**
 		The name of the action to fire when scrolled
 		@property scrollAction
-		@type String
+		@type {String}
 		@default null
 	*/
 	scrollAction: null,
@@ -158,7 +158,7 @@ export default Ember.Component.extend({
 	/**
 		The name of the action to fire when resized
 		@property resizeAction
-		@type String
+		@type {String}
 		@default null
 	*/
 	resizeAction: null,
@@ -166,10 +166,18 @@ export default Ember.Component.extend({
 	/**
 		The name of the action to fire when scrolled *OR* resized
 		@property changeAction
-		@type String
+		@type {String}
 		@default null
 	*/
 	changeAction: null,
+
+	/**
+		The name of the action to fire when the list of child DOM nodes changes
+		@property childrenChangedAction
+		@type {String}
+		@default null
+	*/
+	childrenChangedAction: null,
 
 	/**
 		Gets or sets the scrollTop by percentage (decimal) of
@@ -184,6 +192,28 @@ export default Ember.Component.extend({
 		return this._scrollTopPercentage;
 	}.property().volatile(),
 
+	_childMutationObserver: null,
+
+	_setupChildMutationObserver: function() {
+		var handler = function(e) {
+			var context = this.createActionContext(e);
+		  this.sendAction(&#x27;childrenChangedAction&#x27;, context);   
+		  this.sendAction(&#x27;changeAction&#x27;, context);   
+		}.bind(this);
+
+		this._childMutationObserver = new MutationObserver(handler);
+		this._childMutationObserver.observe(this.get(&#x27;element&#x27;), { childList: true });
+
+		// trigger initial event
+		handler();
+	}.on(&#x27;didInsertElement&#x27;),
+
+	_teardownChildMutationObserver: function(){
+		if(this._childMutationObserver) {
+			this._childMutationObserver.disconnect();
+		}
+	}.on(&#x27;willDestroyElement&#x27;),
+
 	_updateScrollTop: function(){
 		var element = this.get(&#x27;element&#x27;);
 		if(element) {
@@ -195,7 +225,7 @@ export default Ember.Component.extend({
 	/**
 		Gets or sets the scrollTop of the area
 		@property scrollTop
-		@type Number
+		@type {Number}
 		@default 0
 	*/
 	scrollTop: function(key, value){

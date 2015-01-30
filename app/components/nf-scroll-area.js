@@ -4,13 +4,13 @@ import ScrollAreaActionContext from 'ember-cli-ember-dvc/utils/nf/scroll-area-ac
 /**
 	A component that emits actions and events when scrolled or resized.
 	@namespace components
-	@class nf-scroll-area
+	@class {nf-scroll-area}
 */
 export default Ember.Component.extend({
 	/**
 		The tag name of the component
 		@property tagName
-		@type String
+		@type {String}
 		@default 'div'
 	*/
 	tagName: 'div',
@@ -20,7 +20,7 @@ export default Ember.Component.extend({
 	/**
 		The name of the action to fire when scrolled
 		@property scrollAction
-		@type String
+		@type {String}
 		@default null
 	*/
 	scrollAction: null,
@@ -28,7 +28,7 @@ export default Ember.Component.extend({
 	/**
 		The name of the action to fire when resized
 		@property resizeAction
-		@type String
+		@type {String}
 		@default null
 	*/
 	resizeAction: null,
@@ -36,10 +36,18 @@ export default Ember.Component.extend({
 	/**
 		The name of the action to fire when scrolled *OR* resized
 		@property changeAction
-		@type String
+		@type {String}
 		@default null
 	*/
 	changeAction: null,
+
+	/**
+		The name of the action to fire when the list of child DOM nodes changes
+		@property childrenChangedAction
+		@type {String}
+		@default null
+	*/
+	childrenChangedAction: null,
 
 	/**
 		Gets or sets the scrollTop by percentage (decimal) of
@@ -54,6 +62,28 @@ export default Ember.Component.extend({
 		return this._scrollTopPercentage;
 	}.property().volatile(),
 
+	_childMutationObserver: null,
+
+	_setupChildMutationObserver: function() {
+		var handler = function(e) {
+			var context = this.createActionContext(e);
+		  this.sendAction('childrenChangedAction', context);   
+		  this.sendAction('changeAction', context);   
+		}.bind(this);
+
+		this._childMutationObserver = new MutationObserver(handler);
+		this._childMutationObserver.observe(this.get('element'), { childList: true });
+
+		// trigger initial event
+		handler();
+	}.on('didInsertElement'),
+
+	_teardownChildMutationObserver: function(){
+		if(this._childMutationObserver) {
+			this._childMutationObserver.disconnect();
+		}
+	}.on('willDestroyElement'),
+
 	_updateScrollTop: function(){
 		var element = this.get('element');
 		if(element) {
@@ -65,7 +95,7 @@ export default Ember.Component.extend({
 	/**
 		Gets or sets the scrollTop of the area
 		@property scrollTop
-		@type Number
+		@type {Number}
 		@default 0
 	*/
 	scrollTop: function(key, value){

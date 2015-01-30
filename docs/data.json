@@ -425,7 +425,7 @@
             "name": "app/components/nf-scroll-area.js",
             "modules": {},
             "classes": {
-                "components.nf-scroll-area": 1
+                "components.{nf-scroll-area}": 1
             },
             "fors": {},
             "namespaces": {
@@ -640,7 +640,7 @@
                 "components.nf-range-marker": 1,
                 "components.nf-range-markers": 1,
                 "components.nf-right-tick": 1,
-                "components.nf-scroll-area": 1,
+                "components.{nf-scroll-area}": 1,
                 "components.nf-selection-box": 1,
                 "components.nf-svg-image": 1,
                 "components.nf-svg-line": 1,
@@ -1283,9 +1283,9 @@
                 "mixins.graph-requires-scale-source"
             ]
         },
-        "components.nf-scroll-area": {
-            "name": "components.nf-scroll-area",
-            "shortname": "components.nf-scroll-area",
+        "components.{nf-scroll-area}": {
+            "name": "components.{nf-scroll-area}",
+            "shortname": "components.{nf-scroll-area}",
             "classitems": [],
             "plugins": [],
             "extensions": [],
@@ -5206,9 +5206,9 @@
             "description": "The tag name of the component",
             "itemtype": "property",
             "name": "tagName",
-            "type": "String",
+            "type": "{String}",
             "default": "'div'",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
@@ -5218,9 +5218,9 @@
             "description": "The name of the action to fire when scrolled",
             "itemtype": "property",
             "name": "scrollAction",
-            "type": "String",
+            "type": "{String}",
             "default": "null",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
@@ -5230,9 +5230,9 @@
             "description": "The name of the action to fire when resized",
             "itemtype": "property",
             "name": "resizeAction",
-            "type": "String",
+            "type": "{String}",
             "default": "null",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
@@ -5242,50 +5242,62 @@
             "description": "The name of the action to fire when scrolled *OR* resized",
             "itemtype": "property",
             "name": "changeAction",
-            "type": "String",
+            "type": "{String}",
             "default": "null",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-scroll-area.js",
             "line": 44,
+            "description": "The name of the action to fire when the list of child DOM nodes changes",
+            "itemtype": "property",
+            "name": "childrenChangedAction",
+            "type": "{String}",
+            "default": "null",
+            "class": "components.{nf-scroll-area}",
+            "module": "multi-sort",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-scroll-area.js",
+            "line": 52,
             "description": "Gets or sets the scrollTop by percentage (decimal) of\nscrollHeight",
             "itemtype": "property",
             "name": "scrollTopPercentage",
             "type": "{Number}",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-scroll-area.js",
-            "line": 65,
+            "line": 95,
             "description": "Gets or sets the scrollTop of the area",
             "itemtype": "property",
             "name": "scrollTop",
-            "type": "Number",
+            "type": "{Number}",
             "default": "0",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-scroll-area.js",
-            "line": 84,
+            "line": 114,
             "description": "The optional action data to send with the action contextl",
             "itemtype": "property",
             "name": "actionData",
             "type": "Any",
             "default": "null",
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-scroll-area.js",
-            "line": 110,
+            "line": 140,
             "description": "Creates an action context to send with an action",
             "itemtype": "method",
             "name": "createActionContext",
@@ -5300,7 +5312,7 @@
                 "description": "",
                 "type": "utils.nf.scroll-area-action-context"
             },
-            "class": "components.nf-scroll-area",
+            "class": "components.{nf-scroll-area}",
             "module": "multi-sort",
             "namespace": "components"
         },
@@ -5924,7 +5936,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 158,
+            "line": 159,
             "description": "The property on each row item to track data by. If undefined, will track by index.",
             "itemtype": "property",
             "name": "trackBy",
@@ -5936,7 +5948,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 166,
+            "line": 167,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -5948,7 +5960,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 177,
+            "line": 178,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -5960,7 +5972,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 186,
+            "line": 187,
             "description": "Gets or sets whether a multi sort is used.",
             "itemtype": "property",
             "name": "sortMultiple",
@@ -5972,7 +5984,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 194,
+            "line": 195,
             "description": "identifies the component as a table column registrar to its children",
             "itemtype": "property",
             "name": "isTableColumnRegistrar",
@@ -5984,7 +5996,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 202,
+            "line": 203,
             "description": "The columns for the table, actually emited to the view context.",
             "itemtype": "property",
             "name": "columns",
@@ -5997,7 +6009,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 211,
+            "line": 212,
             "description": "The grouped and sorted data, actually emited to the view context.",
             "itemtype": "property",
             "name": "groups",
@@ -6010,7 +6022,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 220,
+            "line": 221,
             "description": "The name of the action to send when grouped data is updated in any way (sorted, added to, etc)",
             "itemtype": "property",
             "name": "groupsUpdated",
@@ -6022,7 +6034,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 228,
+            "line": 229,
             "description": "The name of the action to send when columns are updated",
             "itemtype": "property",
             "name": "columnsUpdated",
@@ -6034,7 +6046,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 236,
+            "line": 237,
             "description": "The collection of columns registered",
             "itemtype": "property",
             "name": "columns",
@@ -6048,7 +6060,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 247,
+            "line": 248,
             "description": "Registers a column with the registrar",
             "itemtype": "method",
             "name": "registerColumn",
@@ -6065,7 +6077,7 @@
         },
         {
             "file": "app/components/nf-table-manager.js",
-            "line": 256,
+            "line": 257,
             "description": "Unregisters a column from the registry",
             "itemtype": "method",
             "name": "unregisterColumn",
@@ -6204,7 +6216,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 216,
+            "line": 217,
             "description": "Alias for the rowAction on the nf-table-group",
             "itemtype": "property",
             "name": "groupRowAction",
@@ -6216,7 +6228,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 224,
+            "line": 225,
             "description": "The data source for rows to display in this table.",
             "itemtype": "property",
             "name": "rows",
@@ -6227,7 +6239,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 239,
+            "line": 240,
             "description": "The property on each row item to track data by. If undefined, will track by index.",
             "itemtype": "property",
             "name": "trackBy",
@@ -6239,7 +6251,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 247,
+            "line": 248,
             "description": "The rows to render, tracked by whatever field is listed in teh trackBy property",
             "itemtype": "property",
             "name": "trackedRows",
@@ -6253,7 +6265,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 256,
+            "line": 257,
             "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -6265,7 +6277,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 265,
+            "line": 266,
             "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
             "itemtype": "property",
             "name": "rowAction",
@@ -6277,7 +6289,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 276,
+            "line": 277,
             "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
             "itemtype": "property",
             "name": "sortedAction",
@@ -6289,7 +6301,7 @@
         },
         {
             "file": "app/components/nf-table.js",
-            "line": 287,
+            "line": 288,
             "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
             "itemtype": "method",
             "name": "actions.sort",

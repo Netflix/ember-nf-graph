@@ -1,3 +1,9 @@
+<style>
+	.test-scroll {
+		height: 200px;
+	}
+</style>
+
 <h2>nf-table-manager</h2>
 
 {{#nf-table-manager rows=myData groups=tableGroups sortMode="multi"}}
@@ -10,12 +16,14 @@
 	{{/nf-column-manager}}
 {{/nf-table-manager}}
 
-{{#each group in tableGroups}}
-	<h4>Group {{group.groupKey}}</h4>
+{{#nf-scroll-area class="test-scroll" childrenChangedAction="childrenOfTheScroll"}}
+	{{#each group in tableGroups}}
+		<h4>Group {{group.groupKey}}</h4>
 
-	<ul>
-		{{#each row in group}}
-			<li>{{row.foo}} {{row.bar}} {{row.blah}}</li>
-		{{/each}}
-	</ul>
-{{/each}}
+		<ul>
+			{{#each row in group}}
+				<li>{{row.foo}} {{row.bar}} {{row.blah}}</li>
+			{{/each}}
+		</ul>
+	{{/each}}
+{{/nf-scroll-area}}
