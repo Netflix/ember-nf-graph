@@ -18,6 +18,15 @@ export default Ember.Mixin.create({
 	*/
 	sortMode: 'single',
 
+	/**
+		An optional function used to filter the rows, is passed the row, index and array
+		just like the standard array filter function.
+		@property filterFunction
+		@type {Function}
+		@default null
+	*/
+	filterFunction: null,
+
 	notifySort: function(column) {
 		if(this.get('sortMode') === 'single') {
 			this.get('_columns').forEach(function(col) {
@@ -98,6 +107,7 @@ export default Ember.Mixin.create({
 			}
 
 			if(Ember.isArray(rows)) {
+				var filterFunction = this.get('filterFunction');
 				var trackedKeys = new Map();
 				var groupKeys = new Map();
 				var groupsContent = this._groups.get('content');
@@ -125,6 +135,11 @@ export default Ember.Mixin.create({
 
 				// group and reconcile rows and groups
 				rows.forEach(function (row, ri) {
+					// filter out rows with the optional filter
+					if(filterFunction && !filterFunction(row, ri, rows)) {
+						return;
+					}
+
 					var groupKey = groupBy ? get(row, groupBy) : 'ungrouped';
 					var trackingKey = getTrackingKey(row, ri);
 					trackedKeys[trackingKey] = true;

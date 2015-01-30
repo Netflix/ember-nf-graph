@@ -148,6 +148,15 @@ export default Ember.Mixin.create({
 	*/
 	sortMode: &#x27;single&#x27;,
 
+	/**
+		An optional function used to filter the rows, is passed the row, index and array
+		just like the standard array filter function.
+		@property filterFunction
+		@type {Function}
+		@default null
+	*/
+	filterFunction: null,
+
 	notifySort: function(column) {
 		if(this.get(&#x27;sortMode&#x27;) === &#x27;single&#x27;) {
 			this.get(&#x27;_columns&#x27;).forEach(function(col) {
@@ -228,6 +237,7 @@ export default Ember.Mixin.create({
 			}
 
 			if(Ember.isArray(rows)) {
+				var filterFunction = this.get(&#x27;filterFunction&#x27;);
 				var trackedKeys = new Map();
 				var groupKeys = new Map();
 				var groupsContent = this._groups.get(&#x27;content&#x27;);
@@ -255,6 +265,11 @@ export default Ember.Mixin.create({
 
 				// group and reconcile rows and groups
 				rows.forEach(function (row, ri) {
+					// filter out rows with the optional filter
+					if(filterFunction &amp;&amp; !filterFunction(row, ri, rows)) {
+						return;
+					}
+
 					var groupKey = groupBy ? get(row, groupBy) : &#x27;ungrouped&#x27;;
 					var trackingKey = getTrackingKey(row, ri);
 					trackedKeys[trackingKey] = true;
@@ -295,13 +310,15 @@ export default Ember.Mixin.create({
 						rowsController.destroy();
 					} else {
 						var rowsContent = rowsController.get(&#x27;content&#x27;);
-						rowsContent.forEach(function (r, i) {
+						var i, r;
+						for(i = rowsContent.length - 1; i &gt;= 0; i--) {
+							r = rowsContent[i];
 							// if nothing was tracked by a row&#x27;s tracking key
 							// remove the row from the row controller
 							if(!trackedKeys[getTrackingKey(r, i)]) {
 								rowsContent.removeObject(r);
 							}
-						}, this);
+						}
 					}
 				}, this);
 			}

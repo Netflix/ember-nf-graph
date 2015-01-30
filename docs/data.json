@@ -2167,7 +2167,18 @@
         },
         {
             "file": "addon/mixins/table-management.js",
-            "line": 35,
+            "line": 21,
+            "description": "An optional function used to filter the rows, is passed the row, index and array\njust like the standard array filter function.",
+            "itemtype": "property",
+            "name": "filterFunction",
+            "type": "{Function}",
+            "default": "null",
+            "class": "mixins.table-management",
+            "namespace": "mixins"
+        },
+        {
+            "file": "addon/mixins/table-management.js",
+            "line": 44,
             "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
             "itemtype": "property",
             "name": "sortMap",

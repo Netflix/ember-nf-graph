@@ -3,6 +3,12 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
 	scrollTo: 0,
 
+	filterTheTable: function(r, i, arr) {
+		console.debug(r, i, arr);
+
+		return Ember.get(r, 'foo') < 50;
+	},
+
 	actions: {
 		fooCellClicked: function(row, column, group) {
 			console.log('foo clicked', row, column, group);
