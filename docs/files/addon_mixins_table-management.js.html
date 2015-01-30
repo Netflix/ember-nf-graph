@@ -78,6 +78,7 @@
                                 <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
                                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
                                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+                                <li><a href="../classes/mixins.table-management.html">mixins.table-management</a></li>
                                 <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
                                 <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
                                 <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
@@ -134,8 +135,29 @@ import { naturalCompare } from &#x27;ember-cli-ember-dvc/utils/nf/array-helpers&
 var get = Ember.get;
 var set = Ember.set;
 
+/**
+	@namespace mixins
+	@class table-management
+*/
 export default Ember.Mixin.create({
-	
+	/**
+		Sets the sort mode of the table. &#x27;single&#x27; or &#x27;multi&#x27; are supported.
+		@property sortMode
+		@type {String}
+		@default &#x27;single&#x27;
+	*/
+	sortMode: &#x27;single&#x27;,
+
+	notifySort: function(column) {
+		if(this.get(&#x27;sortMode&#x27;) === &#x27;single&#x27;) {
+			this.get(&#x27;_columns&#x27;).forEach(function(col) {
+				if(col !== column) {
+					col.set(&#x27;sortDirection&#x27;, &#x27;none&#x27;);
+				}
+			}, this);
+		}
+	},
+
 	sortFn: function() {
 		return multiSort(this.get(&#x27;sortMap&#x27;));
 	}.property(&#x27;sortMap.[]&#x27;),

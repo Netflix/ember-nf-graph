@@ -117,9 +117,13 @@
         "addon/mixins/table-management.js": {
             "name": "addon/mixins/table-management.js",
             "modules": {},
-            "classes": {},
+            "classes": {
+                "mixins.table-management": 1
+            },
             "fors": {},
-            "namespaces": {}
+            "namespaces": {
+                "mixins": 1
+            }
         },
         "addon/utils/nf/array-helpers.js": {
             "name": "addon/utils/nf/array-helpers.js",
@@ -576,6 +580,7 @@
                 "mixins.graph-requires-scale-source": 1,
                 "mixins.graph-selectable-graphic": 1,
                 "mixins.table-column-registrar": 1,
+                "mixins.table-management": 1,
                 "utils.nf.graph-event": 1,
                 "utils.nf.graph-mouse-event": 1,
                 "utils.nf.graph-position": 1
@@ -880,6 +885,19 @@
             "file": "addon/mixins/table-column-registrar.js",
             "line": 4,
             "description": "Marks a component as a registry for table columns"
+        },
+        "mixins.table-management": {
+            "name": "mixins.table-management",
+            "shortname": "mixins.table-management",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/array-helpers",
+            "namespace": "mixins",
+            "file": "addon/mixins/table-management.js",
+            "line": 8
         },
         "utils.nf.graph-event": {
             "name": "utils.nf.graph-event",
@@ -2138,14 +2156,25 @@
         },
         {
             "file": "addon/mixins/table-management.js",
-            "line": 14,
+            "line": 13,
+            "description": "Sets the sort mode of the table. 'single' or 'multi' are supported.",
+            "itemtype": "property",
+            "name": "sortMode",
+            "type": "{String}",
+            "default": "'single'",
+            "class": "mixins.table-management",
+            "namespace": "mixins"
+        },
+        {
+            "file": "addon/mixins/table-management.js",
+            "line": 35,
             "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
             "itemtype": "property",
             "name": "sortMap",
             "readonly": "",
             "access": "private",
             "tagname": "",
-            "class": "utils.nf.graph-event",
+            "class": "mixins.table-management",
             "namespace": "mixins"
         },
         {
@@ -3267,7 +3296,7 @@
         },
         {
             "file": "app/components/nf-column-manager.js",
-            "line": 151,
+            "line": 152,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",
@@ -3452,7 +3481,7 @@
         },
         {
             "file": "app/components/nf-column.js",
-            "line": 196,
+            "line": 197,
             "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
             "itemtype": "property",
             "name": "sortClass",

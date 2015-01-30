@@ -5,8 +5,29 @@ import { naturalCompare } from 'ember-cli-ember-dvc/utils/nf/array-helpers';
 var get = Ember.get;
 var set = Ember.set;
 
+/**
+	@namespace mixins
+	@class table-management
+*/
 export default Ember.Mixin.create({
-	
+	/**
+		Sets the sort mode of the table. 'single' or 'multi' are supported.
+		@property sortMode
+		@type {String}
+		@default 'single'
+	*/
+	sortMode: 'single',
+
+	notifySort: function(column) {
+		if(this.get('sortMode') === 'single') {
+			this.get('_columns').forEach(function(col) {
+				if(col !== column) {
+					col.set('sortDirection', 'none');
+				}
+			}, this);
+		}
+	},
+
 	sortFn: function() {
 		return multiSort(this.get('sortMap'));
 	}.property('sortMap.[]'),

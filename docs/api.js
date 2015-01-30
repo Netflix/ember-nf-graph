@@ -41,6 +41,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-requires-scale-source",
         "mixins.graph-selectable-graphic",
         "mixins.table-column-registrar",
+        "mixins.table-management",
         "utils.nf.graph-event",
         "utils.nf.graph-mouse-event",
         "utils.nf.graph-position",

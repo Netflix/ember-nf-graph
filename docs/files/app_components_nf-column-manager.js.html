@@ -78,6 +78,7 @@
                                 <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
                                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
                                 <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
+                                <li><a href="../classes/mixins.table-management.html">mixins.table-management</a></li>
                                 <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
                                 <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
                                 <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
@@ -271,6 +272,7 @@ export default Ember.Component.extend({
 		var i = SORTS.indexOf(sortDirection);
 		var next = SORTS[(i + 1) % SORTS.length];
 		this.set(&#x27;sortDirection&#x27;, next);
+		this.get(&#x27;tableManager&#x27;).notifySort(this);
 	},
 
 	click: function(e) {

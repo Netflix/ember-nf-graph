@@ -142,6 +142,7 @@ export default Ember.Component.extend({
 		var i = SORTS.indexOf(sortDirection);
 		var next = SORTS[(i + 1) % SORTS.length];
 		this.set('sortDirection', next);
+		this.get('tableManager').notifySort(this);
 	},
 
 	click: function(e) {

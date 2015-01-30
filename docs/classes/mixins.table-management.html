@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/utils/parse-property-expression.js - Ember-CLI-Ember-DVC</title>
+    <title>mixins.table-management - Ember-CLI-Ember-DVC</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -124,83 +124,114 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: addon/utils/parse-property-expression.js</h1>
-
-<div class="file">
-    <pre class="code prettyprint linenums">
-/**
-  A function that will parse a path expression into a &quot;getter&quot; function that
-  can retrieve a value from that path off of any object when called.
-
-  ### Example
-        
-        import parsePropertyExpr from &#x27;utils/parse-property-expr&#x27;;
-
-        var test = { foo: { bar: [&#x27;apple&#x27;, &#x27;banana&#x27;] } };
-        var getFooBar1 = parsePropertyExpr(&#x27;foo.bar[1]&#x27;);
-        var result = getFooBar1(test);
-        console.log(result); // &quot;banana&quot;
-
-  ### Notes
-
-  Will return &#x60;undefined&#x60; if the nothing is at the end of the path, or the
-  path cannot be reached.
-
-  @namespace utils
-  @class parse-property-expression
-*/
+<h1>mixins.table-management Class</h1>
+<div class="box meta">
 
 
-/**  
-  @method default
-  @param expr {String} the expression to parse
-  @return {Function} a function that when called with an object,
-  will locate the value at the end of the expressed path.
-*/
-export default function parsePropertyExpression(expr) {
-  var c, i;
-  var isIndex = false;
-  var token = &#x27;&#x27;;
-  var tokens = [];
-  var addToken = function(){
-    if(token === &#x27;&#x27;) {
-      return;
-    }
-    if(isIndex) {
-      token = +token;
-    }
-    tokens.push(token);
-    token = &#x27;&#x27;;
-    isIndex = c === &#x27;[&#x27;;    
-  };
-  
-  for(i = 0; i &lt; expr.length; i++) {
-    c = expr[i];
-    if(&#x27;[].&#x27;.indexOf(c) &gt;= 0) {
-      addToken();
-    } else {
-      token += c;
-    }
-  }
-  
-  addToken();
-  
-  return function(obj){
-    var i, next;
-    var result = obj[tokens[0]];
-    if(result) {
-      for(i = 1; i &lt; tokens.length; i++) {
-        next = result[tokens[i]];
-        if(typeof next !== &#x27;object&#x27;) {
-          return next;
-        }
-        result = next;
-      }
-    }
-    return result;
-  };
-}
-    </pre>
+        <div class="foundat">
+            Defined in: <a href="../files/addon_mixins_table-management.js.html#l8"><code>addon&#x2F;mixins&#x2F;table-management.js:8</code></a>
+        </div>
+
+            Module: <a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a>
+
+</div>
+
+
+<div class="box intro">
+    
+</div>
+
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property private">
+                                <a href="#property_sortMap">sortMap</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_sortMode">sortMode</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_sortMap" class="property item private">
+                        <h3 class="name"><code>sortMap</code></h3>
+                        <span class="type">Unknown</span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_table-management.js.html#l35"><code>addon&#x2F;mixins&#x2F;table-management.js:35</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets the an array of sorts, in order to be processed when sorting the rows.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_sortMode" class="property item">
+                        <h3 class="name"><code>sortMode</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_table-management.js.html#l13"><code>addon&#x2F;mixins&#x2F;table-management.js:13</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Sets the sort mode of the table. &#39;single&#39; or &#39;multi&#39; are supported.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;single&#x27;</p>
+                    
+                    
+                    </div>
+            </div>
+
+
+    </div>
 </div>
                     </div>
                 </div>
