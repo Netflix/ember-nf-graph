@@ -72,7 +72,7 @@ export default Ember.Component.extend({
 		}.bind(this);
 
 		this._childMutationObserver = new MutationObserver(handler);
-		this._childMutationObserver.observe(this.get('element'), { childList: true });
+		this._childMutationObserver.observe(this.get('element'), { childList: true, subtree: true });
 
 		// trigger initial event
 		handler();
