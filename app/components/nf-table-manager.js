@@ -1,11 +1,5 @@
 import Ember from 'ember';
-import multiSort from 'ember-cli-ember-dvc/utils/multi-sort';
-import trackedArrayProperty from 'ember-cli-ember-dvc/utils/nf/tracked-array-property';
-import { naturalCompare } from 'ember-cli-ember-dvc/utils/nf/array-helpers';
 import TableManagement from 'ember-cli-ember-dvc/mixins/table-management';
-
-var get = Ember.get;
-var set = Ember.set;
 
 /**
 	Composable table component with built-in sorting
