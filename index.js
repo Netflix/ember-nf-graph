@@ -8,7 +8,6 @@ module.exports = {
   	this._super.included(app);
 
   	app.import('vendor/ember-cli-ember-dvc/ember-cli-ember-dvc.css');
-  	app.import(app.bowerDirectory + '/rx-ember/dist/rx-ember.js');
-  	app.import(app.bowerDirectory + '/rxjs/dist/rx.all.js');
+  	app.import(app.bowerDirectory + '/d3/d3.js');
   }
 };

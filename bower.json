@@ -14,8 +14,6 @@
     "ember-qunit": "0.1.8",
     "ember-qunit-notifications": "0.0.4",
     "qunit": "~1.15.0",
-    "d3": "~3.5.3",
-    "rx-ember": "~0.2.2",
-    "rxjs": "~2.3.24"
+    "d3": "~3.5.3"
   }
 }
