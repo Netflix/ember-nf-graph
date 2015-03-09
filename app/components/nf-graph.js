@@ -935,6 +935,9 @@ export default Ember.Component.extend({
     var mouseUps = Observable.fromEvent(Ember.$(document), 'mouseup');
 
     this._brushDisposable = Observable.merge(mouseDowns, mouseMoves).window(mouseDowns, function() { return mouseUps; })
+      .filter(function(){
+        return self.get('brushAction') || self.get('brushEndAction') || self.get('brushStartAction');
+      })
       .map(function(events) {
         var starts = events.take(1).map(function(e) {
           return {
