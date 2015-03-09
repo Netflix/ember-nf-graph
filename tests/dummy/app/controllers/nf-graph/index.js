@@ -19,6 +19,18 @@ export default Ember.ObjectController.extend({
 	fooData: null,
 
 	actions: {
+		brushStart: function(e) {
+			console.debug('brush start', e.left.get('x'), e.right.get('x'));
+		},
+		
+		brush: function(e) {
+			console.debug('brush ', e.left.get('x'), e.right.get('x'));
+		},
+
+		brushEnd: function(e) {
+			console.debug('brush end', e.left.get('x'), e.right.get('x'));
+		},
+
 		test: function(){
 			console.log('test!');
 		},

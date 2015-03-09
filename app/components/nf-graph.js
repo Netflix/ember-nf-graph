@@ -1,5 +1,9 @@
 import Ember from 'ember';
 import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
+import GraphPosition from 'ember-cli-ember-dvc/utils/nf/graph-position';
+import { getMousePoint } from 'ember-cli-ember-dvc/utils/nf/svg-dom';
+
+var Observable = Rx.Observable;
 
 var computedBool = Ember.computed.bool;
 
@@ -889,4 +893,127 @@ export default Ember.Component.extend({
     this.set('graphics', []);
     this.set('selected', this.selectMultiple ? [] : null);
   }.on('init'),
+
+  /**
+    The amount of leeway, in pixels, to give before triggering a brush start.
+    @property brushThreshold
+    @type {Number}
+    @default 7
+  */
+  brushThreshold: 7,
+
+  /**
+    The name of the action to trigger when brushing starts
+    @property brushStartAction
+    @type {String}
+    @default null
+  */
+  brushStartAction: null,
+
+  /**
+    The name of the action to trigger when brushing emits a new value
+    @property brushAction
+    @type {String}
+    @default null
+  */
+  brushAction: null,
+
+  /**
+    The name of the action to trigger when brushing ends
+    @property brushEndAction
+    @type {String}
+    @default null
+  */
+  brushEndAction: null,
+
+  didInsertElement: function(){
+    var content = this.$('.nf-graph-content');
+    var self = this;
+
+    var mouseMoves = Observable.fromEvent(content, 'mousemove');
+    var mouseDowns = Observable.fromEvent(content, 'mousedown');
+    var mouseUps = Observable.fromEvent(Ember.$(document), 'mouseup');
+
+    this._brushDisposable = Observable.merge(mouseDowns, mouseMoves).window(mouseDowns, function() { return mouseUps; })
+      .map(function(events) {
+        var starts = events.take(1).map(function(e) {
+          return {
+            originalEvent: e,
+            mousePoint: getMousePoint(content[0], e)
+          };
+        });
+
+        return Observable.combineLatest(starts, events.skip(1), function(start, current) {
+          return [start, current];
+        }).
+        filter(function(d) {
+          var startEvent = d[0].originalEvent;
+          var currentEvent = d[1];
+          return Math.abs(currentEvent.clientX - startEvent.clientX) > self.get('brushThreshold');
+        }).
+        map(function(d) {
+          var start = d[0];
+          var currentEvent =  d[1];
+          var currentPoint = getMousePoint(content[0], d[1]);
+
+          var startPosition = GraphPosition.create({
+            originalEvent: start.originalEvent,
+            graph: self,
+            graphX: start.mousePoint.x,
+            graphY: start.mousePoint.y
+          });
+
+          var currentPosition = GraphPosition.create({
+            originalEvent: currentEvent,
+            graph: self,
+            graphX: currentPoint.x,
+            graphY: currentPoint.y
+          });
+
+          var left = startPosition;
+          var right = currentPosition;
+
+          if(startPosition.graphX > currentPosition.graphX) {
+            left = currentPosition;
+            right = startPosition;
+          }
+
+          return {
+            start: startPosition,
+            current: currentPosition,
+            left: left,
+            right: right
+          }; 
+        });
+      }).
+      flatMap(function(events) {
+         return Observable.merge(events.take(1).map(function(e) {
+          return {
+            action: 'brushStartAction',
+            event: e
+          };
+         }), events.map(function(e) {
+          return {
+            action: 'brushAction',
+            event: e
+          };
+         }), events.last().map(function(e) {
+          return {
+            action: 'brushEndAction',
+            event: e
+          };
+         }));
+      }).
+      forEach(function(d) {
+        self.sendAction(d.action, d.event);
+      }, function(err) {
+        console.error(err);
+      });
+  },
+
+  willDestroyElement: function(){
+    if(this._brushDisposable) {
+      this._brushDisposable.dispose();
+    }
+  },
 });

@@ -6,4 +6,4 @@ export default Ember.ObjectController.extend({
 			console.log('children mutated!!!', context);
 		}
 	}
-})
+});

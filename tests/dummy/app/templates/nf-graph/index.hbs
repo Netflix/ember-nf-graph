@@ -7,6 +7,9 @@
 <output>{{graphWidth}}px</output>
 
 {{#nf-graph xLink=groupX yLink=groupY selected=selectedThings 
+	brushStartAction="brushStart"
+	brushAction="brush"
+	brushEndAction="brushEnd"
 	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50
 	yScaleType="power"}}
 
