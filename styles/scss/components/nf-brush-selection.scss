@@ -10,3 +10,11 @@
 .nf-brush-selection-left-text-bg, .nf-brush-selection-right-text-bg {
 	fill: white;
 }
+
+.nf-brush-selection-left-text {
+	dominant-baseline: text-before-edge;
+}
+
+.nf-brush-selection-right-text {
+	dominant-baseline: text-before-edge;
+}

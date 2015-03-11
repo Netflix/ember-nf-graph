@@ -4,7 +4,12 @@
 <line class="nf-brush-selection-line" y1="0" {{bind-attr x1=leftX x2=leftX y2=graphHeight}}></line>
 <line class="nf-brush-selection-line" y1="0" {{bind-attr x1=rightX x2=rightX y2=graphHeight}}></line>
 
-<rect class="nf-brush-selection-left-text-bg"></rect>
-<text class="nf-brush-selection-left-text">{{leftDisplay}}</text>
-<rect class="nf-brush-selection-right-text-bg"></rect>
-<text class="nf-brush-selection-right-text">{{rightDisplay}}</text>
+<g class="nf-brush-selection-left-display">
+	<rect class="nf-brush-selection-left-text-bg"></rect>
+	<text class="nf-brush-selection-left-text">{{leftDisplay}}</text>
+</g>
+
+<g class="nf-brush-selection-right-display">
+	<rect class="nf-brush-selection-right-text-bg"></rect>
+	<text class="nf-brush-selection-right-text">{{rightDisplay}}</text>
+</g>

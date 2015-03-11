@@ -11,57 +11,88 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
 	formatter: null,
 
+	textPadding: 3,
+
 	_updateLeftText: function(){
+		var root = d3.select(this.element);
+		var g = d3.select('.nf-brush-selection-left-display');
+		var text = g.select('.nf-brush-selection-left-text');
+		var bg = g.select('.nf-brush-selection-left-text-bg');
+
 		var display = this.get('leftDisplay');
-		var text = this.$('.nf-brush-selection-left-text');
-		var bg = this.$('.nf-brush-selection-left-text-bg');
 
 		if(!display) {
-			text.hide();
-			bg.hide();
+			g.attr('hidden', true);
 		} else {
-			text.show();
-			bg.show();
+			g.attr('hidden', null);
 		}
-		
+
 		text.text(display);
-		var texte = d3.select(text[0]);
-		texte.attr('x', this.get('leftX'))
-			.attr('y', this.get('graphHeight'));
-			
-		var bbox = text[0].getBBox();
-		var bge = d3.select(bg[0]);
-		bge.attr('width', bbox.width);
-		bge.attr('height', bbox.height);
-		bge.attr('x', bbox.x);
-		bge.attr('y', bbox.y);
-	}.observes('left').on('didInsertElement'),
+		
+		var textPadding = this.get('textPadding');
+		var leftX = this.get('leftX');
+		var graphHeight = this.get('graphHeight');
+		var bbox = text[0][0].getBBox();
+
+		var doublePad = textPadding * 2;
+		var width = bbox.width + doublePad;
+		var height = bbox.height + doublePad;
+		var x = Math.max(0, leftX - width);
+		var y = graphHeight - height;
+
+		g.attr('transform', 'translate(%@, %@)'.fmt(x, y));
+		
+		text.attr('x', textPadding).
+			attr('y', textPadding);
+
+		bg.attr('width', width).
+			attr('height', height);
+	},
+
+	_onLeftChange: function(){
+		Ember.run.once(this, this._updateLeftText);
+	}.observes('left', 'graphHeight', 'textPadding').on('didInsertElement'),
 
 	_updateRightText: function(){
+		var root = d3.select(this.element);
+		var g = d3.select('.nf-brush-selection-right-display');
+		var text = g.select('.nf-brush-selection-right-text');
+		var bg = g.select('.nf-brush-selection-right-text-bg');
+
 		var display = this.get('rightDisplay');
-		var text = this.$('.nf-brush-selection-right-text');
-		var bg = this.$('.nf-brush-selection-right-text-bg');
 
 		if(!display) {
-			text.hide();
-			bg.hide();
+			g.attr('hidden', true);
 		} else {
-			text.show();
-			bg.show();
+			g.attr('hidden', null);
 		}
 
 		text.text(display);
-		var texte = d3.select(text[0]);
-		texte.attr('x', this.get('rightX'))
-			.attr('y', this.get('graphHeight'));
 
-		var bbox = text[0].getBBox();
-		var bge = d3.select(bg[0]);
-		bge.attr('width', bbox.width);
-		bge.attr('height', bbox.height);
-		bge.attr('x', bbox.x);
-		bge.attr('y', bbox.y);
-	}.observes('right').on('didInsertElement'),
+		var textPadding = this.get('textPadding');
+		var rightX = this.get('rightX');
+		var graphHeight = this.get('graphHeight');
+		var graphWidth = this.get('graphWidth');
+		var bbox = text[0][0].getBBox();
+
+		var doublePad = textPadding * 2;
+		var width = bbox.width + doublePad;
+		var height = bbox.height + doublePad;
+		var x = Math.min(graphWidth - width, rightX);
+		var y = graphHeight - height;
+
+		g.attr('transform', 'translate(%@, %@)'.fmt(x, y));
+		
+		text.attr('x', textPadding).
+			attr('y', textPadding);
+
+		bg.attr('width', width).
+			attr('height', height);
+	},
+
+	_onRightChange: function(){
+		Ember.run.once(this, this._updateRightText);
+	}.observes('right', 'graphHeight', 'graphWidth', 'textPadding').on('didInsertElement'),
 
 	leftDisplay: function(){
 		var formatter = this.get('formatter');
