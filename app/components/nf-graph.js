@@ -931,7 +931,6 @@ export default Ember.Component.extend({
     var content = this.$('.nf-graph-content');
     var self = this;
 
-    var hasBrushAction = this._hasBrushAction.bind(this);
     var toBrushEventStreams = this._toBrushEventStreams.bind(this);
     var toComponentEventStream = this._toComponentEventStream;
     var triggerComponentEvent = this._triggerComponentEvent.bind(this);
@@ -945,7 +944,6 @@ export default Ember.Component.extend({
       // get a streams of mouse events that start on mouse down and end on mouse up
       window(mouseDowns, function() { return mouseUps; })
       // filter out all of them if there are no brush actions registered
-      .filter( hasBrushAction )
       // map the mouse event streams into brush event streams
       .map( toBrushEventStreams ).
       // flatten to a stream of action names and event objects
@@ -1007,7 +1005,6 @@ export default Ember.Component.extend({
     }
   },
 
-
   _toBrushEvent: function(d) {
     var start = d[0];
     var currentEvent =  d[1];
@@ -1054,10 +1051,6 @@ export default Ember.Component.extend({
       originalEvent: e,
       mousePoint: getMousePoint(e.currentTarget, e)
     };
-  },
-
-  _hasBrushAction:function(){
-    return this.get('brushAction') || this.get('brushEndAction') || this.get('brushStartAction');
   },
 
   willDestroyElement: function(){

@@ -13,9 +13,40 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
 	textPadding: 3,
 
+	autoWireUp: true,
+
+	_autoBrushHandler: function(e) {
+		this.set('left', Ember.get(e, 'left.x'));
+		this.set('right', Ember.get(e, 'right.x'));
+	},
+
+	_autoBrushEndHandler: function(e) {
+		this.set('left', undefined);
+		this.set('right', undefined);
+	},
+
+	_wireToGraph: function(){
+		var graph = this.get('graph');
+		var auto = this.get('autoWireUp');
+
+		if(auto) {
+			graph.on('didBrushStart', this, this._autoBrushHandler);
+			graph.on('didBrush', this, this._autoBrushHandler);
+			graph.on('didBrushEnd', this, this._autoBrushEndHandler);
+		} else {
+			graph.off('didBrushStart', this, this._autoBrushHandler);
+			graph.off('didBrush', this, this._autoBrushHandler);
+			graph.off('didBrushEnd', this, this._autoBrushEndHandler);
+		}
+	},
+
+	_autoWireUpChanged: function(){
+		Ember.run.once(this, this._wireToGraph);
+	}.observes('autoWireUp').on('didInsertElement'),
+
 	_updateLeftText: function(){
 		var root = d3.select(this.element);
-		var g = d3.select('.nf-brush-selection-left-display');
+		var g = root.select('.nf-brush-selection-left-display');
 		var text = g.select('.nf-brush-selection-left-text');
 		var bg = g.select('.nf-brush-selection-left-text-bg');
 
@@ -55,7 +86,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
 	_updateRightText: function(){
 		var root = d3.select(this.element);
-		var g = d3.select('.nf-brush-selection-right-display');
+		var g = root.select('.nf-brush-selection-right-display');
 		var text = g.select('.nf-brush-selection-right-text');
 		var bg = g.select('.nf-brush-selection-right-text-bg');
 
