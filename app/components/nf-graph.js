@@ -933,8 +933,8 @@ export default Ember.Component.extend({
 
     var hasBrushAction = this._hasBrushAction.bind(this);
     var toBrushEventStreams = this._toBrushEventStreams.bind(this);
-    var toActionStream = this._toActionStream;
-    var sendBrushAction = this._sendBrushAction.bind(this);
+    var toComponentEventStream = this._toComponentEventStream;
+    var triggerComponentEvent = this._triggerComponentEvent.bind(this);
 
     var mouseMoves = Observable.fromEvent(content, 'mousemove');
     var mouseDowns = Observable.fromEvent(content, 'mousedown');
@@ -949,11 +949,11 @@ export default Ember.Component.extend({
       // map the mouse event streams into brush event streams
       .map( toBrushEventStreams ).
       // flatten to a stream of action names and event objects
-      flatMap( toActionStream ).
+      flatMap( toComponentEventStream ).
       // HACK: this is fairly cosmetic, so skip errors.
       retry().
       // subscribe and send the brush actions via Ember
-      forEach(sendBrushAction);
+      forEach(triggerComponentEvent);
   }.on('didInsertElement'),
 
   _toBrushEventStreams: function(mouseEvents) {
@@ -973,21 +973,40 @@ export default Ember.Component.extend({
       map( toBrushEvent );
   },
 
-  _sendBrushAction: function(d) {
-    this.sendAction(d[0], d[1]);
+  _triggerComponentEvent: function(d) {
+    this.trigger(d[0], d[1]);
   },
 
-  _toActionStream: function(events) {
+  _toComponentEventStream: function(events) {
     return Observable.merge(
       events.take(1).map(function(e) {
-        return ['brushStartAction', e];
+        return ['didBrushStart', e];
       }), events.map(function(e) {
-        return ['brushAction', e];
+        return ['didBrush', e];
       }), events.last().map(function(e) {
-        return ['brushEndAction', e];
+        return ['didBrushEnd', e];
       })
     );
   },
+
+  didBrush: function(e) {
+    if(this.get('brushAction')) {
+      this.sendAction('brushAction', e);
+    }
+  },
+
+  didBrushStart: function(e) {
+    if(this.get('brushStartAction')) {
+      this.sendAction('brushStartAction', e);
+    }
+  },
+
+  didBrushEnd: function(e) {
+    if(this.get('brushEndAction')) {
+      this.sendAction('brushEndAction', e);
+    }
+  },
+
 
   _toBrushEvent: function(d) {
     var start = d[0];
