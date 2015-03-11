@@ -201,7 +201,7 @@ export default Ember.Object.extend({
 				this._x = scale.invert(graphX);
 			} 
 		}
-		return this._x || NaN;
+		return this._x || 0;
 	}.property(&#x27;graphX&#x27;, &#x27;xScale&#x27;),
 
 	/**
@@ -219,7 +219,7 @@ export default Ember.Object.extend({
 				this._y = scale.invert(graphY);
 			} 
 		}
-		return this._y || NaN;
+		return this._y || 0;
 	}.property(&#x27;graphY&#x27;, &#x27;yScale&#x27;),
 
 	/**

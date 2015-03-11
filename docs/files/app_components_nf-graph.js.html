@@ -130,6 +130,11 @@
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
 import { property } from &#x27;ember-cli-ember-dvc/utils/computed-property-helpers&#x27;;
+import GraphPosition from &#x27;ember-cli-ember-dvc/utils/nf/graph-position&#x27;;
+import { getMousePoint } from &#x27;ember-cli-ember-dvc/utils/nf/svg-dom&#x27;;
+import { toArray } from &#x27;ember-cli-ember-dvc/utils/nf/array-helpers&#x27;;
+
+var Observable = Rx.Observable;
 
 var computedBool = Ember.computed.bool;
 
@@ -1019,8 +1024,171 @@ export default Ember.Component.extend({
     this.set(&#x27;graphics&#x27;, []);
     this.set(&#x27;selected&#x27;, this.selectMultiple ? [] : null);
   }.on(&#x27;init&#x27;),
-});
 
+  /**
+    The amount of leeway, in pixels, to give before triggering a brush start.
+    @property brushThreshold
+    @type {Number}
+    @default 7
+  */
+  brushThreshold: 7,
+
+  /**
+    The name of the action to trigger when brushing starts
+    @property brushStartAction
+    @type {String}
+    @default null
+  */
+  brushStartAction: null,
+
+  /**
+    The name of the action to trigger when brushing emits a new value
+    @property brushAction
+    @type {String}
+    @default null
+  */
+  brushAction: null,
+
+  /**
+    The name of the action to trigger when brushing ends
+    @property brushEndAction
+    @type {String}
+    @default null
+  */
+  brushEndAction: null,
+
+  _setupBrushAction: function(){
+    var content = this.$(&#x27;.nf-graph-content&#x27;);
+    var self = this;
+
+    var toBrushEventStreams = this._toBrushEventStreams.bind(this);
+    var toComponentEventStream = this._toComponentEventStream;
+    var triggerComponentEvent = this._triggerComponentEvent.bind(this);
+
+    var mouseMoves = Observable.fromEvent(content, &#x27;mousemove&#x27;);
+    var mouseDowns = Observable.fromEvent(content, &#x27;mousedown&#x27;);
+    var mouseUps = Observable.fromEvent(Ember.$(document), &#x27;mouseup&#x27;);
+    var mouseLeaves = Observable.fromEvent(content, &#x27;mouseleave&#x27;);
+
+    this._brushDisposable = Observable.merge(mouseDowns, mouseMoves, mouseLeaves).
+      // get a streams of mouse events that start on mouse down and end on mouse up
+      window(mouseDowns, function() { return mouseUps; })
+      // filter out all of them if there are no brush actions registered
+      // map the mouse event streams into brush event streams
+      .map( toBrushEventStreams ).
+      // flatten to a stream of action names and event objects
+      flatMap( toComponentEventStream ).
+      // HACK: this is fairly cosmetic, so skip errors.
+      retry().
+      // subscribe and send the brush actions via Ember
+      forEach(triggerComponentEvent);
+  }.on(&#x27;didInsertElement&#x27;),
+
+  _toBrushEventStreams: function(mouseEvents) {
+    var getStartInfo = this._getStartInfo;
+    var byBrushThreshold = this._byBrushThreshold.bind(this);
+    var toBrushEvent = this._toBrushEvent.bind(this);
+
+    // get the starting mouse event
+    return mouseEvents.take(1).
+      // calculate it&#x27;s mouse point and info
+      map( getStartInfo ).
+      // combine the start with the each subsequent mouse event
+      combineLatest(mouseEvents.skip(1), toArray).
+      // filter out everything until the brushThreshold is crossed
+      filter( byBrushThreshold ).
+      // create the brush event object
+      map( toBrushEvent );
+  },
+
+  _triggerComponentEvent: function(d) {
+    this.trigger(d[0], d[1]);
+  },
+
+  _toComponentEventStream: function(events) {
+    return Observable.merge(
+      events.take(1).map(function(e) {
+        return [&#x27;didBrushStart&#x27;, e];
+      }), events.map(function(e) {
+        return [&#x27;didBrush&#x27;, e];
+      }), events.last().map(function(e) {
+        return [&#x27;didBrushEnd&#x27;, e];
+      })
+    );
+  },
+
+  didBrush: function(e) {
+    if(this.get(&#x27;brushAction&#x27;)) {
+      this.sendAction(&#x27;brushAction&#x27;, e);
+    }
+  },
+
+  didBrushStart: function(e) {
+    if(this.get(&#x27;brushStartAction&#x27;)) {
+      this.sendAction(&#x27;brushStartAction&#x27;, e);
+    }
+  },
+
+  didBrushEnd: function(e) {
+    if(this.get(&#x27;brushEndAction&#x27;)) {
+      this.sendAction(&#x27;brushEndAction&#x27;, e);
+    }
+  },
+
+  _toBrushEvent: function(d) {
+    var start = d[0];
+    var currentEvent =  d[1];
+    var currentPoint = getMousePoint(currentEvent.currentTarget, d[1]);
+
+    var startPosition = GraphPosition.create({
+      originalEvent: start.originalEvent,
+      graph: this,
+      graphX: start.mousePoint.x,
+      graphY: start.mousePoint.y
+    });
+
+    var currentPosition = GraphPosition.create({
+      originalEvent: currentEvent,
+      graph: this,
+      graphX: currentPoint.x,
+      graphY: currentPoint.y
+    });
+
+    var left = startPosition;
+    var right = currentPosition;
+
+    if(start.originalEvent.clientX &gt; currentEvent.clientX) {
+      left = currentPosition;
+      right = startPosition;
+    }
+
+    return {
+      start: startPosition,
+      current: currentPosition,
+      left: left,
+      right: right
+    }; 
+  },
+
+  _byBrushThreshold: function(d) {
+    var startEvent = d[0].originalEvent;
+    var currentEvent = d[1];
+    return Math.abs(currentEvent.clientX - startEvent.clientX) &gt; this.get(&#x27;brushThreshold&#x27;);
+  },
+
+  _getStartInfo: function(e) {
+    return {
+      originalEvent: e,
+      mousePoint: getMousePoint(e.currentTarget, e)
+    };
+  },
+
+  willDestroyElement: function(){
+    if(this._brushDisposable) {
+      this._brushDisposable.dispose();
+    }
+  },
+});
     </pre>
 </div>
                     </div>

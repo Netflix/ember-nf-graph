@@ -306,7 +306,8 @@ export default Ember.Mixin.create({
 					// if nothing was grouped by a particular group key, 
 					// remove it&#x27;s rowsController
 					if(!groupKeys[rowsController.get(&#x27;groupKey&#x27;)]) {
-						groupsContent.remove(rowsController);
+						groupsContent.removeObject(rowsController);
+						rowsController.clear();
 						rowsController.destroy();
 					} else {
 						var rowsContent = rowsController.get(&#x27;content&#x27;);
