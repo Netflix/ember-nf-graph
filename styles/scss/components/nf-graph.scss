@@ -12,4 +12,14 @@
   text {
   	font-size: 10px;
   }
+
+  * {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+
+    -moz-user-drag: none;
+    -webkit-user-drag: none;
+    user-drag: none;
+  }
 }

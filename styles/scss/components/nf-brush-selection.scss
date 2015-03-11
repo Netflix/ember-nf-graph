@@ -1,0 +1,12 @@
+.nf-brush-selection-overlay {
+	fill: rgba($gray, .3);
+}
+
+.nf-brush-selection-line {
+	stroke-width: 1px;
+	stroke: $gray;
+}
+
+.nf-brush-selection-left-text-bg, .nf-brush-selection-right-text-bg {
+	fill: white;
+}

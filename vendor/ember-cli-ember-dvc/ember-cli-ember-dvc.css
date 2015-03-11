@@ -79,6 +79,13 @@
   text-anchor: middle; }
 .nf-graph text {
   font-size: 10px; }
+.nf-graph * {
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  user-select: none;
+  -moz-user-drag: none;
+  -webkit-user-drag: none;
+  user-drag: none; }
 
 .nf-graph .nf-graph-content > .background {
   fill: #ffffff; }
@@ -200,3 +207,13 @@
 
 .nf-scroll-area {
   overflow: auto; }
+
+.nf-brush-selection-overlay {
+  fill: rgba(153, 153, 153, 0.3); }
+
+.nf-brush-selection-line {
+  stroke-width: 1px;
+  stroke: #999999; }
+
+.nf-brush-selection-left-text-bg, .nf-brush-selection-right-text-bg {
+  fill: white; }

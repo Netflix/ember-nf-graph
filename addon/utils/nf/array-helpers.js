@@ -119,3 +119,11 @@ export function naturalCompare(a, b) {
 export function naturalSort(arr) {
   arr.sort(naturalCompare);
 }
+
+export function sliceArrayLike(arrayLike, from, to) {
+  return Array.prototype.slice.call(arrayLike, from, to);
+}
+
+export function toArray() {
+  return sliceArrayLike(arguments);
+}
