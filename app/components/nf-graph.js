@@ -994,12 +994,18 @@ export default Ember.Component.extend({
   },
 
   didBrushStart: function(e) {
+    document.body.style.setProperty('-webkit-user-select', 'none');
+    document.body.style.setProperty('-moz-user-select', 'none');
+    document.body.style.setProperty('user-select', 'none');
     if(this.get('brushStartAction')) {
       this.sendAction('brushStartAction', e);
     }
   },
 
   didBrushEnd: function(e) {
+    document.body.style.removeProperty('-webkit-user-select');
+    document.body.style.removeProperty('-moz-user-select');
+    document.body.style.removeProperty('user-select');
     if(this.get('brushEndAction')) {
       this.sendAction('brushEndAction', e);
     }
