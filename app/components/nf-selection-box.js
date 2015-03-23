@@ -110,14 +110,25 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 			.attr('d', rectPath);
 	},
 
+	doUpdatePositionStatic: function(){
+		var boxRect = this.get('boxRectElement');
+		var rectPath = this.get('rectPath');
+
+		boxRect.attr('d', rectPath);
+	},
+
 	/**
 		Schedules an update to the position of the box after render.
 		@method updatePosition
 		@private
 	*/
 	updatePosition: function(){
-		Ember.run.scheduleOnce('afterRender', this, this.doUpdatePosition);
+		Ember.run.once(this, this.doUpdatePosition);
 	}.observes('xMin', 'xMax', 'yMin', 'yMax'),
+
+	staticPositionChange: function(){
+		Ember.run.once(this, this.doUpdatePositionStatic);
+	}.observes('xScale', 'yScale').on('didInsertElement'),
 
 	/**
 		Sets up the required d3 elements after component
