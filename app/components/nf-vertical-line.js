@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
@@ -51,7 +50,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	lineX: property('x', 'xScale', function(x, xScale) {
+	lineX: function(){
+		var xScale = this.get('xScale');
+		var x = this.get('x');
 		return xScale ? xScale(x) : -1;
-	}),
+	}.property('xScale', 'x'),
 });

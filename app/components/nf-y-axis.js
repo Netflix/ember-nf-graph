@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import HasGraphParent  from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
@@ -196,30 +195,39 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  ticks: property('yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData',
-    function(yScale, tickCount, yScaleType, tickPadding, axisLineX, tickLength, isOrientRight, tickFilter, uniqueYData) {
-      var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
-      var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
-      var x2 = axisLineX;
-      var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
+  ticks: function(){
+    var yScale = this.get('yScale');
+    var tickCount = this.get('tickCount');
+    var yScaleType = this.get('graph.yScaleType');
+    var tickPadding = this.get('tickPadding');
+    var axisLineX = this.get('axisLineX');
+    var tickLength = this.get('tickLength');
+    var isOrientRight = this.get('isOrientRight');
+    var tickFilter = this.get('tickFilter');
+    var uniqueYData = this.get('uniqueYData');
+    var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
+    var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
+    var x2 = axisLineX;
+    var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
 
-      var result = ticks.map(function (tick) {
-        return {
-          value: tick,
-          y: yScale(tick),
-          x1: x1,
-          x2: x2,
-          labelx: labelx,
-        };
-      });
+    var result = ticks.map(function (tick) {
+      return {
+        value: tick,
+        y: yScale(tick),
+        x1: x1,
+        x2: x2,
+        labelx: labelx,
+      };
+    });
 
-      if(tickFilter) {
-        result = result.filter(tickFilter);
-      }
-
-      return result;
+    if(tickFilter) {
+      result = result.filter(tickFilter);
     }
-  ),
+
+    return result;
+  }.property('yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 
+    'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData'),
+
 
   /**
     The x position of the axis line.
@@ -227,9 +235,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  axisLineX: property('isOrientRight', 'width', function(isOrientRight, width){
-    return isOrientRight ? 0 : width;
-  }),
+  axisLineX: function(){
+    return this.get('isOrientRight') ? 0 : this.get('width');
+  }.property('isOrientRight', 'width'),
 
   /**
     sets graph's yAxis property on willInsertElement

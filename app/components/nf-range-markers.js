@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 
 /**
 	A container and manager for `nf-range-marker` components.
@@ -48,9 +47,9 @@ export default Ember.Component.extend(HasGraphParent, {
 		@type Array
 		@readonly
 	*/
-	markers: property(function(){
+	markers: function() {
 		return [];
-	}),
+	}.property(),
 
 	/**
 		Adds the passed marker to the `markers` list, and sets the `prevMarker` and `nextMarker`

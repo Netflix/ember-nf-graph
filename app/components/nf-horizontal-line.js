@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
@@ -33,9 +32,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	lineY: property('y', 'yScale', function(y, yScale) {
+	lineY: function(){
+		var y = this.get('y');
+		var yScale = this.get('yScale');
 		return yScale ? yScale(y) : -1;
-	}),
+	}.property('y', 'yScale'),
 
 	/**
 		The left x coordinate of the line

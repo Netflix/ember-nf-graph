@@ -6,7 +6,6 @@ import SelectableGraphic from 'ember-cli-ember-dvc/mixins/graph-selectable-graph
 import RegisteredGraphic from 'ember-cli-ember-dvc/mixins/graph-registered-graphic';
 import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-with-tracking-dot';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 
 /**
   A line graphic for `nf-graph`. Displays a line for the data it's passed.
@@ -45,9 +44,12 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @return {String} an SVG path data string
   */
-  lineFn: property('xScale', 'yScale', 'interpolator', function(xScale, yScale, interpolator) {
+  lineFn: function(){
+    var xScale = this.get('xScale');
+    var yScale = this.get('yScale');
+    var interpolator = this.get('interpolator');
     return this.createLineFn(xScale, yScale, interpolator);
-  }),
+  }.property('xScale', 'yScale', 'interpolator'),
 
   /**
     The SVG path data string to render the line
@@ -56,9 +58,11 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @readonly
   */
-  d: property('renderedData.@each', 'lineFn', function(renderedData, lineFn) {
+  d: function(){
+    var renderedData = this.get('renderedData');
+    var lineFn = this.get('lineFn');
     return lineFn(renderedData);
-  }),
+  }.property('renderedData.@each', 'lineFn'),
 
   /**
     Event handler to toggle the `selected` property on click

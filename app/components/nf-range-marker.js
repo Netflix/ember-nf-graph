@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
@@ -71,9 +70,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  x: property('xMin', 'xScale', function(xMin, xScale) {
-  	return xScale(xMin);
-  }),
+  x: function(){
+    var xScale = this.get('xScale');
+    var xMin = this.get('xMin');
+    return xScale(xMin);
+  }.property('xMin', 'xScale'),
 
   /**
     The computed width of the range marker.
@@ -81,9 +82,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  width: property('xMin', 'xMax', 'xScale', function(xMin, xMax, xScale) {
+  width: function() {
+    var xScale = this.get('xScale');
+    var xMax = this.get('xMax');
+    var xMin = this.get('xMin');
   	return xScale(xMax) - xScale(xMin);
-  }),
+  }.property('xScale', 'xMin', 'xMax'),
 
   /**
     The computed y position of the range marker.
@@ -91,17 +95,23 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: property('container.orient', 'prevMarker.bottom', 'prevMarker.y', 'graph.graphHeight', 'totalHeight', function(orient, prevBottom, prevY, graphHeight, totalHeight){
-  	prevBottom = prevBottom || 0;
+  y: function() {
+    var orient = this.get('container.orient');
+    var prevBottom = this.get('prevMarker.bottom');
+    var prevY = this.get('prevMarker.y');
+    var graphHeight = this.get('graph.graphHeight');
+    var totalHeight = this.get('totalHeight');
 
-  	if(orient === 'bottom') {
-  		return (prevY || graphHeight) - totalHeight;
-  	}
+    prevBottom = prevBottom || 0;
 
-  	if(orient === 'top') {
-  		return prevBottom;
-  	}
-  }),
+    if(orient === 'bottom') {
+      return (prevY || graphHeight) - totalHeight;
+    }
+
+    if(orient === 'top') {
+      return prevBottom;
+    }
+  }.property('container.orient', 'prevMarker.bottom', 'prevMarker.y', 'graph.graphHeight', 'totalHeight'),
 
   /**
     The computed total height of the range marker including its margins.
@@ -109,9 +119,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  totalHeight: property('height', 'marginTop', 'marginBottom', function(height, marginTop, marginBottom) {
-  	return height + marginTop + marginBottom;
-  }),
+  totalHeight: function() {
+    var height = this.get('height');
+    var marginTop = this.get('marginTop');
+    var marginBottom = this.get('marginBottom');
+    return height + marginTop + marginBottom;
+  }.property('height', 'marginTop', 'marginBottom'),
 
   /**
     The computed bottom of the range marker, not including the bottom margin.
@@ -119,9 +132,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  bottom: property('y', 'totalHeight', function(y, totalHeight) {
-  	return y + totalHeight;
-  }),
+  bottom: function(){
+    var y = this.get('y');
+    var totalHeight = this.get('totalHeight');
+    return y + totalHeight;
+  }.property('y', 'totalHeight'),
 
   /**
     The computed SVG transform of the range marker container
@@ -129,9 +144,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: property('y', function(y) {
-  	return 'translate(0 %@)'.fmt(y || 0);
-  }),
+  transform: function(){ 
+    var y = this.get('y');
+    return 'translate(0 %@)'.fmt(y || 0);
+  }.property('y'),
 
   /**
     The computed SVG transform fo the range marker label container.
@@ -139,9 +155,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  labelTransform: property('x', function(x){
-  	return 'translate(%@ 0)'.fmt(x || 0);
-  }),
+  labelTransform: function(){
+    var x = this.get('x');
+    return 'translate(%@ 0)'.fmt(x || 0);
+  }.property('x'),
 
   /**
     Initialization function that registers the range marker with its parent 

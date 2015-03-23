@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
 /**
@@ -52,9 +51,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	cx: property('x', 'xScale', 'hasX', function(x, xScale, hasX) {
+	cx: function(){
+		var x = this.get('x');
+		var xScale = this.get('xScale');
+		var hasX = this.get('hasX');
 		return hasX && xScale ? xScale(x) : -1;
-	}),
+	}.property('x', 'xScale', 'hasX'),
 
 	/**
 		The computed center y coordinate of the circle
@@ -63,9 +65,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	cy: property('y', 'yScale', 'hasY', function(y, yScale, hasY) {
+	cy: function() {
+		var y = this.get('y');
+		var yScale = this.get('yScale');
+		var hasY = this.get('hasY');
 		return hasY && yScale ? yScale(y) : -1;
-	}),
+	}.property('y', 'yScale', 'hasY'),
 
 	/**
 		Toggles the visibility of the dot. If x or y are

@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
 /**
@@ -191,14 +190,15 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueXData: property('graph.xData.@each', function(xData) {
+  uniqueXData: function(){
+    var xData = this.get('graph.xData');
     return xData.reduce(function(unique, d) {
       if(unique.indexOf(d) === -1) {
         unique.push(d);
       }
       return unique;
     }, []);
-  }),
+  }.property('graph.xData.@each'),
 
   /**
     The models for the ticks to display on the axis.
@@ -206,30 +206,37 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  ticks: property('tickCount', 'xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'uniqueXData',
-    function(tickCount, xScale, tickPadding, tickLength, height, orient, tickFilter, xScaleType, uniqueXData) {
-      var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
-      var y1 = orient === 'top' ? height : 0;
-      var y2 = y1 + tickLength;
-      var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);  
-      var halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
-      var result = ticks.map(function(tick) {
-        return {
-          value: tick,
-          x: xScale(tick) + halfBandWidth,
-          y1: y1,
-          y2: y2,
-          labely: labely
-        };
-      });
+  ticks: function(){
+    var tickCount = this.get("tickCount");
+    var xScale = this.get("xScale");
+    var tickPadding = this.get("tickPadding");
+    var tickLength = this.get("tickLength");
+    var height = this.get("height");
+    var orient = this.get("orient");
+    var tickFilter = this.get("tickFilter");
+    var xScaleType = this.get("graph.xScaleType");
+    var uniqueXData = this.get("uniqueXData");
+    var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
+    var y1 = orient === 'top' ? height : 0;
+    var y2 = y1 + tickLength;
+    var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);  
+    var halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
+    var result = ticks.map(function(tick) {
+      return {
+        value: tick,
+        x: xScale(tick) + halfBandWidth,
+        y1: y1,
+        y2: y2,
+        labely: labely
+      };
+    });
 
-      if(tickFilter) {
-        result = result.filter(tickFilter);
-      }
-
-      return result;
+    if(tickFilter) {
+      result = result.filter(tickFilter);
     }
-  ),
+
+    return result;
+  }.property('tickCount', 'xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'uniqueXData'),
 
   /**
     Updates the graph's xAxis property on willInsertElement
@@ -246,7 +253,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  axisLineY: property('orient', 'height', function(orient, height) {
+  axisLineY: function(){
+    var orient = this.get('orient');
+    var height = this.get('height');
     return orient === 'top' ? height : 0;
-  }),
+  }.property('orient', 'height'),
 });

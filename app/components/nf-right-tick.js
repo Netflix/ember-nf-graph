@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
@@ -46,9 +45,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	isVisible: property('y', function(y){
-		return !isNaN(y);
-	}),
+	isVisible: function(){
+		return !isNaN(this.get('y'));
+	}.property('y'),
 
 	/**
 		The calculated y coordinate of the tick
@@ -56,13 +55,16 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@type Number
 		@readonly
 	*/
-	y: property('value', 'yScale', 'graph.paddingTop', function(value, yScale, paddingTop){
+	y: function() {
+		var value = this.get('value');
+		var yScale = this.get('yScale');
+		var paddingTop = this.get('graph.paddingTop');
 		var vy = 0;
 		if(yScale) {
 			vy = yScale(value) || 0;
 		}
 		return vy + paddingTop;
-	}),
+	}.property('value', 'yScale', 'graph.paddingTop'),
 
 	/**
 		The SVG transform used to render the tick
@@ -71,9 +73,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 		@private
 		@readonly
 	*/
-	transform: property('y', 'graph.width', function(y, graphWidth){
+	transform: function(){
+		var y = this.get('y');
+		var graphWidth = this.get('graph.width');
 		return 'translate(%@ %@)'.fmt(graphWidth - 6, y - 3);
-	}),
+	}.property('y', 'graph.width'),
 
 	/**
 		performs the D3 transition to move the tick to the proper position.

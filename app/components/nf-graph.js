@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
 import GraphPosition from 'ember-cli-ember-dvc/utils/nf/graph-position';
 import { getMousePoint } from 'ember-cli-ember-dvc/utils/nf/svg-dom';
 import { toArray } from 'ember-cli-ember-dvc/utils/nf/array-helpers';
@@ -9,7 +8,13 @@ var Observable = Rx.Observable;
 var computedBool = Ember.computed.bool;
 
 var scaleFactoryProperty = function(axis) {
-  return property(axis + 'ScaleType', axis + 'PowerExponent', function (type, powExp) {
+  var scaleTypeKey = axis + 'ScaleType';
+  var powExponentKey = axis + 'PowerExponent';
+
+  return function(){
+    var type = this.get(scaleTypeKey);
+    var powExp = this.get(powExponentKey);
+
     type = typeof type === 'string' ? type.toLowerCase() : '';
     
     if(type === 'linear') {
@@ -34,52 +39,72 @@ var scaleFactoryProperty = function(axis) {
       Ember.warn('unknown scale type: ' + type);
       return d3.scale.linear;
     }
-  });
+  }.property(scaleTypeKey, powExponentKey);
 };
 
 var domainProperty = function(axis) {
-  return property(
-    axis + 'Data', axis + 'Min', axis + 'Max', axis + 'ScaleType', axis + 'LogMin',
-    function(data, min, max, scaleType, logMin) {
-      var domain = null;
+  var dataKey = axis + 'Data';
+  var minKey = axis + 'Min';
+  var maxKey = axis + 'Max';
+  var scaleTypeKey = axis + 'ScaleType';
+  var logMinKey = axis + 'LogMin';
 
-      if(scaleType === 'ordinal') {
-        domain = data;
-      } else {
-        var extent = [min, max];
+  return function(){
+    var data = this.get(dataKey);
+    var min = this.get(minKey);
+    var max = this.get(maxKey);
+    var scaleType = this.get(scaleTypeKey);
+    var logMin = this.get(logMinKey);
+    var domain = null;
 
-        if(scaleType === 'log') {
-          if (extent[0] <= 0) {
-            extent[0] = logMin;
-          }
-          if (extent[1] <= 0) {
-            extent[1] = logMin;
-          }
+    if(scaleType === 'ordinal') {
+      domain = data;
+    } else {
+      var extent = [min, max];
+
+      if(scaleType === 'log') {
+        if (extent[0] <= 0) {
+          extent[0] = logMin;
         }
-
-        domain = extent;
+        if (extent[1] <= 0) {
+          extent[1] = logMin;
+        }
       }
 
-      return domain;
+      domain = extent;
     }
-  );
+
+    return domain;
+  }.property(dataKey, minKey, maxKey, scaleTypeKey, logMinKey);
 };
 
 var scaleProperty = function(axis) {
-  return property(
-    axis + 'ScaleFactory', axis + 'Range', axis + 'Domain', axis + 'ScaleType', axis + 'Axis.tickCount', axis + 'OrdinalPadding', axis + 'OrdinalOuterPadding',
-    function(scaleFactory, range, domain, scaleType, tickCount, ordinalPadding, ordinalOuterPadding) {
-      var scale = scaleFactory();
 
-      if(scaleType === 'ordinal') {
-        scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
-      } else {        
-        scale = scale.domain(domain).range(range).clamp(true);
-      }
+  var scaleFactoryKey = axis + 'ScaleFactory'; 
+  var rangeKey = axis + 'Range'; 
+  var domainKey = axis + 'Domain'; 
+  var scaleTypeKey = axis + 'ScaleType';
+  var ordinalPaddingKey = axis + 'OrdinalPadding'; 
+  var ordinalOuterPaddingKey = axis + 'OrdinalOuterPadding';
 
-      return scale;
+  return function(){
+    var scaleFactory = this.get(scaleFactoryKey);
+    var range = this.get(rangeKey);
+    var domain = this.get(domainKey);
+    var scaleType = this.get(scaleTypeKey);
+    var ordinalPadding = this.get(ordinalPaddingKey);
+    var ordinalOuterPadding = this.get(ordinalOuterPaddingKey);
+
+    var scale = scaleFactory();
+
+    if(scaleType === 'ordinal') {
+      scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
+    } else {        
+      scale = scale.domain(domain).range(range).clamp(true);
     }
-  );
+
+    return scale;
+  }.property(scaleFactoryKey, rangeKey, scaleTypeKey, ordinalPaddingKey, ordinalOuterPaddingKey);
 };
 
 var minProperty = function(axis, defaultTickCount){
@@ -556,9 +581,10 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  xDataExtent: property('xData.@each', function(xData) {
+  xDataExtent: function(){
+    var xData = this.get('xData');
     return xData ? d3.extent(xData) : [null, null];
-  }),
+  }.property('xData.@each'),
 
   /**
     Gets the highest and lowest y values of the graphed data in a two element array.
@@ -566,9 +592,10 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  yDataExtent: property('yData.@each', function(yData) {
+  yDataExtent: function(){
+    var yData = this.get('yData');
     return yData ? d3.extent(yData) : [null, null];
-  }),
+  }.property('yData.@each'),
 
   /**
     Gets all x data from all graphics.
@@ -576,13 +603,14 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  xData: property('graphics.@each.xData', function(graphics) {
+  xData: function(){
+    var graphics = this.get('graphics');
     var all = [];
     graphics.forEach(function(graphic) {
       all = all.concat(graphic.get('xData'));
     });
     return all;
-  }),
+  }.property('graphics.@each.xData'),
 
   /**
     Gets all y data from all graphics
@@ -590,13 +618,14 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  yData: property('graphics.@each.yData', function(graphics) {
+  yData: function(){
+    var graphics = this.get('graphics');
     var all = [];
     graphics.forEach(function(graphic) {
       all = all.concat(graphic.get('yData'));
     });
     return all;
-  }),
+  }.property('graphics.@each.yData'),
 
   /**
     Gets the DOM id for the content clipPath element.
@@ -929,7 +958,6 @@ export default Ember.Component.extend({
 
   _setupBrushAction: function(){
     var content = this.$('.nf-graph-content');
-    var self = this;
 
     var toBrushEventStreams = this._toBrushEventStreams.bind(this);
     var toComponentEventStream = this._toComponentEventStream;
