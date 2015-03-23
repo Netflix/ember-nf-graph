@@ -1,8 +1,8 @@
 {
-  "name": "ember-cli-ember-dvc",
-  "version": "0.6.1",
+  "name": "ember-cli-nf-graph",
+  "version": "1.0.0-beta.1",
   "directories": {
-    "doc": "doc",
+    "doc": "docs",
     "test": "tests"
   },
   "scripts": {
@@ -10,11 +10,11 @@
     "build": "ember build",
     "test": "ember test"
   },
-  "repository": "",
+  "repository": "git@github.com:Netflix/ember-cli-nf-graph.git",
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
+  "author": "Ben Lesh <blesh@netflix.com> and contributors",
   "license": "MIT",
   "devDependencies": {
     "broccoli-asset-rev": "^1.0.0",
