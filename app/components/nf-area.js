@@ -7,8 +7,6 @@ import AreaUtils from 'ember-cli-ember-dvc/mixins/graph-area-utils';
 import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-with-tracking-dot';
 import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
 
-import { property } from 'ember-cli-ember-dvc/utils/computed-property-helpers';
-
 /**
   Adds an area graph to an `nf-graph` component.
   
@@ -79,21 +77,20 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    nextYData: property('renderedData.@each', 'graph.yMin', 'nextArea.renderedData.@each', 
-      function(renderedData, yMin, nextRenderedData) { 
-        var nextData = nextRenderedData || [];
+    nextYData: function(){
+      var renderedData = this.get('renderedData');
+      var nextData = this.get('nextArea.renderedData') || [];
         
-        var result = nextData.map(function(next) {
-          return next[1];
-        });
-        
-        while(result.length < renderedData.length) {
-          result.push(-99999999);
-        }
-
-        return result;
+      var result = nextData.map(function(next) {
+        return next[1];
+      });
+      
+      while(result.length < renderedData.length) {
+        result.push(-99999999);
       }
-    ),
+
+      return result;
+    }.property('renderedData.@each', 'nextArea.renderedData.@each'),
 
     /**
       The current rendered data "zipped" together with the nextYData.
@@ -101,11 +98,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    areaData: property('renderedData.@each', 'nextYData.@each', function(renderedData, nextYData){
-      return renderedData.map(function(r, i){
+    areaData: function(){
+      var nextYData = this.get('nextYData');
+      return this.get('renderedData').map(function(r, i) {
         return [r[0], r[1], nextYData[i]];
       });
-    }),
+    }.property('renderedData.@each', 'nextYData.@each'),
 
 
     /**

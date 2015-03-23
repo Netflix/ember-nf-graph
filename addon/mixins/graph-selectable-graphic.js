@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import { backedProperty } from '../utils/computed-property-helpers';
 
 /**
   Adds functionality to a component to make it a selectable graphic
@@ -27,7 +26,7 @@ export default Ember.Mixin.create({
     @type Boolean
     @default false
   */
-  selected: backedProperty('_selected'),
+  selected: false,
 
   /**
     Alias of selected
