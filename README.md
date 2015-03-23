@@ -1,6 +1,6 @@
-# Ember-cli-nf-graph
+# ember-cli-nf-graph
 
-This README outlines the details of collaborating on this Ember addon.
+A data visualization add-on for Ember
 
 ## Installation
 
@@ -23,3 +23,27 @@ This README outlines the details of collaborating on this Ember addon.
 * `ember build`
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
+
+### Generating Documenation
+
+This project uses YUIDoc to generate documentation. Once YUIDoc is installed run:
+
+```sh
+yuidoc -c yuidoc.json 
+```
+
+The documentation is located in `docs/`.
+
+## Styles
+
+To work around an issue with including SASS in an Ember-CLI Add-On, the styles and building thereof, are 
+now located under `styles/` and must be built from the command line as so:
+
+```sh
+cd styles/
+npm run build
+```
+
+This will output the .css file to the proper directory, and that file must be committed.
+
+
