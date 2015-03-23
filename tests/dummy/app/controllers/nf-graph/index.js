@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.ObjectController.extend({
 	graphWidth: 400,
+	graphHeight: 300,
 	
 	xTickFilter: function() {
 		return true;

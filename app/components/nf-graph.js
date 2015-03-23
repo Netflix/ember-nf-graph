@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import GraphPosition from 'ember-cli-ember-dvc/utils/nf/graph-position';
-import { getMousePoint } from 'ember-cli-ember-dvc/utils/nf/svg-dom';
-import { toArray } from 'ember-cli-ember-dvc/utils/nf/array-helpers';
+import GraphPosition from 'ember-cli-nf-graph/utils/nf/graph-position';
+import { getMousePoint } from 'ember-cli-nf-graph/utils/nf/svg-dom';
+import { toArray } from 'ember-cli-nf-graph/utils/nf/array-helpers';
 
 var Observable = Rx.Observable;
 
@@ -49,6 +49,8 @@ var domainProperty = function(axis) {
   var scaleTypeKey = axis + 'ScaleType';
   var logMinKey = axis + 'LogMin';
 
+  console.debug(dataKey + '.@each', minKey, maxKey, scaleTypeKey, logMinKey);
+
   return function(){
     var data = this.get(dataKey);
     var min = this.get(minKey);
@@ -75,11 +77,10 @@ var domainProperty = function(axis) {
     }
 
     return domain;
-  }.property(dataKey, minKey, maxKey, scaleTypeKey, logMinKey);
+  }.property(dataKey + '.@each', minKey, maxKey, scaleTypeKey, logMinKey);
 };
 
 var scaleProperty = function(axis) {
-
   var scaleFactoryKey = axis + 'ScaleFactory'; 
   var rangeKey = axis + 'Range'; 
   var domainKey = axis + 'Domain'; 
@@ -104,7 +105,7 @@ var scaleProperty = function(axis) {
     }
 
     return scale;
-  }.property(scaleFactoryKey, rangeKey, scaleTypeKey, ordinalPaddingKey, ordinalOuterPaddingKey);
+  }.property(scaleFactoryKey, rangeKey, scaleTypeKey, ordinalPaddingKey, domainKey, ordinalOuterPaddingKey);
 };
 
 var minProperty = function(axis, defaultTickCount){
@@ -584,7 +585,7 @@ export default Ember.Component.extend({
   xDataExtent: function(){
     var xData = this.get('xData');
     return xData ? d3.extent(xData) : [null, null];
-  }.property('xData.@each'),
+  }.property('xData'),
 
   /**
     Gets the highest and lowest y values of the graphed data in a two element array.
@@ -595,7 +596,7 @@ export default Ember.Component.extend({
   yDataExtent: function(){
     var yData = this.get('yData');
     return yData ? d3.extent(yData) : [null, null];
-  }.property('yData.@each'),
+  }.property('yData'),
 
   /**
     Gets all x data from all graphics.

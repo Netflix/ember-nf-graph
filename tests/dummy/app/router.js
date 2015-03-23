@@ -10,18 +10,6 @@ Router.map(function() {
 		this.route('/');
 		this.route('nf-bars');
 	});
-
-	this.resource('nf-table', function(){
-		this.route('/');
-	});
-
-	this.resource('nf-table-manager', function(){
-		this.route('/');
-	});
-
-	this.resource('nf-inline-graph', function(){
-		this.route('/');
-	});
 });
 
 export default Router;

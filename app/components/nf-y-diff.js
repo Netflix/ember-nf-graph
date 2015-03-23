@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
-import { normalizeScale } from 'ember-cli-ember-dvc/utils/nf/scale-utils';
+import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
+import RequireScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-source';
+import { normalizeScale } from 'ember-cli-nf-graph/utils/nf/scale-utils';
 
 /**
 	Draws a box underneath (or over) the y axis to between the given `a` and `b`
@@ -221,7 +221,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 	*/
 	transition: function(){
 		Ember.run.once(this, this.doTransition);
-	}.observes('a', 'b').on('init'),
+	}.observes('a', 'b'),
 
 	/**
 		Updates to d3 managed DOM elments that do
@@ -235,6 +235,19 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 			contentElement.attr('transform', contentTransform);
 		}
 	},
+
+	adjustGraphHeight: function(){
+		var rectElement = this.get('rectElement');
+		var contentElement = this.get('contentElement');
+
+		if(rectElement) {
+			rectElement.attr('d', this.get('rectPath'));
+		}
+
+		if(contentElement) {
+			contentElement.attr('transform', this.get('contentTransform'));
+		}
+	}.observes('graph.graphHeight').on('didInsertElement'),
 
 	/**
 		Schedules a call to `doAdjustWidth` on afterRender

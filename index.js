@@ -2,8 +2,8 @@
 'use strict';
 
 module.exports = {
-  name: 'ember-cli-ember-dvc',
-
+  name: 'ember-cli-nf-graph',
+  
   included: function(app) {
   	this._super.included(app);
 

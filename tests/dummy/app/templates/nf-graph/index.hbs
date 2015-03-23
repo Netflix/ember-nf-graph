@@ -1,6 +1,7 @@
 <h1>Graph - Basics</h1>
 
 <label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label><output>{{graphWidth}}px</output><br/>
+<label>Graph Height: {{input type="range" min="10" max="1000" value=graphHeight}}</label><output>{{graphHeight}}px</output><br/>
 <label>Graph1 Diff A: {{input type="range" min="0" max="1000" value=diffA}}</label><output>{{diffA}}</output><br/>
 <label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
 <label>Multiplier Y: {{input type="range" min="0" step=".01" max="2" value=multiY}}</label><output>{{multiY}}</output><br/>
@@ -10,7 +11,7 @@
 	brushStartAction="brushStart"
 	brushAction="brush"
 	brushEndAction="brushEnd"
-	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50
+	width=graphWidth height=graphHeight showFrets="true" showLanes="true" paddingTop=50
 	yScaleType="power"}}
 
 	{{#nf-graph-content}}
@@ -81,7 +82,7 @@
 	brushStartAction="brushStart"
 	brushAction="brush"
 	brushEndAction="brushEnd"
-	width=graphWidth height="300" showFrets="true" showLanes="true" paddingTop=50}}
+	width=graphWidth height=graphHeight showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
 		{{#nf-area-stack}}

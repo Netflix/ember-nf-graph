@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
+import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
+import RequireScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-source';
 
 /**
 	Plots a circle at a given x and y domain value on an `nf-graph`.

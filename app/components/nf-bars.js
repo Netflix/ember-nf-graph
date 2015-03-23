@@ -1,12 +1,12 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import DataGraphic from 'ember-cli-ember-dvc/mixins/graph-data-graphic';
-import RegisteredGraphic from 'ember-cli-ember-dvc/mixins/graph-registered-graphic';
-import parsePropExpr from 'ember-cli-ember-dvc/utils/parse-property-expression';
-import RequireScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
-import GraphicWithTrackingDot from 'ember-cli-ember-dvc/mixins/graph-graphic-with-tracking-dot';
-import { normalizeScale } from 'ember-cli-ember-dvc/utils/nf/scale-utils';
-import { getRectPath } from 'ember-cli-ember-dvc/utils/nf/svg-dom';
+import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
+import DataGraphic from 'ember-cli-nf-graph/mixins/graph-data-graphic';
+import RegisteredGraphic from 'ember-cli-nf-graph/mixins/graph-registered-graphic';
+import parsePropExpr from 'ember-cli-nf-graph/utils/parse-property-expression';
+import RequireScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-source';
+import GraphicWithTrackingDot from 'ember-cli-nf-graph/mixins/graph-graphic-with-tracking-dot';
+import { normalizeScale } from 'ember-cli-nf-graph/utils/nf/scale-utils';
+import { getRectPath } from 'ember-cli-nf-graph/utils/nf/svg-dom';
 
 /**
 	Adds a bar graph to an `nf-graph` component.

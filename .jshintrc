@@ -3,8 +3,7 @@
     "document",
     "window",
     "-Promise",
-    "d3",
-    "Rx"
+    "d3"
   ],
   "browser": true,
   "boss": true,

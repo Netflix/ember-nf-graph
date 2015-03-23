@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-ember-dvc/mixins/graph-has-graph-parent';
-import RequiresScaleSource from 'ember-cli-ember-dvc/mixins/graph-requires-scale-source';
-import { normalizeScale } from 'ember-cli-ember-dvc/utils/nf/scale-utils';
-import SelectableGraphic from 'ember-cli-ember-dvc/mixins/graph-selectable-graphic';
+import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
+import RequiresScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-source';
+import { normalizeScale } from 'ember-cli-nf-graph/utils/nf/scale-utils';
+import SelectableGraphic from 'ember-cli-nf-graph/mixins/graph-selectable-graphic';
 
 /**
 	An SVG path primitive that plots based on a graph's scale.

@@ -18,7 +18,4 @@ var app = new EmberAddon();
 // please specify an object with the list of modules as keys
 // along with the exports of each module as its value.
 
-app.import(app.bowerDirectory + '/d3/d3.js');
-app.import('vendor/ember-cli-ember-dvc/ember-cli-ember-dvc.css');
-
 module.exports = app.toTree();

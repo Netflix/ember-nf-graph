@@ -1,20 +1,23 @@
 {
-  "name": "ember-cli-ember-dvc",
-  "version": "0.6.1",
+  "name": "ember-cli-nf-graph",
   "dependencies": {
     "handlebars": "~1.3.0",
     "jquery": "^1.11.1",
     "ember": "1.8.1",
-    "ember-data": "1.0.0-beta.12",
-    "ember-resolver": "~0.1.10",
-    "loader.js": "stefanpenner/loader.js#1.0.1",
-    "ember-cli-shims": "stefanpenner/ember-cli-shims#0.0.3",
-    "ember-cli-test-loader": "rwjblue/ember-cli-test-loader#0.0.4",
-    "ember-load-initializers": "stefanpenner/ember-load-initializers#0.0.2",
-    "ember-qunit": "0.1.8",
-    "ember-qunit-notifications": "0.0.4",
-    "qunit": "~1.15.0",
-    "d3": "~3.5.3",
+    "ember-data": "1.0.0-beta.14.1",
+    "ember-resolver": "~0.1.11",
+    "loader.js": "ember-cli/loader.js#1.0.1",
+    "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
+    "ember-cli-test-loader": "ember-cli/ember-cli-test-loader#0.1.1",
+    "ember-load-initializers": "ember-cli/ember-load-initializers#0.0.2",
+    "ember-qunit": "0.2.8",
+    "ember-qunit-notifications": "0.0.7",
+    "qunit": "~1.17.1",
+    "d3": "~3.5.5",
+    "rxjs": "~2.4.6",
     "rx-ember": "~0.2.3"
+  },
+  "resolutions": {
+    "rxjs": "~2.4.6"
   }
 }
