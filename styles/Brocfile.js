@@ -17,10 +17,10 @@ var imageTree = sassImageCompiler('images', {
 
 var stylesTree = mergeTrees(['scss', imageTree]);
 
-var compiledCss = scssCompile([stylesTree], 'main.scss', 'ember-cli-ember-dvc.css');
+var compiledCss = scssCompile([stylesTree], 'main.scss', 'ember-cli-nf-graph.css');
 
 // var exportedCss = exportTree(compiledCss, {
-// 	destDir: 'ember-cli-ember-dvc', 
+// 	destDir: 'ember-cli-nf-graph', 
 //  	clobber: true
 // });
 

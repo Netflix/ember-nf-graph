@@ -1,5 +1,28 @@
 import Ember from 'ember';
 
+function generateLineData(xStart, yMin, yMax, variance, count, yStart){
+	var p = yStart || 0;
+	return range(count).map(function(d, i) {
+		var y = p + (Math.random() * variance) - (variance / 2);
+		y = Math.min(yMax, Math.max(yMin, y));
+		p = y;
+		return {
+			x: xStart + i,
+			y: y
+		};
+	});
+}
+
+
+function range(count) {
+	var output = [];
+	var i = 0;
+	while(i < count) {
+		output.push(i++);
+	}
+	return output;
+}
+
 export default Ember.ObjectController.extend({
 	graphWidth: 400,
 	graphHeight: 300,
@@ -20,6 +43,10 @@ export default Ember.ObjectController.extend({
 	fooData: null,
 
 	actions: {
+		loadNewData: function(){
+			this.set('lineData', generateLineData(0, 0, 2000, 200, 20, 500));
+		},
+
 		brushStart: function(e) {
 			console.debug('brush start', e.left.get('x'), e.right.get('x'));
 			this.set('brushLeft', e.left.get('x'));

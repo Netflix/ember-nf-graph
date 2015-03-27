@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ../vendor/ember-cli-ember-dvc && broccoli build ../vendor/ember-cli-ember-dvc"
+    "build": "rm -rf ../vendor/ember-cli-nf-graph && broccoli build ../vendor/ember-cli-nf-graph"
   },
   "author": "",
   "license": "ISC",

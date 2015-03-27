@@ -1,6 +1,6 @@
 {
-    "name": "Ember-CLI-Ember-DVC",
-    "description": "Ember Data Visualization Components for Ember-CLI",
+    "name": "ember-cli-nf-graph",
+    "description": "A DSL for creating graphs with Ember",
     "options": {
         "outdir": "./docs",
         "paths": ["addon/", "app/"]

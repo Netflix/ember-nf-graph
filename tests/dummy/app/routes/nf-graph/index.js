@@ -12,7 +12,7 @@ export default Ember.Route.extend({
 	}
 });
 
-function generateLineData(xStart, yMin, yMax, variance, count, yStart){
+export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 	var p = yStart || 0;
 	return range(count).map(function(d, i) {
 		var y = p + (Math.random() * variance) - (variance / 2);

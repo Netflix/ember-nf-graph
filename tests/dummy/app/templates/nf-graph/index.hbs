@@ -1,5 +1,7 @@
 <h1>Graph - Basics</h1>
 
+<button id="loadNewData" {{action 'loadNewData'}}>Load New Data</button>
+
 <label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label><output>{{graphWidth}}px</output><br/>
 <label>Graph Height: {{input type="range" min="10" max="1000" value=graphHeight}}</label><output>{{graphHeight}}px</output><br/>
 <label>Graph1 Diff A: {{input type="range" min="0" max="1000" value=diffA}}</label><output>{{diffA}}</output><br/>
@@ -28,11 +30,11 @@
 		{{/nf-gg}}
 
 		{{nf-svg-rect x=1 y=diffA width=2 height=diffB}}
-		
+		{{!-- 
 		{{#nf-plots data=lineData action="showData" scaleZoomY=multiY}}
 			<image xlink:href="http://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" 
 				x="0" y="0" width="40" height="40" transform="translate(-20 -20)"/>
-		{{/nf-plots}}
+		{{/nf-plots}} --}}
 
 
 		{{#if shownData}}
