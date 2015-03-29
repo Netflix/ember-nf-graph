@@ -1,0 +1,7 @@
+- 1.0.0-beta.2
+  - fixed license
+  - updated documentation and removed document cruft
+  - added a changelog :P
+  - made meta joke in changelog with appropriate emoticon
+- 1.0.0-beta.1
+  - just releasing to public
