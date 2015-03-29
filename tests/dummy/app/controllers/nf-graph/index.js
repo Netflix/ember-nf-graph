@@ -26,6 +26,8 @@ function range(count) {
 export default Ember.ObjectController.extend({
 	graphWidth: 400,
 	graphHeight: 300,
+
+	queryParams: ['graphWidth'],
 	
 	xTickFilter: function() {
 		return true;
@@ -44,7 +46,7 @@ export default Ember.ObjectController.extend({
 
 	actions: {
 		loadNewData: function(){
-			this.set('lineData', generateLineData(0, 0, 2000, 200, 20, 500));
+			this.set('lineData', generateLineData(0, 0, 2000, 200, 240, 500));
 		},
 
 		brushStart: function(e) {

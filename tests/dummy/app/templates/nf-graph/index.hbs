@@ -2,7 +2,7 @@
 
 <button id="loadNewData" {{action 'loadNewData'}}>Load New Data</button>
 
-<label>Graph Width: {{input type="range" min="10" max="1000" value=graphWidth}}</label><output>{{graphWidth}}px</output><br/>
+<label>Graph Width: {{input name="graphWidth" type="range" min="10" max="1000" value=graphWidth}}</label><output>{{graphWidth}}px</output><br/>
 <label>Graph Height: {{input type="range" min="10" max="1000" value=graphHeight}}</label><output>{{graphHeight}}px</output><br/>
 <label>Graph1 Diff A: {{input type="range" min="0" max="1000" value=diffA}}</label><output>{{diffA}}</output><br/>
 <label>Graph1 Diff B: {{input type="range" min="0" max="1000" value=diffB}}</label><output>{{diffB}}</output><br/>
@@ -18,7 +18,7 @@
 
 	{{#nf-graph-content}}
 		{{#nf-gg scaleZoomX=multiY scaleZoomY=multiY}}
-			{{nf-area selectable=1 selected=fooSelected data=lineData 
+			{{nf-line selectable=1 selected=fooSelected data=lineData 
 				trackedData=fooData
 				hoverData=fooHovered
 				trackingMode="snap-last"}}
@@ -29,14 +29,14 @@
 			{{nf-selection-box xMin=10 xMax=50 yMin=diffA yMax=diffB}}
 		{{/nf-gg}}
 
-		{{nf-svg-rect x=1 y=diffA width=2 height=diffB}}
+		{{!-- {{nf-svg-rect x=1 y=diffA width=2 height=diffB}} --}}
 		{{!-- 
 		{{#nf-plots data=lineData action="showData" scaleZoomY=multiY}}
 			<image xlink:href="http://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" 
 				x="0" y="0" width="40" height="40" transform="translate(-20 -20)"/>
 		{{/nf-plots}} --}}
 
-
+{{!-- 
 		{{#if shownData}}
 			{{#nf-plot x=shownData.x y=shownData.y}}
 				<foreignObject width="150" height="50">
@@ -45,7 +45,7 @@
 					</div>
 				</foreignObject>
 			{{/nf-plot}}
-		{{/if}}
+		{{/if}} --}}
 
 		{{nf-brush-selection left=brushLeft right=brushRight}}
 	{{/nf-graph-content}}

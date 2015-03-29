@@ -18,7 +18,7 @@ describe('deep tree baseline', function() {
     browser.ignoreSynchronization = true;
     //Load the benchmark, with a tree depth of 9
 
-    browser.get('http://localhost:4200/nf-graph').then(function(){
+    browser.get('http://localhost:4200/nf-graph?graphWidth=900').then(function(){
       // browser.get('http://localhost:8080/tree.html?depth='+depth);
       /*
        * Tell benchpress to click the buttons to destroy and re-create the tree for each sample. 
@@ -26,6 +26,9 @@ describe('deep tree baseline', function() {
        * sampling as soon as the calculated regression slope for last 20 samples is stable.
        */
       runner.sample({
+        params: {
+          name: 'graphWidth', value: 900, scale: 'sqrt'
+        },
         id: 'deep-tree',
         execute: function() {
           /*
@@ -33,6 +36,7 @@ describe('deep tree baseline', function() {
            * script.
            */
            $('#loadNewData').click();
+
         },
         bindings: [
           // benchpress.bind(benchpress.Options.SAMPLE_DESCRIPTION).toValue({
