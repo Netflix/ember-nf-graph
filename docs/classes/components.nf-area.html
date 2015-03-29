@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>components.nf-area - Ember-CLI-Ember-DVC</title>
+    <title>components.nf-area - ember-cli-nf-graph</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -14,7 +14,7 @@
 <div id="doc">
     <div id="hd" class="yui3-g header">
         <div class="yui3-u-3-4">
-                <h1><img src="../assets/css/logo.png" title="Ember-CLI-Ember-DVC" width="117" height="52"></h1>
+                <h1><img src="../assets/css/logo.png" title="ember-cli-nf-graph" width="117" height="52"></h1>
         </div>
         <div class="yui3-u-1-4 version">
             <em>API Docs for: </em>
@@ -41,14 +41,11 @@
                                 <li><a href="../classes/components.nf-area.html">components.nf-area</a></li>
                                 <li><a href="../classes/components.nf-area-stack.html">components.nf-area-stack</a></li>
                                 <li><a href="../classes/components.nf-bars.html">components.nf-bars</a></li>
-                                <li><a href="../classes/components.nf-cell.html">components.nf-cell</a></li>
-                                <li><a href="../classes/components.nf-column.html">components.nf-column</a></li>
                                 <li><a href="../classes/components.nf-crosshair.html">components.nf-crosshair</a></li>
                                 <li><a href="../classes/components.nf-dot.html">components.nf-dot</a></li>
                                 <li><a href="../classes/components.nf-gg.html">components.nf-gg</a></li>
                                 <li><a href="../classes/components.nf-graph.html">components.nf-graph</a></li>
                                 <li><a href="../classes/components.nf-graph-content.html">components.nf-graph-content</a></li>
-                                <li><a href="../classes/components.nf-header.html">components.nf-header</a></li>
                                 <li><a href="../classes/components.nf-horizontal-line.html">components.nf-horizontal-line</a></li>
                                 <li><a href="../classes/components.nf-line.html">components.nf-line</a></li>
                                 <li><a href="../classes/components.nf-plot.html">components.nf-plot</a></li>
@@ -60,9 +57,6 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
-                                <li><a href="../classes/components.nf-table.html">components.nf-table</a></li>
-                                <li><a href="../classes/components.nf-table-group.html">components.nf-table-group</a></li>
-                                <li><a href="../classes/components.nf-table-manager.html">components.nf-table-manager</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -77,8 +71,6 @@
                                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
                                 <li><a href="../classes/mixins.graph-requires-scale-source.html">mixins.graph-requires-scale-source</a></li>
                                 <li><a href="../classes/mixins.graph-selectable-graphic.html">mixins.graph-selectable-graphic</a></li>
-                                <li><a href="../classes/mixins.table-column-registrar.html">mixins.table-column-registrar</a></li>
-                                <li><a href="../classes/mixins.table-management.html">mixins.table-management</a></li>
                                 <li><a href="../classes/utils.nf.graph-event.html">utils.nf.graph-event</a></li>
                                 <li><a href="../classes/utils.nf.graph-mouse-event.html">utils.nf.graph-mouse-event</a></li>
                                 <li><a href="../classes/utils.nf.graph-position.html">utils.nf.graph-position</a></li>
@@ -87,7 +79,6 @@
                             </ul>
                 
                             <ul id="api-modules" class="apis modules">
-                                <li><a href="../modules/multi-sort.html">multi-sort</a></li>
                                 <li><a href="../modules/scale-utils.html">scale-utils</a></li>
                                 <li><a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a></li>
                                 <li><a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a></li>
@@ -144,17 +135,17 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/app_components_nf-area.js.html#l12"><code>app&#x2F;components&#x2F;nf-area.js:12</code></a>
+            Defined in: <a href="../files/app_components_nf-area.js.html#l10"><code>app&#x2F;components&#x2F;nf-area.js:10</code></a>
         </div>
 
-            Module: <a href="../modules/multi-sort.html">multi-sort</a>
+            Module: <a href="../modules/utils_nf_svg-dom.html">utils/nf/svg-dom</a>
 
 </div>
 
 
 <div class="box intro">
     <p>Adds an area graph to an <code>nf-graph</code> component.</p>
-<p>Optionally, if it&#39;s located within an <code>nf-area-stack</code> component, it will work with
+<p>Optionally, if it's located within an <code>nf-area-stack</code> component, it will work with
 sibling <code>nf-area</code> components to create a stacked graph.</p>
 
 </div>
@@ -400,8 +391,8 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
     </div>
 
     <div class="description">
-        <p>Initalization method that gets the <code>nf-graph</code> parent
-and assigns it to <code>graph</code></p>
+        <p>&lt;p&gt;Initalization method that gets the &lt;code&gt;nf-graph&lt;/code&gt; parent
+and assigns it to &lt;code&gt;graph&lt;/code&gt;&lt;/p&gt;</p>
 
     </div>
 
@@ -433,7 +424,7 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Sets up subscriptions to content hover events.</p>
+        <p>&lt;p&gt;Sets up subscriptions to content hover events.&lt;/p&gt;</p>
 
     </div>
 
@@ -465,8 +456,8 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>calls <a href="../classes/components.nf-graph.html#method_registerGraphic" class="crosslink">registerGraphic</a> on
-<code>didInsertElement</code>.</p>
+        <p>&lt;p&gt;calls &lt;a href=&quot;../classes/components.nf-graph.html#method_registerGraphic&quot; class=&quot;crosslink&quot;&gt;registerGraphic&lt;/a&gt; on
+&lt;code&gt;didInsertElement&lt;/code&gt;.&lt;/p&gt;</p>
 
     </div>
 
@@ -498,8 +489,8 @@ and assigns it to <code>graph</code></p>
     </div>
 
     <div class="description">
-        <p>Observes changes to tracked data and sends the
-didTrack action.</p>
+        <p>&lt;p&gt;Observes changes to tracked data and sends the
+didTrack action.&lt;/p&gt;</p>
 
     </div>
 
@@ -531,8 +522,8 @@ didTrack action.</p>
     </div>
 
     <div class="description">
-        <p>Observes impending changes to trackedData and sends
-the willTrack action.</p>
+        <p>&lt;p&gt;Observes impending changes to trackedData and sends
+the willTrack action.&lt;/p&gt;</p>
 
     </div>
 
@@ -564,7 +555,7 @@ the willTrack action.</p>
     </div>
 
     <div class="description">
-        <p>Tears down subscriptions to content hover events.</p>
+        <p>&lt;p&gt;Tears down subscriptions to content hover events.&lt;/p&gt;</p>
 
     </div>
 
@@ -596,8 +587,8 @@ the willTrack action.</p>
     </div>
 
     <div class="description">
-        <p>calls <a href="../classes/components.nf-graph.html#method_unregisterGraphic" class="crosslink">unregisterGraphic</a> on
-<code>didInsertElement</code>.</p>
+        <p>&lt;p&gt;calls &lt;a href=&quot;../classes/components.nf-graph.html#method_unregisterGraphic&quot; class=&quot;crosslink&quot;&gt;unregisterGraphic&lt;/a&gt; on
+&lt;code&gt;didInsertElement&lt;/code&gt;.&lt;/p&gt;</p>
 
     </div>
 
@@ -621,7 +612,7 @@ the willTrack action.</p>
     <div class="meta">
                 <p>Inherited from
                 <a href="../classes/mixins.graph-selectable-graphic.html#method__updateGraphSelected">mixins.graph-selectable-graphic</a>:
-        <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l39"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:39</code></a>
+        <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l38"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:38</code></a>
         </p>
 
 
@@ -629,9 +620,9 @@ the willTrack action.</p>
     </div>
 
     <div class="description">
-        <p>Makes calls to the parent nf-graph to update it&#39;s
-<code>selected</code> property. Observes changes to <code>selected</code> and also 
-fires on <code>didInsertElement</code>.</p>
+        <p>&lt;p&gt;Makes calls to the parent nf-graph to update it's
+&lt;code&gt;selected&lt;/code&gt; property. Observes changes to &lt;code&gt;selected&lt;/code&gt; and also
+fires on &lt;code&gt;didInsertElement&lt;/code&gt;.&lt;/p&gt;</p>
 
     </div>
 
@@ -677,7 +668,7 @@ fires on <code>didInsertElement</code>.</p>
     </div>
 
     <div class="description">
-        <p>Creates a d3 area function from a given set of scales and an interpolator</p>
+        <p>&lt;p&gt;Creates a d3 area function from a given set of scales and an interpolator&lt;/p&gt;</p>
 
     </div>
 
@@ -691,7 +682,7 @@ fires on <code>didInsertElement</code>.</p>
 
 
                     <div class="param-description">
-                        <p>a d3 scale</p>
+                        <p>&lt;p&gt;a d3 scale&lt;/p&gt;</p>
 
                     </div>
 
@@ -702,7 +693,7 @@ fires on <code>didInsertElement</code>.</p>
 
 
                     <div class="param-description">
-                        <p>a d3 scale</p>
+                        <p>&lt;p&gt;a d3 scale&lt;/p&gt;</p>
 
                     </div>
 
@@ -713,7 +704,7 @@ fires on <code>didInsertElement</code>.</p>
 
 
                     <div class="param-description">
-                        <p>the name of the d3 interpolator to use.</p>
+                        <p>&lt;p&gt;the name of the d3 interpolator to use.&lt;/p&gt;</p>
 
                     </div>
 
@@ -726,7 +717,7 @@ fires on <code>didInsertElement</code>.</p>
 
             <div class="returns-description">
                         <span class="type">Function</span>:
-                    <p>a function that when called will create SVG path data.</p>
+                    <p>&lt;p&gt;a function that when called will create SVG path data.&lt;/p&gt;</p>
 
             </div>
         </div>
@@ -763,7 +754,7 @@ fires on <code>didInsertElement</code>.</p>
     </div>
 
     <div class="description">
-        <p>Event handler for content hoverChange event. Triggers <code>didHoverChange</code>.</p>
+        <p>&lt;p&gt;Event handler for content hoverChange event. Triggers &lt;code&gt;didHoverChange&lt;/code&gt;.&lt;/p&gt;</p>
 
     </div>
 
@@ -817,7 +808,7 @@ fires on <code>didInsertElement</code>.</p>
     </div>
 
     <div class="description">
-        <p>Handles the graph-content&#39;s hoverEnd event and triggers didHoverEnd</p>
+        <p>&lt;p&gt;Handles the graph-content's hoverEnd event and triggers didHoverEnd&lt;/p&gt;</p>
 
     </div>
 
@@ -870,7 +861,7 @@ fires on <code>didInsertElement</code>.</p>
     </div>
 
     <div class="description">
-        <p>Event handler for didHoverChange. Sends hoverChange action.</p>
+        <p>&lt;p&gt;Event handler for didHoverChange. Sends hoverChange action.&lt;/p&gt;</p>
 
     </div>
 
@@ -923,7 +914,7 @@ fires on <code>didInsertElement</code>.</p>
     </div>
 
     <div class="description">
-        <p>Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.</p>
+        <p>&lt;p&gt;Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.&lt;/p&gt;</p>
 
     </div>
 
@@ -937,7 +928,7 @@ fires on <code>didInsertElement</code>.</p>
 
 
                     <div class="param-description">
-                        <p>hover end event object.</p>
+                        <p>&lt;p&gt;hover end event object.&lt;/p&gt;</p>
 
                     </div>
 
@@ -964,7 +955,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l98"><code>app&#x2F;components&#x2F;nf-area.js:98</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l95"><code>app&#x2F;components&#x2F;nf-area.js:95</code></a>
                             </p>
                     
                     
@@ -989,7 +980,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l111"><code>app&#x2F;components&#x2F;nf-area.js:111</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l109"><code>app&#x2F;components&#x2F;nf-area.js:109</code></a>
                             </p>
                     
                     
@@ -1014,7 +1005,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l124"><code>app&#x2F;components&#x2F;nf-area.js:124</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l122"><code>app&#x2F;components&#x2F;nf-area.js:122</code></a>
                             </p>
                     
                     
@@ -1046,7 +1037,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Gets or sets the data used by the component to plot itself.</p>
+                            <p>&lt;p&gt;Gets or sets the data used by the component to plot itself.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1072,7 +1063,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The action to send on <code>didTrack</code>.</p>
+                            <p>&lt;p&gt;The action to send on &lt;code&gt;didTrack&lt;/code&gt;.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1098,8 +1089,8 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
-                    that is actually visible within the x domain.</p>
+                            <p>&lt;p&gt;The first element from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_renderedData&quot; class=&quot;crosslink&quot;&gt;renderedData&lt;/a&gt;
+                    that is actually visible within the x domain.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1124,7 +1115,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The parent graph for a component.</p>
+                            <p>&lt;p&gt;The parent graph for a component.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1150,7 +1141,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The action name to send to the controller when the <code>hoverChange</code> event fires</p>
+                            <p>&lt;p&gt;The action name to send to the controller when the &lt;code&gt;hoverChange&lt;/code&gt; event fires&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1176,7 +1167,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Name of the action to send on <code>hoverEnd</code></p>
+                            <p>&lt;p&gt;Name of the action to send on &lt;code&gt;hoverEnd&lt;/code&gt;&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1195,7 +1186,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l35"><code>app&#x2F;components&#x2F;nf-area.js:35</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l33"><code>app&#x2F;components&#x2F;nf-area.js:33</code></a>
                             </p>
                     
                     
@@ -1222,7 +1213,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-selectable-graphic.html#property_isSelected">mixins.graph-selectable-graphic</a>:
-                            <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l32"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:32</code></a>
+                            <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l31"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:31</code></a>
                             </p>
                     
                                 <p>Deprecated: use &#x60;selected&#x60;</p>
@@ -1230,7 +1221,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Alias of selected</p>
+                            <p>&lt;p&gt;Alias of selected&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1255,8 +1246,8 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
-                    that is actually visible within the x domain.</p>
+                            <p>&lt;p&gt;The last element from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_renderedData&quot; class=&quot;crosslink&quot;&gt;renderedData&lt;/a&gt;
+                    that is actually visible within the x domain.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1274,7 +1265,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l51"><code>app&#x2F;components&#x2F;nf-area.js:51</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l49"><code>app&#x2F;components&#x2F;nf-area.js:49</code></a>
                             </p>
                     
                     
@@ -1300,7 +1291,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l74"><code>app&#x2F;components&#x2F;nf-area.js:74</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l72"><code>app&#x2F;components&#x2F;nf-area.js:72</code></a>
                             </p>
                     
                     
@@ -1327,7 +1318,7 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l43"><code>app&#x2F;components&#x2F;nf-area.js:43</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l41"><code>app&#x2F;components&#x2F;nf-area.js:41</code></a>
                             </p>
                     
                     
@@ -1360,8 +1351,8 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The list of data points from mixins.graph-data-graphc/sortedData:property that
-                    fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
+                            <p>&lt;p&gt;The list of data points from mixins.graph-data-graphc/sortedData:property that
+                    fits within the x domain, plus up to one data point outside of that domain in each direction.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1386,7 +1377,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The offset, in pixels, for the x scale</p>
+                            <p>&lt;p&gt;The offset, in pixels, for the x scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1412,7 +1403,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The offset, in pixels, for the y scale</p>
+                            <p>&lt;p&gt;The offset, in pixels, for the y scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1438,7 +1429,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The zoom multiplier for the x scale</p>
+                            <p>&lt;p&gt;The zoom multiplier for the x scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1464,7 +1455,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The zoom multiplier for the y scale</p>
+                            <p>&lt;p&gt;The zoom multiplier for the y scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1483,16 +1474,16 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-selectable-graphic.html#property_selectable">mixins.graph-selectable-graphic</a>:
-                            <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l14"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:14</code></a>
+                            <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l13"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:13</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph 
-                    via some action (usually click). The component will then show up in the nf-graph parent&#39;s selected 
-                    property.</p>
+                            <p>&lt;p&gt;Gets or sets whether or not the graphic is &quot;selectable&quot;. Meaning can be &quot;selected&quot; on the nf-graph
+                    via some action (usually click). The component will then show up in the nf-graph parent's selected
+                    property.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1511,14 +1502,14 @@ fires on <code>didInsertElement</code>.</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-selectable-graphic.html#property_selected">mixins.graph-selectable-graphic</a>:
-                            <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l24"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:24</code></a>
+                            <a href="../files/addon_mixins_graph-selectable-graphic.js.html#l23"><code>addon&#x2F;mixins&#x2F;graph-selectable-graphic.js:23</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>Gets or sets whether or not the graphic is selected.</p>
+                            <p>&lt;p&gt;Gets or sets whether or not the graphic is selected.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1544,11 +1535,12 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The sorted and mapped data pulled from <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-                    An array of arrays, structures as so:</p>
-                    <pre class="code prettyprint"><code>  [[x,y],[x,y],[x,y]];
-                    </code></pre><p><strong> each inner array also has a property <code>data</code> on it, containing the original data object </strong></p>
-                    <p>When this property is computed, it also updates the <code>xData</code> and <code>yData</code> properties of the graphic.</p>
+                            <p>&lt;p&gt;The sorted and mapped data pulled from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt;
+                    An array of arrays, structures as so:&lt;/p&gt;
+                    &lt;pre&gt;&lt;code&gt;  [[x,y],[x,y],[x,y]];
+                    &lt;/code&gt;&lt;/pre&gt;
+                    &lt;p&gt;** each inner array also has a property &lt;code&gt;data&lt;/code&gt; on it, containing the original data object **&lt;/p&gt;
+                    &lt;p&gt;When this property is computed, it also updates the &lt;code&gt;xData&lt;/code&gt; and &lt;code&gt;yData&lt;/code&gt; properties of the graphic.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1573,20 +1565,20 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p><p>Gets or sets the tracking mode of the component.</p></p>
-                    <p><p>Possible values are:</p></p>
-                    <ul>
-                    <li>&#39;none&#39;: no tracking behavior</li>
-                    <li>&#39;hover&#39;: only track while mouse hover</li>
-                    <li>&#39;snap-last&#39;: track while mouse hover, but snap to the last data element when not hovering</li>
-                    <li>&#39;snap-first&#39;: track while mouse hover, but snap to the first data element when not hovering</li>
-                    <li>&#39;selected-hover&#39;: The same as <code>&#39;hover&#39;</code> tracking mode, but only when the compononent is 
-                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
-                    <li>&#39;selected-snap-last&#39;: The same as <code>&#39;snap-last&#39;</code> tracking mode, but only when the compononent is 
-                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
-                    <li>&#39;selected-snap-first&#39;: The same as <code>&#39;snap-first&#39;</code> tracking mode, but only when the compononent is 
-                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
-                    </ul>
+                            <p>&lt;p&gt;Gets or sets the tracking mode of the component.&lt;/p&gt;
+                    &lt;p&gt;Possible values are:&lt;/p&gt;
+                    &lt;ul&gt;
+                    &lt;li&gt;'none': no tracking behavior&lt;/li&gt;
+                    &lt;li&gt;'hover': only track while mouse hover&lt;/li&gt;
+                    &lt;li&gt;'snap-last': track while mouse hover, but snap to the last data element when not hovering&lt;/li&gt;
+                    &lt;li&gt;'snap-first': track while mouse hover, but snap to the first data element when not hovering&lt;/li&gt;
+                    &lt;li&gt;'selected-hover': The same as &lt;code&gt;'hover'&lt;/code&gt; tracking mode, but only when the compononent is
+                    &lt;a href=&quot;../classes/mixins.graph-selectable-graphic.html#property_selected&quot; class=&quot;crosslink&quot;&gt;selected&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;'selected-snap-last': The same as &lt;code&gt;'snap-last'&lt;/code&gt; tracking mode, but only when the compononent is
+                    &lt;a href=&quot;../classes/mixins.graph-selectable-graphic.html#property_selected&quot; class=&quot;crosslink&quot;&gt;selected&lt;/a&gt;&lt;/li&gt;
+                    &lt;li&gt;'selected-snap-first': The same as &lt;code&gt;'snap-first'&lt;/code&gt; tracking mode, but only when the compononent is
+                    &lt;a href=&quot;../classes/mixins.graph-selectable-graphic.html#property_selected&quot; class=&quot;crosslink&quot;&gt;selected&lt;/a&gt;&lt;/li&gt;
+                    &lt;/ul&gt;</p>
                     
                         </div>
                     
@@ -1612,7 +1604,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The action to send on <code>willTrack</code></p>
+                            <p>&lt;p&gt;The action to send on &lt;code&gt;willTrack&lt;/code&gt;&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1638,9 +1630,9 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The path of the property on each object in 
-                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-                    to use as x data to plot on the graph.</p>
+                            <p>&lt;p&gt;The path of the property on each object in
+                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt;
+                    to use as x data to plot on the graph.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1666,7 +1658,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Gets the x values from the <code>sortedData</code>.</p>
+                            <p>&lt;p&gt;Gets the x values from the &lt;code&gt;sortedData&lt;/code&gt;.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1691,8 +1683,8 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The function to get the x value from each 
-                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+                            <p>&lt;p&gt;The function to get the x value from each
+                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt; object&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1717,7 +1709,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The x scale used by this component</p>
+                            <p>&lt;p&gt;The x scale used by this component&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1742,9 +1734,9 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The path of the property on each object in 
-                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-                    to use as y data to plot on the graph.</p>
+                            <p>&lt;p&gt;The path of the property on each object in
+                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt;
+                    to use as y data to plot on the graph.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1770,7 +1762,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>Gets the y values from the <code>sortedData</code></p>
+                            <p>&lt;p&gt;Gets the y values from the &lt;code&gt;sortedData&lt;/code&gt;&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1795,8 +1787,8 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The function to get the y value from each 
-                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
+                            <p>&lt;p&gt;The function to get the y value from each
+                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt; object&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -1821,7 +1813,7 @@ fires on <code>didInsertElement</code>.</p>
                         </div>
                     
                         <div class="description">
-                            <p>The y scale used by this component</p>
+                            <p>&lt;p&gt;The y scale used by this component&lt;/p&gt;</p>
                     
                         </div>
                     

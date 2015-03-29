@@ -1,7 +1,7 @@
 {
     "project": {
-        "name": "Ember-CLI-Ember-DVC",
-        "description": "Ember Data Visualization Components for Ember-CLI"
+        "name": "ember-cli-nf-graph",
+        "description": "A DSL for creating graphs with Ember"
     },
     "files": {
         "addon/mixins/graph-area-utils.js": {
@@ -103,28 +103,6 @@
                 "mixins": 1
             }
         },
-        "addon/mixins/table-column-registrar.js": {
-            "name": "addon/mixins/table-column-registrar.js",
-            "modules": {},
-            "classes": {
-                "mixins.table-column-registrar": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "mixins": 1
-            }
-        },
-        "addon/mixins/table-management.js": {
-            "name": "addon/mixins/table-management.js",
-            "modules": {},
-            "classes": {
-                "mixins.table-management": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "mixins": 1
-            }
-        },
         "addon/utils/nf/array-helpers.js": {
             "name": "addon/utils/nf/array-helpers.js",
             "modules": {
@@ -198,15 +176,6 @@
             "fors": {},
             "namespaces": {}
         },
-        "addon/utils/multi-sort.js": {
-            "name": "addon/utils/multi-sort.js",
-            "modules": {
-                "multi-sort": 1
-            },
-            "classes": {},
-            "fors": {},
-            "namespaces": {}
-        },
         "addon/utils/parse-property-expression.js": {
             "name": "addon/utils/parse-property-expression.js",
             "modules": {},
@@ -245,37 +214,6 @@
             "modules": {},
             "classes": {
                 "components.nf-bars": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
-        "app/components/nf-cell.js": {
-            "name": "app/components/nf-cell.js",
-            "modules": {},
-            "classes": {
-                "components.nf-cell": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
-        "app/components/nf-column-manager.js": {
-            "name": "app/components/nf-column-manager.js",
-            "modules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
-        "app/components/nf-column.js": {
-            "name": "app/components/nf-column.js",
-            "modules": {},
-            "classes": {
-                "components.nf-column": 1
             },
             "fors": {},
             "namespaces": {
@@ -331,17 +269,6 @@
             "modules": {},
             "classes": {
                 "components.nf-graph": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
-        "app/components/nf-header.js": {
-            "name": "app/components/nf-header.js",
-            "modules": {},
-            "classes": {
-                "components.nf-header": 1
             },
             "fors": {},
             "namespaces": {
@@ -487,39 +414,6 @@
                 "components": 1
             }
         },
-        "app/components/nf-table-group.js": {
-            "name": "app/components/nf-table-group.js",
-            "modules": {},
-            "classes": {
-                "components.nf-table-group": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
-        "app/components/nf-table-manager.js": {
-            "name": "app/components/nf-table-manager.js",
-            "modules": {},
-            "classes": {
-                "components.nf-table-manager": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
-        "app/components/nf-table.js": {
-            "name": "app/components/nf-table.js",
-            "modules": {},
-            "classes": {
-                "components.nf-table": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
         "app/components/nf-vertical-line.js": {
             "name": "app/components/nf-vertical-line.js",
             "modules": {},
@@ -579,8 +473,6 @@
                 "mixins.graph-registered-graphic": 1,
                 "mixins.graph-requires-scale-source": 1,
                 "mixins.graph-selectable-graphic": 1,
-                "mixins.table-column-registrar": 1,
-                "mixins.table-management": 1,
                 "utils.nf.graph-event": 1,
                 "utils.nf.graph-mouse-event": 1,
                 "utils.nf.graph-position": 1
@@ -611,29 +503,16 @@
         "utils/nf/svg-dom": {
             "name": "utils/nf/svg-dom",
             "submodules": {},
-            "classes": {},
-            "fors": {},
-            "namespaces": {},
-            "tag": "module",
-            "file": "addon/utils/nf/svg-dom.js",
-            "line": 2
-        },
-        "multi-sort": {
-            "name": "multi-sort",
-            "submodules": {},
             "classes": {
                 "utils.parse-property-expression": 1,
                 "components.nf-area-stack": 1,
                 "components.nf-area": 1,
                 "components.nf-bars": 1,
-                "components.nf-cell": 1,
-                "components.nf-column": 1,
                 "components.nf-crosshair": 1,
                 "components.nf-dot": 1,
                 "components.nf-gg": 1,
                 "components.nf-graph-content": 1,
                 "components.nf-graph": 1,
-                "components.nf-header": 1,
                 "components.nf-horizontal-line": 1,
                 "components.nf-line": 1,
                 "components.nf-plot": 1,
@@ -646,9 +525,6 @@
                 "components.nf-svg-line": 1,
                 "components.nf-svg-path": 1,
                 "components.nf-svg-rect": 1,
-                "components.nf-table-group": 1,
-                "components.nf-table-manager": 1,
-                "components.nf-table": 1,
                 "components.nf-vertical-line": 1,
                 "components.nf-x-axis": 1,
                 "components.nf-y-axis": 1,
@@ -661,19 +537,7 @@
             },
             "tag": "module",
             "file": "app/components/nf-y-diff.js",
-            "line": 6,
-            "itemtype": "method",
-            "params": [
-                {
-                    "name": "sorts",
-                    "description": "the array of sort properties and directions",
-                    "type": "Array"
-                }
-            ],
-            "return": {
-                "description": "a function to use to sort an array",
-                "type": "Function"
-            }
+            "line": 6
         }
     },
     "classes": {
@@ -865,39 +729,9 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "addon/mixins/graph-selectable-graphic.js",
-            "line": 4,
+            "line": 3,
             "description": "Adds functionality to a component to make it a selectable graphic\nwithin it's parent nf-graph.",
             "extends": "Ember.Mixin"
-        },
-        "mixins.table-column-registrar": {
-            "name": "mixins.table-column-registrar",
-            "shortname": "mixins.table-column-registrar",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [
-                "components.nf-table-group",
-                "components.nf-table"
-            ],
-            "module": "utils/nf/array-helpers",
-            "namespace": "mixins",
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 4,
-            "description": "Marks a component as a registry for table columns"
-        },
-        "mixins.table-management": {
-            "name": "mixins.table-management",
-            "shortname": "mixins.table-management",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "utils/nf/array-helpers",
-            "namespace": "mixins",
-            "file": "addon/mixins/table-management.js",
-            "line": 8
         },
         "utils.nf.graph-event": {
             "name": "utils.nf.graph-event",
@@ -966,7 +800,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "utils",
             "file": "addon/utils/parse-property-expression.js",
             "line": 1,
@@ -980,7 +814,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-area-stack.js",
             "line": 3,
@@ -994,10 +828,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-area.js",
-            "line": 12,
+            "line": 10,
             "description": "Adds an area graph to an `nf-graph` component.\n\nOptionally, if it's located within an `nf-area-stack` component, it will work with\nsibling `nf-area` components to create a stacked graph.",
             "extends": "Ember.Component",
             "uses": [
@@ -1018,7 +852,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-bars.js",
             "line": 11,
@@ -1031,36 +865,6 @@
                 "mixins.graph-requires-scale-source"
             ]
         },
-        "components.nf-cell": {
-            "name": "components.nf-cell",
-            "shortname": "components.nf-cell",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "multi-sort",
-            "namespace": "components",
-            "file": "app/components/nf-cell.js",
-            "line": 3,
-            "description": "Templating component for `nf-table`. Should always be contained in an `nf-column` component.",
-            "extends": "Ember.Component"
-        },
-        "components.nf-column": {
-            "name": "components.nf-column",
-            "shortname": "components.nf-column",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "multi-sort",
-            "namespace": "components",
-            "file": "app/components/nf-column.js",
-            "line": 3,
-            "description": "A column class to support `nf-table`",
-            "extends": "Ember.Component"
-        },
         "components.nf-crosshair": {
             "name": "components.nf-crosshair",
             "shortname": "components.nf-crosshair",
@@ -1069,7 +873,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-crosshair.js",
             "line": 4,
@@ -1087,10 +891,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-dot.js",
-            "line": 6,
+            "line": 5,
             "description": "Plots a circle at a given x and y domain value on an `nf-graph`.",
             "extends": "Ember.Component",
             "uses": [
@@ -1106,7 +910,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-gg.js",
             "line": 6,
@@ -1126,7 +930,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-graph-content.js",
             "line": 5,
@@ -1143,27 +947,12 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-graph.js",
-            "line": 177,
+            "line": 203,
             "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n     {{#nf-graph width=100 height=50}}\n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n     {{#nf-graph width=500 height=300}}\n       {{#nf-x-axis height=\"50\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-x-axis}}\n \n       {{#nf-y-axis width=\"120\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-y-axis}}\n \n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present.",
             "extends": "Ember.Component"
-        },
-        "components.nf-header": {
-            "name": "components.nf-header",
-            "shortname": "components.nf-header",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "multi-sort",
-            "namespace": "components",
-            "file": "app/components/nf-header.js",
-            "line": 3,
-            "description": "Templating component for `nf-table`. Should always be contained in an `nf-column` component.",
-            "extends": "components.nf-cell"
         },
         "components.nf-horizontal-line": {
             "name": "components.nf-horizontal-line",
@@ -1173,10 +962,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-horizontal-line.js",
-            "line": 6,
+            "line": 5,
             "description": "Draws a horizontal line on the graph at a given y domain value",
             "extends": "Ember.Component",
             "uses": [
@@ -1192,10 +981,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-line.js",
-            "line": 11,
+            "line": 10,
             "description": "A line graphic for `nf-graph`. Displays a line for the data it's passed.",
             "extends": "Ember.Component",
             "uses": [
@@ -1216,7 +1005,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-plot.js",
             "line": 6,
@@ -1235,10 +1024,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-range-marker.js",
-            "line": 6,
+            "line": 5,
             "description": "Draws a rectangular strip with a templated label on an `nf-graph`.\nShould always be used in conjunction with an `nf-range-markers` container component.",
             "extends": "Ember.Component",
             "uses": [
@@ -1254,10 +1043,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-range-markers.js",
-            "line": 5,
+            "line": 4,
             "description": "A container and manager for `nf-range-marker` components.\nUsed to draw an association between `nf-range-marker` components so they \ncan be laid out in a manner in which they don't collide.",
             "extends": "Ember.Component",
             "uses": [
@@ -1272,10 +1061,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-right-tick.js",
-            "line": 6,
+            "line": 5,
             "description": "Draws a line and a chevron at the specified domain value \non the right side of an `nf-graph`. \n\n### Tips\n\n- Position outside of `nf-graph-content` component, but inside `nf-graph`.\n- Adding `paddingRight` to `nf-graph` component will not affect `nf-right-tick`'s position.",
             "extends": "Ember.Component",
             "uses": [
@@ -1291,7 +1080,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-scroll-area.js",
             "line": 4,
@@ -1305,7 +1094,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-selection-box.js",
             "line": 6,
@@ -1324,7 +1113,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-svg-image.js",
             "line": 7,
@@ -1344,7 +1133,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-svg-line.js",
             "line": 7,
@@ -1364,7 +1153,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-svg-path.js",
             "line": 7,
@@ -1384,7 +1173,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-svg-rect.js",
             "line": 7,
@@ -1396,57 +1185,6 @@
                 "mixins.graph-selectable-graphic"
             ]
         },
-        "components.nf-table-group": {
-            "name": "components.nf-table-group",
-            "shortname": "components.nf-table-group",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "multi-sort",
-            "namespace": "components",
-            "file": "app/components/nf-table-group.js",
-            "line": 4,
-            "description": "A component for defining a grouping row on an `nf-table`.",
-            "uses": [
-                "mixins.table-column-registrar"
-            ]
-        },
-        "components.nf-table-manager": {
-            "name": "components.nf-table-manager",
-            "shortname": "components.nf-table-manager",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "multi-sort",
-            "namespace": "components",
-            "file": "app/components/nf-table-manager.js",
-            "line": 4,
-            "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n\t\t\t{{#nf-table-manager rows=myData groupBy=\"baz\" groupsUpdated=\"actionName\"}}\n      \t{{#nf-column-manager sortBy=\"foo\"}}\n      \t  <span class=\"nf-column-label\">Foo</span>\n      \t{{/nf-column-manager}}\n      \t\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  <span class=\"nf-column-label\">Bar</span>\n      \t{{/nf-column-manager}}\n      {{/nf-table-manager}}\n\n### Styling\n\nnf-table renders a structure of `div.nf-table-manager > table > thead > tr > th.nf-header.nf-table-column`",
-            "extends": "Ember.Component"
-        },
-        "components.nf-table": {
-            "name": "components.nf-table",
-            "shortname": "components.nf-table",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "multi-sort",
-            "namespace": "components",
-            "file": "app/components/nf-table.js",
-            "line": 10,
-            "description": "Composable table component with built-in sorting\n\n### Basic Example\n\n      {{#nf-table rows=myData}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Foo</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      \t{{#nf-column sortField=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Bar</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nThe example above will create a sortable table from an array `myData` containing objects\nwith fields `foo` and `bar`.\n\n### Grouped Example\n\nIf you wish to create a \"grouped table\", you simply need to group the data with the `groupBy`\nproperty.\n\nAdditionally, you can add grouping rows with the `{{nf-table-group}}` component, which allows you\nto define the columns for the group rows. **If you do this, you will need to create an ArrayController**\nfor the group that will carry with it any computed properties you might need, such as a sum or average\naggregated over the group. The array controller for your grouping must be assigned to the `itemController`\nproperty on the `nf-table-group` component.\n\n\t\t\t{{#nf-table rows=myData groupBy=\"baz\"}}\n\t\t\t\t\n\t\t\t\t{{#nf-table-group itemController=\"my-group-row\"}}\n\n\t\t\t\t\t{{#nf-column}}\n\t\t\t\t\t\t{{#nf-cell colspan=\"2\"}}\n\t\t\t\t\t\t\tBaz: {{group.baz}}\n\t\t\t\t\t\t\tBars: {{group.barSum}}\n\t\t\t\t\t\t{{/nf-cell}}\n\t\t\t\t\t{{/nf-column}}\n\t\t\t\t\n\t\t\t\t{{/nf-table-group}}\n\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Foo</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.foo}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n      \t\n      \t{{#nf-column sortBy=\"foo\"}}\n      \t  {{nf-header}}\n      \t  \t<span class=\"nf-column-label\">Bar</span>\n      \t  {{/nf-header}}\n      \t  {{#nf-cell}}\n      \t\t\t{{row.bar}}\n      \t  {{/nf-cell}}\n      \t{{/nf-column}}\n\n      {{/nf-table}}\n\nWhich would need an accompanying array controller definition `my-group-row`:\n\n\t\t\texport default Ember.ArrayController.extend({\n\t\t\t\t// returns the first value from the array\n\t\t\t\tbaz: function(){\n\t\t\t\t\treturn this.get('model')[0].baz;\n\t\t\t\t}.property('model.@each.baz'),\n\n\t\t\t\t//gets the sum of all the bars\n\t\t\t\tbarSum: function() {\n\t\t\t\t\treturn this.get('model').reduce(function(sum, item) {\n\t\t\t\t\t\treturn sum + item.bar;\n\t\t\t\t\t}, 0);\n\t\t\t\t}.property('model.@each.bar'),\n\t\t  });\n\n### Styling\n\nnf-table emits a `<table>` with a class of `nf-table` applied to it.",
-            "extends": "Ember.Component",
-            "uses": [
-                "mixins.table-column-registrar"
-            ],
-            "deprecated": true
-        },
         "components.nf-vertical-line": {
             "name": "components.nf-vertical-line",
             "shortname": "components.nf-vertical-line",
@@ -1455,10 +1193,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-vertical-line.js",
-            "line": 6,
+            "line": 5,
             "description": "Draws a vertical line on a graph at a given x domain value",
             "extends": "Ember.Component",
             "uses": [
@@ -1474,10 +1212,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-x-axis.js",
-            "line": 6,
+            "line": 5,
             "description": "A component for adding a templated x axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-x-axis` class.\nA `orient-top` or `orient-bottom` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example \n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}",
             "extends": "Ember.Component",
             "uses": [
@@ -1493,10 +1231,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-y-axis.js",
-            "line": 6,
+            "line": 5,
             "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-y-axis` class.\nA `orient-left` or `orient-right` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-y-axis width=40}}\n          <text>y is {{tick.value}}</text>\n        {{/nf-y-axis}}\n      {{/nf-graph}}",
             "uses": [
                 "mixins.graph-has-graph-parent",
@@ -1511,7 +1249,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-y-diff.js",
             "line": 6,
@@ -2012,7 +1750,7 @@
         },
         {
             "file": "addon/mixins/graph-selectable-graphic.js",
-            "line": 14,
+            "line": 13,
             "description": "Gets or sets whether or not the graphic is \"selectable\". Meaning can be \"selected\" on the nf-graph \nvia some action (usually click). The component will then show up in the nf-graph parent's selected \nproperty.",
             "itemtype": "property",
             "name": "selectable",
@@ -2023,7 +1761,7 @@
         },
         {
             "file": "addon/mixins/graph-selectable-graphic.js",
-            "line": 24,
+            "line": 23,
             "description": "Gets or sets whether or not the graphic is selected.",
             "itemtype": "property",
             "name": "selected",
@@ -2034,7 +1772,7 @@
         },
         {
             "file": "addon/mixins/graph-selectable-graphic.js",
-            "line": 32,
+            "line": 31,
             "description": "Alias of selected",
             "itemtype": "property",
             "name": "isSelected",
@@ -2045,147 +1783,13 @@
         },
         {
             "file": "addon/mixins/graph-selectable-graphic.js",
-            "line": 39,
+            "line": 38,
             "description": "Makes calls to the parent nf-graph to update it's\n`selected` property. Observes changes to `selected` and also \nfires on `didInsertElement`.",
             "itemtype": "method",
             "name": "_updateGraphSelected",
             "access": "private",
             "tagname": "",
             "class": "mixins.graph-selectable-graphic",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 11,
-            "description": "Gets or sets whether a multi sort is used.",
-            "itemtype": "property",
-            "name": "sortMultiple",
-            "type": "Boolean",
-            "default": "false",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 19,
-            "description": "identifies the component as a table column registrar to its children",
-            "itemtype": "property",
-            "name": "isTableColumnRegistrar",
-            "type": "Boolean",
-            "default": "true",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 27,
-            "description": "An emitted list of columns",
-            "itemtype": "property",
-            "name": "columns",
-            "type": "Array",
-            "readonly": "",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 35,
-            "description": "The collection of columns registered",
-            "itemtype": "property",
-            "name": "_columns",
-            "type": "Array",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 57,
-            "description": "The list of visible columns",
-            "itemtype": "property",
-            "name": "visibleColumns",
-            "type": "Array",
-            "readonly": "",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 69,
-            "description": "The list of columns with an sort applied to them",
-            "itemtype": "property",
-            "name": "sortedColumns",
-            "type": "Array",
-            "readonly": "",
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 81,
-            "description": "Registers a column with the registrar",
-            "itemtype": "method",
-            "name": "registerColumn",
-            "params": [
-                {
-                    "name": "column",
-                    "description": "the column to register",
-                    "type": "components.nf-column"
-                }
-            ],
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-column-registrar.js",
-            "line": 90,
-            "description": "Unregisters a column from the registry",
-            "itemtype": "method",
-            "name": "unregisterColumn",
-            "params": [
-                {
-                    "name": "column",
-                    "description": "the column to unregister",
-                    "type": "components.nf-column"
-                }
-            ],
-            "class": "mixins.table-column-registrar",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-management.js",
-            "line": 13,
-            "description": "Sets the sort mode of the table. 'single' or 'multi' are supported.",
-            "itemtype": "property",
-            "name": "sortMode",
-            "type": "{String}",
-            "default": "'single'",
-            "class": "mixins.table-management",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-management.js",
-            "line": 21,
-            "description": "An optional function used to filter the rows, is passed the row, index and array\njust like the standard array filter function.",
-            "itemtype": "property",
-            "name": "filterFunction",
-            "type": "{Function}",
-            "default": "null",
-            "class": "mixins.table-management",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/table-management.js",
-            "line": 44,
-            "description": "Gets the an array of sorts, in order to be processed when sorting the rows.",
-            "itemtype": "property",
-            "name": "sortMap",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.table-management",
             "namespace": "mixins"
         },
         {
@@ -2930,7 +2534,7 @@
                 "type": "Function"
             },
             "class": "utils.parse-property-expression",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "utils"
         },
         {
@@ -2943,7 +2547,7 @@
             "default": "true",
             "readonly": "",
             "class": "components.nf-area-stack",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -2955,7 +2559,7 @@
             "type": "Array",
             "readonly": "",
             "class": "components.nf-area-stack",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -2972,7 +2576,7 @@
                 }
             ],
             "class": "components.nf-area-stack",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -2989,91 +2593,91 @@
                 }
             ],
             "class": "components.nf-area-stack",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 35,
+            "line": 33,
             "description": "The type of d3 interpolator to use to create the area",
             "itemtype": "property",
             "name": "interpolator",
             "type": "String",
             "default": "'linear'",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 43,
+            "line": 41,
             "description": "The previous area in the stack, if this area is part of an `nf-area-stack`",
             "itemtype": "property",
             "name": "prevArea",
             "type": "components.nf-area",
             "default": "null",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 51,
+            "line": 49,
             "description": "The next area in the stack, if this area is part of an `nf-area-stack`",
             "itemtype": "property",
             "name": "nextArea",
             "type": "components.nf-area",
             "default": "null",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 74,
+            "line": 72,
             "description": "The computed set of next y values to use for the \"bottom\" of the graphed area.\nIf the area is part of a stack, this will be the \"top\" of the next area in the stack,\notherwise it will return an array of values at the \"bottom\" of the graph domain.",
             "itemtype": "property",
             "name": "nextYData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 98,
+            "line": 95,
             "description": "The current rendered data \"zipped\" together with the nextYData.",
             "itemtype": "property",
             "name": "areaData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 111,
+            "line": 109,
             "description": "Gets the area function to use to create the area SVG path data",
             "itemtype": "property",
             "name": "areaFn",
             "type": "Function",
             "readonly": "",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 124,
+            "line": 122,
             "description": "The SVG path data for the area",
             "itemtype": "property",
             "name": "d",
             "type": "String",
             "readonly": "",
             "class": "components.nf-area",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3085,7 +2689,7 @@
             "type": "String",
             "default": "'className'",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3098,7 +2702,7 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3110,7 +2714,7 @@
             "type": "components.nf-bars-group",
             "default": "null",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3122,7 +2726,7 @@
             "type": "Number",
             "default": "null",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3134,7 +2738,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3146,7 +2750,7 @@
             "type": "d3.scale",
             "readonly": "",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3158,7 +2762,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3169,7 +2773,7 @@
             "name": "bars",
             "readonly": "",
             "class": "components.nf-bars",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3181,328 +2785,7 @@
             "type": "String",
             "default": "null",
             "class": "components.nf-bars",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-cell.js",
-            "line": 14,
-            "description": "The number of columns for the output cell to span",
-            "itemtype": "property",
-            "name": "colspan",
-            "type": "Number",
-            "default": "1",
-            "class": "components.nf-cell",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 12,
-            "description": "The table manager component the column belongs to",
-            "itemtype": "property",
-            "name": "tableManager",
-            "type": "{nf-table-manager}",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 20,
-            "description": "Gets or sets the inline style width of both the header and the table cell.",
-            "itemtype": "property",
-            "name": "width",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 30,
-            "description": "Sets the alignment of the items in the column. Using this attribute\nadds appropriate styling for sort arrows.\n\nTo make sort arrows appear for center and left alignment, the text you want\nthe sort arrow to appear next to needs to be wrapped in `<span class=\"nf-column-label\"></span>`\n\n**This property is completely optional, and is here as a convenience.** \nYou don't need to use this property at all, if you which to add your own sort\nstyling.",
-            "itemtype": "property",
-            "name": "align",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 47,
-            "description": "The computed alignment class for aligning the column content and header",
-            "itemtype": "property",
-            "name": "alignmentClass",
-            "type": "String",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 58,
-            "description": "Gets or sets the sort direction for the column.\n\nPossible Values:\n\n- `'asc'` - sort ascending.\n- `'desc'` - sort descending.\n- `'none'` - (or any other value) no sort.",
-            "itemtype": "property",
-            "name": "sortDirection",
-            "type": "String",
-            "default": "'none'",
-            "example": [
-                "\n\n     {{#nf-column sortDirection=\"asc\"}}"
-            ],
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 98,
-            "description": "Gets or sets whether to use a natural sort.",
-            "itemtype": "property",
-            "name": "sortNatural",
-            "type": "Boolean",
-            "default": "false",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 106,
-            "description": "The numeric value of `sortDirection`",
-            "itemtype": "property",
-            "name": "direction",
-            "type": "number",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 127,
-            "description": "List of available sort directions",
-            "itemtype": "property",
-            "name": "SORTS",
-            "constant": "",
-            "type": "Array",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 135,
-            "description": "Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.",
-            "itemtype": "method",
-            "name": "toggleSortDirection",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column-manager.js",
-            "line": 152,
-            "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
-            "itemtype": "property",
-            "name": "sortClass",
-            "type": "String",
-            "default": "'nf-sort-none'",
-            "example": [
-                "\n\n    column.set('sortDirection', 'asc');\n    console.log(column.get('sortClass')); // nf-sort-ascending"
-            ],
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 11,
-            "description": "used so child components `nf-cell` and `nf-header` can find this component\nand register themselves.",
-            "itemtype": "property",
-            "name": "isDataTableColumn",
-            "type": "Boolean",
-            "default": "true",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 21,
-            "description": "The column's header component",
-            "itemtype": "property",
-            "name": "header",
-            "type": "nf-header",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 29,
-            "description": "The column's cell component",
-            "itemtype": "property",
-            "name": "cell",
-            "type": "nf-cell",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 37,
-            "description": "The table component the column belongs to",
-            "itemtype": "property",
-            "name": "table",
-            "type": "nf-table",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 45,
-            "description": "Gets or sets the inline style width of both the header and the table cell.",
-            "itemtype": "property",
-            "name": "width",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 55,
-            "description": "Sets the alignment of the items in the column. Using this attribute\nadds appropriate styling for sort arrows.\n\nTo make sort arrows appear for center and left alignment, the text you want\nthe sort arrow to appear next to needs to be wrapped in `<span class=\"nf-column-label\"></span>`\n\n**This property is completely optional, and is here as a convenience.** \nYou don't need to use this property at all, if you which to add your own sort\nstyling.",
-            "itemtype": "property",
-            "name": "align",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 72,
-            "description": "The computed alignment class for aligning the column content and header",
-            "itemtype": "property",
-            "name": "alignmentClass",
-            "type": "String",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 83,
-            "description": "The list of classes to apply to table headers",
-            "itemtype": "property",
-            "name": "headerClassNames",
-            "type": "Array",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 95,
-            "description": "The list of classes to apply to table cells",
-            "itemtype": "property",
-            "name": "cellClassNames",
-            "type": "Array",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 107,
-            "description": "Gets or sets the sort direction for the column.\n\nPossible Values:\n\n- `'asc'` - sort ascending.\n- `'desc'` - sort descending.\n- `'none'` - (or any other value) no sort.",
-            "itemtype": "property",
-            "name": "sortDirection",
-            "type": "String",
-            "default": "'none'",
-            "example": [
-                "\n\n     {{#nf-column sortDirection=\"asc\"}}"
-            ],
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 147,
-            "description": "Gets or sets whether to use a natural sort.",
-            "itemtype": "property",
-            "name": "sortNatural",
-            "type": "Boolean",
-            "default": "false",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 155,
-            "description": "The numeric value of `sortDirection`",
-            "itemtype": "property",
-            "name": "direction",
-            "type": "number",
-            "readonly": "",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 176,
-            "description": "List of available sort directions",
-            "itemtype": "property",
-            "name": "SORTS",
-            "constant": "",
-            "type": "Array",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 184,
-            "description": "Convenience method for toggling through sort directions on the column. (asc, desc, none) repeat.",
-            "itemtype": "method",
-            "name": "toggleSortDirection",
-            "class": "components.nf-column",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-column.js",
-            "line": 197,
-            "description": "Gets the CSS sort class to be applied to the column\n\nPossible return values are `nf-sort-ascending`, `nf-sort-descending` and `nf-sort-none`.",
-            "itemtype": "property",
-            "name": "sortClass",
-            "type": "String",
-            "default": "'nf-sort-none'",
-            "example": [
-                "\n\n    column.set('sortDirection', 'asc');\n    console.log(column.get('sortClass')); // nf-sort-ascending"
-            ],
-            "class": "components.nf-column",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3514,7 +2797,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-crosshair",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3526,7 +2809,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-crosshair",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3538,7 +2821,7 @@
             "type": "Number",
             "default": "0",
             "class": "components.nf-crosshair",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3550,7 +2833,7 @@
             "type": "Number",
             "default": "0",
             "class": "components.nf-crosshair",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3562,48 +2845,48 @@
             "type": "Boolean",
             "default": "false",
             "class": "components.nf-crosshair",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-dot.js",
-            "line": 20,
+            "line": 19,
             "description": "The x domain value at which to plot the circle",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "default": "null",
             "class": "components.nf-dot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-dot.js",
-            "line": 28,
+            "line": 27,
             "description": "The y domain value at which to plot the circle",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "default": "null",
             "class": "components.nf-dot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-dot.js",
-            "line": 36,
+            "line": 35,
             "description": "The radius of the circle plotted",
             "itemtype": "property",
             "name": "r",
             "type": "Number",
             "default": "2.5",
             "class": "components.nf-dot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-dot.js",
-            "line": 48,
+            "line": 47,
             "description": "The computed center x coordinate of the circle",
             "itemtype": "property",
             "name": "cx",
@@ -3612,12 +2895,12 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-dot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-dot.js",
-            "line": 59,
+            "line": 61,
             "description": "The computed center y coordinate of the circle",
             "itemtype": "property",
             "name": "cy",
@@ -3626,12 +2909,12 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-dot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-dot.js",
-            "line": 70,
+            "line": 75,
             "description": "Toggles the visibility of the dot. If x or y are\nnot numbers, will return false.",
             "itemtype": "property",
             "name": "isVisible",
@@ -3639,7 +2922,7 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-dot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3651,7 +2934,7 @@
             "type": "String",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3663,7 +2946,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3675,7 +2958,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3687,7 +2970,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3699,7 +2982,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3711,7 +2994,7 @@
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3723,7 +3006,7 @@
             "type": "String",
             "default": "null",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3735,7 +3018,7 @@
             "type": "String",
             "default": "null",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -3747,483 +3030,483 @@
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph-content",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 219,
+            "line": 245,
             "description": "The exponent to use for xScaleType \"pow\" or \"power\".",
             "itemtype": "property",
             "name": "xPowerExponent",
             "type": "Number",
             "default": "3",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 227,
+            "line": 253,
             "description": "The exponent to use for yScaleType \"pow\" or \"power\".",
             "itemtype": "property",
             "name": "yPowerExponent",
             "type": "Number",
             "default": "3",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 235,
+            "line": 261,
             "description": "The min value to use for xScaleType \"log\" if xMin <= 0",
             "itemtype": "property",
             "name": "xLogMin",
             "type": "Number",
             "default": "0.1",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 243,
+            "line": 269,
             "description": "The min value to use for yScaleType \"log\" if yMin <= 0",
             "itemtype": "property",
             "name": "yLogMin",
             "type": "Number",
             "default": "0.1",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 251,
+            "line": 277,
             "description": "Allows child compoenents to identify graph parent.",
             "itemtype": "property",
             "name": "isGraph",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 258,
+            "line": 284,
             "description": "Identifies this graph to its children as providing scales.",
             "itemtype": "property",
             "name": "isScaleSource",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 265,
+            "line": 291,
             "itemtype": "property",
             "name": "hasRendered",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 271,
+            "line": 297,
             "description": "Gets or sets the whether or not multiple selectable graphics may be\nselected simultaneously.",
             "itemtype": "property",
             "name": "selectMultiple",
             "type": "Boolean",
             "default": "false",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 280,
+            "line": 306,
             "description": "The width of the graph in pixels.",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "default": "300",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 288,
+            "line": 314,
             "description": "The height of the graph in pixels.",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "default": "100",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 296,
+            "line": 322,
             "description": "The padding at the top of the graph",
             "itemtype": "property",
             "name": "paddingTop",
             "type": "Number",
             "default": "0",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 304,
+            "line": 330,
             "description": "The padding at the left of the graph",
             "itemtype": "property",
             "name": "paddingLeft",
             "type": "Number",
             "default": "0",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 312,
+            "line": 338,
             "description": "The padding at the right of the graph",
             "itemtype": "property",
             "name": "paddingRight",
             "type": "Number",
             "default": "0",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 320,
+            "line": 346,
             "description": "The padding at the bottom of the graph",
             "itemtype": "property",
             "name": "paddingBottom",
             "type": "Number",
             "default": "0",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 328,
+            "line": 354,
             "description": "Determines whether to display \"lanes\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showLanes",
             "type": "Boolean",
             "default": "false",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 337,
+            "line": 363,
             "description": "Determines whether to display \"frets\" in the background of\nthe graph.",
             "itemtype": "property",
             "name": "showFrets",
             "type": "Boolean",
             "default": "false",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 346,
+            "line": 372,
             "description": "The type of scale to use for x values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "xScaleType",
             "type": "String",
             "default": "'linear'",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 361,
+            "line": 387,
             "description": "The type of scale to use for y values.\n\nPossible Values:\n- `'linear'` - a standard linear scale\n- `'log'` - a logarithmic scale\n- `'power'` - a power-based scale (exponent = 3)\n- `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.",
             "itemtype": "property",
             "name": "yScaleType",
             "type": "String",
             "default": "'linear'",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 376,
+            "line": 402,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalPadding",
             "type": "Number",
             "default": "0.1",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 384,
+            "line": 410,
             "description": "The padding at the ends of the domain data when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "xOrdinalOuterPadding",
             "type": "Number",
             "default": "0.1",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 392,
+            "line": 418,
             "description": "The padding between value steps when `xScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalPadding",
             "type": "Number",
             "default": "0.1",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 400,
+            "line": 426,
             "description": "The padding at the ends of the domain data when `yScaleType` is `'ordinal'`",
             "itemtype": "property",
             "name": "yOrdinalOuterPadding",
             "type": "Number",
             "default": "0.1",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 408,
+            "line": 434,
             "description": "the `nf-y-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "yAxis",
             "readonly": "",
             "default": "null",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 416,
+            "line": 442,
             "description": "The `nf-x-axis` component is registered here if there is one present",
             "itemtype": "property",
             "name": "xAxis",
             "readonly": "",
             "default": "null",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 424,
+            "line": 450,
             "description": "Backing field for `xMin`",
             "itemtype": "property",
             "name": "_xMin",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 431,
+            "line": 457,
             "description": "Backing field for `xMax`",
             "itemtype": "property",
             "name": "_xMax",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 438,
+            "line": 464,
             "description": "Backing field for `yMin`",
             "itemtype": "property",
             "name": "_yMin",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 445,
+            "line": 471,
             "description": "Backing field for `yMax`",
             "itemtype": "property",
             "name": "_yMax",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 452,
+            "line": 478,
             "description": "Gets or sets the minimum x domain value to display on the graph.\nBehavior depends on `xMinMode`.",
             "itemtype": "property",
             "name": "xMin",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 459,
+            "line": 485,
             "description": "Gets or sets the maximum x domain value to display on the graph.\nBehavior depends on `xMaxMode`.",
             "itemtype": "property",
             "name": "xMax",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 466,
+            "line": 492,
             "description": "Gets or sets the maximum y domain value to display on the graph.\nBehavior depends on `yMaxMode`.",
             "itemtype": "property",
             "name": "yMax",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 473,
+            "line": 499,
             "description": "Gets or sets the maximum y domain value to display on the graph.\nBehavior depends on `yMaxMode`.",
             "itemtype": "property",
             "name": "yMax",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 481,
+            "line": 507,
             "description": "Sets the behavior of `xMin` for the graph.\n\n### Possible values:\n\n- 'auto': (default) xMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.\n- 'fixed': xMin can be set to an exact value and will not change based on graphed data.\n- 'push': xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than \n  what xMin is currently set to.\n- 'push-tick': xMin can be set to a specific value, but will update to next \"nice\" tick if the minimum x value contained in\n  the graph is less than that xMin is set to.",
             "itemtype": "property",
             "name": "xMinMode",
             "type": "String",
             "default": "'auto'",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 499,
+            "line": 525,
             "description": "Sets the behavior of `xMax` for the graph.\n\n### Possible values:\n\n- 'auto': (default) xMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.\n- 'fixed': xMax can be set to an exact value and will not change based on graphed data.\n- 'push': xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than \n  what xMax is currently set to.\n- 'push-tick': xMax can be set to a specific value, but will update to next \"nice\" tick if the maximum x value contained in\n  the graph is greater than that xMax is set to.",
             "itemtype": "property",
             "name": "xMaxMode",
             "type": "String",
             "default": "'auto'",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 517,
+            "line": 543,
             "description": "Sets the behavior of `yMin` for the graph.\n\n### Possible values:\n\n- 'auto': (default) yMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.\n- 'fixed': yMin can be set to an exact value and will not change based on graphed data.\n- 'push': yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than \n  what yMin is currently set to.\n- 'push-tick': yMin can be set to a specific value, but will update to next \"nice\" tick if the minimum y value contained in\n  the graph is less than that yMin is set to.",
             "itemtype": "property",
             "name": "yMinMode",
             "type": "String",
             "default": "'auto'",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 535,
+            "line": 561,
             "description": "Sets the behavior of `yMax` for the graph.\n\n### Possible values:\n\n- 'auto': (default) yMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.\n- 'fixed': yMax can be set to an exact value and will not change based on graphed data.\n- 'push': yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than \n  what yMax is currently set to.\n- 'push-tick': yMax can be set to a specific value, but will update to next \"nice\" tick if the maximum y value contained in\n  the graph is greater than that yMax is set to.",
             "itemtype": "property",
             "name": "yMaxMode",
             "type": "String",
             "default": "'auto'",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 553,
+            "line": 579,
             "description": "Gets the highest and lowest x values of the graphed data in a two element array.",
             "itemtype": "property",
             "name": "xDataExtent",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 563,
+            "line": 590,
             "description": "Gets the highest and lowest y values of the graphed data in a two element array.",
             "itemtype": "property",
             "name": "yDataExtent",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 573,
+            "line": 601,
             "description": "Gets all x data from all graphics.",
             "itemtype": "property",
             "name": "xData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 587,
+            "line": 616,
             "description": "Gets all y data from all graphics",
             "itemtype": "property",
             "name": "yData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 601,
+            "line": 631,
             "description": "Gets the DOM id for the content clipPath element.",
             "itemtype": "property",
             "name": "contentClipPathId",
@@ -4232,130 +3515,130 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 612,
+            "line": 642,
             "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
             "itemtype": "property",
             "name": "graphics",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 621,
+            "line": 651,
             "description": "An array of \"selectable\" graphics that have been selected within this graph.",
             "itemtype": "property",
             "name": "selected",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 629,
+            "line": 659,
             "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
             "itemtype": "property",
             "name": "showYAxis",
             "type": "Boolean",
             "default": "false",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 637,
+            "line": 667,
             "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
             "itemtype": "property",
             "name": "showXAxis",
             "type": "Boolean",
             "default": "false",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 645,
+            "line": 675,
             "description": "Gets a function to create the xScale",
             "itemtype": "property",
             "name": "xScaleFactory",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 652,
+            "line": 682,
             "description": "Gets a function to create the yScale",
             "itemtype": "property",
             "name": "yScaleFactory",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 659,
+            "line": 689,
             "description": "Gets the domain of x values.",
             "itemtype": "property",
             "name": "xDomain",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 667,
+            "line": 697,
             "description": "Gets the domain of y values.",
             "itemtype": "property",
             "name": "yDomain",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 675,
+            "line": 705,
             "description": "Gets the current xScale used to draw the graph.",
             "itemtype": "property",
             "name": "xScale",
             "type": "Function",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 683,
+            "line": 713,
             "description": "Gets the current yScale used to draw the graph.",
             "itemtype": "property",
             "name": "yScale",
             "type": "Function",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 691,
+            "line": 721,
             "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
             "itemtype": "method",
             "name": "registerGraphic",
@@ -4367,12 +3650,12 @@
                 }
             ],
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 701,
+            "line": 731,
             "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
             "itemtype": "method",
             "name": "unregisterGraphic",
@@ -4384,36 +3667,36 @@
                 }
             ],
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 711,
+            "line": 741,
             "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "yRange",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 722,
+            "line": 752,
             "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "xRange",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 733,
+            "line": 763,
             "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
             "itemtype": "property",
             "name": "hasData",
@@ -4421,84 +3704,84 @@
             "default": "false",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 743,
+            "line": 773,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 759,
+            "line": 789,
             "description": "The y coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphY",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 775,
+            "line": 805,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 789,
+            "line": 819,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 803,
+            "line": 833,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
             "type": "String",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 813,
+            "line": 843,
             "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
             "itemtype": "method",
             "name": "_notifyHasRendered",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 822,
+            "line": 852,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -4519,24 +3802,24 @@
                 "type": "Array"
             },
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 842,
+            "line": 872,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
             "type": "Ember.Controller",
             "readonly": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 850,
+            "line": 880,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -4548,12 +3831,12 @@
                 }
             ],
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 871,
+            "line": 901,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -4565,84 +3848,84 @@
                 }
             ],
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 888,
+            "line": 918,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
             "access": "private",
             "tagname": "",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 898,
+            "line": 928,
             "description": "The amount of leeway, in pixels, to give before triggering a brush start.",
             "itemtype": "property",
             "name": "brushThreshold",
             "type": "{Number}",
             "default": "7",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 906,
+            "line": 936,
             "description": "The name of the action to trigger when brushing starts",
             "itemtype": "property",
             "name": "brushStartAction",
             "type": "{String}",
             "default": "null",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 914,
+            "line": 944,
             "description": "The name of the action to trigger when brushing emits a new value",
             "itemtype": "property",
             "name": "brushAction",
             "type": "{String}",
             "default": "null",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 922,
+            "line": 952,
             "description": "The name of the action to trigger when brushing ends",
             "itemtype": "property",
             "name": "brushEndAction",
             "type": "{String}",
             "default": "null",
             "class": "components.nf-graph",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-horizontal-line.js",
-            "line": 21,
+            "line": 20,
             "description": "The y domain value at which to draw the horizontal line",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "default": "null",
             "class": "components.nf-horizontal-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-horizontal-line.js",
-            "line": 29,
+            "line": 28,
             "description": "The computed y coordinate of the line to draw",
             "itemtype": "property",
             "name": "lineY",
@@ -4651,12 +3934,12 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-horizontal-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-horizontal-line.js",
-            "line": 40,
+            "line": 41,
             "description": "The left x coordinate of the line",
             "itemtype": "property",
             "name": "x1",
@@ -4665,12 +3948,12 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-horizontal-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-horizontal-line.js",
-            "line": 49,
+            "line": 50,
             "description": "The right x coordinate of the line",
             "itemtype": "property",
             "name": "x2",
@@ -4679,24 +3962,24 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-horizontal-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-line.js",
-            "line": 29,
+            "line": 28,
             "description": "The type of D3 interpolator to use to create the line.",
             "itemtype": "property",
             "name": "interpolator",
             "type": "String",
             "default": "'linear'",
             "class": "components.nf-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-line.js",
-            "line": 41,
+            "line": 40,
             "description": "The d3 line function to create the line path.",
             "itemtype": "method",
             "name": "lineFn",
@@ -4714,12 +3997,12 @@
                 "type": "String"
             },
             "class": "components.nf-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-line.js",
-            "line": 52,
+            "line": 54,
             "description": "The SVG path data string to render the line",
             "itemtype": "property",
             "name": "d",
@@ -4728,19 +4011,19 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-line.js",
-            "line": 63,
+            "line": 67,
             "description": "Event handler to toggle the `selected` property on click",
             "itemtype": "method",
             "name": "_toggleSelected",
             "access": "private",
             "tagname": "",
             "class": "components.nf-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4751,7 +4034,7 @@
             "name": "x",
             "default": "null",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4762,7 +4045,7 @@
             "name": "x",
             "default": "null",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4774,7 +4057,7 @@
             "type": "Boolean",
             "readonly": "",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4786,7 +4069,7 @@
             "type": "Boolean",
             "readonly": "",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4798,7 +4081,7 @@
             "type": "Boolean",
             "readonly": "",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4810,7 +4093,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4822,7 +4105,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4834,7 +4117,7 @@
             "type": "String",
             "readonly": "",
             "class": "components.nf-plot",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4848,7 +4131,7 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -4861,190 +4144,190 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 22,
+            "line": 21,
             "description": "The parent `nf-range-markers` component.",
             "itemtype": "property",
             "name": "container",
             "type": "{components.nf-range-markers}",
             "default": "null",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 30,
+            "line": 29,
             "description": "The minimum domain value for the range to mark.",
             "itemtype": "property",
             "name": "xMin",
             "default": "0",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 37,
+            "line": 36,
             "description": "The maximum domain value for the range to mark.",
             "itemtype": "property",
             "name": "xMax",
             "default": "0",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 44,
+            "line": 43,
             "description": "The spacing above the range marker.",
             "itemtype": "property",
             "name": "marginTop",
             "type": "Number",
             "default": "10",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 52,
+            "line": 51,
             "description": "The spacing below the range marker.",
             "itemtype": "property",
             "name": "marginBottom",
             "type": "Number",
             "default": "3",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 60,
+            "line": 59,
             "description": "The height of the range marker.",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "default": "10",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 68,
+            "line": 67,
             "description": "The computed x position of the range marker.",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 78,
+            "line": 79,
             "description": "The computed width of the range marker.",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 88,
+            "line": 92,
             "description": "The computed y position of the range marker.",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 106,
+            "line": 116,
             "description": "The computed total height of the range marker including its margins.",
             "itemtype": "property",
             "name": "totalHeight",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 116,
+            "line": 129,
             "description": "The computed bottom of the range marker, not including the bottom margin.",
             "itemtype": "property",
             "name": "bottom",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 126,
+            "line": 141,
             "description": "The computed SVG transform of the range marker container",
             "itemtype": "property",
             "name": "transform",
             "type": "String",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 136,
+            "line": 152,
             "description": "The computed SVG transform fo the range marker label container.",
             "itemtype": "property",
             "name": "labelTransform",
             "type": "String",
             "readonly": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 146,
+            "line": 163,
             "description": "Initialization function that registers the range marker with its parent \nand populates the container property",
             "itemtype": "method",
             "name": "_setup",
             "access": "private",
             "tagname": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 158,
+            "line": 175,
             "description": "Unregisters the range marker from its parent when the range marker is destroyed.",
             "itemtype": "method",
             "name": "_unregister",
             "access": "private",
             "tagname": "",
             "class": "components.nf-range-marker",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-markers.js",
-            "line": 17,
+            "line": 16,
             "description": "Used by `nf-range-marker` to identify the `nf-range-markers` container",
             "itemtype": "property",
             "name": "isRangeMarkerContainer",
@@ -5052,48 +4335,48 @@
             "default": "true",
             "readonly": "",
             "class": "components.nf-range-markers",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-markers.js",
-            "line": 26,
+            "line": 25,
             "description": "Sets the orientation of the range markers.\n\n- `'bottom'` - Range markers start at the bottom and stack upward\n- `'top'` - Range markers start at the top and stack downward",
             "itemtype": "property",
             "name": "orient",
             "type": "String",
             "default": "'bottom'",
             "class": "components.nf-range-markers",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-markers.js",
-            "line": 37,
+            "line": 36,
             "description": "The margin, in pixels, between the markers",
             "itemtype": "property",
             "name": "markerMargin",
             "type": "Number",
             "default": "10",
             "class": "components.nf-range-markers",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-markers.js",
-            "line": 45,
+            "line": 44,
             "description": "The marker components registered with this container",
             "itemtype": "property",
             "name": "markers",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-range-markers",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-markers.js",
-            "line": 55,
+            "line": 54,
             "description": "Adds the passed marker to the `markers` list, and sets the `prevMarker` and `nextMarker`\nproperties on the marker component and it's neighbor.",
             "itemtype": "method",
             "name": "registerMarker",
@@ -5105,12 +4388,12 @@
                 }
             ],
             "class": "components.nf-range-markers",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-range-markers.js",
-            "line": 73,
+            "line": 72,
             "description": "Removes the marker from the `markers` list. Also updates the `nextMarker` and `prevMarker`\nproperties of it's neighboring components.",
             "itemtype": "method",
             "name": "unregisterMarker",
@@ -5122,36 +4405,36 @@
                 }
             ],
             "class": "components.nf-range-markers",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 26,
+            "line": 25,
             "description": "The transition duration in milliseconds",
             "itemtype": "property",
             "name": "duration",
             "type": "Number",
             "default": "400",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 34,
+            "line": 33,
             "description": "The domain value at which to place the tick",
             "itemtype": "property",
             "name": "value",
             "type": "Number",
             "default": "null",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 42,
+            "line": 41,
             "description": "Sets the visibility of the component. Returns false if `y` is not \na numeric data type.",
             "itemtype": "property",
             "name": "isVisible",
@@ -5159,24 +4442,24 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 53,
+            "line": 52,
             "description": "The calculated y coordinate of the tick",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 67,
+            "line": 69,
             "description": "The SVG transform used to render the tick",
             "itemtype": "property",
             "name": "transform",
@@ -5185,67 +4468,67 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 78,
+            "line": 82,
             "description": "performs the D3 transition to move the tick to the proper position.",
             "itemtype": "method",
             "name": "_transitionalUpdate",
             "access": "private",
             "tagname": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 91,
+            "line": 95,
             "description": "Schedules the transition when `value` changes on on init.",
             "itemtype": "method",
             "name": "_triggerTransition",
             "access": "private",
             "tagname": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 100,
+            "line": 104,
             "description": "Updates the tick position without a transition.",
             "itemtype": "method",
             "name": "_nonTransitionalUpdate",
             "access": "private",
             "tagname": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 111,
+            "line": 115,
             "description": "Schedules the update of non-transitional positions",
             "itemtype": "method",
             "name": "_triggerNonTransitionalUpdate",
             "access": "private",
             "tagname": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-right-tick.js",
-            "line": 120,
+            "line": 124,
             "description": "Gets the elements required to do the d3 transitions",
             "itemtype": "method",
             "name": "_getElements",
             "access": "private",
             "tagname": "",
             "class": "components.nf-right-tick",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5257,7 +4540,7 @@
             "type": "{String}",
             "default": "'div'",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5269,7 +4552,7 @@
             "type": "{String}",
             "default": "null",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5281,7 +4564,7 @@
             "type": "{String}",
             "default": "null",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5293,7 +4576,7 @@
             "type": "{String}",
             "default": "null",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5305,7 +4588,7 @@
             "type": "{String}",
             "default": "null",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5316,7 +4599,7 @@
             "name": "scrollTopPercentage",
             "type": "{Number}",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5328,7 +4611,7 @@
             "type": "{Number}",
             "default": "0",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5340,7 +4623,7 @@
             "type": "Any",
             "default": "null",
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5361,7 +4644,7 @@
                 "type": "utils.nf.scroll-area-action-context"
             },
             "class": "components.{nf-scroll-area}",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5373,7 +4656,7 @@
             "type": "Number",
             "default": "400",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5384,7 +4667,7 @@
             "name": "xMin",
             "default": "null",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5395,7 +4678,7 @@
             "name": "xMax",
             "default": "null",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5406,7 +4689,7 @@
             "name": "yMin",
             "default": "null",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5417,7 +4700,7 @@
             "name": "yMax",
             "default": "null",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5428,7 +4711,7 @@
             "name": "x0",
             "type": "Number",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5439,7 +4722,7 @@
             "name": "x1",
             "type": "Number",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5450,7 +4733,7 @@
             "name": "y0",
             "type": "Number",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5461,7 +4744,7 @@
             "name": "y1",
             "type": "Number",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5472,7 +4755,7 @@
             "name": "rectPath",
             "type": "String",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5482,29 +4765,29 @@
             "itemtype": "method",
             "name": "doUpdatePosition",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-selection-box.js",
-            "line": 113,
+            "line": 120,
             "description": "Schedules an update to the position of the box after render.",
             "itemtype": "method",
             "name": "updatePosition",
             "access": "private",
             "tagname": "",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-selection-box.js",
-            "line": 122,
+            "line": 133,
             "description": "Sets up the required d3 elements after component\nis inserted into the DOM",
             "itemtype": "method",
             "name": "didInsertElement",
             "class": "components.nf-selection-box",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5515,7 +4798,7 @@
             "name": "x",
             "default": "null",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5526,7 +4809,7 @@
             "name": "y",
             "default": "null",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5538,7 +4821,7 @@
             "type": "Number",
             "default": "0",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5549,7 +4832,7 @@
             "name": "height",
             "default": "null",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5560,7 +4843,7 @@
             "name": "src",
             "type": "String",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5571,7 +4854,7 @@
             "name": "svgX",
             "type": "Number",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5582,7 +4865,7 @@
             "name": "svgY",
             "type": "Number",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5593,7 +4876,7 @@
             "name": "svgWidth",
             "type": "Number",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5604,7 +4887,7 @@
             "name": "svgHeight",
             "type": "Number",
             "class": "components.nf-svg-image",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5615,7 +4898,7 @@
             "name": "x1",
             "default": "null",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5626,7 +4909,7 @@
             "name": "x2",
             "default": "null",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5637,7 +4920,7 @@
             "name": "y1",
             "default": "null",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5648,7 +4931,7 @@
             "name": "y2",
             "default": "null",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5659,7 +4942,7 @@
             "name": "svgX1",
             "type": "Number",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5670,7 +4953,7 @@
             "name": "svgX2",
             "type": "Number",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5681,7 +4964,7 @@
             "name": "svgY1",
             "type": "Number",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5692,7 +4975,7 @@
             "name": "svgY2",
             "type": "Number",
             "class": "components.nf-svg-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5703,7 +4986,7 @@
             "name": "points",
             "type": "Array",
             "class": "components.nf-svg-path",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5714,7 +4997,7 @@
             "name": "svgPoints",
             "type": "Array",
             "class": "components.nf-svg-path",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5725,7 +5008,7 @@
             "name": "d",
             "type": "String",
             "class": "components.nf-svg-path",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5736,7 +5019,7 @@
             "name": "x",
             "default": "null",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5747,7 +5030,7 @@
             "name": "y",
             "default": "null",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5759,7 +5042,7 @@
             "type": "Number",
             "default": "0",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5771,7 +5054,7 @@
             "type": "Number",
             "default": "0",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5782,7 +5065,7 @@
             "name": "x1",
             "type": "Number",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5793,7 +5076,7 @@
             "name": "y1",
             "type": "Number",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5804,7 +5087,7 @@
             "name": "x0",
             "type": "Number",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5815,7 +5098,7 @@
             "name": "y0",
             "type": "Number",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5826,7 +5109,7 @@
             "name": "d",
             "type": "String",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -5836,537 +5119,12 @@
             "itemtype": "method",
             "name": "click",
             "class": "components.nf-svg-rect",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-group.js",
-            "line": 11,
-            "description": "The name of the item controller to use for each grouping.",
-            "itemtype": "property",
-            "name": "itemController",
-            "class": "components.nf-table-group",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-group.js",
-            "line": 17,
-            "description": "The name of the action to send when the group row is clicked.\nSends an object with `group`, `table` and `tableGroup` which are\nthe group data, the table component, and the table-group component, respectively.",
-            "itemtype": "property",
-            "name": "rowAction",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table-group",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 31,
-            "description": "Gets or sets the scroll of the underlying \nscroll area if there is one.",
-            "itemtype": "property",
-            "name": "scrollTop",
-            "type": "{Number}",
-            "default": "0",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 40,
-            "description": "Gets or sets the scroll by percentage\nof scrollHeight of the underlying \nscroll area if there is one.",
-            "itemtype": "property",
-            "name": "scrollTopPercentage",
-            "type": "{Number}",
-            "default": "0",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 50,
-            "description": "Property used by child components to locate the table component.",
-            "itemtype": "property",
-            "name": "isTableManager",
-            "type": "{Boolean}",
-            "default": "true",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 58,
-            "description": "The expression used to locate the values in the rows to group by.",
-            "itemtype": "property",
-            "name": "groupBy",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 66,
-            "description": "The type of grouping to perform with the groupBy\n\n# options\n- `'flat'`: (default) rows data is flattened and groups are aggregated by matching\n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"foo\"` rows\n\t\t\t\t\t\twill be grouped by all rows with a `foo` property that matches.\n- `'hierarchy'`: rows data is already in parent/child format. Parent rows contain child rows on \n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"children\"`, each row\n\t\t\t\t\t\tin the base rows data array will be a grouping row, and the\tarray of items under \n\t\t\t\t\t\t`children` will be used as the \"child\" rows of each group.",
-            "itemtype": "property",
-            "name": "groupFrom",
-            "type": "String",
-            "default": "'flat'",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 83,
-            "description": "Gets or sets whether the table has a scrollable layout.",
-            "itemtype": "property",
-            "name": "scrollable",
-            "type": "{Boolean}",
-            "default": "false",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 91,
-            "description": "The name of an item controller for the rows",
-            "itemtype": "property",
-            "name": "itemController",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 99,
-            "description": "Gets whether or not to use the grouped table layout",
-            "itemtype": "property",
-            "name": "useGroupedTableLayout",
-            "type": "{Boolean}",
-            "access": "private",
-            "tagname": "",
-            "readonly": "",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 108,
-            "description": "The optional name of an item controller to use on each grouping",
-            "itemtype": "property",
-            "name": "groupItemController",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 117,
-            "description": "The data source for rows to display in this table.",
-            "itemtype": "property",
-            "name": "rows",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 153,
-            "description": "The property on each row item to track data by. If undefined, will track by index.",
-            "itemtype": "property",
-            "name": "trackBy",
-            "type": "String",
-            "default": "undefined",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 161,
-            "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
-            "itemtype": "property",
-            "name": "rowAction",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 172,
-            "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
-            "itemtype": "property",
-            "name": "sortedAction",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 181,
-            "description": "Gets or sets whether a multi sort is used.",
-            "itemtype": "property",
-            "name": "sortMultiple",
-            "type": "Boolean",
-            "default": "false",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 189,
-            "description": "identifies the component as a table column registrar to its children",
-            "itemtype": "property",
-            "name": "isTableColumnRegistrar",
-            "type": "Boolean",
-            "default": "true",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 197,
-            "description": "The columns for the table, actually emited to the view context.",
-            "itemtype": "property",
-            "name": "columns",
-            "type": "{Array} an array of nf-column-manager components",
-            "default": "null",
-            "readonly": "",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 206,
-            "description": "The grouped and sorted data, actually emited to the view context.",
-            "itemtype": "property",
-            "name": "groups",
-            "type": "{nf-table-group-controller} an Ember.ArrayController of groups",
-            "default": "null",
-            "readonly": "",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 215,
-            "description": "The name of the action to send when grouped data is updated in any way (sorted, added to, etc)",
-            "itemtype": "property",
-            "name": "groupsUpdated",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 223,
-            "description": "The name of the action to send when columns are updated",
-            "itemtype": "property",
-            "name": "columnsUpdated",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 231,
-            "description": "The collection of columns registered",
-            "itemtype": "property",
-            "name": "columns",
-            "type": "Array",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 242,
-            "description": "Registers a column with the registrar",
-            "itemtype": "method",
-            "name": "registerColumn",
-            "params": [
-                {
-                    "name": "column",
-                    "description": "the column to register",
-                    "type": "components.nf-column"
-                }
-            ],
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table-manager.js",
-            "line": 251,
-            "description": "Unregisters a column from the registry",
-            "itemtype": "method",
-            "name": "unregisterColumn",
-            "params": [
-                {
-                    "name": "column",
-                    "description": "the column to unregister",
-                    "type": "components.nf-column"
-                }
-            ],
-            "class": "components.nf-table-manager",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 118,
-            "description": "Gets or sets the scroll of the underlying \nscroll area if there is one.",
-            "itemtype": "property",
-            "name": "scrollTop",
-            "type": "{Number}",
-            "default": "0",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 127,
-            "description": "Gets or sets the scroll by percentage\nof scrollHeight of the underlying \nscroll area if there is one.",
-            "itemtype": "property",
-            "name": "scrollTopPercentage",
-            "type": "{Number}",
-            "default": "0",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 137,
-            "description": "Property used by child components to locate the table component.",
-            "itemtype": "property",
-            "name": "isTable",
-            "type": "Boolean",
-            "default": "true",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 145,
-            "description": "Gets the nf-table-group component if one is present.",
-            "itemtype": "property",
-            "name": "tableGroup",
-            "type": "components.nf-table-group",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 153,
-            "description": "The expression used to locate the values in the rows to group by.",
-            "itemtype": "property",
-            "name": "groupBy",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 161,
-            "description": "The type of grouping to perform with the groupBy\n\n# options\n- `'flat'`: (default) rows data is flattened and groups are aggregated by matching\n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"foo\"` rows\n\t\t\t\t\t\twill be grouped by all rows with a `foo` property that matches.\n- `'hierarchy'`: rows data is already in parent/child format. Parent rows contain child rows on \n\t\t\t\t\t\tthe property specified with `groupBy`. For example, if `groupBy=\"children\"`, each row\n\t\t\t\t\t\tin the base rows data array will be a grouping row, and the\tarray of items under \n\t\t\t\t\t\t`children` will be used as the \"child\" rows of each group.",
-            "itemtype": "property",
-            "name": "groupFrom",
-            "type": "String",
-            "default": "'flat'",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 178,
-            "description": "Gets or sets whether the table has a scrollable layout.",
-            "itemtype": "property",
-            "name": "scrollable",
-            "type": "Boolean",
-            "default": "false",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 186,
-            "description": "The name of an item controller for the rows",
-            "itemtype": "property",
-            "name": "itemController",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 194,
-            "description": "The name of the grouped items item controller from the nf-table-group component,\nif present",
-            "itemtype": "property",
-            "name": "groupItemController",
-            "type": "{String}",
-            "readonly": "",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 203,
-            "description": "Gets whether or not to use the grouped table layout",
-            "itemtype": "property",
-            "name": "useGroupedTableLayout",
-            "type": "Boolean",
-            "access": "private",
-            "tagname": "",
-            "readonly": "",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 217,
-            "description": "Alias for the rowAction on the nf-table-group",
-            "itemtype": "property",
-            "name": "groupRowAction",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 225,
-            "description": "The data source for rows to display in this table.",
-            "itemtype": "property",
-            "name": "rows",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 240,
-            "description": "The property on each row item to track data by. If undefined, will track by index.",
-            "itemtype": "property",
-            "name": "trackBy",
-            "type": "String",
-            "default": "undefined",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 248,
-            "description": "The rows to render, tracked by whatever field is listed in teh trackBy property",
-            "itemtype": "property",
-            "name": "trackedRows",
-            "type": "Array",
-            "readonly": "",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 257,
-            "description": "A computed alias returning the controller of the current view. Used to wire\nup child templates to the proper controller.",
-            "itemtype": "property",
-            "name": "parentController",
-            "type": "Ember.Controller",
-            "readonly": "",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 266,
-            "description": "The name of the action to fire when a row is clicked.\nSends an object with the `row` and `table`.\n\nFor group rows, see {{#crossLink \"components.nf-table-group/rowAction:property\"}}{{/crossLink}}.",
-            "itemtype": "property",
-            "name": "rowAction",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 277,
-            "description": "An action to be fired when the rows are sorted.\nPasses the sorted rows (or groups)",
-            "itemtype": "property",
-            "name": "sortedAction",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-table",
-            "module": "multi-sort",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-table.js",
-            "line": 288,
-            "description": "Action handler to sort columns by a passed column. Sets the `sortDirection`\nof the pass column to the appropriate value based on the `sortType`.",
-            "itemtype": "method",
-            "name": "actions.sort",
-            "params": [
-                {
-                    "name": "sortedColumn",
-                    "description": "",
-                    "type": "Nf-column"
-                }
-            ],
-            "class": "components.nf-table",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-vertical-line.js",
-            "line": 21,
+            "line": 20,
             "description": "The top y coordinate of the line",
             "itemtype": "property",
             "name": "y1",
@@ -6375,12 +5133,12 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-vertical-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-vertical-line.js",
-            "line": 30,
+            "line": 29,
             "description": "The bottom y coordinate of the line",
             "itemtype": "property",
             "name": "y2",
@@ -6389,24 +5147,24 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-vertical-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-vertical-line.js",
-            "line": 39,
+            "line": 38,
             "description": "The x domain value at which to draw the vertical line on the graph",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "default": "null",
             "class": "components.nf-vertical-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-vertical-line.js",
-            "line": 47,
+            "line": 46,
             "description": "The calculated x coordinate of the vertical line",
             "itemtype": "property",
             "name": "lineX",
@@ -6415,72 +5173,72 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-vertical-line",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 44,
+            "line": 43,
             "description": "The height of the x axis in pixels.",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "default": "20",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 52,
+            "line": 51,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
             "type": "Number",
             "default": "12",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 60,
+            "line": 59,
             "description": "The length of the tick line (the small vertical line indicating the tick)",
             "itemtype": "property",
             "name": "tickLength",
             "type": "Number",
             "default": "0",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 68,
+            "line": 67,
             "description": "The spacing between the end of the tick line and the origin of the templated \ntick content",
             "itemtype": "property",
             "name": "tickPadding",
             "type": "Number",
             "default": "5",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 77,
+            "line": 76,
             "description": "The orientation of the x axis. Value can be `'top'` or `'bottom'`.",
             "itemtype": "property",
             "name": "orient",
             "type": "String",
             "default": "'bottom'",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 87,
+            "line": 86,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -6490,72 +5248,72 @@
                 "\n  \n      {{#nf-x-axis tickFilter=myFilter}} \n        <text>{{tick.value}}</text>\n      {{/nf-x-axis}}\n  \nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n  \nThe above example will filter down the set of ticks to only those that are less than 1000."
             ],
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 111,
+            "line": 110,
             "description": "The class applied due to orientation (e.g. `'orient-top'`)",
             "itemtype": "property",
             "name": "orientClass",
             "type": "String",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 121,
+            "line": 120,
             "description": "The SVG Transform applied to this component's container.",
             "itemtype": "property",
             "name": "transform",
             "type": "String",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 133,
+            "line": 132,
             "description": "The y position of this component's container.",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 156,
+            "line": 155,
             "description": "This x position of this component's container",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 167,
+            "line": 166,
             "description": "The width of the component",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 175,
+            "line": 174,
             "description": "Function to create the tick values. Can be overriden to provide specific values.",
             "itemtype": "method",
             "name": "tickFactory",
@@ -6586,19 +5344,19 @@
                 "type": "Array"
             },
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 188,
+            "line": 187,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6610,96 +5368,96 @@
             "type": "Array",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 234,
+            "line": 241,
             "description": "Updates the graph's xAxis property on willInsertElement",
             "itemtype": "method",
             "name": "_updateGraphXAxis",
             "access": "private",
             "tagname": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 243,
+            "line": 250,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-x-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 39,
+            "line": 38,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
             "type": "Number",
             "default": "5",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 47,
+            "line": 46,
             "description": "The length of the tick's accompanying line.",
             "itemtype": "property",
             "name": "tickLength",
             "type": "Number",
             "default": "5",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 55,
+            "line": 54,
             "description": "The distance between the tick line and the origin tick's templated output",
             "itemtype": "property",
             "name": "tickPadding",
             "type": "Number",
             "default": "3",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 63,
+            "line": 62,
             "description": "The total width of the y axis",
             "itemtype": "property",
             "name": "width",
             "type": "Number",
             "default": "40",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 71,
+            "line": 70,
             "description": "The orientation of the y axis. Possible values are `'left'` and `'right'`",
             "itemtype": "property",
             "name": "orient",
             "type": "String",
             "default": "'left'",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 85,
+            "line": 84,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -6709,72 +5467,72 @@
                 "\n  \n      {{#nf-y-axis tickFilter=myFilter}} \n        <text>{{tick.value}}</text>\n      {{/nf-y-axis}}\n  \nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n  \nThe above example will filter down the set of ticks to only those that are less than 1000."
             ],
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 114,
+            "line": 113,
             "description": "computed property. returns true if `orient` is equal to `'right'`.",
             "itemtype": "property",
             "name": "isOrientRight",
             "type": "Boolean",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 123,
+            "line": 122,
             "description": "The SVG transform for positioning the component.",
             "itemtype": "property",
             "name": "transform",
             "type": "String",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 135,
+            "line": 134,
             "description": "The x position of the component",
             "itemtype": "property",
             "name": "x",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 149,
+            "line": 148,
             "description": "The y position of the component",
             "itemtype": "property",
             "name": "y",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 157,
+            "line": 156,
             "description": "the height of the component",
             "itemtype": "property",
             "name": "height",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 165,
+            "line": 164,
             "description": "Function to create the tick values. Can be overriden to provide specific values.",
             "itemtype": "method",
             "name": "tickFactory",
@@ -6805,55 +5563,55 @@
                 "type": "Array"
             },
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 185,
+            "line": 184,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 193,
+            "line": 192,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 224,
+            "line": 232,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 234,
+            "line": 242,
             "description": "sets graph's yAxis property on willInsertElement",
             "itemtype": "method",
             "name": "_updateGraphYAxis",
             "access": "private",
             "tagname": "",
             "class": "components.nf-y-axis",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6865,7 +5623,7 @@
             "type": "Number",
             "default": "null",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6877,7 +5635,7 @@
             "type": "Number",
             "default": "null",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6889,7 +5647,7 @@
             "type": "Number",
             "default": "5",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6901,7 +5659,7 @@
             "type": "Number",
             "default": "400",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6913,7 +5671,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6924,7 +5682,7 @@
             "name": "yB",
             "type": "Number",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6935,7 +5693,7 @@
             "name": "yA",
             "type": "Number",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6949,7 +5707,7 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6961,7 +5719,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6973,7 +5731,7 @@
             "type": "Boolean",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6985,7 +5743,7 @@
             "type": "Boolean",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -6997,7 +5755,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7011,7 +5769,7 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7023,7 +5781,7 @@
             "type": "Number",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7037,7 +5795,7 @@
             "tagname": "",
             "readonly": "",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7047,7 +5805,7 @@
             "itemtype": "method",
             "name": "didInsertElement",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7057,7 +5815,7 @@
             "itemtype": "method",
             "name": "doTransition",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7067,7 +5825,7 @@
             "itemtype": "method",
             "name": "transition",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
@@ -7077,17 +5835,17 @@
             "itemtype": "method",
             "name": "doAdjustWidth",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-diff.js",
-            "line": 239,
+            "line": 252,
             "description": "Schedules a call to `doAdjustWidth` on afterRender",
             "itemtype": "method",
             "name": "adjustWidth",
             "class": "components.nf-y-diff",
-            "module": "multi-sort",
+            "module": "utils/nf/svg-dom",
             "namespace": "components"
         }
     ],
@@ -7103,14 +5861,6 @@
         {
             "message": "replacing incorrect tag: params with param",
             "line": " addon/mixins/graph-graphic-with-tracking-dot.js:143"
-        },
-        {
-            "message": "unknown tag: constant",
-            "line": " app/components/nf-column-manager.js:127"
-        },
-        {
-            "message": "unknown tag: constant",
-            "line": " app/components/nf-column.js:176"
         }
     ]
 }

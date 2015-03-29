@@ -4,14 +4,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-area",
         "components.nf-area-stack",
         "components.nf-bars",
-        "components.nf-cell",
-        "components.nf-column",
         "components.nf-crosshair",
         "components.nf-dot",
         "components.nf-gg",
         "components.nf-graph",
         "components.nf-graph-content",
-        "components.nf-header",
         "components.nf-horizontal-line",
         "components.nf-line",
         "components.nf-plot",
@@ -23,9 +20,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-svg-line",
         "components.nf-svg-path",
         "components.nf-svg-rect",
-        "components.nf-table",
-        "components.nf-table-group",
-        "components.nf-table-manager",
         "components.nf-vertical-line",
         "components.nf-x-axis",
         "components.nf-y-axis",
@@ -40,8 +34,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "mixins.graph-registered-graphic",
         "mixins.graph-requires-scale-source",
         "mixins.graph-selectable-graphic",
-        "mixins.table-column-registrar",
-        "mixins.table-management",
         "utils.nf.graph-event",
         "utils.nf.graph-mouse-event",
         "utils.nf.graph-position",
@@ -49,16 +41,11 @@ YUI.add("yuidoc-meta", function(Y) {
         "utils.parse-property-expression"
     ],
     "modules": [
-        "multi-sort",
         "scale-utils",
         "utils_nf_array-helpers",
         "utils_nf_svg-dom"
     ],
     "allModules": [
-        {
-            "displayName": "multi-sort",
-            "name": "multi-sort"
-        },
         {
             "displayName": "scale-utils",
             "name": "scale-utils",
