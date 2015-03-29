@@ -15,8 +15,8 @@
   "engines": {
     "node": ">= 0.10.0"
   },
-  "author": "",
-  "license": "MIT",
+  "author": "Ben Lesh <blesh@netflix.com> and contributors",
+  "license": "Apache 2",
   "devDependencies": {
     "benchpress": "^2.0.0-alpha.16",
     "broccoli-asset-rev": "^2.0.0",
