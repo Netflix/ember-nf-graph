@@ -1,6 +1,46 @@
 # ember-cli-nf-graph
 
-A data visualization add-on for Ember
+A Component-based DSL for creating graphs in your Ember app. The goal of the library is to 
+create a set of components that allows application or component authors to build graphs in a
+compositional way. This includes components for templated axes, graph lines, areas, stacked areas, bar graphs, and much more. Check the [documentation](//netflix.github.io/ember-cli-nf-graph/docs) for more information.
+
+A basic graph example is as follows:
+
+```js
+export default Ember.Route.extend({
+	main: function(){
+		return {
+			myLineData: [{ x: 0, y: 12}, { x: 1, y: 32 }, { x: 2, y: 42 }, ... ],
+			myAreaData: [{ x: 0, y: 43}, { x: 1, y: 54 }, { x: 2, y: 13 }, ... ]
+		}
+	}
+})
+```
+
+```hbs
+{{#nf-graph width=500 height=300}}
+  {{#nf-graph-content}}
+    <!-- add a line -->
+    {{nf-line data=myLineData}}
+
+    <!-- add an area -->
+    {{nf-area data=myAreaData}}
+
+    <!-- mix in any SVG element you want -->
+    <circle cx="40" cy="40" r="10"></circle>
+  {{/nf-graph-content}}
+
+	<!-- axis ticks are templateable as well -->
+  {{#nf-y-axis}}
+    <text>{{tick.value}}</text>
+  {{/nf-y-axis}}
+
+
+  {{#nf-x-axis}}
+    <text>{{tick.value}}</text>
+  {{/nf-x-axis}}
+{{/nf-graph}}
+```
 
 
 ## Installation
