@@ -1,4 +1,4 @@
-- master
+- 1.0.0-beta.3
   - BUG FIX (Issue #9) - Blueprints now properly named
 - 1.0.0-beta.2
   - fixed license
