@@ -1,3 +1,5 @@
+- master
+  - BUG FIX (Issue #9) - Blueprints now properly named
 - 1.0.0-beta.2
   - fixed license
   - updated documentation and removed document cruft
