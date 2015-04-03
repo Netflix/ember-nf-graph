@@ -22,7 +22,12 @@
     "currentURL",
     "currentPath",
     "currentRouteName",
-    "d3"
+    "d3",
+    "require",
+    "describe",
+    "it",
+    "browser",
+    "expect"
   ],
   "node": false,
   "browser": false,
