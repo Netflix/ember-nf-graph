@@ -2,6 +2,15 @@
   "name": "ember-cli-nf-graph",
   "version": "1.0.0-beta.3",
   "description": "The default blueprint for ember-cli addons.",
+  "files": [
+    "addon/",
+    "app/",
+    "blueprints/",
+    "vendor/",
+    "LICENSE.md",
+    "README.md",
+    "index.js"
+  ],
   "directories": {
     "doc": "doc",
     "test": "tests"
