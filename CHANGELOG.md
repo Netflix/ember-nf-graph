@@ -1,5 +1,6 @@
 - master
   - update rx-ember to 0.2.4, clean up bower.json
+  - stop publishing tmp and dist to npm (oops)
 - 1.0.0-beta.3
   - BUG FIX (Issue #9) - Blueprints now properly named
 - 1.0.0-beta.2
