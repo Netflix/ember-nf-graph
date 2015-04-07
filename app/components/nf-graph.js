@@ -49,8 +49,6 @@ var domainProperty = function(axis) {
   var scaleTypeKey = axis + 'ScaleType';
   var logMinKey = axis + 'LogMin';
 
-  console.debug(dataKey + '.@each', minKey, maxKey, scaleTypeKey, logMinKey);
-
   return function(){
     var data = this.get(dataKey);
     var min = this.get(minKey);
