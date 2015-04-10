@@ -1,13 +1,14 @@
 - master
-  - removed tabs in favor of spaces (#25)
-  - update rx-ember to 0.2.4, clean up bower.json
-  - stop publishing tmp and dist to npm (oops)
+  - FIX #25: removed tabs in favor of spaces (#25)
+  - UPDATE: update rx-ember to 0.2.4, clean up bower.json
+  - FIX #17: stop publishing tmp and dist to npm (#17)
+  - FIX #21: remove leftover console.debug statement
 - 1.0.0-beta.3
-  - BUG FIX (Issue #9) - Blueprints now properly named
+  - FIX #9: Blueprints now properly named
 - 1.0.0-beta.2
-  - fixed license
-  - updated documentation and removed document cruft
-  - added a changelog :P
-  - made meta joke in changelog with appropriate emoticon
+  - FIX: Update license
+  - FIX: updated documentation and removed document cruft
+  - UPDATE: added a changelog :P
+  - META: made meta joke in changelog with appropriate emoticon
 - 1.0.0-beta.1
-  - just releasing to public
+  - UPDATE: just releasing to public
