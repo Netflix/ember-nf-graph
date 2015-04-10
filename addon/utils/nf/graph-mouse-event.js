@@ -32,9 +32,9 @@ export default GraphPosition.extend({
     @readonly
     @private
   */
-  _mousePoint: function(){
+  _mousePoint: Ember.computed('originalEvent', 'graphContentElement', function(){
     return this._getMousePoint(this.get('graphContentElement'), this.get('originalEvent'));
-  }.property('originalEvent', 'graphContentElement'),
+  }),
 
   /**
     The nf-graph-content element of the nf-graph
@@ -66,14 +66,14 @@ export default GraphPosition.extend({
     @type graph-position
     @readonly
   */
-  mousePosition: function(){
+  mousePosition: Ember.computed('mouseX', 'mouseY', 'source', 'graph', function(){
     return GraphPosition.create({
       graphX: this.get('mouseX'),
       graphY: this.get('mouseY'),
       source: this.get('source'),
       graph: this.get('graph'),
     });
-  }.property('mouseX', 'mouseY', 'source', 'graph'),
+  }),
 
   /**
     The raw data point nearest the mouse.graphX position
@@ -81,11 +81,11 @@ export default GraphPosition.extend({
     @type Array
     @readonly
   */
-  nearestDataPoint: function() {
+  nearestDataPoint: Ember.computed('source', 'mouse.graphX', function() {
     var mouseX = this.get('mouseX');
     var source = this.get('source');
     return source ? source.getDataNearXRange(mouseX) : undefined;
-  }.property('source', 'mouse.graphX'),
+  }),
 
   /**
     The x domain value at the nearest data point to the mouse position
@@ -93,11 +93,11 @@ export default GraphPosition.extend({
     @property x
     @readonly
   */
-  x: function() {
+  x: Ember.computed('nearestDataPoint', function() {
     var nearestDataPoint = this.get('nearestDataPoint');
     this._x =  nearestDataPoint ? nearestDataPoint[0] : undefined;
     return this._x;
-  }.property('nearestDataPoint'),
+  }),
 
   /**
     The y domain value at the nearest data point to the mouse position
@@ -105,11 +105,11 @@ export default GraphPosition.extend({
     @property y
     @readonly
   */
-  y: function() {
+  y: Ember.computed('nearestDataPoint', function() {
     var nearestDataPoint = this.get('nearestDataPoint');
     this._y = nearestDataPoint ? nearestDataPoint[1] : undefined;
     return this._y;
-  }.property('nearestDataPoint'),
+  }),
 
   /**
     The data carried by the nearest data point to the mouse position

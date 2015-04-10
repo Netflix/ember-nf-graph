@@ -47,9 +47,9 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Array
     @readonly
   */
-  markers: function() {
+  markers: Ember.computed(function() {
     return [];
-  }.property(),
+  }),
 
   /**
     Adds the passed marker to the `markers` list, and sets the `prevMarker` and `nextMarker`

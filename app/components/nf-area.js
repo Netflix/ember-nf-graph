@@ -54,20 +54,20 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     */
     nextArea: null,
 
-    _checkForAreaStackParent: function() {
+    _checkForAreaStackParent: Ember.on('init', function() {
       var stack = this.nearestWithProperty('isAreaStack');
       if(stack) {
         stack.registerArea(this);
         this.set('stack', stack);
       }
-    }.on('init'),
+    }),
 
-    _unregister: function(){
+    _unregister: Ember.on('willDestroyElement', function(){
       var stack = this.get('stack', stack);
       if(stack) {
         stack.unregisterArea(this);
       }
-    }.on('willDestroyElement'),
+    }),
 
     /**
       The computed set of next y values to use for the "bottom" of the graphed area.
@@ -77,7 +77,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    nextYData: function(){
+    nextYData: Ember.computed('renderedData.@each', 'nextArea.renderedData.@each', function(){
       var renderedData = this.get('renderedData');
       var nextData = this.get('nextArea.renderedData') || [];
         
@@ -90,7 +90,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
 
       return result;
-    }.property('renderedData.@each', 'nextArea.renderedData.@each'),
+    }),
 
     /**
       The current rendered data "zipped" together with the nextYData.
@@ -98,12 +98,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    areaData: function(){
+    areaData: Ember.computed('renderedData.@each', 'nextYData.@each', function(){
       var nextYData = this.get('nextYData');
       return this.get('renderedData').map(function(r, i) {
         return [r[0], r[1], nextYData[i]];
       });
-    }.property('renderedData.@each', 'nextYData.@each'),
+    }),
 
 
     /**
@@ -112,12 +112,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Function
       @readonly
     */
-    areaFn: function(){
+    areaFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
       var xScale = this.get('xScale');
       var yScale = this.get('yScale');
       var interpolator = this.get('interpolator');
       return this.createAreaFn(xScale, yScale, interpolator);
-    }.property('xScale', 'yScale', 'interpolator'),
+    }),
 
     /**
       The SVG path data for the area
@@ -125,9 +125,9 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type String
       @readonly
     */
-    d: function(){
+    d: Ember.computed('areaData', 'areaFn', function(){
       return this.get('areaFn')(this.get('areaData'));
-    }.property('areaData', 'areaFn'),
+    }),
 
     click: function(){
       if(this.get('selectable')) {

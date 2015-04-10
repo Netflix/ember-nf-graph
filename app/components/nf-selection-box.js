@@ -57,45 +57,45 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @property x0
     @type Number
   */
-  x0: function(){
+  x0: Ember.computed('xMin', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('xMin'));
-  }.property('xMin', 'xScale'),
+  }),
 
   /**
     The x pixel position of xMax
     @property x1
     @type Number
   */
-  x1: function(){
+  x1: Ember.computed('xMax', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('xMax'));
-  }.property('xMax', 'xScale'),
+  }),
 
   /**
     The y pixel position of yMin
     @property y0
     @type Number
   */
-  y0: function(){
+  y0: Ember.computed('yMin', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('yMin'));
-  }.property('yMin', 'yScale'),
+  }),
 
   /**
     The y pixel position of yMax
     @property y1
     @type Number
   */
-  y1: function(){
+  y1: Ember.computed('yMax', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('yMax'));
-  }.property('yMax', 'yScale'),
+  }),
 
   /**
     The SVG path string for the box's rectangle.
     @property rectPath
     @type String
   */
-  rectPath: function(){
+  rectPath: Ember.computed('x0', 'x1', 'y0', 'y1', function(){
     return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(this.get('x0'), this.get('y0'), this.get('x1'), this.get('y1'));
-  }.property('x0', 'x1', 'y0', 'y1'),
+  }),
 
   /**
     Updates the position of the box with a transition
@@ -122,13 +122,13 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method updatePosition
     @private
   */
-  updatePosition: function(){
+  updatePosition: Ember.observer('xMin', 'xMax', 'yMin', 'yMax', function(){
     Ember.run.once(this, this.doUpdatePosition);
-  }.observes('xMin', 'xMax', 'yMin', 'yMax'),
+  }),
 
-  staticPositionChange: function(){
+  staticPositionChange: Ember.on('didInsertElement', Ember.observer('xScale', 'yScale', function(){
     Ember.run.once(this, this.doUpdatePositionStatic);
-  }.observes('xScale', 'yScale').on('didInsertElement'),
+  })),
 
   /**
     Sets up the required d3 elements after component

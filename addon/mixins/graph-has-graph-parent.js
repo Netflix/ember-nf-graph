@@ -23,9 +23,9 @@ export default Ember.Mixin.create({
     
     @method _getGraph
     */
-  _getGraph: function(){
+  _getGraph: Ember.on('init', function(){
     var graph = this.nearestWithProperty('isGraph');
     this.set('graph', graph);
     this.trigger('hasGraph', graph);
-  }.on('init'),
+  }),
 });

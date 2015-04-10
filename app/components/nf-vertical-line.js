@@ -50,9 +50,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  lineX: function(){
+  lineX: Ember.computed('xScale', 'x', function(){
     var xScale = this.get('xScale');
     var x = this.get('x');
     return xScale ? xScale(x) : -1;
-  }.property('xScale', 'x'),
+  }),
 });

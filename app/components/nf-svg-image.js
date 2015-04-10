@@ -51,12 +51,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
     @default 0
   */
-  width: function(key, value) {
+  width: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._width = Math.max(0, +value) || 0;
     }
     return this._width;
-  }.property(),
+  }),
 
   _height: 0,
 
@@ -67,84 +67,84 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property height
     @default null
   */
-  height: function(key, value) {
+  height: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._height = Math.max(0, +value) || 0;
     }
     return this._height;
-  }.property(),
+  }),
 
   /**
     The image source url
     @property src
     @type String
   */
-  src: function(key, value) {
+  src: Ember.computed(function(key, value) {
     //HACK: because attributeBindings doesn't currently work with namespaced attributes.
     var $elem = this.$();
     if(arguments.length > 1) {
       $elem.attr('xlink:href', value);
     }
     return $elem.attr('xlink:href');
-  }.property(),
+  }),
 
-  x0: function(){
+  x0: Ember.computed('x', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x'));
-  }.property('x', 'xScale'),
+  }),
 
-  y0: function(){
+  y0: Ember.computed('y', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('y'));
-  }.property('y', 'yScale'),
+  }),
 
-  x1: function(){
+  x1: Ember.computed('xScale', 'width', 'x', function(){
     var scale = this.get('xScale');
     if(scale.rangeBands) {
       throw new Error('nf-image does not support ordinal scales');
     }
     return normalizeScale(scale, this.get('width') + this.get('x'));
-  }.property('xScale', 'width', 'x'),
+  }),
 
-  y1: function(){
+  y1: Ember.computed('yScale', 'height', 'y', function(){
     var scale = this.get('yScale');
     if(scale.rangeBands) {
       throw new Error('nf-image does not support ordinal scales');
     }
     return normalizeScale(scale, this.get('height') + this.get('y'));
-  }.property('yScale', 'height', 'y'),
+  }),
 
   /**
     The pixel value at which to plot the image.
     @property svgX
     @type Number
   */
-  svgX: function(){
+  svgX: Ember.computed('x0', 'x1', function(){
     return Math.min(this.get('x0'), this.get('x1'));
-  }.property('x0', 'x1'),
+  }),
 
   /**
     The pixel value at which to plot the image.
     @property svgY
     @type Number
   */
-  svgY: function(){
+  svgY: Ember.computed('y0', 'y1', function(){
     return Math.min(this.get('y0'), this.get('y1'));
-  }.property('y0', 'y1'),
+  }),
 
   /**
     The width, in pixels, of the image.
     @property svgWidth
     @type Number
   */
-  svgWidth: function(){
+  svgWidth: Ember.computed('x0', 'x1', function(){
     return Math.abs(this.get('x0') - this.get('x1'));
-  }.property('x0', 'x1'),
+  }),
 
   /**
     The height, in pixels of the image.
     @property svgHeight
     @type Number
   */
-  svgHeight: function(){
+  svgHeight: Ember.computed('y0', 'y1', function(){
     return Math.abs(this.get('y0') - this.get('y1'));
-  }.property('y0', 'y1'),
+  }),
 });

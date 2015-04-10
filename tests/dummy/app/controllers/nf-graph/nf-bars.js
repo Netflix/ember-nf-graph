@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.ObjectController.extend({
   poop: null,
   
-  data: function() {
+  data: Ember.computed(function() {
     var arr = [];
     var str = 'abcdefg';
     
@@ -18,7 +18,7 @@ export default Ember.ObjectController.extend({
     }
     
     return arr;
-  }.property(),
+  }),
 
   actions: {
     barClicked: function(barData) {

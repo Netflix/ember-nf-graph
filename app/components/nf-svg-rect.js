@@ -46,12 +46,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
     @default 0
   */
-  width: function(key, value) {
+  width: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._width = +value;
     }
     return this._width;
-  }.property(),
+  }),
 
   _height: 0,
 
@@ -64,19 +64,19 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
     @default 0
   */
-  height: function(key, value) {
+  height: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._height = +value;
     }
     return this._height;
-  }.property(),
+  }),
 
   /**
     The x value of the bottom right corner of the rectangle.
     @property x1
     @type Number
   */
-  x1: function(){
+  x1: Ember.computed('width', 'x', 'xScale', function(){
     var xScale = this.get('xScale');
     var w = this.get('width');
     var x = this.get('x');
@@ -89,14 +89,14 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
       x = +x || 0;
       return normalizeScale(xScale, w + x);
     }
-  }.property('width', 'x', 'xScale'),
+  }),
 
   /**
     The y value of the bottom right corner of the rectangle
     @property y1
     @type Number
   */
-  y1: function(){
+  y1: Ember.computed('height', 'y', 'yScale', function(){
     var yScale = this.get('yScale');
     var h = this.get('height');
     var y = this.get('y');
@@ -109,38 +109,38 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
       y = +y || 0;
       return normalizeScale(yScale, h + y);
     }
-  }.property('height', 'y', 'yScale'),
+  }),
 
   /**
     The x value of the top right corner of the rectangle
     @property x0
     @type Number
   */
-  x0: function(){
+  x0: Ember.computed('x', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x'));
-  }.property('x', 'xScale'),
+  }),
 
   /**
     The y value of the top right corner of the rectangle.
     @property y0
     @type Number
   */
-  y0: function() {
+  y0: Ember.computed('y', 'yScale', function() {
     return normalizeScale(this.get('yScale'), this.get('y'));
-  }.property('y', 'yScale'),
+  }),
 
   /**
     The SVG path data for the rectangle
     @property d
     @type String
   */
-  d: function(){
+  d: Ember.computed('x0', 'y0', 'x1', 'y1', function(){
     var x0 = this.get('x0');
     var y0 = this.get('y0');
     var x1 = this.get('x1');
     var y1 = this.get('y1');
     return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x0, y0, x1, y1);
-  }.property('x0', 'y0', 'x1', 'y1'),
+  }),
 
   /**
     Click event handler. Toggles selected if selectable.

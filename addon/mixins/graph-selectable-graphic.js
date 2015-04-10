@@ -42,7 +42,7 @@ export default Ember.Mixin.create({
     @method _updateGraphSelected
     @private
   */
-  _updateGraphSelected: function() {
+  _updateGraphSelected: Ember.on('didInsertElement', Ember.observer('selected', function() {
     Ember.run.once(this, function(){
       var selected = this.get('selected');
       var graph = this.get('graph');
@@ -52,5 +52,5 @@ export default Ember.Mixin.create({
         graph.deselectGraphic(this);
       }
     });
-  }.observes('selected').on('didInsertElement'),
+  })),
 });

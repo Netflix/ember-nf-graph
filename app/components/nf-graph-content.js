@@ -18,10 +18,10 @@ export default Ember.Component.extend(HasGraphParent, {
 
   attributeBindings: ['transform', 'clip-path'],
 
-  'clip-path': function(){
+  'clip-path': Ember.computed('graph.contentClipPathId', function(){
     var clipPathId = this.get('graph.contentClipPathId');
     return 'url(\'#%@\')'.fmt(clipPathId);
-  }.property('graph.contentClipPathId'),
+  }),
 
   /**
     The SVG transform for positioning the graph content
@@ -29,9 +29,9 @@ export default Ember.Component.extend(HasGraphParent, {
     @type String
     @readonly
   */
-  transform: function(){
+  transform: Ember.computed('x', 'y', function(){
     return 'translate(%@ %@)'.fmt(this.get('x'), this.get('y'));
-  }.property('x', 'y'),
+  }),
 
   /**
     The x position of the graph content
@@ -72,7 +72,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @type Array
     @readonly
   */
-  gridLanes: function () {
+  gridLanes: Ember.computed('graph.yAxis.ticks', 'width', 'height', function () {
     var ticks = this.get('graph.yAxis.ticks');
     var width = this.get('width');
     var height = this.get('height');
@@ -103,7 +103,7 @@ export default Ember.Component.extend(HasGraphParent, {
     }, []);
 
     return lanes;
-  }.property('graph.yAxis.ticks', 'width', 'height'),
+  }),
 
   /**
     The name of the hoverChange action to fire

@@ -45,7 +45,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property svgPoints
     @type Array
   */
-  svgPoints: function(){
+  svgPoints: Ember.computed('points.[]', 'xScale', 'yScale', function(){
     var points = this.get('points');
     var xScale = this.get('xScale');
     var yScale = this.get('yScale');
@@ -57,7 +57,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
         return [dx, dy, c];
       });
     } 
-  }.property('points.[]', 'xScale', 'yScale'),
+  }),
 
   click: function(){
     if(this.get('selectable')) {
@@ -70,7 +70,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property d
     @type String
   */
-  d: function(){
+  d: Ember.computed('svgPoints', function(){
     var svgPoints = this.get('svgPoints');
     if(Ember.isArray(svgPoints) && svgPoints.length > 0) {
       return svgPoints.reduce(function(d, pt, i) {
@@ -83,5 +83,5 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     } else {
       return 'M0,0';
     }
-  }.property('svgPoints'),
+  }),
 });

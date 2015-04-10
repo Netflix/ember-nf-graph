@@ -51,12 +51,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  cx: function(){
+  cx: Ember.computed('x', 'xScale', 'hasX', function(){
     var x = this.get('x');
     var xScale = this.get('xScale');
     var hasX = this.get('hasX');
     return hasX && xScale ? xScale(x) : -1;
-  }.property('x', 'xScale', 'hasX'),
+  }),
 
   /**
     The computed center y coordinate of the circle
@@ -65,12 +65,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  cy: function() {
+  cy: Ember.computed('y', 'yScale', 'hasY', function() {
     var y = this.get('y');
     var yScale = this.get('yScale');
     var hasY = this.get('hasY');
     return hasY && yScale ? yScale(y) : -1;
-  }.property('y', 'yScale', 'hasY'),
+  }),
 
   /**
     Toggles the visibility of the dot. If x or y are

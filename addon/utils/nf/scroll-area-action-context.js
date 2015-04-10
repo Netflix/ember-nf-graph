@@ -60,9 +60,9 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollTopMax: function(){
+  scrollTopMax: Ember.computed('outerHeight', 'scrollHeight', function(){
     return this.get('scrollHeight') - this.get('outerHeight');
-  }.property('outerHeight', 'scrollHeight'),
+  }),
 
   /**
     The calculated percentage, in decimals, of content scrolled.
@@ -70,9 +70,9 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollTopPercentage: function() {
+  scrollTopPercentage: Ember.computed('scrollTop', 'scrollTopMax', function() {
     return this.get('scrollTop') / this.get('scrollTopMax');
-  }.property('scrollTop', 'scrollTopMax'),
+  }),
   
   /**
     The calculated maximum value for scrollTop in pixels.
@@ -80,9 +80,9 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollLeftMax: function(){
+  scrollLeftMax: Ember.computed('outerWidth', 'scrollWidth', function(){
     return this.get('scrollWidth') - this.get('outerWidth');
-  }.property('outerWidth', 'scrollWidth'),
+  }),
 
   /**
     The calculated percentage, in decimals, of content scrolled.
@@ -90,9 +90,9 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollLeftPercentage: function() {
+  scrollLeftPercentage: Ember.computed('scrollLeft', 'scrollLeftMax', function() {
     return this.get('scrollLeft') / this.get('scrollLeftMax');
-  }.property('scrollLeft', 'scrollLeftMax'),
+  }),
 
   /**
     The component that fired the event

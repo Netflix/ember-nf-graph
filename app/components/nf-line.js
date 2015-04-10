@@ -44,12 +44,12 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @return {String} an SVG path data string
   */
-  lineFn: function(){
+  lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
     var xScale = this.get('xScale');
     var yScale = this.get('yScale');
     var interpolator = this.get('interpolator');
     return this.createLineFn(xScale, yScale, interpolator);
-  }.property('xScale', 'yScale', 'interpolator'),
+  }),
 
   /**
     The SVG path data string to render the line
@@ -58,20 +58,20 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @readonly
   */
-  d: function(){
+  d: Ember.computed('renderedData.@each', 'lineFn', function(){
     var renderedData = this.get('renderedData');
     var lineFn = this.get('lineFn');
     return lineFn(renderedData);
-  }.property('renderedData.@each', 'lineFn'),
+  }),
 
   /**
     Event handler to toggle the `selected` property on click
     @method _toggleSelected
     @private
   */
-  _toggleSelected: function(){
+  _toggleSelected: Ember.on('click', function(){
     if(this.get('selectable')) {
       this.toggleProperty('selected');
     }
-  }.on('click'),
+  }),
 });

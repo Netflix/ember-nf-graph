@@ -55,16 +55,16 @@ export default Ember.Component.extend({
     @property scrollTopPercentage
     @type {Number}
   */
-  scrollTopPercentage: function(key, value) {
+  scrollTopPercentage: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._scrollTopPercentage = value;
     }
     return this._scrollTopPercentage;
-  }.property().volatile(),
+  }).volatile(),
 
   _childMutationObserver: null,
 
-  _setupChildMutationObserver: function() {
+  _setupChildMutationObserver: Ember.on('didInsertElement', function() {
     var handler = function(e) {
       var context = this.createActionContext(e);
       this.sendAction('childrenChangedAction', context);   
@@ -76,21 +76,21 @@ export default Ember.Component.extend({
 
     // trigger initial event
     handler();
-  }.on('didInsertElement'),
+  }),
 
-  _teardownChildMutationObserver: function(){
+  _teardownChildMutationObserver: Ember.on('willDestroyElement', function(){
     if(this._childMutationObserver) {
       this._childMutationObserver.disconnect();
     }
-  }.on('willDestroyElement'),
+  }),
 
-  _updateScrollTop: function(){
+  _updateScrollTop: Ember.on('didInsertElement', Ember.observer('scrollTopPercentage', function(){
     var element = this.get('element');
     if(element) {
       var scrollTop = this.get('scrollTopPercentage') * (element.scrollHeight - this.$().outerHeight());
       this.set('scrollTop', scrollTop);
     }
-  }.observes('scrollTopPercentage').on('didInsertElement'),
+  })),
 
   /**
     Gets or sets the scrollTop of the area
@@ -98,18 +98,18 @@ export default Ember.Component.extend({
     @type {Number}
     @default 0
   */
-  scrollTop: function(key, value){
+  scrollTop: Ember.computed(function(key, value){
     if(arguments.length > 1) {
       this._scrollTop = value;
     }
     return this._scrollTop;
-  }.property().volatile(),
+  }).volatile(),
 
-  _updateScroll: function(){
+  _updateScroll: Ember.on('didInsertElement', Ember.observer('scrollTop', function(){
     if(this.get('element')) {
       this.$().scrollTop(this.get('scrollTop'));
     }
-  }.observes('scrollTop').on('didInsertElement'),
+  })),
 
   /**
     The optional action data to send with the action contextl
@@ -162,19 +162,19 @@ export default Ember.Component.extend({
     return ScrollAreaActionContext.create(context);
   },
 
-  _setupElement: function() {
+  _setupElement: Ember.on('didInsertElement', function() {
     var elem = this.get('element');
     if(elem) {
       elem.addEventListener('scroll', this._onScroll.bind(this));
       elem.addEventListener('resize', this._onResize.bind(this));
     }
-  }.on('didInsertElement'),
+  }),
 
-  _unsubscribeEvents: function(){
+  _unsubscribeEvents: Ember.on('willDestroyElement', function(){
     var elem = this.get('element');
     if(elem) {
       elem.removeEventListener('scroll', this._onScroll);
       elem.removeEventListener('resize', this._onResize);
     }
-  }.on('willDestroyElement'),
+  }),
 });

@@ -62,12 +62,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  rangeX: function(){
+  rangeX: Ember.computed('x', 'xScale', function(){
     var xScale = this.get('xScale');
     var x = this.get('x');
     var hasX = this.get('hasX');
     return (hasX && xScale ? xScale(x) : 0) || 0;
-  }.property('x', 'xScale'),
+  }),
 
   /**
     The calculated y coordinate
@@ -75,12 +75,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  rangeY: function(){
+  rangeY: Ember.computed('y', 'yScale', function(){
     var yScale = this.get('yScale');
     var y = this.get('y');
     var hasY = this.get('hasY');
     return (hasY && yScale ? yScale(y) : 0) || 0;
-  }.property('y', 'yScale'),
+  }),
 
   /**
     The SVG transform of the component's `<g>` tag.
@@ -88,9 +88,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: function(){
+  transform: Ember.computed('rangeX', 'rangeY', function(){
     return 'translate(%@ %@)'.fmt(this.get('rangeX'), this.get('rangeY'));
-  }.property('rangeX', 'rangeY'),
+  }),
 
   data: null,
 

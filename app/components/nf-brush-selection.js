@@ -40,9 +40,9 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     }
   },
 
-  _autoWireUpChanged: function(){
+  _autoWireUpChanged: Ember.on('didInsertElement', Ember.observer('autoWireUp', function(){
     Ember.run.once(this, this._wireToGraph);
-  }.observes('autoWireUp').on('didInsertElement'),
+  })),
 
   _updateLeftText: function(){
     var root = d3.select(this.element);
@@ -80,9 +80,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
       attr('height', height);
   },
 
-  _onLeftChange: function(){
-    Ember.run.once(this, this._updateLeftText);
-  }.observes('left', 'graphHeight', 'textPadding').on('didInsertElement'),
+  _onLeftChange: Ember.on(
+    'didInsertElement',
+    Ember.observer('left', 'graphHeight', 'textPadding', function(){
+      Ember.run.once(this, this._updateLeftText);
+    })
+  ),
 
   _updateRightText: function(){
     var root = d3.select(this.element);
@@ -121,45 +124,48 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
       attr('height', height);
   },
 
-  _onRightChange: function(){
-    Ember.run.once(this, this._updateRightText);
-  }.observes('right', 'graphHeight', 'graphWidth', 'textPadding').on('didInsertElement'),
+  _onRightChange: Ember.on(
+    'didInsertElement',
+    Ember.observer('right', 'graphHeight', 'graphWidth', 'textPadding', function(){
+      Ember.run.once(this, this._updateRightText);
+    })
+  ),
 
-  leftDisplay: function(){
+  leftDisplay: Ember.computed('left', 'formatter', function(){
     var formatter = this.get('formatter');
     var left = this.get('left');
     return formatter ? formatter(left) : left;
-  }.property('left', 'formatter'),
+  }),
 
-  rightDisplay: function(){
+  rightDisplay: Ember.computed('right', 'formatter', function(){
     var formatter = this.get('formatter');
     var right = this.get('right');
     return formatter ? formatter(right) : right;
-  }.property('right', 'formatter'),
+  }),
 
-  isVisible: function(){
+  isVisible: Ember.computed('left', 'right', function(){
     var left = +this.get('left');
     var right = +this.get('right');
     return left === left && right === right;
-  }.property('left', 'right'),
+  }),
 
-  leftX: function() {
+  leftX: Ember.computed('xScale', 'left', function() {
     var left = this.get('left') || 0;
     var scale = this.get('xScale');
     return scale ? scale(left) : 0; 
-  }.property('xScale', 'left'),
+  }),
 
-  rightX: function() {
+  rightX: Ember.computed('xScale', 'right', function() {
     var right = this.get('right') || 0;
     var scale = this.get('xScale');
     return scale ? scale(right) : 0;
-  }.property('xScale', 'right'),
+  }),
 
   graphWidth: Ember.computed.alias('graph.graphWidth'),
   
   graphHeight: Ember.computed.alias('graph.graphHeight'),
 
-  rightWidth: function() {
+  rightWidth: Ember.computed('rightX', 'graphWidth', function() {
     return (this.get('graphWidth') - this.get('rightX')) || 0;
-  }.property('rightX', 'graphWidth'),
+  }),
 });

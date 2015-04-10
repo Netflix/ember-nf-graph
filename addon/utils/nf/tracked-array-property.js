@@ -7,7 +7,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 
   backingField = backingField || '_%@_trackBy_%@'.fmt(arraySourceProp, trackByProp);
 
-  return function(){
+  return Ember.computed(arraySourceDependency, function(){
     var array = this.get(backingField);
 
     if(!Ember.isArray(array)){
@@ -62,7 +62,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
     this.set(backingField, array);
     
     return array;
-  }.property(arraySourceDependency);
+  });
 }
 
 export default trackedArrayProperty;

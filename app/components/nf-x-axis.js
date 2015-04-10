@@ -113,9 +113,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  orientClass: function(){
+  orientClass: Ember.computed('orient', function(){
     return 'orient-' + this.get('orient');
-  }.property('orient'),
+  }),
 
   /**
     The SVG Transform applied to this component's container.
@@ -123,11 +123,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: function(){
+  transform: Ember.computed('x', 'y', function(){
     var x = this.get('x') || 0;
     var y = this.get('y') || 0;
     return 'translate(%@ %@)'.fmt(x, y);
-  }.property('x', 'y'),
+  }),
 
   /** 
     The y position of this component's container.
@@ -135,22 +135,29 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: function(){
-    var orient = this.get('orient');
-    var graphHeight = this.get('graph.height');
-    var height = this.get('height');
-    var paddingBottom = this.get('graph.paddingBottom');
-    var paddingTop = this.get('graph.paddingTop');
-    var y;
-    
-    if(orient === 'bottom') {
-      y = graphHeight - paddingBottom - height;
-    } else {
-      y = paddingTop;
-    }
+  y: Ember.computed(
+    'orient',
+    'graph.paddingTop',
+    'graph.paddingBottom',
+    'graph.height',
+    'height',
+    function(){
+      var orient = this.get('orient');
+      var graphHeight = this.get('graph.height');
+      var height = this.get('height');
+      var paddingBottom = this.get('graph.paddingBottom');
+      var paddingTop = this.get('graph.paddingTop');
+      var y;
+      
+      if(orient === 'bottom') {
+        y = graphHeight - paddingBottom - height;
+      } else {
+        y = paddingTop;
+      }
 
-    return y || 0;
-  }.property('orient', 'graph.paddingTop', 'graph.paddingBottom', 'graph.height', 'height'),
+      return y || 0;
+    }
+  ),
 
   /**
     This x position of this component's container
@@ -158,9 +165,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  x: function(){
+  x: Ember.computed('graph.graphX', function(){
     return this.get('graph.graphX') || 0;
-  }.property('graph.graphX'),
+  }),
 
 
   /**
@@ -190,7 +197,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueXData: function(){
+  uniqueXData: Ember.computed('graph.xData.@each', function(){
     var xData = this.get('graph.xData');
     return xData.reduce(function(unique, d) {
       if(unique.indexOf(d) === -1) {
@@ -198,7 +205,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
       }
       return unique;
     }, []);
-  }.property('graph.xData.@each'),
+  }),
 
   /**
     The models for the ticks to display on the axis.
@@ -206,46 +213,57 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  ticks: function(){
-    var tickCount = this.get("tickCount");
-    var xScale = this.get("xScale");
-    var tickPadding = this.get("tickPadding");
-    var tickLength = this.get("tickLength");
-    var height = this.get("height");
-    var orient = this.get("orient");
-    var tickFilter = this.get("tickFilter");
-    var xScaleType = this.get("graph.xScaleType");
-    var uniqueXData = this.get("uniqueXData");
-    var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
-    var y1 = orient === 'top' ? height : 0;
-    var y2 = y1 + tickLength;
-    var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);  
-    var halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
-    var result = ticks.map(function(tick) {
-      return {
-        value: tick,
-        x: xScale(tick) + halfBandWidth,
-        y1: y1,
-        y2: y2,
-        labely: labely
-      };
-    });
+  ticks: Ember.computed(
+    'tickCount',
+    'xScale',
+    'tickPadding',
+    'tickLength',
+    'height',
+    'orient',
+    'tickFilter',
+    'graph.xScaleType',
+    'uniqueXData',
+    function(){
+      var tickCount = this.get("tickCount");
+      var xScale = this.get("xScale");
+      var tickPadding = this.get("tickPadding");
+      var tickLength = this.get("tickLength");
+      var height = this.get("height");
+      var orient = this.get("orient");
+      var tickFilter = this.get("tickFilter");
+      var xScaleType = this.get("graph.xScaleType");
+      var uniqueXData = this.get("uniqueXData");
+      var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
+      var y1 = orient === 'top' ? height : 0;
+      var y2 = y1 + tickLength;
+      var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);  
+      var halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
+      var result = ticks.map(function(tick) {
+        return {
+          value: tick,
+          x: xScale(tick) + halfBandWidth,
+          y1: y1,
+          y2: y2,
+          labely: labely
+        };
+      });
 
-    if(tickFilter) {
-      result = result.filter(tickFilter);
+      if(tickFilter) {
+        result = result.filter(tickFilter);
+      }
+
+      return result;
     }
-
-    return result;
-  }.property('tickCount', 'xScale', 'tickPadding', 'tickLength', 'height', 'orient', 'tickFilter', 'graph.xScaleType', 'uniqueXData'),
+  ),
 
   /**
     Updates the graph's xAxis property on willInsertElement
     @method _updateGraphXAxis
     @private
   */
-  _updateGraphXAxis: function(){
+  _updateGraphXAxis: Ember.on('willInsertElement', function(){
     this.set('graph.xAxis', this);
-  }.on('willInsertElement'),
+  }),
 
   /**
     The y position, in pixels, of the axis line
@@ -253,9 +271,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  axisLineY: function(){
+  axisLineY: Ember.computed('orient', 'height', function(){
     var orient = this.get('orient');
     var height = this.get('height');
     return orient === 'top' ? height : 0;
-  }.property('orient', 'height'),
+  }),
 });

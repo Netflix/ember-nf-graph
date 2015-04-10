@@ -23,7 +23,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleS
     @readonly
     @private
   */
-  plotData: function(){
+  plotData: Ember.computed('renderedData.@each', function(){
     var renderedData = this.get('renderedData');
     if(renderedData && Ember.isArray(renderedData)) {
       return renderedData.map(function(d) {
@@ -34,7 +34,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleS
         };
       });
     }
-  }.property('renderedData.@each'),
+  }),
 
 
   actions: {
