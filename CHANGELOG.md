@@ -1,10 +1,10 @@
 - master
-  - FIX #25: removed tabs in favor of spaces (#25)
+  - FIX [#25](//github.com/netflix.com/ember-cli-nf-graph/issue/#25): removed tabs in favor of spaces
   - UPDATE: update rx-ember to 0.2.4, clean up bower.json
-  - FIX #17: stop publishing tmp and dist to npm (#17)
-  - FIX #21: remove leftover console.debug statement
+  - FIX [#17](//github.com/netflix.com/ember-cli-nf-graph/pull/#17): stop publishing tmp and dist to npm
+  - FIX [#21](//github.com/netflix.com/ember-cli-nf-graph/issue/#21): remove leftover console.debug statement
 - 1.0.0-beta.3
-  - FIX #9: Blueprints now properly named
+  - FIX [#9](//github.com/netflix.com/ember-cli-nf-graph/issue/#9): Blueprints now properly named
 - 1.0.0-beta.2
   - FIX: Update license
   - FIX: updated documentation and removed document cruft
