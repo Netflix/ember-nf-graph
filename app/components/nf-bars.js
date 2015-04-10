@@ -40,10 +40,10 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     @readonly
     @private
   */
-  getBarClass: function() {
+  getBarClass: Ember.computed('classprop', function() {
     var classprop = this.get('classprop');
     return classprop ? parsePropExpr(classprop) : null;
-  }.property('classprop'),
+  }),
 
   /**
     The nf-bars-group this belongs to, if any.
@@ -83,52 +83,61 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     @type Number
     @readonly
   */
-  barWidth: function(){
+  barWidth: Ember.computed('xScale', 'barScale', function(){
     var barScale = this.get('barScale');
     if(barScale) {
       return barScale.rangeBand();
     }
     var xScale = this.get('xScale');
     return xScale && xScale.rangeBand ? xScale.rangeBand() : 0;
-  }.property('xScale', 'barScale'),
+  }),
 
-  groupOffsetX: function(){
+  groupOffsetX: Ember.computed('barScale', 'groupIndex', function(){
     var barScale = this.get('barScale');
     var groupIndex = this.get('groupIndex');
     return normalizeScale(barScale, groupIndex);
-  }.property('barScale', 'groupIndex'),
+  }),
 
   /**
     The bar models used to render the bars.
     @property bars
     @readonly
   */
-  bars: function(){
-    var xScale = this.get('xScale');
-    var yScale = this.get('yScale');
-    var renderedData = this.get('renderedData');
-    var graphHeight = this.get('graphHeight');
-    var getBarClass = this.get('getBarClass');
-    var groupOffsetX = this.get('groupOffsetX');
+  bars: Ember.computed(
+    'xScale',
+    'yScale',
+    'renderedData.[]',
+    'graphHeight',
+    'getBarClass',
+    'barWidth',
+    'groupOffsetX',
+    function(){
+      var xScale = this.get('xScale');
+      var yScale = this.get('yScale');
+      var renderedData = this.get('renderedData');
+      var graphHeight = this.get('graphHeight');
+      var getBarClass = this.get('getBarClass');
+      var groupOffsetX = this.get('groupOffsetX');
 
-    if(!xScale || !yScale || !Ember.isArray(renderedData)) {
-      return null;
+      if(!xScale || !yScale || !Ember.isArray(renderedData)) {
+        return null;
+      }
+
+      var w = this.get('barWidth');
+
+      return renderedData.map(function(d) {
+        var barClass = 'nf-bars-bar' + getBarClass ? ' ' + getBarClass(d.data) : '';
+        var x = normalizeScale(xScale, d[0]) + groupOffsetX;
+        var y = normalizeScale(yScale, d[1]);
+        var h = graphHeight - y;
+        return {
+          path: getRectPath(x, y, w, h),
+          className: barClass,
+          data: d,
+        };
+      });
     }
-
-    var w = this.get('barWidth');
-
-    return renderedData.map(function(d) {
-      var barClass = 'nf-bars-bar' + getBarClass ? ' ' + getBarClass(d.data) : '';
-      var x = normalizeScale(xScale, d[0]) + groupOffsetX;
-      var y = normalizeScale(yScale, d[1]);
-      var h = graphHeight - y;
-      return {
-        path: getRectPath(x, y, w, h),
-        className: barClass,
-        data: d,
-      };
-    });
-  }.property('xScale', 'yScale', 'renderedData.[]', 'graphHeight', 'getBarClass', 'barWidth', 'groupOffsetX'),
+  ),
 
   /**
     The name of the action to fire when a bar is clicked.
@@ -138,12 +147,12 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   */
   barClick: null,
 
-  _registerBars: function(){
+  _registerBars: Ember.on('init', function(){
     var group = this.nearestWithProperty('isBarsGroup');
     if(group && group.registerBars) {
       group.registerBars(this);
     }
-  }.on('init'),
+  }),
 
   actions: {
     nfBarClickBar: function(dataPoint) {

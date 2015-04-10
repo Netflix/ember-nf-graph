@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 var scaleProperty = function(scaleKey, zoomKey, offsetKey){
-  return function() {
+  return Ember.computed(scaleKey, zoomKey, offsetKey, function() {
     var scale = this.get(scaleKey);
     var zoom = this.get(zoomKey);
     var offset = this.get(offsetKey);
@@ -17,7 +17,7 @@ var scaleProperty = function(scaleKey, zoomKey, offsetKey){
     copy.range([range[0] - offset, range[1] - offset]);
 
     return copy;
-  }.property(scaleKey, zoomKey, offsetKey);
+  });
 };
 
 /**
@@ -57,12 +57,12 @@ export default Ember.Mixin.create({
     @type Number
     @default 1
   */
-  scaleZoomX: function(key, value) {
+  scaleZoomX: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._scaleZoomX = +value;
     }
     return this._scaleZoomX || 1;
-  }.property(),
+  }),
 
   /**
     The zoom multiplier for the y scale
@@ -70,12 +70,12 @@ export default Ember.Mixin.create({
     @type Number
     @default 1
   */
-  scaleZoomY: function(key, value) {
+  scaleZoomY: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._scaleZoomY = +value;
     }
     return this._scaleZoomY || 1;
-  }.property(),
+  }),
 
   /**
     The offset, in pixels, for the x scale
@@ -83,12 +83,12 @@ export default Ember.Mixin.create({
     @type Number
     @default 0
   */
-  scaleOffsetX: function(key, value) {
+  scaleOffsetX: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._scaleOffsetX = +value;
     }
     return this._scaleOffsetX || 0;
-  }.property(),
+  }),
 
   /**
     The offset, in pixels, for the y scale
@@ -96,15 +96,15 @@ export default Ember.Mixin.create({
     @type Number
     @default 0
   */
-  scaleOffsetY: function(key, value) {
+  scaleOffsetY: Ember.computed(function(key, value) {
     if(arguments.length > 1) {
       this._scaleOffsetY = +value;
     }
     return this._scaleOffsetY || 0;
-  }.property(),
+  }),
 
-  _getScaleSource: function(){
+  _getScaleSource: Ember.on('init', function(){
     var scaleSource = this.nearestWithProperty('isScaleSource');
     this.set('scaleSource', scaleSource);
-  }.on('init'),
+  }),
 });

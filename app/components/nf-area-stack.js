@@ -40,9 +40,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  areas: function(){
+  areas: Ember.computed(function(){
     return [];
-  }.property(),
+  }),
 
   /**
     Registers an area component with this stack. Also links areas to one

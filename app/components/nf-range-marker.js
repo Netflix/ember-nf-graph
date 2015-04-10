@@ -70,11 +70,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  x: function(){
+  x: Ember.computed('xMin', 'xScale', function(){
     var xScale = this.get('xScale');
     var xMin = this.get('xMin');
     return xScale(xMin);
-  }.property('xMin', 'xScale'),
+  }),
 
   /**
     The computed width of the range marker.
@@ -82,12 +82,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  width: function() {
+  width: Ember.computed('xScale', 'xMin', 'xMax', function() {
     var xScale = this.get('xScale');
     var xMax = this.get('xMax');
     var xMin = this.get('xMin');
     return xScale(xMax) - xScale(xMin);
-  }.property('xScale', 'xMin', 'xMax'),
+  }),
 
   /**
     The computed y position of the range marker.
@@ -95,23 +95,30 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: function() {
-    var orient = this.get('container.orient');
-    var prevBottom = this.get('prevMarker.bottom');
-    var prevY = this.get('prevMarker.y');
-    var graphHeight = this.get('graph.graphHeight');
-    var totalHeight = this.get('totalHeight');
+  y: Ember.computed(
+    'container.orient',
+    'prevMarker.bottom',
+    'prevMarker.y',
+    'graph.graphHeight',
+    'totalHeight',
+    function() {
+      var orient = this.get('container.orient');
+      var prevBottom = this.get('prevMarker.bottom');
+      var prevY = this.get('prevMarker.y');
+      var graphHeight = this.get('graph.graphHeight');
+      var totalHeight = this.get('totalHeight');
 
-    prevBottom = prevBottom || 0;
+      prevBottom = prevBottom || 0;
 
-    if(orient === 'bottom') {
-      return (prevY || graphHeight) - totalHeight;
+      if(orient === 'bottom') {
+        return (prevY || graphHeight) - totalHeight;
+      }
+
+      if(orient === 'top') {
+        return prevBottom;
+      }
     }
-
-    if(orient === 'top') {
-      return prevBottom;
-    }
-  }.property('container.orient', 'prevMarker.bottom', 'prevMarker.y', 'graph.graphHeight', 'totalHeight'),
+  ),
 
   /**
     The computed total height of the range marker including its margins.
@@ -119,12 +126,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  totalHeight: function() {
+  totalHeight: Ember.computed('height', 'marginTop', 'marginBottom', function() {
     var height = this.get('height');
     var marginTop = this.get('marginTop');
     var marginBottom = this.get('marginBottom');
     return height + marginTop + marginBottom;
-  }.property('height', 'marginTop', 'marginBottom'),
+  }),
 
   /**
     The computed bottom of the range marker, not including the bottom margin.
@@ -132,11 +139,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  bottom: function(){
+  bottom: Ember.computed('y', 'totalHeight', function(){
     var y = this.get('y');
     var totalHeight = this.get('totalHeight');
     return y + totalHeight;
-  }.property('y', 'totalHeight'),
+  }),
 
   /**
     The computed SVG transform of the range marker container
@@ -144,10 +151,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: function(){ 
+  transform: Ember.computed('y', function(){ 
     var y = this.get('y');
     return 'translate(0 %@)'.fmt(y || 0);
-  }.property('y'),
+  }),
 
   /**
     The computed SVG transform fo the range marker label container.
@@ -155,10 +162,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  labelTransform: function(){
+  labelTransform: Ember.computed('x', function(){
     var x = this.get('x');
     return 'translate(%@ 0)'.fmt(x || 0);
-  }.property('x'),
+  }),
 
   /**
     Initialization function that registers the range marker with its parent 
@@ -166,18 +173,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method _setup
     @private
   */
-  _setup: function(){
+  _setup: Ember.on('init', function(){
     var container = this.nearestWithProperty('isRangeMarkerContainer');
     container.registerMarker(this);
     this.set('container', container);
-  }.on('init'),
+  }),
 
   /**
     Unregisters the range marker from its parent when the range marker is destroyed.
     @method _unregister
     @private
   */
-  _unregister: function() {
+  _unregister: Ember.on('willDestroyElement', function() {
     this.get('container').unregisterMarker(this);
-  }.on('willDestroyElement')
+  })
 });

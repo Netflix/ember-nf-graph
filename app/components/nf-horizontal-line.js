@@ -32,11 +32,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  lineY: function(){
+  lineY: Ember.computed('y', 'yScale', function(){
     var y = this.get('y');
     var yScale = this.get('yScale');
     return yScale ? yScale(y) : -1;
-  }.property('y', 'yScale'),
+  }),
 
   /**
     The left x coordinate of the line

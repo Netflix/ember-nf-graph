@@ -103,12 +103,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
-  tickFilter: function(name, value) {
+  tickFilter: Ember.computed(function(name, value) {
     if(arguments.length > 1) {
       this._tickFilter = value;
     }
     return this._tickFilter;
-  }.property(),
+  }),
 
   /**
     computed property. returns true if `orient` is equal to `'right'`.
@@ -125,11 +125,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: function(){
+  transform: Ember.computed('x', 'y', function(){
     var x = this.get('x');
     var y = this.get('y');
     return 'translate(%@ %@)'.fmt(x, y);
-  }.property('x', 'y'),
+  }),
 
   /**
     The x position of the component
@@ -137,13 +137,20 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  x: function(){
-    var orient = this.get('orient');
-    if(orient !== 'left') {
-      return this.get('graph.width') - this.get('width') - this.get('graph.paddingRight');
+  x: Ember.computed(
+    'orient',
+    'graph.width',
+    'width',
+    'graph.paddingLeft',
+    'graph.paddingRight',
+    function(){
+      var orient = this.get('orient');
+      if(orient !== 'left') {
+        return this.get('graph.width') - this.get('width') - this.get('graph.paddingRight');
+      }
+      return this.get('graph.paddingLeft');
     }
-    return this.get('graph.paddingLeft');
-  }.property('orient', 'graph.width', 'width', 'graph.paddingLeft', 'graph.paddingRight'),
+  ),
 
   /**
     The y position of the component
@@ -195,38 +202,48 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  ticks: function(){
-    var yScale = this.get('yScale');
-    var tickCount = this.get('tickCount');
-    var yScaleType = this.get('graph.yScaleType');
-    var tickPadding = this.get('tickPadding');
-    var axisLineX = this.get('axisLineX');
-    var tickLength = this.get('tickLength');
-    var isOrientRight = this.get('isOrientRight');
-    var tickFilter = this.get('tickFilter');
-    var uniqueYData = this.get('uniqueYData');
-    var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
-    var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
-    var x2 = axisLineX;
-    var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
+  ticks: Ember.computed(
+    'yScale',
+    'tickCount',
+    'graph.yScaleType',
+    'tickPadding',
+    'axisLineX',
+    'tickLength',
+    'isOrientRight',
+    'tickFilter',
+    'uniqueYData',
+    function(){
+      var yScale = this.get('yScale');
+      var tickCount = this.get('tickCount');
+      var yScaleType = this.get('graph.yScaleType');
+      var tickPadding = this.get('tickPadding');
+      var axisLineX = this.get('axisLineX');
+      var tickLength = this.get('tickLength');
+      var isOrientRight = this.get('isOrientRight');
+      var tickFilter = this.get('tickFilter');
+      var uniqueYData = this.get('uniqueYData');
+      var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
+      var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
+      var x2 = axisLineX;
+      var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
 
-    var result = ticks.map(function (tick) {
-      return {
-        value: tick,
-        y: yScale(tick),
-        x1: x1,
-        x2: x2,
-        labelx: labelx,
-      };
-    });
+      var result = ticks.map(function (tick) {
+        return {
+          value: tick,
+          y: yScale(tick),
+          x1: x1,
+          x2: x2,
+          labelx: labelx,
+        };
+      });
 
-    if(tickFilter) {
-      result = result.filter(tickFilter);
+      if(tickFilter) {
+        result = result.filter(tickFilter);
+      }
+
+      return result;
     }
-
-    return result;
-  }.property('yScale', 'tickCount', 'graph.yScaleType', 'tickPadding', 'axisLineX', 
-    'tickLength', 'isOrientRight', 'tickFilter', 'uniqueYData'),
+  ),
 
 
   /**
@@ -235,16 +252,16 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  axisLineX: function(){
+  axisLineX: Ember.computed('isOrientRight', 'width', function(){
     return this.get('isOrientRight') ? 0 : this.get('width');
-  }.property('isOrientRight', 'width'),
+  }),
 
   /**
     sets graph's yAxis property on willInsertElement
     @method _updateGraphYAxis
     @private
   */
-  _updateGraphYAxis: function(){
+  _updateGraphYAxis: Ember.on('willInsertElement', function(){
     this.set('graph.yAxis', this);
-  }.on('willInsertElement')
+  })
 });

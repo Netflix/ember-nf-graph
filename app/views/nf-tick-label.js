@@ -5,9 +5,9 @@ export default Ember.View.extend({
 
   attributeBindings: ['transform'],
 
-  transform: function(){
+  transform: Ember.computed('x', 'y', function(){
     return 'translate(%@ %@)'.fmt(this.get('x'), this.get('y'));
-  }.property('x', 'y'),
+  }),
 
   className: 'nf-tick-label'
 });

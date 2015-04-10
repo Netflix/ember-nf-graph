@@ -13,12 +13,12 @@ export default Ember.Mixin.create({
     @method _registerGraphic
     @private
   */
-  _registerGraphic: function() {
+  _registerGraphic: Ember.on('didInsertElement', function() {
     var graph = this.get('graph');
     if(graph) {
       graph.registerGraphic(this);
     }
-  }.on('didInsertElement'),
+  }),
 
   /**
     calls {{#crossLink "components.nf-graph/unregisterGraphic"}}{{/crossLink}} on
@@ -26,10 +26,10 @@ export default Ember.Mixin.create({
     @method _unregisterGraphic
     @private
   */
-  _unregisterGraphic: function(){
+  _unregisterGraphic: Ember.on('willDestroyElement', function(){
     var graph = this.get('graph');
     if(graph) {
       graph.unregisterGraphic(this);
     }
-  }.on('willDestroyElement')
+  })
 });

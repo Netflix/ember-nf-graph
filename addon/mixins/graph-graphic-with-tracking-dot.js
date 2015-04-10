@@ -39,34 +39,34 @@ export default Ember.Mixin.create({
 
   isShouldTrack: Ember.computed.or('isSelectedHoverMode', 'isHoverMode'),
 
-  isSelectedHoverMode: function(){
+  isSelectedHoverMode: Ember.computed('trackingMode', function(){
     var mode = this.get('trackingMode');
     return mode === 'selected-hover' || mode === 'selected-snap-first' || mode === 'selected-snap-last';
-  }.property('trackingMode'),
+  }),
 
-  isHoverMode: function(){
+  isHoverMode: Ember.computed('trackingMode', function(){
     var mode = this.get('trackingMode');
     return mode === 'hover' || mode === 'snap-first' || mode === 'snap-last';
-  }.property('trackingMode'),
+  }),
 
   hoverData: null,
 
   isHovered: false,
 
-  showTrackingDot: function(){
+  showTrackingDot: Ember.computed('trackedData.x', 'trackedData.y', function(){
     var trackedData = this.get('trackedData');
     if(trackedData) {
       var x = get(trackedData, 'x');
       var y = get(trackedData, 'y');
       return +x === +x && +y === +y;
     }
-  }.property('trackedData.x', 'trackedData.y'),
+  }),
 
-  _updateHovered: function() {
+  _updateHovered: Ember.observer('isShouldTrack', 'hoverData', function() {
     if(this.get('isShouldTrack')) {
       this.set('trackedData', this.get('hoverData'));
     }
-  }.observes('isShouldTrack', 'hoverData'),
+  }),
 
   _processUpdateUnhovered: function(){
     if(!this.get('isHovered')) {
@@ -81,9 +81,16 @@ export default Ember.Mixin.create({
     }
   },
 
-  _updateUnhovered: function(){
-    Ember.run.scheduleOnce('actions', this, this._processUpdateUnhovered);
-  }.observes('isHovered', 'trackingMode', 'firstVisibleData', 'lastVisibleData', 'selected').on('didInsertElement'),
+  _updateUnhovered: Ember.on('didInsertElement', Ember.observer(
+    'isHovered',
+    'trackingMode',
+    'firstVisibleData',
+    'lastVisibleData',
+    'selected',
+    function(){
+      Ember.run.scheduleOnce('actions', this, this._processUpdateUnhovered);
+    }
+  )),
 
   /**
     The action name to send to the controller when the `hoverChange` event fires
@@ -175,7 +182,7 @@ export default Ember.Mixin.create({
     @method _sendDidTrack
     @private
   */
-  _sendDidTrack: function(){
+  _sendDidTrack: Ember.observer('trackedData', function(){
     if(this.get('didTrack')) {
       this.sendAction('didTrack', {
         x: this.get('trackedData.x'),
@@ -185,7 +192,7 @@ export default Ember.Mixin.create({
         graph: this.get('graph'),
       });
     }
-  }.observes('trackedData'),
+  }),
 
   /**
     The action to send on `willTrack`
@@ -234,22 +241,22 @@ export default Ember.Mixin.create({
     @method _initializeTrackingDot
     @private
   */
-  _initializeTrackingDot: function(){
+  _initializeTrackingDot: Ember.on('didInsertElement', function(){
     var content = this.get('graph.content');
     content.on('didHoverChange', this, this.didContentHoverChange);
     content.on('didHoverEnd', this, this.didContentHoverEnd);
-  }.on('didInsertElement'),
+  }),
 
   /**
     Tears down subscriptions to content hover events.
     @method _teardownTrackingDot
     @private
   */
-  _teardownTrackingDot: function(){
+  _teardownTrackingDot: Ember.on('willDestroyElement', function(){
     var content = this.get('graph.content');
     if(content) {
       content.off('didHoverChange', this, this.didContentHoverChange);
       content.off('didHoverEnd', this, this.didContentHoverEnd);
     }
-  }.on('willDestroyElement')
+  })
 });

@@ -65,29 +65,29 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  yCenter: function(){
+  yCenter: Ember.computed('yA', 'yB', function(){
     var yA = +this.get('yA') || 0;
     var yB = +this.get('yB') || 0;
     return (yA + yB) / 2;
-  }.property('yA', 'yB'),
+  }),
 
   /**
     The y pixel value of b.
     @property yB
     @type Number
   */
-  yB: function(){
+  yB: Ember.computed('yScale', 'b', function(){
     return normalizeScale(this.get('yScale'), this.get('b'));
-  }.property('yScale', 'b'),
+  }),
 
   /**
     The y pixel value of a.
     @property yA
     @type Number
   */
-  yA: function() {
+  yA: Ember.computed('yScale', 'a', function() {
     return normalizeScale(this.get('yScale'), this.get('a'));
-  }.property('yScale', 'a'),
+  }),
 
   /**
     The SVG transformation of the component.
@@ -104,9 +104,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  diff: function(){
+  diff: Ember.computed('a', 'b', function(){
     return +this.get('b') - this.get('a');
-  }.property('a', 'b'),
+  }),
 
   /**
     Returns `true` if `diff` is a positive number
@@ -147,20 +147,20 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  contentX: function(){
+  contentX: Ember.computed('isOrientRight', 'width', 'contentPadding', function(){
     var contentPadding = this.get('contentPadding');
     var width = this.get('width');
     return this.get('isOrientRight') ? width - contentPadding : contentPadding;
-  }.property('isOrientRight', 'width', 'contentPadding'),
+  }),
 
-  rectPath: function(){
+  rectPath: Ember.computed('yA', 'yB', 'width', function(){
     var x = 0;
     var w = +this.get('width') || 0;
     var x2 = x + w;
     var yA = +this.get('yA') || 0;
     var yB = +this.get('yB') || 0;
     return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x, yA, x2, yB);
-  }.property('yA', 'yB', 'width'),
+  }),
 
   /**
     The SVG transformation used to position the content container.
@@ -169,9 +169,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  contentTransform: function(){
+  contentTransform: Ember.computed('contentX', 'yCenter', function(){
     return 'translate(%@ %@)'.fmt(this.get('contentX'), this.get('yCenter'));
-  }.property('contentX', 'yCenter'),
+  }),
 
   /**
     Sets up the d3 related elements when component is inserted 
@@ -219,9 +219,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     Schedules a transition once at afterRender.
     @method transition
   */
-  transition: function(){
+  transition: Ember.observer('a', 'b', function(){
     Ember.run.once(this, this.doTransition);
-  }.observes('a', 'b'),
+  }),
 
   /**
     Updates to d3 managed DOM elments that do
@@ -236,7 +236,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     }
   },
 
-  adjustGraphHeight: function(){
+  adjustGraphHeight: Ember.on('didInsertElement', Ember.observer('graph.graphHeight', function(){
     var rectElement = this.get('rectElement');
     var contentElement = this.get('contentElement');
 
@@ -247,15 +247,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     if(contentElement) {
       contentElement.attr('transform', this.get('contentTransform'));
     }
-  }.observes('graph.graphHeight').on('didInsertElement'),
+  })),
 
   /**
     Schedules a call to `doAdjustWidth` on afterRender
     @method adjustWidth
   */
-  adjustWidth: function(){
-    Ember.run.once(this, this.doAdjustWidth);
-  }.observes('isOrientRight', 'width', 'contentPadding').on('didInsertElement'),
+  adjustWidth: Ember.on(
+    'didInsertElement',
+    Ember.observer('isOrientRight', 'width', 'contentPadding', function(){
+      Ember.run.once(this, this.doAdjustWidth);
+    })
+  ),
 });
 
 

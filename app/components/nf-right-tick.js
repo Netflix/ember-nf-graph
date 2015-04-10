@@ -45,9 +45,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  isVisible: function(){
+  isVisible: Ember.computed('y', function(){
     return !isNaN(this.get('y'));
-  }.property('y'),
+  }),
 
   /**
     The calculated y coordinate of the tick
@@ -55,7 +55,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: function() {
+  y: Ember.computed('value', 'yScale', 'graph.paddingTop', function() {
     var value = this.get('value');
     var yScale = this.get('yScale');
     var paddingTop = this.get('graph.paddingTop');
@@ -64,7 +64,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
       vy = yScale(value) || 0;
     }
     return vy + paddingTop;
-  }.property('value', 'yScale', 'graph.paddingTop'),
+  }),
 
   /**
     The SVG transform used to render the tick
@@ -73,11 +73,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
     @readonly
   */
-  transform: function(){
+  transform: Ember.computed('y', 'graph.width', function(){
     var y = this.get('y');
     var graphWidth = this.get('graph.width');
     return 'translate(%@ %@)'.fmt(graphWidth - 6, y - 3);
-  }.property('y', 'graph.width'),
+  }),
 
   /**
     performs the D3 transition to move the tick to the proper position.
@@ -97,9 +97,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method _triggerTransition
     @private
   */
-  _triggerTransition: function(){
+  _triggerTransition: Ember.on('init', Ember.observer('value', function(){
     Ember.run.scheduleOnce('afterRender', this, this._transitionalUpdate);
-  }.observes('value').on('init'),
+  })),
 
   /**
     Updates the tick position without a transition.
@@ -117,18 +117,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method _triggerNonTransitionalUpdate
     @private
   */
-  _triggerNonTransitionalUpdate: function(){
+  _triggerNonTransitionalUpdate: Ember.observer('graph.width', function(){
     Ember.run.scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
-  }.observes('graph.width'),
+  }),
 
   /**
     Gets the elements required to do the d3 transitions
     @method _getElements
     @private
   */
-  _getElements: function(){
+  _getElements: Ember.on('didInsertElement', function(){
     var g = d3.select(this.$()[0]);
     var path = g.selectAll('path').data([0]);
     this.set('path', path);
-  }.on('didInsertElement')
+  })
 });
