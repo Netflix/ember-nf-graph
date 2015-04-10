@@ -1,4 +1,5 @@
 - master
+  - FIX [#8](//github.com/netflix/ember-cli-nf-graph/issues/8): Removed prototype functions (e.g. `function() {}.property()`).
   - UPDATE [#3](//github.com/netflix/ember-cli-nf-graph/issues/3): [Examples are now live](//netflix.github.io/ember-nf-graph-examples/dist) special thanks to [@jeff3dx](//github.com/jeff3dx) 
     for all of his hard work!
   - FIX [#25](//github.com/netflix/ember-cli-nf-graph/issues/25): removed tabs in favor of spaces
