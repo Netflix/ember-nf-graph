@@ -94,7 +94,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
   */
   rectPath: Ember.computed('x0', 'x1', 'y0', 'y1', function(){
-    return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(this.get('x0'), this.get('y0'), this.get('x1'), this.get('y1'));
+    var x0 = this.get('x0');
+    var x1 = this.get('x1');
+    var y0 = this.get('y0');
+    var y1 = this.get('y1');
+    return `M${x0},${y0} L${x0},${y1} L${x1},${y1} L${x1},${y0} L${x0},${y0}`;
   }),
 
   /**

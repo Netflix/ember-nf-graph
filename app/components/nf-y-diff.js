@@ -159,7 +159,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     var x2 = x + w;
     var yA = +this.get('yA') || 0;
     var yB = +this.get('yB') || 0;
-    return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x, yA, x2, yB);
+    return `M${x},${yA} L${x},${yB} L${x2},${yB} L${x2},${yA} L${x},${yA}`;
   }),
 
   /**
@@ -170,7 +170,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   contentTransform: Ember.computed('contentX', 'yCenter', function(){
-    return 'translate(%@ %@)'.fmt(this.get('contentX'), this.get('yCenter'));
+    var contentX = this.get('contentX');
+    var yCenter = this.get('yCenter');
+    return `translate(${contentX} ${yCenter})`;
   }),
 
   /**

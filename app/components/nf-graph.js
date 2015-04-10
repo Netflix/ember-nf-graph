@@ -855,7 +855,9 @@ export default Ember.Component.extend({
     @readonly
    */
   graphTransform: Ember.computed('graphX', 'graphY', function(){
-    return 'translate(%@, %@)'.fmt(this.get('graphX'), this.get('graphY'));
+    var graphX = this.get('graphX');
+    var graphY = this.get('graphY');
+    return `translate(${graphX} ${graphY})`;
   }),
 
   /**

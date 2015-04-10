@@ -126,7 +126,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   transform: Ember.computed('x', 'y', function(){
     var x = this.get('x') || 0;
     var y = this.get('y') || 0;
-    return 'translate(%@ %@)'.fmt(x, y);
+    return `translate(${x} ${y})`;
   }),
 
   /** 

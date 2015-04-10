@@ -76,7 +76,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   transform: Ember.computed('y', 'graph.width', function(){
     var y = this.get('y');
     var graphWidth = this.get('graph.width');
-    return 'translate(%@ %@)'.fmt(graphWidth - 6, y - 3);
+    var x0 = graphWidth - 6;
+    var y0 = y - 3;
+    return `translate(${x0} ${y0})`;
   }),
 
   /**

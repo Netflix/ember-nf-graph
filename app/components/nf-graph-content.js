@@ -20,7 +20,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
   'clip-path': Ember.computed('graph.contentClipPathId', function(){
     var clipPathId = this.get('graph.contentClipPathId');
-    return 'url(\'#%@\')'.fmt(clipPathId);
+    return  `url('#${clipPathId}')`;
   }),
 
   /**
@@ -30,7 +30,9 @@ export default Ember.Component.extend(HasGraphParent, {
     @readonly
   */
   transform: Ember.computed('x', 'y', function(){
-    return 'translate(%@ %@)'.fmt(this.get('x'), this.get('y'));
+    var x = this.get('x');
+    var y = this.get('y');
+    return `translate(${x} ${y})`;
   }),
 
   /**

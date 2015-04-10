@@ -208,7 +208,7 @@ export default Ember.Mixin.create({
     @method _sendWillTrack
     @private
   */
-  _sendWillTrack: function(){
+  _sendWillTrack: Ember.beforeObserver('trackedData', function(){
     if(this.get('willTrack')) {
       this.sendAction('willTrack', {
         x: this.get('trackedData.x'),
@@ -218,7 +218,7 @@ export default Ember.Mixin.create({
         graph: this.get('graph'),
       });
     }
-  }.observesBefore('trackedData'),
+  }),
 
   /**
     Handles the graph-content's hoverEnd event and triggers didHoverEnd

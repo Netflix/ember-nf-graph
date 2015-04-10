@@ -152,8 +152,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: Ember.computed('y', function(){ 
-    var y = this.get('y');
-    return 'translate(0 %@)'.fmt(y || 0);
+    var y = this.get('y') || 0;
+    return `translate(0 ${y})`;
   }),
 
   /**
@@ -163,8 +163,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   labelTransform: Ember.computed('x', function(){
-    var x = this.get('x');
-    return 'translate(%@ 0)'.fmt(x || 0);
+    var x = this.get('x') || 0;
+    return `translate(${x} 0)`;
   }),
 
   /**

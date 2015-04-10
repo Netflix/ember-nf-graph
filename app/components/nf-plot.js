@@ -89,7 +89,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: Ember.computed('rangeX', 'rangeY', function(){
-    return 'translate(%@ %@)'.fmt(this.get('rangeX'), this.get('rangeY'));
+    var rangeX = this.get('rangeX');
+    var rangeY = this.get('rangeY');
+    return `translate(${rangeX} ${rangeY})`;
   }),
 
   data: null,

@@ -71,7 +71,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     var x = Math.max(0, leftX - width);
     var y = graphHeight - height;
 
-    g.attr('transform', 'translate(%@, %@)'.fmt(x, y));
+    g.attr('transform', `translate(${x} ${y})`);
     
     text.attr('x', textPadding).
       attr('y', textPadding);
@@ -115,7 +115,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     var x = Math.min(graphWidth - width, rightX);
     var y = graphHeight - height;
 
-    g.attr('transform', 'translate(%@, %@)'.fmt(x, y));
+    g.attr('transform', `translate(${x} ${y})`);
     
     text.attr('x', textPadding).
       attr('y', textPadding);

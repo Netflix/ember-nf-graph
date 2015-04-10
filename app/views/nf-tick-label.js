@@ -6,7 +6,9 @@ export default Ember.View.extend({
   attributeBindings: ['transform'],
 
   transform: Ember.computed('x', 'y', function(){
-    return 'translate(%@ %@)'.fmt(this.get('x'), this.get('y'));
+    var x = this.get('x');
+    var y = this.get('y');
+    return `translate(${x} ${y})`;
   }),
 
   className: 'nf-tick-label'
