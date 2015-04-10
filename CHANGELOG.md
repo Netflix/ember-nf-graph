@@ -1,4 +1,6 @@
 - master
+  - UPDATE [#3](//github.com/netflix/ember-cli-nf-graph/issues/3): [Examples are now live](//netflix.github.io/ember-nf-graph-examples/dist) special thanks to [@jeff3dx](//github.com/jeff3dx) 
+    for all of his hard work!
   - FIX [#25](//github.com/netflix/ember-cli-nf-graph/issues/25): removed tabs in favor of spaces
   - UPDATE: update rx-ember to 0.2.4, clean up bower.json
   - FIX [#17](//github.com/netflix/ember-cli-nf-graph/pull/17): stop publishing tmp and dist to npm

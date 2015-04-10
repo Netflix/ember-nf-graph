@@ -4,6 +4,9 @@ A Component-based DSL for creating graphs in your Ember app. The goal of the lib
 create a set of components that allows application or component authors to build graphs in a
 compositional way. This includes components for templated axes, graph lines, areas, stacked areas, bar graphs, and much more. Check the [documentation](//netflix.github.io/ember-cli-nf-graph/docs) for more information.
 
+- [Documentation](//netflix.github.io/ember-cli-nf-graph/docs)
+- [Examples](//netflix.github.io/ember-nf-graph-examples/dist)
+
 A basic graph example is as follows:
 
 ```js
