@@ -1,5 +1,5 @@
 {
-    "name": "ember-cli-nf-graph",
+    "name": "ember-nf-graph",
     "description": "A DSL for creating graphs with Ember",
     "options": {
         "outdir": "./docs",

@@ -1,7 +1,7 @@
 import Ember from 'ember';
-import GraphPosition from 'ember-cli-nf-graph/utils/nf/graph-position';
-import { getMousePoint } from 'ember-cli-nf-graph/utils/nf/svg-dom';
-import { toArray } from 'ember-cli-nf-graph/utils/nf/array-helpers';
+import GraphPosition from 'ember-nf-graph/utils/nf/graph-position';
+import { getMousePoint } from 'ember-nf-graph/utils/nf/svg-dom';
+import { toArray } from 'ember-nf-graph/utils/nf/array-helpers';
 
 var Observable = Rx.Observable;
 

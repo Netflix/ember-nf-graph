@@ -1,8 +1,8 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
-import RequiresScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-source';
-import { normalizeScale } from 'ember-cli-nf-graph/utils/nf/scale-utils';
-import SelectableGraphic from 'ember-cli-nf-graph/mixins/graph-selectable-graphic';
+import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
+import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
+import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
+import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
 
 /**
   Draws a basic line between two points on the graph. 

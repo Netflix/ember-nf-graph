@@ -7,13 +7,13 @@ var warningHeader = chalk.white.bgRed;
 var warning = chalk.red;
 
 console.log(warningHeader('                                                   '));
-console.log(warningHeader(' WARNING: ember-cli-nf-graph is now ember-nf-graph '));
+console.log(warningHeader(' WARNING: ember-nf-graph is now ember-nf-graph '));
 console.log(warningHeader('                                                   '));
 console.log(      warning('                                                   '));
-console.log(      warning(' to update, uninstall ember-cli-nf-graph and       '));
+console.log(      warning(' to update, uninstall ember-nf-graph and       '));
 console.log(      warning(' install ember-nf-graph with NPM:                  '));
 console.log(      warning('                                                   '));
-console.log(      warning(' npm uninstall -D ember-cli-nf-graph               '));
+console.log(      warning(' npm uninstall -D ember-nf-graph               '));
 console.log(      warning(' npm install -D ember-nf-graph                     '));
 console.log(      warning('                                                   '));
 console.log(      warning(' We realize this might make you sad,               '));
@@ -45,12 +45,12 @@ console.log(      warning('                    .                              ')
 console.log(      warning('                            source: retrojunkie.com'));
 
 module.exports = {
-  name: 'ember-cli-nf-graph',
+  name: 'ember-nf-graph',
   
   included: function(app) {
     this._super.included(app);
 
-    app.import('vendor/ember-cli-nf-graph/ember-cli-nf-graph.css');
+    app.import('vendor/ember-nf-graph/ember-nf-graph.css');
     app.import(app.bowerDirectory + '/d3/d3.js');
     app.import(app.bowerDirectory + '/rxjs/dist/rx.all.js'); //probably ham fisted.
     app.import(app.bowerDirectory + '/rx-ember/dist/rx-ember.js');

@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "rm -rf ../vendor/ember-cli-nf-graph && broccoli build ../vendor/ember-cli-nf-graph"
+    "build": "rm -rf ../vendor/ember-nf-graph && broccoli build ../vendor/ember-nf-graph"
   },
   "author": "",
   "license": "ISC",
@@ -13,7 +13,7 @@
     "broccoli": "^0.13.3",
     "broccoli-export-tree": "^0.3.2",
     "broccoli-merge-trees": "^0.2.1",
-    "broccoli-sass": "^0.3.3",
+    "broccoli-sass": "^0.6.4",
     "broccoli-sass-image-compiler": "^0.1.4"
   }
 }

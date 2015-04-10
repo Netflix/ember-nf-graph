@@ -1,6 +1,6 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
-import RequireScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-source';
+import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
+import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
 /**
   Draws a horizontal line on the graph at a given y domain value

@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-cli-nf-graph/mixins/graph-has-graph-parent';
+import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 
 /**
   A component that adds a "crosshair" to an `nf-graph` that follows the mouse

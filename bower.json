@@ -1,5 +1,5 @@
 {
-  "name": "ember-cli-nf-graph",
+  "name": "ember-nf-graph",
   "dependencies": {
     "jquery": "^1.11.1",
     "ember": "1.10.0",
