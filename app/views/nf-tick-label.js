@@ -1,13 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.View.extend({
-	tagName: 'g',
+  tagName: 'g',
 
-	attributeBindings: ['transform'],
+  attributeBindings: ['transform'],
 
-	transform: function(){
-		return 'translate(%@ %@)'.fmt(this.get('x'), this.get('y'));
-	}.property('x', 'y'),
+  transform: function(){
+    return 'translate(%@ %@)'.fmt(this.get('x'), this.get('y'));
+  }.property('x', 'y'),
 
-	className: 'nf-tick-label'
+  className: 'nf-tick-label'
 });

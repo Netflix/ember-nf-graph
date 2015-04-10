@@ -1,85 +1,85 @@
 import Ember from 'ember';
 
 /**
-	A component for grouping and stacking `nf-area` components in an `nf-graph`.
-	
-	This component looks at the order of the `nf-area` components underneath it 
-	and uses the ydata of the next sibling `nf-area` component to determine the bottom 
-	of each `nf-area` components path to be drawn.
+  A component for grouping and stacking `nf-area` components in an `nf-graph`.
+  
+  This component looks at the order of the `nf-area` components underneath it 
+  and uses the ydata of the next sibling `nf-area` component to determine the bottom 
+  of each `nf-area` components path to be drawn.
 
-	### Example
+  ### Example
 
-	 		{{#nf-graph width=300 height=100}}
-	 			{{#nf-graph-content}}
-	 				{{#nf-area-stack}}
-	 					{{nf-area data=myData xprop="time" yprop="high"}}
-	 					{{nf-area data=myData xprop="time" yprop="med"}}
-	 					{{nf-area data=myData xprop="time" yprop="low"}}
-	 				{{/nf-area-stack}}
-	 			{{/nf-graph-content}}
-	 		{{/nf-graph}}
+      {{#nf-graph width=300 height=100}}
+        {{#nf-graph-content}}
+          {{#nf-area-stack}}
+            {{nf-area data=myData xprop="time" yprop="high"}}
+            {{nf-area data=myData xprop="time" yprop="med"}}
+            {{nf-area data=myData xprop="time" yprop="low"}}
+          {{/nf-area-stack}}
+        {{/nf-graph-content}}
+      {{/nf-graph}}
 
-	@namespace components
-	@class nf-area-stack 
+  @namespace components
+  @class nf-area-stack 
 */
 export default Ember.Component.extend({
-	tagName: 'g',
+  tagName: 'g',
 
-	/**
-		Used by `nf-area` to identify an area stack parent
-		@property isAreaStack
-		@type Boolean
-		@default true
-		@readonly
+  /**
+    Used by `nf-area` to identify an area stack parent
+    @property isAreaStack
+    @type Boolean
+    @default true
+    @readonly
   */
-	isAreaStack: true,
+  isAreaStack: true,
 
-	/**
-		The collection of `nf-area` components under this stack.
-		@property areas
-		@type Array
-		@readonly
-	*/
-	areas: function(){
-		return [];
-	}.property(),
+  /**
+    The collection of `nf-area` components under this stack.
+    @property areas
+    @type Array
+    @readonly
+  */
+  areas: function(){
+    return [];
+  }.property(),
 
-	/**
-		Registers an area component with this stack. Also links areas to one
-		another by setting `nextArea` on each area component.
-		@method registerArea
-		@param area {Ember.Component} The area component to register.
-	*/
-	registerArea: function(area) {
-		var areas = this.get('areas');
-		var prev = areas[areas.length - 1];
-		
-		if(prev) {
-			prev.set('nextArea', area);
-			area.set('prevArea', prev);
-		}
-		
-		areas.pushObject(area);
-	},
+  /**
+    Registers an area component with this stack. Also links areas to one
+    another by setting `nextArea` on each area component.
+    @method registerArea
+    @param area {Ember.Component} The area component to register.
+  */
+  registerArea: function(area) {
+    var areas = this.get('areas');
+    var prev = areas[areas.length - 1];
+    
+    if(prev) {
+      prev.set('nextArea', area);
+      area.set('prevArea', prev);
+    }
+    
+    areas.pushObject(area);
+  },
 
-	/**
-		Unregisters an area component from this stack. Also updates next
-		and previous links.
-		@method unregisterArea
-		@param area {Ember.Component} the area to unregister
-	*/
-	unregisterArea: function(area) {
-		var prev = area.get('prevArea');
-		var next = area.get('nextArea');
+  /**
+    Unregisters an area component from this stack. Also updates next
+    and previous links.
+    @method unregisterArea
+    @param area {Ember.Component} the area to unregister
+  */
+  unregisterArea: function(area) {
+    var prev = area.get('prevArea');
+    var next = area.get('nextArea');
 
-		if(next) {
-			next.set('prevArea', prev);
-		}
-		
-		if(prev) {
-			prev.set('nextArea', next);
-		}
+    if(next) {
+      next.set('prevArea', prev);
+    }
+    
+    if(prev) {
+      prev.set('nextArea', next);
+    }
 
-		this.get('areas').removeObject(area);
-	},
+    this.get('areas').removeObject(area);
+  },
 });

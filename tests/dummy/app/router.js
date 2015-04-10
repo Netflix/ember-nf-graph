@@ -6,10 +6,10 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-	this.resource('nf-graph', function(){
-		this.route('/');
-		this.route('nf-bars');
-	});
+  this.resource('nf-graph', function(){
+    this.route('/');
+    this.route('nf-bars');
+  });
 });
 
 export default Router;

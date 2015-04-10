@@ -4,34 +4,34 @@ import RequireScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-s
 import SelectableGraphic from 'ember-cli-nf-graph/mixins/graph-selectable-graphic';
 
 /**
-	A grouping tag that provides zooming and offset functionality to it's children.
+  A grouping tag that provides zooming and offset functionality to it's children.
 
-	## Example
+  ## Example
 
-	The following example will show a line of `someData` with a 2x zoom, offset by 30px in both x and y
-	directions:
+  The following example will show a line of `someData` with a 2x zoom, offset by 30px in both x and y
+  directions:
 
-				{{#nf-gg scaleZoomX="2" scaleZoomY="2" scaleOffsetX="30" scaleOffsetY="30"}}
-					{{nf-line data=someData}}
-				{{/nf-gg}}
+        {{#nf-gg scaleZoomX="2" scaleZoomY="2" scaleOffsetX="30" scaleOffsetY="30"}}
+          {{nf-line data=someData}}
+        {{/nf-gg}}
 
-	@namespace components
-	@class nf-gg
-	@extends Ember.Component
-	@uses mixins.graph-has-graph-parent
-	@uses mixins.graph-require-scale-source
-	@uses mixins.graph-selecteble-graphic
+  @namespace components
+  @class nf-gg
+  @extends Ember.Component
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-require-scale-source
+  @uses mixins.graph-selecteble-graphic
 */
 export default Ember.Component.extend(HasGraphParent, RequireScaleSource, SelectableGraphic, {
-	tagName: 'g',
-	
-	classNameBindings: [':nf-gg', 'selectable', 'selected'],
+  tagName: 'g',
+  
+  classNameBindings: [':nf-gg', 'selectable', 'selected'],
 
-	isScaleSource: true,
+  isScaleSource: true,
 
-	click: function() {
-		if(this.get('selectable')) {
-			this.toggleProperty('selected');
-		}
-	}
+  click: function() {
+    if(this.get('selectable')) {
+      this.toggleProperty('selected');
+    }
+  }
 });

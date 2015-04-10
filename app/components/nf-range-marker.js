@@ -12,11 +12,11 @@ import RequireScaleSource from 'ember-cli-nf-graph/mixins/graph-requires-scale-s
   @uses mixins.graph-requires-scale-source
 */
 export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
-	tagName: 'g',
+  tagName: 'g',
 
-	attributeBindings: ['transform'],
+  attributeBindings: ['transform'],
 
-	classNames: ['nf-range-marker'],
+  classNames: ['nf-range-marker'],
 
   /**
     The parent `nf-range-markers` component.
@@ -31,14 +31,14 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @property xMin
     @default 0
   */
-	xMin: 0,
+  xMin: 0,
 
   /**
     The maximum domain value for the range to mark.
     @property xMax
     @default 0
   */
-	xMax: 0,
+  xMax: 0,
 
   /**
     The spacing above the range marker.
@@ -46,7 +46,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @default 10
   */
-	marginTop: 10,
+  marginTop: 10,
 
   /**
     The spacing below the range marker.
@@ -54,7 +54,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @default 3
   */
-	marginBottom: 3,
+  marginBottom: 3,
 
   /**
     The height of the range marker.
@@ -62,7 +62,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @default 10
   */
-	height: 10,
+  height: 10,
 
   /**
     The computed x position of the range marker.
@@ -86,7 +86,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     var xScale = this.get('xScale');
     var xMax = this.get('xMax');
     var xMin = this.get('xMin');
-  	return xScale(xMax) - xScale(xMin);
+    return xScale(xMax) - xScale(xMin);
   }.property('xScale', 'xMin', 'xMax'),
 
   /**
@@ -166,11 +166,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method _setup
     @private
   */
-	_setup: function(){
-		var container = this.nearestWithProperty('isRangeMarkerContainer');
-		container.registerMarker(this);
-		this.set('container', container);
-	}.on('init'),
+  _setup: function(){
+    var container = this.nearestWithProperty('isRangeMarkerContainer');
+    container.registerMarker(this);
+    this.set('container', container);
+  }.on('init'),
 
   /**
     Unregisters the range marker from its parent when the range marker is destroyed.

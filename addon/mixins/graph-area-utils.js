@@ -18,7 +18,7 @@ export default Ember.Mixin.create({
     @param interpolator {String} the name of the d3 interpolator to use.
     @return {Function} a function that when called will create SVG path data.
   */
-	createAreaFn: function(xScale, yScale, interpolator) {
+  createAreaFn: function(xScale, yScale, interpolator) {
       var interp = interpolator || 'linear';
       var xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
       var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
@@ -40,5 +40,5 @@ export default Ember.Mixin.create({
           })
           .interpolate(interp)(data);
       };
-	}
+  }
 });

@@ -17,7 +17,7 @@ var noop = function(){};
   @extends Ember.Mixin
 */
 export default Ember.Mixin.create({
-	isDataGraphic: true,
+  isDataGraphic: true,
 
   /**
     Gets or sets the data used by the component to plot itself.
@@ -37,7 +37,7 @@ export default Ember.Mixin.create({
     @type String
     @default 'x'
   */
-	xprop: 'x',
+  xprop: 'x',
 
   /**
     The path of the property on each object in 
@@ -48,7 +48,7 @@ export default Ember.Mixin.create({
     @type String
     @default 'y'
   */
-	yprop: 'y',
+  yprop: 'y',
 
   /**
     The function to get the x value from each 
@@ -58,10 +58,10 @@ export default Ember.Mixin.create({
     @type Function
     @readonly
   */
-	xPropFn: function() {
+  xPropFn: function() {
     var xprop = this.get('xprop');
-		return xprop ? parsePropertyExpr(xprop) : noop;
-	}.property('xprop'),
+    return xprop ? parsePropertyExpr(xprop) : noop;
+  }.property('xprop'),
 
   /**
     The function to get the y value from each 
@@ -71,10 +71,10 @@ export default Ember.Mixin.create({
     @type Function
     @readonly
   */
-	yPropFn: function() {
+  yPropFn: function() {
     var yprop = this.get('yprop');
-		return yprop ? parsePropertyExpr(yprop) : noop;
-	}.property('yprop'),
+    return yprop ? parsePropertyExpr(yprop) : noop;
+  }.property('yprop'),
 
   /**
     Gets the x values from the `sortedData`.
@@ -105,7 +105,7 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-	sortedData: function(){
+  sortedData: function(){
     var data = this.get('data');
     var xPropFn = this.get('xPropFn');
     var yPropFn = this.get('yPropFn');
@@ -117,14 +117,14 @@ export default Ember.Mixin.create({
 
     var mapped = data.map(function(d, i) {
       var item = [xPropFn(d), yPropFn(d)];
-    	item.data = d;
-    	item.origIndex = i;
-    	return item;
+      item.data = d;
+      item.origIndex = i;
+      return item;
     });
 
     if(xScaleType !== 'ordinal') {
       mapped.sort(function(a, b) {
-      	var ax = a[0];
+        var ax = a[0];
         var bx = b[0];
         return ax === bx ? 0 : (ax > bx) ? 1 : -1;
       });
