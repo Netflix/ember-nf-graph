@@ -1,3 +1,7 @@
+- 1.0.0-beta.5
+  - UPDATE name to ember-nf-graph
+  - FIX [#28](//github.com/netflix/ember-nf-graph/issues/28) Remove a few additional prototype functions. But also I had to 
+    remove the addon that removed the prototype functions. (prototype functions are back for now).
 - 1.0.0-beta.4
   - DEPRECATE [#11](//github.com/netflix/ember-nf-graph/issues/11) Add warning message that name will be changing from ember-nf-graph 
     to ember-nf-graph for next version
