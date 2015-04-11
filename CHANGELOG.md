@@ -1,3 +1,5 @@
+- master
+  - FIX [#29](//github.com/netflix/ember-nf-graph/issues/29) remove sad panda rename warning.
 - 1.0.0-beta.5
   - UPDATE name to ember-nf-graph
   - FIX [#28](//github.com/netflix/ember-nf-graph/issues/28) Remove a few additional prototype functions. But also I had to 
