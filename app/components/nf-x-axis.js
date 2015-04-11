@@ -252,7 +252,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
         result = result.filter(tickFilter);
       }
 
-      return result;
+      return Ember.A(result);
     }
   ),
 

@@ -1,6 +1,5 @@
 <line x1="0" {{bind-attr y1=axisLineY x2=width y2=axisLineY }}> </line>
 
-
 {{#each tick in ticks}}
   <g class="tick">
   	{{view 'nf-tick-label' controller=graph.parentController template=template x=tick.x y=tick.labely}}
