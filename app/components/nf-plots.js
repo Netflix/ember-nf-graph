@@ -26,13 +26,13 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleS
   plotData: Ember.computed('renderedData.@each', function(){
     var renderedData = this.get('renderedData');
     if(renderedData && Ember.isArray(renderedData)) {
-      return renderedData.map(function(d) {
+      return Ember.A(renderedData.map(function(d) {
         return {
           x: d[0],
           y: d[1],
           data: d.data,
         };
-      });
+      }));
     }
   }),
 

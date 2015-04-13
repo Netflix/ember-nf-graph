@@ -48,7 +48,7 @@ export default Ember.Component.extend(HasGraphParent, {
     @readonly
   */
   markers: Ember.computed(function() {
-    return [];
+    return Ember.A();
   }),
 
   /**

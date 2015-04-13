@@ -41,7 +41,7 @@ export default Ember.Component.extend({
     @readonly
   */
   areas: Ember.computed(function(){
-    return [];
+    return Ember.A();
   }),
 
   /**

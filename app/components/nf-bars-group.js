@@ -13,7 +13,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
   // either b-arses or fat, stupid hobbitses
   barses: Ember.computed(function(){
-    return [];
+    return Ember.A();
   }),
 
   registerBars: function(bars) {

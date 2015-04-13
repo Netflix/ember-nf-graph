@@ -125,7 +125,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
       var w = this.get('barWidth');
 
-      return renderedData.map(function(d) {
+      return Ember.A(renderedData.map(function(d) {
         var barClass = 'nf-bars-bar' + getBarClass ? ' ' + getBarClass(d.data) : '';
         var x = normalizeScale(xScale, d[0]) + groupOffsetX;
         var y = normalizeScale(yScale, d[1]);
@@ -135,7 +135,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
           className: barClass,
           data: d,
         };
-      });
+      }));
     }
   ),
 

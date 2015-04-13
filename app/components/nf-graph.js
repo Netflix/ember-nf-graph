@@ -628,7 +628,7 @@ export default Ember.Component.extend({
     graphics.forEach(function(graphic) {
       all = all.concat(graphic.get('xData'));
     });
-    return all;
+    return Ember.A(all);
   }),
 
   /**
@@ -643,7 +643,7 @@ export default Ember.Component.extend({
     graphics.forEach(function(graphic) {
       all = all.concat(graphic.get('yData'));
     });
-    return all;
+    return Ember.A(all);
   }),
 
   /**
@@ -664,7 +664,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  graphics: null,
+  graphics: Ember.computed(function(){
+    return Ember.A();
+  }),
 
   /**
     An array of "selectable" graphics that have been selected within this graph.
@@ -941,8 +943,7 @@ export default Ember.Component.extend({
     @private
   */
   _setup: Ember.on('init', function(){
-    this.set('graphics', []);
-    this.set('selected', this.selectMultiple ? [] : null);
+    this.set('selected', this.selectMultiple ? Ember.A() : null);
   }),
 
   /**

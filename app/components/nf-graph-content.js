@@ -104,7 +104,7 @@ export default Ember.Component.extend(HasGraphParent, {
       return lanes;
     }, []);
 
-    return lanes;
+    return Ember.A(lanes);
   }),
 
   /**
