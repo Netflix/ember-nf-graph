@@ -17,7 +17,7 @@ function inlineAllStyles(element) {
       element.style[key] = styles[key];
     }
   }
-  
+
   for(var i = 0; i < element.childNodes.length; i++) {
     var node = element.childNodes[i];
     if(node.nodeType === 1) {
@@ -34,22 +34,22 @@ function inlineAllStyles(element) {
 export function svgToImageUrl(svg, callback) {
   var clone = svg.cloneNode(true);
   var parent = svg.parentElement;
-  
+
   var canvas = document.createElement('canvas');
   canvas.setAttribute('width', svg.getAttribute('width'));
   canvas.setAttribute('height', svg.getAttribute('height'));
   var context = canvas.getContext('2d');
-  
+
   parent.insertBefore(clone, svg);
   clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 
   inlineAllStyles(clone);
-  
-  var img = new Image();  
+
+  var img = new Image();
   var blob = new Blob([clone.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
   clone.remove();
   var url = URL.createObjectURL(blob);
-  
+
   img.onload = function(){
     context.drawImage(img, 0, 0);
     URL.revokeObjectURL(url);
@@ -58,8 +58,8 @@ export function svgToImageUrl(svg, callback) {
     }
     canvas.remove();
   };
-  
-  img.src = url;  
+
+  img.src = url;
 }
 
 /**
@@ -82,7 +82,7 @@ export function downloadSvg(svg) {
 */
 export function getMousePoint(container, e) {
   var x, y;
-  
+
   if(e && e.hasOwnProperty('clientX') && e.hasOwnProperty('clientY')) {
     var svg = container.ownerSVGElement || container;
     if (svg.createSVGPoint) {
@@ -94,7 +94,7 @@ export function getMousePoint(container, e) {
       y = point.y;
     } else {
       var rect = container.getBoundingClientRect();
-      x = e.clientX - rect.left - container.clientLeft; 
+      x = e.clientX - rect.left - container.clientLeft;
       y = e.clientY - rect.top - container.clientTop;
     }
   }
@@ -121,5 +121,5 @@ export function getRectPath(x, y, w, h) {
   h = +h || 0;
   var x2 = w + x;
   var y2 = h + y;
-  return 'M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2'.fmt(x, y, x2, y2);
+  return `M${x},${y} L${x},${y2} L${x2},${y2} L${x2},${y} L${x},${y}`;
 }
