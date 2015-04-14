@@ -508,9 +508,9 @@ export default Ember.Component.extend({
   xMax: maxProperty('x', 8),
 
   /**
-    Gets or sets the maximum y domain value to display on the graph.
-    Behavior depends on `yMaxMode`.
-    @property yMax
+    Gets or sets the minimum y domain value to display on the graph.
+    Behavior depends on `yMinMode`.
+    @property yMin
   */
   yMin: minProperty('y', 5),
 
