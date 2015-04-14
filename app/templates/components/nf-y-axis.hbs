@@ -1,8 +1,18 @@
 <line {{bind-attr x1=axisLineX y1="0" x2=axisLineX y2=height }}></line>
 
-{{#each tick in ticks}}
+{{#each ticks as |tick|}}
   <g class="tick">
-  	{{view 'nf-tick-label' controller=graph.parentController template=template x=tick.labelx y=tick.y}}
+    {{#if template.blockParams}}
+      {{#view 'nf-tick-label' controller=graph.parentController x=tick.labelx y=tick.y}}
+        {{#if useDefaultTemplate}}
+          <text>{{tick.value}}</text>
+        {{else}}
+          {{yield tick}}
+        {{/if}}
+      {{/view}}
+    {{else}}
+      {{view 'nf-tick-label' controller=graph.parentController template=template x=tick.labelx y=tick.y}}
+    {{/if}}
     <line {{bind-attr x1=tick.x1 y1=tick.y x2=tick.x2 y2=tick.y}}></line>
   </g>
 {{/each}}
