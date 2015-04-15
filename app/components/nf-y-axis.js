@@ -2,6 +2,8 @@ import Ember from 'ember';
 import HasGraphParent  from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
+import layout from '../templates/components/nf-y-axis';
+
 /**
   A component for adding a templated y axis to an `nf-graph` component.
   All items contained within this component are used to template each tick mark on the 
@@ -34,6 +36,11 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
 */
 export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tagName: 'g',
+
+  layout: layout,
+  template: null,
+
+  useDefaultTemplate: Ember.computed.equal('template', null),
 
   /**
     The number of ticks to display
@@ -167,6 +174,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   height: Ember.computed.alias('graph.height'),
+
+  init() {
+    this._super(...arguments);
+
+    Ember.deprecate('Non-block form of tick is deprecated. Please add `as |tick|` to your template.', this.get('template.blockParams'));
+  },
 
   /**
     Function to create the tick values. Can be overriden to provide specific values.
