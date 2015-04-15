@@ -1,4 +1,5 @@
-- master
+- 1.0.0-beta.6
+  - UPDATE [#4](//github.com/Netflix/ember-nf-graph/issues/4) add block params to axis components.
   - FIX [#29](//github.com/netflix/ember-nf-graph/issues/29) remove sad panda rename warning.
 - 1.0.0-beta.5
   - UPDATE name to ember-nf-graph
