@@ -1,3 +1,7 @@
+- 1.0.0-beta.8
+  - [CRITICAL BUGFIX] Moved babel to `dependencies` so our addon is actually transpiled in host apps #34
+- 1.0.0-beta.7
+  - Do not use.
 - 1.0.0-beta.6
   - UPDATE [#4](//github.com/Netflix/ember-nf-graph/issues/4) add block params to axis components.
   - FIX [#29](//github.com/netflix/ember-nf-graph/issues/29) remove sad panda rename warning.
