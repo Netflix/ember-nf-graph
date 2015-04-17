@@ -1,3 +1,7 @@
+- 1.0.0-beta.7
+  - UPDATE ember-cli is now version 0.2.3
+  - UPDATE ember to version 1.11.1
+  - FIX ember-cli-babel to 5.0.0 and add it to production dependencies
 - 1.0.0-beta.6
   - UPDATE [#4](//github.com/Netflix/ember-nf-graph/issues/4) add block params to axis components.
   - FIX [#29](//github.com/netflix/ember-nf-graph/issues/29) remove sad panda rename warning.
