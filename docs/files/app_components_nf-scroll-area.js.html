@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -186,11 +185,11 @@ export default Ember.Component.extend({
   _childMutationObserver: null,
 
   _setupChildMutationObserver: Ember.on(&#x27;didInsertElement&#x27;, function() {
-    var handler = function(e) {
+    var handler = Ember.run.bind(this, function(e) {
       var context = this.createActionContext(e);
       this.sendAction(&#x27;childrenChangedAction&#x27;, context);   
       this.sendAction(&#x27;changeAction&#x27;, context);   
-    }.bind(this);
+    });
 
     this._childMutationObserver = new MutationObserver(handler);
     this._childMutationObserver.observe(this.get(&#x27;element&#x27;), { childList: true, subtree: true });
@@ -299,6 +298,7 @@ export default Ember.Component.extend({
     }
   }),
 });
+
     </pre>
 </div>
                     </div>

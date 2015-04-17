@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -210,7 +209,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: Ember.computed(&#x27;rangeX&#x27;, &#x27;rangeY&#x27;, function(){
-    return &#x27;translate(%@ %@)&#x27;.fmt(this.get(&#x27;rangeX&#x27;), this.get(&#x27;rangeY&#x27;));
+    var rangeX = this.get(&#x27;rangeX&#x27;);
+    var rangeY = this.get(&#x27;rangeY&#x27;);
+    return &#x60;translate(${rangeX} ${rangeY})&#x60;;
   }),
 
   data: null,

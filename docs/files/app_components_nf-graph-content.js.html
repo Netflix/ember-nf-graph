@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -141,7 +140,7 @@ export default Ember.Component.extend(HasGraphParent, {
 
   &#x27;clip-path&#x27;: Ember.computed(&#x27;graph.contentClipPathId&#x27;, function(){
     var clipPathId = this.get(&#x27;graph.contentClipPathId&#x27;);
-    return &#x27;url(\&#x27;#%@\&#x27;)&#x27;.fmt(clipPathId);
+    return  &#x60;url(&#x27;#${clipPathId}&#x27;)&#x60;;
   }),
 
   /**
@@ -151,7 +150,9 @@ export default Ember.Component.extend(HasGraphParent, {
     @readonly
   */
   transform: Ember.computed(&#x27;x&#x27;, &#x27;y&#x27;, function(){
-    return &#x27;translate(%@ %@)&#x27;.fmt(this.get(&#x27;x&#x27;), this.get(&#x27;y&#x27;));
+    var x = this.get(&#x27;x&#x27;);
+    var y = this.get(&#x27;y&#x27;);
+    return &#x60;translate(${x} ${y})&#x60;;
   }),
 
   /**
@@ -223,7 +224,7 @@ export default Ember.Component.extend(HasGraphParent, {
       return lanes;
     }, []);
 
-    return lanes;
+    return Ember.A(lanes);
   }),
 
   /**

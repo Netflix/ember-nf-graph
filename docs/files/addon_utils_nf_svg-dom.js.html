@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -138,7 +137,7 @@ function inlineAllStyles(element) {
       element.style[key] = styles[key];
     }
   }
-  
+
   for(var i = 0; i &lt; element.childNodes.length; i++) {
     var node = element.childNodes[i];
     if(node.nodeType === 1) {
@@ -155,22 +154,22 @@ function inlineAllStyles(element) {
 export function svgToImageUrl(svg, callback) {
   var clone = svg.cloneNode(true);
   var parent = svg.parentElement;
-  
+
   var canvas = document.createElement(&#x27;canvas&#x27;);
   canvas.setAttribute(&#x27;width&#x27;, svg.getAttribute(&#x27;width&#x27;));
   canvas.setAttribute(&#x27;height&#x27;, svg.getAttribute(&#x27;height&#x27;));
   var context = canvas.getContext(&#x27;2d&#x27;);
-  
+
   parent.insertBefore(clone, svg);
   clone.setAttribute(&#x27;xmlns&#x27;, &#x27;http://www.w3.org/2000/svg&#x27;);
 
   inlineAllStyles(clone);
-  
-  var img = new Image();  
+
+  var img = new Image();
   var blob = new Blob([clone.outerHTML], { type: &#x27;image/svg+xml;charset=utf-8&#x27; });
   clone.remove();
   var url = URL.createObjectURL(blob);
-  
+
   img.onload = function(){
     context.drawImage(img, 0, 0);
     URL.revokeObjectURL(url);
@@ -179,8 +178,8 @@ export function svgToImageUrl(svg, callback) {
     }
     canvas.remove();
   };
-  
-  img.src = url;  
+
+  img.src = url;
 }
 
 /**
@@ -203,7 +202,7 @@ export function downloadSvg(svg) {
 */
 export function getMousePoint(container, e) {
   var x, y;
-  
+
   if(e &amp;&amp; e.hasOwnProperty(&#x27;clientX&#x27;) &amp;&amp; e.hasOwnProperty(&#x27;clientY&#x27;)) {
     var svg = container.ownerSVGElement || container;
     if (svg.createSVGPoint) {
@@ -215,7 +214,7 @@ export function getMousePoint(container, e) {
       y = point.y;
     } else {
       var rect = container.getBoundingClientRect();
-      x = e.clientX - rect.left - container.clientLeft; 
+      x = e.clientX - rect.left - container.clientLeft;
       y = e.clientY - rect.top - container.clientTop;
     }
   }
@@ -242,8 +241,9 @@ export function getRectPath(x, y, w, h) {
   h = +h || 0;
   var x2 = w + x;
   var y2 = h + y;
-  return &#x27;M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2&#x27;.fmt(x, y, x2, y2);
+  return &#x60;M${x},${y} L${x},${y2} L${x2},${y2} L${x2},${y} L${x},${y}&#x60;;
 }
+
     </pre>
 </div>
                     </div>

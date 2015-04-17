@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -246,7 +245,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
       var w = this.get(&#x27;barWidth&#x27;);
 
-      return renderedData.map(function(d) {
+      return Ember.A(renderedData.map(function(d) {
         var barClass = &#x27;nf-bars-bar&#x27; + getBarClass ? &#x27; &#x27; + getBarClass(d.data) : &#x27;&#x27;;
         var x = normalizeScale(xScale, d[0]) + groupOffsetX;
         var y = normalizeScale(yScale, d[1]);
@@ -256,7 +255,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
           className: barClass,
           data: d,
         };
-      });
+      }));
     }
   ),
 

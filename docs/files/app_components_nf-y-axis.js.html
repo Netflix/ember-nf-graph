@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -123,6 +122,8 @@ import Ember from &#x27;ember&#x27;;
 import HasGraphParent  from &#x27;ember-nf-graph/mixins/graph-has-graph-parent&#x27;;
 import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-source&#x27;;
 
+import layout from &#x27;../templates/components/nf-y-axis&#x27;;
+
 /**
   A component for adding a templated y axis to an &#x60;nf-graph&#x60; component.
   All items contained within this component are used to template each tick mark on the 
@@ -155,6 +156,11 @@ import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-
 */
 export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tagName: &#x27;g&#x27;,
+
+  layout: layout,
+  template: null,
+
+  useDefaultTemplate: Ember.computed.equal(&#x27;template&#x27;, null),
 
   /**
     The number of ticks to display
@@ -249,7 +255,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   transform: Ember.computed(&#x27;x&#x27;, &#x27;y&#x27;, function(){
     var x = this.get(&#x27;x&#x27;);
     var y = this.get(&#x27;y&#x27;);
-    return &#x27;translate(%@ %@)&#x27;.fmt(x, y);
+    return &#x60;translate(${x} ${y})&#x60;;
   }),
 
   /**
@@ -288,6 +294,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   height: Ember.computed.alias(&#x27;graph.height&#x27;),
+
+  init() {
+    this._super(...arguments);
+
+    Ember.deprecate(&#x27;Non-block form of tick is deprecated. Please add &#x60;as |tick|&#x60; to your template.&#x27;, this.get(&#x27;template.blockParams&#x27;));
+  },
 
   /**
     Function to create the tick values. Can be overriden to provide specific values.
@@ -362,7 +374,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
         result = result.filter(tickFilter);
       }
 
-      return result;
+      return Ember.A(result);
     }
   ),
 

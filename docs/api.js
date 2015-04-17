@@ -27,7 +27,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.{nf-scroll-area}",
         "mixins.graph-area-utils",
         "mixins.graph-data-graphic",
-        "mixins.graph-data-position-utils",
         "mixins.graph-graphic-with-tracking-dot",
         "mixins.graph-has-graph-parent",
         "mixins.graph-line-utils",

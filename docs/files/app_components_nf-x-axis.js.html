@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -123,23 +122,25 @@ import Ember from &#x27;ember&#x27;;
 import HasGraphParent from &#x27;ember-nf-graph/mixins/graph-has-graph-parent&#x27;;
 import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-source&#x27;;
 
+import layout from &#x27;../templates/components/nf-x-axis&#x27;;
+
 /**
   A component for adding a templated x axis to an &#x60;nf-graph&#x60; component.
-  All items contained within this component are used to template each tick mark on the 
+  All items contained within this component are used to template each tick mark on the
   rendered graph. Tick values are supplied to the inner scope of this component on the
   view template via &#x60;tick&#x60;.
-  
+
   ### Styling
-  
+
   The main container will have a &#x60;nf-x-axis&#x60; class.
   A &#x60;orient-top&#x60; or &#x60;orient-bottom&#x60; container will be applied to the container
   depending on the &#x60;orient&#x60; setting.
 
   Ticks are positioned via a &#x60;&lt;g&gt;&#x60; tag, that will contain whatever is passed into it via
-  templating, along with the tick line. &#x60;&lt;text&gt;&#x60; tags within tick templates do have some 
+  templating, along with the tick line. &#x60;&lt;text&gt;&#x60; tags within tick templates do have some
   default styling applied to them to position them appropriately based off of orientation.
 
-  ### Example 
+  ### Example
 
         {{#nf-graph width=500 height=300}}
           {{#nf-x-axis height=40}}
@@ -156,6 +157,11 @@ import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-
 */
 export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tagName: &#x27;g&#x27;,
+
+  layout: layout,
+  template: null,
+
+  useDefaultTemplate: Ember.computed.equal(&#x27;template&#x27;, null),
 
   attributeBindings: [&#x27;transform&#x27;],
   classNameBindings: [&#x27;orientClass&#x27;],
@@ -186,7 +192,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tickLength: 0,
 
   /**
-    The spacing between the end of the tick line and the origin of the templated 
+    The spacing between the end of the tick line and the origin of the templated
     tick content
     @property tickPadding
     @type Number
@@ -200,30 +206,30 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @default &#x27;bottom&#x27;
   */
-  orient: &#x27;bottom&#x27;,  
-  
+  orient: &#x27;bottom&#x27;,
+
   _tickFilter: null,
 
   /**
     An optional filtering function to allow more control over what tick marks are displayed.
     The function should have exactly the same signature as the function you&#x27;d use for an
     &#x60;Array.prototype.filter()&#x60;.
-  
+
     @property tickFilter
     @type Function
     @default null
     @example
-  
-          {{#nf-x-axis tickFilter=myFilter}} 
+
+          {{#nf-x-axis tickFilter=myFilter}}
             &lt;text&gt;{{tick.value}}&lt;/text&gt;
           {{/nf-x-axis}}
-  
+
     And on your controller:
-    
+
           myFilter: function(tick, index, ticks) {
             return tick.value &lt; 1000;
           },
-  
+
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
   tickFilter: Ember.computed.alias(&#x27;_tickFilter&#x27;),
@@ -247,10 +253,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   transform: Ember.computed(&#x27;x&#x27;, &#x27;y&#x27;, function(){
     var x = this.get(&#x27;x&#x27;) || 0;
     var y = this.get(&#x27;y&#x27;) || 0;
-    return &#x27;translate(%@ %@)&#x27;.fmt(x, y);
+    return &#x60;translate(${x} ${y})&#x60;;
   }),
 
-  /** 
+  /**
     The y position of this component&#x27;s container.
     @property y
     @type Number
@@ -269,7 +275,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
       var paddingBottom = this.get(&#x27;graph.paddingBottom&#x27;);
       var paddingTop = this.get(&#x27;graph.paddingTop&#x27;);
       var y;
-      
+
       if(orient === &#x27;bottom&#x27;) {
         y = graphHeight - paddingBottom - height;
       } else {
@@ -290,6 +296,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     return this.get(&#x27;graph.graphX&#x27;) || 0;
   }),
 
+  init() {
+    this._super(...arguments);
+
+    Ember.deprecate(&#x27;Non-block form of tick is deprecated. Please add &#x60;as |tick|&#x60; to your template.&#x27;, this.get(&#x27;template.blockParams&#x27;));
+  },
 
   /**
     The width of the component
@@ -357,7 +368,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
       var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
       var y1 = orient === &#x27;top&#x27; ? height : 0;
       var y2 = y1 + tickLength;
-      var labely = orient === &#x27;top&#x27; ? (y1 - tickPadding) : (y1 + tickPadding);  
+      var labely = orient === &#x27;top&#x27; ? (y1 - tickPadding) : (y1 + tickPadding);
       var halfBandWidth = (xScaleType === &#x27;ordinal&#x27;) ? xScale.rangeBand() / 2 : 0;
       var result = ticks.map(function(tick) {
         return {
@@ -373,7 +384,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
         result = result.filter(tickFilter);
       }
 
-      return result;
+      return Ember.A(result);
     }
   ),
 
@@ -396,7 +407,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     var orient = this.get(&#x27;orient&#x27;);
     var height = this.get(&#x27;height&#x27;);
     return orient === &#x27;top&#x27; ? height : 0;
-  }),
+  })
+
 });
 
     </pre>

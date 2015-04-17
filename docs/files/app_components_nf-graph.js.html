@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -629,9 +628,9 @@ export default Ember.Component.extend({
   xMax: maxProperty(&#x27;x&#x27;, 8),
 
   /**
-    Gets or sets the maximum y domain value to display on the graph.
-    Behavior depends on &#x60;yMaxMode&#x60;.
-    @property yMax
+    Gets or sets the minimum y domain value to display on the graph.
+    Behavior depends on &#x60;yMinMode&#x60;.
+    @property yMin
   */
   yMin: minProperty(&#x27;y&#x27;, 5),
 
@@ -749,7 +748,7 @@ export default Ember.Component.extend({
     graphics.forEach(function(graphic) {
       all = all.concat(graphic.get(&#x27;xData&#x27;));
     });
-    return all;
+    return Ember.A(all);
   }),
 
   /**
@@ -764,7 +763,7 @@ export default Ember.Component.extend({
     graphics.forEach(function(graphic) {
       all = all.concat(graphic.get(&#x27;yData&#x27;));
     });
-    return all;
+    return Ember.A(all);
   }),
 
   /**
@@ -785,7 +784,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  graphics: null,
+  graphics: Ember.computed(function(){
+    return Ember.A();
+  }),
 
   /**
     An array of &quot;selectable&quot; graphics that have been selected within this graph.
@@ -976,7 +977,9 @@ export default Ember.Component.extend({
     @readonly
    */
   graphTransform: Ember.computed(&#x27;graphX&#x27;, &#x27;graphY&#x27;, function(){
-    return &#x27;translate(%@, %@)&#x27;.fmt(this.get(&#x27;graphX&#x27;), this.get(&#x27;graphY&#x27;));
+    var graphX = this.get(&#x27;graphX&#x27;);
+    var graphY = this.get(&#x27;graphY&#x27;);
+    return &#x60;translate(${graphX} ${graphY})&#x60;;
   }),
 
   /**
@@ -1060,8 +1063,7 @@ export default Ember.Component.extend({
     @private
   */
   _setup: Ember.on(&#x27;init&#x27;, function(){
-    this.set(&#x27;graphics&#x27;, []);
-    this.set(&#x27;selected&#x27;, this.selectMultiple ? [] : null);
+    this.set(&#x27;selected&#x27;, this.selectMultiple ? Ember.A() : null);
   }),
 
   /**
@@ -1233,6 +1235,7 @@ export default Ember.Component.extend({
     }
   },
 });
+
     </pre>
 </div>
                     </div>

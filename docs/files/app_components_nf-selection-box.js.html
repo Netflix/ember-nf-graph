@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.{nf-scroll-area}.html">components.{nf-scroll-area}</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-data-position-utils.html">mixins.graph-data-position-utils</a></li>
                                 <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
@@ -215,7 +214,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
   */
   rectPath: Ember.computed(&#x27;x0&#x27;, &#x27;x1&#x27;, &#x27;y0&#x27;, &#x27;y1&#x27;, function(){
-    return &#x27;M%@1,%@2 L%@1,%@4 L%@3,%@4 L%@3,%@2 L%@1,%@2&#x27;.fmt(this.get(&#x27;x0&#x27;), this.get(&#x27;y0&#x27;), this.get(&#x27;x1&#x27;), this.get(&#x27;y1&#x27;));
+    var x0 = this.get(&#x27;x0&#x27;);
+    var x1 = this.get(&#x27;x1&#x27;);
+    var y0 = this.get(&#x27;y0&#x27;);
+    var y1 = this.get(&#x27;y1&#x27;);
+    return &#x60;M${x0},${y0} L${x0},${y1} L${x1},${y1} L${x1},${y0} L${x0},${y0}&#x60;;
   }),
 
   /**
