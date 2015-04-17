@@ -65,11 +65,11 @@ export default Ember.Component.extend({
   _childMutationObserver: null,
 
   _setupChildMutationObserver: Ember.on('didInsertElement', function() {
-    var handler = function(e) {
+    var handler = Ember.run.bind(this, function(e) {
       var context = this.createActionContext(e);
       this.sendAction('childrenChangedAction', context);   
       this.sendAction('changeAction', context);   
-    }.bind(this);
+    });
 
     this._childMutationObserver = new MutationObserver(handler);
     this._childMutationObserver.observe(this.get('element'), { childList: true, subtree: true });
