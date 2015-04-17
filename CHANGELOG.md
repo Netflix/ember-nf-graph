@@ -1,3 +1,5 @@
+- master
+  - FIX lock to rx-ember 0.2.5-1
 - 1.0.0-beta.8
   - [CRITICAL BUGFIX] Moved babel to `dependencies` so our addon is actually transpiled in host apps #34
 - 1.0.0-beta.7
