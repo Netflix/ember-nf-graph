@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/Netflix/ember-nf-graph.svg?branch=1.x)](https://travis-ci.org/Netflix/ember-nf-graph)
+
 # ember-nf-graph
 
 A Component-based DSL for creating graphs in your Ember app. The goal of the library is to 
