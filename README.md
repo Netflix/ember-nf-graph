@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/Netflix/ember-nf-graph.svg?branch=master)](https://travis-ci.org/Netflix/ember-nf-graph)
+[![npm version](https://badge.fury.io/js/ember-nf-graph.svg)](http://badge.fury.io/js/ember-nf-graph)
 
 # ember-nf-graph
 
