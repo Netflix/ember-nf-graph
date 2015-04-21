@@ -53,6 +53,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   lineX: Ember.computed('xScale', 'x', function(){
     var xScale = this.get('xScale');
     var x = this.get('x');
-    return xScale ? xScale(x) : -1;
+    var px = xScale ? xScale(x) : -1;
+    return px && px > 0 ? px : 0;
   }),
 });
