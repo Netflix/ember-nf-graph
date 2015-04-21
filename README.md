@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/Netflix/ember-nf-graph.svg?branch=1.x)](https://travis-ci.org/Netflix/ember-nf-graph)
+[![Build Status](https://travis-ci.org/Netflix/ember-nf-graph.svg?branch=master)](https://travis-ci.org/Netflix/ember-nf-graph)
 
 # ember-nf-graph
 

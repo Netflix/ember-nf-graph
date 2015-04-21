@@ -1,4 +1,4 @@
-- master
+- 1.0.0-beta.9
   - FIX [#16](//github.com/Netflix/ember-nf-graph/issues/16) SVG classes not swapping when selection changed
   - FIX lock to rx-ember 0.2.5-1
   - FIX [#24](//github.com/Netflix/ember-nf-graph/issues/24) SVG lines no longer complain when nf-vertical-line or nf-horizontal-line have null values
