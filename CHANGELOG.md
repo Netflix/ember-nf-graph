@@ -1,5 +1,7 @@
 - master
   - FIX lock to rx-ember 0.2.5-1
+  - FIX [#24](//github.com/Netflix/ember-nf-graph/issues/24) SVG lines no longer complain when nf-vertical-line or nf-horizontal-line have null values
+    or return a pixel value less than zero
 - 1.0.0-beta.8
   - [CRITICAL BUGFIX] Moved babel to `dependencies` so our addon is actually transpiled in host apps #34
 - 1.0.0-beta.7
