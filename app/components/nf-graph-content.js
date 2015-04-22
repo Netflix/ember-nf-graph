@@ -119,7 +119,7 @@ export default Ember.Component.extend(HasGraphParent, {
     var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
-      graph: this.get('graph'),
+      graphContentElement: this.element,
     });
 
     this.trigger('didHoverChange', context);
@@ -141,7 +141,7 @@ export default Ember.Component.extend(HasGraphParent, {
     var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
-      graph: this.get('graph'),
+      graphContentElement: this.element
     });
     this.trigger('didHoverEnd', context);
 

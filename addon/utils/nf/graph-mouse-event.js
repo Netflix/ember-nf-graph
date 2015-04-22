@@ -42,7 +42,7 @@ export default GraphPosition.extend({
     @type SVGGElement
     @readonly
   */
-  graphContentElement: Ember.computed.oneWay('graph.content.element'),
+  graphContentElement: null,
 
   /**
     The mouse x position relative to the graph content
@@ -71,7 +71,7 @@ export default GraphPosition.extend({
       graphX: this.get('mouseX'),
       graphY: this.get('mouseY'),
       source: this.get('source'),
-      graph: this.get('graph'),
+      graphContentElement: this.get('graphContentElement'),
     });
   }),
 
