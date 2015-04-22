@@ -1,4 +1,4 @@
-- master
+- 1.0.0-beta.10
   - FIX [#44](//github.com/Netflix/ember-nf-graph/issues/44) remove nf-scroll-area, which was leftover from splitting out nf-table
   - FIX [#41](//github.com/Netflix/ember-nf-graph/issues/41) fix assertion error that was caused in certain tracking modes
   - FIX [#16](//github.com/Netflix/ember-nf-graph/issues/16) patched addClass so Ember will actually update classes on SVG elements using classNameBindings
