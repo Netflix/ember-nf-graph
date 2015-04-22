@@ -1,3 +1,5 @@
+- master
+  - FIX [#44](//github.com/Netflix/ember-nf-graph/issues/44) remove nf-scroll-area, which was leftover from splitting out nf-table
 - 1.0.0-beta.9
   - FIX [#16](//github.com/Netflix/ember-nf-graph/issues/16) SVG classes not swapping when selection changed
   - FIX lock to rx-ember 0.2.5-1

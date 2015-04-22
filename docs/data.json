@@ -337,17 +337,6 @@
                 "components": 1
             }
         },
-        "app/components/nf-scroll-area.js": {
-            "name": "app/components/nf-scroll-area.js",
-            "modules": {},
-            "classes": {
-                "components.{nf-scroll-area}": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "components": 1
-            }
-        },
         "app/components/nf-selection-box.js": {
             "name": "app/components/nf-selection-box.js",
             "modules": {},
@@ -507,7 +496,6 @@
                 "components.nf-range-marker": 1,
                 "components.nf-range-markers": 1,
                 "components.nf-right-tick": 1,
-                "components.{nf-scroll-area}": 1,
                 "components.nf-selection-box": 1,
                 "components.nf-svg-image": 1,
                 "components.nf-svg-line": 1,
@@ -1044,20 +1032,6 @@
                 "mixins.graph-has-graph-parent",
                 "mixins.graph-requires-scale-source"
             ]
-        },
-        "components.{nf-scroll-area}": {
-            "name": "components.{nf-scroll-area}",
-            "shortname": "components.{nf-scroll-area}",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "utils/nf/svg-dom",
-            "namespace": "components",
-            "file": "app/components/nf-scroll-area.js",
-            "line": 4,
-            "description": "A component that emits actions and events when scrolled or resized."
         },
         "components.nf-selection-box": {
             "name": "components.nf-selection-box",
@@ -3882,7 +3856,7 @@
         },
         {
             "file": "app/components/nf-horizontal-line.js",
-            "line": 41,
+            "line": 42,
             "description": "The left x coordinate of the line",
             "itemtype": "property",
             "name": "x1",
@@ -3896,7 +3870,7 @@
         },
         {
             "file": "app/components/nf-horizontal-line.js",
-            "line": 50,
+            "line": 51,
             "description": "The right x coordinate of the line",
             "itemtype": "property",
             "name": "x2",
@@ -4471,122 +4445,6 @@
             "access": "private",
             "tagname": "",
             "class": "components.nf-right-tick",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 10,
-            "description": "The tag name of the component",
-            "itemtype": "property",
-            "name": "tagName",
-            "type": "{String}",
-            "default": "'div'",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 20,
-            "description": "The name of the action to fire when scrolled",
-            "itemtype": "property",
-            "name": "scrollAction",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 28,
-            "description": "The name of the action to fire when resized",
-            "itemtype": "property",
-            "name": "resizeAction",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 36,
-            "description": "The name of the action to fire when scrolled *OR* resized",
-            "itemtype": "property",
-            "name": "changeAction",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 44,
-            "description": "The name of the action to fire when the list of child DOM nodes changes",
-            "itemtype": "property",
-            "name": "childrenChangedAction",
-            "type": "{String}",
-            "default": "null",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 52,
-            "description": "Gets or sets the scrollTop by percentage (decimal) of\nscrollHeight",
-            "itemtype": "property",
-            "name": "scrollTopPercentage",
-            "type": "{Number}",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 95,
-            "description": "Gets or sets the scrollTop of the area",
-            "itemtype": "property",
-            "name": "scrollTop",
-            "type": "{Number}",
-            "default": "0",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 114,
-            "description": "The optional action data to send with the action contextl",
-            "itemtype": "property",
-            "name": "actionData",
-            "type": "Any",
-            "default": "null",
-            "class": "components.{nf-scroll-area}",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-scroll-area.js",
-            "line": 140,
-            "description": "Creates an action context to send with an action",
-            "itemtype": "method",
-            "name": "createActionContext",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "the original event object if there is one",
-                    "type": "Event"
-                }
-            ],
-            "return": {
-                "description": "",
-                "type": "utils.nf.scroll-area-action-context"
-            },
-            "class": "components.{nf-scroll-area}",
             "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
