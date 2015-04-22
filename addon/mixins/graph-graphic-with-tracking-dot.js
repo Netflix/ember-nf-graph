@@ -107,12 +107,12 @@ export default Ember.Mixin.create({
     @private
   */
   didContentHoverChange: function(e){
-    var graph = this.get('graph');
+    var graphContentElement = this.get('graphContentElement');
 
     this.trigger('didHoverChange', GraphMouseEvent.create({
       originalEvent: e.get('originalEvent'),
       source: this,
-      graph: graph,
+      graphContentElement: graphContentElement,
     }));
   },
 
@@ -201,6 +201,10 @@ export default Ember.Mixin.create({
     @default null
   */
   willTrack: null,
+
+  graphContentElement: Ember.computed('graph', function(){
+    return this.get('graph').$('.nf-graph-content')[0];
+  }),
 
   /**
     Observes impending changes to trackedData and sends
