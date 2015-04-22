@@ -166,9 +166,6 @@
   stroke: #d3dbdd;
   stroke-width: 1px; }
 
-.nf-scroll-area {
-  overflow: auto; }
-
 .nf-brush-selection-overlay {
   fill: rgba(153, 153, 153, 0.3); }
 
