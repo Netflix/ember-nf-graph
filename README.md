@@ -14,35 +14,45 @@ A basic graph example is as follows:
 
 ```js
 export default Ember.Route.extend({
-	main: function(){
-		return {
-			myLineData: [{ x: 0, y: 12}, { x: 1, y: 32 }, { x: 2, y: 42 }, ... ],
-			myAreaData: [{ x: 0, y: 43}, { x: 1, y: 54 }, { x: 2, y: 13 }, ... ]
-		}
-	}
-})
+  model() {
+    return {
+      myLineData: [
+        { x: 0, y: 12 },
+        { x: 1, y: 32 },
+        { x: 2, y: 42 },
+        // ...
+      ],
+      myAreaData: [
+        { x: 0, y: 43 },
+        { x: 1, y: 54 },
+        { x: 2, y: 13 },
+        // ...
+      ]
+    };
+  }
+});
 ```
 
 ```hbs
 {{#nf-graph width=500 height=300}}
   {{#nf-graph-content}}
     <!-- add a line -->
-    {{nf-line data=myLineData}}
+    {{nf-line data=model.myLineData}}
 
     <!-- add an area -->
-    {{nf-area data=myAreaData}}
+    {{nf-area data=model.myAreaData}}
 
     <!-- mix in any SVG element you want -->
     <circle cx="40" cy="40" r="10"></circle>
   {{/nf-graph-content}}
 
 	<!-- axis ticks are templateable as well -->
-  {{#nf-y-axis}}
+  {{#nf-y-axis as |tick|}}
     <text>{{tick.value}}</text>
   {{/nf-y-axis}}
 
 
-  {{#nf-x-axis}}
+  {{#nf-x-axis as |tick|}}
     <text>{{tick.value}}</text>
   {{/nf-x-axis}}
 {{/nf-graph}}
