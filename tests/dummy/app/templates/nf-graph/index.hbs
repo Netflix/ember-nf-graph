@@ -54,11 +54,11 @@
 		<text {{action 'test'}}>{{diffA}} {{diffB}}</text>
 	{{/nf-y-diff}}
 
-	{{#nf-x-axis scaleZoomX=multiY}}
+	{{#nf-x-axis scaleZoomX=multiY as |tick|}}
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
-	{{#nf-y-axis scaleZoomY=multiY orient="right"}}
+	{{#nf-y-axis scaleZoomY=multiY orient="right" as |tick|}}
 		<text>{{tick.value}}</text>
 	{{/nf-y-axis}}
 
@@ -97,11 +97,11 @@
 		{{nf-brush-selection left=brushLeft right=brushRight}}
 	{{/nf-graph-content}}
 
-	{{#nf-x-axis}}
+	{{#nf-x-axis as |tick|}}
 		<text>{{tick.value}}</text>
 	{{/nf-x-axis}}
 
-	{{#nf-y-axis orient="right"}}
+	{{#nf-y-axis orient="right" as |tick|}}
 		<text>{{tick.value}}</text>
 	{{/nf-y-axis}}
 
