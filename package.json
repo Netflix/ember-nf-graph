@@ -27,7 +27,8 @@
   "author": "Ben Lesh <blesh@netflix.com> and contributors",
   "license": "Apache 2",
   "dependencies": {
-    "ember-cli-babel": "^5.0.0"
+    "ember-cli-babel": "^5.0.0",
+    "ember-cli-rx": "^0.2.5"
   },
   "devDependencies": {
     "benchpress": "^2.0.0-alpha.16",
