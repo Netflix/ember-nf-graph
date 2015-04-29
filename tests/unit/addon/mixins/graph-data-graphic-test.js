@@ -63,7 +63,6 @@ test('firstVisibleData returns the first item of renderedData that is actually v
   assert.deepEqual(firstVisibleData, { x: 2, y: 2, data: undefined });
 });
 
-
 test('firstVisibleData returns the first item of renderedData if it is at the xMin exactly', assert => {
   var Foo = Ember.Object.extend(GraphDataGraphic);
   var foo = Foo.create({
@@ -85,7 +84,6 @@ test('lastVisibleData returns the last item of renderedData that is actually vis
   var lastVisibleData = foo.get('lastVisibleData');
   assert.deepEqual(lastVisibleData, { x: 4, y: 4, data: undefined });
 });
-
 
 test('lastVisibleData returns the last item of renderedData if it is at the xMax exactly', assert => {
   var Foo = Ember.Object.extend(GraphDataGraphic);
@@ -121,7 +119,6 @@ test('xPropFn should be a function that gets the value specified by xprop', asse
   assert.equal(fn({ foo: { bar: 'wokka wokka' } }), 'wokka wokka');
 });
 
-
 test('xPropFn should work if xprop uses an array index like so: foo[2]', assert => {
   var Foo = Ember.Object.extend(GraphDataGraphic);
   var foo = Foo.create({
@@ -131,8 +128,6 @@ test('xPropFn should work if xprop uses an array index like so: foo[2]', assert 
   var fn = foo.get('xPropFn');
   assert.equal(fn({ foo: ['apple', 'orange', 'banana'] }), 'banana');
 });
-
-
 
 test('yPropFn should be a function that gets the value specified by yprop', assert => {
   var Foo = Ember.Object.extend(GraphDataGraphic);
@@ -154,13 +149,3 @@ test('yPropFn should work if yprop uses an array index like so: foo[2]', assert 
   var fn = foo.get('yPropFn');
   assert.equal(fn({ foo: ['apple', 'orange', 'banana'] }), 'banana');
 });
-
-
-
-
-
-
-
-
-
-

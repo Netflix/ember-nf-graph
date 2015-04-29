@@ -26,7 +26,7 @@ export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 }
 
 function range(count) {
-  var output = [];
+  var output = Ember.A();
   var i = 0;
   while(i < count) {
     output.push(i++);

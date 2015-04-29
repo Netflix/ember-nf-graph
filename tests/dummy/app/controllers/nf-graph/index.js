@@ -15,7 +15,7 @@ function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 
 
 function range(count) {
-  var output = [];
+  var output = Ember.A();
   var i = 0;
   while(i < count) {
     output.push(i++);
@@ -27,14 +27,14 @@ export default Ember.ObjectController.extend({
   graphWidth: 400,
   graphHeight: 300,
 
-  queryParams: ['graphWidth'],
+  queryParams: Ember.A(['graphWidth']),
   
   xTickFilter: function() {
     return true;
   },
 
   xTickFactory: function() {
-    var ticks = [1, 10, 30, 50, 80, 99];
+    var ticks = Ember.A([1, 10, 30, 50, 80, 99]);
 
     return ticks;
   },
