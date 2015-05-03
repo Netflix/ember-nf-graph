@@ -20,12 +20,13 @@ export default Ember.Mixin.create({
   /**
     Initalization method that gets the `nf-graph` parent
     and assigns it to `graph`
-    
-    @method _getGraph
+    NOTE: all object that mixin and have init, must call super.init()
+    @method init
     */
-  _getGraph: Ember.on('init', function(){
+
+  init() {
+    this._super(...arguments);
     var graph = this.nearestWithProperty('isGraph');
     this.set('graph', graph);
-    this.trigger('hasGraph', graph);
-  }),
+  }
 });

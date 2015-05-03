@@ -942,9 +942,10 @@ export default Ember.Component.extend({
     @method _setup
     @private
   */
-  _setup: Ember.on('init', function(){
+  init() {
+    this._super(...arguments);
     this.set('selected', this.selectMultiple ? Ember.A() : null);
-  }),
+  },
 
   /**
     The amount of leeway, in pixels, to give before triggering a brush start.

@@ -54,13 +54,14 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     */
     nextArea: null,
 
-    _checkForAreaStackParent: Ember.on('init', function() {
+    init() {
+      this._super(...arguments);
       var stack = this.nearestWithProperty('isAreaStack');
       if(stack) {
         stack.registerArea(this);
         this.set('stack', stack);
       }
-    }),
+    },
 
     _unregister: Ember.on('willDestroyElement', function(){
       var stack = this.get('stack', stack);
