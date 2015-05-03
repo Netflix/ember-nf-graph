@@ -1,3 +1,5 @@
+- master
+  - FIX [#53](//github.com/Netflix/ember-nf-graph/issues/53) remove event hooks and registrations that were causing recalculations and re-renders.
 - 1.0.0-beta.10
   - FIX [#44](//github.com/Netflix/ember-nf-graph/issues/44) remove nf-scroll-area, which was leftover from splitting out nf-table
   - FIX [#41](//github.com/Netflix/ember-nf-graph/issues/41) fix assertion error that was caused in certain tracking modes
