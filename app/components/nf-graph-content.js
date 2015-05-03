@@ -158,7 +158,8 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   frets: Ember.computed.alias('graph.xAxis.ticks'),
 
-  hasGraph: function(graph) {
-    graph.set('content', this);
+  init(){
+    this._super(...arguments);
+    this.set('graph.content', this);
   },
 });
