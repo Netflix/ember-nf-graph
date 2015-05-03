@@ -103,8 +103,9 @@ export default Ember.Mixin.create({
     return this._scaleOffsetY || 0;
   }),
 
-  _getScaleSource: Ember.on('init', function(){
+  init() {
+    this._super(...arguments);
     var scaleSource = this.nearestWithProperty('isScaleSource');
     this.set('scaleSource', scaleSource);
-  }),
+  }
 });

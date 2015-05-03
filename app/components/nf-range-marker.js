@@ -173,11 +173,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method _setup
     @private
   */
-  _setup: Ember.on('init', function(){
+  init() {
+    this._super(...arguments);
     var container = this.nearestWithProperty('isRangeMarkerContainer');
     container.registerMarker(this);
     this.set('container', container);
-  }),
+  },
 
   /**
     Unregisters the range marker from its parent when the range marker is destroyed.

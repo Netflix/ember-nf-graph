@@ -147,12 +147,13 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   */
   barClick: null,
 
-  _registerBars: Ember.on('init', function(){
+  init() {
+    this._super(...arguments);
     var group = this.nearestWithProperty('isBarsGroup');
     if(group && group.registerBars) {
       group.registerBars(this);
     }
-  }),
+  },
 
   actions: {
     nfBarClickBar: function(dataPoint) {
