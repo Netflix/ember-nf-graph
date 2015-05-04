@@ -1,4 +1,5 @@
-- master
+- 1.0.0-beta.11
+  - Update Ember-CLI to `0.2.3` and Ember to `~1.11.3`
   - FIX [#53](//github.com/Netflix/ember-nf-graph/issues/53) remove event hooks and registrations that were causing recalculations and re-renders.
 - 1.0.0-beta.10
   - FIX [#44](//github.com/Netflix/ember-nf-graph/issues/44) remove nf-scroll-area, which was leftover from splitting out nf-table
