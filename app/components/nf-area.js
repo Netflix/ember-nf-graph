@@ -78,15 +78,15 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    nextYData: Ember.computed('renderedData.@each', 'nextArea.renderedData.@each', function(){
-      var renderedData = this.get('renderedData');
+    nextYData: Ember.computed('renderedData.length', 'nextArea.renderedData.@each', function(){
       var nextData = this.get('nextArea.renderedData') || [];
+      var renderedDataLength = this.get('renderedData.length');
         
       var result = nextData.map(function(next) {
         return next[1];
       });
       
-      while(result.length < renderedData.length) {
+      while(result.length < renderedDataLength) {
         result.push(-99999999);
       }
 
@@ -127,7 +127,8 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @readonly
     */
     d: Ember.computed('areaData', 'areaFn', function(){
-      return this.get('areaFn')(this.get('areaData'));
+      var areaData = this.get('areaData');
+      return this.get('areaFn')(areaData);
     }),
 
     click: function(){
