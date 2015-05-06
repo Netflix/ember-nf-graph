@@ -1,3 +1,6 @@
+- 1.0.0-beta.12
+  - FIX performance issue with axes caused by graphics registering after render
+  - FIX issue where `nf-area-stack` would not stack some `nf-area` components
 - 1.0.0-beta.11
   - Update Ember-CLI to `0.2.3` and Ember to `~1.11.3`
   - FIX [#53](//github.com/Netflix/ember-nf-graph/issues/53) remove event hooks and registrations that were causing recalculations and re-renders.
