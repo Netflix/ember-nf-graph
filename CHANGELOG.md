@@ -1,3 +1,6 @@
+- master
+  - FIX rxjs dependency added to `index.js`
+  - UPDATE removed dependency on `ember-cli-rx`
 - 1.0.0-beta.12
   - FIX performance issue with axes caused by graphics registering after render
   - FIX issue where `nf-area-stack` would not stack some `nf-area` components
