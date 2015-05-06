@@ -126,18 +126,13 @@ import Ember from &#x27;ember&#x27;;
 */
 export default Ember.Mixin.create({
 
-  /**
-    calls {{#crossLink &quot;components.nf-graph/registerGraphic&quot;}}{{/crossLink}} on
-    &#x60;didInsertElement&#x60;.
-    @method _registerGraphic
-    @private
-  */
-  _registerGraphic: Ember.on(&#x27;didInsertElement&#x27;, function() {
+  init() {
+    this._super(...arguments);
     var graph = this.get(&#x27;graph&#x27;);
     if(graph) {
       graph.registerGraphic(this);
     }
-  }),
+  },
 
   /**
     calls {{#crossLink &quot;components.nf-graph/unregisterGraphic&quot;}}{{/crossLink}} on

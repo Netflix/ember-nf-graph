@@ -296,7 +296,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   init() {
     this._super(...arguments);
-
+    this.set(&#x27;graph.yAxis&#x27;, this);
     Ember.deprecate(&#x27;Non-block form of tick is deprecated. Please add &#x60;as |tick|&#x60; to your template.&#x27;, this.get(&#x27;template.blockParams&#x27;));
   },
 
@@ -387,15 +387,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   axisLineX: Ember.computed(&#x27;isOrientRight&#x27;, &#x27;width&#x27;, function(){
     return this.get(&#x27;isOrientRight&#x27;) ? 0 : this.get(&#x27;width&#x27;);
   }),
-
-  /**
-    sets graph&#x27;s yAxis property on willInsertElement
-    @method _updateGraphYAxis
-    @private
-  */
-  _updateGraphYAxis: Ember.on(&#x27;willInsertElement&#x27;, function(){
-    this.set(&#x27;graph.yAxis&#x27;, this);
-  })
 });
 
     </pre>

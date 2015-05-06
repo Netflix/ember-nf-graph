@@ -168,10 +168,6 @@ on the right side of an <code>nf-graph</code>.</p>
                                 <a href="#method__getElements">_getElements</a>
 
                             </li>
-                            <li class="index-item method inherited">
-                                <a href="#method__getGraph">_getGraph</a>
-
-                            </li>
                             <li class="index-item method private">
                                 <a href="#method__nonTransitionalUpdate">_nonTransitionalUpdate</a>
 
@@ -186,6 +182,10 @@ on the right side of an <code>nf-graph</code>.</p>
                             </li>
                             <li class="index-item method private">
                                 <a href="#method__triggerTransition">_triggerTransition</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_init">init</a>
 
                             </li>
                     </ul>
@@ -277,38 +277,6 @@ on the right side of an <code>nf-graph</code>.</p>
 
     <div class="description">
         <p>Gets the elements required to do the d3 transitions</p>
-
-    </div>
-
-
-
-
-</div>
-<div id="method__getGraph" class="method item inherited">
-    <h3 class="name"><code>_getGraph</code></h3>
-
-        <span class="paren">()</span>
-
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>Inherited from
-                <a href="../classes/mixins.graph-has-graph-parent.html#method__getGraph">mixins.graph-has-graph-parent</a>:
-        <a href="../files/addon_mixins_graph-has-graph-parent.js.html#l20"><code>addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>&lt;p&gt;Initalization method that gets the &lt;code&gt;nf-graph&lt;/code&gt; parent
-and assigns it to &lt;code&gt;graph&lt;/code&gt;&lt;/p&gt;</p>
 
     </div>
 
@@ -437,6 +405,39 @@ and assigns it to &lt;code&gt;graph&lt;/code&gt;&lt;/p&gt;</p>
 
     <div class="description">
         <p>Schedules the transition when <code>value</code> changes on on init.</p>
+
+    </div>
+
+
+
+
+</div>
+<div id="method_init" class="method item inherited">
+    <h3 class="name"><code>init</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method_init">mixins.graph-has-graph-parent</a>:
+        <a href="../files/addon_mixins_graph-has-graph-parent.js.html#l20"><code>addon&#x2F;mixins&#x2F;graph-has-graph-parent.js:20</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>&lt;p&gt;Initalization method that gets the &lt;code&gt;nf-graph&lt;/code&gt; parent
+and assigns it to &lt;code&gt;graph&lt;/code&gt;
+NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
 
     </div>
 

@@ -222,10 +222,11 @@ export default Ember.Mixin.create({
     return this._scaleOffsetY || 0;
   }),
 
-  _getScaleSource: Ember.on(&#x27;init&#x27;, function(){
+  init() {
+    this._super(...arguments);
     var scaleSource = this.nearestWithProperty(&#x27;isScaleSource&#x27;);
     this.set(&#x27;scaleSource&#x27;, scaleSource);
-  }),
+  }
 });
     </pre>
 </div>

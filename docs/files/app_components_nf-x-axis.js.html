@@ -297,7 +297,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   init() {
     this._super(...arguments);
-
+    this.set(&#x27;graph.xAxis&#x27;, this);
     Ember.deprecate(&#x27;Non-block form of tick is deprecated. Please add &#x60;as |tick|&#x60; to your template.&#x27;, this.get(&#x27;template.blockParams&#x27;));
   },
 
@@ -386,15 +386,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
       return Ember.A(result);
     }
   ),
-
-  /**
-    Updates the graph&#x27;s xAxis property on willInsertElement
-    @method _updateGraphXAxis
-    @private
-  */
-  _updateGraphXAxis: Ember.on(&#x27;willInsertElement&#x27;, function(){
-    this.set(&#x27;graph.xAxis&#x27;, this);
-  }),
 
   /**
     The y position, in pixels, of the axis line

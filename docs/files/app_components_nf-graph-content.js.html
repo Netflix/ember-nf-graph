@@ -238,7 +238,7 @@ export default Ember.Component.extend(HasGraphParent, {
     var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
-      graph: this.get(&#x27;graph&#x27;),
+      graphContentElement: this.element,
     });
 
     this.trigger(&#x27;didHoverChange&#x27;, context);
@@ -260,7 +260,7 @@ export default Ember.Component.extend(HasGraphParent, {
     var context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
-      graph: this.get(&#x27;graph&#x27;),
+      graphContentElement: this.element
     });
     this.trigger(&#x27;didHoverEnd&#x27;, context);
 
@@ -277,8 +277,9 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   frets: Ember.computed.alias(&#x27;graph.xAxis.ticks&#x27;),
 
-  hasGraph: function(graph) {
-    graph.set(&#x27;content&#x27;, this);
+  init(){
+    this._super(...arguments);
+    this.set(&#x27;graph.content&#x27;, this);
   },
 });
     </pre>

@@ -1478,7 +1478,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 205,
+            "line": 209,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -1489,7 +1489,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 223,
+            "line": 227,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -1507,7 +1507,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 239,
+            "line": 243,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_initializeTrackingDot",
@@ -1518,7 +1518,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 250,
+            "line": 254,
             "description": "Tears down subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_teardownTrackingDot",
@@ -1541,9 +1541,9 @@
         {
             "file": "addon/mixins/graph-has-graph-parent.js",
             "line": 20,
-            "description": "Initalization method that gets the `nf-graph` parent\nand assigns it to `graph`",
+            "description": "Initalization method that gets the `nf-graph` parent\nand assigns it to `graph`\nNOTE: all object that mixin and have init, must call super.init()",
             "itemtype": "method",
-            "name": "_getGraph",
+            "name": "init",
             "class": "mixins.graph-has-graph-parent",
             "namespace": "mixins"
         },
@@ -1579,18 +1579,7 @@
         },
         {
             "file": "addon/mixins/graph-registered-graphic.js",
-            "line": 10,
-            "description": "calls {{#crossLink \"components.nf-graph/registerGraphic\"}}{{/crossLink}} on\n`didInsertElement`.",
-            "itemtype": "method",
-            "name": "_registerGraphic",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-registered-graphic",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-registered-graphic.js",
-            "line": 23,
+            "line": 18,
             "description": "calls {{#crossLink \"components.nf-graph/unregisterGraphic\"}}{{/crossLink}} on\n`didInsertElement`.",
             "itemtype": "method",
             "name": "_unregisterGraphic",
@@ -2551,7 +2540,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 72,
+            "line": 73,
             "description": "The computed set of next y values to use for the \"bottom\" of the graphed area.\nIf the area is part of a stack, this will be the \"top\" of the next area in the stack,\notherwise it will return an array of values at the \"bottom\" of the graph domain.",
             "itemtype": "property",
             "name": "nextYData",
@@ -2563,7 +2552,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 95,
+            "line": 96,
             "description": "The current rendered data \"zipped\" together with the nextYData.",
             "itemtype": "property",
             "name": "areaData",
@@ -2575,7 +2564,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 109,
+            "line": 110,
             "description": "Gets the area function to use to create the area SVG path data",
             "itemtype": "property",
             "name": "areaFn",
@@ -2587,7 +2576,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 122,
+            "line": 123,
             "description": "The SVG path data for the area",
             "itemtype": "property",
             "name": "d",
@@ -3782,7 +3771,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 949,
+            "line": 950,
             "description": "The amount of leeway, in pixels, to give before triggering a brush start.",
             "itemtype": "property",
             "name": "brushThreshold",
@@ -3794,7 +3783,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 957,
+            "line": 958,
             "description": "The name of the action to trigger when brushing starts",
             "itemtype": "property",
             "name": "brushStartAction",
@@ -3806,7 +3795,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 965,
+            "line": 966,
             "description": "The name of the action to trigger when brushing emits a new value",
             "itemtype": "property",
             "name": "brushAction",
@@ -3818,7 +3807,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 973,
+            "line": 974,
             "description": "The name of the action to trigger when brushing ends",
             "itemtype": "property",
             "name": "brushEndAction",
@@ -4232,7 +4221,7 @@
         },
         {
             "file": "app/components/nf-range-marker.js",
-            "line": 182,
+            "line": 183,
             "description": "Unregisters the range marker from its parent when the range marker is destroyed.",
             "itemtype": "method",
             "name": "_unregister",
@@ -5175,18 +5164,6 @@
         {
             "file": "app/components/nf-x-axis.js",
             "line": 271,
-            "description": "Updates the graph's xAxis property on willInsertElement",
-            "itemtype": "method",
-            "name": "_updateGraphXAxis",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-x-axis",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-x-axis.js",
-            "line": 280,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",
@@ -5399,18 +5376,6 @@
             "name": "axisLineX",
             "type": "Number",
             "readonly": "",
-            "class": "components.nf-y-axis",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-y-axis.js",
-            "line": 272,
-            "description": "sets graph's yAxis property on willInsertElement",
-            "itemtype": "method",
-            "name": "_updateGraphYAxis",
-            "access": "private",
-            "tagname": "",
             "class": "components.nf-y-axis",
             "module": "utils/nf/svg-dom",
             "namespace": "components"
