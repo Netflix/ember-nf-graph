@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import computed from 'ember-new-computed';
 
 /**
   Action context event object for an nf-scroll-area scroll event.
@@ -60,8 +61,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollTopMax: Ember.computed('outerHeight', 'scrollHeight', function(){
-    return this.get('scrollHeight') - this.get('outerHeight');
+  scrollTopMax: computed('outerHeight', 'scrollHeight', {
+    get() {
+      return this.get('scrollHeight') - this.get('outerHeight');
+    }
   }),
 
   /**
@@ -70,8 +73,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollTopPercentage: Ember.computed('scrollTop', 'scrollTopMax', function() {
-    return this.get('scrollTop') / this.get('scrollTopMax');
+  scrollTopPercentage: computed('scrollTop', 'scrollTopMax', {
+    get() {
+      return this.get('scrollTop') / this.get('scrollTopMax');
+    }
   }),
   
   /**
@@ -80,8 +85,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollLeftMax: Ember.computed('outerWidth', 'scrollWidth', function(){
-    return this.get('scrollWidth') - this.get('outerWidth');
+  scrollLeftMax: computed('outerWidth', 'scrollWidth', {
+    get() {
+      return this.get('scrollWidth') - this.get('outerWidth');
+    }
   }),
 
   /**
@@ -90,8 +97,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollLeftPercentage: Ember.computed('scrollLeft', 'scrollLeftMax', function() {
-    return this.get('scrollLeft') / this.get('scrollLeftMax');
+  scrollLeftPercentage: computed('scrollLeft', 'scrollLeftMax', {
+    get() {
+      return this.get('scrollLeft') / this.get('scrollLeftMax');
+    }
   }),
 
   /**
