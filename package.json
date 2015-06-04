@@ -1,6 +1,6 @@
 {
   "name": "ember-nf-graph",
-  "version": "1.0.0-beta.13",
+  "version": "1.0.0-beta.14",
   "description": "The default blueprint for ember-cli addons.",
   "files": [
     "addon/",
