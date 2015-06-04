@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.0.0-beta.15
+
+- FIX Moved ember-new-computed to deps not devDeps
+
 ### v1.0.0-beta.14
 
 - FIX [#63](https://github.com/Netflix/ember-nf-graph/pull/63) Uses new computed property syntax w/ polyfill for host apps running older ember
