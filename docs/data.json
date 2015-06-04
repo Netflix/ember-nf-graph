@@ -460,7 +460,7 @@
             },
             "tag": "module",
             "file": "addon/utils/nf/graph-position.js",
-            "line": 3
+            "line": 6
         },
         "scale-utils": {
             "name": "scale-utils",
@@ -474,7 +474,7 @@
             },
             "tag": "module",
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 3,
+            "line": 4,
             "description": "utilities for dealing with d3 scales"
         },
         "utils/nf/svg-dom": {
@@ -549,7 +549,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 7,
+            "line": 8,
             "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}",
             "extends": "Ember.Mixin"
         },
@@ -567,7 +567,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 6,
+            "line": 8,
             "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
@@ -669,7 +669,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 23,
+            "line": 27,
             "description": "Adds functionality to identify a parent control that will provide an x and\ny scale, then adds scaling properties to the component it's mixed in to."
         },
         "mixins.graph-selectable-graphic": {
@@ -720,7 +720,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "utils.nf",
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 4,
+            "line": 8,
             "description": "An event context object generally returned by tracking events. Also used as\n`trackedData` in components such as `nf-line`, `nf-area` and `nf-bars`.",
             "extends": "graph-position"
         },
@@ -735,7 +735,7 @@
             "module": "utils/nf/array-helpers",
             "namespace": "utils.nf",
             "file": "addon/utils/nf/graph-position.js",
-            "line": 3,
+            "line": 6,
             "description": "Position calculation class for nf-graph related events",
             "extends": "Ember.Object"
         },
@@ -750,7 +750,7 @@
             "module": "scale-utils",
             "namespace": "utils.nf",
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 3,
+            "line": 4,
             "description": "Action context event object for an nf-scroll-area scroll event."
         },
         "utils.parse-property-expression": {
@@ -1241,7 +1241,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 22,
+            "line": 23,
             "description": "Gets or sets the data used by the component to plot itself.",
             "itemtype": "property",
             "name": "data",
@@ -1252,10 +1252,10 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 31,
+            "line": 32,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as x data to plot on the graph.",
             "itemtype": "property",
-            "name": "x",
+            "name": "xprop",
             "type": "String",
             "default": "'x'",
             "class": "mixins.graph-data-graphic",
@@ -1263,10 +1263,10 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 42,
+            "line": 43,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as y data to plot on the graph.",
             "itemtype": "property",
-            "name": "y",
+            "name": "yprop",
             "type": "String",
             "default": "'y'",
             "class": "mixins.graph-data-graphic",
@@ -1274,7 +1274,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 53,
+            "line": 54,
             "description": "The function to get the x value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "xPropFn",
@@ -1285,7 +1285,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 66,
+            "line": 69,
             "description": "The function to get the y value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "yPropFn",
@@ -1296,7 +1296,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 79,
+            "line": 84,
             "description": "Gets the x values from the `sortedData`.",
             "itemtype": "property",
             "name": "xData",
@@ -1307,7 +1307,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 87,
+            "line": 92,
             "description": "Gets the y values from the `sortedData`",
             "itemtype": "property",
             "name": "yData",
@@ -1318,7 +1318,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 95,
+            "line": 100,
             "description": "The sorted and mapped data pulled from {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nAn array of arrays, structures as so:\n\n      [[x,y],[x,y],[x,y]];\n\n** each inner array also has a property `data` on it, containing the original data object **\n\nWhen this property is computed, it also updates the `xData` and `yData` properties of the graphic.",
             "itemtype": "property",
             "name": "sortedData",
@@ -1329,7 +1329,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 147,
+            "line": 154,
             "description": "The list of data points from {{#crossLink \"mixins.graph-data-graphc/sortedData:property\"}}{{/crossLink}} that\nfits within the x domain, plus up to one data point outside of that domain in each direction.",
             "itemtype": "property",
             "name": "renderedData",
@@ -1340,7 +1340,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 186,
+            "line": 195,
             "description": "The first element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "firstSortedData",
@@ -1351,7 +1351,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 208,
+            "line": 219,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
@@ -1362,7 +1362,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 14,
+            "line": 16,
             "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'none': no tracking behavior\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
             "itemtype": "property",
             "name": "trackingMode",
@@ -1373,7 +1373,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 95,
+            "line": 103,
             "description": "The action name to send to the controller when the `hoverChange` event fires",
             "itemtype": "property",
             "name": "hoverChange",
@@ -1384,7 +1384,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 103,
+            "line": 111,
             "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
             "itemtype": "method",
             "name": "didContentHoverChange",
@@ -1402,7 +1402,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 119,
+            "line": 127,
             "description": "Event handler for didHoverChange. Sends hoverChange action.",
             "itemtype": "method",
             "name": "didHoverChange",
@@ -1418,7 +1418,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 142,
+            "line": 150,
             "description": "Name of the action to send on `hoverEnd`",
             "itemtype": "property",
             "name": "hoverEnd",
@@ -1429,7 +1429,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 150,
+            "line": 158,
             "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
             "itemtype": "method",
             "name": "didHoverEnd",
@@ -1445,7 +1445,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 171,
+            "line": 179,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
@@ -1456,7 +1456,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 179,
+            "line": 187,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
@@ -1467,7 +1467,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 197,
+            "line": 205,
             "description": "The action to send on `willTrack`",
             "itemtype": "property",
             "name": "willTrack",
@@ -1478,7 +1478,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 209,
+            "line": 219,
             "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
             "itemtype": "method",
             "name": "_sendWillTrack",
@@ -1489,7 +1489,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 227,
+            "line": 237,
             "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
             "itemtype": "method",
             "name": "didContentHoverEnd",
@@ -1507,7 +1507,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 243,
+            "line": 253,
             "description": "Sets up subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_initializeTrackingDot",
@@ -1518,7 +1518,7 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 254,
+            "line": 264,
             "description": "Tears down subscriptions to content hover events.",
             "itemtype": "method",
             "name": "_teardownTrackingDot",
@@ -1590,7 +1590,7 @@
         },
         {
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 30,
+            "line": 34,
             "description": "The x scale used by this component",
             "itemtype": "property",
             "name": "xScale",
@@ -1601,7 +1601,7 @@
         },
         {
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 38,
+            "line": 42,
             "description": "The y scale used by this component",
             "itemtype": "property",
             "name": "yScale",
@@ -1612,7 +1612,7 @@
         },
         {
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 54,
+            "line": 58,
             "description": "The zoom multiplier for the x scale",
             "itemtype": "property",
             "name": "scaleZoomX",
@@ -1623,7 +1623,7 @@
         },
         {
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 67,
+            "line": 73,
             "description": "The zoom multiplier for the y scale",
             "itemtype": "property",
             "name": "scaleZoomY",
@@ -1634,7 +1634,7 @@
         },
         {
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 80,
+            "line": 88,
             "description": "The offset, in pixels, for the x scale",
             "itemtype": "property",
             "name": "scaleOffsetX",
@@ -1645,7 +1645,7 @@
         },
         {
             "file": "addon/mixins/graph-requires-scale-source.js",
-            "line": 93,
+            "line": 103,
             "description": "The offset, in pixels, for the y scale",
             "itemtype": "property",
             "name": "scaleOffsetY",
@@ -1835,7 +1835,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 13,
+            "line": 17,
             "description": "The original event that triggered the action or ember event",
             "itemtype": "property",
             "name": "originalEvent",
@@ -1847,7 +1847,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 21,
+            "line": 25,
             "description": "Method used to get the mouse position relative to a container",
             "itemtype": "method",
             "name": "_getMousePoint",
@@ -1859,7 +1859,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 28,
+            "line": 32,
             "description": "The coordinates of the mouse relative to eh nf-graph-content",
             "itemtype": "property",
             "name": "_mousePoint",
@@ -1873,7 +1873,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 39,
+            "line": 45,
             "description": "The nf-graph-content element of the nf-graph",
             "itemtype": "property",
             "name": "graphContentElement",
@@ -1885,7 +1885,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 47,
+            "line": 53,
             "description": "The mouse x position relative to the graph content",
             "itemtype": "property",
             "name": "mouseX",
@@ -1897,7 +1897,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 55,
+            "line": 61,
             "description": "The mouse y position relative to the graph content",
             "itemtype": "property",
             "name": "mouseY",
@@ -1909,7 +1909,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 63,
+            "line": 69,
             "description": "A positioning object for the mouse position",
             "itemtype": "property",
             "name": "mousePosition",
@@ -1921,7 +1921,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 78,
+            "line": 86,
             "description": "The raw data point nearest the mouse.graphX position",
             "itemtype": "property",
             "name": "nearestDataPoint",
@@ -1933,7 +1933,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 90,
+            "line": 100,
             "description": "The x domain value at the nearest data point to the mouse position\nalong the x axis.",
             "itemtype": "property",
             "name": "x",
@@ -1944,7 +1944,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 102,
+            "line": 114,
             "description": "The y domain value at the nearest data point to the mouse position\nalong the x axis.",
             "itemtype": "property",
             "name": "y",
@@ -1955,7 +1955,7 @@
         },
         {
             "file": "addon/utils/nf/graph-mouse-event.js",
-            "line": 114,
+            "line": 128,
             "description": "The data carried by the nearest data point to the mouse position\nalong the x axis.",
             "itemtype": "property",
             "name": "data",
@@ -1966,7 +1966,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 10,
+            "line": 13,
             "itemtype": "property",
             "name": "graph",
             "type": "component.nf-graph",
@@ -1977,7 +1977,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 17,
+            "line": 20,
             "itemtype": "property",
             "name": "source",
             "type": "Ember.Component",
@@ -1987,7 +1987,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 23,
+            "line": 26,
             "description": "The x position relative to graph",
             "itemtype": "property",
             "name": "graphX",
@@ -1998,7 +1998,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 41,
+            "line": 45,
             "description": "The y position relative to graph",
             "itemtype": "property",
             "name": "graphY",
@@ -2009,7 +2009,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 59,
+            "line": 64,
             "description": "The x domain value",
             "itemtype": "property",
             "name": "x",
@@ -2020,7 +2020,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 77,
+            "line": 83,
             "description": "The y domain value",
             "itemtype": "property",
             "name": "y",
@@ -2031,7 +2031,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 95,
+            "line": 102,
             "description": "The x position relative to the document",
             "itemtype": "property",
             "name": "pageX",
@@ -2042,7 +2042,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 109,
+            "line": 118,
             "description": "The y position relative to the document",
             "itemtype": "property",
             "name": "pageY",
@@ -2053,7 +2053,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 123,
+            "line": 134,
             "description": "The x scale from either the source or graph used to calculate positions",
             "itemtype": "property",
             "name": "xScale",
@@ -2065,7 +2065,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 133,
+            "line": 146,
             "description": "The y scale from either the source or graph used to calculate positions",
             "itemtype": "property",
             "name": "yScale",
@@ -2077,7 +2077,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 143,
+            "line": 158,
             "description": "The JQuery offset of the graph element",
             "itemtype": "property",
             "name": "graphOffset",
@@ -2089,7 +2089,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 157,
+            "line": 174,
             "description": "The center point at x. Use in case of requiring a center point \nand using ordinal scale.",
             "itemtype": "property",
             "name": "centerX",
@@ -2100,7 +2100,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 173,
+            "line": 192,
             "description": "The center point at y. Use in case of requiring a center point \nand using ordinal scale.",
             "itemtype": "property",
             "name": "centerY",
@@ -2111,7 +2111,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 189,
+            "line": 210,
             "description": "The x position of the nf-graph-content within the nf-graph",
             "itemtype": "property",
             "name": "_graphContentX",
@@ -2124,7 +2124,7 @@
         },
         {
             "file": "addon/utils/nf/graph-position.js",
-            "line": 197,
+            "line": 218,
             "description": "The y position of the nf-graph-content within the nf-graph",
             "itemtype": "property",
             "name": "_graphContentY",
@@ -2162,7 +2162,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 9,
+            "line": 10,
             "description": "The scroll top in pixels.",
             "itemtype": "property",
             "name": "scrollTop",
@@ -2174,7 +2174,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 17,
+            "line": 18,
             "description": "The scroll height of the element.",
             "itemtype": "property",
             "name": "scrollHeight",
@@ -2186,7 +2186,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 25,
+            "line": 26,
             "description": "The outer height of the element",
             "itemtype": "property",
             "name": "outerHeight",
@@ -2198,7 +2198,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 33,
+            "line": 34,
             "description": "The scroll left in pixels.",
             "itemtype": "property",
             "name": "scrollLeft",
@@ -2210,7 +2210,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 41,
+            "line": 42,
             "description": "The scroll width of the element.",
             "itemtype": "property",
             "name": "scrollWidth",
@@ -2222,7 +2222,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 49,
+            "line": 50,
             "description": "The outer width of the element",
             "itemtype": "property",
             "name": "outerWidth",
@@ -2234,7 +2234,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 57,
+            "line": 58,
             "description": "The calculated maximum value for scrollTop in pixels.",
             "itemtype": "property",
             "name": "scrollTopMax",
@@ -2246,7 +2246,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 67,
+            "line": 70,
             "description": "The calculated percentage, in decimals, of content scrolled.",
             "itemtype": "property",
             "name": "scrollTopPercentage",
@@ -2258,7 +2258,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 77,
+            "line": 82,
             "description": "The calculated maximum value for scrollTop in pixels.",
             "itemtype": "property",
             "name": "scrollLeftMax",
@@ -2270,7 +2270,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 87,
+            "line": 94,
             "description": "The calculated percentage, in decimals, of content scrolled.",
             "itemtype": "property",
             "name": "scrollLeftPercentage",
@@ -2282,7 +2282,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 97,
+            "line": 106,
             "description": "The component that fired the event",
             "itemtype": "property",
             "name": "source",
@@ -2294,7 +2294,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 105,
+            "line": 114,
             "description": "The optional data to send with the action",
             "itemtype": "property",
             "name": "data",
@@ -2305,7 +2305,7 @@
         },
         {
             "file": "addon/utils/nf/scroll-area-action-context.js",
-            "line": 112,
+            "line": 121,
             "description": "The original scroll event object",
             "itemtype": "property",
             "name": "originalEvent",
@@ -2684,7 +2684,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 142,
+            "line": 145,
             "description": "The name of the action to fire when a bar is clicked.",
             "itemtype": "property",
             "name": "barClick",
@@ -5103,43 +5103,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 193,
-            "description": "Function to create the tick values. Can be overriden to provide specific values.",
-            "itemtype": "method",
-            "name": "tickFactory",
-            "params": [
-                {
-                    "name": "xScale",
-                    "description": "a d3 scale function",
-                    "type": "Function"
-                },
-                {
-                    "name": "tickCount",
-                    "description": "the number of ticks desired",
-                    "type": "Number"
-                },
-                {
-                    "name": "uniqueXData",
-                    "description": "all x data represented, filted to be unique (used for ordinal cases)",
-                    "type": "Array"
-                },
-                {
-                    "name": "xScaleType",
-                    "description": "the scale type of the containing graph.",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "an array of domain values at which ticks should be placed.",
-                "type": "Array"
-            },
-            "class": "components.nf-x-axis",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-x-axis.js",
-            "line": 206,
+            "line": 201,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
@@ -5151,7 +5115,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 222,
+            "line": 209,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
@@ -5163,7 +5127,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 271,
+            "line": 255,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",
@@ -5346,7 +5310,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 204,
+            "line": 221,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
@@ -5358,7 +5322,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 212,
+            "line": 229,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
@@ -5370,7 +5334,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 262,
+            "line": 273,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
@@ -5618,15 +5582,15 @@
     "warnings": [
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:103"
+            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:111"
         },
         {
             "message": "replacing incorrect tag: function with method",
-            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:150"
+            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:158"
         },
         {
             "message": "replacing incorrect tag: params with param",
-            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:150"
+            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:158"
         }
     ]
 }

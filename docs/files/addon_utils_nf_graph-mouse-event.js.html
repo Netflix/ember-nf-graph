@@ -120,6 +120,10 @@
 import Ember from &#x27;ember&#x27;;
 import GraphPosition from &#x27;./graph-position&#x27;;
 import { getMousePoint } from &#x27;./svg-dom&#x27;;
+import computed from &#x27;ember-new-computed&#x27;;
+
+const { reads } = Ember.computed;
+
 /**
   An event context object generally returned by tracking events. Also used as
   &#x60;trackedData&#x60; in components such as &#x60;nf-line&#x60;, &#x60;nf-area&#x60; and &#x60;nf-bars&#x60;.
@@ -151,8 +155,10 @@ export default GraphPosition.extend({
     @readonly
     @private
   */
-  _mousePoint: Ember.computed(&#x27;originalEvent&#x27;, &#x27;graphContentElement&#x27;, function(){
-    return this._getMousePoint(this.get(&#x27;graphContentElement&#x27;), this.get(&#x27;originalEvent&#x27;));
+  _mousePoint: computed(&#x27;originalEvent&#x27;, &#x27;graphContentElement&#x27;, {
+    get() {
+      return this._getMousePoint(this.get(&#x27;graphContentElement&#x27;), this.get(&#x27;originalEvent&#x27;));
+    }
   }),
 
   /**
@@ -169,7 +175,7 @@ export default GraphPosition.extend({
     @type Number
     @readonly
   */
-  mouseX: Ember.computed.oneWay(&#x27;_mousePoint.x&#x27;),
+  mouseX: reads(&#x27;_mousePoint.x&#x27;),
 
   /**
     The mouse y position relative to the graph content
@@ -177,7 +183,7 @@ export default GraphPosition.extend({
     @type Number
     @readonly
   */
-  mouseY: Ember.computed.oneWay(&#x27;_mousePoint.y&#x27;),
+  mouseY: reads(&#x27;_mousePoint.y&#x27;),
 
   /**
     A positioning object for the mouse position
@@ -185,13 +191,15 @@ export default GraphPosition.extend({
     @type graph-position
     @readonly
   */
-  mousePosition: Ember.computed(&#x27;mouseX&#x27;, &#x27;mouseY&#x27;, &#x27;source&#x27;, &#x27;graph&#x27;, function(){
-    return GraphPosition.create({
-      graphX: this.get(&#x27;mouseX&#x27;),
-      graphY: this.get(&#x27;mouseY&#x27;),
-      source: this.get(&#x27;source&#x27;),
-      graphContentElement: this.get(&#x27;graphContentElement&#x27;),
-    });
+  mousePosition: computed(&#x27;mouseX&#x27;, &#x27;mouseY&#x27;, &#x27;source&#x27;, &#x27;graph&#x27;, {
+    get() {
+      return GraphPosition.create({
+        graphX: this.get(&#x27;mouseX&#x27;),
+        graphY: this.get(&#x27;mouseY&#x27;),
+        source: this.get(&#x27;source&#x27;),
+        graphContentElement: this.get(&#x27;graphContentElement&#x27;),
+      });
+    }
   }),
 
   /**
@@ -200,10 +208,12 @@ export default GraphPosition.extend({
     @type Array
     @readonly
   */
-  nearestDataPoint: Ember.computed(&#x27;source&#x27;, &#x27;mouse.graphX&#x27;, function() {
-    var mouseX = this.get(&#x27;mouseX&#x27;);
-    var source = this.get(&#x27;source&#x27;);
-    return source ? source.getDataNearXRange(mouseX) : undefined;
+  nearestDataPoint: computed(&#x27;source&#x27;, &#x27;mouse.graphX&#x27;, {
+    get() {
+      var mouseX = this.get(&#x27;mouseX&#x27;);
+      var source = this.get(&#x27;source&#x27;);
+      return source ? source.getDataNearXRange(mouseX) : undefined;
+    }
   }),
 
   /**
@@ -212,10 +222,12 @@ export default GraphPosition.extend({
     @property x
     @readonly
   */
-  x: Ember.computed(&#x27;nearestDataPoint&#x27;, function() {
-    var nearestDataPoint = this.get(&#x27;nearestDataPoint&#x27;);
-    this._x =  nearestDataPoint ? nearestDataPoint[0] : undefined;
-    return this._x;
+  x: computed(&#x27;nearestDataPoint&#x27;, {
+    get() {
+      var nearestDataPoint = this.get(&#x27;nearestDataPoint&#x27;);
+      this._x =  nearestDataPoint ? nearestDataPoint[0] : undefined;
+      return this._x;
+    }
   }),
 
   /**
@@ -224,10 +236,12 @@ export default GraphPosition.extend({
     @property y
     @readonly
   */
-  y: Ember.computed(&#x27;nearestDataPoint&#x27;, function() {
-    var nearestDataPoint = this.get(&#x27;nearestDataPoint&#x27;);
-    this._y = nearestDataPoint ? nearestDataPoint[1] : undefined;
-    return this._y;
+  y: computed(&#x27;nearestDataPoint&#x27;, {
+    get() {
+      var nearestDataPoint = this.get(&#x27;nearestDataPoint&#x27;);
+      this._y = nearestDataPoint ? nearestDataPoint[1] : undefined;
+      return this._y;
+    }
   }),
 
   /**
@@ -236,7 +250,7 @@ export default GraphPosition.extend({
     @property data
     @readonly
   */
-  data: Ember.computed.oneWay(&#x27;nearestDataPoint.data&#x27;),
+  data: reads(&#x27;nearestDataPoint.data&#x27;),
 });
     </pre>
 </div>

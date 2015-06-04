@@ -309,18 +309,13 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
 
-  /**
-    Function to create the tick values. Can be overriden to provide specific values.
-    @method tickFactory
-    @param xScale {Function} a d3 scale function
-    @param tickCount {Number} the number of ticks desired
-    @param uniqueXData {Array} all x data represented, filted to be unique (used for ordinal cases)
-    @param xScaleType {String} the scale type of the containing graph.
-    @return {Array} an array of domain values at which ticks should be placed.
-  */
-  tickFactory: function(xScale, tickCount, uniqueXData, xScaleType) {
-    return (xScaleType === &#x27;ordinal&#x27;) ? uniqueXData : xScale.ticks(tickCount);
-  },
+  tickData: Ember.computed(&#x27;xScale&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;uniqueXData&#x27;, &#x27;tickCount&#x27;, function(){
+    if(this.get(&#x27;graph.xScaleType&#x27;) === &#x27;ordinal&#x27;) {
+      return this.get(&#x27;uniqueXData&#x27;);
+    } else {
+      return this.get(&#x27;xScale&#x27;).ticks(this.get(&#x27;tickCount&#x27;));
+    }
+  }),
 
   /**
     A unique set of all x data on the graph
@@ -328,15 +323,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueXData: Ember.computed(&#x27;graph.xData.@each&#x27;, function(){
-    var xData = this.get(&#x27;graph.xData&#x27;);
-    return xData.reduce(function(unique, d) {
-      if(unique.indexOf(d) === -1) {
-        unique.push(d);
-      }
-      return unique;
-    }, []);
-  }),
+  uniqueXData: Ember.computed.uniq(&#x27;graph.xData&#x27;),
 
   /**
     The models for the ticks to display on the axis.
@@ -345,26 +332,23 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   ticks: Ember.computed(
-    &#x27;tickCount&#x27;,
     &#x27;xScale&#x27;,
     &#x27;tickPadding&#x27;,
     &#x27;tickLength&#x27;,
     &#x27;height&#x27;,
     &#x27;orient&#x27;,
     &#x27;tickFilter&#x27;,
+    &#x27;tickData&#x27;,
     &#x27;graph.xScaleType&#x27;,
-    &#x27;uniqueXData&#x27;,
     function(){
-      var tickCount = this.get(&quot;tickCount&quot;);
-      var xScale = this.get(&quot;xScale&quot;);
-      var tickPadding = this.get(&quot;tickPadding&quot;);
-      var tickLength = this.get(&quot;tickLength&quot;);
-      var height = this.get(&quot;height&quot;);
-      var orient = this.get(&quot;orient&quot;);
-      var tickFilter = this.get(&quot;tickFilter&quot;);
-      var xScaleType = this.get(&quot;graph.xScaleType&quot;);
-      var uniqueXData = this.get(&quot;uniqueXData&quot;);
-      var ticks = this.tickFactory(xScale, tickCount, uniqueXData, xScaleType);
+      var xScale = this.get(&#x27;xScale&#x27;);
+      var xScaleType = this.get(&#x27;graph.xScaleType&#x27;);
+      var tickPadding = this.get(&#x27;tickPadding&#x27;);
+      var tickLength = this.get(&#x27;tickLength&#x27;);
+      var height = this.get(&#x27;height&#x27;);
+      var orient = this.get(&#x27;orient&#x27;);
+      var tickFilter = this.get(&#x27;tickFilter&#x27;);
+      var ticks = this.get(&#x27;tickData&#x27;);
       var y1 = orient === &#x27;top&#x27; ? height : 0;
       var y2 = y1 + tickLength;
       var labely = orient === &#x27;top&#x27; ? (y1 - tickPadding) : (y1 + tickPadding);

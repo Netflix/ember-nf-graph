@@ -118,6 +118,7 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import computed from &#x27;ember-new-computed&#x27;;
 
 /**
   Action context event object for an nf-scroll-area scroll event.
@@ -179,8 +180,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollTopMax: Ember.computed(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;, function(){
-    return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
+  scrollTopMax: computed(&#x27;outerHeight&#x27;, &#x27;scrollHeight&#x27;, {
+    get() {
+      return this.get(&#x27;scrollHeight&#x27;) - this.get(&#x27;outerHeight&#x27;);
+    }
   }),
 
   /**
@@ -189,8 +192,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollTopPercentage: Ember.computed(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;, function() {
-    return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
+  scrollTopPercentage: computed(&#x27;scrollTop&#x27;, &#x27;scrollTopMax&#x27;, {
+    get() {
+      return this.get(&#x27;scrollTop&#x27;) / this.get(&#x27;scrollTopMax&#x27;);
+    }
   }),
   
   /**
@@ -199,8 +204,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollLeftMax: Ember.computed(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;, function(){
-    return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
+  scrollLeftMax: computed(&#x27;outerWidth&#x27;, &#x27;scrollWidth&#x27;, {
+    get() {
+      return this.get(&#x27;scrollWidth&#x27;) - this.get(&#x27;outerWidth&#x27;);
+    }
   }),
 
   /**
@@ -209,8 +216,10 @@ export default Ember.Object.extend({
     @type Number
     @readonly
   */
-  scrollLeftPercentage: Ember.computed(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;, function() {
-    return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
+  scrollLeftPercentage: computed(&#x27;scrollLeft&#x27;, &#x27;scrollLeftMax&#x27;, {
+    get() {
+      return this.get(&#x27;scrollLeft&#x27;) / this.get(&#x27;scrollLeftMax&#x27;);
+    }
   }),
 
   /**

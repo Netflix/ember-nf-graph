@@ -320,6 +320,23 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     return ticks;
   },
 
+  tickData: Ember.computed(&#x27;graph.yScaleType&#x27;, &#x27;uniqueYData&#x27;, &#x27;yScale&#x27;, &#x27;tickCount&#x27;, function(){
+    var yScaleType = this.get(&#x27;graph.yScaleType&#x27;);
+    if(yScaleType === &#x27;ordinal&#x27;) {
+      return this.get(&#x27;uniqueYData&#x27;);
+    } else {
+      var tickCount = this.get(&#x27;tickCount&#x27;);
+      var ticks = this.get(&#x27;yScale&#x27;).ticks(tickCount);
+      if (yScaleType === &#x27;log&#x27;) {
+        var step = Math.round(ticks.length / tickCount);
+        ticks = ticks.filter(function (tick, i) {
+          return i % step === 0;
+        });
+      }
+      return ticks;
+    }
+  }),
+
   /**
     All y data from the graph, filtered to unique values.
     @property uniqueYData
@@ -336,25 +353,19 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   ticks: Ember.computed(
     &#x27;yScale&#x27;,
-    &#x27;tickCount&#x27;,
-    &#x27;graph.yScaleType&#x27;,
     &#x27;tickPadding&#x27;,
     &#x27;axisLineX&#x27;,
     &#x27;tickLength&#x27;,
     &#x27;isOrientRight&#x27;,
     &#x27;tickFilter&#x27;,
-    &#x27;uniqueYData&#x27;,
     function(){
       var yScale = this.get(&#x27;yScale&#x27;);
-      var tickCount = this.get(&#x27;tickCount&#x27;);
-      var yScaleType = this.get(&#x27;graph.yScaleType&#x27;);
       var tickPadding = this.get(&#x27;tickPadding&#x27;);
       var axisLineX = this.get(&#x27;axisLineX&#x27;);
       var tickLength = this.get(&#x27;tickLength&#x27;);
       var isOrientRight = this.get(&#x27;isOrientRight&#x27;);
       var tickFilter = this.get(&#x27;tickFilter&#x27;);
-      var uniqueYData = this.get(&#x27;uniqueYData&#x27;);
-      var ticks = this.tickFactory(yScale, tickCount, uniqueYData, yScaleType);
+      var ticks = this.get(&#x27;tickData&#x27;);
       var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
       var x2 = axisLineX;
       var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
