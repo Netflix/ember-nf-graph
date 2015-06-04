@@ -18,7 +18,7 @@
 
 	{{#nf-graph-content}}
 		{{#nf-gg scaleZoomX=multiY scaleZoomY=multiY}}
-			{{nf-line selectable=1 selected=fooSelected data=lineData 
+			{{nf-line selectable=1 selected=fooSelected data=model.lineData 
 				trackedData=fooData
 				hoverData=fooHovered
 				trackingMode="snap-last"}}
@@ -31,7 +31,7 @@
 
 		{{!-- {{nf-svg-rect x=1 y=diffA width=2 height=diffB}} --}}
 		{{!-- 
-		{{#nf-plots data=lineData action="showData" scaleZoomY=multiY}}
+		{{#nf-plots data=model.lineData action="showData" scaleZoomY=multiY}}
 			<image xlink:href="http://upload.wikimedia.org/wikipedia/en/6/69/Ember.js_Logo_and_Mascot.png" 
 				x="0" y="0" width="40" height="40" transform="translate(-20 -20)"/>
 		{{/nf-plots}} --}}
@@ -89,9 +89,9 @@
 
 	{{#nf-graph-content}}
 		{{#nf-area-stack}}
-			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=area3  trackingMode="snap-last"}}
-			{{nf-area class="area2" selectable=1 interpolator="linear" data=area2  trackingMode="snap-last"}}
-			{{nf-area class="area1" selectable=1 interpolator="linear" data=area1  trackingMode="snap-last"}}
+			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=model.area3  trackingMode="snap-last"}}
+			{{nf-area class="area2" selectable=1 interpolator="linear" data=model.area2  trackingMode="snap-last"}}
+			{{nf-area class="area1" selectable=1 interpolator="linear" data=model.area1  trackingMode="snap-last"}}
 		{{/nf-area-stack}}
 		
 		{{nf-brush-selection left=brushLeft right=brushRight}}
@@ -112,6 +112,6 @@
 	<output>{{tracked2.y}}</output>
 </div>
 
-<button {{action 'appendAreaData' area1}}>area1</button>
-<button {{action 'appendAreaData' area2}}>area2</button>
-<button {{action 'appendAreaData' area3}}>area3</button>
+<button {{action 'appendAreaData' model.area1}}>area1</button>
+<button {{action 'appendAreaData' model.area2}}>area2</button>
+<button {{action 'appendAreaData' model.area3}}>area3</button>

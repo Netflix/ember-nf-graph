@@ -1,7 +1,9 @@
 import Ember from 'ember';
 import GraphMouseEvent from '../utils/nf/graph-mouse-event';
+import computed from 'ember-new-computed';
 
-var get = Ember.get;
+const get = Ember.get;
+const { or } = Ember.computed;
 
 /**
   Adds tracking dot functionality to a component such as {{#crossLink "components.nf-line"}}{{/crossLink}}
@@ -37,32 +39,38 @@ export default Ember.Mixin.create({
 
   trackingDotRadius: 2.5,
 
-  isShouldTrack: Ember.computed.or('isSelectedHoverMode', 'isHoverMode'),
+  isShouldTrack: or('isSelectedHoverMode', 'isHoverMode'),
 
-  isSelectedHoverMode: Ember.computed('trackingMode', function(){
-    var mode = this.get('trackingMode');
-    return mode === 'selected-hover' || mode === 'selected-snap-first' || mode === 'selected-snap-last';
+  isSelectedHoverMode: computed('trackingMode', {
+    get() {
+      var mode = this.get('trackingMode');
+      return mode === 'selected-hover' || mode === 'selected-snap-first' || mode === 'selected-snap-last';
+    }
   }),
 
-  isHoverMode: Ember.computed('trackingMode', function(){
-    var mode = this.get('trackingMode');
-    return mode === 'hover' || mode === 'snap-first' || mode === 'snap-last';
+  isHoverMode: computed('trackingMode', {
+    get() {
+      var mode = this.get('trackingMode');
+      return mode === 'hover' || mode === 'snap-first' || mode === 'snap-last';
+    }
   }),
 
   hoverData: null,
 
   isHovered: false,
 
-  showTrackingDot: Ember.computed('trackedData.x', 'trackedData.y', function(){
-    var trackedData = this.get('trackedData');
-    if(trackedData) {
-      var x = get(trackedData, 'x');
-      var y = get(trackedData, 'y');
-      return +x === +x && +y === +y;
+  showTrackingDot: computed('trackedData.x', 'trackedData.y', {
+    get() {
+      var trackedData = this.get('trackedData');
+      if(trackedData) {
+        var x = get(trackedData, 'x');
+        var y = get(trackedData, 'y');
+        return +x === +x && +y === +y;
+      }
     }
   }),
 
-  _updateHovered: Ember.observer('isShouldTrack', 'hoverData', function() {
+  _updateHovered: Ember.observer('isShouldTrack', 'hoverData', function(){
     if(this.get('isShouldTrack')) {
       this.set('trackedData', this.get('hoverData'));
     }
@@ -202,8 +210,10 @@ export default Ember.Mixin.create({
   */
   willTrack: null,
 
-  graphContentElement: Ember.computed('graph', function(){
-    return this.get('graph').$('.nf-graph-content')[0];
+  graphContentElement: computed('graph', {
+    get() {
+      return this.get('graph').$('.nf-graph-content')[0];
+    }
   }),
 
   /**

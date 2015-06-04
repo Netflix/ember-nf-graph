@@ -1,4 +1,7 @@
 import Ember from 'ember';
+import computed from 'ember-new-computed';
+
+const { reads } = Ember.computed;
 
 /**
   Position calculation class for nf-graph related events
@@ -25,17 +28,18 @@ export default Ember.Object.extend({
     @property graphX
     @type Number
   */
-  graphX: Ember.computed('x', 'xScale', function(key, value) {
-    if(arguments.length > 1) {
-      this._graphX = value;
-    } else {
+  graphX: computed('x', 'xScale', {
+    get() {
       var scale = this.get('xScale');
       if(scale) {
         var x = this.get('x');
         this._graphX = scale(x);
       }
+      return this._graphX || NaN;
+    },
+    set(key, value) {
+      return this._graphX = value || NaN;
     }
-    return this._graphX || NaN;
   }),
 
   /**
@@ -43,17 +47,18 @@ export default Ember.Object.extend({
     @property graphY
     @type Number
   */
-  graphY: Ember.computed('y', 'yScale', function(key, value) {
-    if(arguments.length > 1) {
-      this._graphY = value;
-    } else {
+  graphY: computed('y', 'yScale', {
+    get() {
       var scale = this.get('yScale');
       if(scale) {
         var y = this.get('y');
         this._graphY = scale(y);
       }
+      return this._graphY || NaN;
+    },
+    set(key, value) {
+      return this._graphY = value || NaN;
     }
-    return this._graphY || NaN;
   }),
 
   /**
@@ -61,17 +66,18 @@ export default Ember.Object.extend({
     @property x
     @type Number
   */
-  x: Ember.computed('graphX', 'xScale', function(key, value) {
-    if(arguments.length > 1) {
-      this._x = value;
-    } else {
+  x: computed('graphX', 'xScale', {
+    get() {
       var scale = this.get('xScale');
       if (scale && scale.invert){
         var graphX = this.get('graphX');
         this._x = scale.invert(graphX);
-      } 
+      }
+      return this._x || 0;
+    },
+    set(key, value) {
+      return this._x = value;
     }
-    return this._x || 0;
   }),
 
   /**
@@ -79,17 +85,18 @@ export default Ember.Object.extend({
     @property y
     @type Number
   */
-  y: Ember.computed('graphY', 'yScale', function(key, value) {
-    if(arguments.length > 1) {
-      this._y = value;
-    } else {
+  y: computed('graphY', 'yScale', {
+    get() {
       var scale = this.get('yScale');
       if (scale && scale.invert){
         var graphY = this.get('graphY');
         this._y = scale.invert(graphY);
-      } 
+      }
+      return this._y || 0;
+    },
+    set(key, value) {
+      return this._y = value;
     }
-    return this._y || 0;
   }),
 
   /**
@@ -97,12 +104,14 @@ export default Ember.Object.extend({
     @property pageX
     @type Number
   */
-  pageX: Ember.computed('graphX', 'graphOffset', 'graphContentX', function(){
-    var offset = this.get('graphOffset');
-    if(offset) {
-      var graphX = this.get('graphX') || 0;
-      var graphContentX = this.get('graphContentX') || 0;
-      return offset.left + graphX + graphContentX;
+  pageX: computed('graphX', 'graphOffset', 'graphContentX', {
+    get() {
+      var offset = this.get('graphOffset');
+      if(offset) {
+        var graphX = this.get('graphX') || 0;
+        var graphContentX = this.get('graphContentX') || 0;
+        return offset.left + graphX + graphContentX;
+      }
     }
   }),
 
@@ -111,12 +120,14 @@ export default Ember.Object.extend({
     @property pageY
     @type Number
   */
-  pageY: Ember.computed('graphY', 'graphOffset', 'graphContentY', function(){
-    var offset = this.get('graphOffset');
-    if(offset) {
-      var graphY = this.get('graphY') || 0;
-      var graphContentY = this.get('graphContentY') || 0;
-      return offset.top + graphY + graphContentY;
+  pageY: computed('graphY', 'graphOffset', 'graphContentY', {
+    get() {
+      var offset = this.get('graphOffset');
+      if(offset) {
+        var graphY = this.get('graphY') || 0;
+        var graphContentY = this.get('graphContentY') || 0;
+        return offset.top + graphY + graphContentY;
+      }
     }
   }),
 
@@ -126,8 +137,10 @@ export default Ember.Object.extend({
     @type d3.scale
     @readonly
   */
-  xScale: Ember.computed('graph.xScale', 'source.xScale', function(){
-    return this.get('source.xScale') || this.get('graph.xScale');
+  xScale: computed('graph.xScale', 'source.xScale', {
+    get() {
+      return this.get('source.xScale') || this.get('graph.xScale');
+    }
   }),
 
   /**
@@ -136,8 +149,10 @@ export default Ember.Object.extend({
     @type d3.scale
     @readonly
   */
-  yScale: Ember.computed('graph.yScale', 'source.yScale', function(){
-    return this.get('source.yScale') || this.get('graph.yScale');
+  yScale: computed('graph.yScale', 'source.yScale', {
+    get() {
+      return this.get('source.yScale') || this.get('graph.yScale');
+    }
   }),
 
   /**
@@ -146,11 +161,13 @@ export default Ember.Object.extend({
     @type Object
     @readonly
   */
-  graphOffset: Ember.computed('graph', function(){
-    var graph = this.get('graph');
-    if(graph) {
-      var content = graph.$('.nf-graph-content');
-      return content ? content.offset() : undefined;
+  graphOffset: computed('graph', {
+    get() {
+      var graph = this.get('graph');
+      if(graph) {
+        var content = graph.$('.nf-graph-content');
+        return content ? content.offset() : undefined;
+      }
     }
   }),
 
@@ -160,14 +177,16 @@ export default Ember.Object.extend({
     @property centerX
     @type Number
   */
-  centerX: Ember.computed('xScale', 'graphX', function(){
-    var scale = this.get('xScale');
-    var graphX = this.get('graphX');
-    if(scale && scale.rangeBand) {
-      var rangeBand = scale.rangeBand();
-      return graphX + (rangeBand / 2);
+  centerX: computed('xScale', 'graphX', {
+    get() {
+      var scale = this.get('xScale');
+      var graphX = this.get('graphX');
+      if(scale && scale.rangeBand) {
+        var rangeBand = scale.rangeBand();
+        return graphX + (rangeBand / 2);
+      }
+      return graphX;
     }
-    return graphX;
   }),
 
   /**
@@ -176,14 +195,16 @@ export default Ember.Object.extend({
     @property centerY
     @type Number
   */
-  centerY: Ember.computed('yScale', 'graphY', function(){
-    var scale = this.get('yScale');
-    var graphY = this.get('graphY');
-    if(scale && scale.rangeBand) {
-      var rangeBand = scale.rangeBand();
-      return graphY + (rangeBand / 2);
+  centerY: computed('yScale', 'graphY', {
+    get() {
+      var scale = this.get('yScale');
+      var graphY = this.get('graphY');
+      if(scale && scale.rangeBand) {
+        var rangeBand = scale.rangeBand();
+        return graphY + (rangeBand / 2);
+      }
+      return graphY;
     }
-    return graphY;
   }),
 
   /**
@@ -192,7 +213,7 @@ export default Ember.Object.extend({
     @type Number
     @private
   */
-  graphContentX: Ember.computed.oneWay('graph.graphX'),
+  graphContentX: reads('graph.graphX'),
 
   /**
     The y position of the nf-graph-content within the nf-graph
@@ -200,5 +221,5 @@ export default Ember.Object.extend({
     @type Number
     @private
   */
-  graphContentY: Ember.computed.oneWay('graph.graphY'),
+  graphContentY: reads('graph.graphY'),
 });

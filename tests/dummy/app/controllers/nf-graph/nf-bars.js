@@ -1,10 +1,10 @@
 import Ember from 'ember';
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   poop: null,
   
   data: Ember.computed(function() {
-    var arr = [];
+    var arr = Ember.A();
     var str = 'abcdefg';
     
     for(var i = 0, len = str.length; i < len; i++) {

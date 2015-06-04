@@ -1,6 +1,7 @@
 import Ember from 'ember';
 import parsePropertyExpr from '../utils/parse-property-expression';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
+import computed from 'ember-new-computed';
 
 var noop = function(){};
 
@@ -58,9 +59,11 @@ export default Ember.Mixin.create({
     @type Function
     @readonly
   */
-  xPropFn: Ember.computed('xprop', function() {
-    var xprop = this.get('xprop');
-    return xprop ? parsePropertyExpr(xprop) : noop;
+  xPropFn: computed('xprop', {
+    get() {
+      var xprop = this.get('xprop');
+      return xprop ? parsePropertyExpr(xprop) : noop;
+    }
   }),
 
   /**
@@ -71,9 +74,11 @@ export default Ember.Mixin.create({
     @type Function
     @readonly
   */
-  yPropFn: Ember.computed('yprop', function() {
-    var yprop = this.get('yprop');
-    return yprop ? parsePropertyExpr(yprop) : noop;
+  yPropFn: computed('yprop', {
+    get() {
+      var yprop = this.get('yprop');
+      return yprop ? parsePropertyExpr(yprop) : noop;
+    }
   }),
 
   /**
@@ -105,43 +110,45 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  sortedData: Ember.computed('data.@each', 'xPropFn', 'yPropFn', function(){
-    var data = this.get('data');
-    var xPropFn = this.get('xPropFn');
-    var yPropFn = this.get('yPropFn');
-    var xScaleType = this.get('xScaleType');
+  sortedData: computed('data.@each', 'xPropFn', 'yPropFn', {
+    get() {
+      var data = this.get('data');
+      var xPropFn = this.get('xPropFn');
+      var yPropFn = this.get('yPropFn');
+      var xScaleType = this.get('xScaleType');
 
-    if(!data) {
-      return null;
-    }
+      if(!data) {
+        return null;
+      }
 
-    var mapped = data.map(function(d, i) {
-      var item = [xPropFn(d), yPropFn(d)];
-      item.data = d;
-      item.origIndex = i;
-      return item;
-    });
-
-    if(xScaleType !== 'ordinal') {
-      mapped.sort(function(a, b) {
-        var ax = a[0];
-        var bx = b[0];
-        return ax === bx ? 0 : (ax > bx) ? 1 : -1;
+      var mapped = data.map(function(d, i) {
+        var item = [xPropFn(d), yPropFn(d)];
+        item.data = d;
+        item.origIndex = i;
+        return item;
       });
+
+      if(xScaleType !== 'ordinal') {
+        mapped.sort(function(a, b) {
+          var ax = a[0];
+          var bx = b[0];
+          return ax === bx ? 0 : (ax > bx) ? 1 : -1;
+        });
+      }
+
+      var xData = [];
+      var yData = [];
+      
+      mapped.forEach(function(d) {
+        xData.push(d[0]);
+        yData.push(d[1]);
+      });
+
+      this.set('xData', xData);
+      this.set('yData', yData);
+      
+      return mapped;
     }
-
-    var xData = [];
-    var yData = [];
-    
-    mapped.forEach(function(d) {
-      xData.push(d[0]);
-      yData.push(d[1]);
-    });
-
-    this.set('xData', xData);
-    this.set('yData', yData);
-    
-    return mapped;
   }),
 
   /**
@@ -151,35 +158,37 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  renderedData: Ember.computed(
+  renderedData: computed(
     'sortedData.@each',
     'graph.xScaleType',
     'graph.xMin',
     'graph.xMax',
-    function(){
-      var sortedData = this.get('sortedData');
-      var graph = this.get('graph');
-      var xScaleType = graph.get('xScaleType');
-      var xMin = graph.get('xMin');
-      var xMax = graph.get('xMax');
+    {
+      get() {
+        var sortedData = this.get('sortedData');
+        var graph = this.get('graph');
+        var xScaleType = graph.get('xScaleType');
+        var xMin = graph.get('xMin');
+        var xMax = graph.get('xMax');
 
-      if(!sortedData || sortedData.length === 0) {
-        return [];
+        if(!sortedData || sortedData.length === 0) {
+          return [];
+        }
+
+        if(xScaleType === 'ordinal') {
+          return sortedData.slice();
+        }
+
+        return sortedData.filter(function(d, i) {
+          var x = d[0];
+          var prev = sortedData[i-1];
+          var next = sortedData[i+1];
+          var prevX = prev ? prev[0] : null;
+          var nextX = next ? next[0] : null;
+
+          return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
+        });
       }
-
-      if(xScaleType === 'ordinal') {
-        return sortedData.slice();
-      }
-
-      return sortedData.filter(function(d, i) {
-        var x = d[0];
-        var prev = sortedData[i-1];
-        var next = sortedData[i+1];
-        var prevX = prev ? prev[0] : null;
-        var nextX = next ? next[0] : null;
-
-        return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
-      });
     }
   ),
 
@@ -190,18 +199,20 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  firstVisibleData: Ember.computed('renderedData.@each', 'xMin', function() {
-    var renderedData = this.get('renderedData');
-    var xMin = this.get('xMin');
-    var first = renderedData[0];
-    if(first && xMin > first[0] && renderedData.length > 1) {
-      first = renderedData[1];
+  firstVisibleData: computed('renderedData.@each', 'xMin', {
+    get() {
+      var renderedData = this.get('renderedData');
+      var xMin = this.get('xMin');
+      var first = renderedData[0];
+      if(first && xMin > first[0] && renderedData.length > 1) {
+        first = renderedData[1];
+      }
+      return first ? {
+        x: first[0],
+        y: first[1],
+        data: first.data,
+      } : null;
     }
-    return first ? {
-      x: first[0],
-      y: first[1],
-      data: first.data,
-    } : null;
   }),
 
 
@@ -212,18 +223,20 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  lastVisibleData: Ember.computed('renderedData.@each', 'xMax', function(){
-    var renderedData = this.get('renderedData');
-    var xMax = this.get('xMax');
-    var last = renderedData[renderedData.length - 1];
-    if(last && xMax < last[0] && renderedData.length > 1) {
-      last = renderedData[renderedData.length - 2];
+  lastVisibleData: computed('renderedData.@each', 'xMax', {
+    get() {
+      var renderedData = this.get('renderedData');
+      var xMax = this.get('xMax');
+      var last = renderedData[renderedData.length - 1];
+      if(last && xMax < last[0] && renderedData.length > 1) {
+        last = renderedData[renderedData.length - 2];
+      }
+      return last ? {
+        x: last[0],
+        y: last[1],
+        data: last.data,
+      }: null;
     }
-    return last ? {
-      x: last[0],
-      y: last[1],
-      data: last.data,
-    }: null;
   }),
 
   getDataNearXRange: function(rangeX) {

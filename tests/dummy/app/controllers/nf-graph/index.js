@@ -23,7 +23,7 @@ function range(count) {
   return output;
 }
 
-export default Ember.ObjectController.extend({
+export default Ember.Controller.extend({
   graphWidth: 400,
   graphHeight: 300,
 

@@ -14,15 +14,17 @@ export default Ember.Route.extend({
 
 export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
   var p = yStart || 0;
-  return range(count).map(function(d, i) {
-    var y = p + (Math.random() * variance) - (variance / 2);
-    y = Math.min(yMax, Math.max(yMin, y));
-    p = y;
-    return {
-      x: xStart + i,
-      y: y
-    };
-  });
+  return Ember.A(
+    range(count).map(function(d, i) {
+      var y = p + (Math.random() * variance) - (variance / 2);
+      y = Math.min(yMax, Math.max(yMin, y));
+      p = y;
+      return {
+        x: xStart + i,
+        y: y
+      };
+    })
+  );
 }
 
 function range(count) {

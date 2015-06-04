@@ -1,22 +1,26 @@
 import Ember from 'ember';
+import computed from 'ember-new-computed';
 
 var scaleProperty = function(scaleKey, zoomKey, offsetKey){
-  return Ember.computed(scaleKey, zoomKey, offsetKey, function() {
-    var scale = this.get(scaleKey);
-    var zoom = this.get(zoomKey);
-    var offset = this.get(offsetKey);
-    if(zoom === 1 && offset === 0) {
-      return scale;
+  return computed(scaleKey, zoomKey, offsetKey, {
+    get() {
+      var scale = this.get(scaleKey);
+      var zoom = this.get(zoomKey);
+
+      var offset = this.get(offsetKey);
+      if(zoom === 1 && offset === 0) {
+        return scale;
+      }
+
+      var copy = scale.copy();
+      var domain = copy.domain();
+      copy.domain([domain[0] / zoom, domain[1] / zoom]);
+
+      var range = copy.range();
+      copy.range([range[0] - offset, range[1] - offset]);
+
+      return copy;
     }
-
-    var copy = scale.copy();
-    var domain = copy.domain();
-    copy.domain([domain[0] / zoom, domain[1] / zoom]);
-
-    var range = copy.range();
-    copy.range([range[0] - offset, range[1] - offset]);
-
-    return copy;
   });
 };
 
@@ -57,11 +61,13 @@ export default Ember.Mixin.create({
     @type Number
     @default 1
   */
-  scaleZoomX: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._scaleZoomX = +value;
+  scaleZoomX: computed({
+    get() {
+      return this._scaleZoomX || 1;
+    },
+    set(key, value) {
+      return this._scaleZoomX = +value || 1;
     }
-    return this._scaleZoomX || 1;
   }),
 
   /**
@@ -70,11 +76,13 @@ export default Ember.Mixin.create({
     @type Number
     @default 1
   */
-  scaleZoomY: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._scaleZoomY = +value;
+  scaleZoomY: computed({
+    get() {
+      return this._scaleZoomY || 1;
+    },
+    set(key, value) {
+      return this._scaleZoomY = +value || 1;
     }
-    return this._scaleZoomY || 1;
   }),
 
   /**
@@ -83,11 +91,13 @@ export default Ember.Mixin.create({
     @type Number
     @default 0
   */
-  scaleOffsetX: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._scaleOffsetX = +value;
+  scaleOffsetX: computed({
+    get() {
+      return this._scaleOffsetX || 0;
+    },
+    set(key, value) {
+      return this._scaleOffsetX = +value || 0;
     }
-    return this._scaleOffsetX || 0;
   }),
 
   /**
@@ -96,11 +106,13 @@ export default Ember.Mixin.create({
     @type Number
     @default 0
   */
-  scaleOffsetY: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._scaleOffsetY = +value;
+  scaleOffsetY: computed({
+    get() {
+      return this._scaleOffsetY || 0;
+    },
+    set(key, value) {
+      return this._scaleOffsetY = +value || 0;
     }
-    return this._scaleOffsetY || 0;
   }),
 
   init() {
