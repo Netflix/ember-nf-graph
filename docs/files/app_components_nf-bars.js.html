@@ -237,6 +237,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       var graphHeight = this.get(&#x27;graphHeight&#x27;);
       var getBarClass = this.get(&#x27;getBarClass&#x27;);
       var groupOffsetX = this.get(&#x27;groupOffsetX&#x27;);
+      var getRectPath = this._getRectPath;
 
       if(!xScale || !yScale || !Ember.isArray(renderedData)) {
         return null;
@@ -245,7 +246,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       var w = this.get(&#x27;barWidth&#x27;);
 
       return Ember.A(renderedData.map(function(d) {
-        var barClass = &#x27;nf-bars-bar&#x27; + getBarClass ? &#x27; &#x27; + getBarClass(d.data) : &#x27;&#x27;;
+        var barClass = &#x27;nf-bars-bar&#x27; + (getBarClass ? &#x27; &#x27; + getBarClass(d.data) : &#x27;&#x27;);
         var x = normalizeScale(xScale, d[0]) + groupOffsetX;
         var y = normalizeScale(yScale, d[1]);
         var h = graphHeight - y;
@@ -257,6 +258,8 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }));
     }
   ),
+
+  _getRectPath: getRectPath,
 
   /**
     The name of the action to fire when a bar is clicked.

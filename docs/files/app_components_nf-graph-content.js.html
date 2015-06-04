@@ -199,7 +199,7 @@ export default Ember.Component.extend(HasGraphParent, {
     var height = this.get(&#x27;height&#x27;);
 
     if(!ticks || ticks.length === 0) {
-      return [];
+      return Ember.A();
     }
 
     var sorted = ticks.slice().sort(function(a, b) {

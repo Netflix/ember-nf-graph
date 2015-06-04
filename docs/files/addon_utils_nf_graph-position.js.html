@@ -118,6 +118,9 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
+import computed from &#x27;ember-new-computed&#x27;;
+
+const { reads } = Ember.computed;
 
 /**
   Position calculation class for nf-graph related events
@@ -144,17 +147,18 @@ export default Ember.Object.extend({
     @property graphX
     @type Number
   */
-  graphX: Ember.computed(&#x27;x&#x27;, &#x27;xScale&#x27;, function(key, value) {
-    if(arguments.length &gt; 1) {
-      this._graphX = value;
-    } else {
+  graphX: computed(&#x27;x&#x27;, &#x27;xScale&#x27;, {
+    get() {
       var scale = this.get(&#x27;xScale&#x27;);
       if(scale) {
         var x = this.get(&#x27;x&#x27;);
         this._graphX = scale(x);
       }
+      return this._graphX || NaN;
+    },
+    set(key, value) {
+      return this._graphX = value || NaN;
     }
-    return this._graphX || NaN;
   }),
 
   /**
@@ -162,17 +166,18 @@ export default Ember.Object.extend({
     @property graphY
     @type Number
   */
-  graphY: Ember.computed(&#x27;y&#x27;, &#x27;yScale&#x27;, function(key, value) {
-    if(arguments.length &gt; 1) {
-      this._graphY = value;
-    } else {
+  graphY: computed(&#x27;y&#x27;, &#x27;yScale&#x27;, {
+    get() {
       var scale = this.get(&#x27;yScale&#x27;);
       if(scale) {
         var y = this.get(&#x27;y&#x27;);
         this._graphY = scale(y);
       }
+      return this._graphY || NaN;
+    },
+    set(key, value) {
+      return this._graphY = value || NaN;
     }
-    return this._graphY || NaN;
   }),
 
   /**
@@ -180,17 +185,18 @@ export default Ember.Object.extend({
     @property x
     @type Number
   */
-  x: Ember.computed(&#x27;graphX&#x27;, &#x27;xScale&#x27;, function(key, value) {
-    if(arguments.length &gt; 1) {
-      this._x = value;
-    } else {
+  x: computed(&#x27;graphX&#x27;, &#x27;xScale&#x27;, {
+    get() {
       var scale = this.get(&#x27;xScale&#x27;);
       if (scale &amp;&amp; scale.invert){
         var graphX = this.get(&#x27;graphX&#x27;);
         this._x = scale.invert(graphX);
-      } 
+      }
+      return this._x || 0;
+    },
+    set(key, value) {
+      return this._x = value;
     }
-    return this._x || 0;
   }),
 
   /**
@@ -198,17 +204,18 @@ export default Ember.Object.extend({
     @property y
     @type Number
   */
-  y: Ember.computed(&#x27;graphY&#x27;, &#x27;yScale&#x27;, function(key, value) {
-    if(arguments.length &gt; 1) {
-      this._y = value;
-    } else {
+  y: computed(&#x27;graphY&#x27;, &#x27;yScale&#x27;, {
+    get() {
       var scale = this.get(&#x27;yScale&#x27;);
       if (scale &amp;&amp; scale.invert){
         var graphY = this.get(&#x27;graphY&#x27;);
         this._y = scale.invert(graphY);
-      } 
+      }
+      return this._y || 0;
+    },
+    set(key, value) {
+      return this._y = value;
     }
-    return this._y || 0;
   }),
 
   /**
@@ -216,12 +223,14 @@ export default Ember.Object.extend({
     @property pageX
     @type Number
   */
-  pageX: Ember.computed(&#x27;graphX&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentX&#x27;, function(){
-    var offset = this.get(&#x27;graphOffset&#x27;);
-    if(offset) {
-      var graphX = this.get(&#x27;graphX&#x27;) || 0;
-      var graphContentX = this.get(&#x27;graphContentX&#x27;) || 0;
-      return offset.left + graphX + graphContentX;
+  pageX: computed(&#x27;graphX&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentX&#x27;, {
+    get() {
+      var offset = this.get(&#x27;graphOffset&#x27;);
+      if(offset) {
+        var graphX = this.get(&#x27;graphX&#x27;) || 0;
+        var graphContentX = this.get(&#x27;graphContentX&#x27;) || 0;
+        return offset.left + graphX + graphContentX;
+      }
     }
   }),
 
@@ -230,12 +239,14 @@ export default Ember.Object.extend({
     @property pageY
     @type Number
   */
-  pageY: Ember.computed(&#x27;graphY&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentY&#x27;, function(){
-    var offset = this.get(&#x27;graphOffset&#x27;);
-    if(offset) {
-      var graphY = this.get(&#x27;graphY&#x27;) || 0;
-      var graphContentY = this.get(&#x27;graphContentY&#x27;) || 0;
-      return offset.top + graphY + graphContentY;
+  pageY: computed(&#x27;graphY&#x27;, &#x27;graphOffset&#x27;, &#x27;graphContentY&#x27;, {
+    get() {
+      var offset = this.get(&#x27;graphOffset&#x27;);
+      if(offset) {
+        var graphY = this.get(&#x27;graphY&#x27;) || 0;
+        var graphContentY = this.get(&#x27;graphContentY&#x27;) || 0;
+        return offset.top + graphY + graphContentY;
+      }
     }
   }),
 
@@ -245,8 +256,10 @@ export default Ember.Object.extend({
     @type d3.scale
     @readonly
   */
-  xScale: Ember.computed(&#x27;graph.xScale&#x27;, &#x27;source.xScale&#x27;, function(){
-    return this.get(&#x27;source.xScale&#x27;) || this.get(&#x27;graph.xScale&#x27;);
+  xScale: computed(&#x27;graph.xScale&#x27;, &#x27;source.xScale&#x27;, {
+    get() {
+      return this.get(&#x27;source.xScale&#x27;) || this.get(&#x27;graph.xScale&#x27;);
+    }
   }),
 
   /**
@@ -255,8 +268,10 @@ export default Ember.Object.extend({
     @type d3.scale
     @readonly
   */
-  yScale: Ember.computed(&#x27;graph.yScale&#x27;, &#x27;source.yScale&#x27;, function(){
-    return this.get(&#x27;source.yScale&#x27;) || this.get(&#x27;graph.yScale&#x27;);
+  yScale: computed(&#x27;graph.yScale&#x27;, &#x27;source.yScale&#x27;, {
+    get() {
+      return this.get(&#x27;source.yScale&#x27;) || this.get(&#x27;graph.yScale&#x27;);
+    }
   }),
 
   /**
@@ -265,11 +280,13 @@ export default Ember.Object.extend({
     @type Object
     @readonly
   */
-  graphOffset: Ember.computed(&#x27;graph&#x27;, function(){
-    var graph = this.get(&#x27;graph&#x27;);
-    if(graph) {
-      var content = graph.$(&#x27;.nf-graph-content&#x27;);
-      return content ? content.offset() : undefined;
+  graphOffset: computed(&#x27;graph&#x27;, {
+    get() {
+      var graph = this.get(&#x27;graph&#x27;);
+      if(graph) {
+        var content = graph.$(&#x27;.nf-graph-content&#x27;);
+        return content ? content.offset() : undefined;
+      }
     }
   }),
 
@@ -279,14 +296,16 @@ export default Ember.Object.extend({
     @property centerX
     @type Number
   */
-  centerX: Ember.computed(&#x27;xScale&#x27;, &#x27;graphX&#x27;, function(){
-    var scale = this.get(&#x27;xScale&#x27;);
-    var graphX = this.get(&#x27;graphX&#x27;);
-    if(scale &amp;&amp; scale.rangeBand) {
-      var rangeBand = scale.rangeBand();
-      return graphX + (rangeBand / 2);
+  centerX: computed(&#x27;xScale&#x27;, &#x27;graphX&#x27;, {
+    get() {
+      var scale = this.get(&#x27;xScale&#x27;);
+      var graphX = this.get(&#x27;graphX&#x27;);
+      if(scale &amp;&amp; scale.rangeBand) {
+        var rangeBand = scale.rangeBand();
+        return graphX + (rangeBand / 2);
+      }
+      return graphX;
     }
-    return graphX;
   }),
 
   /**
@@ -295,14 +314,16 @@ export default Ember.Object.extend({
     @property centerY
     @type Number
   */
-  centerY: Ember.computed(&#x27;yScale&#x27;, &#x27;graphY&#x27;, function(){
-    var scale = this.get(&#x27;yScale&#x27;);
-    var graphY = this.get(&#x27;graphY&#x27;);
-    if(scale &amp;&amp; scale.rangeBand) {
-      var rangeBand = scale.rangeBand();
-      return graphY + (rangeBand / 2);
+  centerY: computed(&#x27;yScale&#x27;, &#x27;graphY&#x27;, {
+    get() {
+      var scale = this.get(&#x27;yScale&#x27;);
+      var graphY = this.get(&#x27;graphY&#x27;);
+      if(scale &amp;&amp; scale.rangeBand) {
+        var rangeBand = scale.rangeBand();
+        return graphY + (rangeBand / 2);
+      }
+      return graphY;
     }
-    return graphY;
   }),
 
   /**
@@ -311,7 +332,7 @@ export default Ember.Object.extend({
     @type Number
     @private
   */
-  graphContentX: Ember.computed.oneWay(&#x27;graph.graphX&#x27;),
+  graphContentX: reads(&#x27;graph.graphX&#x27;),
 
   /**
     The y position of the nf-graph-content within the nf-graph
@@ -319,7 +340,7 @@ export default Ember.Object.extend({
     @type Number
     @private
   */
-  graphContentY: Ember.computed.oneWay(&#x27;graph.graphY&#x27;),
+  graphContentY: reads(&#x27;graph.graphY&#x27;),
 });
     </pre>
 </div>

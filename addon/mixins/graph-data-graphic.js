@@ -34,7 +34,7 @@ export default Ember.Mixin.create({
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     to use as x data to plot on the graph.
 
-    @property x
+    @property xprop
     @type String
     @default 'x'
   */
@@ -45,7 +45,7 @@ export default Ember.Mixin.create({
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     to use as y data to plot on the graph.
 
-    @property y
+    @property yprop
     @type String
     @default 'y'
   */

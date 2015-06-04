@@ -178,10 +178,6 @@ default styling applied to them to position them appropriately based off of orie
                                 <a href="#method_init">init</a>
 
                             </li>
-                            <li class="index-item method">
-                                <a href="#method_tickFactory">tickFactory</a>
-
-                            </li>
                     </ul>
                 </div>
 
@@ -305,121 +301,13 @@ default styling applied to them to position them appropriately based off of orie
     </div>
 
     <div class="description">
-        <p>&lt;p&gt;Initalization method that gets the &lt;code&gt;nf-graph&lt;/code&gt; parent
-and assigns it to &lt;code&gt;graph&lt;/code&gt;
-NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code>
+NOTE: all object that mixin and have init, must call super.init()</p>
 
     </div>
 
 
-
-
-</div>
-<div id="method_tickFactory" class="method item">
-    <h3 class="name"><code>tickFactory</code></h3>
-
-        <div class="args">
-            <span class="paren">(</span><ul class="args-list inline commas">
-                <li class="arg">
-                        <code>xScale</code>
-                </li>
-                <li class="arg">
-                        <code>tickCount</code>
-                </li>
-                <li class="arg">
-                        <code>uniqueXData</code>
-                </li>
-                <li class="arg">
-                        <code>xScaleType</code>
-                </li>
-            </ul><span class="paren">)</span>
-        </div>
-
-        <span class="returns-inline">
-            <span class="type">Array</span>
-        </span>
-
-
-
-
-
-
-
-    <div class="meta">
-                <p>
-                Defined in
-        <a href="../files/app_components_nf-x-axis.js.html#l193"><code>app&#x2F;components&#x2F;nf-x-axis.js:193</code></a>
-        </p>
-
-
-
-    </div>
-
-    <div class="description">
-        <p>Function to create the tick values. Can be overriden to provide specific values.</p>
-
-    </div>
-
-        <div class="params">
-            <h4>Parameters:</h4>
-
-            <ul class="params-list">
-                <li class="param">
-                        <code class="param-name">xScale</code>
-                        <span class="type">Function</span>
-
-
-                    <div class="param-description">
-                        <p>a d3 scale function</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">tickCount</code>
-                        <span class="type">Number</span>
-
-
-                    <div class="param-description">
-                        <p>the number of ticks desired</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">uniqueXData</code>
-                        <span class="type">Array</span>
-
-
-                    <div class="param-description">
-                        <p>all x data represented, filted to be unique (used for ordinal cases)</p>
-
-                    </div>
-
-                </li>
-                <li class="param">
-                        <code class="param-name">xScaleType</code>
-                        <span class="type">String</span>
-
-
-                    <div class="param-description">
-                        <p>the scale type of the containing graph.</p>
-
-                    </div>
-
-                </li>
-            </ul>
-        </div>
-
-        <div class="returns">
-            <h4>Returns:</h4>
-
-            <div class="returns-description">
-                        <span class="type">Array</span>:
-                    <p>an array of domain values at which ticks should be placed.</p>
-
-            </div>
-        </div>
 
 
 </div>
@@ -439,7 +327,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-x-axis.js.html#l271"><code>app&#x2F;components&#x2F;nf-x-axis.js:271</code></a>
+                            <a href="../files/app_components_nf-x-axis.js.html#l255"><code>app&#x2F;components&#x2F;nf-x-axis.js:255</code></a>
                             </p>
                     
                     
@@ -471,7 +359,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The parent graph for a component.&lt;/p&gt;</p>
+                            <p>The parent graph for a component.</p>
                     
                         </div>
                     
@@ -567,14 +455,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetX">mixins.graph-requires-scale-source</a>:
-                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l80"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:80</code></a>
+                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l88"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:88</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The offset, in pixels, for the x scale&lt;/p&gt;</p>
+                            <p>The offset, in pixels, for the x scale</p>
                     
                         </div>
                     
@@ -593,14 +481,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleOffsetY">mixins.graph-requires-scale-source</a>:
-                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l93"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:93</code></a>
+                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l103"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:103</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The offset, in pixels, for the y scale&lt;/p&gt;</p>
+                            <p>The offset, in pixels, for the y scale</p>
                     
                         </div>
                     
@@ -619,14 +507,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomX">mixins.graph-requires-scale-source</a>:
-                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l54"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:54</code></a>
+                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l58"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:58</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The zoom multiplier for the x scale&lt;/p&gt;</p>
+                            <p>The zoom multiplier for the x scale</p>
                     
                         </div>
                     
@@ -645,14 +533,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-requires-scale-source.html#property_scaleZoomY">mixins.graph-requires-scale-source</a>:
-                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l67"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:67</code></a>
+                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l73"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:73</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The zoom multiplier for the y scale&lt;/p&gt;</p>
+                            <p>The zoom multiplier for the y scale</p>
                     
                         </div>
                     
@@ -795,7 +683,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-x-axis.js.html#l222"><code>app&#x2F;components&#x2F;nf-x-axis.js:222</code></a>
+                            <a href="../files/app_components_nf-x-axis.js.html#l209"><code>app&#x2F;components&#x2F;nf-x-axis.js:209</code></a>
                             </p>
                     
                     
@@ -845,7 +733,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-x-axis.js.html#l206"><code>app&#x2F;components&#x2F;nf-x-axis.js:206</code></a>
+                            <a href="../files/app_components_nf-x-axis.js.html#l201"><code>app&#x2F;components&#x2F;nf-x-axis.js:201</code></a>
                             </p>
                     
                     
@@ -920,14 +808,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-requires-scale-source.html#property_xScale">mixins.graph-requires-scale-source</a>:
-                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l30"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:30</code></a>
+                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l34"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:34</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The x scale used by this component&lt;/p&gt;</p>
+                            <p>The x scale used by this component</p>
                     
                         </div>
                     
@@ -970,14 +858,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-requires-scale-source.html#property_yScale">mixins.graph-requires-scale-source</a>:
-                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l38"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:38</code></a>
+                            <a href="../files/addon_mixins_graph-requires-scale-source.js.html#l42"><code>addon&#x2F;mixins&#x2F;graph-requires-scale-source.js:42</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The y scale used by this component&lt;/p&gt;</p>
+                            <p>The y scale used by this component</p>
                     
                         </div>
                     
