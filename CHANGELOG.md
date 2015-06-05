@@ -1,5 +1,10 @@
 # Changelog
 
+### v1.0.0-beta.16
+
+- FIX [#64](https://github.com/Netflix/ember-nf-graph/issues/64) put `tickFactory` back where it belongs on the axes components
+- FIX [#59](https://github.com/Netflix/ember-nf-graph/pull/59) fixed an issue where nf-bars scales had the wrong domain values. 
+
 ### v1.0.0-beta.15
 
 - FIX Moved ember-new-computed to deps not devDeps
