@@ -11,6 +11,7 @@ moduleForComponent('nf-bars', {
 });
 
 test('bars layout', function(assert) {
+  console.log(this);
   var nfBars = this.subject();
 
   nfBars.setProperties({
