@@ -226,6 +226,10 @@ default styling applied to them to position them appropriately based off of orie
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_tickFactory">tickFactory</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_tickFilter">tickFilter</a>
 
                             </li>
@@ -301,9 +305,9 @@ default styling applied to them to position them appropriately based off of orie
     </div>
 
     <div class="description">
-        <p>Initalization method that gets the <code>nf-graph</code> parent
-and assigns it to <code>graph</code>
-NOTE: all object that mixin and have init, must call super.init()</p>
+        <p>&lt;p&gt;Initalization method that gets the &lt;code&gt;nf-graph&lt;/code&gt; parent
+and assigns it to &lt;code&gt;graph&lt;/code&gt;
+NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
 
     </div>
 
@@ -327,7 +331,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-x-axis.js.html#l255"><code>app&#x2F;components&#x2F;nf-x-axis.js:255</code></a>
+                            <a href="../files/app_components_nf-x-axis.js.html#l285"><code>app&#x2F;components&#x2F;nf-x-axis.js:285</code></a>
                             </p>
                     
                     
@@ -359,7 +363,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The parent graph for a component.</p>
+                            <p>&lt;p&gt;The parent graph for a component.&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -462,7 +466,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The offset, in pixels, for the x scale</p>
+                            <p>&lt;p&gt;The offset, in pixels, for the x scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -488,7 +492,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The offset, in pixels, for the y scale</p>
+                            <p>&lt;p&gt;The offset, in pixels, for the y scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -514,7 +518,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The zoom multiplier for the x scale</p>
+                            <p>&lt;p&gt;The zoom multiplier for the x scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -540,7 +544,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The zoom multiplier for the y scale</p>
+                            <p>&lt;p&gt;The zoom multiplier for the y scale&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -571,6 +575,41 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                             <p><strong>Default:</strong> 12</p>
+                    
+                    
+                    </div>
+                    <div id="property_tickFactory" class="property item">
+                        <h3 class="name"><code>tickFactory</code></h3>
+                        <span class="type">Function</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-x-axis.js.html#l193"><code>app&#x2F;components&#x2F;nf-x-axis.js:193</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>A method to call to override the default behavior of how ticks are created.</p>
+                    <p>The function signature should match:</p>
+                    <pre class="code prettyprint"><code>  // - scale: d3.Scale
+                      // - tickCount: number of ticks
+                      // - uniqueData: unique data points for the axis
+                      // - scaleType: string of &quot;linear&quot; or &quot;ordinal&quot;
+                      // returns: an array of tick values.
+                      function(scale, tickCount, uniqueData, scaleType) {
+                        return [100,200,300];
+                      }</code></pre>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>
@@ -683,7 +722,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-x-axis.js.html#l209"><code>app&#x2F;components&#x2F;nf-x-axis.js:209</code></a>
+                            <a href="../files/app_components_nf-x-axis.js.html#l239"><code>app&#x2F;components&#x2F;nf-x-axis.js:239</code></a>
                             </p>
                     
                     
@@ -733,7 +772,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-x-axis.js.html#l201"><code>app&#x2F;components&#x2F;nf-x-axis.js:201</code></a>
+                            <a href="../files/app_components_nf-x-axis.js.html#l231"><code>app&#x2F;components&#x2F;nf-x-axis.js:231</code></a>
                             </p>
                     
                     
@@ -815,7 +854,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The x scale used by this component</p>
+                            <p>&lt;p&gt;The x scale used by this component&lt;/p&gt;</p>
                     
                         </div>
                     
@@ -865,7 +904,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                         <div class="description">
-                            <p>The y scale used by this component</p>
+                            <p>&lt;p&gt;The y scale used by this component&lt;/p&gt;</p>
                     
                         </div>
                     

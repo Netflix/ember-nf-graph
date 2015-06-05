@@ -309,11 +309,41 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   width: Ember.computed.alias(&#x27;graph.graphWidth&#x27;),
 
-  tickData: Ember.computed(&#x27;xScale&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;uniqueXData&#x27;, &#x27;tickCount&#x27;, function(){
-    if(this.get(&#x27;graph.xScaleType&#x27;) === &#x27;ordinal&#x27;) {
-      return this.get(&#x27;uniqueXData&#x27;);
-    } else {
-      return this.get(&#x27;xScale&#x27;).ticks(this.get(&#x27;tickCount&#x27;));
+  /**
+    A method to call to override the default behavior of how ticks are created.
+
+    The function signature should match:
+
+          // - scale: d3.Scale
+          // - tickCount: number of ticks
+          // - uniqueData: unique data points for the axis
+          // - scaleType: string of &quot;linear&quot; or &quot;ordinal&quot;
+          // returns: an array of tick values.
+          function(scale, tickCount, uniqueData, scaleType) {
+            return [100,200,300];
+          }
+
+    @property tickFactory
+    @type {Function}
+    @default null
+  */
+  tickFactory: null,
+
+  tickData: Ember.computed(&#x27;xScale&#x27;, &#x27;graph.xScaleType&#x27;, &#x27;uniqueXData&#x27;, &#x27;tickCount&#x27;, &#x27;tickFactory&#x27;, function(){
+    var tickFactory = this.get(&#x27;tickFactory&#x27;);
+    var scale = this.get(&#x27;xScale&#x27;);
+    var uniqueData = this.get(&#x27;uniqueXData&#x27;);
+    var tickCount = this.get(&#x27;tickCount&#x27;);
+    var scaleType = this.get(&#x27;graph.xScaleType&#x27;);
+
+    if(tickFactory) {
+      return tickFactory(scale, tickCount, uniqueData, scaleType);
+    }
+    else if(scaleType === &#x27;ordinal&#x27;) {
+      return uniqueData;
+    } 
+    else {
+      return scale.ticks(tickCount);
     }
   }),
 

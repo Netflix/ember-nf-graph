@@ -225,15 +225,15 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   bars: Ember.computed(
     &#x27;xScale&#x27;,
     &#x27;yScale&#x27;,
-    &#x27;renderedData.[]&#x27;,
+    &#x27;renderedData.@each&#x27;,
     &#x27;graphHeight&#x27;,
     &#x27;getBarClass&#x27;,
     &#x27;barWidth&#x27;,
     &#x27;groupOffsetX&#x27;,
     function(){
+      var renderedData = this.get(&#x27;renderedData&#x27;);
       var xScale = this.get(&#x27;xScale&#x27;);
       var yScale = this.get(&#x27;yScale&#x27;);
-      var renderedData = this.get(&#x27;renderedData&#x27;);
       var graphHeight = this.get(&#x27;graphHeight&#x27;);
       var getBarClass = this.get(&#x27;getBarClass&#x27;);
       var groupOffsetX = this.get(&#x27;groupOffsetX&#x27;);

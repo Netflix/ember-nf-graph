@@ -301,33 +301,41 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   },
 
   /**
-    Function to create the tick values. Can be overriden to provide specific values.
-    @method tickFactory
-    @param yScale {Function} a d3 scale function
-    @param tickCount {Number} the number of ticks desired
-    @param uniqueYData {Array} all y data represented, filted to be unique (used for ordinal cases)
-    @param yScaleType {String} the scale type of the containing graph.
-    @return {Array} an array of domain values at which ticks should be placed.
+    A method to call to override the default behavior of how ticks are created.
+
+    The function signature should match:
+
+          // - scale: d3.Scale
+          // - tickCount: number of ticks
+          // - uniqueData: unique data points for the axis
+          // - scaleType: string of &quot;linear&quot; or &quot;ordinal&quot;
+          // returns: an array of tick values.
+          function(scale, tickCount, uniqueData, scaleType) {
+            return [100,200,300];
+          }
+
+    @property tickFactory
+    @type {Function}
+    @default null
   */
-  tickFactory: function(yScale, tickCount, uniqueYData, yScaleType) {
-    var ticks = yScaleType === &#x27;ordinal&#x27; ? uniqueYData : yScale.ticks(tickCount);
-    if (yScaleType === &#x27;log&#x27;) {
-      var step = Math.round(ticks.length / tickCount);
-      ticks = ticks.filter(function (tick, i) {
-        return i % step === 0;
-      });
-    }
-    return ticks;
-  },
+  tickFactory: null,
 
   tickData: Ember.computed(&#x27;graph.yScaleType&#x27;, &#x27;uniqueYData&#x27;, &#x27;yScale&#x27;, &#x27;tickCount&#x27;, function(){
-    var yScaleType = this.get(&#x27;graph.yScaleType&#x27;);
-    if(yScaleType === &#x27;ordinal&#x27;) {
-      return this.get(&#x27;uniqueYData&#x27;);
-    } else {
-      var tickCount = this.get(&#x27;tickCount&#x27;);
-      var ticks = this.get(&#x27;yScale&#x27;).ticks(tickCount);
-      if (yScaleType === &#x27;log&#x27;) {
+    var tickFactory = this.get(&#x27;tickFactory&#x27;);
+    var scale = this.get(&#x27;yScale&#x27;);
+    var uniqueData = this.get(&#x27;uniqueYData&#x27;);
+    var scaleType = this.get(&#x27;graph.yScaleType&#x27;);
+    var tickCount = this.get(&#x27;tickCount&#x27;);
+
+    if(tickFactory) {
+      return tickFactory(scale, tickCount, uniqueData, scaleType);
+    }
+    else if(scaleType === &#x27;ordinal&#x27;) {
+      return uniqueData;
+    } 
+    else {
+      var ticks = scale.ticks(tickCount);
+      if (scaleType === &#x27;log&#x27;) {
         var step = Math.round(ticks.length / tickCount);
         ticks = ticks.filter(function (tick, i) {
           return i % step === 0;

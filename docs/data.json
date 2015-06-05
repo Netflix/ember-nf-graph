@@ -5103,7 +5103,19 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 201,
+            "line": 193,
+            "description": "A method to call to override the default behavior of how ticks are created.\n\nThe function signature should match:\n\n      // - scale: d3.Scale\n      // - tickCount: number of ticks\n      // - uniqueData: unique data points for the axis\n      // - scaleType: string of \"linear\" or \"ordinal\"\n      // returns: an array of tick values.\n      function(scale, tickCount, uniqueData, scaleType) {\n        return [100,200,300];\n      }",
+            "itemtype": "property",
+            "name": "tickFactory",
+            "type": "{Function}",
+            "default": "null",
+            "class": "components.nf-x-axis",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-x-axis.js",
+            "line": 231,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
@@ -5115,7 +5127,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 209,
+            "line": 239,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
@@ -5127,7 +5139,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 255,
+            "line": 285,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",
@@ -5275,42 +5287,18 @@
         {
             "file": "app/components/nf-y-axis.js",
             "line": 184,
-            "description": "Function to create the tick values. Can be overriden to provide specific values.",
-            "itemtype": "method",
+            "description": "A method to call to override the default behavior of how ticks are created.\n\nThe function signature should match:\n\n      // - scale: d3.Scale\n      // - tickCount: number of ticks\n      // - uniqueData: unique data points for the axis\n      // - scaleType: string of \"linear\" or \"ordinal\"\n      // returns: an array of tick values.\n      function(scale, tickCount, uniqueData, scaleType) {\n        return [100,200,300];\n      }",
+            "itemtype": "property",
             "name": "tickFactory",
-            "params": [
-                {
-                    "name": "yScale",
-                    "description": "a d3 scale function",
-                    "type": "Function"
-                },
-                {
-                    "name": "tickCount",
-                    "description": "the number of ticks desired",
-                    "type": "Number"
-                },
-                {
-                    "name": "uniqueYData",
-                    "description": "all y data represented, filted to be unique (used for ordinal cases)",
-                    "type": "Array"
-                },
-                {
-                    "name": "yScaleType",
-                    "description": "the scale type of the containing graph.",
-                    "type": "String"
-                }
-            ],
-            "return": {
-                "description": "an array of domain values at which ticks should be placed.",
-                "type": "Array"
-            },
+            "type": "{Function}",
+            "default": "null",
             "class": "components.nf-y-axis",
             "module": "utils/nf/svg-dom",
             "namespace": "components"
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 221,
+            "line": 229,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
@@ -5322,7 +5310,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 229,
+            "line": 237,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
@@ -5334,7 +5322,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 273,
+            "line": 281,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
