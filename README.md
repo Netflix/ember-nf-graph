@@ -64,7 +64,7 @@ export default Ember.Route.extend({
 This set of Ember components requires [Ember-CLI](http://ember-cli.com) 0.2.0 or higher and
 [Ember](http://emberjs.com) 1.10.0 or higher.
 
-To install, simply run `ember install:addon ember-nf-graph`, or `npm install -D ember-nf-graph` 
+To install, simply run `ember install ember-nf-graph`, or `npm install -D ember-nf-graph` 
 
 ## Documentation
 
