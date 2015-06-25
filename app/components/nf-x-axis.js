@@ -23,7 +23,7 @@ import layout from '../templates/components/nf-x-axis';
   ### Example
 
         {{#nf-graph width=500 height=300}}
-          {{#nf-x-axis height=40}}
+          {{#nf-x-axis height=40 as |tick|}}
             <text>x is {{tick.value}}</text>
           {{/nf-x-axis}}
         {{/nf-graph}}
@@ -40,8 +40,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   layout: layout,
   template: null,
-
-  useDefaultTemplate: Ember.computed.equal('template', null),
 
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],
@@ -100,7 +98,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @default null
     @example
 
-          {{#nf-x-axis tickFilter=myFilter}}
+          {{#nf-x-axis tickFilter=myFilter as |tick|}}
             <text>{{tick.value}}</text>
           {{/nf-x-axis}}
 
@@ -179,7 +177,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   init() {
     this._super(...arguments);
     this.set('graph.xAxis', this);
-    Ember.deprecate('Non-block form of tick is deprecated. Please add `as |tick|` to your template.', this.get('template.blockParams'));
   },
 
   /**
