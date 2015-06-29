@@ -1,8 +1,8 @@
-<rect class="nf-brush-selection-overlay" x="0" y="0" {{bind-attr width=leftX height=graphHeight}}></rect>
-<rect class="nf-brush-selection-overlay" y="0" {{bind-attr x=rightX width=rightWidth height=graphHeight}}></rect>
+<rect class="nf-brush-selection-overlay" x="0" y="0" width="{{leftX}}" height="{{graphHeight}}"></rect>
+<rect class="nf-brush-selection-overlay" y="0" x="{{rightX}}" width="{{rightWidth}}" height="{{graphHeight}}"></rect>
 
-<line class="nf-brush-selection-line" y1="0" {{bind-attr x1=leftX x2=leftX y2=graphHeight}}></line>
-<line class="nf-brush-selection-line" y1="0" {{bind-attr x1=rightX x2=rightX y2=graphHeight}}></line>
+<line class="nf-brush-selection-line" y1="0" x1="{{leftX}}" x2="{{leftX}}" y2="{{graphHeight}}"></line>
+<line class="nf-brush-selection-line" y1="0" x1="{{rightX}}" x2="{{rightX}}" y2="{{graphHeight}}"></line>
 
 <g class="nf-brush-selection-left-display">
 	<rect class="nf-brush-selection-left-text-bg"></rect>

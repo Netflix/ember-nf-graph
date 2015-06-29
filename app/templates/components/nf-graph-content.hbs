@@ -1,11 +1,11 @@
-<rect x=0 y=0 class="background" {{bind-attr width=width height=height}}></rect>
+<rect x=0 y=0 class="background" width="{{width}}" height="{{height}}"></rect>
 
 
   {{#if graph.hasData}}
     {{#if graph.showLanes}}
       <g class="nf-grid-lanes">
         {{#each lane in gridLanes}}
-          <rect {{bind-attr x=lane.x y=lane.y width=width height=lane.height }}></rect>
+          <rect x="{{lane.x}}" y="{{lane.y}}" width="{{width}}" height="{{lane.height}}"></rect>
         {{/each}}
       </g>
     {{/if}}
@@ -13,7 +13,7 @@
     {{#if graph.showFrets}}
       <g class="nf-grid-frets">
         {{#each fret in frets}}
-          <line {{bind-attr x1=fret.x y1="0" x2=fret.x y2=height}}></line>
+          <line x1="{{fret.x}}" y1="0" x2="{{fret.x}}" y2="{{height}}"></line>
         {{/each}}
       </g>
     {{/if}}
