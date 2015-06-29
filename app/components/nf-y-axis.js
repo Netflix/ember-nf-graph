@@ -23,7 +23,7 @@ import layout from '../templates/components/nf-y-axis';
   ### Example
 
         {{#nf-graph width=500 height=300}}
-          {{#nf-y-axis width=40}}
+          {{#nf-y-axis width=40 as |tick|}}
             <text>y is {{tick.value}}</text>
           {{/nf-y-axis}}
         {{/nf-graph}}
@@ -39,8 +39,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   layout: layout,
   template: null,
-
-  useDefaultTemplate: Ember.computed.equal('template', null),
 
   /**
     The number of ticks to display
@@ -97,8 +95,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Function
     @default null
     @example
-  
-          {{#nf-y-axis tickFilter=myFilter}} 
+
+          {{#nf-y-axis tickFilter=myFilter as |tick|}}
             <text>{{tick.value}}</text>
           {{/nf-y-axis}}
   
@@ -178,7 +176,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   init() {
     this._super(...arguments);
     this.set('graph.yAxis', this);
-    Ember.deprecate('Non-block form of tick is deprecated. Please add `as |tick|` to your template.', this.get('template.blockParams'));
   },
 
   /**

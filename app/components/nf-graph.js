@@ -236,11 +236,11 @@ var maxProperty = function(axis, defaultTickCount) {
   ## More advanced example
 
        {{#nf-graph width=500 height=300}}
-         {{#nf-x-axis height="50"}}
+         {{#nf-x-axis height="50" as |tick|}}
            <text>{{tick.value}}</text>
          {{/nf-x-axis}}
-   
-         {{#nf-y-axis width="120"}}
+
+         {{#nf-y-axis width="120" as |tick|}}
            <text>{{tick.value}}</text>
          {{/nf-y-axis}}
    

@@ -1,18 +1,17 @@
-<line x1="0" {{bind-attr y1=axisLineY x2=width y2=axisLineY }}></line>
+<line x1="0" y1="{{axisLineY}}" x2="{{width}}" y2="{{axisLineY}}"></line>
 
 {{#each ticks as |tick|}}
   <g class="tick">
-    {{#if template.blockParams}}
-      {{#view 'nf-tick-label' controller=graph.parentController x=tick.x y=tick.labely}}
-        {{#if useDefaultTemplate}}
-          <text>{{tick.value}}</text>
-        {{else}}
-          {{yield tick}}
-        {{/if}}
-      {{/view}}
-   {{else}}
-      {{view 'nf-tick-label' controller=graph.parentController template=template x=tick.x y=tick.labely}}
+    {{#if hasBlock}}
+      {{#nf-tick-label x=tick.x y=tick.labely}}
+        {{yield tick}}
+      {{/nf-tick-label}}
+    {{else}}
+      {{#nf-tick-label x=tick.x y=tick.labely}}
+        <text>{{tick.value}}</text>
+      {{/nf-tick-label}}
     {{/if}}
-    <line {{bind-attr x1=tick.x y1=tick.y1 x2=tick.x y2=tick.y2}}></line>
+
+    <line x1="{{tick.x}}" y1="{{tick.y1}}" x2="{{tick.x}}" y2="{{tick.y2}}"></line>
   </g>
 {{/each}}
