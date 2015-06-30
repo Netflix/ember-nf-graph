@@ -81,14 +81,14 @@
 	}
 </style>
 
-{{#nf-graph  xLink=groupX selectMultiple=1
+{{#nf-graph yMaxMode="fixed" yMax=500 xLink=groupX selectMultiple=1
 	brushStartAction="brushStart"
 	brushAction="brush"
 	brushEndAction="brushEnd"
 	width=graphWidth height=graphHeight showFrets="true" showLanes="true" paddingTop=50}}
 
 	{{#nf-graph-content}}
-		{{#nf-area-stack}}
+		{{#nf-area-stack aggregate=1}}
 			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=model.area3  trackingMode="snap-last"}}
 			{{nf-area class="area2" selectable=1 interpolator="linear" data=model.area2  trackingMode="snap-last"}}
 			{{nf-area class="area1" selectable=1 interpolator="linear" data=model.area1  trackingMode="snap-last"}}

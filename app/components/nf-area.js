@@ -99,11 +99,11 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    areaData: Ember.computed('renderedData.@each', 'nextYData.@each', function(){
+    areaData: Ember.computed('renderedData.[]', 'nextYData.@each', 'stack.aggregate', function() {
       var nextYData = this.get('nextYData');
-      return this.get('renderedData').map(function(r, i) {
-        return [r[0], r[1], nextYData[i]];
-      });
+      var renderedData = this.get('renderedData');
+      var aggregate = this.get('stack.aggregate');
+      return renderedData.map(([x, y], i) => aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]]);
     }),
 
 
