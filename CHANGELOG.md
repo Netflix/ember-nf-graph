@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### v1.0.0-beta.17
 
 - ADD `nf-tracker` component. This is a component for templatable tracking dots
 - UPDATE `nf-line` and `nf-area` to use `nf-tracker` for tracking dot generation
