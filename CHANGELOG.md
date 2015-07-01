@@ -9,6 +9,7 @@
 - UPDATE switch templates to attribute syntax
 - UPDATE switch most computed properties to new computed property syntax
 - FIX nf-graph should work with Glimmer now (thanks @jamesarosen)
+- BREAKING graph components such as `nf-line` and `nf-area` will no longer sort your data for you. This is done for performance reasons.
 
 ### v1.0.0-beta.16
 
