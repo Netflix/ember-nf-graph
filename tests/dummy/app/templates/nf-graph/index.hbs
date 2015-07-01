@@ -29,6 +29,8 @@
 			{{nf-selection-box xMin=10 xMax=50 yMin=diffA yMax=diffB}}
 		{{/nf-gg}}
 
+		{{#nf-tracker data=model.lineData as |d|}}<text>{{d.x}}, {{d.y}}</text>{{/nf-tracker}}
+
 		{{!-- {{nf-svg-rect x=1 y=diffA width=2 height=diffB}} --}}
 		{{!-- 
 		{{#nf-plots data=model.lineData action="showData" scaleZoomY=multiY}}

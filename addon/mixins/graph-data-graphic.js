@@ -35,12 +35,16 @@ export default Ember.Mixin.create({
     get() {
       var yPropFn = this.get('yPropFn');
       var xPropFn = this.get('xPropFn');
-      return this.get('data').map(function(d, i) {
-        var item = [xPropFn(d), yPropFn(d)];
-        item.data = d;
-        item.origIndex = i;
-        return item;
-      });
+      var data = this.get('data');
+      if(Ember.isArray(data)) {
+        return data.map(function(d, i) {
+          var item = [xPropFn(d), yPropFn(d)];
+          item.data = d;
+          item.origIndex = i;
+          return item;
+        });
+      }
+      return [];
     }
   }),
 
