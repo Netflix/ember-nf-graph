@@ -78,32 +78,30 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    nextYData: Ember.computed('renderedData.length', 'nextArea.renderedData.@each', function(){
-      var nextData = this.get('nextArea.renderedData') || [];
-      var renderedDataLength = this.get('renderedData.length');
-        
-      var result = nextData.map(function(next) {
-        return next[1];
-      });
-      
-      while(result.length < renderedDataLength) {
-        result.push(-99999999);
+    nextYData: Ember.computed('data.length', 'nextArea.data.@each', function(){
+      var data = this.get('data');
+      if(!Array.isArray(data)) {
+        return [];
       }
-
-      return result;
+      var nextData = this.get('nextArea.mappedData');
+      return data.map((d, i) => (nextData && nextData[i] && nextData[i][1]) || Number.MIN_VALUE);
     }),
 
     /**
       The current rendered data "zipped" together with the nextYData.
-      @property areaData
+      @property mappedData
       @type Array
       @readonly
     */
-    areaData: Ember.computed('renderedData.[]', 'nextYData.@each', 'stack.aggregate', function() {
-      var nextYData = this.get('nextYData');
-      var renderedData = this.get('renderedData');
+    mappedData: Ember.computed('data.[]', 'xPropFn', 'yPropFn', 'nextYData.@each', 'stack.aggregate', function() {
+      var { data, xPropFn, yPropFn, nextYData } = this.getProperties('data', 'xPropFn', 'yPropFn', 'nextYData');
       var aggregate = this.get('stack.aggregate');
-      return renderedData.map(([x, y], i) => aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]]);
+      return data.map((d, i) => {
+        var x = xPropFn(d);
+        var y = yPropFn(d);
+        var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
+        return result;
+      });
     }),
 
 
@@ -126,9 +124,9 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type String
       @readonly
     */
-    d: Ember.computed('areaData', 'areaFn', function(){
-      var areaData = this.get('areaData');
-      return this.get('areaFn')(areaData);
+    d: Ember.computed('renderedData', 'areaFn', function(){
+      var renderedData = this.get('renderedData');
+      return this.get('areaFn')(renderedData);
     }),
 
     click: function(){

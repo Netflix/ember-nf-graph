@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 import {
   moduleForComponent,
   test
@@ -23,8 +25,10 @@ test('it renders', function(assert) {
 test('lineY pins to zero', function(assert) {
   var component = this.subject();
 
-  component.set('yScale', function() { return -99; });
-  component.set('y', 0);
+  Ember.run(() => {
+    component.set('yScale', function() { return -99; });
+    component.set('y', 0);
+  });
 
   assert.equal(component.get('lineY'), 0);
 });

@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 import {
   moduleForComponent,
   test
@@ -23,8 +25,10 @@ test('it renders', function(assert) {
 test('lineX pins to zero', function(assert) {
   var component = this.subject();
 
-  component.set('xScale', function() { return -99; });
-  component.set('x', 0);
+  Ember.run(() => {
+    component.set('xScale', function() { return -99; });
+    component.set('x', 0);
+  });
 
   assert.equal(component.get('lineX'), 0);
 });
