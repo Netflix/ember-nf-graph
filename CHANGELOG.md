@@ -1,5 +1,15 @@
 # Changelog
 
+### master
+
+- ADD `nf-tracker` component. This is a component for templatable tracking dots
+- UPDATE `nf-line` and `nf-area` to use `nf-tracker` for tracking dot generation
+- UPDATE improved performance on hover/tracking
+- UPDATE add `aggregate` to `nf-area-stack` component to sum y values of areas for stacking purposes. Defaults to `false` currently, but should be used with `true` from this point on, as it will default to `true` in future versions.
+- UPDATE switch templates to attribute syntax
+- UPDATE switch most computed properties to new computed property syntax
+- FIX nf-graph should work with Glimmer now (thanks @jamesarosen)
+
 ### v1.0.0-beta.16
 
 - FIX [#64](https://github.com/Netflix/ember-nf-graph/issues/64) put `tickFactory` back where it belongs on the axes components
