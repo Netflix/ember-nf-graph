@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -122,6 +123,8 @@ import parsePropertyExpr from &#x27;../utils/parse-property-expression&#x27;;
 import { nearestIndexTo } from &#x27;../utils/nf/array-helpers&#x27;;
 import computed from &#x27;ember-new-computed&#x27;;
 
+var { on, observer } = Ember;
+
 var noop = function(){};
 
 /**
@@ -147,6 +150,31 @@ export default Ember.Mixin.create({
     @default null
   */
   data: null,
+
+  mappedData: computed(&#x27;data.@each&#x27;, {
+    get() {
+      var yPropFn = this.get(&#x27;yPropFn&#x27;);
+      var xPropFn = this.get(&#x27;xPropFn&#x27;);
+      var data = this.get(&#x27;data&#x27;);
+      if(Ember.isArray(data)) {
+        return data.map(function(d, i) {
+          var item = [xPropFn(d), yPropFn(d)];
+          item.data = d;
+          item.origIndex = i;
+          return item;
+        });
+      }
+      return [];
+    }
+  }),
+
+  _triggerHasData: on(&#x27;init&#x27;, observer(&#x27;data.@each&#x27;, function(){
+    Ember.run.once(this, this._sendTriggerHasData);
+  })),
+
+  _sendTriggerHasData() {
+    this.trigger(&#x27;hasData&#x27;, this.get(&#x27;mappedData&#x27;));
+  },
 
   /**
     The path of the property on each object in 
@@ -201,107 +229,37 @@ export default Ember.Mixin.create({
   }),
 
   /**
-    Gets the x values from the &#x60;sortedData&#x60;.
-    @property xData
-    @type Array
-    @readonly
-  */
-  xData: null,
-
-  /**
-    Gets the y values from the &#x60;sortedData&#x60;
-    @property yData
-    @type Array
-    @readonly
-  */
-  yData: null,
-
-  /**
-    The sorted and mapped data pulled from {{#crossLink &quot;mixins.graph-data-graphic/data:property&quot;}}{{/crossLink}}
-    An array of arrays, structures as so:
-
-          [[x,y],[x,y],[x,y]];
-
-    ** each inner array also has a property &#x60;data&#x60; on it, containing the original data object **
-
-    When this property is computed, it also updates the &#x60;xData&#x60; and &#x60;yData&#x60; properties of the graphic.
-    @property sortedData
-    @type Array
-    @readonly
-  */
-  sortedData: computed(&#x27;data.@each&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, {
-    get() {
-      var data = this.get(&#x27;data&#x27;);
-      var xPropFn = this.get(&#x27;xPropFn&#x27;);
-      var yPropFn = this.get(&#x27;yPropFn&#x27;);
-      var xScaleType = this.get(&#x27;xScaleType&#x27;);
-
-      if(!data) {
-        return null;
-      }
-
-      var mapped = data.map(function(d, i) {
-        var item = [xPropFn(d), yPropFn(d)];
-        item.data = d;
-        item.origIndex = i;
-        return item;
-      });
-
-      if(xScaleType !== &#x27;ordinal&#x27;) {
-        mapped.sort(function(a, b) {
-          var ax = a[0];
-          var bx = b[0];
-          return ax === bx ? 0 : (ax &gt; bx) ? 1 : -1;
-        });
-      }
-
-      var xData = [];
-      var yData = [];
-      
-      mapped.forEach(function(d) {
-        xData.push(d[0]);
-        yData.push(d[1]);
-      });
-
-      this.set(&#x27;xData&#x27;, xData);
-      this.set(&#x27;yData&#x27;, yData);
-      
-      return mapped;
-    }
-  }),
-
-  /**
-    The list of data points from {{#crossLink &quot;mixins.graph-data-graphc/sortedData:property&quot;}}{{/crossLink}} that
+    The list of data points from {{#crossLink &quot;mixins.graph-data-graphc/mappedData:property&quot;}}{{/crossLink}} that
     fits within the x domain, plus up to one data point outside of that domain in each direction.
     @property renderedData
     @type Array
     @readonly
   */
   renderedData: computed(
-    &#x27;sortedData.@each&#x27;,
+    &#x27;mappedData.@each&#x27;,
     &#x27;graph.xScaleType&#x27;,
     &#x27;graph.xMin&#x27;,
     &#x27;graph.xMax&#x27;,
     {
       get() {
-        var sortedData = this.get(&#x27;sortedData&#x27;);
+        var mappedData = this.get(&#x27;mappedData&#x27;);
         var graph = this.get(&#x27;graph&#x27;);
         var xScaleType = graph.get(&#x27;xScaleType&#x27;);
         var xMin = graph.get(&#x27;xMin&#x27;);
         var xMax = graph.get(&#x27;xMax&#x27;);
 
-        if(!sortedData || sortedData.length === 0) {
+        if(!mappedData || mappedData.length === 0) {
           return [];
         }
 
         if(xScaleType === &#x27;ordinal&#x27;) {
-          return sortedData.slice();
+          return mappedData;
         }
 
-        return sortedData.filter(function(d, i) {
+        return mappedData.filter(function(d, i) {
           var x = d[0];
-          var prev = sortedData[i-1];
-          var next = sortedData[i+1];
+          var prev = mappedData[i-1];
+          var next = mappedData[i+1];
           var prevX = prev ? prev[0] : null;
           var nextX = next ? next[0] : null;
 

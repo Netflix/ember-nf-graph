@@ -3,6 +3,8 @@ import parsePropertyExpr from '../utils/parse-property-expression';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
 import computed from 'ember-new-computed';
 
+var { on, observer } = Ember;
+
 var noop = function(){};
 
 /**
@@ -28,6 +30,31 @@ export default Ember.Mixin.create({
     @default null
   */
   data: null,
+
+  mappedData: computed('data.@each', {
+    get() {
+      var yPropFn = this.get('yPropFn');
+      var xPropFn = this.get('xPropFn');
+      var data = this.get('data');
+      if(Ember.isArray(data)) {
+        return data.map(function(d, i) {
+          var item = [xPropFn(d), yPropFn(d)];
+          item.data = d;
+          item.origIndex = i;
+          return item;
+        });
+      }
+      return [];
+    }
+  }),
+
+  _triggerHasData: on('init', observer('data.@each', function(){
+    Ember.run.once(this, this._sendTriggerHasData);
+  })),
+
+  _sendTriggerHasData() {
+    this.trigger('hasData', this.get('mappedData'));
+  },
 
   /**
     The path of the property on each object in 
@@ -82,107 +109,37 @@ export default Ember.Mixin.create({
   }),
 
   /**
-    Gets the x values from the `sortedData`.
-    @property xData
-    @type Array
-    @readonly
-  */
-  xData: null,
-
-  /**
-    Gets the y values from the `sortedData`
-    @property yData
-    @type Array
-    @readonly
-  */
-  yData: null,
-
-  /**
-    The sorted and mapped data pulled from {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
-    An array of arrays, structures as so:
-
-          [[x,y],[x,y],[x,y]];
-
-    ** each inner array also has a property `data` on it, containing the original data object **
-
-    When this property is computed, it also updates the `xData` and `yData` properties of the graphic.
-    @property sortedData
-    @type Array
-    @readonly
-  */
-  sortedData: computed('data.@each', 'xPropFn', 'yPropFn', {
-    get() {
-      var data = this.get('data');
-      var xPropFn = this.get('xPropFn');
-      var yPropFn = this.get('yPropFn');
-      var xScaleType = this.get('xScaleType');
-
-      if(!data) {
-        return null;
-      }
-
-      var mapped = data.map(function(d, i) {
-        var item = [xPropFn(d), yPropFn(d)];
-        item.data = d;
-        item.origIndex = i;
-        return item;
-      });
-
-      if(xScaleType !== 'ordinal') {
-        mapped.sort(function(a, b) {
-          var ax = a[0];
-          var bx = b[0];
-          return ax === bx ? 0 : (ax > bx) ? 1 : -1;
-        });
-      }
-
-      var xData = [];
-      var yData = [];
-      
-      mapped.forEach(function(d) {
-        xData.push(d[0]);
-        yData.push(d[1]);
-      });
-
-      this.set('xData', xData);
-      this.set('yData', yData);
-      
-      return mapped;
-    }
-  }),
-
-  /**
-    The list of data points from {{#crossLink "mixins.graph-data-graphc/sortedData:property"}}{{/crossLink}} that
+    The list of data points from {{#crossLink "mixins.graph-data-graphc/mappedData:property"}}{{/crossLink}} that
     fits within the x domain, plus up to one data point outside of that domain in each direction.
     @property renderedData
     @type Array
     @readonly
   */
   renderedData: computed(
-    'sortedData.@each',
+    'mappedData.@each',
     'graph.xScaleType',
     'graph.xMin',
     'graph.xMax',
     {
       get() {
-        var sortedData = this.get('sortedData');
+        var mappedData = this.get('mappedData');
         var graph = this.get('graph');
         var xScaleType = graph.get('xScaleType');
         var xMin = graph.get('xMin');
         var xMax = graph.get('xMax');
 
-        if(!sortedData || sortedData.length === 0) {
+        if(!mappedData || mappedData.length === 0) {
           return [];
         }
 
         if(xScaleType === 'ordinal') {
-          return sortedData.slice();
+          return mappedData;
         }
 
-        return sortedData.filter(function(d, i) {
+        return mappedData.filter(function(d, i) {
           var x = d[0];
-          var prev = sortedData[i-1];
-          var next = sortedData[i+1];
+          var prev = mappedData[i-1];
+          var next = mappedData[i+1];
           var prevX = prev ? prev[0] : null;
           var nextX = next ? next[0] : null;
 

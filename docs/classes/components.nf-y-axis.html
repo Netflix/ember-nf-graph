@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -147,7 +148,7 @@ templating, along with the tick line. <code>&lt;text&gt;</code> tags within tick
 default styling applied to them to position them appropriately based off of orientation.</p>
 <h3>Example</h3>
 <pre class="code prettyprint"><code>  {{#nf-graph width=500 height=300}}
-    {{#nf-y-axis width=40}}
+    {{#nf-y-axis width=40 as |tick|}}
       &lt;text&gt;y is {{tick.value}}&lt;/text&gt;
     {{/nf-y-axis}}
   {{/nf-graph}}</code></pre>
@@ -328,7 +329,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l281"><code>app&#x2F;components&#x2F;nf-y-axis.js:281</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l278"><code>app&#x2F;components&#x2F;nf-y-axis.js:278</code></a>
                             </p>
                     
                     
@@ -379,7 +380,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l170"><code>app&#x2F;components&#x2F;nf-y-axis.js:170</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l168"><code>app&#x2F;components&#x2F;nf-y-axis.js:168</code></a>
                             </p>
                     
                     
@@ -404,7 +405,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l120"><code>app&#x2F;components&#x2F;nf-y-axis.js:120</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l118"><code>app&#x2F;components&#x2F;nf-y-axis.js:118</code></a>
                             </p>
                     
                     
@@ -429,7 +430,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l77"><code>app&#x2F;components&#x2F;nf-y-axis.js:77</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l75"><code>app&#x2F;components&#x2F;nf-y-axis.js:75</code></a>
                             </p>
                     
                     
@@ -559,7 +560,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l45"><code>app&#x2F;components&#x2F;nf-y-axis.js:45</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l43"><code>app&#x2F;components&#x2F;nf-y-axis.js:43</code></a>
                             </p>
                     
                     
@@ -585,7 +586,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l184"><code>app&#x2F;components&#x2F;nf-y-axis.js:184</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l181"><code>app&#x2F;components&#x2F;nf-y-axis.js:181</code></a>
                             </p>
                     
                     
@@ -620,7 +621,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l91"><code>app&#x2F;components&#x2F;nf-y-axis.js:91</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l89"><code>app&#x2F;components&#x2F;nf-y-axis.js:89</code></a>
                             </p>
                     
                     
@@ -639,7 +640,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                                 <h4>Example:</h4>
                     
                                 <div class="example-content">
-                                    <pre class="code prettyprint"><code>  {{#nf-y-axis tickFilter=myFilter}} 
+                                    <pre class="code prettyprint"><code>  {{#nf-y-axis tickFilter=myFilter as |tick|}}
                         &lt;text&gt;{{tick.value}}&lt;/text&gt;
                       {{/nf-y-axis}}
                     </code></pre>
@@ -665,7 +666,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l53"><code>app&#x2F;components&#x2F;nf-y-axis.js:53</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l51"><code>app&#x2F;components&#x2F;nf-y-axis.js:51</code></a>
                             </p>
                     
                     
@@ -691,7 +692,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l61"><code>app&#x2F;components&#x2F;nf-y-axis.js:61</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l59"><code>app&#x2F;components&#x2F;nf-y-axis.js:59</code></a>
                             </p>
                     
                     
@@ -717,7 +718,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l237"><code>app&#x2F;components&#x2F;nf-y-axis.js:237</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l234"><code>app&#x2F;components&#x2F;nf-y-axis.js:234</code></a>
                             </p>
                     
                     
@@ -742,7 +743,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l129"><code>app&#x2F;components&#x2F;nf-y-axis.js:129</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l127"><code>app&#x2F;components&#x2F;nf-y-axis.js:127</code></a>
                             </p>
                     
                     
@@ -767,7 +768,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l229"><code>app&#x2F;components&#x2F;nf-y-axis.js:229</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l226"><code>app&#x2F;components&#x2F;nf-y-axis.js:226</code></a>
                             </p>
                     
                     
@@ -792,7 +793,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l69"><code>app&#x2F;components&#x2F;nf-y-axis.js:69</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l67"><code>app&#x2F;components&#x2F;nf-y-axis.js:67</code></a>
                             </p>
                     
                     
@@ -818,7 +819,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l141"><code>app&#x2F;components&#x2F;nf-y-axis.js:141</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l139"><code>app&#x2F;components&#x2F;nf-y-axis.js:139</code></a>
                             </p>
                     
                     
@@ -868,7 +869,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-y-axis.js.html#l162"><code>app&#x2F;components&#x2F;nf-y-axis.js:162</code></a>
+                            <a href="../files/app_components_nf-y-axis.js.html#l160"><code>app&#x2F;components&#x2F;nf-y-axis.js:160</code></a>
                             </p>
                     
                     

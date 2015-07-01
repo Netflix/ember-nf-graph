@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -142,7 +143,7 @@ import layout from &#x27;../templates/components/nf-y-axis&#x27;;
   ### Example
 
         {{#nf-graph width=500 height=300}}
-          {{#nf-y-axis width=40}}
+          {{#nf-y-axis width=40 as |tick|}}
             &lt;text&gt;y is {{tick.value}}&lt;/text&gt;
           {{/nf-y-axis}}
         {{/nf-graph}}
@@ -158,8 +159,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   layout: layout,
   template: null,
-
-  useDefaultTemplate: Ember.computed.equal(&#x27;template&#x27;, null),
 
   /**
     The number of ticks to display
@@ -216,8 +215,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Function
     @default null
     @example
-  
-          {{#nf-y-axis tickFilter=myFilter}} 
+
+          {{#nf-y-axis tickFilter=myFilter as |tick|}}
             &lt;text&gt;{{tick.value}}&lt;/text&gt;
           {{/nf-y-axis}}
   
@@ -297,7 +296,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   init() {
     this._super(...arguments);
     this.set(&#x27;graph.yAxis&#x27;, this);
-    Ember.deprecate(&#x27;Non-block form of tick is deprecated. Please add &#x60;as |tick|&#x60; to your template.&#x27;, this.get(&#x27;template.blockParams&#x27;));
   },
 
   /**

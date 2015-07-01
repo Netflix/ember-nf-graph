@@ -594,15 +594,31 @@ export default Ember.Component.extend({
   */
   yMaxMode: 'auto',
 
+  dataExtents: Ember.computed('graphics.@each.data', function(){
+    var graphics = this.get('graphics');
+    return graphics.reduce((c, x) => c.concat(x.get('mappedData')), []).reduce((extents, [x, y]) => {
+      extents.xMin = extents.xMin < x ? extents.xMin : x;
+      extents.xMax = extents.xMax > x ? extents.xMax : x;
+      extents.yMin = extents.yMin < y ? extents.yMin : y;
+      extents.yMax = extents.yMax > y ? extents.yMax : y;
+      return extents;
+    }, {
+      xMin: Number.MAX_VALUE,
+      xMax: Number.MIN_VALUE,
+      yMin: Number.MAX_VALUE,
+      yMax: Number.MIN_VALUE
+    })
+  }),
+
   /**
     Gets the highest and lowest x values of the graphed data in a two element array.
     @property xDataExtent
     @type Array
     @readonly
   */
-  xDataExtent: Ember.computed('xData', function(){
-    var xData = this.get('xData');
-    return xData ? d3.extent(xData) : [null, null];
+  xDataExtent: Ember.computed('dataExtents', function(){
+    var { xMin, xMax } = this.get('dataExtents');
+    return [xMin, xMax];
   }),
 
   /**
@@ -611,9 +627,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  yDataExtent: Ember.computed('yData', function(){
-    var yData = this.get('yData');
-    return yData ? d3.extent(yData) : [null, null];
+  yDataExtent: Ember.computed('dataExtents', function(){
+    var { yMin, yMax } = this.get('dataExtents');
+    return [yMin, yMax];
   }),
 
   /**
@@ -746,6 +762,7 @@ export default Ember.Component.extend({
   registerGraphic: function (graphic) {
     var graphics = this.get('graphics');
     graphics.pushObject(graphic);
+    graphic.on('hasData', this, this.updateExtents);
   },
 
   /**
@@ -754,10 +771,16 @@ export default Ember.Component.extend({
     @param graphic {Ember.Component} The component to unregister
    */
   unregisterGraphic: function(graphic) {
+    graphic.off('hasData', this, this.updateExtents);
     var graphics = this.get('graphics');
     graphics.removeObject(graphic);
   },
   
+  updateExtents(data) {
+    this.get('xDataExtent');
+    this.get('yDataExtent');
+  },
+
   /**
     The y range of the graph in pixels. The min and max pixel values
     in an array form.

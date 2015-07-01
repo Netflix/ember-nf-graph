@@ -1,3 +1,5 @@
+import Ember from 'ember';
+
 import {
   moduleForComponent,
   test
@@ -11,30 +13,32 @@ moduleForComponent('nf-bars', {
 });
 
 test('bars layout', function(assert) {
-  var nfBars = this.subject();
+  var bars;
 
-  nfBars.setProperties({
-    xScale: x => { 
-      switch(x) {
-        case 'a':
-          return 0;
-        case 'b':
-          return 10;
-        case 'c':
-          return 20;
-      }
-    },
-    yScale: x => x,
-    renderedData: [ ['a', 10], ['b', 5], ['c', 1] ],
-    graphHeight: 10,
-    getBarClass: () => 'testClass',
-    barWidth: 10,
-    groupOffsetX: 30,
-    _getRectPath: (...args) => args
+  Ember.run(() => {
+    var nfBars = this.subject({
+        xScale: x => { 
+          switch(x) {
+            case 'a':
+              return 0;
+            case 'b':
+              return 10;
+            case 'c':
+              return 20;
+          }
+        },
+        yScale: x => x,
+        renderedData: [ ['a', 10], ['b', 5], ['c', 1] ],
+        graphHeight: 10,
+        getBarClass: () => 'testClass',
+        barWidth: 10,
+        groupOffsetX: 30,
+        _getRectPath: (...args) => args
+      });
+
+      bars = nfBars.get('bars');
   });
-
-  var bars = nfBars.get('bars');
-
+  
   assert.deepEqual(bars, [{
     path: [30, 10, 10, 0],
     className: 'nf-bars-bar testClass',

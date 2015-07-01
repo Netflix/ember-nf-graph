@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -197,31 +198,29 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    nextYData: Ember.computed(&#x27;renderedData.length&#x27;, &#x27;nextArea.renderedData.@each&#x27;, function(){
-      var nextData = this.get(&#x27;nextArea.renderedData&#x27;) || [];
-      var renderedDataLength = this.get(&#x27;renderedData.length&#x27;);
-        
-      var result = nextData.map(function(next) {
-        return next[1];
-      });
-      
-      while(result.length &lt; renderedDataLength) {
-        result.push(-99999999);
+    nextYData: Ember.computed(&#x27;data.length&#x27;, &#x27;nextArea.data.@each&#x27;, function(){
+      var data = this.get(&#x27;data&#x27;);
+      if(!Array.isArray(data)) {
+        return [];
       }
-
-      return result;
+      var nextData = this.get(&#x27;nextArea.mappedData&#x27;);
+      return data.map((d, i) =&gt; (nextData &amp;&amp; nextData[i] &amp;&amp; nextData[i][1]) || Number.MIN_VALUE);
     }),
 
     /**
       The current rendered data &quot;zipped&quot; together with the nextYData.
-      @property areaData
+      @property mappedData
       @type Array
       @readonly
     */
-    areaData: Ember.computed(&#x27;renderedData.@each&#x27;, &#x27;nextYData.@each&#x27;, function(){
-      var nextYData = this.get(&#x27;nextYData&#x27;);
-      return this.get(&#x27;renderedData&#x27;).map(function(r, i) {
-        return [r[0], r[1], nextYData[i]];
+    mappedData: Ember.computed(&#x27;data.[]&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, &#x27;nextYData.@each&#x27;, &#x27;stack.aggregate&#x27;, function() {
+      var { data, xPropFn, yPropFn, nextYData } = this.getProperties(&#x27;data&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, &#x27;nextYData&#x27;);
+      var aggregate = this.get(&#x27;stack.aggregate&#x27;);
+      return data.map((d, i) =&gt; {
+        var x = xPropFn(d);
+        var y = yPropFn(d);
+        var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
+        return result;
       });
     }),
 
@@ -245,9 +244,9 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type String
       @readonly
     */
-    d: Ember.computed(&#x27;areaData&#x27;, &#x27;areaFn&#x27;, function(){
-      var areaData = this.get(&#x27;areaData&#x27;);
-      return this.get(&#x27;areaFn&#x27;)(areaData);
+    d: Ember.computed(&#x27;renderedData&#x27;, &#x27;areaFn&#x27;, function(){
+      var renderedData = this.get(&#x27;renderedData&#x27;);
+      return this.get(&#x27;areaFn&#x27;)(renderedData);
     }),
 
     click: function(){

@@ -20,6 +20,7 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-svg-line",
         "components.nf-svg-path",
         "components.nf-svg-rect",
+        "components.nf-tracker",
         "components.nf-vertical-line",
         "components.nf-x-axis",
         "components.nf-y-axis",

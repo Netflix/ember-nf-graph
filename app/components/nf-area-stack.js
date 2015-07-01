@@ -35,6 +35,22 @@ export default Ember.Component.extend({
   isAreaStack: true,
 
   /**
+    Whether or not to add the values together to create the stacked area
+    @property aggregate
+    @type {boolean}
+    @default false
+  */
+  aggregate: Ember.computed(function(key, value) {
+    if(arguments.length > 1) {
+      this._aggregate = value;
+    } else if(typeof this._aggregate === 'undefined') {
+      Ember.warn('nf-area-stack.aggregate must be set. Currently defaulting to `false` but will default to `true` in the future.')
+      this._aggregate = false;
+    }
+    return this._aggregate;
+  }),
+
+  /**
     The collection of `nf-area` components under this stack.
     @property areas
     @type Array

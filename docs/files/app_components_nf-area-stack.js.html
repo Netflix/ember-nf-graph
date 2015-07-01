@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -152,6 +153,22 @@ export default Ember.Component.extend({
     @readonly
   */
   isAreaStack: true,
+
+  /**
+    Whether or not to add the values together to create the stacked area
+    @property aggregate
+    @type {boolean}
+    @default false
+  */
+  aggregate: Ember.computed(function(key, value) {
+    if(arguments.length &gt; 1) {
+      this._aggregate = value;
+    } else if(typeof this._aggregate === &#x27;undefined&#x27;) {
+      Ember.warn(&#x27;nf-area-stack.aggregate must be set. Currently defaulting to &#x60;false&#x60; but will default to &#x60;true&#x60; in the future.&#x27;)
+      this._aggregate = false;
+    }
+    return this._aggregate;
+  }),
 
   /**
     The collection of &#x60;nf-area&#x60; components under this stack.

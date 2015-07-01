@@ -392,6 +392,17 @@
                 "components": 1
             }
         },
+        "app/components/nf-tracker.js": {
+            "name": "app/components/nf-tracker.js",
+            "modules": {},
+            "classes": {
+                "components.nf-tracker": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "components": 1
+            }
+        },
         "app/components/nf-vertical-line.js": {
             "name": "app/components/nf-vertical-line.js",
             "modules": {},
@@ -501,6 +512,7 @@
                 "components.nf-svg-line": 1,
                 "components.nf-svg-path": 1,
                 "components.nf-svg-rect": 1,
+                "components.nf-tracker": 1,
                 "components.nf-vertical-line": 1,
                 "components.nf-x-axis": 1,
                 "components.nf-y-axis": 1,
@@ -544,12 +556,13 @@
             "extension_for": [
                 "components.nf-area",
                 "components.nf-bars",
-                "components.nf-line"
+                "components.nf-line",
+                "components.nf-tracker"
             ],
             "module": "utils/nf/array-helpers",
             "namespace": "mixins",
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 8,
+            "line": 10,
             "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}",
             "extends": "Ember.Mixin"
         },
@@ -595,6 +608,7 @@
                 "components.nf-svg-line",
                 "components.nf-svg-path",
                 "components.nf-svg-rect",
+                "components.nf-tracker",
                 "components.nf-vertical-line",
                 "components.nf-x-axis",
                 "components.nf-y-axis",
@@ -661,6 +675,7 @@
                 "components.nf-svg-line",
                 "components.nf-svg-path",
                 "components.nf-svg-rect",
+                "components.nf-tracker",
                 "components.nf-vertical-line",
                 "components.nf-x-axis",
                 "components.nf-y-axis",
@@ -912,7 +927,7 @@
             "namespace": "components",
             "file": "app/components/nf-graph.js",
             "line": 221,
-            "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n     {{#nf-graph width=100 height=50}}\n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n     {{#nf-graph width=500 height=300}}\n       {{#nf-x-axis height=\"50\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-x-axis}}\n \n       {{#nf-y-axis width=\"120\"}}\n         <text>{{tick.value}}</text>\n       {{/nf-y-axis}}\n \n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present.",
+            "description": "A container component for building complex Cartesian graphs.\n\n## Minimal example\n\n     {{#nf-graph width=100 height=50}}\n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above will create a simple 100x50 graph, with no axes, and a single line\nplotting the data it finds on each object in the array `lineData` at properties\n`foo` and `bar` for x and y values respectively.\n\n## More advanced example\n\n     {{#nf-graph width=500 height=300}}\n       {{#nf-x-axis height=\"50\" as |tick|}}\n         <text>{{tick.value}}</text>\n       {{/nf-x-axis}}\n\n       {{#nf-y-axis width=\"120\" as |tick|}}\n         <text>{{tick.value}}</text>\n       {{/nf-y-axis}}\n \n       {{#nf-graph-content}}\n         {{nf-line data=lineData xprop=\"foo\" yprop=\"bar\"}}\n       {{/nf-graph-content}}\n     {{/nf-graph}}\n\nThe above example will create a 500x300 graph with both axes visible. The graph will not \nrender either axis unless its component is present.",
             "extends": "Ember.Component"
         },
         "components.nf-horizontal-line": {
@@ -1132,6 +1147,25 @@
                 "mixins.graph-selectable-graphic"
             ]
         },
+        "components.nf-tracker": {
+            "name": "components.nf-tracker",
+            "shortname": "components.nf-tracker",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "utils/nf/svg-dom",
+            "namespace": "components",
+            "file": "app/components/nf-tracker.js",
+            "line": 11,
+            "description": "A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.",
+            "uses": [
+                "mixins.graph-has-graph-parent",
+                "mixins.graph-data-graphic",
+                "mixins.graph-requires-scale-source"
+            ]
+        },
         "components.nf-vertical-line": {
             "name": "components.nf-vertical-line",
             "shortname": "components.nf-vertical-line",
@@ -1163,7 +1197,7 @@
             "namespace": "components",
             "file": "app/components/nf-x-axis.js",
             "line": 7,
-            "description": "A component for adding a templated x axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the\nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-x-axis` class.\nA `orient-top` or `orient-bottom` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some\ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}",
+            "description": "A component for adding a templated x axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the\nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-x-axis` class.\nA `orient-top` or `orient-bottom` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some\ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-x-axis height=40 as |tick|}}\n          <text>x is {{tick.value}}</text>\n        {{/nf-x-axis}}\n      {{/nf-graph}}",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
@@ -1182,7 +1216,7 @@
             "namespace": "components",
             "file": "app/components/nf-y-axis.js",
             "line": 7,
-            "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-y-axis` class.\nA `orient-left` or `orient-right` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-y-axis width=40}}\n          <text>y is {{tick.value}}</text>\n        {{/nf-y-axis}}\n      {{/nf-graph}}",
+            "description": "A component for adding a templated y axis to an `nf-graph` component.\nAll items contained within this component are used to template each tick mark on the \nrendered graph. Tick values are supplied to the inner scope of this component on the\nview template via `tick`.\n\n### Styling\n\nThe main container will have a `nf-y-axis` class.\nA `orient-left` or `orient-right` container will be applied to the container\ndepending on the `orient` setting.\n\nTicks are positioned via a `<g>` tag, that will contain whatever is passed into it via\ntemplating, along with the tick line. `<text>` tags within tick templates do have some \ndefault styling applied to them to position them appropriately based off of orientation.\n\n### Example\n\n      {{#nf-graph width=500 height=300}}\n        {{#nf-y-axis width=40 as |tick|}}\n          <text>y is {{tick.value}}</text>\n        {{/nf-y-axis}}\n      {{/nf-graph}}",
             "uses": [
                 "mixins.graph-has-graph-parent",
                 "mixins.graph-requires-scale-source"
@@ -1241,7 +1275,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 23,
+            "line": 25,
             "description": "Gets or sets the data used by the component to plot itself.",
             "itemtype": "property",
             "name": "data",
@@ -1252,7 +1286,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 32,
+            "line": 59,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as x data to plot on the graph.",
             "itemtype": "property",
             "name": "xprop",
@@ -1263,7 +1297,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 43,
+            "line": 70,
             "description": "The path of the property on each object in \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nto use as y data to plot on the graph.",
             "itemtype": "property",
             "name": "yprop",
@@ -1274,7 +1308,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 54,
+            "line": 81,
             "description": "The function to get the x value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "xPropFn",
@@ -1285,7 +1319,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 69,
+            "line": 96,
             "description": "The function to get the y value from each \n{{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}} object",
             "itemtype": "property",
             "name": "yPropFn",
@@ -1296,41 +1330,8 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 84,
-            "description": "Gets the x values from the `sortedData`.",
-            "itemtype": "property",
-            "name": "xData",
-            "type": "Array",
-            "readonly": "",
-            "class": "mixins.graph-data-graphic",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-data-graphic.js",
-            "line": 92,
-            "description": "Gets the y values from the `sortedData`",
-            "itemtype": "property",
-            "name": "yData",
-            "type": "Array",
-            "readonly": "",
-            "class": "mixins.graph-data-graphic",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-data-graphic.js",
-            "line": 100,
-            "description": "The sorted and mapped data pulled from {{#crossLink \"mixins.graph-data-graphic/data:property\"}}{{/crossLink}}\nAn array of arrays, structures as so:\n\n      [[x,y],[x,y],[x,y]];\n\n** each inner array also has a property `data` on it, containing the original data object **\n\nWhen this property is computed, it also updates the `xData` and `yData` properties of the graphic.",
-            "itemtype": "property",
-            "name": "sortedData",
-            "type": "Array",
-            "readonly": "",
-            "class": "mixins.graph-data-graphic",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-data-graphic.js",
-            "line": 154,
-            "description": "The list of data points from {{#crossLink \"mixins.graph-data-graphc/sortedData:property\"}}{{/crossLink}} that\nfits within the x domain, plus up to one data point outside of that domain in each direction.",
+            "line": 111,
+            "description": "The list of data points from {{#crossLink \"mixins.graph-data-graphc/mappedData:property\"}}{{/crossLink}} that\nfits within the x domain, plus up to one data point outside of that domain in each direction.",
             "itemtype": "property",
             "name": "renderedData",
             "type": "Array",
@@ -1340,7 +1341,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 195,
+            "line": 152,
             "description": "The first element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "firstSortedData",
@@ -1351,7 +1352,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 219,
+            "line": 176,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
@@ -2459,6 +2460,18 @@
         {
             "file": "app/components/nf-area-stack.js",
             "line": 37,
+            "description": "Whether or not to add the values together to create the stacked area",
+            "itemtype": "property",
+            "name": "aggregate",
+            "type": "{boolean}",
+            "default": "false",
+            "class": "components.nf-area-stack",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-area-stack.js",
+            "line": 53,
             "description": "The collection of `nf-area` components under this stack.",
             "itemtype": "property",
             "name": "areas",
@@ -2470,7 +2483,7 @@
         },
         {
             "file": "app/components/nf-area-stack.js",
-            "line": 47,
+            "line": 63,
             "description": "Registers an area component with this stack. Also links areas to one\nanother by setting `nextArea` on each area component.",
             "itemtype": "method",
             "name": "registerArea",
@@ -2487,7 +2500,7 @@
         },
         {
             "file": "app/components/nf-area-stack.js",
-            "line": 65,
+            "line": 81,
             "description": "Unregisters an area component from this stack. Also updates next\nand previous links.",
             "itemtype": "method",
             "name": "unregisterArea",
@@ -2552,10 +2565,10 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 96,
+            "line": 90,
             "description": "The current rendered data \"zipped\" together with the nextYData.",
             "itemtype": "property",
-            "name": "areaData",
+            "name": "mappedData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-area",
@@ -2564,7 +2577,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 110,
+            "line": 108,
             "description": "Gets the area function to use to create the area SVG path data",
             "itemtype": "property",
             "name": "areaFn",
@@ -2576,7 +2589,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 123,
+            "line": 121,
             "description": "The SVG path data for the area",
             "itemtype": "property",
             "name": "d",
@@ -3364,7 +3377,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 597,
+            "line": 613,
             "description": "Gets the highest and lowest x values of the graphed data in a two element array.",
             "itemtype": "property",
             "name": "xDataExtent",
@@ -3376,7 +3389,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 608,
+            "line": 624,
             "description": "Gets the highest and lowest y values of the graphed data in a two element array.",
             "itemtype": "property",
             "name": "yDataExtent",
@@ -3388,7 +3401,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 619,
+            "line": 635,
             "description": "Gets all x data from all graphics.",
             "itemtype": "property",
             "name": "xData",
@@ -3400,7 +3413,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 634,
+            "line": 650,
             "description": "Gets all y data from all graphics",
             "itemtype": "property",
             "name": "yData",
@@ -3412,7 +3425,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 649,
+            "line": 665,
             "description": "Gets the DOM id for the content clipPath element.",
             "itemtype": "property",
             "name": "contentClipPathId",
@@ -3426,7 +3439,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 660,
+            "line": 676,
             "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
             "itemtype": "property",
             "name": "graphics",
@@ -3438,7 +3451,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 671,
+            "line": 687,
             "description": "An array of \"selectable\" graphics that have been selected within this graph.",
             "itemtype": "property",
             "name": "selected",
@@ -3450,7 +3463,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 679,
+            "line": 695,
             "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
             "itemtype": "property",
             "name": "showYAxis",
@@ -3462,7 +3475,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 687,
+            "line": 703,
             "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
             "itemtype": "property",
             "name": "showXAxis",
@@ -3474,7 +3487,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 695,
+            "line": 711,
             "description": "Gets a function to create the xScale",
             "itemtype": "property",
             "name": "xScaleFactory",
@@ -3485,7 +3498,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 702,
+            "line": 718,
             "description": "Gets a function to create the yScale",
             "itemtype": "property",
             "name": "yScaleFactory",
@@ -3496,7 +3509,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 709,
+            "line": 725,
             "description": "Gets the domain of x values.",
             "itemtype": "property",
             "name": "xDomain",
@@ -3508,7 +3521,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 717,
+            "line": 733,
             "description": "Gets the domain of y values.",
             "itemtype": "property",
             "name": "yDomain",
@@ -3520,7 +3533,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 725,
+            "line": 741,
             "description": "Gets the current xScale used to draw the graph.",
             "itemtype": "property",
             "name": "xScale",
@@ -3532,7 +3545,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 733,
+            "line": 749,
             "description": "Gets the current yScale used to draw the graph.",
             "itemtype": "property",
             "name": "yScale",
@@ -3544,7 +3557,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 741,
+            "line": 757,
             "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
             "itemtype": "method",
             "name": "registerGraphic",
@@ -3561,7 +3574,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 751,
+            "line": 768,
             "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
             "itemtype": "method",
             "name": "unregisterGraphic",
@@ -3578,7 +3591,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 761,
+            "line": 784,
             "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "yRange",
@@ -3590,7 +3603,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 772,
+            "line": 795,
             "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "xRange",
@@ -3602,7 +3615,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 783,
+            "line": 806,
             "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
             "itemtype": "property",
             "name": "hasData",
@@ -3615,7 +3628,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 793,
+            "line": 816,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
@@ -3627,7 +3640,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 809,
+            "line": 832,
             "description": "The y coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphY",
@@ -3639,7 +3652,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 825,
+            "line": 848,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
@@ -3651,7 +3664,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 839,
+            "line": 862,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
@@ -3663,7 +3676,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 853,
+            "line": 876,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
@@ -3675,7 +3688,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 865,
+            "line": 888,
             "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
             "itemtype": "method",
             "name": "_notifyHasRendered",
@@ -3687,7 +3700,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 874,
+            "line": 897,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -3713,7 +3726,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 894,
+            "line": 917,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -3725,7 +3738,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 902,
+            "line": 925,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -3742,7 +3755,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 923,
+            "line": 946,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -3759,7 +3772,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 940,
+            "line": 963,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
@@ -3771,7 +3784,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 950,
+            "line": 973,
             "description": "The amount of leeway, in pixels, to give before triggering a brush start.",
             "itemtype": "property",
             "name": "brushThreshold",
@@ -3783,7 +3796,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 958,
+            "line": 981,
             "description": "The name of the action to trigger when brushing starts",
             "itemtype": "property",
             "name": "brushStartAction",
@@ -3795,7 +3808,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 966,
+            "line": 989,
             "description": "The name of the action to trigger when brushing emits a new value",
             "itemtype": "property",
             "name": "brushAction",
@@ -3807,7 +3820,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 974,
+            "line": 997,
             "description": "The name of the action to trigger when brushing ends",
             "itemtype": "property",
             "name": "brushEndAction",
@@ -4913,6 +4926,162 @@
             "namespace": "components"
         },
         {
+            "file": "app/components/nf-tracker.js",
+            "line": 26,
+            "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
+            "itemtype": "property",
+            "name": "trackingMode",
+            "type": "String",
+            "default": "'hover'",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 122,
+            "description": "The action name to send to the controller when the `hoverChange` event fires",
+            "itemtype": "property",
+            "name": "hoverChange",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 130,
+            "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
+            "itemtype": "method",
+            "name": "didContentHoverChange",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "utils.nf.graph-mouse-event"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 146,
+            "description": "Event handler for didHoverChange. Sends hoverChange action.",
+            "itemtype": "method",
+            "name": "didHoverChange",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "utils.nf.graph-mouse-event"
+                }
+            ],
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 169,
+            "description": "Name of the action to send on `hoverEnd`",
+            "itemtype": "property",
+            "name": "hoverEnd",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 177,
+            "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
+            "itemtype": "method",
+            "name": "didHoverEnd",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "hover end event object.",
+                    "type": "Object"
+                }
+            ],
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 198,
+            "description": "The action to send on `didTrack`.",
+            "itemtype": "property",
+            "name": "didTrack",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 206,
+            "description": "Observes changes to tracked data and sends the\ndidTrack action.",
+            "itemtype": "method",
+            "name": "_sendDidTrack",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 224,
+            "description": "The action to send on `willTrack`",
+            "itemtype": "property",
+            "name": "willTrack",
+            "type": "String",
+            "default": "null",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 238,
+            "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
+            "itemtype": "method",
+            "name": "_sendWillTrack",
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-tracker.js",
+            "line": 256,
+            "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
+            "itemtype": "method",
+            "name": "didContentHoverEnd",
+            "params": [
+                {
+                    "name": "e",
+                    "description": "",
+                    "type": "utils.nf.graph-mouse-action-context"
+                }
+            ],
+            "access": "private",
+            "tagname": "",
+            "class": "components.nf-tracker",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
             "file": "app/components/nf-vertical-line.js",
             "line": 20,
             "description": "The top y coordinate of the line",
@@ -4968,7 +5137,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 50,
+            "line": 48,
             "description": "The height of the x axis in pixels.",
             "itemtype": "property",
             "name": "height",
@@ -4980,7 +5149,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 58,
+            "line": 56,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
@@ -4992,7 +5161,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 66,
+            "line": 64,
             "description": "The length of the tick line (the small vertical line indicating the tick)",
             "itemtype": "property",
             "name": "tickLength",
@@ -5004,7 +5173,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 74,
+            "line": 72,
             "description": "The spacing between the end of the tick line and the origin of the templated\ntick content",
             "itemtype": "property",
             "name": "tickPadding",
@@ -5016,7 +5185,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 83,
+            "line": 81,
             "description": "The orientation of the x axis. Value can be `'top'` or `'bottom'`.",
             "itemtype": "property",
             "name": "orient",
@@ -5028,14 +5197,14 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 93,
+            "line": 91,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
             "type": "Function",
             "default": "null",
             "example": [
-                "\n\n      {{#nf-x-axis tickFilter=myFilter}}\n        <text>{{tick.value}}</text>\n      {{/nf-x-axis}}\n\nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n\nThe above example will filter down the set of ticks to only those that are less than 1000."
+                "\n\n      {{#nf-x-axis tickFilter=myFilter as |tick|}}\n        <text>{{tick.value}}</text>\n      {{/nf-x-axis}}\n\nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n\nThe above example will filter down the set of ticks to only those that are less than 1000."
             ],
             "class": "components.nf-x-axis",
             "module": "utils/nf/svg-dom",
@@ -5043,7 +5212,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 117,
+            "line": 115,
             "description": "The class applied due to orientation (e.g. `'orient-top'`)",
             "itemtype": "property",
             "name": "orientClass",
@@ -5055,7 +5224,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 127,
+            "line": 125,
             "description": "The SVG Transform applied to this component's container.",
             "itemtype": "property",
             "name": "transform",
@@ -5067,7 +5236,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 139,
+            "line": 137,
             "description": "The y position of this component's container.",
             "itemtype": "property",
             "name": "y",
@@ -5079,7 +5248,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 169,
+            "line": 167,
             "description": "This x position of this component's container",
             "itemtype": "property",
             "name": "x",
@@ -5091,7 +5260,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 185,
+            "line": 182,
             "description": "The width of the component",
             "itemtype": "property",
             "name": "width",
@@ -5103,7 +5272,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 193,
+            "line": 190,
             "description": "A method to call to override the default behavior of how ticks are created.\n\nThe function signature should match:\n\n      // - scale: d3.Scale\n      // - tickCount: number of ticks\n      // - uniqueData: unique data points for the axis\n      // - scaleType: string of \"linear\" or \"ordinal\"\n      // returns: an array of tick values.\n      function(scale, tickCount, uniqueData, scaleType) {\n        return [100,200,300];\n      }",
             "itemtype": "property",
             "name": "tickFactory",
@@ -5115,7 +5284,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 231,
+            "line": 228,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
@@ -5127,7 +5296,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 239,
+            "line": 236,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
@@ -5139,7 +5308,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 285,
+            "line": 282,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",
@@ -5151,7 +5320,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 45,
+            "line": 43,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
@@ -5163,7 +5332,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 53,
+            "line": 51,
             "description": "The length of the tick's accompanying line.",
             "itemtype": "property",
             "name": "tickLength",
@@ -5175,7 +5344,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 61,
+            "line": 59,
             "description": "The distance between the tick line and the origin tick's templated output",
             "itemtype": "property",
             "name": "tickPadding",
@@ -5187,7 +5356,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 69,
+            "line": 67,
             "description": "The total width of the y axis",
             "itemtype": "property",
             "name": "width",
@@ -5199,7 +5368,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 77,
+            "line": 75,
             "description": "The orientation of the y axis. Possible values are `'left'` and `'right'`",
             "itemtype": "property",
             "name": "orient",
@@ -5211,14 +5380,14 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 91,
+            "line": 89,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
             "type": "Function",
             "default": "null",
             "example": [
-                "\n  \n      {{#nf-y-axis tickFilter=myFilter}} \n        <text>{{tick.value}}</text>\n      {{/nf-y-axis}}\n  \nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n  \nThe above example will filter down the set of ticks to only those that are less than 1000."
+                "\n\n      {{#nf-y-axis tickFilter=myFilter as |tick|}}\n        <text>{{tick.value}}</text>\n      {{/nf-y-axis}}\n  \nAnd on your controller:\n\n      myFilter: function(tick, index, ticks) {\n        return tick.value < 1000;\n      },\n  \nThe above example will filter down the set of ticks to only those that are less than 1000."
             ],
             "class": "components.nf-y-axis",
             "module": "utils/nf/svg-dom",
@@ -5226,7 +5395,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 120,
+            "line": 118,
             "description": "computed property. returns true if `orient` is equal to `'right'`.",
             "itemtype": "property",
             "name": "isOrientRight",
@@ -5238,7 +5407,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 129,
+            "line": 127,
             "description": "The SVG transform for positioning the component.",
             "itemtype": "property",
             "name": "transform",
@@ -5250,7 +5419,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 141,
+            "line": 139,
             "description": "The x position of the component",
             "itemtype": "property",
             "name": "x",
@@ -5262,7 +5431,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 162,
+            "line": 160,
             "description": "The y position of the component",
             "itemtype": "property",
             "name": "y",
@@ -5274,7 +5443,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 170,
+            "line": 168,
             "description": "the height of the component",
             "itemtype": "property",
             "name": "height",
@@ -5286,7 +5455,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 184,
+            "line": 181,
             "description": "A method to call to override the default behavior of how ticks are created.\n\nThe function signature should match:\n\n      // - scale: d3.Scale\n      // - tickCount: number of ticks\n      // - uniqueData: unique data points for the axis\n      // - scaleType: string of \"linear\" or \"ordinal\"\n      // returns: an array of tick values.\n      function(scale, tickCount, uniqueData, scaleType) {\n        return [100,200,300];\n      }",
             "itemtype": "property",
             "name": "tickFactory",
@@ -5298,7 +5467,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 229,
+            "line": 226,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
@@ -5310,7 +5479,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 237,
+            "line": 234,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
@@ -5322,7 +5491,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 281,
+            "line": 278,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
@@ -5579,6 +5748,18 @@
         {
             "message": "replacing incorrect tag: params with param",
             "line": " addon/mixins/graph-graphic-with-tracking-dot.js:158"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app/components/nf-tracker.js:130"
+        },
+        {
+            "message": "replacing incorrect tag: function with method",
+            "line": " app/components/nf-tracker.js:177"
+        },
+        {
+            "message": "replacing incorrect tag: params with param",
+            "line": " app/components/nf-tracker.js:177"
         }
     ]
 }
