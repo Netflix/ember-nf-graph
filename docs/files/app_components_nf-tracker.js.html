@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>addon/mixins/graph-graphic-with-tracking-dot.js - ember-nf-graph</title>
+    <title>app/components/nf-tracker.js - ember-nf-graph</title>
     <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
@@ -114,31 +114,40 @@
             <div class="apidocs">
                 <div id="docs-main">
                     <div class="content">
-<h1 class="file-heading">File: addon/mixins/graph-graphic-with-tracking-dot.js</h1>
+<h1 class="file-heading">File: app/components/nf-tracker.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import GraphMouseEvent from &#x27;../utils/nf/graph-mouse-event&#x27;;
+import GraphMouseEvent from &#x27;ember-nf-graph/utils/nf/graph-mouse-event&#x27;;
+import DataGraphic from &#x27;ember-nf-graph/mixins/graph-data-graphic&#x27;;
+import RequiresScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-source&#x27;;
+import HasGraphParent from &#x27;ember-nf-graph/mixins/graph-has-graph-parent&#x27;;
 import computed from &#x27;ember-new-computed&#x27;;
 
 const get = Ember.get;
 const { or } = Ember.computed;
 
 /**
-  Adds tracking dot functionality to a component such as {{#crossLink &quot;components.nf-line&quot;}}{{/crossLink}}
-  or {{#crossLink &quot;components.nf-area&quot;}}{{/crossLink}}
-  
-  @namespace mixins
-  @class graph-graphic-with-tracking-dot
+  A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.
+  @namespace components
+  @class nf-tracker
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-data-graphic
+  @uses mixins.graph-requires-scale-source
   */
-export default Ember.Mixin.create({
+export default Ember.Component.extend(HasGraphParent, DataGraphic, RequiresScaleSource, {
+  tagName: &#x27;g&#x27;,
+
+  classNameBindings: [&#x27;:nf-tracker&#x27;],
+
+  attributeBindings: [&#x27;transform&#x27;],
+
   /**
     Gets or sets the tracking mode of the component.
 
     Possible values are:
 
-    - &#x27;none&#x27;: no tracking behavior
     - &#x27;hover&#x27;: only track while mouse hover
     - &#x27;snap-last&#x27;: track while mouse hover, but snap to the last data element when not hovering
     - &#x27;snap-first&#x27;: track while mouse hover, but snap to the first data element when not hovering
@@ -151,13 +160,13 @@ export default Ember.Mixin.create({
 
     @property trackingMode
     @type String
-    @default &#x27;none&#x27;
+    @default &#x27;hover&#x27;
   */
-  trackingMode: &#x27;none&#x27;,
+  trackingMode: &#x27;hover&#x27;,
+
+  isTracker: true,
 
   trackedData: null,
-
-  trackingDotRadius: 2.5,
 
   isShouldTrack: or(&#x27;isSelectedHoverMode&#x27;, &#x27;isHoverMode&#x27;),
 
@@ -179,7 +188,17 @@ export default Ember.Mixin.create({
 
   isHovered: false,
 
-  showTrackingDot: computed(&#x27;trackedData.x&#x27;, &#x27;trackedData.y&#x27;, {
+  transform: computed(&#x27;trackedData.x&#x27;, &#x27;trackedData.y&#x27;, &#x27;xScale&#x27;, &#x27;yScale&#x27;, {
+    get() {
+      var xScale = this.get(&#x27;xScale&#x27;);
+      var yScale = this.get(&#x27;yScale&#x27;);
+      var x = xScale &amp;&amp; xScale(this.get(&#x27;trackedData.x&#x27;) || 0);
+      var y = yScale &amp;&amp; yScale(this.get(&#x27;trackedData.y&#x27;) || 0);
+      return &#x27;translate(&#x27; + x + &#x27;,&#x27; + y + &#x27;)&#x27;;
+    }
+  }),
+
+  showTracker: computed(&#x27;trackedData.graphX&#x27;, &#x27;trackedData.graphY&#x27;, {
     get() {
       var trackedData = this.get(&#x27;trackedData&#x27;);
       if(trackedData) {
@@ -234,7 +253,7 @@ export default Ember.Mixin.create({
     @params e {utils.nf.graph-mouse-event}
     @private
   */
-  didContentHoverChange: function(e){
+  didContentHoverChange(e){
     var graphContentElement = this.get(&#x27;graphContentElement&#x27;);
 
     this.trigger(&#x27;didHoverChange&#x27;, GraphMouseEvent.create({
@@ -249,7 +268,7 @@ export default Ember.Mixin.create({
     @method didHoverChange
     @param e {utils.nf.graph-mouse-event}
   */
-  didHoverChange: function(e) {
+  didHoverChange(e) {
     var isHoverMode = this.get(&#x27;isHoverMode&#x27;);
     var isSelectedHoverMode = this.get(&#x27;isSelectedHoverMode&#x27;);
     var selected = this.get(&#x27;selected&#x27;);
@@ -280,7 +299,7 @@ export default Ember.Mixin.create({
     @function didHoverEnd
     @params e {Object} hover end event object.
   */
-  didHoverEnd: function(e) {
+  didHoverEnd(e) {
     this.set(&#x27;hoverData&#x27;, null);
 
     if(this.get(&#x27;isHovered&#x27;)) {
@@ -360,7 +379,7 @@ export default Ember.Mixin.create({
     @param e {utils.nf.graph-mouse-action-context}
     @private
   */
-  didContentHoverEnd: function(e){
+  didContentHoverEnd(e){
     var graph = this.get(&#x27;graph&#x27;);
 
     this.trigger(&#x27;didHoverEnd&#x27;, {
@@ -370,29 +389,21 @@ export default Ember.Mixin.create({
     });
   },
 
-  /**
-    Sets up subscriptions to content hover events.
-    @method _initializeTrackingDot
-    @private
-  */
-  _initializeTrackingDot: Ember.on(&#x27;didInsertElement&#x27;, function(){
+  didInsertElement() {
+    this._super.apply(arguments);
     var content = this.get(&#x27;graph.content&#x27;);
     content.on(&#x27;didHoverChange&#x27;, this, this.didContentHoverChange);
     content.on(&#x27;didHoverEnd&#x27;, this, this.didContentHoverEnd);
-  }),
+  },
 
-  /**
-    Tears down subscriptions to content hover events.
-    @method _teardownTrackingDot
-    @private
-  */
-  _teardownTrackingDot: Ember.on(&#x27;willDestroyElement&#x27;, function(){
+  willDestroyElement(){
+    this._super.apply(arguments);
     var content = this.get(&#x27;graph.content&#x27;);
     if(content) {
       content.off(&#x27;didHoverChange&#x27;, this, this.didContentHoverChange);
       content.off(&#x27;didHoverEnd&#x27;, this, this.didContentHoverEnd);
     }
-  })
+  }
 });
     </pre>
 </div>

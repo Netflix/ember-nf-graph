@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -121,7 +122,7 @@
         </div>
 
         <div class="foundat">
-            Defined in: <a href="../files/addon_mixins_graph-data-graphic.js.html#l8"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:8</code></a>
+            Defined in: <a href="../files/addon_mixins_graph-data-graphic.js.html#l10"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:10</code></a>
         </div>
 
             Module: <a href="../modules/utils_nf_array-helpers.html">utils/nf/array-helpers</a>
@@ -172,23 +173,11 @@ for use in graphing components.</p>
 
                             </li>
                             <li class="index-item property">
-                                <a href="#property_sortedData">sortedData</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_xData">xData</a>
-
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_xprop">xprop</a>
 
                             </li>
                             <li class="index-item property">
                                 <a href="#property_xPropFn">xPropFn</a>
-
-                            </li>
-                            <li class="index-item property">
-                                <a href="#property_yData">yData</a>
 
                             </li>
                             <li class="index-item property">
@@ -220,7 +209,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l23"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:23</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l25"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:25</code></a>
                             </p>
                     
                     
@@ -246,7 +235,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l195"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:195</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l152"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:152</code></a>
                             </p>
                     
                     
@@ -272,7 +261,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l219"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:219</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l176"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:176</code></a>
                             </p>
                     
                     
@@ -298,70 +287,15 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l154"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:154</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l111"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:111</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>The list of data points from mixins.graph-data-graphc/sortedData:property that
+                            <p>The list of data points from mixins.graph-data-graphc/mappedData:property that
                     fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_sortedData" class="property item">
-                        <h3 class="name"><code>sortedData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l100"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:100</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The sorted and mapped data pulled from <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
-                    An array of arrays, structures as so:</p>
-                    <pre class="code prettyprint"><code>  [[x,y],[x,y],[x,y]];
-                    </code></pre>
-                    <p>** each inner array also has a property <code>data</code> on it, containing the original data object **</p>
-                    <p>When this property is computed, it also updates the <code>xData</code> and <code>yData</code> properties of the graphic.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_xData" class="property item">
-                        <h3 class="name"><code>xData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l84"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:84</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Gets the x values from the <code>sortedData</code>.</p>
                     
                         </div>
                     
@@ -379,7 +313,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l32"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:32</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l59"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:59</code></a>
                             </p>
                     
                     
@@ -407,7 +341,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l54"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:54</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l81"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:81</code></a>
                             </p>
                     
                     
@@ -416,31 +350,6 @@ for use in graphing components.</p>
                         <div class="description">
                             <p>The function to get the x value from each
                     <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
-                    <div id="property_yData" class="property item">
-                        <h3 class="name"><code>yData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l92"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:92</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>Gets the y values from the <code>sortedData</code></p>
                     
                         </div>
                     
@@ -458,7 +367,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l43"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:43</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l70"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:70</code></a>
                             </p>
                     
                     
@@ -486,7 +395,7 @@ for use in graphing components.</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l69"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:69</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l96"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:96</code></a>
                             </p>
                     
                     

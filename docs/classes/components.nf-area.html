@@ -57,6 +57,7 @@
                                 <li><a href="../classes/components.nf-svg-line.html">components.nf-svg-line</a></li>
                                 <li><a href="../classes/components.nf-svg-path.html">components.nf-svg-path</a></li>
                                 <li><a href="../classes/components.nf-svg-rect.html">components.nf-svg-rect</a></li>
+                                <li><a href="../classes/components.nf-tracker.html">components.nf-tracker</a></li>
                                 <li><a href="../classes/components.nf-vertical-line.html">components.nf-vertical-line</a></li>
                                 <li><a href="../classes/components.nf-x-axis.html">components.nf-x-axis</a></li>
                                 <li><a href="../classes/components.nf-y-axis.html">components.nf-y-axis</a></li>
@@ -221,10 +222,6 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
 
                     <ul class="index-list properties extends">
                             <li class="index-item property">
-                                <a href="#property_areaData">areaData</a>
-
-                            </li>
-                            <li class="index-item property">
                                 <a href="#property_areaFn">areaFn</a>
 
                             </li>
@@ -270,6 +267,10 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
 
                             </li>
                             <li class="index-item property">
+                                <a href="#property_mappedData">mappedData</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_nextArea">nextArea</a>
 
                             </li>
@@ -310,19 +311,11 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
 
                             </li>
                             <li class="index-item property inherited">
-                                <a href="#property_sortedData">sortedData</a>
-
-                            </li>
-                            <li class="index-item property inherited">
                                 <a href="#property_trackingMode">trackingMode</a>
 
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_willTrack">willTrack</a>
-
-                            </li>
-                            <li class="index-item property inherited">
-                                <a href="#property_xData">xData</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -335,10 +328,6 @@ sibling <code>nf-area</code> components to create a stacked graph.</p>
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_xScale">xScale</a>
-
-                            </li>
-                            <li class="index-item property inherited">
-                                <a href="#property_yData">yData</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -906,31 +895,6 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
-                    <div id="property_areaData" class="property item">
-                        <h3 class="name"><code>areaData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>
-                                    Defined in
-                            <a href="../files/app_components_nf-area.js.html#l96"><code>app&#x2F;components&#x2F;nf-area.js:96</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>The current rendered data &quot;zipped&quot; together with the nextYData.</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_areaFn" class="property item">
                         <h3 class="name"><code>areaFn</code></h3>
                         <span class="type">Function</span>
@@ -942,7 +906,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l110"><code>app&#x2F;components&#x2F;nf-area.js:110</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l108"><code>app&#x2F;components&#x2F;nf-area.js:108</code></a>
                             </p>
                     
                     
@@ -967,7 +931,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-area.js.html#l123"><code>app&#x2F;components&#x2F;nf-area.js:123</code></a>
+                            <a href="../files/app_components_nf-area.js.html#l121"><code>app&#x2F;components&#x2F;nf-area.js:121</code></a>
                             </p>
                     
                     
@@ -992,7 +956,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_data">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l23"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:23</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l25"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:25</code></a>
                             </p>
                     
                     
@@ -1044,7 +1008,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_firstSortedData">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l195"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:195</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l152"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:152</code></a>
                             </p>
                     
                     
@@ -1201,7 +1165,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_lastVisibleData">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l219"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:219</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l176"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:176</code></a>
                             </p>
                     
                     
@@ -1210,6 +1174,31 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="description">
                             <p>&lt;p&gt;The last element from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_renderedData&quot; class=&quot;crosslink&quot;&gt;renderedData&lt;/a&gt;
                     that is actually visible within the x domain.&lt;/p&gt;</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_mappedData" class="property item">
+                        <h3 class="name"><code>mappedData</code></h3>
+                        <span class="type">Array</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/app_components_nf-area.js.html#l90"><code>app&#x2F;components&#x2F;nf-area.js:90</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The current rendered data &quot;zipped&quot; together with the nextYData.</p>
                     
                         </div>
                     
@@ -1306,14 +1295,14 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_renderedData">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l154"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:154</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l111"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:111</code></a>
                             </p>
                     
                     
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The list of data points from mixins.graph-data-graphc/sortedData:property that
+                            <p>&lt;p&gt;The list of data points from mixins.graph-data-graphc/mappedData:property that
                     fits within the x domain, plus up to one data point outside of that domain in each direction.&lt;/p&gt;</p>
                     
                         </div>
@@ -1479,36 +1468,6 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                     
                     
                     </div>
-                    <div id="property_sortedData" class="property item inherited">
-                        <h3 class="name"><code>sortedData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/mixins.graph-data-graphic.html#property_sortedData">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l100"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:100</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>&lt;p&gt;The sorted and mapped data pulled from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt;
-                    An array of arrays, structures as so:&lt;/p&gt;
-                    &lt;pre&gt;&lt;code&gt;  [[x,y],[x,y],[x,y]];
-                    &lt;/code&gt;&lt;/pre&gt;
-                    &lt;p&gt;** each inner array also has a property &lt;code&gt;data&lt;/code&gt; on it, containing the original data object **&lt;/p&gt;
-                    &lt;p&gt;When this property is computed, it also updates the &lt;code&gt;xData&lt;/code&gt; and &lt;code&gt;yData&lt;/code&gt; properties of the graphic.&lt;/p&gt;</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_trackingMode" class="property item inherited">
                         <h3 class="name"><code>trackingMode</code></h3>
                         <span class="type">String</span>
@@ -1574,31 +1533,6 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                     
                     
                     </div>
-                    <div id="property_xData" class="property item inherited">
-                        <h3 class="name"><code>xData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/mixins.graph-data-graphic.html#property_xData">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l84"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:84</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>&lt;p&gt;Gets the x values from the &lt;code&gt;sortedData&lt;/code&gt;.&lt;/p&gt;</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_xprop" class="property item inherited">
                         <h3 class="name"><code>xprop</code></h3>
                         <span class="type">String</span>
@@ -1610,7 +1544,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_xprop">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l32"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:32</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l59"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:59</code></a>
                             </p>
                     
                     
@@ -1638,7 +1572,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_xPropFn">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l54"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:54</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l81"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:81</code></a>
                             </p>
                     
                     
@@ -1678,31 +1612,6 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                     
                     
                     </div>
-                    <div id="property_yData" class="property item inherited">
-                        <h3 class="name"><code>yData</code></h3>
-                        <span class="type">Array</span>
-                    
-                    
-                    
-                    
-                    
-                        <div class="meta">
-                                    <p>Inherited from
-                                    <a href="../classes/mixins.graph-data-graphic.html#property_yData">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l92"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:92</code></a>
-                            </p>
-                    
-                    
-                        </div>
-                    
-                        <div class="description">
-                            <p>&lt;p&gt;Gets the y values from the &lt;code&gt;sortedData&lt;/code&gt;&lt;/p&gt;</p>
-                    
-                        </div>
-                    
-                    
-                    
-                    </div>
                     <div id="property_yprop" class="property item inherited">
                         <h3 class="name"><code>yprop</code></h3>
                         <span class="type">String</span>
@@ -1714,7 +1623,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_yprop">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l43"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:43</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l70"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:70</code></a>
                             </p>
                     
                     
@@ -1742,7 +1651,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-data-graphic.html#property_yPropFn">mixins.graph-data-graphic</a>:
-                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l69"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:69</code></a>
+                            <a href="../files/addon_mixins_graph-data-graphic.js.html#l96"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:96</code></a>
                             </p>
                     
                     

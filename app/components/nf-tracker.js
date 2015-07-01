@@ -12,6 +12,9 @@ const { or } = Ember.computed;
   A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.
   @namespace components
   @class nf-tracker
+  @uses mixins.graph-has-graph-parent
+  @uses mixins.graph-data-graphic
+  @uses mixins.graph-requires-scale-source
   */
 export default Ember.Component.extend(HasGraphParent, DataGraphic, RequiresScaleSource, {
   tagName: 'g',
