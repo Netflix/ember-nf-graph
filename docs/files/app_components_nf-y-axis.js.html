@@ -160,6 +160,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   layout: layout,
   template: null,
 
+  useTemplate: Ember.computed(function(){
+    var preGlimmerCheck = this.get(&#x27;template.blockParams&#x27;);
+    var postGlimmerCheck = this.get(&#x27;hasBlock&#x27;) &amp;&amp; this.get(&#x27;hasBlockParams&#x27;);
+    return Boolean(postGlimmerCheck || preGlimmerCheck);
+  }),
+
   /**
     The number of ticks to display
     @property tickCount

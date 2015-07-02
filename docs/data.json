@@ -5137,7 +5137,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 48,
+            "line": 54,
             "description": "The height of the x axis in pixels.",
             "itemtype": "property",
             "name": "height",
@@ -5149,7 +5149,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 56,
+            "line": 62,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
@@ -5161,7 +5161,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 64,
+            "line": 70,
             "description": "The length of the tick line (the small vertical line indicating the tick)",
             "itemtype": "property",
             "name": "tickLength",
@@ -5173,7 +5173,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 72,
+            "line": 78,
             "description": "The spacing between the end of the tick line and the origin of the templated\ntick content",
             "itemtype": "property",
             "name": "tickPadding",
@@ -5185,7 +5185,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 81,
+            "line": 87,
             "description": "The orientation of the x axis. Value can be `'top'` or `'bottom'`.",
             "itemtype": "property",
             "name": "orient",
@@ -5197,7 +5197,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 91,
+            "line": 97,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -5212,7 +5212,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 115,
+            "line": 121,
             "description": "The class applied due to orientation (e.g. `'orient-top'`)",
             "itemtype": "property",
             "name": "orientClass",
@@ -5224,7 +5224,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 125,
+            "line": 131,
             "description": "The SVG Transform applied to this component's container.",
             "itemtype": "property",
             "name": "transform",
@@ -5236,7 +5236,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 137,
+            "line": 143,
             "description": "The y position of this component's container.",
             "itemtype": "property",
             "name": "y",
@@ -5248,7 +5248,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 167,
+            "line": 173,
             "description": "This x position of this component's container",
             "itemtype": "property",
             "name": "x",
@@ -5260,7 +5260,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 182,
+            "line": 188,
             "description": "The width of the component",
             "itemtype": "property",
             "name": "width",
@@ -5272,7 +5272,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 190,
+            "line": 196,
             "description": "A method to call to override the default behavior of how ticks are created.\n\nThe function signature should match:\n\n      // - scale: d3.Scale\n      // - tickCount: number of ticks\n      // - uniqueData: unique data points for the axis\n      // - scaleType: string of \"linear\" or \"ordinal\"\n      // returns: an array of tick values.\n      function(scale, tickCount, uniqueData, scaleType) {\n        return [100,200,300];\n      }",
             "itemtype": "property",
             "name": "tickFactory",
@@ -5284,7 +5284,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 228,
+            "line": 234,
             "description": "A unique set of all x data on the graph",
             "itemtype": "property",
             "name": "uniqueXData",
@@ -5296,7 +5296,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 236,
+            "line": 242,
             "description": "The models for the ticks to display on the axis.",
             "itemtype": "property",
             "name": "ticks",
@@ -5308,7 +5308,7 @@
         },
         {
             "file": "app/components/nf-x-axis.js",
-            "line": 282,
+            "line": 288,
             "description": "The y position, in pixels, of the axis line",
             "itemtype": "property",
             "name": "axisLineY",
@@ -5320,7 +5320,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 43,
+            "line": 49,
             "description": "The number of ticks to display",
             "itemtype": "property",
             "name": "tickCount",
@@ -5332,7 +5332,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 51,
+            "line": 57,
             "description": "The length of the tick's accompanying line.",
             "itemtype": "property",
             "name": "tickLength",
@@ -5344,7 +5344,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 59,
+            "line": 65,
             "description": "The distance between the tick line and the origin tick's templated output",
             "itemtype": "property",
             "name": "tickPadding",
@@ -5356,7 +5356,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 67,
+            "line": 73,
             "description": "The total width of the y axis",
             "itemtype": "property",
             "name": "width",
@@ -5368,7 +5368,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 75,
+            "line": 81,
             "description": "The orientation of the y axis. Possible values are `'left'` and `'right'`",
             "itemtype": "property",
             "name": "orient",
@@ -5380,7 +5380,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 89,
+            "line": 95,
             "description": "An optional filtering function to allow more control over what tick marks are displayed.\nThe function should have exactly the same signature as the function you'd use for an\n`Array.prototype.filter()`.",
             "itemtype": "property",
             "name": "tickFilter",
@@ -5395,7 +5395,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 118,
+            "line": 124,
             "description": "computed property. returns true if `orient` is equal to `'right'`.",
             "itemtype": "property",
             "name": "isOrientRight",
@@ -5407,7 +5407,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 127,
+            "line": 133,
             "description": "The SVG transform for positioning the component.",
             "itemtype": "property",
             "name": "transform",
@@ -5419,7 +5419,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 139,
+            "line": 145,
             "description": "The x position of the component",
             "itemtype": "property",
             "name": "x",
@@ -5431,7 +5431,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 160,
+            "line": 166,
             "description": "The y position of the component",
             "itemtype": "property",
             "name": "y",
@@ -5443,7 +5443,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 168,
+            "line": 174,
             "description": "the height of the component",
             "itemtype": "property",
             "name": "height",
@@ -5455,7 +5455,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 181,
+            "line": 187,
             "description": "A method to call to override the default behavior of how ticks are created.\n\nThe function signature should match:\n\n      // - scale: d3.Scale\n      // - tickCount: number of ticks\n      // - uniqueData: unique data points for the axis\n      // - scaleType: string of \"linear\" or \"ordinal\"\n      // returns: an array of tick values.\n      function(scale, tickCount, uniqueData, scaleType) {\n        return [100,200,300];\n      }",
             "itemtype": "property",
             "name": "tickFactory",
@@ -5467,7 +5467,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 226,
+            "line": 232,
             "description": "All y data from the graph, filtered to unique values.",
             "itemtype": "property",
             "name": "uniqueYData",
@@ -5479,7 +5479,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 234,
+            "line": 240,
             "description": "The ticks to be displayed.",
             "itemtype": "property",
             "name": "ticks",
@@ -5491,7 +5491,7 @@
         },
         {
             "file": "app/components/nf-y-axis.js",
-            "line": 278,
+            "line": 284,
             "description": "The x position of the axis line.",
             "itemtype": "property",
             "name": "axisLineX",
