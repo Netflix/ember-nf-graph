@@ -41,6 +41,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   layout: layout,
   template: null,
 
+  useTemplate: Ember.computed('hasBlock', 'template.blockParams', 'hasBlockParams', function(){
+    var preGlimmerCheck = this.get('template.blockParams');
+    var postGlimmerCheck = this.get('hasBlock') && this.get('hasBlockParams');
+    return Boolean(postGlimmerCheck || preGlimmerCheck);
+  }),
+
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],
   classNames: ['nf-x-axis'],
