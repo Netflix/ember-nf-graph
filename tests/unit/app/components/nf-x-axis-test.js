@@ -35,3 +35,34 @@ test('nf-x-axis tickData should call tickFactory if available', function(assert)
     assert.deepEqual(args, ['xScale', 42, [1,2,3,4,5], 'xScaleType']);
   });
 });
+
+test('nf-x-axis useTemplate if template.blockParams', function(assert) {
+  Ember.run(() => {
+    var axis = this.factory().extend({
+      graph: Ember.computed((key, value) => ({
+        xScaleType: 'xScaleType'
+      }))
+    }).create();
+
+    axis.set('template', Ember.Object.create({
+      blockParams: true
+    }));
+
+    assert.equal(axis.get('useTemplate'), true);
+  });
+});
+
+
+test('nf-x-axis useTemplate if hasBlock AND hasBlockParams', function(assert) {
+  Ember.run(() => {
+    var axis = this.factory().extend({
+      graph: Ember.computed((key, value) => ({
+        xScaleType: 'xScaleType'
+      })),
+      hasBlock: true,
+      hasBlockParams: true
+    }).create();
+
+    assert.equal(axis.get('useTemplate'), true);
+  });
+});
