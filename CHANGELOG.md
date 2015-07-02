@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.0.0-beta.18
+
+- FIX axes components will once again use the passed templates for pre-Glimmer Ember.
+
 ### v1.0.0-beta.17
 
 - ADD `nf-tracker` component. This is a component for templatable tracking dots
