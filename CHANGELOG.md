@@ -1,5 +1,9 @@
 # Changelog
 
+### v1.0.0-beta.19
+
+- FIX issue where `nf-area` having null data would throw an unhandled error.
+
 ### v1.0.0-beta.18
 
 - FIX axes components will once again use the passed templates for pre-Glimmer Ember.

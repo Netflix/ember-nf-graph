@@ -216,12 +216,16 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     mappedData: Ember.computed(&#x27;data.[]&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, &#x27;nextYData.@each&#x27;, &#x27;stack.aggregate&#x27;, function() {
       var { data, xPropFn, yPropFn, nextYData } = this.getProperties(&#x27;data&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, &#x27;nextYData&#x27;);
       var aggregate = this.get(&#x27;stack.aggregate&#x27;);
-      return data.map((d, i) =&gt; {
-        var x = xPropFn(d);
-        var y = yPropFn(d);
-        var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
-        return result;
-      });
+      if(Array.isArray(data)) {
+        return data.map((d, i) =&gt; {
+          var x = xPropFn(d);
+          var y = yPropFn(d);
+          var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
+          return result;
+        });
+      } else {
+        return [];
+      }
     }),
 
 
