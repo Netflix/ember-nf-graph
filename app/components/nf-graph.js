@@ -16,7 +16,7 @@ var scaleFactoryProperty = function(axis) {
     var powExp = this.get(powExponentKey);
 
     type = typeof type === 'string' ? type.toLowerCase() : '';
-    
+
     if(type === 'linear') {
       return d3.scale.linear;
     }
@@ -24,17 +24,17 @@ var scaleFactoryProperty = function(axis) {
     else if(type === 'ordinal') {
       return d3.scale.ordinal;
     }
-    
+
     else if(type === 'power' || type === 'pow') {
       return function(){
         return d3.scale.pow().exponent(powExp);
       };
     }
-    
+
     else if(type === 'log') {
       return d3.scale.log;
     }
-    
+
     else {
       Ember.warn('unknown scale type: ' + type);
       return d3.scale.linear;
@@ -79,11 +79,11 @@ var domainProperty = function(axis) {
 };
 
 var scaleProperty = function(axis) {
-  var scaleFactoryKey = axis + 'ScaleFactory'; 
-  var rangeKey = axis + 'Range'; 
-  var domainKey = axis + 'Domain'; 
+  var scaleFactoryKey = axis + 'ScaleFactory';
+  var rangeKey = axis + 'Range';
+  var domainKey = axis + 'Domain';
   var scaleTypeKey = axis + 'ScaleType';
-  var ordinalPaddingKey = axis + 'OrdinalPadding'; 
+  var ordinalPaddingKey = axis + 'OrdinalPadding';
   var ordinalOuterPaddingKey = axis + 'OrdinalOuterPadding';
 
   return Ember.computed(
@@ -105,7 +105,7 @@ var scaleProperty = function(axis) {
 
       if(scaleType === 'ordinal') {
         scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
-      } else {        
+      } else {
         scale = scale.domain(domain).range(range).clamp(true);
       }
 
@@ -120,6 +120,7 @@ var minProperty = function(axis, defaultTickCount){
   var _Axis_tickCount_ = axis + 'Axis.tickCount';
   var _ScaleFactory_ = axis + 'ScaleFactory';
   var __Min_ = '_' + axis + 'Min';
+  var __didOverride_ = '_didOverride_' + axis + 'Min';
   var _prop_ = axis + 'Min';
   var _autoScaleEvent_ = 'didAutoUpdateMin' + axis.toUpperCase();
 
@@ -132,36 +133,41 @@ var minProperty = function(axis, defaultTickCount){
       var mode = this.get(_MinMode_);
       var ext;
 
-      if(arguments.length > 1) {
-        this[__Min_] = value;
-      } else {
-        var self = this;
+      if(value != null) {
+        this[__didOverride_] = true;
+        return this[__Min_] = value;
+      }
 
-        var change = function(val) {
-          self.set(_prop_, val);
-          self.trigger(_autoScaleEvent_);
-        };
+      if(this[__didOverride_]) {
+        return this[__Min_];
+      }
 
-        if(mode === 'auto') {
-          change(this.get(_DataExtent_)[0] || 0);
+      var self = this;
+
+      var change = function(val) {
+        self[__Min_] = val;
+        self.trigger(_autoScaleEvent_);
+      };
+
+      if(mode === 'auto') {
+        change(this.get(_DataExtent_)[0] || 0);
+      }
+
+      else if(mode === 'push') {
+        ext = this.get(_DataExtent_)[0];
+        if(!isNaN(ext) && ext < this[__Min_]) {
+          change(ext);
         }
+      }
 
-        else if(mode === 'push') {
-          ext = this.get(_DataExtent_)[0];
-          if(!isNaN(ext) && ext < this[__Min_]) {
-            change(ext);
-          }
-        }
+      else if(mode === 'push-tick') {
+        var extent = this.get(_DataExtent_);
+        ext = extent[0];
 
-        else if(mode === 'push-tick') {
-          var extent = this.get(_DataExtent_);
-          ext = extent[0];
-
-          if(!isNaN(ext) && ext < this[__Min_]) {
-            var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
-            var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
-            change(newDomain[0]);
-          }
+        if(!isNaN(ext) && ext < this[__Min_]) {
+          var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
+          var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
+          change(newDomain[0]);
         }
       }
 
@@ -176,6 +182,7 @@ var maxProperty = function(axis, defaultTickCount) {
   var _ScaleFactory_ = axis + 'ScaleFactory';
   var _MaxMode_ = axis + 'MaxMode';
   var __Max_ = '_' + axis + 'Max';
+  var __didOverride_ = '_didOverride_' + axis + 'Max';
   var _prop_ = axis + 'Max';
   var _autoScaleEvent_ = 'didAutoUpdateMax' + axis.toUpperCase();
 
@@ -188,36 +195,41 @@ var maxProperty = function(axis, defaultTickCount) {
       var mode = this.get(_MaxMode_);
       var ext;
 
-      if(arguments.length > 1) {
-        this[__Max_] = value;
-      } else {
-        var self = this;
+      if(value != null) {
+        this[__didOverride_] = true;
+        return this[__Max_] = value;
+      }
 
-        var change = function(val) {
-          self.set(_prop_, val);
+      if(this[__didOverride_]) {
+        return this[__Max_];
+      }
+
+      var self = this;
+
+      var change = function(val) {
+        self[__Max_] = val;
           self.trigger(_autoScaleEvent_);
-        };
+      };
 
-        if(mode === 'auto') {
-          change(this.get(_DataExtent_)[1] || 1);
+      if(mode === 'auto') {
+        change(this.get(_DataExtent_)[1] || 1);
+      }
+
+      else if(mode === 'push') {
+        ext = this.get(_DataExtent_)[1];
+        if(!isNaN(ext) && this[__Max_] < ext) {
+          change(ext);
         }
+      }
 
-        else if(mode === 'push') {
-          ext = this.get(_DataExtent_)[1];
-          if(!isNaN(ext) && this[__Max_] < ext) {
-            change(ext);
-          }
-        }
+      else if(mode === 'push-tick') {
+        var extent = this.get(_DataExtent_);
+        ext = extent[1];
 
-        else if(mode === 'push-tick') {
-          var extent = this.get(_DataExtent_);
-          ext = extent[1];
-
-          if(!isNaN(ext) && this[__Max_] < ext) {
-            var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
-            var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
-            change(newDomain[1]);
-          }
+        if(!isNaN(ext) && this[__Max_] < ext) {
+          var tickCount = this.get(_Axis_tickCount_) || defaultTickCount;
+          var newDomain = this.get(_ScaleFactory_)().domain(extent).nice(tickCount).domain();
+          change(newDomain[1]);
         }
       }
 
@@ -251,13 +263,13 @@ var maxProperty = function(axis, defaultTickCount) {
          {{#nf-y-axis width="120" as |tick|}}
            <text>{{tick.value}}</text>
          {{/nf-y-axis}}
-   
+
          {{#nf-graph-content}}
            {{nf-line data=lineData xprop="foo" yprop="bar"}}
          {{/nf-graph-content}}
        {{/nf-graph}}
 
-  The above example will create a 500x300 graph with both axes visible. The graph will not 
+  The above example will create a 500x300 graph with both axes visible. The graph will not
   render either axis unless its component is present.
 
 
@@ -266,7 +278,7 @@ var maxProperty = function(axis, defaultTickCount) {
   @extends Ember.Component
 */
 export default Ember.Component.extend({
-  tagName: 'div',  
+  tagName: 'div',
 
   /**
     The exponent to use for xScaleType "pow" or "power".
@@ -300,7 +312,7 @@ export default Ember.Component.extend({
   */
   yLogMin: 0.1,
 
-  /** 
+  /**
     Allows child compoenents to identify graph parent.
     @property isGraph
     @private
@@ -391,19 +403,19 @@ export default Ember.Component.extend({
     the graph.
     @property showFrets
     @type Boolean
-    @default false 
+    @default false
   */
   showFrets: false,
 
   /**
     The type of scale to use for x values.
-    
+
     Possible Values:
     - `'linear'` - a standard linear scale
     - `'log'` - a logarithmic scale
     - `'power'` - a power-based scale (exponent = 3)
     - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
-    
+
     @property xScaleType
     @type String
     @default 'linear'
@@ -412,19 +424,19 @@ export default Ember.Component.extend({
 
   /**
     The type of scale to use for y values.
-    
+
     Possible Values:
     - `'linear'` - a standard linear scale
     - `'log'` - a logarithmic scale
     - `'power'` - a power-based scale (exponent = 3)
     - `'ordinal'` - an ordinal scale, used for ordinal data. required for bar graphs.
-    
+
     @property yScaleType
     @type String
     @default 'linear'
   */
   yScaleType: 'linear',
-  
+
   /**
     The padding between value steps when `xScaleType` is `'ordinal'`
     @property xOrdinalPadding
@@ -528,7 +540,7 @@ export default Ember.Component.extend({
     @property yMax
   */
   yMax: maxProperty('y', 5),
-  
+
 
   /**
     Sets the behavior of `xMin` for the graph.
@@ -537,7 +549,7 @@ export default Ember.Component.extend({
 
     - 'auto': (default) xMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.
     - 'fixed': xMin can be set to an exact value and will not change based on graphed data.
-    - 'push': xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than 
+    - 'push': xMin can be set to a specific value, but will update if the minimum x value contained in the graph is less than
       what xMin is currently set to.
     - 'push-tick': xMin can be set to a specific value, but will update to next "nice" tick if the minimum x value contained in
       the graph is less than that xMin is set to.
@@ -555,11 +567,11 @@ export default Ember.Component.extend({
 
     - 'auto': (default) xMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.
     - 'fixed': xMax can be set to an exact value and will not change based on graphed data.
-    - 'push': xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than 
+    - 'push': xMax can be set to a specific value, but will update if the maximum x value contained in the graph is greater than
       what xMax is currently set to.
     - 'push-tick': xMax can be set to a specific value, but will update to next "nice" tick if the maximum x value contained in
       the graph is greater than that xMax is set to.
-      
+
     @property xMaxMode
     @type String
     @default 'auto'
@@ -573,7 +585,7 @@ export default Ember.Component.extend({
 
     - 'auto': (default) yMin is always equal to the minimum domain value contained in the graphed data. Cannot be set.
     - 'fixed': yMin can be set to an exact value and will not change based on graphed data.
-    - 'push': yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than 
+    - 'push': yMin can be set to a specific value, but will update if the minimum y value contained in the graph is less than
       what yMin is currently set to.
     - 'push-tick': yMin can be set to a specific value, but will update to next "nice" tick if the minimum y value contained in
       the graph is less than that yMin is set to.
@@ -591,11 +603,11 @@ export default Ember.Component.extend({
 
     - 'auto': (default) yMax is always equal to the maximum domain value contained in the graphed data. Cannot be set.
     - 'fixed': yMax can be set to an exact value and will not change based on graphed data.
-    - 'push': yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than 
+    - 'push': yMax can be set to a specific value, but will update if the maximum y value contained in the graph is greater than
       what yMax is currently set to.
     - 'push-tick': yMax can be set to a specific value, but will update to next "nice" tick if the maximum y value contained in
       the graph is greater than that yMax is set to.
-      
+
     @property yMaxMode
     @type String
     @default 'auto'
@@ -631,7 +643,7 @@ export default Ember.Component.extend({
   }),
 
   /**
-    The action to trigger when the graph automatically updates the xScale 
+    The action to trigger when the graph automatically updates the xScale
     due to an "auto" "push" or "push-tick" domainMode.
 
     sends the graph component instance value as the argument.
@@ -683,7 +695,7 @@ export default Ember.Component.extend({
   },
 
   /**
-    The action to trigger when the graph automatically updates the yScale 
+    The action to trigger when the graph automatically updates the yScale
     due to an "auto" "push" or "push-tick" domainMode.
 
     Sends the graph component instance as the argument.
@@ -859,7 +871,7 @@ export default Ember.Component.extend({
     var graphics = this.get('graphics');
     graphics.removeObject(graphic);
   },
-  
+
   updateExtents(data) {
     this.get('xDataExtent');
     this.get('yDataExtent');
@@ -872,7 +884,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  yRange: Ember.computed('graphHeight', function(){ 
+  yRange: Ember.computed('graphHeight', function(){
     return [this.get('graphHeight'), 0];
   }),
 
@@ -913,7 +925,7 @@ export default Ember.Component.extend({
     return paddingLeft + yAxisWidth;
   }),
 
-  /** 
+  /**
     The y coordinate position of the graph content
     @property graphY
     @type Number
@@ -927,7 +939,7 @@ export default Ember.Component.extend({
       return xAxisHeight + paddingTop;
     }
     return paddingTop;
-  }), 
+  }),
 
   /**
     The width, in pixels, of the graph content
@@ -1193,7 +1205,7 @@ export default Ember.Component.extend({
       current: currentPosition,
       left: left,
       right: right
-    }; 
+    };
   },
 
   _byBrushThreshold: function(d) {
