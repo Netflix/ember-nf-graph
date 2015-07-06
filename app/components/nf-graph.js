@@ -135,10 +135,12 @@ var minProperty = function(axis, defaultTickCount){
       if(arguments.length > 1) {
         this[__Min_] = value;
       } else {
+        var self = this;
+
         var change = function(val) {
-          this.set(_prop_, val);
-          this.trigger(_autoScaleEvent_);
-        }.bind(this);
+          self.set(_prop_, val);
+          self.trigger(_autoScaleEvent_);
+        };
 
         if(mode === 'auto') {
           change(this.get(_DataExtent_)[0] || 0);
@@ -189,10 +191,12 @@ var maxProperty = function(axis, defaultTickCount) {
       if(arguments.length > 1) {
         this[__Max_] = value;
       } else {
+        var self = this;
+
         var change = function(val) {
-          this.set(_prop_, val);
-          this.trigger(_autoScaleEvent_);
-        }.bind(this);
+          self.set(_prop_, val);
+          self.trigger(_autoScaleEvent_);
+        };
 
         if(mode === 'auto') {
           change(this.get(_DataExtent_)[1] || 1);
@@ -1058,10 +1062,6 @@ export default Ember.Component.extend({
   _setupBrushAction: Ember.on('didInsertElement', function(){
     var content = this.$('.nf-graph-content');
 
-    var toBrushEventStreams = this._toBrushEventStreams.bind(this);
-    var toComponentEventStream = this._toComponentEventStream;
-    var triggerComponentEvent = this._triggerComponentEvent.bind(this);
-
     var mouseMoves = Observable.fromEvent(content, 'mousemove');
     var mouseDowns = Observable.fromEvent(content, 'mousedown');
     var mouseUps = Observable.fromEvent(Ember.$(document), 'mouseup');
@@ -1072,30 +1072,26 @@ export default Ember.Component.extend({
       window(mouseDowns, function() { return mouseUps; })
       // filter out all of them if there are no brush actions registered
       // map the mouse event streams into brush event streams
-      .map( toBrushEventStreams ).
+      .map(x => this._toBrushEventStreams(x)).
       // flatten to a stream of action names and event objects
-      flatMap( toComponentEventStream ).
+      flatMap(x => this._toComponentEventStream(x)).
       // HACK: this is fairly cosmetic, so skip errors.
       retry().
       // subscribe and send the brush actions via Ember
-      forEach(triggerComponentEvent);
+      forEach(x => this._triggerComponentEvent(x));
   }),
 
   _toBrushEventStreams: function(mouseEvents) {
-    var getStartInfo = this._getStartInfo;
-    var byBrushThreshold = this._byBrushThreshold.bind(this);
-    var toBrushEvent = this._toBrushEvent.bind(this);
-
     // get the starting mouse event
     return mouseEvents.take(1).
       // calculate it's mouse point and info
-      map( getStartInfo ).
+      map( this._getStartInfo ).
       // combine the start with the each subsequent mouse event
       combineLatest(mouseEvents.skip(1), toArray).
       // filter out everything until the brushThreshold is crossed
-      filter( byBrushThreshold ).
+      filter(x => this._byBrushThreshold(x)).
       // create the brush event object
-      map( toBrushEvent );
+      map(x => this._toBrushEvent(x));
   },
 
   _triggerComponentEvent: function(d) {
