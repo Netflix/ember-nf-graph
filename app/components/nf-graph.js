@@ -121,6 +121,7 @@ var minProperty = function(axis, defaultTickCount){
   var _ScaleFactory_ = axis + 'ScaleFactory';
   var __Min_ = '_' + axis + 'Min';
   var _prop_ = axis + 'Min';
+  var _autoScaleEvent_ = 'didAutoUpdateMin' + axis.toUpperCase();
 
   return Ember.computed(
     _MinMode_,
@@ -136,6 +137,7 @@ var minProperty = function(axis, defaultTickCount){
       } else {
         var change = function(val) {
           this.set(_prop_, val);
+          this.trigger(_autoScaleEvent_);
         }.bind(this);
 
         if(mode === 'auto') {
@@ -173,6 +175,7 @@ var maxProperty = function(axis, defaultTickCount) {
   var _MaxMode_ = axis + 'MaxMode';
   var __Max_ = '_' + axis + 'Max';
   var _prop_ = axis + 'Max';
+  var _autoScaleEvent_ = 'didAutoUpdateMax' + axis.toUpperCase();
 
   return Ember.computed(
     _MaxMode_,
@@ -188,6 +191,7 @@ var maxProperty = function(axis, defaultTickCount) {
       } else {
         var change = function(val) {
           this.set(_prop_, val);
+          this.trigger(_autoScaleEvent_);
         }.bind(this);
 
         if(mode === 'auto') {
@@ -609,6 +613,55 @@ export default Ember.Component.extend({
       yMax: Number.MIN_VALUE
     })
   }),
+
+  /**
+    The action to trigger when the graph automatically updates the xScale 
+    due to an "auto" "push" or "push-tick" domainMode.
+
+    sends the xDataExtent value as the argument.
+
+    @property autoScaleXAction
+    @type {string}
+    @default null
+  */
+  autoScaleXAction: null,
+
+  _sendAutoUpdateXAction() {
+    this.sendAction('autoScaleXAction', this.get('xDataExtent'));
+  },
+
+  _sendAutoUpdateYAction() {
+    this.sendAction('autoScaleYAction', this.get('yDataExtent'));
+  },
+
+  didAutoUpdateMaxX() {
+    Ember.run.once(this, this._sendAutoUpdateXAction);
+  },
+
+  didAutoUpdateMinX() {
+    Ember.run.once(this, this._sendAutoUpdateXAction);
+  },
+
+
+  didAutoUpdateMaxY() {
+    Ember.run.once(this, this._sendAutoUpdateYAction);
+  },
+
+  didAutoUpdateMinY() {
+    Ember.run.once(this, this._sendAutoUpdateYAction);
+  },
+
+  /**
+    The action to trigger when the graph automatically updates the yScale 
+    due to an "auto" "push" or "push-tick" domainMode.
+
+    Sends the yDataExtent value as the argument.
+
+    @property autoScaleYAction
+    @type {string}
+    @default null
+  */
+  autoScaleYAction: null,
 
   /**
     Gets the highest and lowest x values of the graphed data in a two element array.
