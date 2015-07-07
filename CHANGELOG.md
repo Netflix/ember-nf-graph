@@ -1,5 +1,11 @@
 # Changelog
 
+### master
+
+- UPDATE `nf-graph` component now has `didAutoUpdateMinX`, `didAutoUpdateMinY`, `didAutoUpdateMaxX`, `didAutoUpdateMaxX` that will trigger when the corresponding values are updated automatically by a mode of `"push-tick"`, `"auto"` or `"tick"`.
+- UPDATE `nf-graph` component now has actions `autoScaleXAction` and `autoScaleYAction` that will send when 
+ the auto update events (mentioned above) trigger.
+
 ### v1.0.0-beta.19
 
 - FIX issue where `nf-area` having null data would throw an unhandled error.
