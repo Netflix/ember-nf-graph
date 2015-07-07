@@ -602,6 +602,18 @@ export default Ember.Component.extend({
   */
   yMaxMode: 'auto',
 
+  /**
+    The data extents for all data in the registered `graphics`.
+
+    @property dataExtents
+    @type {Object}
+    @default {
+      xMin: Number.MAX_VALUE,
+      xMax: Number.MIN_VALUE,
+      yMin: Number.MAX_VALUE,
+      yMax: Number.MIN_VALUE
+    }
+  */
   dataExtents: Ember.computed('graphics.@each.data', function(){
     var graphics = this.get('graphics');
     return graphics.reduce((c, x) => c.concat(x.get('mappedData')), []).reduce((extents, [x, y]) => {
@@ -622,7 +634,7 @@ export default Ember.Component.extend({
     The action to trigger when the graph automatically updates the xScale 
     due to an "auto" "push" or "push-tick" domainMode.
 
-    sends the xDataExtent value as the argument.
+    sends the graph component instance value as the argument.
 
     @property autoScaleXAction
     @type {string}
@@ -631,26 +643,41 @@ export default Ember.Component.extend({
   autoScaleXAction: null,
 
   _sendAutoUpdateXAction() {
-    this.sendAction('autoScaleXAction', this.get('xDataExtent'));
+    this.sendAction('autoScaleXAction', this);
   },
 
   _sendAutoUpdateYAction() {
-    this.sendAction('autoScaleYAction', this.get('yDataExtent'));
+    this.sendAction('autoScaleYAction', this);
   },
 
+  /**
+    Event handler that is fired for the `didAutoUpdateMaxX` event
+    @method didAutoUpdateMaxX
+  */
   didAutoUpdateMaxX() {
     Ember.run.once(this, this._sendAutoUpdateXAction);
   },
 
+  /**
+    Event handler that is fired for the `didAutoUpdateMinX` event
+    @method didAutoUpdateMinX
+  */
   didAutoUpdateMinX() {
     Ember.run.once(this, this._sendAutoUpdateXAction);
   },
 
-
+  /**
+    Event handler that is fired for the `didAutoUpdateMaxY` event
+    @method didAutoUpdateMaxY
+  */
   didAutoUpdateMaxY() {
     Ember.run.once(this, this._sendAutoUpdateYAction);
   },
 
+  /**
+    Event handler that is fired for the `didAutoUpdateMinY` event
+    @method didAutoUpdateMinY
+  */
   didAutoUpdateMinY() {
     Ember.run.once(this, this._sendAutoUpdateYAction);
   },
@@ -659,7 +686,7 @@ export default Ember.Component.extend({
     The action to trigger when the graph automatically updates the yScale 
     due to an "auto" "push" or "push-tick" domainMode.
 
-    Sends the yDataExtent value as the argument.
+    Sends the graph component instance as the argument.
 
     @property autoScaleYAction
     @type {string}

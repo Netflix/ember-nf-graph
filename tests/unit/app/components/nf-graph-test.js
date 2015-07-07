@@ -85,7 +85,7 @@ test('changing xDataExtent[0] with xMaxMode = "fixed" should trigger NOT didAuto
   });
 });
 
-test('calling didAutoUpdateMaxX() should send xDataExtent over autoScaleXAction', function(assert){
+test('calling didAutoUpdateMaxX() should send the graph instance over autoScaleXAction', function(assert){
   assert.expect(1);
 
   var calledWith;
@@ -101,10 +101,10 @@ test('calling didAutoUpdateMaxX() should send xDataExtent over autoScaleXAction'
     graph.didAutoUpdateMaxX();
   });
 
-  assert.deepEqual(calledWith, ['autoScaleXAction', [1,2]]);
+  assert.deepEqual(calledWith, ['autoScaleXAction', graph]);
 });
 
-test('calling didAutoUpdateMinX() should send xDataExtent over autoScaleXAction', function(assert){
+test('calling didAutoUpdateMinX() should send the graph instance over autoScaleXAction', function(assert){
   assert.expect(1);
 
   var calledWith;
@@ -120,13 +120,13 @@ test('calling didAutoUpdateMinX() should send xDataExtent over autoScaleXAction'
     graph.didAutoUpdateMinX();
   });
 
-  assert.deepEqual(calledWith, ['autoScaleXAction', [1,2]]);
+  assert.deepEqual(calledWith, ['autoScaleXAction', graph]);
 });
 
 //-----
 
 
-test('calling didAutoUpdateMinY() should send yDataExtent over autoScaleYAction', function(assert){
+test('calling didAutoUpdateMinY() should send the graph instance over autoScaleYAction', function(assert){
   assert.expect(1);
 
   var calledWith;
@@ -142,7 +142,7 @@ test('calling didAutoUpdateMinY() should send yDataExtent over autoScaleYAction'
     graph.didAutoUpdateMinY();
   });
 
-  assert.deepEqual(calledWith, ['autoScaleYAction', [1,2]]);
+  assert.deepEqual(calledWith, ['autoScaleYAction', graph]);
 });
 
 test('calling didAutoUpdateMaxY() should send yDataExtent over autoScaleYAction', function(assert){
@@ -161,7 +161,7 @@ test('calling didAutoUpdateMaxY() should send yDataExtent over autoScaleYAction'
     graph.didAutoUpdateMaxY();
   });
 
-  assert.deepEqual(calledWith, ['autoScaleYAction', [1,2]]);
+  assert.deepEqual(calledWith, ['autoScaleYAction', graph]);
 });
 
 
