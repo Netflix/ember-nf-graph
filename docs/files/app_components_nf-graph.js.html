@@ -241,6 +241,7 @@ var minProperty = function(axis, defaultTickCount){
   var _ScaleFactory_ = axis + &#x27;ScaleFactory&#x27;;
   var __Min_ = &#x27;_&#x27; + axis + &#x27;Min&#x27;;
   var _prop_ = axis + &#x27;Min&#x27;;
+  var _autoScaleEvent_ = &#x27;didAutoUpdateMin&#x27; + axis.toUpperCase();
 
   return Ember.computed(
     _MinMode_,
@@ -254,9 +255,12 @@ var minProperty = function(axis, defaultTickCount){
       if(arguments.length &gt; 1) {
         this[__Min_] = value;
       } else {
+        var self = this;
+
         var change = function(val) {
-          this.set(_prop_, val);
-        }.bind(this);
+          self.set(_prop_, val);
+          self.trigger(_autoScaleEvent_);
+        };
 
         if(mode === &#x27;auto&#x27;) {
           change(this.get(_DataExtent_)[0] || 0);
@@ -293,6 +297,7 @@ var maxProperty = function(axis, defaultTickCount) {
   var _MaxMode_ = axis + &#x27;MaxMode&#x27;;
   var __Max_ = &#x27;_&#x27; + axis + &#x27;Max&#x27;;
   var _prop_ = axis + &#x27;Max&#x27;;
+  var _autoScaleEvent_ = &#x27;didAutoUpdateMax&#x27; + axis.toUpperCase();
 
   return Ember.computed(
     _MaxMode_,
@@ -306,9 +311,12 @@ var maxProperty = function(axis, defaultTickCount) {
       if(arguments.length &gt; 1) {
         this[__Max_] = value;
       } else {
+        var self = this;
+
         var change = function(val) {
-          this.set(_prop_, val);
-        }.bind(this);
+          self.set(_prop_, val);
+          self.trigger(_autoScaleEvent_);
+        };
 
         if(mode === &#x27;auto&#x27;) {
           change(this.get(_DataExtent_)[1] || 1);
@@ -714,6 +722,18 @@ export default Ember.Component.extend({
   */
   yMaxMode: &#x27;auto&#x27;,
 
+  /**
+    The data extents for all data in the registered &#x60;graphics&#x60;.
+
+    @property dataExtents
+    @type {Object}
+    @default {
+      xMin: Number.MAX_VALUE,
+      xMax: Number.MIN_VALUE,
+      yMin: Number.MAX_VALUE,
+      yMax: Number.MIN_VALUE
+    }
+  */
   dataExtents: Ember.computed(&#x27;graphics.@each.data&#x27;, function(){
     var graphics = this.get(&#x27;graphics&#x27;);
     return graphics.reduce((c, x) =&gt; c.concat(x.get(&#x27;mappedData&#x27;)), []).reduce((extents, [x, y]) =&gt; {
@@ -729,6 +749,70 @@ export default Ember.Component.extend({
       yMax: Number.MIN_VALUE
     })
   }),
+
+  /**
+    The action to trigger when the graph automatically updates the xScale 
+    due to an &quot;auto&quot; &quot;push&quot; or &quot;push-tick&quot; domainMode.
+
+    sends the graph component instance value as the argument.
+
+    @property autoScaleXAction
+    @type {string}
+    @default null
+  */
+  autoScaleXAction: null,
+
+  _sendAutoUpdateXAction() {
+    this.sendAction(&#x27;autoScaleXAction&#x27;, this);
+  },
+
+  _sendAutoUpdateYAction() {
+    this.sendAction(&#x27;autoScaleYAction&#x27;, this);
+  },
+
+  /**
+    Event handler that is fired for the &#x60;didAutoUpdateMaxX&#x60; event
+    @method didAutoUpdateMaxX
+  */
+  didAutoUpdateMaxX() {
+    Ember.run.once(this, this._sendAutoUpdateXAction);
+  },
+
+  /**
+    Event handler that is fired for the &#x60;didAutoUpdateMinX&#x60; event
+    @method didAutoUpdateMinX
+  */
+  didAutoUpdateMinX() {
+    Ember.run.once(this, this._sendAutoUpdateXAction);
+  },
+
+  /**
+    Event handler that is fired for the &#x60;didAutoUpdateMaxY&#x60; event
+    @method didAutoUpdateMaxY
+  */
+  didAutoUpdateMaxY() {
+    Ember.run.once(this, this._sendAutoUpdateYAction);
+  },
+
+  /**
+    Event handler that is fired for the &#x60;didAutoUpdateMinY&#x60; event
+    @method didAutoUpdateMinY
+  */
+  didAutoUpdateMinY() {
+    Ember.run.once(this, this._sendAutoUpdateYAction);
+  },
+
+  /**
+    The action to trigger when the graph automatically updates the yScale 
+    due to an &quot;auto&quot; &quot;push&quot; or &quot;push-tick&quot; domainMode.
+
+    Sends the graph component instance as the argument.
+
+    @property autoScaleYAction
+    @type {string}
+    @default null
+  */
+  autoScaleYAction: null,
 
   /**
     Gets the highest and lowest x values of the graphed data in a two element array.
@@ -1125,10 +1209,6 @@ export default Ember.Component.extend({
   _setupBrushAction: Ember.on(&#x27;didInsertElement&#x27;, function(){
     var content = this.$(&#x27;.nf-graph-content&#x27;);
 
-    var toBrushEventStreams = this._toBrushEventStreams.bind(this);
-    var toComponentEventStream = this._toComponentEventStream;
-    var triggerComponentEvent = this._triggerComponentEvent.bind(this);
-
     var mouseMoves = Observable.fromEvent(content, &#x27;mousemove&#x27;);
     var mouseDowns = Observable.fromEvent(content, &#x27;mousedown&#x27;);
     var mouseUps = Observable.fromEvent(Ember.$(document), &#x27;mouseup&#x27;);
@@ -1139,30 +1219,26 @@ export default Ember.Component.extend({
       window(mouseDowns, function() { return mouseUps; })
       // filter out all of them if there are no brush actions registered
       // map the mouse event streams into brush event streams
-      .map( toBrushEventStreams ).
+      .map(x =&gt; this._toBrushEventStreams(x)).
       // flatten to a stream of action names and event objects
-      flatMap( toComponentEventStream ).
+      flatMap(x =&gt; this._toComponentEventStream(x)).
       // HACK: this is fairly cosmetic, so skip errors.
       retry().
       // subscribe and send the brush actions via Ember
-      forEach(triggerComponentEvent);
+      forEach(x =&gt; this._triggerComponentEvent(x));
   }),
 
   _toBrushEventStreams: function(mouseEvents) {
-    var getStartInfo = this._getStartInfo;
-    var byBrushThreshold = this._byBrushThreshold.bind(this);
-    var toBrushEvent = this._toBrushEvent.bind(this);
-
     // get the starting mouse event
     return mouseEvents.take(1).
       // calculate it&#x27;s mouse point and info
-      map( getStartInfo ).
+      map( this._getStartInfo ).
       // combine the start with the each subsequent mouse event
       combineLatest(mouseEvents.skip(1), toArray).
       // filter out everything until the brushThreshold is crossed
-      filter( byBrushThreshold ).
+      filter(x =&gt; this._byBrushThreshold(x)).
       // create the brush event object
-      map( toBrushEvent );
+      map(x =&gt; this._toBrushEvent(x));
   },
 
   _triggerComponentEvent: function(d) {
