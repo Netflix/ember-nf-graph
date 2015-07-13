@@ -63,6 +63,17 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     },
 
+    /**
+      Override from `graph-data-graphic` mixin
+      @method getActualTrackData
+    */
+    getActualTrackData(renderX, renderY, data) {
+      return {
+        x: this.get('xPropFn')(data),
+        y: this.get('yPropFn')(data)
+      };
+    },
+
     _unregister: Ember.on('willDestroyElement', function(){
       var stack = this.get('stack', stack);
       if(stack) {
@@ -101,6 +112,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
           var x = xPropFn(d);
           var y = yPropFn(d);
           var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
+          result.data = d;
           return result;
         });
       } else {

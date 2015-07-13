@@ -1,17 +1,9 @@
 import Ember from 'ember';
-import GraphMouseEvent from '../utils/nf/graph-mouse-event';
+import { getMousePoint } from '../utils/nf/svg-dom';
 import computed from 'ember-new-computed';
 
-const get = Ember.get;
-const { or } = Ember.computed;
+var { on, observer } = Ember;
 
-/**
-  Adds tracking dot functionality to a component such as {{#crossLink "components.nf-line"}}{{/crossLink}}
-  or {{#crossLink "components.nf-area"}}{{/crossLink}}
-  
-  @namespace mixins
-  @class graph-graphic-with-tracking-dot
-  */
 export default Ember.Mixin.create({
   /**
     Gets or sets the tracking mode of the component.
@@ -35,146 +27,13 @@ export default Ember.Mixin.create({
   */
   trackingMode: 'none',
 
-  trackedData: null,
-
+  /**
+    The radius of the tracking dot in pixels
+    @property trackingDotRadius
+    @type {number}
+    @default 2.5
+  */
   trackingDotRadius: 2.5,
-
-  isShouldTrack: or('isSelectedHoverMode', 'isHoverMode'),
-
-  isSelectedHoverMode: computed('trackingMode', {
-    get() {
-      var mode = this.get('trackingMode');
-      return mode === 'selected-hover' || mode === 'selected-snap-first' || mode === 'selected-snap-last';
-    }
-  }),
-
-  isHoverMode: computed('trackingMode', {
-    get() {
-      var mode = this.get('trackingMode');
-      return mode === 'hover' || mode === 'snap-first' || mode === 'snap-last';
-    }
-  }),
-
-  hoverData: null,
-
-  isHovered: false,
-
-  showTrackingDot: computed('trackedData.x', 'trackedData.y', {
-    get() {
-      var trackedData = this.get('trackedData');
-      if(trackedData) {
-        var x = get(trackedData, 'x');
-        var y = get(trackedData, 'y');
-        return +x === +x && +y === +y;
-      }
-    }
-  }),
-
-  _updateHovered: Ember.observer('isShouldTrack', 'hoverData', function(){
-    if(this.get('isShouldTrack')) {
-      this.set('trackedData', this.get('hoverData'));
-    }
-  }),
-
-  _processUpdateUnhovered: function(){
-    if(!this.get('isHovered')) {
-      var mode = this.get('trackingMode');
-      var selected = this.get('selected');
-      if(mode === 'snap-last' || (selected && mode === 'selected-snap-last')) {
-        this.set('trackedData', this.get('lastVisibleData'));
-      }
-      if(mode === 'snap-first' || (selected && mode === 'selected-snap-first')) {
-        this.set('trackedData', this.get('firstVisibleData'));
-      }
-    }
-  },
-
-  _updateUnhovered: Ember.on('didInsertElement', Ember.observer(
-    'isHovered',
-    'trackingMode',
-    'firstVisibleData',
-    'lastVisibleData',
-    'selected',
-    function(){
-      Ember.run.scheduleOnce('actions', this, this._processUpdateUnhovered);
-    }
-  )),
-
-  /**
-    The action name to send to the controller when the `hoverChange` event fires
-    @property hoverChange
-    @type String
-    @default null
-  */
-  hoverChange: null,
-
-  /**
-    Event handler for content hoverChange event. Triggers `didHoverChange`.
-    @method didContentHoverChange
-    @params e {utils.nf.graph-mouse-event}
-    @private
-  */
-  didContentHoverChange: function(e){
-    var graphContentElement = this.get('graphContentElement');
-
-    this.trigger('didHoverChange', GraphMouseEvent.create({
-      originalEvent: e.get('originalEvent'),
-      source: this,
-      graphContentElement: graphContentElement,
-    }));
-  },
-
-  /**
-    Event handler for didHoverChange. Sends hoverChange action.
-    @method didHoverChange
-    @param e {utils.nf.graph-mouse-event}
-  */
-  didHoverChange: function(e) {
-    var isHoverMode = this.get('isHoverMode');
-    var isSelectedHoverMode = this.get('isSelectedHoverMode');
-    var selected = this.get('selected');
-
-    if(!this.get('isHovered')) {
-      this.set('isHovered', true);
-    }
-
-    if(isHoverMode || (selected && isSelectedHoverMode)) {
-      this.set('hoverData', e);
-    }
-
-    if(this.get('hoverChange')) {
-      this.sendAction('hoverChange', e);
-    }
-  },
-
-  /**
-    Name of the action to send on `hoverEnd`
-    @property hoverEnd
-    @type String
-    @default null
-  */
-  hoverEnd: null,
-
-  /**
-    Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.
-    @function didHoverEnd
-    @params e {Object} hover end event object.
-  */
-  didHoverEnd: function(e) {
-    this.set('hoverData', null);
-
-    if(this.get('isHovered')) {
-      this.set('isHovered', false);
-    }
-
-    if(this.get('hoverEnd')) {
-      this.sendAction('hoverEnd', {
-        originalEvent: e.get('originalEvent'),
-        source: this,
-        graph: this.get('graph'),
-      });
-    }
-  },
 
   /**
     The action to send on `didTrack`.
@@ -183,6 +42,24 @@ export default Ember.Mixin.create({
     @default null
   */
   didTrack: null,
+
+  _showTrackingDot: true,
+
+  /**
+    Gets or sets whether the tracking dot should be shown at all.
+    @property showTrackingDot
+    @type {boolean}
+    @default true
+  */
+  showTrackingDot: computed('trackedData', {
+    get() {
+      return Boolean(this._showTrackingDot && this.get('trackedData'));
+    },
+
+    set(value) {
+      this._showTrackingDot = value;
+    }
+  }),
 
   /**
     Observes changes to tracked data and sends the
@@ -202,75 +79,144 @@ export default Ember.Mixin.create({
     }
   }),
 
-  /**
-    The action to send on `willTrack`
-    @property willTrack
-    @type String
-    @default null
-  */
-  willTrack: null,
-
-  graphContentElement: computed('graph', {
-    get() {
-      return this.get('graph').$('.nf-graph-content')[0];
+  _cleanup: function(){
+    if(this._onHoverCleanup) {
+      this._onHoverCleanup();
     }
-  }),
-
-  /**
-    Observes impending changes to trackedData and sends
-    the willTrack action.
-    @method _sendWillTrack
-    @private
-  */
-  _sendWillTrack: Ember.beforeObserver('trackedData', function(){
-    if(this.get('willTrack')) {
-      this.sendAction('willTrack', {
-        x: this.get('trackedData.x'),
-        y: this.get('trackedData.y'),
-        data: this.get('trackedData.data'),
-        source: this,
-        graph: this.get('graph'),
-      });
+    if(this._onEndCleanup) {
+      this._onEndCleanup();
     }
-  }),
-
-  /**
-    Handles the graph-content's hoverEnd event and triggers didHoverEnd
-    @method didContentHoverEnd
-    @param e {utils.nf.graph-mouse-action-context}
-    @private
-  */
-  didContentHoverEnd: function(e){
-    var graph = this.get('graph');
-
-    this.trigger('didHoverEnd', {
-      originalEvent: e,
-      source: this,
-      graph: graph,
-    });
   },
 
-  /**
-    Sets up subscriptions to content hover events.
-    @method _initializeTrackingDot
-    @private
-  */
-  _initializeTrackingDot: Ember.on('didInsertElement', function(){
-    var content = this.get('graph.content');
-    content.on('didHoverChange', this, this.didContentHoverChange);
-    content.on('didHoverEnd', this, this.didContentHoverEnd);
-  }),
+  _updateTrackingHandling() {
+    var { trackingMode, selected } = this.getProperties('trackingMode', 'selected');
 
-  /**
-    Tears down subscriptions to content hover events.
-    @method _teardownTrackingDot
-    @private
-  */
-  _teardownTrackingDot: Ember.on('willDestroyElement', function(){
-    var content = this.get('graph.content');
-    if(content) {
-      content.off('didHoverChange', this, this.didContentHoverChange);
-      content.off('didHoverEnd', this, this.didContentHoverEnd);
+    this._cleanup();
+
+    switch(trackingMode) {
+      case 'hover':
+        this._onHoverTrack();
+        this._onEndUntrack();
+        break;
+      case 'snap-first':
+        this._onHoverTrack();
+        this._onEndSnapFirst();
+        break;
+      case 'snap-last':
+        this._onHoverTrack();
+        this._onEndSnapLast();
+        break;
+      case 'selected-hover':
+        if(selected) {
+          this._onHoverTrack();
+          this._onEndUntrack();
+        }
+        break;
+      case 'selected-snap-first':
+        if(selected) {
+          this._onHoverTrack();
+          this._onEndSnapFirst();
+        }
+        break;
+      case 'selected-snap-last':
+        if(selected) {
+          this._onHoverTrack();
+          this._onEndSnapLast();
+        }
+        break;
     }
-  })
+  },
+
+  _onHoverTrack() {
+    var content = this._content;
+
+    var handler = e => {
+      var evt = this._getEventObject(e);
+      this.set('trackedData', evt);
+    };
+
+    content.on('mousemove', handler);
+
+    this._onHoverCleanup = () => {
+      content.off('mousemove', handler);
+    };
+  },
+
+  _onEndUntrack() {
+    var content = this._content;
+
+    var handler = () => {
+      this.set('trackedData', null);
+    };
+
+    content.on('mouseout', handler);
+
+    this._onEndCleanup = () => {
+      content.off('mouseout', handler);
+    };
+  },
+
+  _onEndSnapLast() {
+    var content = this._content;
+
+    var handler = () => {
+      this.set('trackedData', this.get('lastVisibleData'));
+    };
+
+    content.on('mouseout', handler);
+
+    this._onEndCleanup = () => {
+      content.off('mouseout', handler);
+    };
+  },
+
+  _onEndSnapFirst() {
+    var content = this._content;
+
+    var handler = () => {
+      this.set('trackedData', this.get('firstVisibleData'));
+    };
+
+    content.on('mouseout', handler);
+
+    this._onEndCleanup = () => {
+      content.off('mouseout', handler);
+    };
+  },
+
+  _trackingModeChanged: on('init', observer('trackingMode', 'selected', function() {
+    Ember.run.once(this, this._updateTrackingHandling);
+  })),
+
+  _getEventObject(e) {
+    var { xScale, yScale } = this.getProperties('xScale', 'yScale');
+    var content = this._content;
+    var point = getMousePoint(content[0], e);
+    var graphX = xScale.invert(point.x);
+    var graphY = yScale.invert(point.y);
+    var { x, y, data, renderX, renderY} = this.getDataNearXRange(point.x);
+
+    return {
+      point,
+      graphX,
+      graphY,
+      x,
+      y,
+      data,
+      renderX,
+      renderY,
+      mouseX: point.x,
+      mouseY: point.y
+    };
+  },
+
+  didInsertElement() {
+    this._super.apply(arguments);
+    this._content = this.$().parents('.nf-graph-content');
+  },
+
+  willDestroyElement() {
+    this._super.apply(arguments);
+    this._cleanup();
+  }
 });

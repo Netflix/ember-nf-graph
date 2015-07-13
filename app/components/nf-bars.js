@@ -13,6 +13,8 @@ import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
 
   **Requires the graph has `xScaleType === 'ordinal'`***
 
+  ** `showTrackingDot` defaults to `false` in this component **
+
   @namespace components
   @class nf-bars
   @extends Ember.Component
@@ -25,6 +27,8 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   tagName: 'g',
 
   classNames: ['nf-bars'],
+
+  _showTrackingDot: false,
 
   /**
     The name of the property on each data item containing the className for the bar rectangle
