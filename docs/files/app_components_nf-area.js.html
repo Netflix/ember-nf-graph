@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
                                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
@@ -183,6 +182,17 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     },
 
+    /**
+      Override from &#x60;graph-data-graphic&#x60; mixin
+      @method getActualTrackData
+    */
+    getActualTrackData(renderX, renderY, data) {
+      return {
+        x: this.get(&#x27;xPropFn&#x27;)(data),
+        y: this.get(&#x27;yPropFn&#x27;)(data)
+      };
+    },
+
     _unregister: Ember.on(&#x27;willDestroyElement&#x27;, function(){
       var stack = this.get(&#x27;stack&#x27;, stack);
       if(stack) {
@@ -221,6 +231,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
           var x = xPropFn(d);
           var y = yPropFn(d);
           var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
+          result.data = d;
           return result;
         });
       } else {

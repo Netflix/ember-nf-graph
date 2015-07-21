@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
                                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
@@ -150,6 +149,10 @@ to a component that is to be contained in an <code>nf-graph</code>.</p>
                     <h3>Methods</h3>
 
                     <ul class="index-list methods">
+                            <li class="index-item method private">
+                                <a href="#method__sendDidTrack">_sendDidTrack</a>
+
+                            </li>
                             <li class="index-item method">
                                 <a href="#method_init">init</a>
 
@@ -162,7 +165,23 @@ to a component that is to be contained in an <code>nf-graph</code>.</p>
 
                     <ul class="index-list properties">
                             <li class="index-item property">
+                                <a href="#property_didTrack">didTrack</a>
+
+                            </li>
+                            <li class="index-item property">
                                 <a href="#property_graph">graph</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_showTrackingDot">showTrackingDot</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_trackingDotRadius">trackingDotRadius</a>
+
+                            </li>
+                            <li class="index-item property">
+                                <a href="#property_trackingMode">trackingMode</a>
 
                             </li>
                     </ul>
@@ -174,6 +193,39 @@ to a component that is to be contained in an <code>nf-graph</code>.</p>
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method__sendDidTrack" class="method item private">
+    <h3 class="name"><code>_sendDidTrack</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>
+                Defined in
+        <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l64"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:64</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Observes changes to tracked data and sends the
+didTrack action.</p>
+
+    </div>
+
+
+
+
+</div>
 <div id="method_init" class="method item">
     <h3 class="name"><code>init</code></h3>
 
@@ -212,6 +264,32 @@ NOTE: all object that mixin and have init, must call super.init()</p>
             <div id="properties" class="api-class-tabpanel">
                 <h2 class="off-left">Properties</h2>
 
+                    <div id="property_didTrack" class="property item">
+                        <h3 class="name"><code>didTrack</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l38"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:38</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to send on <code>didTrack</code>.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
                     <div id="property_graph" class="property item">
                         <h3 class="name"><code>graph</code></h3>
                         <span class="type"><a href="../classes/components.nf-graph.html" class="crosslink">components.nf-graph</a></span>
@@ -235,6 +313,97 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         </div>
                     
                             <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_showTrackingDot" class="property item">
+                        <h3 class="name"><code>showTrackingDot</code></h3>
+                        <span class="type">Boolean</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l48"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:48</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets whether the tracking dot should be shown at all.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_trackingDotRadius" class="property item">
+                        <h3 class="name"><code>trackingDotRadius</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l30"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:30</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The radius of the tracking dot in pixels</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 2.5</p>
+                    
+                    
+                    </div>
+                    <div id="property_trackingMode" class="property item">
+                        <h3 class="name"><code>trackingMode</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l8"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:8</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets the tracking mode of the component.</p>
+                    <p>Possible values are:</p>
+                    <ul>
+                    <li>'none': no tracking behavior</li>
+                    <li>'hover': only track while mouse hover</li>
+                    <li>'snap-last': track while mouse hover, but snap to the last data element when not hovering</li>
+                    <li>'snap-first': track while mouse hover, but snap to the first data element when not hovering</li>
+                    <li>'selected-hover': The same as <code>'hover'</code> tracking mode, but only when the compononent is
+                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
+                    <li>'selected-snap-last': The same as <code>'snap-last'</code> tracking mode, but only when the compononent is
+                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
+                    <li>'selected-snap-first': The same as <code>'snap-first'</code> tracking mode, but only when the compononent is
+                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
+                    </ul>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;none&#x27;</p>
                     
                     
                     </div>

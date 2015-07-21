@@ -27,7 +27,6 @@ YUI.add("yuidoc-meta", function(Y) {
         "components.nf-y-diff",
         "mixins.graph-area-utils",
         "mixins.graph-data-graphic",
-        "mixins.graph-graphic-with-tracking-dot",
         "mixins.graph-has-graph-parent",
         "mixins.graph-line-utils",
         "mixins.graph-registered-graphic",

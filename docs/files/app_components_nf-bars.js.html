@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
                                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
@@ -133,6 +132,8 @@ import { getRectPath } from &#x27;ember-nf-graph/utils/nf/svg-dom&#x27;;
 
   **Requires the graph has &#x60;xScaleType === &#x27;ordinal&#x27;&#x60;***
 
+  ** &#x60;showTrackingDot&#x60; defaults to &#x60;false&#x60; in this component **
+
   @namespace components
   @class nf-bars
   @extends Ember.Component
@@ -145,6 +146,8 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   tagName: &#x27;g&#x27;,
 
   classNames: [&#x27;nf-bars&#x27;],
+
+  _showTrackingDot: false,
 
   /**
     The name of the property on each data item containing the className for the bar rectangle

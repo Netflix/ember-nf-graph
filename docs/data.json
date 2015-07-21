@@ -29,13 +29,9 @@
         "addon/mixins/graph-graphic-with-tracking-dot.js": {
             "name": "addon/mixins/graph-graphic-with-tracking-dot.js",
             "modules": {},
-            "classes": {
-                "mixins.graph-graphic-with-tracking-dot": 1
-            },
+            "classes": {},
             "fors": {},
-            "namespaces": {
-                "mixins": 1
-            }
+            "namespaces": {}
         },
         "addon/mixins/graph-has-graph-parent.js": {
             "name": "addon/mixins/graph-has-graph-parent.js",
@@ -455,7 +451,6 @@
             "classes": {
                 "mixins.graph-area-utils": 1,
                 "mixins.graph-data-graphic": 1,
-                "mixins.graph-graphic-with-tracking-dot": 1,
                 "mixins.graph-has-graph-parent": 1,
                 "mixins.graph-line-utils": 1,
                 "mixins.graph-registered-graphic": 1,
@@ -565,23 +560,6 @@
             "line": 10,
             "description": "This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data\nwith the graph. Includes methods for extracting, sorting and scrubbing data\nfor use in graphing components.\n\nRequires {{#crossLink \"mixins.graph-registered-graphic\"}}{{/crossLink}} and \n{{#crossLink \"mixins.graph-has-graph-parent\"}}{{/crossLink}}",
             "extends": "Ember.Mixin"
-        },
-        "mixins.graph-graphic-with-tracking-dot": {
-            "name": "mixins.graph-graphic-with-tracking-dot",
-            "shortname": "mixins.graph-graphic-with-tracking-dot",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [
-                "components.nf-area",
-                "components.nf-line"
-            ],
-            "module": "utils/nf/array-helpers",
-            "namespace": "mixins",
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 8,
-            "description": "Adds tracking dot functionality to a component such as {{#crossLink \"components.nf-line\"}}{{/crossLink}}\nor {{#crossLink \"components.nf-area\"}}{{/crossLink}}"
         },
         "mixins.graph-has-graph-parent": {
             "name": "mixins.graph-has-graph-parent",
@@ -832,7 +810,7 @@
             "namespace": "components",
             "file": "app/components/nf-bars.js",
             "line": 11,
-            "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***",
+            "description": "Adds a bar graph to an `nf-graph` component.\n\n**Requires the graph has `xScaleType === 'ordinal'`***\n\n** `showTrackingDot` defaults to `false` in this component **",
             "extends": "Ember.Component",
             "uses": [
                 "mixins.graph-has-graph-parent",
@@ -1158,12 +1136,13 @@
             "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-tracker.js",
-            "line": 11,
+            "line": 12,
             "description": "A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.",
             "uses": [
                 "mixins.graph-has-graph-parent",
                 "mixins.graph-data-graphic",
-                "mixins.graph-requires-scale-source"
+                "mixins.graph-requires-scale-source",
+                "mixins.graph-graphic-with-tracking-dot"
             ]
         },
         "components.nf-vertical-line": {
@@ -1362,170 +1341,88 @@
             "namespace": "mixins"
         },
         {
+            "file": "addon/mixins/graph-data-graphic.js",
+            "line": 229,
+            "description": "Gets the actual data at a rendered tracking point passed to it.\nThis is overridden in nf-area to account for stacking of data.",
+            "itemtype": "method",
+            "name": "getActualTrackData",
+            "params": [
+                {
+                    "name": "renderX",
+                    "description": "the x domain value the data is rendered at",
+                    "type": "Number"
+                },
+                {
+                    "name": "renderY",
+                    "description": "the y domain value the data is rendered at",
+                    "type": "Number"
+                },
+                {
+                    "name": "data",
+                    "description": "the raw data from the point",
+                    "type": "Object"
+                }
+            ],
+            "return": {
+                "description": "simple x, y point structure",
+                "type": "Object"
+            },
+            "class": "mixins.graph-data-graphic",
+            "namespace": "mixins"
+        },
+        {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 16,
+            "line": 8,
             "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'none': no tracking behavior\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
             "itemtype": "property",
             "name": "trackingMode",
             "type": "String",
             "default": "'none'",
-            "class": "mixins.graph-graphic-with-tracking-dot",
+            "class": "mixins.graph-has-graph-parent",
             "namespace": "mixins"
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 103,
-            "description": "The action name to send to the controller when the `hoverChange` event fires",
+            "line": 30,
+            "description": "The radius of the tracking dot in pixels",
             "itemtype": "property",
-            "name": "hoverChange",
-            "type": "String",
-            "default": "null",
-            "class": "mixins.graph-graphic-with-tracking-dot",
+            "name": "trackingDotRadius",
+            "type": "{number}",
+            "default": "2.5",
+            "class": "mixins.graph-has-graph-parent",
             "namespace": "mixins"
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 111,
-            "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
-            "itemtype": "method",
-            "name": "didContentHoverChange",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "utils.nf.graph-mouse-event"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 127,
-            "description": "Event handler for didHoverChange. Sends hoverChange action.",
-            "itemtype": "method",
-            "name": "didHoverChange",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "utils.nf.graph-mouse-event"
-                }
-            ],
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 150,
-            "description": "Name of the action to send on `hoverEnd`",
-            "itemtype": "property",
-            "name": "hoverEnd",
-            "type": "String",
-            "default": "null",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 158,
-            "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
-            "itemtype": "method",
-            "name": "didHoverEnd",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "hover end event object.",
-                    "type": "Object"
-                }
-            ],
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 179,
+            "line": 38,
             "description": "The action to send on `didTrack`.",
             "itemtype": "property",
             "name": "didTrack",
             "type": "String",
             "default": "null",
-            "class": "mixins.graph-graphic-with-tracking-dot",
+            "class": "mixins.graph-has-graph-parent",
             "namespace": "mixins"
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 187,
+            "line": 48,
+            "description": "Gets or sets whether the tracking dot should be shown at all.",
+            "itemtype": "property",
+            "name": "showTrackingDot",
+            "type": "{boolean}",
+            "default": "true",
+            "class": "mixins.graph-has-graph-parent",
+            "namespace": "mixins"
+        },
+        {
+            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 64,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
             "name": "_sendDidTrack",
             "access": "private",
             "tagname": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 205,
-            "description": "The action to send on `willTrack`",
-            "itemtype": "property",
-            "name": "willTrack",
-            "type": "String",
-            "default": "null",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 219,
-            "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
-            "itemtype": "method",
-            "name": "_sendWillTrack",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 237,
-            "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
-            "itemtype": "method",
-            "name": "didContentHoverEnd",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "utils.nf.graph-mouse-action-context"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 253,
-            "description": "Sets up subscriptions to content hover events.",
-            "itemtype": "method",
-            "name": "_initializeTrackingDot",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
-            "namespace": "mixins"
-        },
-        {
-            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 264,
-            "description": "Tears down subscriptions to content hover events.",
-            "itemtype": "method",
-            "name": "_teardownTrackingDot",
-            "access": "private",
-            "tagname": "",
-            "class": "mixins.graph-graphic-with-tracking-dot",
+            "class": "mixins.graph-has-graph-parent",
             "namespace": "mixins"
         },
         {
@@ -2384,8 +2281,8 @@
                 }
             ],
             "return": {
-                "description": "the [x,y] data of the mouse position relative to the container",
-                "type": "Array"
+                "description": "the {x, y} data of the mouse position relative to the container",
+                "type": "Object"
             },
             "class": "utils.parse-property-expression",
             "module": "utils/nf/svg-dom"
@@ -2553,7 +2450,17 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 73,
+            "line": 66,
+            "description": "Override from `graph-data-graphic` mixin",
+            "itemtype": "method",
+            "name": "getActualTrackData",
+            "class": "components.nf-area",
+            "module": "utils/nf/svg-dom",
+            "namespace": "components"
+        },
+        {
+            "file": "app/components/nf-area.js",
+            "line": 84,
             "description": "The computed set of next y values to use for the \"bottom\" of the graphed area.\nIf the area is part of a stack, this will be the \"top\" of the next area in the stack,\notherwise it will return an array of values at the \"bottom\" of the graph domain.",
             "itemtype": "property",
             "name": "nextYData",
@@ -2565,7 +2472,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 90,
+            "line": 101,
             "description": "The current rendered data \"zipped\" together with the nextYData.",
             "itemtype": "property",
             "name": "mappedData",
@@ -2577,7 +2484,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 112,
+            "line": 124,
             "description": "Gets the area function to use to create the area SVG path data",
             "itemtype": "property",
             "name": "areaFn",
@@ -2589,7 +2496,7 @@
         },
         {
             "file": "app/components/nf-area.js",
-            "line": 125,
+            "line": 137,
             "description": "The SVG path data for the area",
             "itemtype": "property",
             "name": "d",
@@ -2601,7 +2508,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 29,
+            "line": 33,
             "description": "The name of the property on each data item containing the className for the bar rectangle",
             "itemtype": "property",
             "name": "classprop",
@@ -2613,7 +2520,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 37,
+            "line": 41,
             "description": "Gets the function to get the classname from each data item.",
             "itemtype": "property",
             "name": "getBarClass",
@@ -2626,7 +2533,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 48,
+            "line": 52,
             "description": "The nf-bars-group this belongs to, if any.",
             "itemtype": "property",
             "name": "group",
@@ -2638,7 +2545,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 56,
+            "line": 60,
             "description": "The index of this component within the group, if any.",
             "itemtype": "property",
             "name": "groupIndex",
@@ -2650,7 +2557,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 64,
+            "line": 68,
             "description": "The graph content height",
             "itemtype": "property",
             "name": "graphHeight",
@@ -2662,7 +2569,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 72,
+            "line": 76,
             "description": "A scale provided by nf-bars-group to offset the bar rectangle output",
             "itemtype": "property",
             "name": "barScale",
@@ -2674,7 +2581,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 80,
+            "line": 84,
             "description": "The width of each bar.",
             "itemtype": "property",
             "name": "barWidth",
@@ -2686,7 +2593,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 101,
+            "line": 105,
             "description": "The bar models used to render the bars.",
             "itemtype": "property",
             "name": "bars",
@@ -2697,7 +2604,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 145,
+            "line": 149,
             "description": "The name of the action to fire when a bar is clicked.",
             "itemtype": "property",
             "name": "barClick",
@@ -5002,162 +4909,6 @@
             "namespace": "components"
         },
         {
-            "file": "app/components/nf-tracker.js",
-            "line": 26,
-            "description": "Gets or sets the tracking mode of the component.\n\nPossible values are:\n\n- 'hover': only track while mouse hover\n- 'snap-last': track while mouse hover, but snap to the last data element when not hovering\n- 'snap-first': track while mouse hover, but snap to the first data element when not hovering\n- 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}\n- 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is \n{{#crossLink \"mixins.graph-selectable-graphic/selected:property\"}}{{/crossLink}}",
-            "itemtype": "property",
-            "name": "trackingMode",
-            "type": "String",
-            "default": "'hover'",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 122,
-            "description": "The action name to send to the controller when the `hoverChange` event fires",
-            "itemtype": "property",
-            "name": "hoverChange",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 130,
-            "description": "Event handler for content hoverChange event. Triggers `didHoverChange`.",
-            "itemtype": "method",
-            "name": "didContentHoverChange",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "utils.nf.graph-mouse-event"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 146,
-            "description": "Event handler for didHoverChange. Sends hoverChange action.",
-            "itemtype": "method",
-            "name": "didHoverChange",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "utils.nf.graph-mouse-event"
-                }
-            ],
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 169,
-            "description": "Name of the action to send on `hoverEnd`",
-            "itemtype": "property",
-            "name": "hoverEnd",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 177,
-            "description": "Event handler for didHoverEnd. Updates tracked data, and sends hoverEnd action.",
-            "itemtype": "method",
-            "name": "didHoverEnd",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "hover end event object.",
-                    "type": "Object"
-                }
-            ],
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 198,
-            "description": "The action to send on `didTrack`.",
-            "itemtype": "property",
-            "name": "didTrack",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 206,
-            "description": "Observes changes to tracked data and sends the\ndidTrack action.",
-            "itemtype": "method",
-            "name": "_sendDidTrack",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 224,
-            "description": "The action to send on `willTrack`",
-            "itemtype": "property",
-            "name": "willTrack",
-            "type": "String",
-            "default": "null",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 238,
-            "description": "Observes impending changes to trackedData and sends\nthe willTrack action.",
-            "itemtype": "method",
-            "name": "_sendWillTrack",
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
-            "file": "app/components/nf-tracker.js",
-            "line": 256,
-            "description": "Handles the graph-content's hoverEnd event and triggers didHoverEnd",
-            "itemtype": "method",
-            "name": "didContentHoverEnd",
-            "params": [
-                {
-                    "name": "e",
-                    "description": "",
-                    "type": "utils.nf.graph-mouse-action-context"
-                }
-            ],
-            "access": "private",
-            "tagname": "",
-            "class": "components.nf-tracker",
-            "module": "utils/nf/svg-dom",
-            "namespace": "components"
-        },
-        {
             "file": "app/components/nf-vertical-line.js",
             "line": 20,
             "description": "The top y coordinate of the line",
@@ -5812,30 +5563,5 @@
             "namespace": "components"
         }
     ],
-    "warnings": [
-        {
-            "message": "replacing incorrect tag: params with param",
-            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:111"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:158"
-        },
-        {
-            "message": "replacing incorrect tag: params with param",
-            "line": " addon/mixins/graph-graphic-with-tracking-dot.js:158"
-        },
-        {
-            "message": "replacing incorrect tag: params with param",
-            "line": " app/components/nf-tracker.js:130"
-        },
-        {
-            "message": "replacing incorrect tag: function with method",
-            "line": " app/components/nf-tracker.js:177"
-        },
-        {
-            "message": "replacing incorrect tag: params with param",
-            "line": " app/components/nf-tracker.js:177"
-        }
-    ]
+    "warnings": []
 }
