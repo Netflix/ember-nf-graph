@@ -1,5 +1,9 @@
 # Changelog
 
+### master
+
+- FIX trackingData no longer throws errors when underlying data is not present
+
 ### v1.0.0-beta.23
 
 - FIX `snap-last` and `snap-first` type trackingModes will now initialize properly and render
