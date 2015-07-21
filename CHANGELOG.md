@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### v1.0.0-beta.21
 
 - UPDATE components with tracking capabilities (`nf-line`, `nf-area` and `nf-bars`) updated to support additional data passed with trackingData, rendered values are `renderX` and `renderY`, where actual values are still at `x` and `y`. This was to account for new stacked area functionality.
 - UPDATE `nf-bars` now will render a tracking dot if `showTrackingDot` is set to `true`
