@@ -152,22 +152,29 @@ export default Ember.Mixin.create({
   /**
     The first element from {{#crossLink "mixins.graph-data-graphic/renderedData:property"}}{{/crossLink}}
     that is actually visible within the x domain.
-    @property firstSortedData
-    @type Array
+    @property firstVisibleData
+    @type {Object}
     @readonly
   */
   firstVisibleData: computed('renderedData.@each', 'xMin', {
     get() {
-      var renderedData = this.get('renderedData');
-      var xMin = this.get('xMin');
+      var { renderedData, xPropFn, yPropFn, xMin } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMin');
+
       var first = renderedData[0];
       if(first && xMin > first[0] && renderedData.length > 1) {
         first = renderedData[1];
       }
+
+      var renderX = first[0];
+      var renderY = first[1];
+      var data = first.data;
+
       return first ? {
-        x: first[0],
-        y: first[1],
-        data: first.data,
+        x: xPropFn(data),
+        y: yPropFn(data),
+        data,
+        renderX,
+        renderY
       } : null;
     }
   }),
@@ -177,21 +184,28 @@ export default Ember.Mixin.create({
     The last element from {{#crossLink "mixins.graph-data-graphic/renderedData:property"}}{{/crossLink}}
     that is actually visible within the x domain.
     @property lastVisibleData
-    @type Array
+    @type {Object}
     @readonly
   */
-  lastVisibleData: computed('renderedData.@each', 'xMax', {
+  lastVisibleData: computed('renderedData.@each', 'yPropFn', 'xPropFn', 'xMax', {
     get() {
-      var renderedData = this.get('renderedData');
-      var xMax = this.get('xMax');
+      var { renderedData, xPropFn, yPropFn, xMax } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMax');
       var last = renderedData[renderedData.length - 1];
+
       if(last && xMax < last[0] && renderedData.length > 1) {
         last = renderedData[renderedData.length - 2];
       }
+
+      var data = last.data;
+      var renderX = last[0];
+      var renderY = last[1];
+
       return last ? {
-        x: last[0],
-        y: last[1],
-        data: last.data,
+        x: xPropFn(data),
+        y: yPropFn(data),
+        data,
+        renderX,
+        renderY
       }: null;
     }
   }),
