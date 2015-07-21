@@ -1,13 +1,10 @@
 import Ember from 'ember';
-import GraphMouseEvent from 'ember-nf-graph/utils/nf/graph-mouse-event';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
-import computed from 'ember-new-computed';
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
+import computed from 'ember-new-computed';
 
-const get = Ember.get;
-const { or } = Ember.computed;
 
 /**
   A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.
