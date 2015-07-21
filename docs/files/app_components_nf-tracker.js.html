@@ -118,15 +118,12 @@
 <div class="file">
     <pre class="code prettyprint linenums">
 import Ember from &#x27;ember&#x27;;
-import GraphMouseEvent from &#x27;ember-nf-graph/utils/nf/graph-mouse-event&#x27;;
 import DataGraphic from &#x27;ember-nf-graph/mixins/graph-data-graphic&#x27;;
 import RequiresScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-source&#x27;;
 import HasGraphParent from &#x27;ember-nf-graph/mixins/graph-has-graph-parent&#x27;;
-import computed from &#x27;ember-new-computed&#x27;;
 import GraphicWithTrackingDot from &#x27;ember-nf-graph/mixins/graph-graphic-with-tracking-dot&#x27;;
+import computed from &#x27;ember-new-computed&#x27;;
 
-const get = Ember.get;
-const { or } = Ember.computed;
 
 /**
   A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.
