@@ -1,0 +1,131 @@
+{{#nf-graph
+    width=400
+    height=150
+    showLanes=true
+    showFrets=true
+    paddingTop=10
+    paddingRight=10}}
+
+  {{#nf-x-axis tickCount=5}}
+    <text>{{format-hour-minute tick.value}}</text>
+  {{/nf-x-axis}}
+
+  {{#nf-y-axis}}
+    <text>{{tick.value}}</text>
+  {{/nf-y-axis}}
+
+  {{#nf-graph-content}}
+    {{nf-line
+        data=graphData
+        xprop="x"
+        yprop="y"
+        interpolator="monotone"}}
+  {{/nf-graph-content}}
+
+{{/nf-graph}}
+
+
+
+
+<h4>Template</h4>
+<table class="CodeRay template"><tbody><tr>
+  <td class="line-numbers">
+<pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+</pre></td>
+  <td class="code"><pre><span title="Operator">{</span><span title="Operator">{</span><span title="Comment" class="comment">#nf-graph</span><span title="Space">
+    </span><span title="Ident">width</span><span title="Operator">=</span><span title="Integer" class="integer">400</span><span title="Space">
+    </span><span title="Ident">height</span><span title="Operator">=</span><span title="Integer" class="integer">150</span><span title="Space">
+    </span><span title="Ident">showLanes</span><span title="Operator">=</span><span title="Predefined Constant" class="predefined-constant">true</span><span title="Space">
+    </span><span title="Ident">showFrets</span><span title="Operator">=</span><span title="Predefined Constant" class="predefined-constant">true</span><span title="Space">
+    </span><span title="Ident">paddingTop</span><span title="Operator">=</span><span title="Integer" class="integer">10</span><span title="Space">
+    </span><span title="Ident">paddingRight</span><span title="Operator">=</span><span title="Integer" class="integer">10</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Comment" class="comment">#nf-x-axis tickCount=5}}</span><span title="Space">
+    </span><span title="Operator">&lt;</span><span title="Ident">text</span><span title="Operator">&gt;</span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">format</span><span title="Operator">-</span><span title="Ident">hour</span><span title="Operator">-</span><span title="Ident">minute</span><span title="Space"> </span><span title="Ident">tick</span><span title="Operator">.</span><span title="Ident">value</span><span title="Operator">}</span><span title="Operator">}</span><span title="Operator">&lt;</span><span title="Operator">/</span><span title="Ident">text</span><span title="Operator">&gt;</span><span title="Space">
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Operator">/</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">x</span><span title="Operator">-</span><span title="Ident">axis</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Comment" class="comment">#nf-y-axis}}</span><span title="Space">
+    </span><span title="Operator">&lt;</span><span title="Ident">text</span><span title="Operator">&gt;</span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">tick</span><span title="Operator">.</span><span title="Ident">value</span><span title="Operator">}</span><span title="Operator">}</span><span title="Operator">&lt;</span><span title="Operator">/</span><span title="Ident">text</span><span title="Operator">&gt;</span><span title="Space">
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Operator">/</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">y</span><span title="Operator">-</span><span title="Ident">axis</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Comment" class="comment">#nf-graph-content}}</span><span title="Space">
+    </span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">line</span><span title="Space">
+        </span><span title="Ident">data</span><span title="Operator">=</span><span title="Ident">graphData</span><span title="Space">
+        </span><span title="Ident">xprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">x</span><span title="String" class="delimiter">"</span></span><span title="Space">
+        </span><span title="Ident">yprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">y</span><span title="String" class="delimiter">"</span></span><span title="Space">
+        </span><span title="Ident">interpolator</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">monotone</span><span title="String" class="delimiter">"</span></span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Operator">/</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">graph</span><span title="Operator">-</span><span title="Ident">content</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+
+</span><span title="Operator">{</span><span title="Operator">{</span><span title="Operator">/</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">graph</span><span title="Operator">}</span><span title="Operator">}</span></pre></td>
+</tr></tbody></table>
+
+<div class="discussion">
+  <p>
+  width=400 and height=150 define the pixel size of the entire graph including axis and padding.  showLanes=true causes horizontal swim lanes to be shaded in the background.  showFrets=true causes vertical lines to be draw in the background for each tick on the X Axis.  paddingRight and paddingType define padding space between the graph plot area and the absolute border of the entire graph.
+  </p>
+  <p>
+    \{{#nf-x-axis}} draws the X Axis. tickCount=5 will produce approximately 5 evenly spaced "nice" ticks on the axis (the actual count may be one more or less depending where "nice" ticks fall on the axis). <text>{{format-hour-minute tick.value}}</text> is the X Axis tick template and defines the text that appears on each tick. tick.value is the domain value of each tick.
+    </p>
+  <p>
+    \{{#nf-y-axis}} draws the Y Axis and has a text template similar to nf-x-axis above.
+  </p>
+  <p>
+    \{{#nf-graph-content}} is the container for elements that should be drawn within the graph plot area.
+  </p>
+  <p>
+    \{{#nf-line}} draws a line plot. data=graphData specifies to get this line's data from the component's graphData property.  xprop defines which property represents the x value on each data element.  yprop defines which property represents the y value on each data element.
+    interpolator="monotone" specifies drawing the line with a smooth curve.  Other interpolator values can be found <a href="https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate">here</a>.
+  </p>
+</div>
+
+
+
+<h4>Component JavaScript</h4>
+<table class="CodeRay"><tbody><tr>
+  <td class="line-numbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+  <td class="code"><pre><span title="Reserved" class="reserved">import</span><span title="Space"> </span><span title="Ident">Ember</span><span title="Space"> </span><span title="Ident">from</span><span title="Space"> </span><span title="String" class="string"><span title="String" class="delimiter">'</span><span title="String" class="content">ember</span><span title="String" class="delimiter">'</span></span><span title="Operator">;</span><span title="Space">
+</span><span title="Reserved" class="reserved">import</span><span title="Space"> </span><span title="Operator">{</span><span title="Space"> </span><span title="Ident">dataGenerator</span><span title="Space"> </span><span title="Operator">}</span><span title="Space"> </span><span title="Ident">from</span><span title="Space"> </span><span title="String" class="string"><span title="String" class="delimiter">'</span><span title="String" class="content">../services/data-generator</span><span title="String" class="delimiter">'</span></span><span title="Operator">;</span><span title="Space">
+
+</span><span title="Reserved" class="reserved">export</span><span title="Space"> </span><span title="Keyword" class="keyword">default</span><span title="Space"> </span><span title="Ident">Ember</span><span title="Operator">.</span><span title="Ident">Component</span><span title="Operator">.</span><span title="Ident">extend</span><span title="Operator">({</span><span title="Space">
+
+  </span><span title="Function" class="function">graphData</span><span title="Operator">:</span><span title="Space"> </span><span title="Keyword" class="keyword">function</span><span title="Operator">(</span><span title="Operator">)</span><span title="Space"> </span><span title="Operator">{</span><span title="Space">
+    </span><span title="Keyword" class="keyword">return</span><span title="Space"> </span><span title="Ident">dataGenerator</span><span title="Operator">.</span><span title="Ident">simpleTimeSeries</span><span title="Operator">(</span><span title="Operator">)</span><span title="Operator">;</span><span title="Space">
+  </span><span title="Operator">}</span><span title="Operator">.</span><span title="Ident">property</span><span title="Operator">(</span><span title="Operator">)</span><span title="Space">
+
+</span><span title="Operator">})</span><span title="Operator">;</span></pre></td>
+</tr></tbody></table>
+
