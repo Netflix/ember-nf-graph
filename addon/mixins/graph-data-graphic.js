@@ -196,7 +196,7 @@ export default Ember.Mixin.create({
     }
   }),
 
-  getDataNearXRange: function(rangeX) {
+  _getRenderedDataNearXRange: function(rangeX) {
     var xScale = this.get('xScale');
     var isLinear = xScale && xScale.invert;
     if(isLinear) {
@@ -209,6 +209,34 @@ export default Ember.Mixin.create({
       var i = Math.floor(v * renderedData.length);
       return renderedData[i];
     }
+  },
+
+  getDataNearXRange(rangeX) {
+    var rendered = this._getRenderedDataNearXRange(rangeX);
+
+    if(!rendered) { 
+      return null;
+    }
+    
+    var renderX = rendered[0];
+    var renderY = rendered[1];
+    var data = rendered.data;
+    var { x, y } = this.getActualTrackData(renderX, renderY, data);
+
+    return { renderX, renderY, data, x, y };
+  },
+
+  /** 
+    Gets the actual data at a rendered tracking point passed to it.
+    This is overridden in nf-area to account for stacking of data.
+    @method getActualTrackData
+    @param renderX {number} the x domain value the data is rendered at
+    @param renderY {number} the y domain value the data is rendered at 
+    @param data {Object} the raw data from the point 
+    @return {Object} simple x, y point structure
+  */
+  getActualTrackData(renderX, renderY, data) {
+    return { x: renderX, y: renderY, data };
   },
 
   getDataNearX: function(x) {

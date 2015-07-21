@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
                                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
@@ -198,7 +197,7 @@ export function downloadSvg(svg) {
   @method getMousePoint
   @param container {SVGElement} the container reference to get the mouse position from
   @param e {MouseEvent} A DOM mouse event
-  @return {Array} the [x,y] data of the mouse position relative to the container
+  @return {Object} the {x, y} data of the mouse position relative to the container
 */
 export function getMousePoint(container, e) {
   var x, y;

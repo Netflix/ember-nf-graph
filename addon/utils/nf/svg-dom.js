@@ -78,7 +78,7 @@ export function downloadSvg(svg) {
   @method getMousePoint
   @param container {SVGElement} the container reference to get the mouse position from
   @param e {MouseEvent} A DOM mouse event
-  @return {Array} the [x,y] data of the mouse position relative to the container
+  @return {Object} the {x, y} data of the mouse position relative to the container
 */
 export function getMousePoint(container, e) {
   var x, y;

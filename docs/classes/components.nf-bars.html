@@ -64,7 +64,6 @@
                                 <li><a href="../classes/components.nf-y-diff.html">components.nf-y-diff</a></li>
                                 <li><a href="../classes/mixins.graph-area-utils.html">mixins.graph-area-utils</a></li>
                                 <li><a href="../classes/mixins.graph-data-graphic.html">mixins.graph-data-graphic</a></li>
-                                <li><a href="../classes/mixins.graph-graphic-with-tracking-dot.html">mixins.graph-graphic-with-tracking-dot</a></li>
                                 <li><a href="../classes/mixins.graph-has-graph-parent.html">mixins.graph-has-graph-parent</a></li>
                                 <li><a href="../classes/mixins.graph-line-utils.html">mixins.graph-line-utils</a></li>
                                 <li><a href="../classes/mixins.graph-registered-graphic.html">mixins.graph-registered-graphic</a></li>
@@ -142,6 +141,7 @@
 <div class="box intro">
     <p>Adds a bar graph to an <code>nf-graph</code> component.</p>
 <p><strong>Requires the graph has <code>xScaleType === 'ordinal'</code></strong>*</p>
+<p>** <code>showTrackingDot</code> defaults to <code>false</code> in this component **</p>
 
 </div>
 
@@ -163,7 +163,15 @@
 
                     <ul class="index-list methods extends">
                             <li class="index-item method private inherited">
+                                <a href="#method__sendDidTrack">_sendDidTrack</a>
+
+                            </li>
+                            <li class="index-item method private inherited">
                                 <a href="#method__unregisterGraphic">_unregisterGraphic</a>
+
+                            </li>
+                            <li class="index-item method inherited">
+                                <a href="#method_getActualTrackData">getActualTrackData</a>
 
                             </li>
                             <li class="index-item method inherited">
@@ -199,6 +207,10 @@
                             </li>
                             <li class="index-item property inherited">
                                 <a href="#property_data">data</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_didTrack">didTrack</a>
 
                             </li>
                             <li class="index-item property inherited">
@@ -250,6 +262,18 @@
 
                             </li>
                             <li class="index-item property inherited">
+                                <a href="#property_showTrackingDot">showTrackingDot</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_trackingDotRadius">trackingDotRadius</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_trackingMode">trackingMode</a>
+
+                            </li>
+                            <li class="index-item property inherited">
                                 <a href="#property_xprop">xprop</a>
 
                             </li>
@@ -282,6 +306,39 @@
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
+<div id="method__sendDidTrack" class="method item private inherited">
+    <h3 class="name"><code>_sendDidTrack</code></h3>
+
+        <span class="paren">()</span>
+
+
+
+        <span class="flag private">private</span>
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__sendDidTrack">mixins.graph-has-graph-parent</a>:
+        <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l64"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:64</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Observes changes to tracked data and sends the
+didTrack action.</p>
+
+    </div>
+
+
+
+
+</div>
 <div id="method__unregisterGraphic" class="method item private inherited">
     <h3 class="name"><code>_unregisterGraphic</code></h3>
 
@@ -306,12 +363,107 @@
     </div>
 
     <div class="description">
-        <p>&lt;p&gt;calls &lt;a href=&quot;../classes/components.nf-graph.html#method_unregisterGraphic&quot; class=&quot;crosslink&quot;&gt;unregisterGraphic&lt;/a&gt; on
-&lt;code&gt;didInsertElement&lt;/code&gt;.&lt;/p&gt;</p>
+        <p>calls <a href="../classes/components.nf-graph.html#method_unregisterGraphic" class="crosslink">unregisterGraphic</a> on
+<code>didInsertElement</code>.</p>
 
     </div>
 
 
+
+
+</div>
+<div id="method_getActualTrackData" class="method item inherited">
+    <h3 class="name"><code>getActualTrackData</code></h3>
+
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+                <li class="arg">
+                        <code>renderX</code>
+                </li>
+                <li class="arg">
+                        <code>renderY</code>
+                </li>
+                <li class="arg">
+                        <code>data</code>
+                </li>
+            </ul><span class="paren">)</span>
+        </div>
+
+        <span class="returns-inline">
+            <span class="type">Object</span>
+        </span>
+
+
+
+
+
+
+
+    <div class="meta">
+                <p>Inherited from
+                <a href="../classes/mixins.graph-data-graphic.html#method_getActualTrackData">mixins.graph-data-graphic</a>:
+        <a href="../files/addon_mixins_graph-data-graphic.js.html#l229"><code>addon&#x2F;mixins&#x2F;graph-data-graphic.js:229</code></a>
+        </p>
+
+
+
+    </div>
+
+    <div class="description">
+        <p>Gets the actual data at a rendered tracking point passed to it.
+This is overridden in nf-area to account for stacking of data.</p>
+
+    </div>
+
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+                <li class="param">
+                        <code class="param-name">renderX</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>the x domain value the data is rendered at</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">renderY</code>
+                        <span class="type">Number</span>
+
+
+                    <div class="param-description">
+                        <p>the y domain value the data is rendered at</p>
+
+                    </div>
+
+                </li>
+                <li class="param">
+                        <code class="param-name">data</code>
+                        <span class="type">Object</span>
+
+
+                    <div class="param-description">
+                        <p>the raw data from the point</p>
+
+                    </div>
+
+                </li>
+            </ul>
+        </div>
+
+        <div class="returns">
+            <h4>Returns:</h4>
+
+            <div class="returns-description">
+                        <span class="type">Object</span>:
+                    <p>simple x, y point structure</p>
+
+            </div>
+        </div>
 
 
 </div>
@@ -338,9 +490,9 @@
     </div>
 
     <div class="description">
-        <p>&lt;p&gt;Initalization method that gets the &lt;code&gt;nf-graph&lt;/code&gt; parent
-and assigns it to &lt;code&gt;graph&lt;/code&gt;
-NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
+        <p>Initalization method that gets the <code>nf-graph</code> parent
+and assigns it to <code>graph</code>
+NOTE: all object that mixin and have init, must call super.init()</p>
 
     </div>
 
@@ -364,7 +516,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l145"><code>app&#x2F;components&#x2F;nf-bars.js:145</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l149"><code>app&#x2F;components&#x2F;nf-bars.js:149</code></a>
                             </p>
                     
                     
@@ -390,7 +542,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l101"><code>app&#x2F;components&#x2F;nf-bars.js:101</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l105"><code>app&#x2F;components&#x2F;nf-bars.js:105</code></a>
                             </p>
                     
                     
@@ -415,7 +567,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l72"><code>app&#x2F;components&#x2F;nf-bars.js:72</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l76"><code>app&#x2F;components&#x2F;nf-bars.js:76</code></a>
                             </p>
                     
                     
@@ -440,7 +592,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l80"><code>app&#x2F;components&#x2F;nf-bars.js:80</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l84"><code>app&#x2F;components&#x2F;nf-bars.js:84</code></a>
                             </p>
                     
                     
@@ -465,7 +617,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l29"><code>app&#x2F;components&#x2F;nf-bars.js:29</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l33"><code>app&#x2F;components&#x2F;nf-bars.js:33</code></a>
                             </p>
                     
                     
@@ -498,7 +650,33 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;Gets or sets the data used by the component to plot itself.&lt;/p&gt;</p>
+                            <p>Gets or sets the data used by the component to plot itself.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_didTrack" class="property item inherited">
+                        <h3 class="name"><code>didTrack</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/mixins.graph-has-graph-parent.html#property_didTrack">mixins.graph-has-graph-parent</a>:
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l38"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:38</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The action to send on <code>didTrack</code>.</p>
                     
                         </div>
                     
@@ -524,8 +702,8 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The first element from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_renderedData&quot; class=&quot;crosslink&quot;&gt;renderedData&lt;/a&gt;
-                    that is actually visible within the x domain.&lt;/p&gt;</p>
+                            <p>The first element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+                    that is actually visible within the x domain.</p>
                     
                         </div>
                     
@@ -544,7 +722,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l37"><code>app&#x2F;components&#x2F;nf-bars.js:37</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l41"><code>app&#x2F;components&#x2F;nf-bars.js:41</code></a>
                             </p>
                     
                     
@@ -576,7 +754,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The parent graph for a component.&lt;/p&gt;</p>
+                            <p>The parent graph for a component.</p>
                     
                         </div>
                     
@@ -595,7 +773,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l64"><code>app&#x2F;components&#x2F;nf-bars.js:64</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l68"><code>app&#x2F;components&#x2F;nf-bars.js:68</code></a>
                             </p>
                     
                     
@@ -620,7 +798,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l48"><code>app&#x2F;components&#x2F;nf-bars.js:48</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l52"><code>app&#x2F;components&#x2F;nf-bars.js:52</code></a>
                             </p>
                     
                     
@@ -646,7 +824,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         <div class="meta">
                                     <p>
                                     Defined in
-                            <a href="../files/app_components_nf-bars.js.html#l56"><code>app&#x2F;components&#x2F;nf-bars.js:56</code></a>
+                            <a href="../files/app_components_nf-bars.js.html#l60"><code>app&#x2F;components&#x2F;nf-bars.js:60</code></a>
                             </p>
                     
                     
@@ -679,8 +857,8 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The last element from &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_renderedData&quot; class=&quot;crosslink&quot;&gt;renderedData&lt;/a&gt;
-                    that is actually visible within the x domain.&lt;/p&gt;</p>
+                            <p>The last element from <a href="../classes/mixins.graph-data-graphic.html#property_renderedData" class="crosslink">renderedData</a>
+                    that is actually visible within the x domain.</p>
                     
                         </div>
                     
@@ -705,8 +883,8 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The list of data points from mixins.graph-data-graphc/mappedData:property that
-                    fits within the x domain, plus up to one data point outside of that domain in each direction.&lt;/p&gt;</p>
+                            <p>The list of data points from mixins.graph-data-graphc/mappedData:property that
+                    fits within the x domain, plus up to one data point outside of that domain in each direction.</p>
                     
                         </div>
                     
@@ -731,7 +909,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The offset, in pixels, for the x scale&lt;/p&gt;</p>
+                            <p>The offset, in pixels, for the x scale</p>
                     
                         </div>
                     
@@ -757,7 +935,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The offset, in pixels, for the y scale&lt;/p&gt;</p>
+                            <p>The offset, in pixels, for the y scale</p>
                     
                         </div>
                     
@@ -783,7 +961,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The zoom multiplier for the x scale&lt;/p&gt;</p>
+                            <p>The zoom multiplier for the x scale</p>
                     
                         </div>
                     
@@ -809,11 +987,102 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The zoom multiplier for the y scale&lt;/p&gt;</p>
+                            <p>The zoom multiplier for the y scale</p>
                     
                         </div>
                     
                             <p><strong>Default:</strong> 1</p>
+                    
+                    
+                    </div>
+                    <div id="property_showTrackingDot" class="property item inherited">
+                        <h3 class="name"><code>showTrackingDot</code></h3>
+                        <span class="type">Boolean</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/mixins.graph-has-graph-parent.html#property_showTrackingDot">mixins.graph-has-graph-parent</a>:
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l48"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:48</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets whether the tracking dot should be shown at all.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> true</p>
+                    
+                    
+                    </div>
+                    <div id="property_trackingDotRadius" class="property item inherited">
+                        <h3 class="name"><code>trackingDotRadius</code></h3>
+                        <span class="type">Number</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/mixins.graph-has-graph-parent.html#property_trackingDotRadius">mixins.graph-has-graph-parent</a>:
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l30"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:30</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The radius of the tracking dot in pixels</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> 2.5</p>
+                    
+                    
+                    </div>
+                    <div id="property_trackingMode" class="property item inherited">
+                        <h3 class="name"><code>trackingMode</code></h3>
+                        <span class="type">String</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/mixins.graph-has-graph-parent.html#property_trackingMode">mixins.graph-has-graph-parent</a>:
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l8"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:8</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets or sets the tracking mode of the component.</p>
+                    <p>Possible values are:</p>
+                    <ul>
+                    <li>'none': no tracking behavior</li>
+                    <li>'hover': only track while mouse hover</li>
+                    <li>'snap-last': track while mouse hover, but snap to the last data element when not hovering</li>
+                    <li>'snap-first': track while mouse hover, but snap to the first data element when not hovering</li>
+                    <li>'selected-hover': The same as <code>'hover'</code> tracking mode, but only when the compononent is
+                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
+                    <li>'selected-snap-last': The same as <code>'snap-last'</code> tracking mode, but only when the compononent is
+                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
+                    <li>'selected-snap-first': The same as <code>'snap-first'</code> tracking mode, but only when the compononent is
+                    <a href="../classes/mixins.graph-selectable-graphic.html#property_selected" class="crosslink">selected</a></li>
+                    </ul>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> &#x27;none&#x27;</p>
                     
                     
                     </div>
@@ -835,9 +1104,9 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The path of the property on each object in
-                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt;
-                    to use as x data to plot on the graph.&lt;/p&gt;</p>
+                            <p>The path of the property on each object in
+                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+                    to use as x data to plot on the graph.</p>
                     
                         </div>
                     
@@ -863,8 +1132,8 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The function to get the x value from each
-                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt; object&lt;/p&gt;</p>
+                            <p>The function to get the x value from each
+                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
                     
                         </div>
                     
@@ -889,7 +1158,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The x scale used by this component&lt;/p&gt;</p>
+                            <p>The x scale used by this component</p>
                     
                         </div>
                     
@@ -914,9 +1183,9 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The path of the property on each object in
-                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt;
-                    to use as y data to plot on the graph.&lt;/p&gt;</p>
+                            <p>The path of the property on each object in
+                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a>
+                    to use as y data to plot on the graph.</p>
                     
                         </div>
                     
@@ -942,8 +1211,8 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The function to get the y value from each
-                    &lt;a href=&quot;../classes/mixins.graph-data-graphic.html#property_data&quot; class=&quot;crosslink&quot;&gt;data&lt;/a&gt; object&lt;/p&gt;</p>
+                            <p>The function to get the y value from each
+                    <a href="../classes/mixins.graph-data-graphic.html#property_data" class="crosslink">data</a> object</p>
                     
                         </div>
                     
@@ -968,7 +1237,7 @@ NOTE: all object that mixin and have init, must call super.init()&lt;/p&gt;</p>
                         </div>
                     
                         <div class="description">
-                            <p>&lt;p&gt;The y scale used by this component&lt;/p&gt;</p>
+                            <p>The y scale used by this component</p>
                     
                         </div>
                     

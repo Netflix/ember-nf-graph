@@ -1,5 +1,11 @@
 # Changelog
 
+### master
+
+- UPDATE components with tracking capabilities (`nf-line`, `nf-area` and `nf-bars`) updated to support additional data passed with trackingData, rendered values are `renderX` and `renderY`, where actual values are still at `x` and `y`. This was to account for new stacked area functionality.
+- UPDATE `nf-bars` now will render a tracking dot if `showTrackingDot` is set to `true`
+- BREAKING `nf-line`, `nf-area` and `nf-bars` will no longer emit values, actions or events for `hoverChange` and `hoverEnd`. `didTrack` still functions, though.
+
 ### v1.0.0-beta.20
 
 - UPDATE `nf-graph` component now has `didAutoUpdateMinX`, `didAutoUpdateMinY`, `didAutoUpdateMaxX`, `didAutoUpdateMaxX` that will trigger when the corresponding values are updated automatically by a mode of `"push-tick"`, `"auto"` or `"tick"`.
