@@ -4,6 +4,7 @@
 
 - FIX fix regression in nf-line tracking behavior
 - FIX `nf-bars` should actually render bars again (doh)
+- FIX `nf-brush-selection` will no longer throw errors to console while brushing
 
 ### v1.0.0-beta.21
 
