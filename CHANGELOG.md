@@ -3,6 +3,7 @@
 ### master
 
 - FIX fix regression in nf-line tracking behavior
+- FIX `nf-bars` should actually render bars again (doh)
 
 ### v1.0.0-beta.21
 
