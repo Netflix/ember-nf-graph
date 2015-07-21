@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### v1.0.0-beta.22
 
 - FIX fix regression in nf-line tracking behavior
 - FIX `nf-bars` should actually render bars again (doh)
