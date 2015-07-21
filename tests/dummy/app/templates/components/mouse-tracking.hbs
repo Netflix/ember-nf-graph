@@ -1,0 +1,104 @@
+{{#nf-graph selected=selectedLine}}
+
+  {{#nf-graph-content}}
+
+    {{nf-vertical-line x=selectedLine.hoverData.x}}
+    {{nf-horizontal-line y=selectedLine.hoverData.y}}
+
+    {{nf-line data=graphData xprop="date" yprop="low" trackingMode="hover" selectable=true interpolator="monotone"}}
+    {{nf-line data=graphData xprop="date" yprop="medium" trackingMode="hover" selectable=true selected=true interpolator="monotone"}}
+    {{nf-line data=graphData xprop="date" yprop="high" trackingMode="hover" selectable=true interpolator="monotone"}}
+
+   {{/nf-graph-content}}
+{{/nf-graph}}
+
+
+
+
+<h4>Template</h4>
+<table class="CodeRay template"><tbody><tr>
+  <td class="line-numbers">
+<pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13</pre></td>
+  <td class="code"><pre><span title="Operator">{</span><span title="Operator">{</span><span title="Comment" class="comment">#nf-graph selected=selectedLine}}</span><span title="Space">
+
+  </span><span title="Operator">{</span><span title="Operator">{</span><span title="Comment" class="comment">#nf-graph-content}}</span><span title="Space">
+
+    </span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">vertical</span><span title="Operator">-</span><span title="Ident">line</span><span title="Space"> </span><span title="Ident">x</span><span title="Operator">=</span><span title="Ident">selectedLine</span><span title="Operator">.</span><span title="Ident">hoverData</span><span title="Operator">.</span><span title="Ident">x</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+    </span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">horizontal</span><span title="Operator">-</span><span title="Ident">line</span><span title="Space"> </span><span title="Ident">y</span><span title="Operator">=</span><span title="Ident">selectedLine</span><span title="Operator">.</span><span title="Ident">hoverData</span><span title="Operator">.</span><span title="Ident">y</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+
+    </span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">line</span><span title="Space"> </span><span title="Ident">data</span><span title="Operator">=</span><span title="Ident">graphData</span><span title="Space"> </span><span title="Ident">xprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">date</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">yprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">low</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">trackingMode</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">hover</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">selectable</span><span title="Operator">=</span><span title="Predefined Constant" class="predefined-constant">true</span><span title="Space"> </span><span title="Ident">interpolator</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">monotone</span><span title="String" class="delimiter">"</span></span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+    </span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">line</span><span title="Space"> </span><span title="Ident">data</span><span title="Operator">=</span><span title="Ident">graphData</span><span title="Space"> </span><span title="Ident">xprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">date</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">yprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">medium</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">trackingMode</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">hover</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">selectable</span><span title="Operator">=</span><span title="Predefined Constant" class="predefined-constant">true</span><span title="Space"> </span><span title="Ident">selected</span><span title="Operator">=</span><span title="Predefined Constant" class="predefined-constant">true</span><span title="Space"> </span><span title="Ident">interpolator</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">monotone</span><span title="String" class="delimiter">"</span></span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+    </span><span title="Operator">{</span><span title="Operator">{</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">line</span><span title="Space"> </span><span title="Ident">data</span><span title="Operator">=</span><span title="Ident">graphData</span><span title="Space"> </span><span title="Ident">xprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">date</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">yprop</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">high</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">trackingMode</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">hover</span><span title="String" class="delimiter">"</span></span><span title="Space"> </span><span title="Ident">selectable</span><span title="Operator">=</span><span title="Predefined Constant" class="predefined-constant">true</span><span title="Space"> </span><span title="Ident">interpolator</span><span title="Operator">=</span><span title="String" class="string"><span title="String" class="delimiter">"</span><span title="String" class="content">monotone</span><span title="String" class="delimiter">"</span></span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+
+   </span><span title="Operator">{</span><span title="Operator">{</span><span title="Operator">/</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">graph</span><span title="Operator">-</span><span title="Ident">content</span><span title="Operator">}</span><span title="Operator">}</span><span title="Space">
+</span><span title="Operator">{</span><span title="Operator">{</span><span title="Operator">/</span><span title="Ident">nf</span><span title="Operator">-</span><span title="Ident">graph</span><span title="Operator">}</span><span title="Operator">}</span></pre></td>
+</tr></tbody></table>
+
+<div class="discussion">
+  <p>
+    \{{#nf-graph}} is the main graph container.  nf-graph has built-in element selection by clicking or setting a property.  selected=selectedLine causes property "selectedLine" to be set to the current selected element.
+  </p>
+  <p>
+    nf-graph child elements have built in mouse tracking features. Also child elements support being selected by clicking, or by setting a property.  Lines and areas provide a "hoverData" property which contains data about the data point nearest to the mouse pointer.
+    By using the "hoverData" of the "selected" element other graph elements can react to mouse tracking on the selected element.
+  </p>
+  <p>
+    The hoverData property of each graph element is an Ember property that can be data-bound as the source for properties on nearby graph elements, other Ember components, or other HTML attibutes for a wide range of effects.
+  </p>
+  <p>
+    trackingMode="hover" specifies the behavior of nearest data point. "hover" mean populate hoverData with an object only while the mouse is hovering. Otherwise return null. Other values are "snap-first" and "snap-last" which cause hoverData to represent the first or last data point on the element when the mouse is NOT hovering.
+  </p>
+  <p>
+    \{{nf-vertical-line}} draws a vertical line in the graph plot area which is being used along with nf-horizontal-line to draw a mouse crosshair.  x=selectedLine.hoverData.x causes the horizontal position of the line to be dependent of the the selected line's hoverData.x value.
+    Therefore mouse tracking will causes the vertical line to follow the mouse pointer and snap to the nearest data point on the selected line.
+  </p>
+  <p>
+    {{nf-horizontal-line}} draws a horizontal line in the graph plot area and behaves similar the nf-vertical-line above.
+  </p>
+  <p>
+    interpolator="monotone" specifies drawing the area with a smooth curve.  Other interpolator values can be found <a href="https://github.com/mbostock/d3/wiki/SVG-Shapes#line_interpolate">here</a>.
+  </p>
+
+</div>
+
+
+
+
+<h4>Component JavaScript</h4>
+<table class="CodeRay"><tbody><tr>
+  <td class="line-numbers">
+<pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre></td>
+  <td class="code"><pre><span title="Reserved" class="reserved">import</span><span title="Space"> </span><span title="Ident">Ember</span><span title="Space"> </span><span title="Ident">from</span><span title="Space"> </span><span title="String" class="string"><span title="String" class="delimiter">'</span><span title="String" class="content">ember</span><span title="String" class="delimiter">'</span></span><span title="Operator">;</span><span title="Space">
+</span><span title="Reserved" class="reserved">import</span><span title="Space"> </span><span title="Operator">{</span><span title="Space"> </span><span title="Ident">dataGenerator</span><span title="Space"> </span><span title="Operator">}</span><span title="Space"> </span><span title="Ident">from</span><span title="Space"> </span><span title="String" class="string"><span title="String" class="delimiter">'</span><span title="String" class="content">../services/data-generator</span><span title="String" class="delimiter">'</span></span><span title="Operator">;</span><span title="Space">
+
+</span><span title="Reserved" class="reserved">export</span><span title="Space"> </span><span title="Keyword" class="keyword">default</span><span title="Space"> </span><span title="Ident">Ember</span><span title="Operator">.</span><span title="Ident">Component</span><span title="Operator">.</span><span title="Ident">extend</span><span title="Operator">({</span><span title="Space">
+
+  </span><span title="Function" class="function">graphData</span><span title="Operator">:</span><span title="Space"> </span><span title="Keyword" class="keyword">function</span><span title="Operator">(</span><span title="Operator">)</span><span title="Space"> </span><span title="Operator">{</span><span title="Space">
+    </span><span title="Keyword" class="keyword">return</span><span title="Space"> </span><span title="Ident">dataGenerator</span><span title="Operator">.</span><span title="Ident">threeMetricTimeSeries</span><span title="Operator">(</span><span title="Operator">)</span><span title="Operator">;</span><span title="Space">
+  </span><span title="Operator">}</span><span title="Operator">.</span><span title="Ident">property</span><span title="Operator">(</span><span title="Operator">)</span><span title="Space">
+
+</span><span title="Operator">})</span><span title="Operator">;</span><span title="Space">
+</span></pre></td>
+</tr></tbody></table>
