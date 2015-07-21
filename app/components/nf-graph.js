@@ -627,7 +627,7 @@ export default Ember.Component.extend({
       xMax: Number.MIN_VALUE,
       yMin: Number.MAX_VALUE,
       yMax: Number.MIN_VALUE
-    })
+    });
   }),
 
   /**
@@ -730,7 +730,7 @@ export default Ember.Component.extend({
         }
         return uniq;
       }, uniq);
-    }, [])
+    }, []);
     return Ember.A(uniq);
   }),
 
@@ -749,7 +749,7 @@ export default Ember.Component.extend({
         }
         return uniq;
       }, uniq);
-    }, [])
+    }, []);
     return Ember.A(uniq);
   }),
 
@@ -867,7 +867,7 @@ export default Ember.Component.extend({
     graphics.removeObject(graphic);
   },
   
-  updateExtents(data) {
+  updateExtents() {
     this.get('xDataExtent');
     this.get('yDataExtent');
   },
@@ -1112,7 +1112,9 @@ export default Ember.Component.extend({
       // HACK: this is fairly cosmetic, so skip errors.
       retry().
       // subscribe and send the brush actions via Ember
-      forEach(x => this._triggerComponentEvent(x));
+      subscribe(x => {
+        Ember.run(this, () => this._triggerComponentEvent(x));
+      });
   }),
 
   _toBrushEventStreams: function(mouseEvents) {
