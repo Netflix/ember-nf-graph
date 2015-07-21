@@ -27,13 +27,17 @@
 	brushEndAction="brushEnd"
 	width=graphWidth height=graphHeight showFrets="true" showLanes="true" paddingTop=50}}
 
+
 	{{#nf-graph-content}}
+	
+		{{nf-line data=model.area3 trackingMode="snap-last" trackedData=tracked2}}
+{{!-- 
 		{{#nf-area-stack aggregate=1}}
 			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=model.area3  trackingMode="snap-last" trackedData=tracked2}}
 			{{nf-area class="area2" selectable=1 interpolator="linear" data=model.area2  trackingMode="snap-last"}}
 			{{nf-area class="area1" selectable=1 interpolator="linear" data=model.area1  trackingMode="snap-last"}}
 		{{/nf-area-stack}}
-		
+		 --}}
 		{{nf-brush-selection left=brushLeft right=brushRight}}
 	{{/nf-graph-content}}
 
@@ -49,7 +53,7 @@
 
 <div>
 	<span>Tracked Data</span>
-	<output>{{tracked2.y}}</output>
+	<output>{{tracked2.y}} {{tracked2.renderY}}</output>
 </div>
 
 <button {{action 'updateAreas'}}>update areas</button>

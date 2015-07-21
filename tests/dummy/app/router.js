@@ -10,6 +10,8 @@ Router.map(function() {
     this.route('/');
     this.route('nf-bars');
   });
+
+  this.route('examples');
 });
 
 export default Router;
