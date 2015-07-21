@@ -1,5 +1,8 @@
 # Changelog
 
+### master
+- FIX snap-last and snap-first type trackingModes will now initialize properly and render
+
 ### v1.0.0-beta.22
 
 - FIX fix regression in nf-line tracking behavior

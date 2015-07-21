@@ -154,6 +154,8 @@ export default Ember.Mixin.create({
     this._onEndCleanup = () => {
       content.off('mouseout', handler);
     };
+
+    handler();
   },
 
   _onEndSnapLast() {
@@ -168,6 +170,8 @@ export default Ember.Mixin.create({
     this._onEndCleanup = () => {
       content.off('mouseout', handler);
     };
+
+    handler();
   },
 
   _onEndSnapFirst() {
@@ -182,6 +186,8 @@ export default Ember.Mixin.create({
     this._onEndCleanup = () => {
       content.off('mouseout', handler);
     };
+
+    handler();
   },
 
   _trackingModeChanged: on('init', observer('trackingMode', 'selected', function() {
@@ -194,7 +200,7 @@ export default Ember.Mixin.create({
     var point = getMousePoint(content[0], e);
     var graphX = xScale.invert(point.x);
     var graphY = yScale.invert(point.y);
-    var { x, y, data, renderX, renderY} = this.getDataNearXRange(point.x);
+    var { x, y, data, renderX, renderY } = this.getDataNearXRange(point.x);
 
     return {
       point,

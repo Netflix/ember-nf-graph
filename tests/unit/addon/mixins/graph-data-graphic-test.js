@@ -40,53 +40,69 @@ test('renderedData should return the whole sortedData array if xScaleType is "or
 
 test('firstVisibleData returns the first item of renderedData that is actually visible if renderedData includes a value off-graph', assert => {
   var Foo = Ember.Component.extend(GraphDataGraphic);
-    Ember.run(() => {
+  var first = [2,2];
+  first.data = [111, 222];
+  Ember.run(() => {
     var foo = Foo.create({
-      renderedData: [[1,1],[2,2],[3,3],[4,4],[5,5]],
-      xMin: 1.4
+      renderedData: [[1,1],first,[3,3],[4,4],[5,5]],
+      xMin: 1.4,
+      yPropFn: x => x[1],
+      xPropFn: x => x[0]
     });
 
     var firstVisibleData = foo.get('firstVisibleData');
-    assert.deepEqual(firstVisibleData, { x: 2, y: 2, data: undefined });
+    assert.deepEqual(firstVisibleData, { x: 111, y: 222, data: first.data, renderX: 2, renderY: 2 });
   });
 });
 
 test('firstVisibleData returns the first item of renderedData if it is at the xMin exactly', assert => {
   var Foo = Ember.Component.extend(GraphDataGraphic);
   Ember.run(() => {
+    var first = [1,1];
+    first.data = [111,222];
     var foo = Foo.create({
-      renderedData: [[1,1],[2,2],[3,3],[4,4],[5,5]],
-      xMin: 1
+      renderedData: [first,[2,2],[3,3],[4,4],[5,5]],
+      xMin: 1,
+      yPropFn: x => x[1],
+      xPropFn: x => x[0]
     });
 
     var firstVisibleData = foo.get('firstVisibleData');
-    assert.deepEqual(firstVisibleData, { x: 1, y: 1, data: undefined });
+    assert.deepEqual(firstVisibleData, { x: 111, y: 222, data: first.data, renderX: 1, renderY: 1 });
   });
 });
 
 test('lastVisibleData returns the last item of renderedData that is actually visible if renderedData includes a value off-graph', assert => {
   var Foo = Ember.Component.extend(GraphDataGraphic);
+  var last = [4,4];
+  last.data = [111,222];
   Ember.run(() => {
     var foo = Foo.create({
-      renderedData: [[1,1],[2,2],[3,3],[4,4],[5,5]],
-      xMax: 4.4
+      renderedData: [[1,1],[2,2],[3,3],last,[5,5]],
+      xMax: 4.4,
+      yPropFn: x => x[1],
+      xPropFn: x => x[0]
     });
 
     var lastVisibleData = foo.get('lastVisibleData');
-    assert.deepEqual(lastVisibleData, { x: 4, y: 4, data: undefined });
+    assert.deepEqual(lastVisibleData, { x: 111, y: 222, data: last.data, renderX: 4, renderY: 4 });
   });
 });
 
 test('lastVisibleData returns the last item of renderedData if it is at the xMax exactly', assert => {
   var Foo = Ember.Component.extend(GraphDataGraphic);
+  var last = [5,5];
+  last.data = [111,222];
   Ember.run(() => {
     var foo = Foo.create({
-      renderedData: [[1,1],[2,2],[3,3],[4,4],[5,5]],
-      xMax: 5
+      renderedData: [[1,1],[2,2],[3,3],[4,4],last],
+      xMax: 5,
+      yPropFn: x => x[1],
+      xPropFn: x => x[0]
     });
 
     var lastVisibleData = foo.get('lastVisibleData');
-    assert.deepEqual(lastVisibleData, { x: 5, y: 5, data: undefined });
+    assert.deepEqual(lastVisibleData, { x: 111, y: 222, data: last.data, renderX: 5, renderY: 5 });
   });
 });
 

@@ -271,22 +271,29 @@ export default Ember.Mixin.create({
   /**
     The first element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
     that is actually visible within the x domain.
-    @property firstSortedData
-    @type Array
+    @property firstVisibleData
+    @type {Object}
     @readonly
   */
   firstVisibleData: computed(&#x27;renderedData.@each&#x27;, &#x27;xMin&#x27;, {
     get() {
-      var renderedData = this.get(&#x27;renderedData&#x27;);
-      var xMin = this.get(&#x27;xMin&#x27;);
+      var { renderedData, xPropFn, yPropFn, xMin } = this.getProperties(&#x27;renderedData&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, &#x27;xMin&#x27;);
+
       var first = renderedData[0];
       if(first &amp;&amp; xMin &gt; first[0] &amp;&amp; renderedData.length &gt; 1) {
         first = renderedData[1];
       }
+
+      var renderX = first[0];
+      var renderY = first[1];
+      var data = first.data;
+
       return first ? {
-        x: first[0],
-        y: first[1],
-        data: first.data,
+        x: xPropFn(data),
+        y: yPropFn(data),
+        data,
+        renderX,
+        renderY
       } : null;
     }
   }),
@@ -296,21 +303,28 @@ export default Ember.Mixin.create({
     The last element from {{#crossLink &quot;mixins.graph-data-graphic/renderedData:property&quot;}}{{/crossLink}}
     that is actually visible within the x domain.
     @property lastVisibleData
-    @type Array
+    @type {Object}
     @readonly
   */
-  lastVisibleData: computed(&#x27;renderedData.@each&#x27;, &#x27;xMax&#x27;, {
+  lastVisibleData: computed(&#x27;renderedData.@each&#x27;, &#x27;yPropFn&#x27;, &#x27;xPropFn&#x27;, &#x27;xMax&#x27;, {
     get() {
-      var renderedData = this.get(&#x27;renderedData&#x27;);
-      var xMax = this.get(&#x27;xMax&#x27;);
+      var { renderedData, xPropFn, yPropFn, xMax } = this.getProperties(&#x27;renderedData&#x27;, &#x27;xPropFn&#x27;, &#x27;yPropFn&#x27;, &#x27;xMax&#x27;);
       var last = renderedData[renderedData.length - 1];
+
       if(last &amp;&amp; xMax &lt; last[0] &amp;&amp; renderedData.length &gt; 1) {
         last = renderedData[renderedData.length - 2];
       }
+
+      var data = last.data;
+      var renderX = last[0];
+      var renderY = last[1];
+
       return last ? {
-        x: last[0],
-        y: last[1],
-        data: last.data,
+        x: xPropFn(data),
+        y: yPropFn(data),
+        data,
+        renderX,
+        renderY
       }: null;
     }
   }),
