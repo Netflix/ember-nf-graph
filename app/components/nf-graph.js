@@ -43,7 +43,7 @@ var scaleFactoryProperty = function(axis) {
 };
 
 var domainProperty = function(axis) {
-  var dataKey = axis + 'Data';
+  var dataKey = axis + 'UniqueData';
   var minKey = axis + 'Min';
   var maxKey = axis + 'Max';
   var scaleTypeKey = axis + 'ScaleType';
@@ -717,33 +717,40 @@ export default Ember.Component.extend({
   }),
 
   /**
-    Gets all x data from all graphics.
-    @property xData
+    @property xUniqueData
     @type Array
     @readonly
   */
-  xData: Ember.computed('graphics.@each.xData', function(){
+  xUniqueData: Ember.computed('graphics.@each.mappedData', function(){
     var graphics = this.get('graphics');
-    var all = [];
-    graphics.forEach(function(graphic) {
-      all = all.concat(graphic.get('xData'));
-    });
-    return Ember.A(all);
+    var uniq = graphics.reduce((uniq, graphic) => {
+      return graphic.get('mappedData').reduce((uniq, d) => {
+        if(!uniq.some(x => x === d[0])) {
+          uniq.push(d[0]);
+        }
+        return uniq;
+      }, uniq);
+    }, [])
+    return Ember.A(uniq);
   }),
 
+
   /**
-    Gets all y data from all graphics
-    @property yData
+    @property yUniqueData
     @type Array
     @readonly
   */
-  yData: Ember.computed('graphics.@each.yData', function(){
+  yUniqueData: Ember.computed('graphics.@each.mappedData', function(){
     var graphics = this.get('graphics');
-    var all = [];
-    graphics.forEach(function(graphic) {
-      all = all.concat(graphic.get('yData'));
-    });
-    return Ember.A(all);
+    var uniq = graphics.reduce((uniq, graphic) => {
+      return graphic.get('mappedData').reduce((uniq, d) => {
+        if(!uniq.some(y => y === d[1])) {
+          uniq.push(d[1]);
+        }
+        return uniq;
+      }, uniq);
+    }, [])
+    return Ember.A(uniq);
   }),
 
   /**

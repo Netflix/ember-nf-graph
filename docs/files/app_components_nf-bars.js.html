@@ -123,7 +123,7 @@ import DataGraphic from &#x27;ember-nf-graph/mixins/graph-data-graphic&#x27;;
 import RegisteredGraphic from &#x27;ember-nf-graph/mixins/graph-registered-graphic&#x27;;
 import parsePropExpr from &#x27;ember-nf-graph/utils/parse-property-expression&#x27;;
 import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-source&#x27;;
-import GraphicWithTrackingDot from &#x27;ember-nf-graph/mixins/graph-graphic-with-tracking-dot&#x27;;
+//import GraphicWithTrackingDot from &#x27;ember-nf-graph/mixins/graph-graphic-with-tracking-dot&#x27;;
 import { normalizeScale } from &#x27;ember-nf-graph/utils/nf/scale-utils&#x27;;
 import { getRectPath } from &#x27;ember-nf-graph/utils/nf/svg-dom&#x27;;
 
@@ -142,7 +142,7 @@ import { getRectPath } from &#x27;ember-nf-graph/utils/nf/svg-dom&#x27;;
   @uses mixins.graph-data-graphic
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
+export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, {
   tagName: &#x27;g&#x27;,
 
   classNames: [&#x27;nf-bars&#x27;],
@@ -235,30 +235,25 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     &#x27;barWidth&#x27;,
     &#x27;groupOffsetX&#x27;,
     function(){
-      var renderedData = this.get(&#x27;renderedData&#x27;);
-      var xScale = this.get(&#x27;xScale&#x27;);
-      var yScale = this.get(&#x27;yScale&#x27;);
-      var graphHeight = this.get(&#x27;graphHeight&#x27;);
-      var getBarClass = this.get(&#x27;getBarClass&#x27;);
-      var groupOffsetX = this.get(&#x27;groupOffsetX&#x27;);
+      var { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } = 
+        this.getProperties(&#x27;renderedData&#x27;, &#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;graphHeight&#x27;, &#x27;getBarClass&#x27;, &#x27;groupOffsetX&#x27;, &#x27;barWidth&#x27;);
+
       var getRectPath = this._getRectPath;
 
       if(!xScale || !yScale || !Ember.isArray(renderedData)) {
         return null;
       }
 
-      var w = this.get(&#x27;barWidth&#x27;);
+      var w = barWidth;
 
-      return Ember.A(renderedData.map(function(d) {
-        var barClass = &#x27;nf-bars-bar&#x27; + (getBarClass ? &#x27; &#x27; + getBarClass(d.data) : &#x27;&#x27;);
-        var x = normalizeScale(xScale, d[0]) + groupOffsetX;
-        var y = normalizeScale(yScale, d[1]);
+      return Ember.A(renderedData.map(function(data) {
+        var className = &#x27;nf-bars-bar&#x27; + (getBarClass ? &#x27; &#x27; + getBarClass(data.data) : &#x27;&#x27;);
+        var x = normalizeScale(xScale, data[0]) + groupOffsetX;
+        var y = normalizeScale(yScale, data[1]);
         var h = graphHeight - y;
-        return {
-          path: getRectPath(x, y, w, h),
-          className: barClass,
-          data: d,
-        };
+        var path = getRectPath(x, y, w, h);
+
+        return { path, className, data };
       }));
     }
   ),

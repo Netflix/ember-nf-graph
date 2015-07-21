@@ -1136,7 +1136,7 @@
             "module": "utils/nf/svg-dom",
             "namespace": "components",
             "file": "app/components/nf-tracker.js",
-            "line": 12,
+            "line": 9,
             "description": "A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.",
             "uses": [
                 "mixins.graph-has-graph-parent",
@@ -2604,7 +2604,7 @@
         },
         {
             "file": "app/components/nf-bars.js",
-            "line": 149,
+            "line": 144,
             "description": "The name of the action to fire when a bar is clicked.",
             "itemtype": "property",
             "name": "barClick",
@@ -3385,9 +3385,8 @@
         {
             "file": "app/components/nf-graph.js",
             "line": 719,
-            "description": "Gets all x data from all graphics.",
             "itemtype": "property",
-            "name": "xData",
+            "name": "xUniqueData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
@@ -3396,10 +3395,9 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 734,
-            "description": "Gets all y data from all graphics",
+            "line": 738,
             "itemtype": "property",
-            "name": "yData",
+            "name": "yUniqueData",
             "type": "Array",
             "readonly": "",
             "class": "components.nf-graph",
@@ -3408,7 +3406,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 749,
+            "line": 756,
             "description": "Gets the DOM id for the content clipPath element.",
             "itemtype": "property",
             "name": "contentClipPathId",
@@ -3422,7 +3420,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 760,
+            "line": 767,
             "description": "Registry of contained graphic elements such as `nf-line` or `nf-area` components.\nThis registry is used to pool data for scaling purposes.",
             "itemtype": "property",
             "name": "graphics",
@@ -3434,7 +3432,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 771,
+            "line": 778,
             "description": "An array of \"selectable\" graphics that have been selected within this graph.",
             "itemtype": "property",
             "name": "selected",
@@ -3446,7 +3444,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 779,
+            "line": 786,
             "description": "Computed property to show yAxis. Returns `true` if a yAxis is present.",
             "itemtype": "property",
             "name": "showYAxis",
@@ -3458,7 +3456,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 787,
+            "line": 794,
             "description": "Computed property to show xAxis. Returns `true` if an xAxis is present.",
             "itemtype": "property",
             "name": "showXAxis",
@@ -3470,7 +3468,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 795,
+            "line": 802,
             "description": "Gets a function to create the xScale",
             "itemtype": "property",
             "name": "xScaleFactory",
@@ -3481,7 +3479,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 802,
+            "line": 809,
             "description": "Gets a function to create the yScale",
             "itemtype": "property",
             "name": "yScaleFactory",
@@ -3492,7 +3490,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 809,
+            "line": 816,
             "description": "Gets the domain of x values.",
             "itemtype": "property",
             "name": "xDomain",
@@ -3504,7 +3502,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 817,
+            "line": 824,
             "description": "Gets the domain of y values.",
             "itemtype": "property",
             "name": "yDomain",
@@ -3516,7 +3514,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 825,
+            "line": 832,
             "description": "Gets the current xScale used to draw the graph.",
             "itemtype": "property",
             "name": "xScale",
@@ -3528,7 +3526,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 833,
+            "line": 840,
             "description": "Gets the current yScale used to draw the graph.",
             "itemtype": "property",
             "name": "yScale",
@@ -3540,7 +3538,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 841,
+            "line": 848,
             "description": "Registers a graphic such as `nf-line` or `nf-area` components with the graph.",
             "itemtype": "method",
             "name": "registerGraphic",
@@ -3557,7 +3555,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 852,
+            "line": 859,
             "description": "Unregisters a graphic such as an `nf-line` or `nf-area` from the graph.",
             "itemtype": "method",
             "name": "unregisterGraphic",
@@ -3574,7 +3572,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 868,
+            "line": 875,
             "description": "The y range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "yRange",
@@ -3586,7 +3584,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 879,
+            "line": 886,
             "description": "The x range of the graph in pixels. The min and max pixel values\nin an array form.",
             "itemtype": "property",
             "name": "xRange",
@@ -3598,7 +3596,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 890,
+            "line": 897,
             "description": "Returns `true` if the graph has data to render. Data is conveyed\nto the graph by registered graphics.",
             "itemtype": "property",
             "name": "hasData",
@@ -3611,7 +3609,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 900,
+            "line": 907,
             "description": "The x coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphX",
@@ -3623,7 +3621,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 916,
+            "line": 923,
             "description": "The y coordinate position of the graph content",
             "itemtype": "property",
             "name": "graphY",
@@ -3635,7 +3633,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 932,
+            "line": 939,
             "description": "The width, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphWidth",
@@ -3647,7 +3645,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 946,
+            "line": 953,
             "description": "The height, in pixels, of the graph content",
             "itemtype": "property",
             "name": "graphHeight",
@@ -3659,7 +3657,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 960,
+            "line": 967,
             "description": "An SVG transform to position the graph content",
             "itemtype": "property",
             "name": "graphTransform",
@@ -3671,7 +3669,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 972,
+            "line": 979,
             "description": "Sets `hasRendered` to `true` on `willInsertElement`.",
             "itemtype": "method",
             "name": "_notifyHasRendered",
@@ -3683,7 +3681,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 981,
+            "line": 988,
             "description": "Gets the mouse position relative to the container",
             "itemtype": "method",
             "name": "mousePoint",
@@ -3709,7 +3707,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1001,
+            "line": 1008,
             "description": "A computed property returned the view's controller.",
             "itemtype": "property",
             "name": "parentController",
@@ -3721,7 +3719,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1009,
+            "line": 1016,
             "description": "Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently\nselected graphic if it's different from the one passed.",
             "itemtype": "method",
             "name": "selectGraphic",
@@ -3738,7 +3736,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1030,
+            "line": 1037,
             "description": "deselects the graphic passed.",
             "itemtype": "method",
             "name": "deselectGraphic",
@@ -3755,7 +3753,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1047,
+            "line": 1054,
             "description": "The initialization method. Fired on `init`.",
             "itemtype": "method",
             "name": "_setup",
@@ -3767,7 +3765,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1057,
+            "line": 1064,
             "description": "The amount of leeway, in pixels, to give before triggering a brush start.",
             "itemtype": "property",
             "name": "brushThreshold",
@@ -3779,7 +3777,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1065,
+            "line": 1072,
             "description": "The name of the action to trigger when brushing starts",
             "itemtype": "property",
             "name": "brushStartAction",
@@ -3791,7 +3789,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1073,
+            "line": 1080,
             "description": "The name of the action to trigger when brushing emits a new value",
             "itemtype": "property",
             "name": "brushAction",
@@ -3803,7 +3801,7 @@
         },
         {
             "file": "app/components/nf-graph.js",
-            "line": 1081,
+            "line": 1088,
             "description": "The name of the action to trigger when brushing ends",
             "itemtype": "property",
             "name": "brushEndAction",
