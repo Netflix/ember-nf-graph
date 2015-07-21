@@ -200,8 +200,19 @@ export default Ember.Mixin.create({
     var point = getMousePoint(content[0], e);
     var graphX = xScale.invert(point.x);
     var graphY = yScale.invert(point.y);
-    var { x, y, data, renderX, renderY } = this.getDataNearXRange(point.x);
+    var near = this.getDataNearXRange(point.x);
 
+    if(!near) {
+      return {
+        point,
+        graphX,
+        graphY,
+        mouseX: point.x,
+        mouseY: point.y,
+      };
+    }
+
+    var { x, y, data, renderX, renderY } = near;
     return {
       point,
       graphX,
