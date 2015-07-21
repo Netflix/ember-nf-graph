@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### v1.0.0-beta.24
 
 - FIX trackingData no longer throws errors when underlying data is not present
 
