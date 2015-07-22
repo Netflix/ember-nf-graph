@@ -130,64 +130,87 @@ export default Ember.Mixin.create({
   _onHoverTrack() {
     var content = this._content;
 
-    var handler = e => {
+    var mousemoveHandler = e => {
+      this._hovered = true;
       var evt = this._getEventObject(e);
       this.set('trackedData', evt);
     };
 
-    content.on('mousemove', handler);
+    content.on('mousemove', mousemoveHandler);
 
     this._onHoverCleanup = () => {
-      content.off('mousemove', handler);
+      content.off('mousemove', mousemoveHandler);
     };
   },
+
+  _hovered: false,
 
   _onEndUntrack() {
     var content = this._content;
 
-    var handler = () => {
+    var mouseoutHandler = () => {
       this.set('trackedData', null);
     };
 
-    content.on('mouseout', handler);
+    content.on('mouseout', mouseoutHandler);
 
     this._onEndCleanup = () => {
-      content.off('mouseout', handler);
+      content.off('mouseout', mouseoutHandler);
     };
 
-    handler();
+    if(!this._hovered) {
+      this.set('trackedData', null);
+    }
   },
 
   _onEndSnapLast() {
     var content = this._content;
 
-    var handler = () => {
+    var mouseoutHandler = () => {
+      this._hovered = false;
       this.set('trackedData', this.get('lastVisibleData'));
     };
 
-    content.on('mouseout', handler);
-
-    this._onEndCleanup = () => {
-      content.off('mouseout', handler);
+    var changeHandler = () => {
+      if(!this._hovered) {
+        this.set('trackedData', this.get('lastVisibleData'));
+      }
     };
 
-    handler();
+    content.on('mouseout', mouseoutHandler);
+    this.addObserver('lastVisibleData', this, changeHandler);
+
+    this._onEndCleanup = () => {
+      content.off('mouseout', mouseoutHandler);
+      this.removeObserver('lastVisibleData', this, changeHandler);
+    };
+
+    changeHandler();
   },
 
   _onEndSnapFirst() {
     var content = this._content;
 
-    var handler = () => {
+    var mouseoutHandler = () => {
+      this._hovered = false;
       this.set('trackedData', this.get('firstVisibleData'));
     };
 
-    content.on('mouseout', handler);
-
-    this._onEndCleanup = () => {
-      content.off('mouseout', handler);
+    var changeHandler = () => {
+      if(!this._hovered) {
+        this.set('trackedData', this.get('firstVisibleData'));
+      }
     };
 
-    handler();
+    content.on('mouseout', mouseoutHandler);
+    this.addObserver('firstVisibleData', this, changeHandler);
+
+    this._onEndCleanup = () => {
+      content.off('mouseout', mouseoutHandler);
+      this.removeObserver('firstVisibleData', this, changeHandler);
+    };
+
+    changeHandler();
   },
 
   _trackingModeChanged: on('init', observer('trackingMode', 'selected', function() {

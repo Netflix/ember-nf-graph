@@ -1,5 +1,9 @@
 # Changelog
 
+### master
+
+- FIX Ensure tracked data updates when firstVisibleData or lastVisibleData has updated in certain tracking modes
+
 ### v1.0.0-beta.25
 
 - FIX issue where firstVisibleData and lastVisibleData would error if no data is present
