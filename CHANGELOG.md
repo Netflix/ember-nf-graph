@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### v1.0.0-beta.25
 
 - FIX issue where firstVisibleData and lastVisibleData would error if no data is present
 
