@@ -1,5 +1,9 @@
 # Changelog
 
+### master
+
+- FIX issue where firstVisibleData and lastVisibleData would error if no data is present
+
 ### v1.0.0-beta.24
 
 - FIX trackingData no longer throws errors when underlying data is not present
