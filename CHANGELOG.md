@@ -1,48 +1,48 @@
 # Changelog
 
-### master
+### 1.0.0-beta.26
 
 - FIX Ensure tracked data updates when firstVisibleData or lastVisibleData has updated in certain tracking modes
 
-### v1.0.0-beta.25
+### 1.0.0-beta.25
 
 - FIX issue where firstVisibleData and lastVisibleData would error if no data is present
 
-### v1.0.0-beta.24
+### 1.0.0-beta.24
 
 - FIX trackingData no longer throws errors when underlying data is not present
 
-### v1.0.0-beta.23
+### 1.0.0-beta.23
 
 - FIX `snap-last` and `snap-first` type trackingModes will now initialize properly and render
 
-### v1.0.0-beta.22
+### 1.0.0-beta.22
 
 - FIX fix regression in `nf-line` tracking behavior
 - FIX `nf-bars` should actually render bars again (doh)
 - FIX `nf-brush-selection` will no longer throw errors to console while brushing
 
-### v1.0.0-beta.21
+### 1.0.0-beta.21
 
 - UPDATE components with tracking capabilities (`nf-line`, `nf-area` and `nf-bars`) updated to support additional data passed with trackingData, rendered values are `renderX` and `renderY`, where actual values are still at `x` and `y`. This was to account for new stacked area functionality.
 - UPDATE `nf-bars` now will render a tracking dot if `showTrackingDot` is set to `true`
 - BREAKING `nf-line`, `nf-area` and `nf-bars` will no longer emit values, actions or events for `hoverChange` and `hoverEnd`. `didTrack` still functions, though.
 
-### v1.0.0-beta.20
+### 1.0.0-beta.20
 
 - UPDATE `nf-graph` component now has `didAutoUpdateMinX`, `didAutoUpdateMinY`, `didAutoUpdateMaxX`, `didAutoUpdateMaxX` that will trigger when the corresponding values are updated automatically by a mode of `"push-tick"`, `"auto"` or `"tick"`.
 - UPDATE `nf-graph` component now has actions `autoScaleXAction` and `autoScaleYAction` that will send when 
  the auto update events (mentioned above) trigger.
 
-### v1.0.0-beta.19
+### 1.0.0-beta.19
 
 - FIX issue where `nf-area` having null data would throw an unhandled error.
 
-### v1.0.0-beta.18
+### 1.0.0-beta.18
 
 - FIX axes components will once again use the passed templates for pre-Glimmer Ember.
 
-### v1.0.0-beta.17
+### 1.0.0-beta.17
 
 - ADD `nf-tracker` component. This is a component for templatable tracking dots
 - UPDATE `nf-line` and `nf-area` to use `nf-tracker` for tracking dot generation
@@ -53,69 +53,69 @@
 - FIX nf-graph should work with Glimmer now (thanks @jamesarosen)
 - BREAKING graph components such as `nf-line` and `nf-area` will no longer sort your data for you. This is done for performance reasons.
 
-### v1.0.0-beta.16
+### 1.0.0-beta.16
 
 - FIX [#64](https://github.com/Netflix/ember-nf-graph/issues/64) put `tickFactory` back where it belongs on the axes components
 - FIX [#59](https://github.com/Netflix/ember-nf-graph/pull/59) fixed an issue where nf-bars scales had the wrong domain values. 
 
-### v1.0.0-beta.15
+### 1.0.0-beta.15
 
 - FIX Moved ember-new-computed to deps not devDeps
 
-### v1.0.0-beta.14
+### 1.0.0-beta.14
 
 - FIX [#63](https://github.com/Netflix/ember-nf-graph/pull/63) Uses new computed property syntax w/ polyfill for host apps running older ember
 
-### v1.0.0-beta.13
+### 1.0.0-beta.13
 
 - FIX [#56](https://github.com/Netflix/ember-nf-graph/pull/56) Added rxjs to host app bower blueprint
 - FIX rxjs dependency added to `index.js`
 - UPDATE removed dependency on `ember-cli-rx`
 
-### v1.0.0-beta.12
+### 1.0.0-beta.12
 
 - FIX performance issue with axes caused by graphics registering after render
 - FIX issue where `nf-area-stack` would not stack some `nf-area` components
 
-### v1.0.0-beta.11
+### 1.0.0-beta.11
 
 - Update Ember-CLI to `0.2.3` and Ember to `~1.11.3`
 - FIX [#53](//github.com/Netflix/ember-nf-graph/issues/53) remove event hooks and registrations that were causing recalculations and re-renders.
 
-### v1.0.0-beta.10
+### 1.0.0-beta.10
 
 - FIX [#44](//github.com/Netflix/ember-nf-graph/issues/44) remove nf-scroll-area, which was leftover from splitting out nf-table
 - FIX [#41](//github.com/Netflix/ember-nf-graph/issues/41) fix assertion error that was caused in certain tracking modes
 - FIX [#16](//github.com/Netflix/ember-nf-graph/issues/16) patched addClass so Ember will actually update classes on SVG elements using classNameBindings
 - UPDATE [#38](//github.com/Netflix/ember-nf-graph/issues/38) Test on multiple Ember versions
 
-### v1.0.0-beta.9
+### 1.0.0-beta.9
 
 - FIX [#16](//github.com/Netflix/ember-nf-graph/issues/16) SVG classes not swapping when selection changed
 - FIX lock to rx-ember 0.2.5-1
 - FIX [#24](//github.com/Netflix/ember-nf-graph/issues/24) SVG lines no longer complain when nf-vertical-line or nf-horizontal-line have null values
   or return a pixel value less than zero
 
-### v1.0.0-beta.8
+### 1.0.0-beta.8
 
 - [CRITICAL BUGFIX] Moved babel to `dependencies` so our addon is actually transpiled in host apps #34
 
-### v1.0.0-beta.7
+### 1.0.0-beta.7
 
 - Do not use.
 
-### v1.0.0-beta.6
+### 1.0.0-beta.6
 
 - UPDATE [#4](//github.com/Netflix/ember-nf-graph/issues/4) add block params to axis components.
 - FIX [#29](//github.com/netflix/ember-nf-graph/issues/29) remove sad panda rename warning.
 
-### v1.0.0-beta.5
+### 1.0.0-beta.5
 
 - UPDATE name to ember-nf-graph
 - FIX [#28](//github.com/netflix/ember-nf-graph/issues/28) Remove a few additional prototype functions. But also I had to 
   remove the addon that removed the prototype functions. (prototype functions are back for now).
 
-### v1.0.0-beta.4
+### 1.0.0-beta.4
 
 - DEPRECATE [#11](//github.com/netflix/ember-nf-graph/issues/11) Add warning message that name will be changing from ember-nf-graph 
   to ember-nf-graph for next version
@@ -127,16 +127,16 @@
 - FIX [#17](//github.com/netflix/ember-nf-graph/pull/17): stop publishing tmp and dist to npm
 - FIX [#21](//github.com/netflix/ember-nf-graph/issues/21): remove leftover console.debug statement
 
-### v1.0.0-beta.3
+### 1.0.0-beta.3
 
 - FIX [#9](//github.com/netflix/ember-nf-graph/issues/9): Blueprints now properly named
 
-### v1.0.0-beta.2
+### 1.0.0-beta.2
 - FIX Update license
 - FIX updated documentation and removed document cruft
 - UPDATE: added a changelog :P
 - META: made meta joke in changelog with appropriate emoticon
 
-### v1.0.0-beta.1
+### 1.0.0-beta.1
 
 - UPDATE: just releasing to public
