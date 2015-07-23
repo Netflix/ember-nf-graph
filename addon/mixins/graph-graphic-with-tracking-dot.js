@@ -43,6 +43,43 @@ export default Ember.Mixin.create({
   */
   didTrack: null,
 
+  /**
+    The value of the data that is being tracked by the component.
+    @property trackedData
+    @type {Object} an object with the following values:  
+      - point: an { x, y } pair for the exact px coordinates inside the graph-content
+      - graphX: domain x value at mouse position
+      - graphY: domain y value at mouse position
+      - x: nearest x data value
+      - y: nearest y data value
+      - data: nearest raw data
+      - renderX: domain x value to render a tracking dot at (stacked areas are offset)
+      - renderY: domain x value to render a tracking dot at (stacked areas are offset)
+      - mouseX: mouse x position in pixels
+      - mouseY: mouse y position in pixels
+    @default null
+  */
+  trackedData: null,
+
+  /**
+    The value of the data that is being tracked by the component, ONLY if the 
+    graph-content is currently being hovered.
+    @property hoverData
+    @type {Object} an object with the following values:  
+      - point: an { x, y } pair for the exact px coordinates inside the graph-content
+      - graphX: domain x value at mouse position
+      - graphY: domain y value at mouse position
+      - x: nearest x data value
+      - y: nearest y data value
+      - data: nearest raw data
+      - renderX: domain x value to render a tracking dot at (stacked areas are offset)
+      - renderY: domain x value to render a tracking dot at (stacked areas are offset)
+      - mouseX: mouse x position in pixels
+      - mouseY: mouse y position in pixels
+    @default null
+  */
+  hoverData: null,
+
   _showTrackingDot: true,
 
   /**
@@ -64,15 +101,18 @@ export default Ember.Mixin.create({
   /**
     Observes changes to tracked data and sends the
     didTrack action.
-    @method _sendDidTrack
+    @method _trackedDataChanged
     @private
   */
-  _sendDidTrack: Ember.observer('trackedData', function(){
+  _trackedDataChanged: Ember.observer('trackedData', function(){
+    var trackedData = this.get('trackedData');
+    this.set('hoverData', this._hovered ? trackedData : null);
+
     if(this.get('didTrack')) {
       this.sendAction('didTrack', {
-        x: this.get('trackedData.x'),
-        y: this.get('trackedData.y'),
-        data: this.get('trackedData.data'),
+        x: trackedData.x,
+        y: trackedData.y,
+        data: trackedData.data,
         source: this,
         graph: this.get('graph'),
       });
