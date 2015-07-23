@@ -1,5 +1,9 @@
 # Changelog
 
+### master
+
+- UPDATE Readd `hoverData` output to tracked components.
+
 ### 1.0.0-beta.26
 
 - FIX Ensure tracked data updates when firstVisibleData or lastVisibleData has updated in certain tracking modes
