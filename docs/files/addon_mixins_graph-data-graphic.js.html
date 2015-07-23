@@ -284,16 +284,12 @@ export default Ember.Mixin.create({
         first = renderedData[1];
       }
 
-      var renderX = first[0];
-      var renderY = first[1];
-      var data = first.data;
-
       return first ? {
-        x: xPropFn(data),
-        y: yPropFn(data),
-        data,
-        renderX,
-        renderY
+        x: xPropFn(first.data),
+        y: yPropFn(first.data),
+        data: first.data,
+        renderX: first[0],
+        renderY: first[1]
       } : null;
     }
   }),
@@ -315,16 +311,12 @@ export default Ember.Mixin.create({
         last = renderedData[renderedData.length - 2];
       }
 
-      var data = last.data;
-      var renderX = last[0];
-      var renderY = last[1];
-
       return last ? {
-        x: xPropFn(data),
-        y: yPropFn(data),
-        data,
-        renderX,
-        renderY
+        x: xPropFn(last.data),
+        y: yPropFn(last.data),
+        data: last.data,
+        renderX: last[0],
+        renderY: last[1]
       }: null;
     }
   }),

@@ -1331,7 +1331,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 183,
+            "line": 179,
             "description": "The last element from {{#crossLink \"mixins.graph-data-graphic/renderedData:property\"}}{{/crossLink}}\nthat is actually visible within the x domain.",
             "itemtype": "property",
             "name": "lastVisibleData",
@@ -1342,7 +1342,7 @@
         },
         {
             "file": "addon/mixins/graph-data-graphic.js",
-            "line": 243,
+            "line": 235,
             "description": "Gets the actual data at a rendered tracking point passed to it.\nThis is overridden in nf-area to account for stacking of data.",
             "itemtype": "method",
             "name": "getActualTrackData",
@@ -1405,7 +1405,29 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 48,
+            "line": 46,
+            "description": "The value of the data that is being tracked by the component.",
+            "itemtype": "property",
+            "name": "trackedData",
+            "type": "{Object} an object with the following values:  \n  - point: an { x, y } pair for the exact px coordinates inside the graph-content\n  - graphX: domain x value at mouse position\n  - graphY: domain y value at mouse position\n  - x: nearest x data value\n  - y: nearest y data value\n  - data: nearest raw data\n  - renderX: domain x value to render a tracking dot at (stacked areas are offset)\n  - renderY: domain x value to render a tracking dot at (stacked areas are offset)\n  - mouseX: mouse x position in pixels\n  - mouseY: mouse y position in pixels",
+            "default": "null",
+            "class": "mixins.graph-has-graph-parent",
+            "namespace": "mixins"
+        },
+        {
+            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 64,
+            "description": "The value of the data that is being tracked by the component, ONLY if the \ngraph-content is currently being hovered.",
+            "itemtype": "property",
+            "name": "hoverData",
+            "type": "{Object} an object with the following values:  \n  - point: an { x, y } pair for the exact px coordinates inside the graph-content\n  - graphX: domain x value at mouse position\n  - graphY: domain y value at mouse position\n  - x: nearest x data value\n  - y: nearest y data value\n  - data: nearest raw data\n  - renderX: domain x value to render a tracking dot at (stacked areas are offset)\n  - renderY: domain x value to render a tracking dot at (stacked areas are offset)\n  - mouseX: mouse x position in pixels\n  - mouseY: mouse y position in pixels",
+            "default": "null",
+            "class": "mixins.graph-has-graph-parent",
+            "namespace": "mixins"
+        },
+        {
+            "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
+            "line": 85,
             "description": "Gets or sets whether the tracking dot should be shown at all.",
             "itemtype": "property",
             "name": "showTrackingDot",
@@ -1416,10 +1438,10 @@
         },
         {
             "file": "addon/mixins/graph-graphic-with-tracking-dot.js",
-            "line": 64,
+            "line": 101,
             "description": "Observes changes to tracked data and sends the\ndidTrack action.",
             "itemtype": "method",
-            "name": "_sendDidTrack",
+            "name": "_trackedDataChanged",
             "access": "private",
             "tagname": "",
             "class": "mixins.graph-has-graph-parent",
