@@ -161,7 +161,7 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
 
                     <ul class="index-list methods extends">
                             <li class="index-item method private inherited">
-                                <a href="#method__sendDidTrack">_sendDidTrack</a>
+                                <a href="#method__trackedDataChanged">_trackedDataChanged</a>
 
                             </li>
                             <li class="index-item method private inherited">
@@ -189,6 +189,10 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
                             </li>
                             <li class="index-item property">
                                 <a href="#property_height">height</a>
+
+                            </li>
+                            <li class="index-item property inherited">
+                                <a href="#property_hoverData">hoverData</a>
 
                             </li>
                             <li class="index-item property deprecated inherited">
@@ -245,6 +249,10 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
 
                             </li>
                             <li class="index-item property inherited">
+                                <a href="#property_trackedData">trackedData</a>
+
+                            </li>
+                            <li class="index-item property inherited">
                                 <a href="#property_trackingDotRadius">trackingDotRadius</a>
 
                             </li>
@@ -281,8 +289,8 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
             <div id="methods" class="api-class-tabpanel">
                 <h2 class="off-left">Methods</h2>
 
-<div id="method__sendDidTrack" class="method item private inherited">
-    <h3 class="name"><code>_sendDidTrack</code></h3>
+<div id="method__trackedDataChanged" class="method item private inherited">
+    <h3 class="name"><code>_trackedDataChanged</code></h3>
 
         <span class="paren">()</span>
 
@@ -296,8 +304,8 @@ uses the scale of the graph. Creates an <code>&lt;image class=&quot;nf-image&quo
 
     <div class="meta">
                 <p>Inherited from
-                <a href="../classes/mixins.graph-has-graph-parent.html#method__sendDidTrack">mixins.graph-has-graph-parent</a>:
-        <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l64"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:64</code></a>
+                <a href="../classes/mixins.graph-has-graph-parent.html#method__trackedDataChanged">mixins.graph-has-graph-parent</a>:
+        <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l101"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:101</code></a>
         </p>
 
 
@@ -459,6 +467,43 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                             <p>The height as a domain value. Does not
                     handle ordinal scales. To set a pixel value, just
                     set <code>svgHeight</code> directly.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
+                    
+                    
+                    </div>
+                    <div id="property_hoverData" class="property item inherited">
+                        <h3 class="name"><code>hoverData</code></h3>
+                        <span class="type">Object an object with the following values:  
+                      - point: an  x, y  pair for the exact px coordinates inside the graph-content
+                      - graphX: domain x value at mouse position
+                      - graphY: domain y value at mouse position
+                      - x: nearest x data value
+                      - y: nearest y data value
+                      - data: nearest raw data
+                      - renderX: domain x value to render a tracking dot at (stacked areas are offset)
+                      - renderY: domain x value to render a tracking dot at (stacked areas are offset)
+                      - mouseX: mouse x position in pixels
+                      - mouseY: mouse y position in pixels</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/mixins.graph-has-graph-parent.html#property_hoverData">mixins.graph-has-graph-parent</a>:
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l64"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:64</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The value of the data that is being tracked by the component, ONLY if the
+                    graph-content is currently being hovered.</p>
                     
                         </div>
                     
@@ -662,7 +707,7 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                         <div class="meta">
                                     <p>Inherited from
                                     <a href="../classes/mixins.graph-has-graph-parent.html#property_showTrackingDot">mixins.graph-has-graph-parent</a>:
-                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l48"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:48</code></a>
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l85"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:85</code></a>
                             </p>
                     
                     
@@ -799,6 +844,42 @@ NOTE: all object that mixin and have init, must call super.init()</p>
                     
                         </div>
                     
+                    
+                    
+                    </div>
+                    <div id="property_trackedData" class="property item inherited">
+                        <h3 class="name"><code>trackedData</code></h3>
+                        <span class="type">Object an object with the following values:  
+                      - point: an  x, y  pair for the exact px coordinates inside the graph-content
+                      - graphX: domain x value at mouse position
+                      - graphY: domain y value at mouse position
+                      - x: nearest x data value
+                      - y: nearest y data value
+                      - data: nearest raw data
+                      - renderX: domain x value to render a tracking dot at (stacked areas are offset)
+                      - renderY: domain x value to render a tracking dot at (stacked areas are offset)
+                      - mouseX: mouse x position in pixels
+                      - mouseY: mouse y position in pixels</span>
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>Inherited from
+                                    <a href="../classes/mixins.graph-has-graph-parent.html#property_trackedData">mixins.graph-has-graph-parent</a>:
+                            <a href="../files/addon_mixins_graph-graphic-with-tracking-dot.js.html#l46"><code>addon&#x2F;mixins&#x2F;graph-graphic-with-tracking-dot.js:46</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>The value of the data that is being tracked by the component.</p>
+                    
+                        </div>
+                    
+                            <p><strong>Default:</strong> null</p>
                     
                     
                     </div>

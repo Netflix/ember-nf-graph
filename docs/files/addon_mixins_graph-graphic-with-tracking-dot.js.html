@@ -162,6 +162,43 @@ export default Ember.Mixin.create({
   */
   didTrack: null,
 
+  /**
+    The value of the data that is being tracked by the component.
+    @property trackedData
+    @type {Object} an object with the following values:  
+      - point: an { x, y } pair for the exact px coordinates inside the graph-content
+      - graphX: domain x value at mouse position
+      - graphY: domain y value at mouse position
+      - x: nearest x data value
+      - y: nearest y data value
+      - data: nearest raw data
+      - renderX: domain x value to render a tracking dot at (stacked areas are offset)
+      - renderY: domain x value to render a tracking dot at (stacked areas are offset)
+      - mouseX: mouse x position in pixels
+      - mouseY: mouse y position in pixels
+    @default null
+  */
+  trackedData: null,
+
+  /**
+    The value of the data that is being tracked by the component, ONLY if the 
+    graph-content is currently being hovered.
+    @property hoverData
+    @type {Object} an object with the following values:  
+      - point: an { x, y } pair for the exact px coordinates inside the graph-content
+      - graphX: domain x value at mouse position
+      - graphY: domain y value at mouse position
+      - x: nearest x data value
+      - y: nearest y data value
+      - data: nearest raw data
+      - renderX: domain x value to render a tracking dot at (stacked areas are offset)
+      - renderY: domain x value to render a tracking dot at (stacked areas are offset)
+      - mouseX: mouse x position in pixels
+      - mouseY: mouse y position in pixels
+    @default null
+  */
+  hoverData: null,
+
   _showTrackingDot: true,
 
   /**
@@ -183,15 +220,18 @@ export default Ember.Mixin.create({
   /**
     Observes changes to tracked data and sends the
     didTrack action.
-    @method _sendDidTrack
+    @method _trackedDataChanged
     @private
   */
-  _sendDidTrack: Ember.observer(&#x27;trackedData&#x27;, function(){
+  _trackedDataChanged: Ember.observer(&#x27;trackedData&#x27;, function(){
+    var trackedData = this.get(&#x27;trackedData&#x27;);
+    this.set(&#x27;hoverData&#x27;, this._hovered ? trackedData : null);
+
     if(this.get(&#x27;didTrack&#x27;)) {
       this.sendAction(&#x27;didTrack&#x27;, {
-        x: this.get(&#x27;trackedData.x&#x27;),
-        y: this.get(&#x27;trackedData.y&#x27;),
-        data: this.get(&#x27;trackedData.data&#x27;),
+        x: trackedData.x,
+        y: trackedData.y,
+        data: trackedData.data,
         source: this,
         graph: this.get(&#x27;graph&#x27;),
       });
@@ -249,64 +289,87 @@ export default Ember.Mixin.create({
   _onHoverTrack() {
     var content = this._content;
 
-    var handler = e =&gt; {
+    var mousemoveHandler = e =&gt; {
+      this._hovered = true;
       var evt = this._getEventObject(e);
       this.set(&#x27;trackedData&#x27;, evt);
     };
 
-    content.on(&#x27;mousemove&#x27;, handler);
+    content.on(&#x27;mousemove&#x27;, mousemoveHandler);
 
     this._onHoverCleanup = () =&gt; {
-      content.off(&#x27;mousemove&#x27;, handler);
+      content.off(&#x27;mousemove&#x27;, mousemoveHandler);
     };
   },
+
+  _hovered: false,
 
   _onEndUntrack() {
     var content = this._content;
 
-    var handler = () =&gt; {
+    var mouseoutHandler = () =&gt; {
       this.set(&#x27;trackedData&#x27;, null);
     };
 
-    content.on(&#x27;mouseout&#x27;, handler);
+    content.on(&#x27;mouseout&#x27;, mouseoutHandler);
 
     this._onEndCleanup = () =&gt; {
-      content.off(&#x27;mouseout&#x27;, handler);
+      content.off(&#x27;mouseout&#x27;, mouseoutHandler);
     };
 
-    handler();
+    if(!this._hovered) {
+      this.set(&#x27;trackedData&#x27;, null);
+    }
   },
 
   _onEndSnapLast() {
     var content = this._content;
 
-    var handler = () =&gt; {
+    var mouseoutHandler = () =&gt; {
+      this._hovered = false;
       this.set(&#x27;trackedData&#x27;, this.get(&#x27;lastVisibleData&#x27;));
     };
 
-    content.on(&#x27;mouseout&#x27;, handler);
-
-    this._onEndCleanup = () =&gt; {
-      content.off(&#x27;mouseout&#x27;, handler);
+    var changeHandler = () =&gt; {
+      if(!this._hovered) {
+        this.set(&#x27;trackedData&#x27;, this.get(&#x27;lastVisibleData&#x27;));
+      }
     };
 
-    handler();
+    content.on(&#x27;mouseout&#x27;, mouseoutHandler);
+    this.addObserver(&#x27;lastVisibleData&#x27;, this, changeHandler);
+
+    this._onEndCleanup = () =&gt; {
+      content.off(&#x27;mouseout&#x27;, mouseoutHandler);
+      this.removeObserver(&#x27;lastVisibleData&#x27;, this, changeHandler);
+    };
+
+    changeHandler();
   },
 
   _onEndSnapFirst() {
     var content = this._content;
 
-    var handler = () =&gt; {
+    var mouseoutHandler = () =&gt; {
+      this._hovered = false;
       this.set(&#x27;trackedData&#x27;, this.get(&#x27;firstVisibleData&#x27;));
     };
 
-    content.on(&#x27;mouseout&#x27;, handler);
-
-    this._onEndCleanup = () =&gt; {
-      content.off(&#x27;mouseout&#x27;, handler);
+    var changeHandler = () =&gt; {
+      if(!this._hovered) {
+        this.set(&#x27;trackedData&#x27;, this.get(&#x27;firstVisibleData&#x27;));
+      }
     };
 
-    handler();
+    content.on(&#x27;mouseout&#x27;, mouseoutHandler);
+    this.addObserver(&#x27;firstVisibleData&#x27;, this, changeHandler);
+
+    this._onEndCleanup = () =&gt; {
+      content.off(&#x27;mouseout&#x27;, mouseoutHandler);
+      this.removeObserver(&#x27;firstVisibleData&#x27;, this, changeHandler);
+    };
+
+    changeHandler();
   },
 
   _trackingModeChanged: on(&#x27;init&#x27;, observer(&#x27;trackingMode&#x27;, &#x27;selected&#x27;, function() {
@@ -319,8 +382,19 @@ export default Ember.Mixin.create({
     var point = getMousePoint(content[0], e);
     var graphX = xScale.invert(point.x);
     var graphY = yScale.invert(point.y);
-    var { x, y, data, renderX, renderY } = this.getDataNearXRange(point.x);
+    var near = this.getDataNearXRange(point.x);
 
+    if(!near) {
+      return {
+        point,
+        graphX,
+        graphY,
+        mouseX: point.x,
+        mouseY: point.y,
+      };
+    }
+
+    var { x, y, data, renderX, renderY } = near;
     return {
       point,
       graphX,
