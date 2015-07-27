@@ -1,6 +1,6 @@
 {
   "name": "ember-nf-graph",
-  "version": "1.0.0-beta.27",
+  "version": "1.0.0-beta.28",
   "description": "A graphing/charting DSL for Ember.js",
   "files": [
     "addon/",
