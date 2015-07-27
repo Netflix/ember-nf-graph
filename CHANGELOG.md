@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### 1.0.0-beta.28
 
 - REMOVE all SASS files and dependencies from styles
 - BREAKING style complexity has been reduced
