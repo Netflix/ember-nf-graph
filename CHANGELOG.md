@@ -1,5 +1,11 @@
 # Changelog
 
+### master
+
+- REMOVE all SASS files and dependencies from styles
+- BREAKING style complexity has been reduced
+- BREAKING add additional path to nf-area to create tracing line at top
+
 ### 1.0.0-beta.27
 
 - UPDATE Readd `hoverData` output to tracked components.

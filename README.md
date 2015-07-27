@@ -105,15 +105,5 @@ yuidoc -c yuidoc.json
 
 The documentation is located in `docs/`.
 
-### Generating Styles
-
-To work around an issue with including SASS in an Ember-CLI Add-On, the styles and building thereof, are now located under `styles/` and must be built from the command line as so:
-
-```sh
-cd styles/
-npm run build
-```
-
-This will output the .css file to the proper directory, and that file must be committed.
 
 
