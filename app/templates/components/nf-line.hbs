@@ -1,8 +1,8 @@
-<path class="line" d="{{d}}"></path>
+<path class="nf-line-line" d="{{d}}"></path>
 {{#if selectable}}
-	<path class="interaction-mask" d="{{d}}"></path>
+	<path class="nf-line-interaction-mask" d="{{d}}"></path>
 {{/if}}
 
 {{#if showTrackingDot}}
-	{{nf-dot x=trackedData.renderX y=trackedData.renderY r=trackingDotRadius}}
+	{{nf-dot class="nf-line-tracking-dot" x=trackedData.renderX y=trackedData.renderY r=trackingDotRadius}}
 {{/if}}

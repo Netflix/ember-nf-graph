@@ -1,7 +1,7 @@
-<line x1="{{axisLineX}}" y1="0" x2="{{axisLineX}}" y2="{{height}}"></line>
+<line class="nf-y-axis-line" x1="{{axisLineX}}" y1="0" x2="{{axisLineX}}" y2="{{height}}"></line>
 
 {{#each ticks as |tick|}}
-  <g class="tick">
+  <g class="nf-y-axis-tick">
     {{#if useTemplate}}
       {{#nf-tick-label x=tick.labelx y=tick.y}}
         {{yield tick}}
@@ -12,6 +12,6 @@
       {{/nf-tick-label}}
     {{/if}}
 
-    <line x1="{{tick.x1}}" y1="{{tick.y}}" x2="{{tick.x2}}" y2="{{tick.y}}"></line>
+    <line class="nf-y-axis-tick-line" x1="{{tick.x1}}" y1="{{tick.y}}" x2="{{tick.x2}}" y2="{{tick.y}}"></line>
   </g>
 {{/each}}
