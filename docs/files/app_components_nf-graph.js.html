@@ -141,7 +141,17 @@ var scaleFactoryProperty = function(axis) {
     }
 
     else if(type === &#x27;ordinal&#x27;) {
-      return d3.scale.ordinal;
+      return function(){ 
+        var scale = d3.scale.ordinal();
+        // ordinal scales don&#x27;t have an invert function, so we need to add one
+        scale.invert = function(rv) {
+          var [min, max] = d3.extent(scale.range());
+          var domain = scale.domain();
+          var i = Math.round((domain.length - 1) * (rv - min) / (max - min));
+          return domain[i];
+        };
+        return scale;
+      }
     }
     
     else if(type === &#x27;power&#x27; || type === &#x27;pow&#x27;) {

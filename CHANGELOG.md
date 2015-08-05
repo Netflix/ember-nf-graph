@@ -1,5 +1,9 @@
 # Changelog
 
+### master
+
+- UPDATE Readd tracking capabilities to nf-bars
+
 ### 1.0.0-beta.28
 
 - REMOVE all SASS files and dependencies from styles

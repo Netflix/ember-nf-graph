@@ -4,7 +4,7 @@ import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RegisteredGraphic from 'ember-nf-graph/mixins/graph-registered-graphic';
 import parsePropExpr from 'ember-nf-graph/utils/parse-property-expression';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
-//import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
+import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
 
@@ -22,8 +22,9 @@ import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-requires-scale-source
+  @uses mixins.graph-graphic-with-tracking-dot
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, {
+export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
   tagName: 'g',
 
   classNames: ['nf-bars'],
