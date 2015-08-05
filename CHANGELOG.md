@@ -1,6 +1,6 @@
 # Changelog
 
-### master
+### 1.0.0-beta.29
 
 - UPDATE Readd tracking capabilities to nf-bars
 
