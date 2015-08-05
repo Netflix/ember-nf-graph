@@ -125,6 +125,7 @@ import DataGraphic from &#x27;ember-nf-graph/mixins/graph-data-graphic&#x27;;
 import AreaUtils from &#x27;ember-nf-graph/mixins/graph-area-utils&#x27;;
 import GraphicWithTrackingDot from &#x27;ember-nf-graph/mixins/graph-graphic-with-tracking-dot&#x27;;
 import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-source&#x27;;
+import LineUtils from &#x27;ember-nf-graph/mixins/graph-line-utils&#x27;;
 
 /**
   Adds an area graph to an &#x60;nf-graph&#x60; component.
@@ -143,7 +144,7 @@ import RequireScaleSource from &#x27;ember-nf-graph/mixins/graph-requires-scale-
   @uses mixins.graph-requires-scale-source
 */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, 
-  Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, {    
+  Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, LineUtils, {    
 
     tagName: &#x27;g&#x27;,
     
@@ -239,29 +240,24 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       }
     }),
 
-
-    /**
-      Gets the area function to use to create the area SVG path data
-      @property areaFn
-      @type Function
-      @readonly
-    */
     areaFn: Ember.computed(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;, function(){
-      var xScale = this.get(&#x27;xScale&#x27;);
-      var yScale = this.get(&#x27;yScale&#x27;);
-      var interpolator = this.get(&#x27;interpolator&#x27;);
+      var { xScale, yScale, interpolator } = this.getProperties(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;);
       return this.createAreaFn(xScale, yScale, interpolator);
     }),
 
-    /**
-      The SVG path data for the area
-      @property d
-      @type String
-      @readonly
-    */
+    lineFn: Ember.computed(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;, function(){
+      var { xScale, yScale, interpolator } = this.getProperties(&#x27;xScale&#x27;, &#x27;yScale&#x27;, &#x27;interpolator&#x27;);
+      return this.createLineFn(xScale, yScale, interpolator);
+    }),
+
     d: Ember.computed(&#x27;renderedData&#x27;, &#x27;areaFn&#x27;, function(){
       var renderedData = this.get(&#x27;renderedData&#x27;);
       return this.get(&#x27;areaFn&#x27;)(renderedData);
+    }),
+
+    dLine: Ember.computed(&#x27;renderedData&#x27;, &#x27;lineFn&#x27;, function(){
+      var renderedData = this.get(&#x27;renderedData&#x27;);
+      return this.get(&#x27;lineFn&#x27;)(renderedData);
     }),
 
     click: function(){

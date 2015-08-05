@@ -22,6 +22,7 @@ import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-requires-scale-source
+  @uses mixins.graph-graphic-with-tracking-dot
 */
 export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
   tagName: 'g',
