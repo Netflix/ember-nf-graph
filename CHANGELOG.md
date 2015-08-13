@@ -1,5 +1,10 @@
 # Changelog
 
+### 1.0.0-beta.30
+
+- FIX memory leak in nf-area caused by overriding `_unregister`
+- FIX null reference error in nf-area caused when data is empty
+
 ### 1.0.0-beta.29
 
 - UPDATE Readd tracking capabilities to nf-bars
