@@ -185,7 +185,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method _unregister
     @private
   */
-  _unregister: Ember.on('willDestroyElement', function() {
+  _unregisterMarker: Ember.on('willDestroyElement', function() {
     this.get('container').unregisterMarker(this);
   })
 });
