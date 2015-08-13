@@ -75,7 +75,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       };
     },
 
-    _unregister: Ember.on('willDestroyElement', function(){
+    _unregisterArea: Ember.on('willDestroyElement', function(){
       var stack = this.get('stack', stack);
       if(stack) {
         stack.unregisterArea(this);
