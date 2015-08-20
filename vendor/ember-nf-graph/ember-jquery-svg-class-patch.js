@@ -10,23 +10,30 @@
     // Modern browsers only for now!
     // Open to pull requests.
     $.fn.addClass = function(value) {
-      var toAdd = value.split(' ');
-      return $(this).each(function(i, el) {
-        if(el.classList) {
-          toAdd.forEach(function(cls) {
-            if(cls) {
-              el.classList.add(cls);
-            }
-          });
-        } else {
-          el.setAttribute('class', _getClassArray(el).concat(toAdd).join(' '));
-        }
-      });
+      var proceed = typeof value === "string" && value;
+
+      if (proceed) {
+        var toAdd = value.split(' ');
+
+        $(this).each(function(i, el) {
+          if(el.classList) {
+            toAdd.forEach(function(cls) {
+              if(cls) {
+                el.classList.add(cls);
+              }
+            });
+          } else {
+            el.setAttribute('class', _getClassArray(el).concat(toAdd).join(' '));
+          }
+        });
+      }
+
+      return $(this);
     };
 
     $.fn.removeClass = function(value) {
       return $(this).each(function(i, el) {
-        var toRemove = value.split(' ').filter(_identity);
+        var toRemove = (value || '').split(' ').filter(_identity);
         if(el.classList) {
           toRemove.forEach(function(cls) {
             if(cls) {
