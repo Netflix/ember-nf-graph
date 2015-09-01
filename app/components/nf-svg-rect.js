@@ -3,6 +3,7 @@ import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
+import computed from 'ember-new-computed';
 
 /**
   A rectangle that plots using domain values from the graph. Uses an SVGPathElement
@@ -46,11 +47,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
     @default 0
   */
-  width: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._width = +value;
+  width: computed({
+    get() {
+      return this._width;
+    },
+    set(key, value) {
+      return this._width = +value;
     }
-    return this._width;
   }),
 
   _height: 0,
@@ -64,11 +67,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
     @default 0
   */
-  height: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._height = +value;
+  height: computed({
+    get() {
+      return this._height;
+    },
+    set(key, value) {
+      return this._height = +value;
     }
-    return this._height;
   }),
 
   /**
@@ -76,7 +81,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property x1
     @type Number
   */
-  x1: Ember.computed('width', 'x', 'xScale', function(){
+  x1: computed('width', 'x', 'xScale', function(){
     var xScale = this.get('xScale');
     var w = this.get('width');
     var x = this.get('x');
@@ -96,7 +101,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property y1
     @type Number
   */
-  y1: Ember.computed('height', 'y', 'yScale', function(){
+  y1: computed('height', 'y', 'yScale', function(){
     var yScale = this.get('yScale');
     var h = this.get('height');
     var y = this.get('y');
@@ -116,7 +121,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property x0
     @type Number
   */
-  x0: Ember.computed('x', 'xScale', function(){
+  x0: computed('x', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x'));
   }),
 
@@ -125,7 +130,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property y0
     @type Number
   */
-  y0: Ember.computed('y', 'yScale', function() {
+  y0: computed('y', 'yScale', function() {
     return normalizeScale(this.get('yScale'), this.get('y'));
   }),
 
@@ -134,7 +139,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property d
     @type String
   */
-  d: Ember.computed('x0', 'y0', 'x1', 'y1', function(){
+  d: computed('x0', 'y0', 'x1', 'y1', function(){
     var x0 = this.get('x0');
     var y0 = this.get('y0');
     var x1 = this.get('x1');

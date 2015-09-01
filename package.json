@@ -28,7 +28,7 @@
   "license": "Apache-2.0",
   "dependencies": {
     "ember-cli-babel": "^5.0.0",
-    "ember-new-computed": "^1.0.0"
+    "ember-new-computed": "^1.0.3"
   },
   "devDependencies": {
     "benchpress": "^2.0.0-alpha.16",

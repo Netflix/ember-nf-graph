@@ -1,7 +1,7 @@
 import Ember from 'ember';
 import HasGraphParent  from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
-
+import computed from 'ember-new-computed';
 import layout from '../templates/components/nf-y-axis';
 
 /**
@@ -40,7 +40,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   layout: layout,
   template: null,
 
-  useTemplate: Ember.computed(function(){
+  useTemplate: computed(function(){
     var preGlimmerCheck = this.get('template.blockParams');
     var postGlimmerCheck = this.get('hasBlock') && this.get('hasBlockParams');
     return Boolean(postGlimmerCheck || preGlimmerCheck);
@@ -114,11 +114,13 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
-  tickFilter: Ember.computed(function(name, value) {
-    if(arguments.length > 1) {
-      this._tickFilter = value;
+  tickFilter: computed({
+    get() {
+      return this._tickFilter;
+    },
+    set(name, value) {
+      return this._tickFilter = value;
     }
-    return this._tickFilter;
   }),
 
   /**
@@ -127,7 +129,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  isOrientRight: Ember.computed.equal('orient', 'right'),
+  isOrientRight: computed.equal('orient', 'right'),
 
 
   /**
@@ -136,7 +138,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: Ember.computed('x', 'y', function(){
+  transform: computed('x', 'y', function(){
     var x = this.get('x');
     var y = this.get('y');
     return `translate(${x} ${y})`;
@@ -148,7 +150,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  x: Ember.computed(
+  x: computed(
     'orient',
     'graph.width',
     'width',
@@ -169,7 +171,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: Ember.computed.alias('graph.graphY'),
+  y: computed.alias('graph.graphY'),
 
   /** 
     the height of the component
@@ -177,7 +179,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  height: Ember.computed.alias('graph.height'),
+  height: computed.alias('graph.height'),
 
   init() {
     this._super(...arguments);
@@ -204,7 +206,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   tickFactory: null,
 
-  tickData: Ember.computed('graph.yScaleType', 'uniqueYData', 'yScale', 'tickCount', function(){
+  tickData: computed('graph.yScaleType', 'uniqueYData', 'yScale', 'tickCount', function(){
     var tickFactory = this.get('tickFactory');
     var scale = this.get('yScale');
     var uniqueData = this.get('uniqueYData');
@@ -235,7 +237,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueYData: Ember.computed.uniq('graph.yData'),
+  uniqueYData: computed.uniq('graph.yData'),
 
   /** 
     The ticks to be displayed.
@@ -243,7 +245,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Array
     @readonly
   */
-  ticks: Ember.computed(
+  ticks: computed(
     'yScale',
     'tickPadding',
     'axisLineX',
@@ -287,7 +289,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  axisLineX: Ember.computed('isOrientRight', 'width', function(){
+  axisLineX: computed('isOrientRight', 'width', function(){
     return this.get('isOrientRight') ? 0 : this.get('width');
   }),
 });
