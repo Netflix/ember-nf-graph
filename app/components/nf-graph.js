@@ -2,16 +2,17 @@ import Ember from 'ember';
 import GraphPosition from 'ember-nf-graph/utils/nf/graph-position';
 import { getMousePoint } from 'ember-nf-graph/utils/nf/svg-dom';
 import { toArray } from 'ember-nf-graph/utils/nf/array-helpers';
+import computed from 'ember-new-computed';
 
 var Observable = Rx.Observable;
 
-var computedBool = Ember.computed.bool;
+var computedBool = computed.bool;
 
 var scaleFactoryProperty = function(axis) {
   var scaleTypeKey = axis + 'ScaleType';
   var powExponentKey = axis + 'PowerExponent';
 
-  return Ember.computed(scaleTypeKey, powExponentKey, function(){
+  return computed(scaleTypeKey, powExponentKey, function(){
     var type = this.get(scaleTypeKey);
     var powExp = this.get(powExponentKey);
 
@@ -59,7 +60,7 @@ var domainProperty = function(axis) {
   var scaleTypeKey = axis + 'ScaleType';
   var logMinKey = axis + 'LogMin';
 
-  return Ember.computed(dataKey + '.@each', minKey, maxKey, scaleTypeKey, logMinKey, function(){
+  return computed(dataKey + '.@each', minKey, maxKey, scaleTypeKey, logMinKey, function(){
     var data = this.get(dataKey);
     var min = this.get(minKey);
     var max = this.get(maxKey);
@@ -96,7 +97,7 @@ var scaleProperty = function(axis) {
   var ordinalPaddingKey = axis + 'OrdinalPadding'; 
   var ordinalOuterPaddingKey = axis + 'OrdinalOuterPadding';
 
-  return Ember.computed(
+  return computed(
     scaleFactoryKey,
     rangeKey,
     scaleTypeKey,
@@ -133,23 +134,19 @@ var minProperty = function(axis, defaultTickCount){
   var _prop_ = axis + 'Min';
   var _autoScaleEvent_ = 'didAutoUpdateMin' + axis.toUpperCase();
 
-  return Ember.computed(
+  return computed(
     _MinMode_,
     _DataExtent_,
     _Axis_tickCount_,
     _ScaleFactory_,
-    function(key, value) {
-      var mode = this.get(_MinMode_);
-      var ext;
+    {
+      get() {
+        var mode = this.get(_MinMode_);
+        var ext;
 
-      if(arguments.length > 1) {
-        this[__Min_] = value;
-      } else {
-        var self = this;
-
-        var change = function(val) {
-          self.set(_prop_, val);
-          self.trigger(_autoScaleEvent_);
+        var change = val => {
+          this.set(_prop_, val);
+          this.trigger(_autoScaleEvent_);
         };
 
         if(mode === 'auto') {
@@ -173,9 +170,15 @@ var minProperty = function(axis, defaultTickCount){
             change(newDomain[0]);
           }
         }
-      }
 
-      return this[__Min_];
+        return this[__Min_];
+      },
+      set(key, value) {
+        if (value !== undefined) {
+          this[__Min_] = value;
+        }
+        return this[__Min_];
+      }
     }
   );
 };
@@ -189,23 +192,19 @@ var maxProperty = function(axis, defaultTickCount) {
   var _prop_ = axis + 'Max';
   var _autoScaleEvent_ = 'didAutoUpdateMax' + axis.toUpperCase();
 
-  return Ember.computed(
+  return computed(
     _MaxMode_,
     _DataExtent_,
     _ScaleFactory_,
     _Axis_tickCount_,
-    function(key, value) {
-      var mode = this.get(_MaxMode_);
-      var ext;
+    {
+      get() {
+        var mode = this.get(_MaxMode_);
+        var ext;
 
-      if(arguments.length > 1) {
-        this[__Max_] = value;
-      } else {
-        var self = this;
-
-        var change = function(val) {
-          self.set(_prop_, val);
-          self.trigger(_autoScaleEvent_);
+        var change = val => {
+          this.set(_prop_, val);
+          this.trigger(_autoScaleEvent_);
         };
 
         if(mode === 'auto') {
@@ -229,9 +228,15 @@ var maxProperty = function(axis, defaultTickCount) {
             change(newDomain[1]);
           }
         }
-      }
 
-      return this[__Max_];
+        return this[__Max_];
+      },
+      set(key, value) {
+        if (value !== undefined) {
+          this[__Max_] = value;
+        }
+        return this[__Max_];
+      }
     }
   );
 };
@@ -624,7 +629,7 @@ export default Ember.Component.extend({
       yMax: Number.MIN_VALUE
     }
   */
-  dataExtents: Ember.computed('graphics.@each.data', function(){
+  dataExtents: computed('graphics.@each.data', function(){
     var graphics = this.get('graphics');
     return graphics.reduce((c, x) => c.concat(x.get('mappedData')), []).reduce((extents, [x, y]) => {
       extents.xMin = extents.xMin < x ? extents.xMin : x;
@@ -710,7 +715,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  xDataExtent: Ember.computed('dataExtents', function(){
+  xDataExtent: computed('dataExtents', function(){
     var { xMin, xMax } = this.get('dataExtents');
     return [xMin, xMax];
   }),
@@ -721,7 +726,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  yDataExtent: Ember.computed('dataExtents', function(){
+  yDataExtent: computed('dataExtents', function(){
     var { yMin, yMax } = this.get('dataExtents');
     return [yMin, yMax];
   }),
@@ -731,7 +736,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  xUniqueData: Ember.computed('graphics.@each.mappedData', function(){
+  xUniqueData: computed('graphics.@each.mappedData', function(){
     var graphics = this.get('graphics');
     var uniq = graphics.reduce((uniq, graphic) => {
       return graphic.get('mappedData').reduce((uniq, d) => {
@@ -750,7 +755,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  yUniqueData: Ember.computed('graphics.@each.mappedData', function(){
+  yUniqueData: computed('graphics.@each.mappedData', function(){
     var graphics = this.get('graphics');
     var uniq = graphics.reduce((uniq, graphic) => {
       return graphic.get('mappedData').reduce((uniq, d) => {
@@ -770,7 +775,7 @@ export default Ember.Component.extend({
     @readonly
     @private
   */
-  contentClipPathId: Ember.computed('elementId', function(){
+  contentClipPathId: computed('elementId', function(){
     return this.get('elementId') + '-content-mask';
   }),
 
@@ -781,7 +786,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  graphics: Ember.computed(function(){
+  graphics: computed(function(){
     return Ember.A();
   }),
 
@@ -889,7 +894,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  yRange: Ember.computed('graphHeight', function(){ 
+  yRange: computed('graphHeight', function(){ 
     return [this.get('graphHeight'), 0];
   }),
 
@@ -900,7 +905,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  xRange: Ember.computed('graphWidth', function(){
+  xRange: computed('graphWidth', function(){
     return [0, this.get('graphWidth')];
   }),
 
@@ -912,7 +917,7 @@ export default Ember.Component.extend({
     @default false
     @readonly
    */
-  hasData: Ember.computed.notEmpty('graphics'),
+  hasData: computed.notEmpty('graphics'),
 
   /**
     The x coordinate position of the graph content
@@ -920,7 +925,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphX: Ember.computed('paddingLeft', 'yAxis.width', 'yAxis.orient', function() {
+  graphX: computed('paddingLeft', 'yAxis.width', 'yAxis.orient', function() {
     var paddingLeft = this.get('paddingLeft');
     var yAxisWidth = this.get('yAxis.width') || 0;
     var yAxisOrient = this.get('yAxis.orient');
@@ -936,7 +941,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphY: Ember.computed('paddingTop', 'xAxis.orient', 'xAxis.height', function(){
+  graphY: computed('paddingTop', 'xAxis.orient', 'xAxis.height', function(){
     var paddingTop = this.get('paddingTop');
     var xAxisOrient = this.get('xAxis.orient');
     if(xAxisOrient === 'top') {
@@ -952,7 +957,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphWidth: Ember.computed('width', 'paddingRight', 'paddingLeft', 'yAxis.width', function() {
+  graphWidth: computed('width', 'paddingRight', 'paddingLeft', 'yAxis.width', function() {
     var paddingRight = this.get('paddingRight') || 0;
     var paddingLeft = this.get('paddingLeft') || 0;
     var yAxisWidth = this.get('yAxis.width') || 0;
@@ -966,7 +971,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
    */
-  graphHeight: Ember.computed('height', 'paddingTop', 'paddingBottom', 'xAxis.height', function(){
+  graphHeight: computed('height', 'paddingTop', 'paddingBottom', 'xAxis.height', function(){
     var paddingTop = this.get('paddingTop') || 0;
     var paddingBottom = this.get('paddingBottom') || 0;
     var xAxisHeight = this.get('xAxis.height') || 0;
@@ -980,7 +985,7 @@ export default Ember.Component.extend({
     @type String
     @readonly
    */
-  graphTransform: Ember.computed('graphX', 'graphY', function(){
+  graphTransform: computed('graphX', 'graphY', function(){
     var graphX = this.get('graphX');
     var graphY = this.get('graphY');
     return `translate(${graphX} ${graphY})`;
@@ -1021,7 +1026,7 @@ export default Ember.Component.extend({
     @type Ember.Controller
     @readonly
   */
-  parentController: Ember.computed.alias('templateData.view.controller'),
+  parentController: computed.alias('templateData.view.controller'),
 
   /**
     Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently

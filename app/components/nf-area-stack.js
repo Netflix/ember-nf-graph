@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import computed from 'ember-new-computed';
 
 /**
   A component for grouping and stacking `nf-area` components in an `nf-graph`.
@@ -40,14 +41,14 @@ export default Ember.Component.extend({
     @type {boolean}
     @default false
   */
-  aggregate: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._aggregate = value;
-    } else if(typeof this._aggregate === 'undefined') {
+  aggregate: computed({
+    get() {
       Ember.warn('nf-area-stack.aggregate must be set. Currently defaulting to `false` but will default to `true` in the future.')
-      this._aggregate = false;
+      return this._aggregate = false;
+    },
+    set(key, value) {
+      return this._aggregate = value;
     }
-    return this._aggregate;
   }),
 
   /**
@@ -56,7 +57,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  areas: Ember.computed(function(){
+  areas: computed(function(){
     return Ember.A();
   }),
 

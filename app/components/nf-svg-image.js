@@ -3,6 +3,7 @@ import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
+import computed from 'ember-new-computed';
 
 /**
   An image to be displayed in a graph with that takes domain based measurements and
@@ -51,11 +52,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
     @default 0
   */
-  width: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
-      this._width = Math.max(0, +value) || 0;
+  width: computed({
+    get() {
+      return this._width;
+    },
+    set(key, value) {
+      return this._width = Math.max(0, +value) || 0;
     }
-    return this._width;
   }),
 
   _height: 0,
@@ -67,11 +70,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property height
     @default null
   */
-  height: Ember.computed(function(key, value) {
-    if(arguments.length > 1) {
+  height: computed({
+    get() {
+      return this._height;
+    },
+    set(key, value) {
       this._height = Math.max(0, +value) || 0;
     }
-    return this._height;
   }),
 
   /**
@@ -79,24 +84,26 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property src
     @type String
   */
-  src: Ember.computed(function(key, value) {
-    //HACK: because attributeBindings doesn't currently work with namespaced attributes.
-    var $elem = this.$();
-    if(arguments.length > 1) {
-      $elem.attr('xlink:href', value);
+  src: computed({
+    // HACK: because attributeBindings doesn't currently work with namespaced attributes.
+    get() {
+      return this.$().attr('xlink:href');
+    },
+    set(key, value) {
+      this.$().attr('xlink:href', value);
+      return value;
     }
-    return $elem.attr('xlink:href');
   }),
 
-  x0: Ember.computed('x', 'xScale', function(){
+  x0: computed('x', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x'));
   }),
 
-  y0: Ember.computed('y', 'yScale', function(){
+  y0: computed('y', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('y'));
   }),
 
-  x1: Ember.computed('xScale', 'width', 'x', function(){
+  x1: computed('xScale', 'width', 'x', function(){
     var scale = this.get('xScale');
     if(scale.rangeBands) {
       throw new Error('nf-image does not support ordinal scales');
@@ -104,7 +111,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     return normalizeScale(scale, this.get('width') + this.get('x'));
   }),
 
-  y1: Ember.computed('yScale', 'height', 'y', function(){
+  y1: computed('yScale', 'height', 'y', function(){
     var scale = this.get('yScale');
     if(scale.rangeBands) {
       throw new Error('nf-image does not support ordinal scales');
@@ -117,7 +124,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property svgX
     @type Number
   */
-  svgX: Ember.computed('x0', 'x1', function(){
+  svgX: computed('x0', 'x1', function(){
     return Math.min(this.get('x0'), this.get('x1'));
   }),
 
@@ -126,7 +133,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property svgY
     @type Number
   */
-  svgY: Ember.computed('y0', 'y1', function(){
+  svgY: computed('y0', 'y1', function(){
     return Math.min(this.get('y0'), this.get('y1'));
   }),
 
@@ -135,7 +142,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property svgWidth
     @type Number
   */
-  svgWidth: Ember.computed('x0', 'x1', function(){
+  svgWidth: computed('x0', 'x1', function(){
     return Math.abs(this.get('x0') - this.get('x1'));
   }),
 
@@ -144,7 +151,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @property svgHeight
     @type Number
   */
-  svgHeight: Ember.computed('y0', 'y1', function(){
+  svgHeight: computed('y0', 'y1', function(){
     return Math.abs(this.get('y0') - this.get('y1'));
   }),
 });
