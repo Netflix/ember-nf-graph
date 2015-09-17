@@ -60,7 +60,7 @@ var domainProperty = function(axis) {
   var scaleTypeKey = axis + 'ScaleType';
   var logMinKey = axis + 'LogMin';
 
-  return computed(dataKey + '.@each', minKey, maxKey, scaleTypeKey, logMinKey, function(){
+  return computed(dataKey + '.[]', minKey, maxKey, scaleTypeKey, logMinKey, function(){
     var data = this.get(dataKey);
     var min = this.get(minKey);
     var max = this.get(maxKey);

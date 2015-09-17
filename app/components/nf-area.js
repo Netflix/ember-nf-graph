@@ -90,7 +90,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    nextYData: Ember.computed('data.length', 'nextArea.data.@each', function(){
+    nextYData: Ember.computed('data.length', 'nextArea.data.[]', function(){
       var data = this.get('data');
       if(!Array.isArray(data)) {
         return [];
@@ -105,7 +105,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @type Array
       @readonly
     */
-    mappedData: Ember.computed('data.[]', 'xPropFn', 'yPropFn', 'nextYData.@each', 'stack.aggregate', function() {
+    mappedData: Ember.computed('data.[]', 'xPropFn', 'yPropFn', 'nextYData.[]', 'stack.aggregate', function() {
       var { data, xPropFn, yPropFn, nextYData } = this.getProperties('data', 'xPropFn', 'yPropFn', 'nextYData');
       var aggregate = this.get('stack.aggregate');
       if(Array.isArray(data)) {
