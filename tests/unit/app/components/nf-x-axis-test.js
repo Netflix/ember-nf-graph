@@ -36,7 +36,7 @@ test('nf-x-axis tickData should call tickFactory if available', function(assert)
   });
 });
 
-test('nf-x-axis useTemplate if template.blockParams', function(assert) {
+test('nf-x-axis hasBlock if template.blockParams', function(assert) {
   Ember.run(() => {
     var axis = this.factory().extend({
       graph: Ember.computed((key, value) => ({
@@ -48,21 +48,22 @@ test('nf-x-axis useTemplate if template.blockParams', function(assert) {
       blockParams: true
     }));
 
-    assert.equal(axis.get('useTemplate'), true);
+    assert.equal(axis.get('hasBlock'), true);
   });
 });
 
 
-test('nf-x-axis useTemplate if hasBlock AND hasBlockParams', function(assert) {
+test('nf-x-axis hasBlock if template is undefined', function(assert) {
   Ember.run(() => {
     var axis = this.factory().extend({
       graph: Ember.computed((key, value) => ({
         xScaleType: 'xScaleType'
       })),
-      hasBlock: true,
-      hasBlockParams: true
+
+      hasBlock: true
     }).create();
 
-    assert.equal(axis.get('useTemplate'), true);
+    assert.equal(axis.get('template'), undefined);
+    assert.equal(axis.get('hasBlock'), true);
   });
 });

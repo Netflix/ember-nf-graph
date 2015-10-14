@@ -2,7 +2,7 @@
 
 {{#each ticks as |tick|}}
   <g class="nf-x-axis-tick">
-    {{#if useTemplate}}
+    {{#if hasBlock}}
       {{#nf-tick-label x=tick.x y=tick.labely}}
         {{yield tick}}
       {{/nf-tick-label}}
