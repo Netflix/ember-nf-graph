@@ -6,7 +6,7 @@ var Router = Ember.Router.extend({
 });
 
 Router.map(function() {
-  this.resource('nf-graph', function(){
+  this.route('nf-graph', function(){
     this.route('/');
     this.route('nf-bars');
   });
