@@ -4,7 +4,7 @@
 
     {{nf-line data=graphData}}
 
-    {{#each item in graphData}}
+    {{#each graphData as |item|}}
 {{!--       {{nf-svg-image src="/images/star.png" x=item.x y=item.y}} --}}
     {{/each}}
 
