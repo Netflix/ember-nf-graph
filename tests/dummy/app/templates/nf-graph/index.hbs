@@ -21,17 +21,23 @@
 	}
 </style>
 
-{{#nf-graph yMaxMode="push-tick" yMax=1 xLink=groupX selectMultiple=1
-	brushStartAction="brushStart"
-	brushAction="brush"
-	brushEndAction="brushEnd"
-	width=graphWidth height=graphHeight showFrets="true" showLanes="true" paddingTop=50}}
-
+{{#nf-graph yMaxMode="push-tick"
+						xLink=groupX
+						selectMultiple=1
+						brushStartAction="brushStart"
+						brushAction="brush"
+						brushEndAction="brushEnd"
+						width=graphWidth
+						height=graphHeight
+						showFrets="true"
+						showLanes="true"
+						paddingTop=10
+						paddingLeft=10}}
 
 	{{#nf-graph-content}}
-	
+
 		{{nf-line data=model.area3 trackingMode="snap-last" trackedData=tracked2}}
-{{!-- 
+{{!--
 		{{#nf-area-stack aggregate=1}}
 			{{nf-area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=model.area3  trackingMode="snap-last" trackedData=tracked2}}
 			{{nf-area class="area2" selectable=1 interpolator="linear" data=model.area2  trackingMode="snap-last"}}

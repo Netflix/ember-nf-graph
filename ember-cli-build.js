@@ -3,7 +3,10 @@
 
 var EmberAddon = require('ember-cli/lib/broccoli/ember-addon');
 
-var app = new EmberAddon();
+module.exports = function(defaults) {
+  var app = new EmberAddon(defaults, {
+    // Add options here
+  });
 
 // Use `app.import` to add additional libraries to the generated
 // output files.
@@ -20,4 +23,15 @@ var app = new EmberAddon();
 
 app.import('bower_components/ember/ember-template-compiler.js', { type: 'test' });
 
-module.exports = app.toTree();
+  return app.toTree();
+};
+
+
+
+
+
+
+
+
+
+

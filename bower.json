@@ -1,7 +1,7 @@
 {
   "name": "ember-nf-graph",
   "dependencies": {
-    "ember": "1.11.1",
+    "ember": "^2.1.0",
     "ember-cli-shims": "ember-cli/ember-cli-shims#0.0.3",
     "ember-cli-test-loader": "ember-cli/ember-cli-test-loader#0.1.3",
     "ember-load-initializers": "ember-cli/ember-load-initializers#0.1.4",
@@ -13,5 +13,8 @@
     "qunit": "~1.17.1",
     "d3": "~3.5.5",
     "rxjs": "~2.3.24"
+  },
+  "resolutions": {
+    "ember": "^2.1.0"
   }
 }
