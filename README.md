@@ -1,6 +1,10 @@
 [![Build Status](https://travis-ci.org/Netflix/ember-nf-graph.svg?branch=master)](https://travis-ci.org/Netflix/ember-nf-graph)
 [![npm version](https://badge.fury.io/js/ember-nf-graph.svg)](http://badge.fury.io/js/ember-nf-graph)
 
+## NOTICE: This add-on was built to support Ember < 1.12 and cannot support Ember 1.13 and higher
+
+Due to this addon being used in large Ember 1.11 and 1.12 apps in production that have enumerable deprecation warnings on the path to Ember 2, and in light of the fact that some public APIs this addon relied on were removed in 1.13, we are unable to update this add-on to a higher version of Ember at this time.
+
 # ember-nf-graph
 
 A Component-based DSL for creating graphs in your Ember app. The goal of the library is to 
@@ -9,6 +13,8 @@ compositional way. This includes components for templated axes, graph lines, are
 
 - [Documentation](//netflix.github.io/ember-nf-graph/docs)
 - [Examples](//netflix.github.io/ember-nf-graph-examples/dist)
+
+
 
 A basic graph example is as follows:
 
