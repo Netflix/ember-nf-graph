@@ -111,13 +111,13 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   bars: Ember.computed(
     'xScale',
     'yScale',
-    'renderedData.@each',
+    'renderedData.[]',
     'graphHeight',
     'getBarClass',
     'barWidth',
     'groupOffsetX',
     function(){
-      var { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } = 
+      var { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } =
         this.getProperties('renderedData', 'xScale', 'yScale', 'graphHeight', 'getBarClass', 'groupOffsetX', 'barWidth');
 
       var getRectPath = this._getRectPath;

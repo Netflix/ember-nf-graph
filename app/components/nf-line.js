@@ -20,11 +20,11 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @uses mixins.graph-graphic-with-tracking-dot
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
+export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic,
   LineUtils, RegisteredGraphic, GraphicWithTrackingDot, RequireScaleSource, {
-    
+
   tagName: 'g',
-  
+
   /**
     The type of D3 interpolator to use to create the line.
     @property interpolator
@@ -32,7 +32,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @default 'linear'
   */
   interpolator: 'linear',
-  
+
   classNameBindings: ['selected', 'selectable'],
 
   classNames: ['nf-line'],
@@ -58,7 +58,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @readonly
   */
-  d: Ember.computed('renderedData.@each', 'lineFn', function(){
+  d: Ember.computed('renderedData.[]', 'lineFn', function(){
     var renderedData = this.get('renderedData');
     var lineFn = this.get('lineFn');
     return lineFn(renderedData);

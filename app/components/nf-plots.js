@@ -7,7 +7,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleS
   tagName: 'g',
 
   classNames: ['nf-plots'],
-  
+
   /**
     The parent controller to use for template binding
     @property parentController
@@ -23,7 +23,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleS
     @readonly
     @private
   */
-  plotData: Ember.computed('renderedData.@each', function(){
+  plotData: Ember.computed('renderedData.[]', function(){
     var renderedData = this.get('renderedData');
     if(renderedData && Ember.isArray(renderedData)) {
       return Ember.A(renderedData.map(function(d) {
