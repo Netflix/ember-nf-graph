@@ -8,7 +8,7 @@ import Ember from 'ember';
   @class graph-has-graph-parent
   */
 export default Ember.Mixin.create({
-  
+
   /**
     The parent graph for a component.
     @property graph
@@ -28,5 +28,15 @@ export default Ember.Mixin.create({
     this._super(...arguments);
     var graph = this.nearestWithProperty('isGraph');
     this.set('graph', graph);
+  },
+
+  nearestWithProperty: function(prop) {
+    var parent = this;
+    while(true) {
+      parent = parent.get('parentView');
+      if (typeof parent === 'undefined' || !parent) { return; }
+      debugger
+      if (parent[prop]) { return parent; }
+    }
   }
 });
