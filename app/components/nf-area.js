@@ -7,6 +7,7 @@ import AreaUtils from 'ember-nf-graph/mixins/graph-area-utils';
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import LineUtils from 'ember-nf-graph/mixins/graph-line-utils';
+import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 /**
   Adds an area graph to an `nf-graph` component.
@@ -57,7 +58,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
     init() {
       this._super(...arguments);
-      var stack = this.nearestWithProperty('isAreaStack');
+      var stack = this.get('isAreaStack') || nearestWithProperty('isAreaStack',this);
       if(stack) {
         stack.registerArea(this);
         this.set('stack', stack);
