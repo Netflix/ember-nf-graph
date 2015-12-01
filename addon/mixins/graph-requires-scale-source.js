@@ -118,7 +118,7 @@ export default Ember.Mixin.create({
 
   init() {
     this._super(...arguments);
-    var scaleSource = this.get('isScaleSource') || nearestWithProperty('isScaleSource');
+    var scaleSource = this.get('isScaleSource') || nearestWithProperty('isScaleSource',this);
     this.set('scaleSource', scaleSource);
   }
 });
