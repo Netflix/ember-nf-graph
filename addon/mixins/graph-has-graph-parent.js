@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 /**
   Adds initialization code to graph the `nf-graph` parent
@@ -26,17 +27,8 @@ export default Ember.Mixin.create({
 
   init() {
     this._super(...arguments);
-    var graph = this.nearestWithProperty('isGraph');
+    var graph = this.get('graph') || nearestWithProperty('isGraph');
     this.set('graph', graph);
-  },
-
-  nearestWithProperty: function(prop) {
-    var parent = this;
-    while(true) {
-      parent = parent.get('parentView');
-      if (typeof parent === 'undefined' || !parent) { return; }
-      debugger
-      if (parent[prop]) { return parent; }
-    }
   }
+
 });

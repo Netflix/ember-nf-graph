@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import computed from 'ember-new-computed';
+import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 var scaleProperty = function(scaleKey, zoomKey, offsetKey){
   return computed(scaleKey, zoomKey, offsetKey, {
@@ -38,7 +39,7 @@ export default Ember.Mixin.create({
     @readonly
   */
   xScale: scaleProperty('scaleSource.xScale', 'scaleZoomX', 'scaleOffsetX'),
-  
+
   /**
     The y scale used by this component
     @property yScale
@@ -117,7 +118,7 @@ export default Ember.Mixin.create({
 
   init() {
     this._super(...arguments);
-    var scaleSource = this.nearestWithProperty('isScaleSource');
+    var scaleSource = this.get('isScaleSource') || nearestWithProperty('isScaleSource');
     this.set('scaleSource', scaleSource);
   }
 });
