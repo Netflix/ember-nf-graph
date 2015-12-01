@@ -12,7 +12,7 @@ var noop = function(){};
   with the graph. Includes methods for extracting, sorting and scrubbing data
   for use in graphing components.
 
-  Requires {{#crossLink "mixins.graph-registered-graphic"}}{{/crossLink}} and 
+  Requires {{#crossLink "mixins.graph-registered-graphic"}}{{/crossLink}} and
   {{#crossLink "mixins.graph-has-graph-parent"}}{{/crossLink}}
 
   @namespace mixins
@@ -31,7 +31,7 @@ export default Ember.Mixin.create({
   */
   data: null,
 
-  mappedData: computed('data.@each', {
+  mappedData: computed('data.[]', {
     get() {
       var yPropFn = this.get('yPropFn');
       var xPropFn = this.get('xPropFn');
@@ -48,7 +48,7 @@ export default Ember.Mixin.create({
     }
   }),
 
-  _triggerHasData: on('init', observer('data.@each', function(){
+  _triggerHasData: on('init', observer('data.[]', function(){
     Ember.run.once(this, this._sendTriggerHasData);
   })),
 
@@ -57,7 +57,7 @@ export default Ember.Mixin.create({
   },
 
   /**
-    The path of the property on each object in 
+    The path of the property on each object in
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     to use as x data to plot on the graph.
 
@@ -68,7 +68,7 @@ export default Ember.Mixin.create({
   xprop: 'x',
 
   /**
-    The path of the property on each object in 
+    The path of the property on each object in
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     to use as y data to plot on the graph.
 
@@ -79,7 +79,7 @@ export default Ember.Mixin.create({
   yprop: 'y',
 
   /**
-    The function to get the x value from each 
+    The function to get the x value from each
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}} object
 
     @property xPropFn
@@ -94,7 +94,7 @@ export default Ember.Mixin.create({
   }),
 
   /**
-    The function to get the y value from each 
+    The function to get the y value from each
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}} object
 
     @property yPropFn
@@ -116,7 +116,7 @@ export default Ember.Mixin.create({
     @readonly
   */
   renderedData: computed(
-    'mappedData.@each',
+    'mappedData.[]',
     'graph.xScaleType',
     'graph.xMin',
     'graph.xMax',
@@ -156,7 +156,7 @@ export default Ember.Mixin.create({
     @type {Object}
     @readonly
   */
-  firstVisibleData: computed('renderedData.@each', 'xMin', {
+  firstVisibleData: computed('renderedData.[]', 'xMin', {
     get() {
       var { renderedData, xPropFn, yPropFn, xMin } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMin');
 
@@ -183,7 +183,7 @@ export default Ember.Mixin.create({
     @type {Object}
     @readonly
   */
-  lastVisibleData: computed('renderedData.@each', 'yPropFn', 'xPropFn', 'xMax', {
+  lastVisibleData: computed('renderedData.[]', 'yPropFn', 'xPropFn', 'xMax', {
     get() {
       var { renderedData, xPropFn, yPropFn, xMax } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMax');
       var last = renderedData[renderedData.length - 1];
@@ -220,10 +220,10 @@ export default Ember.Mixin.create({
   getDataNearXRange(rangeX) {
     var rendered = this._getRenderedDataNearXRange(rangeX);
 
-    if(!rendered) { 
+    if(!rendered) {
       return null;
     }
-    
+
     var renderX = rendered[0];
     var renderY = rendered[1];
     var data = rendered.data;
@@ -232,13 +232,13 @@ export default Ember.Mixin.create({
     return { renderX, renderY, data, x, y };
   },
 
-  /** 
+  /**
     Gets the actual data at a rendered tracking point passed to it.
     This is overridden in nf-area to account for stacking of data.
     @method getActualTrackData
     @param renderX {number} the x domain value the data is rendered at
-    @param renderY {number} the y domain value the data is rendered at 
-    @param data {Object} the raw data from the point 
+    @param renderY {number} the y domain value the data is rendered at
+    @param data {Object} the raw data from the point
     @return {Object} simple x, y point structure
   */
   getActualTrackData(renderX, renderY, data) {
