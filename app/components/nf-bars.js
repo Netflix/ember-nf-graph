@@ -7,6 +7,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
+import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 /**
   Adds a bar graph to an `nf-graph` component.
@@ -117,7 +118,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     'barWidth',
     'groupOffsetX',
     function(){
-      var { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } = 
+      var { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } =
         this.getProperties('renderedData', 'xScale', 'yScale', 'graphHeight', 'getBarClass', 'groupOffsetX', 'barWidth');
 
       var getRectPath = this._getRectPath;
@@ -152,7 +153,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
   init() {
     this._super(...arguments);
-    var group = this.nearestWithProperty('isBarsGroup');
+    var group = nearestWithProperty('isBarsGroup',this);
     if(group && group.registerBars) {
       group.registerBars(this);
     }
