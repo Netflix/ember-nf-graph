@@ -5,15 +5,15 @@ import GraphMouseEvent from 'ember-nf-graph/utils/nf/graph-mouse-event';
 /**
   Container component for graphics to display in `nf-graph`. Represents
   the area where the graphics, such as lines will display.
-  
+
   Exists for layout purposes.
   @namespace components
   @class nf-graph-content
   @uses mixins.graph-has-graph-parent
-*/  
+*/
 export default Ember.Component.extend(HasGraphParent, {
   tagName: 'g',
-  
+
   classNames: ['nf-graph-content'],
 
   attributeBindings: ['transform', 'clip-path'],

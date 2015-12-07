@@ -7,7 +7,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleS
   tagName: 'g',
 
   classNames: ['nf-plots'],
-  
+
   /**
     The parent controller to use for template binding
     @property parentController
