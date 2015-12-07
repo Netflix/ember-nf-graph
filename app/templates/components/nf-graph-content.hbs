@@ -4,7 +4,7 @@
   {{#if graph.hasData}}
     {{#if graph.showLanes}}
       <g class="nf-grid-lanes">
-        {{#each lane in gridLanes}}
+        {{#each gridLanes as |lane|}}
           <rect class="nf-grid-lane" x="{{lane.x}}" y="{{lane.y}}" width="{{width}}" height="{{lane.height}}"></rect>
         {{/each}}
       </g>
@@ -12,7 +12,7 @@
 
     {{#if graph.showFrets}}
       <g class="nf-grid-frets">
-        {{#each fret in frets}}
+        {{#each frets as |fret|}}
           <line class="nf-grid-fret" x1="{{fret.x}}" y1="0" x2="{{fret.x}}" y2="{{height}}"></line>
         {{/each}}
       </g>
