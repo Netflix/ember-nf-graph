@@ -41,11 +41,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   layout: layout,
   template: null,
 
-  useTemplate: computed('hasBlock', 'template.blockParams', 'hasBlockParams', function(){
-    var preGlimmerCheck = this.get('template.blockParams');
-    var postGlimmerCheck = this.get('hasBlock') && this.get('hasBlockParams');
-    return Boolean(postGlimmerCheck || preGlimmerCheck);
-  }),
+  addTemplateObserver: function() {
+    this.addObserver('template.blockParams', this, function() {
+      var preGlimmer = this.get('template');
+      if (preGlimmer) {
+        if (!this.get('hasBlock')) {
+          this.set('hasBlock',computed('template.blockParams', function() {
+            return this.get('template.blockParams');
+          }));
+        }
+      }
+    });
+  },
 
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],
@@ -183,6 +190,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   init() {
     this._super(...arguments);
     this.set('graph.xAxis', this);
+    this.addTemplateObserver();
   },
 
   /**
@@ -225,7 +233,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     }
     else if(scaleType === 'ordinal') {
       return uniqueData;
-    } 
+    }
     else {
       return scale.ticks(tickCount);
     }
