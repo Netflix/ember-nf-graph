@@ -7,7 +7,7 @@ import Ember from 'ember';
  @namespace shims
  */
 export default function nearestWithProperty(prop, parent) {
-  nearestWithProp = this.get('prop');
+  nearestWithProp = parent.get(prop);
   if (!nearestWithProp) {
     while(true) {
       parent = parent.get('parentView');
