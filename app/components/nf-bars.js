@@ -111,7 +111,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
   bars: Ember.computed(
     'xScale',
     'yScale',
-    'renderedData.@each',
+    'renderedData.[]',
     'graphHeight',
     'getBarClass',
     'barWidth',

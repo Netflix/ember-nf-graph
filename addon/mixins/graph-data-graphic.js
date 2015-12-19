@@ -31,7 +31,7 @@ export default Ember.Mixin.create({
   */
   data: null,
 
-  mappedData: computed('data.@each', {
+  mappedData: computed('data.[]', {
     get() {
       var yPropFn = this.get('yPropFn');
       var xPropFn = this.get('xPropFn');
@@ -48,7 +48,7 @@ export default Ember.Mixin.create({
     }
   }),
 
-  _triggerHasData: on('init', observer('data.@each', function(){
+  _triggerHasData: on('init', observer('data.[]', function(){
     Ember.run.once(this, this._sendTriggerHasData);
   })),
 
@@ -116,7 +116,7 @@ export default Ember.Mixin.create({
     @readonly
   */
   renderedData: computed(
-    'mappedData.@each',
+    'mappedData.[]',
     'graph.xScaleType',
     'graph.xMin',
     'graph.xMax',
@@ -156,7 +156,7 @@ export default Ember.Mixin.create({
     @type {Object}
     @readonly
   */
-  firstVisibleData: computed('renderedData.@each', 'xMin', {
+  firstVisibleData: computed('renderedData.[]', 'xMin', {
     get() {
       var { renderedData, xPropFn, yPropFn, xMin } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMin');
 
@@ -183,7 +183,7 @@ export default Ember.Mixin.create({
     @type {Object}
     @readonly
   */
-  lastVisibleData: computed('renderedData.@each', 'yPropFn', 'xPropFn', 'xMax', {
+  lastVisibleData: computed('renderedData.[]', 'yPropFn', 'xPropFn', 'xMax', {
     get() {
       var { renderedData, xPropFn, yPropFn, xMax } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMax');
       var last = renderedData[renderedData.length - 1];

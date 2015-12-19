@@ -58,7 +58,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @readonly
   */
-  d: Ember.computed('renderedData.@each', 'lineFn', function(){
+  d: Ember.computed('renderedData.[]', 'lineFn', function(){
     var renderedData = this.get('renderedData');
     var lineFn = this.get('lineFn');
     return lineFn(renderedData);
