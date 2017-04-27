@@ -19,7 +19,7 @@ export default Ember.Component.extend(HasGraphParent, {
   attributeBindings: ['transform', 'clip-path'],
 
   'clip-path': Ember.computed('graph.contentClipPathId', function(){
-    var clipPathId = this.get('graph.contentClipPathId');
+    let clipPathId = this.get('graph.contentClipPathId');
     return  `url('#${clipPathId}')`;
   }),
 
@@ -30,8 +30,8 @@ export default Ember.Component.extend(HasGraphParent, {
     @readonly
   */
   transform: Ember.computed('x', 'y', function(){
-    var x = this.get('x');
-    var y = this.get('y');
+    let x = this.get('x');
+    let y = this.get('y');
     return `translate(${x} ${y})`;
   }),
 
@@ -75,15 +75,15 @@ export default Ember.Component.extend(HasGraphParent, {
     @readonly
   */
   gridLanes: Ember.computed('graph.yAxis.ticks', 'width', 'height', function () {
-    var ticks = this.get('graph.yAxis.ticks');
-    var width = this.get('width');
-    var height = this.get('height');
+    let ticks = this.get('graph.yAxis.ticks');
+    let width = this.get('width');
+    let height = this.get('height');
 
     if(!ticks || ticks.length === 0) {
       return Ember.A();
     }
 
-    var sorted = ticks.slice().sort(function(a, b) {
+    let sorted = ticks.slice().sort(function(a, b) {
       return a.y - b.y;
     });
 
@@ -91,10 +91,10 @@ export default Ember.Component.extend(HasGraphParent, {
       sorted.unshift({ y: 0 });
     }
 
-    var lanes = sorted.reduce(function(lanes, tick, i) {
-      var y = tick.y;
-      var next = sorted[i+1] || { y: height };
-      var h = next.y - tick.y;
+    let lanes = sorted.reduce(function(lanes, tick, i) {
+      let y = tick.y;
+      let next = sorted[i+1] || { y: height };
+      let h = next.y - tick.y;
       lanes.push({
         x: 0,
         y: y,
@@ -116,7 +116,7 @@ export default Ember.Component.extend(HasGraphParent, {
   hoverChange: null,
 
   mouseMove: function(e) {
-    var context = GraphMouseEvent.create({
+    let context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
       graphContentElement: this.element,
@@ -138,7 +138,7 @@ export default Ember.Component.extend(HasGraphParent, {
   hoverEnd: null,
 
   mouseLeave: function(e) {
-    var context = GraphMouseEvent.create({
+    let context = GraphMouseEvent.create({
       originalEvent: e,
       source: this,
       graphContentElement: this.element

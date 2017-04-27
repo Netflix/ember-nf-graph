@@ -63,9 +63,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   rangeX: Ember.computed('x', 'xScale', function(){
-    var xScale = this.get('xScale');
-    var x = this.get('x');
-    var hasX = this.get('hasX');
+    let xScale = this.get('xScale');
+    let x = this.get('x');
+    let hasX = this.get('hasX');
     return (hasX && xScale ? xScale(x) : 0) || 0;
   }),
 
@@ -76,9 +76,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   rangeY: Ember.computed('y', 'yScale', function(){
-    var yScale = this.get('yScale');
-    var y = this.get('y');
-    var hasY = this.get('hasY');
+    let yScale = this.get('yScale');
+    let y = this.get('y');
+    let hasY = this.get('hasY');
     return (hasY && yScale ? yScale(y) : 0) || 0;
   }),
 
@@ -89,15 +89,15 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: Ember.computed('rangeX', 'rangeY', function(){
-    var rangeX = this.get('rangeX');
-    var rangeY = this.get('rangeY');
+    let rangeX = this.get('rangeX');
+    let rangeY = this.get('rangeY');
     return `translate(${rangeX} ${rangeY})`;
   }),
 
   data: null,
 
   click: function(e) {
-    var context = GraphEvent.create({
+    let context = GraphEvent.create({
       x: this.get('x'),
       y: this.get('y'),
       data: this.get('data'),

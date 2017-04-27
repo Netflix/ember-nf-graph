@@ -56,10 +56,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   y: Ember.computed('value', 'yScale', 'graph.paddingTop', function() {
-    var value = this.get('value');
-    var yScale = this.get('yScale');
-    var paddingTop = this.get('graph.paddingTop');
-    var vy = 0;
+    let value = this.get('value');
+    let yScale = this.get('yScale');
+    let paddingTop = this.get('graph.paddingTop');
+    let vy = 0;
     if(yScale) {
       vy = yScale(value) || 0;
     }
@@ -74,10 +74,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: Ember.computed('y', 'graph.width', function(){
-    var y = this.get('y');
-    var graphWidth = this.get('graph.width');
-    var x0 = graphWidth - 6;
-    var y0 = y - 3;
+    let y = this.get('y');
+    let graphWidth = this.get('graph.width');
+    let x0 = graphWidth - 6;
+    let y0 = y - 3;
     return `translate(${x0} ${y0})`;
   }),
 
@@ -87,9 +87,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
   */
   _transitionalUpdate: function(){
-    var transform = this.get('transform');
-    var path = this.get('path');
-    var duration = this.get('duration');
+    let transform = this.get('transform');
+    let path = this.get('path');
+    let duration = this.get('duration');
     path.transition().duration(duration)
       .attr('transform', transform);
   },
@@ -109,8 +109,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
   */
   _nonTransitionalUpdate: function(){
-    var transform = this.get('transform');
-    var path = this.get('path');
+    let transform = this.get('transform');
+    let path = this.get('path');
     path.attr('transform', transform);
   },
 
@@ -129,8 +129,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @private
   */
   _getElements: Ember.on('didInsertElement', function(){
-    var g = d3.select(this.$()[0]);
-    var path = g.selectAll('path').data([0]);
+    let g = d3.select(this.$()[0]);
+    let path = g.selectAll('path').data([0]);
     this.set('path', path);
   })
 });

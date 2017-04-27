@@ -52,9 +52,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   cx: Ember.computed('x', 'xScale', 'hasX', function(){
-    var x = this.get('x');
-    var xScale = this.get('xScale');
-    var hasX = this.get('hasX');
+    let x = this.get('x');
+    let xScale = this.get('xScale');
+    let hasX = this.get('hasX');
     return hasX && xScale ? xScale(x) : -1;
   }),
 
@@ -66,9 +66,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   cy: Ember.computed('y', 'yScale', 'hasY', function() {
-    var y = this.get('y');
-    var yScale = this.get('yScale');
-    var hasY = this.get('hasY');
+    let y = this.get('y');
+    let yScale = this.get('yScale');
+    let hasY = this.get('hasY');
     return hasY && yScale ? yScale(y) : -1;
   }),
 

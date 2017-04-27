@@ -58,7 +58,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
     init() {
       this._super(...arguments);
-      var stack = nearestWithProperty('isAreaStack',this);
+      let stack = nearestWithProperty('isAreaStack',this);
       if(stack) {
         stack.registerArea(this);
         this.set('stack', stack);
@@ -77,7 +77,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     },
 
     _unregisterArea: Ember.on('willDestroyElement', function(){
-      var stack = this.get('stack', stack);
+      let stack = this.get('stack');
       if(stack) {
         stack.unregisterArea(this);
       }
@@ -92,11 +92,11 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @readonly
     */
     nextYData: Ember.computed('data.length', 'nextArea.data.[]', function(){
-      var data = this.get('data');
+      let data = this.get('data');
       if(!Array.isArray(data)) {
         return [];
       }
-      var nextData = this.get('nextArea.mappedData');
+      let nextData = this.get('nextArea.mappedData');
       return data.map((d, i) => (nextData && nextData[i] && nextData[i][1]) || Number.MIN_VALUE);
     }),
 
@@ -107,13 +107,13 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
       @readonly
     */
     mappedData: Ember.computed('data.[]', 'xPropFn', 'yPropFn', 'nextYData.[]', 'stack.aggregate', function() {
-      var { data, xPropFn, yPropFn, nextYData } = this.getProperties('data', 'xPropFn', 'yPropFn', 'nextYData');
-      var aggregate = this.get('stack.aggregate');
+      let { data, xPropFn, yPropFn, nextYData } = this.getProperties('data', 'xPropFn', 'yPropFn', 'nextYData');
+      let aggregate = this.get('stack.aggregate');
       if(Array.isArray(data)) {
         return data.map((d, i) => {
-          var x = xPropFn(d);
-          var y = yPropFn(d);
-          var result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
+          let x = xPropFn(d);
+          let y = yPropFn(d);
+          let result = aggregate ? [x, y + nextYData[i], nextYData[i]] : [x, y, nextYData[i]];
           result.data = d;
           return result;
         });
@@ -123,22 +123,22 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     }),
 
     areaFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
-      var { xScale, yScale, interpolator } = this.getProperties('xScale', 'yScale', 'interpolator');
+      let { xScale, yScale, interpolator } = this.getProperties('xScale', 'yScale', 'interpolator');
       return this.createAreaFn(xScale, yScale, interpolator);
     }),
 
     lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
-      var { xScale, yScale, interpolator } = this.getProperties('xScale', 'yScale', 'interpolator');
+      let { xScale, yScale, interpolator } = this.getProperties('xScale', 'yScale', 'interpolator');
       return this.createLineFn(xScale, yScale, interpolator);
     }),
 
     d: Ember.computed('renderedData', 'areaFn', function(){
-      var renderedData = this.get('renderedData');
+      let renderedData = this.get('renderedData');
       return this.get('areaFn')(renderedData);
     }),
 
     dLine: Ember.computed('renderedData', 'lineFn', function(){
-      var renderedData = this.get('renderedData');
+      let renderedData = this.get('renderedData');
       return this.get('lineFn')(renderedData);
     }),
 

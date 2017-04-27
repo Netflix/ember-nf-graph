@@ -27,7 +27,7 @@ export default Ember.Mixin.create({
 
   init() {
     this._super(...arguments);
-    var graph = nearestWithProperty('isGraph',this);
+    let graph = nearestWithProperty('isGraph',this);
     this.set('graph', graph);
   }
 });

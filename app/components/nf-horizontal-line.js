@@ -33,9 +33,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   lineY: Ember.computed('y', 'yScale', function(){
-    var y = this.get('y');
-    var yScale = this.get('yScale');
-    var py = yScale ? yScale(y) : -1;
+    let y = this.get('y');
+    let yScale = this.get('yScale');
+    let py = yScale ? yScale(y) : -1;
     return py && py > 0 ? py : 0;
   }),
 

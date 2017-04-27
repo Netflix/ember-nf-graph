@@ -104,7 +104,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
   }),
 
   x1: computed('xScale', 'width', 'x', function(){
-    var scale = this.get('xScale');
+    let scale = this.get('xScale');
     if(scale.rangeBands) {
       throw new Error('nf-image does not support ordinal scales');
     }
@@ -112,7 +112,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
   }),
 
   y1: computed('yScale', 'height', 'y', function(){
-    var scale = this.get('yScale');
+    let scale = this.get('yScale');
     if(scale.rangeBands) {
       throw new Error('nf-image does not support ordinal scales');
     }

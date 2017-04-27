@@ -72,8 +72,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   x: Ember.computed('xMin', 'xScale', function(){
-    var xScale = this.get('xScale');
-    var xMin = this.get('xMin');
+    let xScale = this.get('xScale');
+    let xMin = this.get('xMin');
     return xScale(xMin);
   }),
 
@@ -84,9 +84,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   width: Ember.computed('xScale', 'xMin', 'xMax', function() {
-    var xScale = this.get('xScale');
-    var xMax = this.get('xMax');
-    var xMin = this.get('xMin');
+    let xScale = this.get('xScale');
+    let xMax = this.get('xMax');
+    let xMin = this.get('xMin');
     return xScale(xMax) - xScale(xMin);
   }),
 
@@ -103,11 +103,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     'graph.graphHeight',
     'totalHeight',
     function() {
-      var orient = this.get('container.orient');
-      var prevBottom = this.get('prevMarker.bottom');
-      var prevY = this.get('prevMarker.y');
-      var graphHeight = this.get('graph.graphHeight');
-      var totalHeight = this.get('totalHeight');
+      let orient = this.get('container.orient');
+      let prevBottom = this.get('prevMarker.bottom');
+      let prevY = this.get('prevMarker.y');
+      let graphHeight = this.get('graph.graphHeight');
+      let totalHeight = this.get('totalHeight');
 
       prevBottom = prevBottom || 0;
 
@@ -128,9 +128,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   totalHeight: Ember.computed('height', 'marginTop', 'marginBottom', function() {
-    var height = this.get('height');
-    var marginTop = this.get('marginTop');
-    var marginBottom = this.get('marginBottom');
+    let height = this.get('height');
+    let marginTop = this.get('marginTop');
+    let marginBottom = this.get('marginBottom');
     return height + marginTop + marginBottom;
   }),
 
@@ -141,8 +141,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   bottom: Ember.computed('y', 'totalHeight', function(){
-    var y = this.get('y');
-    var totalHeight = this.get('totalHeight');
+    let y = this.get('y');
+    let totalHeight = this.get('totalHeight');
     return y + totalHeight;
   }),
 
@@ -153,7 +153,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: Ember.computed('y', function(){
-    var y = this.get('y') || 0;
+    let y = this.get('y') || 0;
     return `translate(0 ${y})`;
   }),
 
@@ -164,7 +164,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   labelTransform: Ember.computed('x', function(){
-    var x = this.get('x') || 0;
+    let x = this.get('x') || 0;
     return `translate(${x} 0)`;
   }),
 
@@ -176,7 +176,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   init() {
     this._super(...arguments);
-    var container = nearestWithProperty('isRangeMarkerContainer',this);
+    let container = nearestWithProperty('isRangeMarkerContainer',this);
     container.registerMarker(this);
     this.set('container', container);
   },

@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { getMousePoint } from '../utils/nf/svg-dom';
 import computed from 'ember-new-computed';
 
-var { on, observer } = Ember;
+let { on, observer } = Ember;
 
 export default Ember.Mixin.create({
   /**
@@ -105,7 +105,7 @@ export default Ember.Mixin.create({
     @private
   */
   _trackedDataChanged: Ember.observer('trackedData', function(){
-    var trackedData = this.get('trackedData');
+    let trackedData = this.get('trackedData');
     this.set('hoverData', this._hovered ? trackedData : null);
 
     if(this.get('didTrack') && trackedData) {
@@ -129,7 +129,7 @@ export default Ember.Mixin.create({
   },
 
   _updateTrackingHandling() {
-    var { trackingMode, selected } = this.getProperties('trackingMode', 'selected');
+    let { trackingMode, selected } = this.getProperties('trackingMode', 'selected');
 
     this._cleanup();
 
@@ -168,11 +168,11 @@ export default Ember.Mixin.create({
   },
 
   _onHoverTrack() {
-    var content = this._content;
+    let content = this._content;
 
-    var mousemoveHandler = e => {
+    let mousemoveHandler = e => {
       this._hovered = true;
-      var evt = this._getEventObject(e);
+      let evt = this._getEventObject(e);
       this.set('trackedData', evt);
     };
 
@@ -186,9 +186,9 @@ export default Ember.Mixin.create({
   _hovered: false,
 
   _onEndUntrack() {
-    var content = this._content;
+    let content = this._content;
 
-    var mouseoutHandler = () => {
+    let mouseoutHandler = () => {
       this.set('trackedData', null);
     };
 
@@ -204,14 +204,14 @@ export default Ember.Mixin.create({
   },
 
   _onEndSnapLast() {
-    var content = this._content;
+    let content = this._content;
 
-    var mouseoutHandler = () => {
+    let mouseoutHandler = () => {
       this._hovered = false;
       this.set('trackedData', this.get('lastVisibleData'));
     };
 
-    var changeHandler = () => {
+    let changeHandler = () => {
       if(!this._hovered) {
         this.set('trackedData', this.get('lastVisibleData'));
       }
@@ -229,14 +229,14 @@ export default Ember.Mixin.create({
   },
 
   _onEndSnapFirst() {
-    var content = this._content;
+    let content = this._content;
 
-    var mouseoutHandler = () => {
+    let mouseoutHandler = () => {
       this._hovered = false;
       this.set('trackedData', this.get('firstVisibleData'));
     };
 
-    var changeHandler = () => {
+    let changeHandler = () => {
       if(!this._hovered) {
         this.set('trackedData', this.get('firstVisibleData'));
       }
@@ -258,12 +258,12 @@ export default Ember.Mixin.create({
   })),
 
   _getEventObject(e) {
-    var { xScale, yScale } = this.getProperties('xScale', 'yScale');
-    var content = this._content;
-    var point = getMousePoint(content[0], e);
-    var graphX = xScale.invert(point.x);
-    var graphY = yScale.invert(point.y);
-    var near = this.getDataNearXRange(point.x);
+    let { xScale, yScale } = this.getProperties('xScale', 'yScale');
+    let content = this._content;
+    let point = getMousePoint(content[0], e);
+    let graphX = xScale.invert(point.x);
+    let graphY = yScale.invert(point.y);
+    let near = this.getDataNearXRange(point.x);
 
     if(!near) {
       return {
@@ -275,7 +275,7 @@ export default Ember.Mixin.create({
       };
     }
 
-    var { x, y, data, renderX, renderY } = near;
+    let { x, y, data, renderX, renderY } = near;
     return {
       point,
       graphX,

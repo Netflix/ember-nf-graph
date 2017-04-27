@@ -66,8 +66,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   yCenter: Ember.computed('yA', 'yB', function(){
-    var yA = +this.get('yA') || 0;
-    var yB = +this.get('yB') || 0;
+    let yA = +this.get('yA') || 0;
+    let yB = +this.get('yB') || 0;
     return (yA + yB) / 2;
   }),
 
@@ -148,17 +148,17 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   contentX: Ember.computed('isOrientRight', 'width', 'contentPadding', function(){
-    var contentPadding = this.get('contentPadding');
-    var width = this.get('width');
+    let contentPadding = this.get('contentPadding');
+    let width = this.get('width');
     return this.get('isOrientRight') ? width - contentPadding : contentPadding;
   }),
 
   rectPath: Ember.computed('yA', 'yB', 'width', function(){
-    var x = 0;
-    var w = +this.get('width') || 0;
-    var x2 = x + w;
-    var yA = +this.get('yA') || 0;
-    var yB = +this.get('yB') || 0;
+    let x = 0;
+    let w = +this.get('width') || 0;
+    let x2 = x + w;
+    let yA = +this.get('yA') || 0;
+    let yB = +this.get('yB') || 0;
     return `M${x},${yA} L${x},${yB} L${x2},${yB} L${x2},${yA} L${x},${yA}`;
   }),
 
@@ -170,8 +170,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   contentTransform: Ember.computed('contentX', 'yCenter', function(){
-    var contentX = this.get('contentX');
-    var yCenter = this.get('yCenter');
+    let contentX = this.get('contentX');
+    let yCenter = this.get('yCenter');
     return `translate(${contentX} ${yCenter})`;
   }),
 
@@ -181,16 +181,16 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method didInsertElement
   */
   didInsertElement: function(){
-    var element = this.get('element');
-    var g = d3.select(element);
+    let element = this.get('element');
+    let g = d3.select(element);
     
-    var rectPath = this.get('rectPath');
-    var rect = g.insert('path', ':first-child')
+    let rectPath = this.get('rectPath');
+    let rect = g.insert('path', ':first-child')
       .attr('class', 'nf-y-diff-rect')
       .attr('d', rectPath);
 
-    var contentTransform = this.get('contentTransform');
-    var content = g.select('.nf-y-diff-content');
+    let contentTransform = this.get('contentTransform');
+    let content = g.select('.nf-y-diff-content');
     content.attr('transform', contentTransform);
 
     this.set('rectElement', rect);
@@ -202,9 +202,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method doTransition
   */
   doTransition: function(){
-    var duration = this.get('duration');
-    var rectElement = this.get('rectElement');
-    var contentElement = this.get('contentElement');
+    let duration = this.get('duration');
+    let rectElement = this.get('rectElement');
+    let contentElement = this.get('contentElement');
 
     if(rectElement) {
       rectElement.transition().duration(duration)
@@ -231,16 +231,16 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method doAdjustWidth
   */
   doAdjustWidth: function(){
-    var contentElement = this.get('contentElement');
+    let contentElement = this.get('contentElement');
     if(contentElement) {
-      var contentTransform = this.get('contentTransform');
+      let contentTransform = this.get('contentTransform');
       contentElement.attr('transform', contentTransform);
     }
   },
 
   adjustGraphHeight: Ember.on('didInsertElement', Ember.observer('graph.graphHeight', function(){
-    var rectElement = this.get('rectElement');
-    var contentElement = this.get('contentElement');
+    let rectElement = this.get('rectElement');
+    let contentElement = this.get('contentElement');
 
     if(rectElement) {
       rectElement.attr('d', this.get('rectPath'));

@@ -65,7 +65,7 @@ export default Ember.Component.extend(HasGraphParent, {
   },
 
   _setupBindings: Ember.observer('graph.content', function() {
-    var content = this.get('graph.content');
+    let content = this.get('graph.content');
     if(content) {
       content.on('didHoverChange', this, this.didContentHoverChange);
       content.on('didHoverEnd', this, this.didContentHoverEnd);

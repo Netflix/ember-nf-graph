@@ -94,10 +94,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type String
   */
   rectPath: Ember.computed('x0', 'x1', 'y0', 'y1', function(){
-    var x0 = this.get('x0');
-    var x1 = this.get('x1');
-    var y0 = this.get('y0');
-    var y1 = this.get('y1');
+    let x0 = this.get('x0');
+    let x1 = this.get('x1');
+    let y0 = this.get('y0');
+    let y1 = this.get('y1');
     return `M${x0},${y0} L${x0},${y1} L${x1},${y1} L${x1},${y0} L${x0},${y0}`;
   }),
 
@@ -106,17 +106,17 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method doUpdatePosition
   */
   doUpdatePosition: function(){
-    var boxRect = this.get('boxRectElement');
-    var rectPath = this.get('rectPath');
-    var duration = this.get('duration');
+    let boxRect = this.get('boxRectElement');
+    let rectPath = this.get('rectPath');
+    let duration = this.get('duration');
 
     boxRect.transition().duration(duration)
       .attr('d', rectPath);
   },
 
   doUpdatePositionStatic: function(){
-    var boxRect = this.get('boxRectElement');
-    var rectPath = this.get('rectPath');
+    let boxRect = this.get('boxRectElement');
+    let rectPath = this.get('rectPath');
 
     boxRect.attr('d', rectPath);
   },
@@ -140,9 +140,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @method didInsertElement
   */
   didInsertElement: function(){
-    var element = this.get('element');
-    var g = d3.select(element);
-    var boxRect = g.append('path')
+    let element = this.get('element');
+    let g = d3.select(element);
+    let boxRect = g.append('path')
       .attr('class', 'nf-selection-box-rect')
       .attr('d', this.get('rectPath'));
 

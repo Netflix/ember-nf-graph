@@ -68,8 +68,8 @@ export default Ember.Component.extend({
     @param area {Ember.Component} The area component to register.
   */
   registerArea: function(area) {
-    var areas = this.get('areas');
-    var prev = areas[areas.length - 1];
+    let areas = this.get('areas');
+    let prev = areas[areas.length - 1];
     
     if(prev) {
       prev.set('nextArea', area);
@@ -86,8 +86,8 @@ export default Ember.Component.extend({
     @param area {Ember.Component} the area to unregister
   */
   unregisterArea: function(area) {
-    var prev = area.get('prevArea');
-    var next = area.get('nextArea');
+    let prev = area.get('prevArea');
+    let next = area.get('nextArea');
 
     if(next) {
       next.set('prevArea', prev);

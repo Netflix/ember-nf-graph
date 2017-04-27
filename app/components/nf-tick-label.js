@@ -6,8 +6,8 @@ export default Ember.Component.extend({
   attributeBindings: ['transform'],
 
   transform: Ember.computed('x', 'y', function(){
-    var x = this.get('x');
-    var y = this.get('y');
+    let x = this.get('x');
+    let y = this.get('y');
     return `translate(${x} ${y})`;
   }),
 

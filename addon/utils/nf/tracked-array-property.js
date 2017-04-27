@@ -1,39 +1,39 @@
 import Ember from 'ember';
 import computed from 'ember-new-computed';
 
-var get = Ember.get;
+let get = Ember.get;
 
 function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
-  var arraySourceDependency = arraySourceProp + '.[]';
+  let arraySourceDependency = arraySourceProp + '.[]';
 
   backingField = backingField || '_%@_trackBy_%@'.fmt(arraySourceProp, trackByProp);
 
   return computed(arraySourceDependency, {
     get() {
-      var array = this.get(backingField);
+      let array = this.get(backingField);
 
       if(!Ember.isArray(array)){
         array = Ember.A();
       }
 
-      var trackBy = trackByProp ? this.get(trackByProp) : null;
-      var keyFn = !trackBy ? function(d, i) {
+      let trackBy = trackByProp ? this.get(trackByProp) : null;
+      let keyFn = !trackBy ? function(d, i) {
         return i;
       } : function(d) {
         return get(d, trackBy);
       };
 
-      var source = this.get(arraySourceProp);
+      let source = this.get(arraySourceProp);
 
       if(!Ember.isArray(source) || source.length === 0) {
         array = Ember.A();
       } else {
-        var sourceKeys = [];
+        let sourceKeys = [];
         source.forEach(function(d, i) {
-          var key = keyFn(d, i);
+          let key = keyFn(d, i);
           sourceKeys.pushObject(key);
           
-          var found = array.find(function(x, i) {
+          let found = array.find(function(x, i) {
             return keyFn(x, i) === key;
           });
           
@@ -41,7 +41,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 
           if(found) {
             Ember.keys(d).forEach(function(k) {
-              var v = get(d, k);
+              let v = get(d, k);
               if(get(found, k) !== v) {
                 Ember.set(found, k, v);
               }
@@ -51,10 +51,10 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
           }
         });
 
-        var d, i;
+        let d, i;
         for(i = array.length - 1; i >= 0; i--) {
           d = array[i];
-          var key = keyFn(d, i);
+          let key = keyFn(d, i);
           if(sourceKeys.indexOf(key) === -1) {
             array.removeObject(d);
           }

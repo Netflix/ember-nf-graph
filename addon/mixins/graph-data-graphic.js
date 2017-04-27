@@ -3,9 +3,9 @@ import parsePropertyExpr from '../utils/parse-property-expression';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
 import computed from 'ember-new-computed';
 
-var { on, observer } = Ember;
+let { on, observer } = Ember;
 
-var noop = function(){};
+let noop = function(){};
 
 /**
   This is mixed in to {{#crossLink components.nf-graph}}nf-graph{{/crossLink}} child components that need to register data
@@ -33,12 +33,12 @@ export default Ember.Mixin.create({
 
   mappedData: computed('data.[]', {
     get() {
-      var yPropFn = this.get('yPropFn');
-      var xPropFn = this.get('xPropFn');
-      var data = this.get('data');
+      let yPropFn = this.get('yPropFn');
+      let xPropFn = this.get('xPropFn');
+      let data = this.get('data');
       if(Ember.isArray(data)) {
         return data.map(function(d, i) {
-          var item = [xPropFn(d), yPropFn(d)];
+          let item = [xPropFn(d), yPropFn(d)];
           item.data = d;
           item.origIndex = i;
           return item;
@@ -88,7 +88,7 @@ export default Ember.Mixin.create({
   */
   xPropFn: computed('xprop', {
     get() {
-      var xprop = this.get('xprop');
+      let xprop = this.get('xprop');
       return xprop ? parsePropertyExpr(xprop) : noop;
     }
   }),
@@ -103,7 +103,7 @@ export default Ember.Mixin.create({
   */
   yPropFn: computed('yprop', {
     get() {
-      var yprop = this.get('yprop');
+      let yprop = this.get('yprop');
       return yprop ? parsePropertyExpr(yprop) : noop;
     }
   }),
@@ -122,11 +122,11 @@ export default Ember.Mixin.create({
     'graph.xMax',
     {
       get() {
-        var mappedData = this.get('mappedData');
-        var graph = this.get('graph');
-        var xScaleType = graph.get('xScaleType');
-        var xMin = graph.get('xMin');
-        var xMax = graph.get('xMax');
+        let mappedData = this.get('mappedData');
+        let graph = this.get('graph');
+        let xScaleType = graph.get('xScaleType');
+        let xMin = graph.get('xMin');
+        let xMax = graph.get('xMax');
 
         if(!mappedData || mappedData.length === 0) {
           return [];
@@ -137,11 +137,11 @@ export default Ember.Mixin.create({
         }
 
         return mappedData.filter(function(d, i) {
-          var x = d[0];
-          var prev = mappedData[i-1];
-          var next = mappedData[i+1];
-          var prevX = prev ? prev[0] : null;
-          var nextX = next ? next[0] : null;
+          let x = d[0];
+          let prev = mappedData[i-1];
+          let next = mappedData[i+1];
+          let prevX = prev ? prev[0] : null;
+          let nextX = next ? next[0] : null;
 
           return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
         });
@@ -158,9 +158,9 @@ export default Ember.Mixin.create({
   */
   firstVisibleData: computed('renderedData.[]', 'xMin', {
     get() {
-      var { renderedData, xPropFn, yPropFn, xMin } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMin');
+      let { renderedData, xPropFn, yPropFn, xMin } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMin');
 
-      var first = renderedData[0];
+      let first = renderedData[0];
       if(first && xMin > first[0] && renderedData.length > 1) {
         first = renderedData[1];
       }
@@ -185,8 +185,8 @@ export default Ember.Mixin.create({
   */
   lastVisibleData: computed('renderedData.[]', 'yPropFn', 'xPropFn', 'xMax', {
     get() {
-      var { renderedData, xPropFn, yPropFn, xMax } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMax');
-      var last = renderedData[renderedData.length - 1];
+      let { renderedData, xPropFn, yPropFn, xMax } = this.getProperties('renderedData', 'xPropFn', 'yPropFn', 'xMax');
+      let last = renderedData[renderedData.length - 1];
 
       if(last && xMax < last[0] && renderedData.length > 1) {
         last = renderedData[renderedData.length - 2];
@@ -203,31 +203,31 @@ export default Ember.Mixin.create({
   }),
 
   _getRenderedDataNearXRange: function(rangeX) {
-    var xScale = this.get('xScale');
-    var isLinear = xScale && xScale.invert;
+    let xScale = this.get('xScale');
+    let isLinear = xScale && xScale.invert;
     if(isLinear) {
       return this.getDataNearX(xScale.invert(rangeX));
     } else {
       //ordinal
-      var range = this.get('graph.xRange');
-      var v = Math.abs(rangeX - range[0]) / Math.abs(range[1] - range[0]);
-      var renderedData = this.get('renderedData');
-      var i = Math.floor(v * renderedData.length);
+      let range = this.get('graph.xRange');
+      let v = Math.abs(rangeX - range[0]) / Math.abs(range[1] - range[0]);
+      let renderedData = this.get('renderedData');
+      let i = Math.floor(v * renderedData.length);
       return renderedData[i];
     }
   },
 
   getDataNearXRange(rangeX) {
-    var rendered = this._getRenderedDataNearXRange(rangeX);
+    let rendered = this._getRenderedDataNearXRange(rangeX);
 
     if(!rendered) { 
       return null;
     }
     
-    var renderX = rendered[0];
-    var renderY = rendered[1];
-    var data = rendered.data;
-    var { x, y } = this.getActualTrackData(renderX, renderY, data);
+    let renderX = rendered[0];
+    let renderY = rendered[1];
+    let data = rendered.data;
+    let { x, y } = this.getActualTrackData(renderX, renderY, data);
 
     return { renderX, renderY, data, x, y };
   },
@@ -248,8 +248,8 @@ export default Ember.Mixin.create({
   getDataNearX: function(x) {
     x = +x;
     if(x === x) {
-      var renderedData = this.get('renderedData');
-      var index = nearestIndexTo(renderedData, x, function(d){
+      let renderedData = this.get('renderedData');
+      let index = nearestIndexTo(renderedData, x, function(d){
         return d ? d[0] : null;
       });
       return index !== -1 ? renderedData[index] : null;

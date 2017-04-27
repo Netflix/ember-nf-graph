@@ -6,18 +6,18 @@ import layout from '../templates/components/nf-y-axis';
 
 /**
   A component for adding a templated y axis to an `nf-graph` component.
-  All items contained within this component are used to template each tick mark on the 
+  All items contained within this component are used to template each tick mark on the
   rendered graph. Tick values are supplied to the inner scope of this component on the
   view template via `tick`.
-  
+
   ### Styling
-  
+
   The main container will have a `nf-y-axis` class.
   A `orient-left` or `orient-right` container will be applied to the container
   depending on the `orient` setting.
 
   Ticks are positioned via a `<g>` tag, that will contain whatever is passed into it via
-  templating, along with the tick line. `<text>` tags within tick templates do have some 
+  templating, along with the tick line. `<text>` tags within tick templates do have some
   default styling applied to them to position them appropriately based off of orientation.
 
   ### Example
@@ -40,11 +40,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   layout: layout,
   template: null,
 
-  useTemplate: computed(function(){
-    var preGlimmerCheck = this.get('template.blockParams');
-    var postGlimmerCheck = this.get('hasBlock') && this.get('hasBlockParams');
-    return Boolean(postGlimmerCheck || preGlimmerCheck);
-  }),
+  useTemplate: computed.and('hasBlock', 'hasBlockParams'),
 
   /**
     The number of ticks to display
@@ -89,14 +85,14 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   attributeBindings: ['transform'],
 
   classNameBindings: [':nf-y-axis', 'isOrientRight:orient-right:orient-left'],
-  
+
   _tickFilter: null,
 
   /**
     An optional filtering function to allow more control over what tick marks are displayed.
     The function should have exactly the same signature as the function you'd use for an
     `Array.prototype.filter()`.
-  
+
     @property tickFilter
     @type Function
     @default null
@@ -105,13 +101,13 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
           {{#nf-y-axis tickFilter=myFilter as |tick|}}
             <text>{{tick.value}}</text>
           {{/nf-y-axis}}
-  
+
     And on your controller:
-    
+
           myFilter: function(tick, index, ticks) {
             return tick.value < 1000;
           },
-  
+
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
   tickFilter: computed({
@@ -139,8 +135,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: computed('x', 'y', function(){
-    var x = this.get('x');
-    var y = this.get('y');
+    let x = this.get('x');
+    let y = this.get('y');
     return `translate(${x} ${y})`;
   }),
 
@@ -157,7 +153,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     'graph.paddingLeft',
     'graph.paddingRight',
     function(){
-      var orient = this.get('orient');
+      let orient = this.get('orient');
       if(orient !== 'left') {
         return this.get('graph.width') - this.get('width') - this.get('graph.paddingRight');
       }
@@ -173,7 +169,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   y: computed.alias('graph.graphY'),
 
-  /** 
+  /**
     the height of the component
     @property height
     @type Number
@@ -183,7 +179,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   init() {
     this._super(...arguments);
-    this.set('graph.yAxis', this);
+
+    Ember.run.schedule('afterRender', () => {
+      this.set('graph.yAxis', this);
+    });
   },
 
   /**
@@ -207,22 +206,22 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tickFactory: null,
 
   tickData: computed('graph.yScaleType', 'uniqueYData', 'yScale', 'tickCount', function(){
-    var tickFactory = this.get('tickFactory');
-    var scale = this.get('yScale');
-    var uniqueData = this.get('uniqueYData');
-    var scaleType = this.get('graph.yScaleType');
-    var tickCount = this.get('tickCount');
+    let tickFactory = this.get('tickFactory');
+    let scale = this.get('yScale');
+    let uniqueData = this.get('uniqueYData');
+    let scaleType = this.get('graph.yScaleType');
+    let tickCount = this.get('tickCount');
 
     if(tickFactory) {
       return tickFactory(scale, tickCount, uniqueData, scaleType);
     }
     else if(scaleType === 'ordinal') {
       return uniqueData;
-    } 
+    }
     else {
-      var ticks = scale.ticks(tickCount);
+      let ticks = scale.ticks(tickCount);
       if (scaleType === 'log') {
-        var step = Math.round(ticks.length / tickCount);
+        let step = Math.round(ticks.length / tickCount);
         ticks = ticks.filter(function (tick, i) {
           return i % step === 0;
         });
@@ -239,7 +238,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   uniqueYData: computed.uniq('graph.yData'),
 
-  /** 
+  /**
     The ticks to be displayed.
     @property ticks
     @type Array
@@ -253,18 +252,18 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     'isOrientRight',
     'tickFilter',
     function(){
-      var yScale = this.get('yScale');
-      var tickPadding = this.get('tickPadding');
-      var axisLineX = this.get('axisLineX');
-      var tickLength = this.get('tickLength');
-      var isOrientRight = this.get('isOrientRight');
-      var tickFilter = this.get('tickFilter');
-      var ticks = this.get('tickData');
-      var x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
-      var x2 = axisLineX;
-      var labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
+      let yScale = this.get('yScale');
+      let tickPadding = this.get('tickPadding');
+      let axisLineX = this.get('axisLineX');
+      let tickLength = this.get('tickLength');
+      let isOrientRight = this.get('isOrientRight');
+      let tickFilter = this.get('tickFilter');
+      let ticks = this.get('tickData');
+      let x1 = isOrientRight ? axisLineX + tickLength : axisLineX - tickLength;
+      let x2 = axisLineX;
+      let labelx = isOrientRight ? (tickLength + tickPadding) : (axisLineX - tickLength - tickPadding);
 
-      var result = ticks.map(function (tick) {
+      let result = ticks.map(function (tick) {
         return {
           value: tick,
           y: yScale(tick),

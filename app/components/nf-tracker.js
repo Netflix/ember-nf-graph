@@ -23,10 +23,10 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, RequiresScale
 
   transform: computed('trackedData.x', 'trackedData.y', 'xScale', 'yScale', {
     get() {
-      var xScale = this.get('xScale');
-      var yScale = this.get('yScale');
-      var x = xScale && xScale(this.get('trackedData.x') || 0);
-      var y = yScale && yScale(this.get('trackedData.y') || 0);
+      let xScale = this.get('xScale');
+      let yScale = this.get('yScale');
+      let x = xScale && xScale(this.get('trackedData.x') || 0);
+      let y = yScale && yScale(this.get('trackedData.y') || 0);
       return 'translate(' + x + ',' + y + ')';
     }
   })

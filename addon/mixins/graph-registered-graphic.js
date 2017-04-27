@@ -9,7 +9,7 @@ export default Ember.Mixin.create({
 
   init() {
     this._super(...arguments);
-    var graph = this.get('graph');
+    let graph = this.get('graph');
     if(graph) {
       graph.registerGraphic(this);
     }
@@ -22,7 +22,7 @@ export default Ember.Mixin.create({
     @private
   */
   _unregisterGraphic: Ember.on('willDestroyElement', function(){
-    var graph = this.get('graph');
+    let graph = this.get('graph');
     if(graph) {
       graph.unregisterGraphic(this);
     }

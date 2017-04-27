@@ -45,9 +45,9 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @return {String} an SVG path data string
   */
   lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
-    var xScale = this.get('xScale');
-    var yScale = this.get('yScale');
-    var interpolator = this.get('interpolator');
+    let xScale = this.get('xScale');
+    let yScale = this.get('yScale');
+    let interpolator = this.get('interpolator');
     return this.createLineFn(xScale, yScale, interpolator);
   }),
 
@@ -59,8 +59,8 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @readonly
   */
   d: Ember.computed('renderedData.[]', 'lineFn', function(){
-    var renderedData = this.get('renderedData');
-    var lineFn = this.get('lineFn');
+    let renderedData = this.get('renderedData');
+    let lineFn = this.get('lineFn');
     return lineFn(renderedData);
   }),
 

@@ -91,8 +91,8 @@ export default GraphPosition.extend({
   */
   nearestDataPoint: computed('source', 'mouse.graphX', {
     get() {
-      var mouseX = this.get('mouseX');
-      var source = this.get('source');
+      let mouseX = this.get('mouseX');
+      let source = this.get('source');
       return source ? source.getDataNearXRange(mouseX) : undefined;
     }
   }),
@@ -105,7 +105,7 @@ export default GraphPosition.extend({
   */
   x: computed('nearestDataPoint', {
     get() {
-      var nearestDataPoint = this.get('nearestDataPoint');
+      let nearestDataPoint = this.get('nearestDataPoint');
       this._x =  nearestDataPoint ? nearestDataPoint[0] : undefined;
       return this._x;
     }
@@ -119,7 +119,7 @@ export default GraphPosition.extend({
   */
   y: computed('nearestDataPoint', {
     get() {
-      var nearestDataPoint = this.get('nearestDataPoint');
+      let nearestDataPoint = this.get('nearestDataPoint');
       this._y = nearestDataPoint ? nearestDataPoint[1] : undefined;
       return this._y;
     }

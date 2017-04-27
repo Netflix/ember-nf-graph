@@ -46,14 +46,14 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Array
   */
   svgPoints: Ember.computed('points.[]', 'xScale', 'yScale', function(){
-    var points = this.get('points');
-    var xScale = this.get('xScale');
-    var yScale = this.get('yScale');
+    let points = this.get('points');
+    let xScale = this.get('xScale');
+    let yScale = this.get('yScale');
     if(Ember.isArray(points) && points.length > 0) {
       return points.map(function(v) {
-        var dx = normalizeScale(xScale, v[0]);
-        var dy = normalizeScale(yScale, v[1]);
-        var c = v.length > 2 ? v[2] : 'L';
+        let dx = normalizeScale(xScale, v[0]);
+        let dy = normalizeScale(yScale, v[1]);
+        let c = v.length > 2 ? v[2] : 'L';
         return [dx, dy, c];
       });
     } 
@@ -71,7 +71,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type String
   */
   d: Ember.computed('svgPoints', function(){
-    var svgPoints = this.get('svgPoints');
+    let svgPoints = this.get('svgPoints');
     if(Ember.isArray(svgPoints) && svgPoints.length > 0) {
       return svgPoints.reduce(function(d, pt, i) {
         if(i === 0) {

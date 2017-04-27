@@ -17,10 +17,10 @@
       @return {Function} a d3 function that will create SVG path data from a given data set.
       */
     createLineFn: function(xScale, yScale, interpolate){ 
-      var interp = interpolate || 'linear';
+      let interp = interpolate || 'linear';
 
-      var xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
-      var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
+      let xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
+      let yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
 
       return function(data) {
         if(!data || data.length === 0) {

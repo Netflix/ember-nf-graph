@@ -41,19 +41,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   layout: layout,
   template: null,
 
-  addTemplateObserver: function() {
-    this.addObserver('template.blockParams', this, function() {
-      var preGlimmer = this.get('template');
-      if (preGlimmer) {
-        if (!this.get('hasBlock')) {
-          this.set('hasBlock',computed('template.blockParams', function() {
-            return this.get('template.blockParams');
-          }));
-        }
-      }
-    });
-  },
-
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],
   classNames: ['nf-x-axis'],
@@ -142,8 +129,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   transform: computed('x', 'y', function(){
-    var x = this.get('x') || 0;
-    var y = this.get('y') || 0;
+    let x = this.get('x') || 0;
+    let y = this.get('y') || 0;
     return `translate(${x} ${y})`;
   }),
 
@@ -160,12 +147,12 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     'graph.height',
     'height',
     function(){
-      var orient = this.get('orient');
-      var graphHeight = this.get('graph.height');
-      var height = this.get('height');
-      var paddingBottom = this.get('graph.paddingBottom');
-      var paddingTop = this.get('graph.paddingTop');
-      var y;
+      let orient = this.get('orient');
+      let graphHeight = this.get('graph.height');
+      let height = this.get('height');
+      let paddingBottom = this.get('graph.paddingBottom');
+      let paddingTop = this.get('graph.paddingTop');
+      let y;
 
       if(orient === 'bottom') {
         y = graphHeight - paddingBottom - height;
@@ -189,8 +176,10 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
   init() {
     this._super(...arguments);
-    this.set('graph.xAxis', this);
-    this.addTemplateObserver();
+
+    Ember.run.schedule('afterRender', () => {
+      this.set('graph.xAxis', this);
+    });
   },
 
   /**
@@ -222,11 +211,11 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   tickFactory: null,
 
   tickData: computed('xScale', 'graph.xScaleType', 'uniqueXData', 'tickCount', 'tickFactory', function(){
-    var tickFactory = this.get('tickFactory');
-    var scale = this.get('xScale');
-    var uniqueData = this.get('uniqueXData');
-    var tickCount = this.get('tickCount');
-    var scaleType = this.get('graph.xScaleType');
+    let tickFactory = this.get('tickFactory');
+    let scale = this.get('xScale');
+    let uniqueData = this.get('uniqueXData');
+    let tickCount = this.get('tickCount');
+    let scaleType = this.get('graph.xScaleType');
 
     if(tickFactory) {
       return tickFactory(scale, tickCount, uniqueData, scaleType);
@@ -263,19 +252,19 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     'tickData',
     'graph.xScaleType',
     function(){
-      var xScale = this.get('xScale');
-      var xScaleType = this.get('graph.xScaleType');
-      var tickPadding = this.get('tickPadding');
-      var tickLength = this.get('tickLength');
-      var height = this.get('height');
-      var orient = this.get('orient');
-      var tickFilter = this.get('tickFilter');
-      var ticks = this.get('tickData');
-      var y1 = orient === 'top' ? height : 0;
-      var y2 = y1 + tickLength;
-      var labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);
-      var halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
-      var result = ticks.map(function(tick) {
+      let xScale = this.get('xScale');
+      let xScaleType = this.get('graph.xScaleType');
+      let tickPadding = this.get('tickPadding');
+      let tickLength = this.get('tickLength');
+      let height = this.get('height');
+      let orient = this.get('orient');
+      let tickFilter = this.get('tickFilter');
+      let ticks = this.get('tickData');
+      let y1 = orient === 'top' ? height : 0;
+      let y2 = y1 + tickLength;
+      let labely = orient === 'top' ? (y1 - tickPadding) : (y1 + tickPadding);
+      let halfBandWidth = (xScaleType === 'ordinal') ? xScale.rangeBand() / 2 : 0;
+      let result = ticks.map(function(tick) {
         return {
           value: tick,
           x: xScale(tick) + halfBandWidth,
@@ -300,8 +289,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   axisLineY: computed('orient', 'height', function(){
-    var orient = this.get('orient');
-    var height = this.get('height');
+    let orient = this.get('orient');
+    let height = this.get('height');
     return orient === 'top' ? height : 0;
   })
 

@@ -26,8 +26,8 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   },
 
   _wireToGraph: function(){
-    var graph = this.get('graph');
-    var auto = this.get('autoWireUp');
+    let graph = this.get('graph');
+    let auto = this.get('autoWireUp');
 
     if(auto) {
       graph.on('didBrushStart', this, this._autoBrushHandler);
@@ -45,12 +45,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   })),
 
   _updateLeftText: function(){
-    var root = d3.select(this.element);
-    var g = root.select('.nf-brush-selection-left-display');
-    var text = g.select('.nf-brush-selection-left-text');
-    var bg = g.select('.nf-brush-selection-left-text-bg');
+    let root = d3.select(this.element);
+    let g = root.select('.nf-brush-selection-left-display');
+    let text = g.select('.nf-brush-selection-left-text');
+    let bg = g.select('.nf-brush-selection-left-text-bg');
 
-    var display = this.get('leftDisplay');
+    let display = this.get('leftDisplay');
 
     if(!display) {
       g.attr('hidden', true);
@@ -60,16 +60,16 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
     text.text(display);
     
-    var textPadding = this.get('textPadding');
-    var leftX = this.get('leftX');
-    var graphHeight = this.get('graphHeight');
-    var bbox = text[0][0].getBBox();
+    let textPadding = this.get('textPadding');
+    let leftX = this.get('leftX');
+    let graphHeight = this.get('graphHeight');
+    let bbox = text[0][0].getBBox();
 
-    var doublePad = textPadding * 2;
-    var width = bbox.width + doublePad;
-    var height = bbox.height + doublePad;
-    var x = Math.max(0, leftX - width);
-    var y = graphHeight - height;
+    let doublePad = textPadding * 2;
+    let width = bbox.width + doublePad;
+    let height = bbox.height + doublePad;
+    let x = Math.max(0, leftX - width);
+    let y = graphHeight - height;
 
     g.attr('transform', `translate(${x} ${y})`);
     
@@ -88,12 +88,12 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   ),
 
   _updateRightText: function(){
-    var root = d3.select(this.element);
-    var g = root.select('.nf-brush-selection-right-display');
-    var text = g.select('.nf-brush-selection-right-text');
-    var bg = g.select('.nf-brush-selection-right-text-bg');
+    let root = d3.select(this.element);
+    let g = root.select('.nf-brush-selection-right-display');
+    let text = g.select('.nf-brush-selection-right-text');
+    let bg = g.select('.nf-brush-selection-right-text-bg');
 
-    var display = this.get('rightDisplay');
+    let display = this.get('rightDisplay');
 
     if(!display) {
       g.attr('hidden', true);
@@ -103,17 +103,17 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
 
     text.text(display);
 
-    var textPadding = this.get('textPadding');
-    var rightX = this.get('rightX');
-    var graphHeight = this.get('graphHeight');
-    var graphWidth = this.get('graphWidth');
-    var bbox = text[0][0].getBBox();
+    let textPadding = this.get('textPadding');
+    let rightX = this.get('rightX');
+    let graphHeight = this.get('graphHeight');
+    let graphWidth = this.get('graphWidth');
+    let bbox = text[0][0].getBBox();
 
-    var doublePad = textPadding * 2;
-    var width = bbox.width + doublePad;
-    var height = bbox.height + doublePad;
-    var x = Math.min(graphWidth - width, rightX);
-    var y = graphHeight - height;
+    let doublePad = textPadding * 2;
+    let width = bbox.width + doublePad;
+    let height = bbox.height + doublePad;
+    let x = Math.min(graphWidth - width, rightX);
+    let y = graphHeight - height;
 
     g.attr('transform', `translate(${x} ${y})`);
     
@@ -132,32 +132,32 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   ),
 
   leftDisplay: Ember.computed('left', 'formatter', function(){
-    var formatter = this.get('formatter');
-    var left = this.get('left');
+    let formatter = this.get('formatter');
+    let left = this.get('left');
     return formatter ? formatter(left) : left;
   }),
 
   rightDisplay: Ember.computed('right', 'formatter', function(){
-    var formatter = this.get('formatter');
-    var right = this.get('right');
+    let formatter = this.get('formatter');
+    let right = this.get('right');
     return formatter ? formatter(right) : right;
   }),
 
   isVisible: Ember.computed('left', 'right', function(){
-    var left = +this.get('left');
-    var right = +this.get('right');
+    let left = +this.get('left');
+    let right = +this.get('right');
     return left === left && right === right;
   }),
 
   leftX: Ember.computed('xScale', 'left', function() {
-    var left = this.get('left') || 0;
-    var scale = this.get('xScale');
+    let left = this.get('left') || 0;
+    let scale = this.get('xScale');
     return scale ? scale(left) : 0; 
   }),
 
   rightX: Ember.computed('xScale', 'right', function() {
-    var right = this.get('right') || 0;
-    var scale = this.get('xScale');
+    let right = this.get('right') || 0;
+    let scale = this.get('xScale');
     return scale ? scale(right) : 0;
   }),
 

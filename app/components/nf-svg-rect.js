@@ -82,13 +82,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
   */
   x1: computed('width', 'x', 'xScale', function(){
-    var xScale = this.get('xScale');
-    var w = this.get('width');
-    var x = this.get('x');
+    let xScale = this.get('xScale');
+    let w = this.get('width');
+    let x = this.get('x');
     if(xScale.rangeBands) {
-      var domain = xScale.domain();
-      var fromIndex = domain.indexOf(x);
-      var toIndex = fromIndex + w;
+      let domain = xScale.domain();
+      let fromIndex = domain.indexOf(x);
+      let toIndex = fromIndex + w;
       return normalizeScale(xScale, domain[toIndex]);
     } else {
       x = +x || 0;
@@ -102,13 +102,13 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type Number
   */
   y1: computed('height', 'y', 'yScale', function(){
-    var yScale = this.get('yScale');
-    var h = this.get('height');
-    var y = this.get('y');
+    let yScale = this.get('yScale');
+    let h = this.get('height');
+    let y = this.get('y');
     if(yScale.rangeBands) {
-      var domain = yScale.domain();
-      var fromIndex = domain.indexOf(y);
-      var toIndex = fromIndex + h;
+      let domain = yScale.domain();
+      let fromIndex = domain.indexOf(y);
+      let toIndex = fromIndex + h;
       return normalizeScale(yScale, domain[toIndex]);
     } else {
       y = +y || 0;
@@ -140,10 +140,10 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
     @type String
   */
   d: computed('x0', 'y0', 'x1', 'y1', function(){
-    var x0 = this.get('x0');
-    var y0 = this.get('y0');
-    var x1 = this.get('x1');
-    var y1 = this.get('y1');
+    let x0 = this.get('x0');
+    let y0 = this.get('y0');
+    let x1 = this.get('x1');
+    let y1 = this.get('y1');
     return `M${x0},${y0} L${x0},${y1} L${x1},${y1} L${x1},${y0} L${x0},${y0}`;
   }),
 

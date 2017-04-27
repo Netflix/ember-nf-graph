@@ -19,9 +19,9 @@ export default Ember.Mixin.create({
     @return {Function} a function that when called will create SVG path data.
   */
   createAreaFn: function(xScale, yScale, interpolator) {
-      var interp = interpolator || 'linear';
-      var xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
-      var yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
+      let interp = interpolator || 'linear';
+      let xMod = xScale.rangeBand ? xScale.rangeBand() / 2 : 0;
+      let yMod = yScale.rangeBand ? yScale.rangeBand() / 2 : 0;
 
       return function(data) {
         if(!data || data.length === 0) {

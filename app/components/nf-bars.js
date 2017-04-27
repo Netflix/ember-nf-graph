@@ -47,7 +47,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     @private
   */
   getBarClass: Ember.computed('classprop', function() {
-    var classprop = this.get('classprop');
+    let classprop = this.get('classprop');
     return classprop ? parsePropExpr(classprop) : null;
   }),
 
@@ -90,17 +90,17 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     @readonly
   */
   barWidth: Ember.computed('xScale', 'barScale', function(){
-    var barScale = this.get('barScale');
+    let barScale = this.get('barScale');
     if(barScale) {
       return barScale.rangeBand();
     }
-    var xScale = this.get('xScale');
+    let xScale = this.get('xScale');
     return xScale && xScale.rangeBand ? xScale.rangeBand() : 0;
   }),
 
   groupOffsetX: Ember.computed('barScale', 'groupIndex', function(){
-    var barScale = this.get('barScale');
-    var groupIndex = this.get('groupIndex');
+    let barScale = this.get('barScale');
+    let groupIndex = this.get('groupIndex');
     return normalizeScale(barScale, groupIndex);
   }),
 
@@ -118,23 +118,23 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     'barWidth',
     'groupOffsetX',
     function(){
-      var { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } =
+      let { renderedData, xScale, yScale, barWidth, graphHeight, getBarClass, groupOffsetX } =
         this.getProperties('renderedData', 'xScale', 'yScale', 'graphHeight', 'getBarClass', 'groupOffsetX', 'barWidth');
 
-      var getRectPath = this._getRectPath;
+      let getRectPath = this._getRectPath;
 
       if(!xScale || !yScale || !Ember.isArray(renderedData)) {
         return null;
       }
 
-      var w = barWidth;
+      let w = barWidth;
 
       return Ember.A(renderedData.map(function(data) {
-        var className = 'nf-bars-bar' + (getBarClass ? ' ' + getBarClass(data.data) : '');
-        var x = normalizeScale(xScale, data[0]) + groupOffsetX;
-        var y = normalizeScale(yScale, data[1]);
-        var h = graphHeight - y;
-        var path = getRectPath(x, y, w, h);
+        let className = 'nf-bars-bar' + (getBarClass ? ' ' + getBarClass(data.data) : '');
+        let x = normalizeScale(xScale, data[0]) + groupOffsetX;
+        let y = normalizeScale(yScale, data[1]);
+        let h = graphHeight - y;
+        let path = getRectPath(x, y, w, h);
 
         return { path, className, data };
       }));
@@ -153,7 +153,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
   init() {
     this._super(...arguments);
-    var group = nearestWithProperty('isBarsGroup',this);
+    let group = nearestWithProperty('isBarsGroup',this);
     if(group && group.registerBars) {
       group.registerBars(this);
     }

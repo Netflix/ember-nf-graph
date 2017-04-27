@@ -58,8 +58,8 @@ export default Ember.Component.extend(HasGraphParent, {
     @param marker {nf-range-marker} the range marker to register with this container
   */
   registerMarker: function(marker) {
-    var markers = this.get('markers');
-    var prevMarker = markers[markers.length - 1];
+    let markers = this.get('markers');
+    let prevMarker = markers[markers.length - 1];
     
     if(prevMarker) {
       marker.set('prevMarker', prevMarker);
@@ -77,8 +77,8 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   unregisterMarker: function(marker) {
     if(marker) {
-      var next = marker.nextMarker;
-      var prev = marker.prevMarker;
+      let next = marker.nextMarker;
+      let prev = marker.prevMarker;
       if(prev) {
         prev.set('nextMarker', next);
       }

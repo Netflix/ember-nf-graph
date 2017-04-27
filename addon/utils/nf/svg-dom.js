@@ -11,15 +11,15 @@
   @private
 */
 function inlineAllStyles(element) {
-  var styles = getComputedStyle(element);
-  for(var key in styles) {
+  let styles = getComputedStyle(element);
+  for(let key in styles) {
     if(styles.hasOwnProperty(key)) {
       element.style[key] = styles[key];
     }
   }
 
-  for(var i = 0; i < element.childNodes.length; i++) {
-    var node = element.childNodes[i];
+  for(let i = 0; i < element.childNodes.length; i++) {
+    let node = element.childNodes[i];
     if(node.nodeType === 1) {
       inlineAllStyles(node);
     }
@@ -32,23 +32,23 @@ function inlineAllStyles(element) {
   @param svg {SVGSVGElement} the svg element to render
 */
 export function svgToImageUrl(svg, callback) {
-  var clone = svg.cloneNode(true);
-  var parent = svg.parentElement;
+  let clone = svg.cloneNode(true);
+  let parent = svg.parentElement;
 
-  var canvas = document.createElement('canvas');
+  let canvas = document.createElement('canvas');
   canvas.setAttribute('width', svg.getAttribute('width'));
   canvas.setAttribute('height', svg.getAttribute('height'));
-  var context = canvas.getContext('2d');
+  let context = canvas.getContext('2d');
 
   parent.insertBefore(clone, svg);
   clone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');
 
   inlineAllStyles(clone);
 
-  var img = new Image();
-  var blob = new Blob([clone.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
+  let img = new Image();
+  let blob = new Blob([clone.outerHTML], { type: 'image/svg+xml;charset=utf-8' });
   clone.remove();
-  var url = URL.createObjectURL(blob);
+  let url = URL.createObjectURL(blob);
 
   img.onload = function(){
     context.drawImage(img, 0, 0);
@@ -69,7 +69,7 @@ export function svgToImageUrl(svg, callback) {
 */
 export function downloadSvg(svg) {
   svgToImageUrl(svg, function(url) {
-    var dlUrl = url.replace('image/png', 'image/octet-stream');
+    let dlUrl = url.replace('image/png', 'image/octet-stream');
     location.href = dlUrl;
   });
 }
@@ -81,19 +81,19 @@ export function downloadSvg(svg) {
   @return {Object} the {x, y} data of the mouse position relative to the container
 */
 export function getMousePoint(container, e) {
-  var x, y;
+  let x, y;
 
   if(e && e.hasOwnProperty('clientX') && e.hasOwnProperty('clientY')) {
-    var svg = container.ownerSVGElement || container;
+    let svg = container.ownerSVGElement || container;
     if (svg.createSVGPoint) {
-      var point = svg.createSVGPoint();
+      let point = svg.createSVGPoint();
       point.x = e.clientX;
       point.y = e.clientY;
       point = point.matrixTransform(container.getScreenCTM().inverse());
       x = point.x;
       y = point.y;
     } else {
-      var rect = container.getBoundingClientRect();
+      let rect = container.getBoundingClientRect();
       x = e.clientX - rect.left - container.clientLeft;
       y = e.clientY - rect.top - container.clientTop;
     }
@@ -119,7 +119,7 @@ export function getRectPath(x, y, w, h) {
   y = +y || 0;
   w = +w || 0;
   h = +h || 0;
-  var x2 = w + x;
-  var y2 = h + y;
+  let x2 = w + x;
+  let y2 = h + y;
   return `M${x},${y} L${x},${y2} L${x2},${y2} L${x2},${y} L${x},${y}`;
 }
