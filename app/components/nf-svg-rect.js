@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
@@ -11,16 +10,23 @@ import computed from 'ember-new-computed';
   @namespace components
   @class nf-svg-rect
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
+export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
   tagName: 'path',
 
   attributeBindings: ['d'],
 
   classNameBindings: [':nf-svg-rect', 'selectable', 'selected'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The domain x value to place the rect at.
@@ -39,8 +45,8 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
   _width: 0,
 
   /**
-    The width as a domain value. If xScale is ordinal, 
-    then this value is the indice offset to which to draw the 
+    The width as a domain value. If xScale is ordinal,
+    then this value is the indice offset to which to draw the
     rectangle. In other words, if it's `2`, then draw the rectangle
     to two ordinals past whatever `x` is set to.
     @property width

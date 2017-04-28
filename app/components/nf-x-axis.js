@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import computed from 'ember-new-computed';
 import layout from '../templates/components/nf-x-axis';
@@ -35,7 +34,7 @@ import layout from '../templates/components/nf-x-axis';
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'g',
 
   layout: layout,
@@ -44,6 +43,14 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   attributeBindings: ['transform'],
   classNameBindings: ['orientClass'],
   classNames: ['nf-x-axis'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The height of the x axis in pixels.

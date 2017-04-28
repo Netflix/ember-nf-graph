@@ -14,11 +14,11 @@ export default Ember.Mixin.create({
     - 'hover': only track while mouse hover
     - 'snap-last': track while mouse hover, but snap to the last data element when not hovering
     - 'snap-first': track while mouse hover, but snap to the first data element when not hovering
-    - 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is 
+    - 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is
     {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
-    - 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is 
+    - 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is
     {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
-    - 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is 
+    - 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is
     {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
 
     @property trackingMode
@@ -46,7 +46,7 @@ export default Ember.Mixin.create({
   /**
     The value of the data that is being tracked by the component.
     @property trackedData
-    @type {Object} an object with the following values:  
+    @type {Object} an object with the following values:
       - point: an { x, y } pair for the exact px coordinates inside the graph-content
       - graphX: domain x value at mouse position
       - graphY: domain y value at mouse position
@@ -62,10 +62,10 @@ export default Ember.Mixin.create({
   trackedData: null,
 
   /**
-    The value of the data that is being tracked by the component, ONLY if the 
+    The value of the data that is being tracked by the component, ONLY if the
     graph-content is currently being hovered.
     @property hoverData
-    @type {Object} an object with the following values:  
+    @type {Object} an object with the following values:
       - point: an { x, y } pair for the exact px coordinates inside the graph-content
       - graphX: domain x value at mouse position
       - graphY: domain y value at mouse position
@@ -171,9 +171,11 @@ export default Ember.Mixin.create({
     let content = this._content;
 
     let mousemoveHandler = e => {
-      this._hovered = true;
-      let evt = this._getEventObject(e);
-      this.set('trackedData', evt);
+      Ember.run.schedule('afterRender', () => {
+        this._hovered = true;
+        let evt = this._getEventObject(e);
+        this.set('trackedData', evt);
+      });
     };
 
     content.on('mousemove', mousemoveHandler);
@@ -207,13 +209,17 @@ export default Ember.Mixin.create({
     let content = this._content;
 
     let mouseoutHandler = () => {
-      this._hovered = false;
-      this.set('trackedData', this.get('lastVisibleData'));
+      Ember.run.schedule('afterRender', () => {
+        this._hovered = false;
+        this.set('trackedData', this.get('lastVisibleData'));
+      });
     };
 
     let changeHandler = () => {
       if(!this._hovered) {
-        this.set('trackedData', this.get('lastVisibleData'));
+        Ember.run.schedule('afterRender', () => {
+          this.set('trackedData', this.get('lastVisibleData'));
+        });
       }
     };
 

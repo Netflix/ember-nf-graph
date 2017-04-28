@@ -1,13 +1,11 @@
 import Ember from 'ember';
 import Selectable from 'ember-nf-graph/mixins/graph-selectable-graphic';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RegisteredGraphic from 'ember-nf-graph/mixins/graph-registered-graphic';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import AreaUtils from 'ember-nf-graph/mixins/graph-area-utils';
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import LineUtils from 'ember-nf-graph/mixins/graph-line-utils';
-import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 /**
   Adds an area graph to an `nf-graph` component.
@@ -18,19 +16,26 @@ import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
   @class nf-area
   @extends Ember.Component
   @uses mixins.graph-area-utils
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-selectable-graphic
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-graphic-with-tracking-dot
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic,
+export default Ember.Component.extend(RegisteredGraphic, DataGraphic,
   Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, LineUtils, {
 
     tagName: 'g',
 
     classNameBindings: [':nf-area', 'selected', 'selectable'],
+
+    /**
+      The parent graph for a component.
+      @property graph
+      @type components.nf-graph
+      @default null
+      */
+    graph: null,
 
     /**
       The type of d3 interpolator to use to create the area
@@ -56,9 +61,11 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
     */
     nextArea: null,
 
+    stack: null,
+
     init() {
       this._super(...arguments);
-      let stack = nearestWithProperty('isAreaStack',this);
+      let stack = this.get('stack');
       if(stack) {
         stack.registerArea(this);
         this.set('stack', stack);

@@ -1,21 +1,19 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
-export default Ember.Component.extend(HasGraphParent, DataGraphic, RequireScaleSource, {
+export default Ember.Component.extend(DataGraphic, RequireScaleSource, {
   tagName: 'g',
 
   classNames: ['nf-plots'],
-  
+
   /**
-    The parent controller to use for template binding
-    @property parentController
-    @type Ember.Controller
-    @readonly
-    @private
-  */
-  parentController: Ember.computed.alias('templateData.view.controller'),
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The model for adding plots to the graph

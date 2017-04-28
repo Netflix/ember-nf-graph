@@ -12,7 +12,7 @@ let noop = function(){};
   with the graph. Includes methods for extracting, sorting and scrubbing data
   for use in graphing components.
 
-  Requires {{#crossLink "mixins.graph-registered-graphic"}}{{/crossLink}} and 
+  Requires {{#crossLink "mixins.graph-registered-graphic"}}{{/crossLink}} and
   {{#crossLink "mixins.graph-has-graph-parent"}}{{/crossLink}}
 
   @namespace mixins
@@ -20,8 +20,6 @@ let noop = function(){};
   @extends Ember.Mixin
 */
 export default Ember.Mixin.create({
-  isDataGraphic: true,
-
   /**
     Gets or sets the data used by the component to plot itself.
 
@@ -49,7 +47,7 @@ export default Ember.Mixin.create({
   }),
 
   _triggerHasData: on('init', observer('data.[]', function(){
-    Ember.run.once(this, this._sendTriggerHasData);
+    Ember.run.scheduleOnce('afterRender', this, this._sendTriggerHasData);
   })),
 
   _sendTriggerHasData() {
@@ -57,7 +55,7 @@ export default Ember.Mixin.create({
   },
 
   /**
-    The path of the property on each object in 
+    The path of the property on each object in
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     to use as x data to plot on the graph.
 
@@ -68,7 +66,7 @@ export default Ember.Mixin.create({
   xprop: 'x',
 
   /**
-    The path of the property on each object in 
+    The path of the property on each object in
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}}
     to use as y data to plot on the graph.
 
@@ -79,7 +77,7 @@ export default Ember.Mixin.create({
   yprop: 'y',
 
   /**
-    The function to get the x value from each 
+    The function to get the x value from each
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}} object
 
     @property xPropFn
@@ -94,7 +92,7 @@ export default Ember.Mixin.create({
   }),
 
   /**
-    The function to get the y value from each 
+    The function to get the y value from each
     {{#crossLink "mixins.graph-data-graphic/data:property"}}{{/crossLink}} object
 
     @property yPropFn
@@ -220,10 +218,10 @@ export default Ember.Mixin.create({
   getDataNearXRange(rangeX) {
     let rendered = this._getRenderedDataNearXRange(rangeX);
 
-    if(!rendered) { 
+    if(!rendered) {
       return null;
     }
-    
+
     let renderX = rendered[0];
     let renderY = rendered[1];
     let data = rendered.data;
@@ -232,13 +230,13 @@ export default Ember.Mixin.create({
     return { renderX, renderY, data, x, y };
   },
 
-  /** 
+  /**
     Gets the actual data at a rendered tracking point passed to it.
     This is overridden in nf-area to account for stacking of data.
     @method getActualTrackData
     @param renderX {number} the x domain value the data is rendered at
-    @param renderY {number} the y domain value the data is rendered at 
-    @param data {Object} the raw data from the point 
+    @param renderY {number} the y domain value the data is rendered at
+    @param data {Object} the raw data from the point
     @return {Object} simple x, y point structure
   */
   getActualTrackData(renderX, renderY, data) {

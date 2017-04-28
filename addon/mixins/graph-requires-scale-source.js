@@ -1,14 +1,14 @@
 import Ember from 'ember';
 import computed from 'ember-new-computed';
-import nearestWithProperty from 'ember-nf-graph/polyfills/nearest-with-property';
 
 let scaleProperty = function(scaleKey, zoomKey, offsetKey){
   return computed(scaleKey, zoomKey, offsetKey, {
     get() {
+      // console.log('HERE');
       let scale = this.get(scaleKey);
       let zoom = this.get(zoomKey);
-
       let offset = this.get(offsetKey);
+
       if(zoom === 1 && offset === 0) {
         return scale;
       }
@@ -118,7 +118,9 @@ export default Ember.Mixin.create({
 
   init() {
     this._super(...arguments);
-    let scaleSource = nearestWithProperty('isScaleSource',this);
-    this.set('scaleSource', scaleSource);
+
+    if (!this.get('scaleSource')) {
+      this.set('scaleSource', this.get('graph'));
+    }
   }
 });

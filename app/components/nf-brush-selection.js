@@ -1,9 +1,16 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+export default Ember.Component.extend(RequiresScaleSource, {
   tagName: 'g',
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   left: undefined,
 
@@ -20,7 +27,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     this.set('right', Ember.get(e, 'right.x'));
   },
 
-  _autoBrushEndHandler: function(e) {
+  _autoBrushEndHandler: function() {
     this.set('left', undefined);
     this.set('right', undefined);
   },
@@ -59,7 +66,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     }
 
     text.text(display);
-    
+
     let textPadding = this.get('textPadding');
     let leftX = this.get('leftX');
     let graphHeight = this.get('graphHeight');
@@ -72,7 +79,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     let y = graphHeight - height;
 
     g.attr('transform', `translate(${x} ${y})`);
-    
+
     text.attr('x', textPadding).
       attr('y', textPadding);
 
@@ -116,7 +123,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
     let y = graphHeight - height;
 
     g.attr('transform', `translate(${x} ${y})`);
-    
+
     text.attr('x', textPadding).
       attr('y', textPadding);
 
@@ -152,7 +159,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   leftX: Ember.computed('xScale', 'left', function() {
     let left = this.get('left') || 0;
     let scale = this.get('xScale');
-    return scale ? scale(left) : 0; 
+    return scale ? scale(left) : 0;
   }),
 
   rightX: Ember.computed('xScale', 'right', function() {
@@ -162,7 +169,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   }),
 
   graphWidth: Ember.computed.alias('graph.graphWidth'),
-  
+
   graphHeight: Ember.computed.alias('graph.graphHeight'),
 
   rightWidth: Ember.computed('rightX', 'graphWidth', function() {

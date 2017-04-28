@@ -1,19 +1,17 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import GraphMouseEvent from 'ember-nf-graph/utils/nf/graph-mouse-event';
 
 /**
   Container component for graphics to display in `nf-graph`. Represents
   the area where the graphics, such as lines will display.
-  
+
   Exists for layout purposes.
   @namespace components
   @class nf-graph-content
-  @uses mixins.graph-has-graph-parent
-*/  
-export default Ember.Component.extend(HasGraphParent, {
+*/
+export default Ember.Component.extend({
   tagName: 'g',
-  
+
   classNames: ['nf-graph-content'],
 
   attributeBindings: ['transform', 'clip-path'],
@@ -22,6 +20,14 @@ export default Ember.Component.extend(HasGraphParent, {
     let clipPathId = this.get('graph.contentClipPathId');
     return  `url('#${clipPathId}')`;
   }),
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The SVG transform for positioning the graph content

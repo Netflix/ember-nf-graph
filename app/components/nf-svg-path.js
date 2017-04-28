@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
@@ -9,16 +8,23 @@ import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
   @namespace components
   @class nf-svg-path
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
+export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
   type: 'path',
 
   classNameBindings: [':nf-svg-path', 'selectable', 'selected'],
 
   attributeBindings: ['d'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The array of points to use to plot the path. This is an array of arrays, in the following format:
@@ -56,7 +62,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
         let c = v.length > 2 ? v[2] : 'L';
         return [dx, dy, c];
       });
-    } 
+    }
   }),
 
   click: function(){

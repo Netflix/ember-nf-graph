@@ -1,9 +1,9 @@
 <rect x=0 y=0 class="nf-graph-content-background" width="{{width}}" height="{{height}}"></rect>
-
-
   {{#if graph.hasData}}
     {{#if graph.showLanes}}
       <g class="nf-grid-lanes">
+        {{log gridLanes}}
+
         {{#each gridLanes as |lane|}}
           <rect class="nf-grid-lane" x="{{lane.x}}" y="{{lane.y}}" width="{{width}}" height="{{lane.height}}"></rect>
         {{/each}}
@@ -24,4 +24,6 @@
   {{/unless}}
 
 
-{{yield}}
+{{#nf-graph-yieldables graph=graph scaleSource=graph as |yieldables|}}
+  {{yield yieldables}}
+{{/nf-graph-yieldables}}

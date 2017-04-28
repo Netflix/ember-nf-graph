@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 
@@ -20,12 +19,20 @@ import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'g',
 
   attributeBindings: ['transform'],
 
   classNameBindings: [':nf-y-diff', 'isPositive:positive:negative', 'isOrientRight:orient-right:orient-left'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The starting domain value of the difference measurement. The subrahend of the difference calculation.
@@ -34,7 +41,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @default null
   */
   a: null,
-  
+
   /**
     The ending domain value of the difference measurement. The minuend of the difference calculation.
     @property b
@@ -42,7 +49,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @default null
   */
   b: null,
-  
+
   /**
     The amount of padding, in pixels, between the edge of the difference "box" and the content container
     @property contentPadding
@@ -50,7 +57,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @default 5
   */
   contentPadding: 5,
-  
+
   /**
     The duration of the transition, in milliseconds, as the difference slides vertically
     @property duration
@@ -115,7 +122,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   isPositive: Ember.computed.gte('diff', 0),
-  
+
   /**
     Returns `true` if the graph's y-axis component is configured to orient right.
     @property isOrientRight
@@ -131,15 +138,6 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @readonly
   */
   width: Ember.computed.alias('graph.yAxis.width'),
-
-  /**
-    The view controller for the view this component is present in
-    @property parentController
-    @type Ember.Controller
-    @private
-    @readonly
-  */
-  parentController: Ember.computed.alias('templateData.view.controller'),
 
   /**
     The x pixel coordinate of the content container.
@@ -176,14 +174,14 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   }),
 
   /**
-    Sets up the d3 related elements when component is inserted 
+    Sets up the d3 related elements when component is inserted
     into the DOM
     @method didInsertElement
   */
   didInsertElement: function(){
     let element = this.get('element');
     let g = d3.select(element);
-    
+
     let rectPath = this.get('rectPath');
     let rect = g.insert('path', ':first-child')
       .attr('class', 'nf-y-diff-rect')
@@ -262,6 +260,3 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     })
   ),
 });
-
-
-

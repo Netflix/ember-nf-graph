@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
@@ -11,15 +10,14 @@ import computed from 'ember-new-computed';
   @namespace components
   @class nf-svg-image
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
+export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
   tagName: 'image',
 
   classNameBindings: [':nf-svg-image', 'selectable', 'selected'],
-  
+
   //HACK: for now xlink:href needs to be bound elsewhere.
   attributeBindings: ['svgX:x', 'svgY:y', 'svgWidth:width', 'svgHeight:height'],
 
@@ -28,6 +26,14 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
       this.toggleProperty('selected');
     }
   },
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The domain x value to place the image at.
@@ -64,7 +70,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
   _height: 0,
 
   /**
-    The height as a domain value. Does not 
+    The height as a domain value. Does not
     handle ordinal scales. To set a pixel value, just
     set `svgHeight` directly.
     @property height

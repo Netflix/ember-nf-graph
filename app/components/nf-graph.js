@@ -104,7 +104,7 @@ let scaleProperty = function(axis) {
     ordinalPaddingKey,
     domainKey,
     ordinalOuterPaddingKey,
-    function(){
+    function() {
       let scaleFactory = this.get(scaleFactoryKey);
       let range = this.get(rangeKey);
       let domain = this.get(domainKey);
@@ -197,6 +197,8 @@ let maxProperty = function(axis, defaultTickCount) {
     _DataExtent_,
     _ScaleFactory_,
     _Axis_tickCount_,
+    'graphHeight',
+    'graphWidth',
     {
       get() {
         let mode = this.get(_MaxMode_);
@@ -314,20 +316,6 @@ export default Ember.Component.extend({
     @default 0.1
   */
   yLogMin: 0.1,
-
-  /**
-    Allows child compoenents to identify graph parent.
-    @property isGraph
-    @private
-  */
-  isGraph: true,
-
-  /**
-    Identifies this graph to its children as providing scales.
-    @property isScaleSource
-    @private
-  */
-  isScaleSource: true,
 
   /**
     @property hasRendered
@@ -670,7 +658,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMaxX
   */
   didAutoUpdateMaxX() {
-    Ember.run.once(this, this._sendAutoUpdateXAction);
+    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateXAction);
   },
 
   /**
@@ -678,7 +666,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMinX
   */
   didAutoUpdateMinX() {
-    Ember.run.once(this, this._sendAutoUpdateXAction);
+    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateXAction);
   },
 
   /**
@@ -686,7 +674,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMaxY
   */
   didAutoUpdateMaxY() {
-    Ember.run.once(this, this._sendAutoUpdateYAction);
+    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateYAction);
   },
 
   /**
@@ -694,7 +682,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMinY
   */
   didAutoUpdateMinY() {
-    Ember.run.once(this, this._sendAutoUpdateYAction);
+    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateYAction);
   },
 
   /**
@@ -1019,14 +1007,6 @@ export default Ember.Component.extend({
     let rect = container.getBoundingClientRect();
     return [ e.clientX - rect.left - container.clientLeft, e.clientY - rect.top - container.clientTop ];
   },
-
-  /**
-    A computed property returned the view's controller.
-    @property parentController
-    @type Ember.Controller
-    @readonly
-  */
-  parentController: computed.alias('templateData.view.controller'),
 
   /**
     Selects the graphic passed. If `selectMultiple` is false, it will deselect the currently

@@ -1,27 +1,32 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
 /**
-  Draws a line and a chevron at the specified domain value 
-  on the right side of an `nf-graph`. 
-  
+  Draws a line and a chevron at the specified domain value
+  on the right side of an `nf-graph`.
+
   ### Tips
-  
-  - Position outside of `nf-graph-content` component, but inside `nf-graph`.
+
   - Adding `paddingRight` to `nf-graph` component will not affect `nf-right-tick`'s position.
-  
+
   @namespace components
   @class nf-right-tick
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'g',
 
   classNames: ['nf-right-tick'],
-  
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
+
   /**
     The transition duration in milliseconds
     @property duration
@@ -39,7 +44,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   value: null,
 
   /**
-    Sets the visibility of the component. Returns false if `y` is not 
+    Sets the visibility of the component. Returns false if `y` is not
     a numeric data type.
     @property isVisible
     @private

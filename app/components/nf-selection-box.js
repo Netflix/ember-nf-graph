@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 
@@ -8,11 +7,18 @@ import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
   @namespace components
   @class nf-selection-box
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
-  tagName: 'g', 
+export default Ember.Component.extend(RequireScaleSource, {
+  tagName: 'g',
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The duration of the transition in ms
@@ -43,7 +49,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   yMin: null,
 
-  /** 
+  /**
     The maximum y domain value to encompass
     @property yMax
     @default null

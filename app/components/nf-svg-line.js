@@ -1,19 +1,17 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
 
 /**
-  Draws a basic line between two points on the graph. 
+  Draws a basic line between two points on the graph.
   @namespace components
   @class nf-svg-line
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, SelectableGraphic, {
+export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
   tagName: 'line',
 
   classNameBindings: [':nf-svg-line', 'selectable', 'selected'],
@@ -25,6 +23,14 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
       this.toggleProperty('selected');
     }
   },
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The domain value to plot the SVGLineElement's x1 at.
@@ -62,7 +68,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
   svgX1: Ember.computed('x1', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x1'));
   }),
-  
+
   /**
     The pixel value to plot the SVGLineElement's x2 at.
     @property svgX2
@@ -80,7 +86,7 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, Selec
   svgY1: Ember.computed('y1', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('y1'));
   }),
-  
+
   /**
     The pixel value to plot the SVGLineElement's y2 at.
     @property svgY2

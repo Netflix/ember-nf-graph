@@ -7,7 +7,14 @@
 
 	<rect class="nf-graph-background" x=0 y=0 width="{{width}}" height="{{height}}"></rect>
 
-  {{yield}}
+  {{yield (hash
+			x-axis=(component 'nf-x-axis' graph=this scaleSource=this)
+			y-axis=(component 'nf-y-axis' graph=this scaleSource=this)
+			graph=(component 'nf-graph-content' graph=this)
+			right-tick=(component 'nf-right-tick' graph=this scaleSource=this)
+			y-diff=(component 'nf-right-tick' graph=this scaleSource=this)
+		)
+	}}
 
 
 </svg>

@@ -3,9 +3,9 @@ import computed from 'ember-new-computed';
 
 /**
   A component for grouping and stacking `nf-area` components in an `nf-graph`.
-  
-  This component looks at the order of the `nf-area` components underneath it 
-  and uses the ydata of the next sibling `nf-area` component to determine the bottom 
+
+  This component looks at the order of the `nf-area` components underneath it
+  and uses the ydata of the next sibling `nf-area` component to determine the bottom
   of each `nf-area` components path to be drawn.
 
   ### Example
@@ -21,19 +21,18 @@ import computed from 'ember-new-computed';
       {{/nf-graph}}
 
   @namespace components
-  @class nf-area-stack 
+  @class nf-area-stack
 */
 export default Ember.Component.extend({
   tagName: 'g',
 
   /**
-    Used by `nf-area` to identify an area stack parent
-    @property isAreaStack
-    @type Boolean
-    @default true
-    @readonly
-  */
-  isAreaStack: true,
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     Whether or not to add the values together to create the stacked area
@@ -43,7 +42,7 @@ export default Ember.Component.extend({
   */
   aggregate: computed({
     get() {
-      Ember.warn('nf-area-stack.aggregate must be set. Currently defaulting to `false` but will default to `true` in the future.')
+      Ember.warn('nf-area-stack.aggregate must be set. Currently defaulting to `false` but will default to `true` in the future.');
       return this._aggregate = false;
     },
     set(key, value) {
@@ -70,13 +69,15 @@ export default Ember.Component.extend({
   registerArea: function(area) {
     let areas = this.get('areas');
     let prev = areas[areas.length - 1];
-    
-    if(prev) {
-      prev.set('nextArea', area);
-      area.set('prevArea', prev);
-    }
-    
-    areas.pushObject(area);
+
+    Ember.run.schedule('afterRender', () => {
+      if(prev) {
+        prev.set('nextArea', area);
+        area.set('prevArea', prev);
+      }
+
+      areas.pushObject(area);
+    });
   },
 
   /**
@@ -89,14 +90,16 @@ export default Ember.Component.extend({
     let prev = area.get('prevArea');
     let next = area.get('nextArea');
 
-    if(next) {
-      next.set('prevArea', prev);
-    }
-    
-    if(prev) {
-      prev.set('nextArea', next);
-    }
+    Ember.run.schedule('afterRender', () => {
+      if(next) {
+        next.set('prevArea', prev);
+      }
 
-    this.get('areas').removeObject(area);
+      if(prev) {
+        prev.set('nextArea', next);
+      }
+
+      this.get('areas').removeObject(area);
+    });
   },
 });

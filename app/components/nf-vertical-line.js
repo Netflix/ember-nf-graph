@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
 /**
@@ -7,15 +6,22 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @namespace components
   @class nf-vertical-line
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'line',
 
   classNames: ['nf-vertical-line'],
 
   attributeBindings: ['lineX:x1', 'lineX:x2', 'y1', 'y2'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The top y coordinate of the line

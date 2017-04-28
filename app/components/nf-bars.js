@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RegisteredGraphic from 'ember-nf-graph/mixins/graph-registered-graphic';
 import parsePropExpr from 'ember-nf-graph/utils/parse-property-expression';
@@ -7,7 +6,6 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
-import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 /**
   Adds a bar graph to an `nf-graph` component.
@@ -19,18 +17,25 @@ import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
   @namespace components
   @class nf-bars
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-graphic-with-tracking-dot
 */
-export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
+export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
   tagName: 'g',
 
   classNames: ['nf-bars'],
 
   _showTrackingDot: false,
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The name of the property on each data item containing the className for the bar rectangle
@@ -153,7 +158,7 @@ export default Ember.Component.extend(HasGraphParent, RegisteredGraphic, DataGra
 
   init() {
     this._super(...arguments);
-    let group = nearestWithProperty('isBarsGroup',this);
+    let group = this.get('group');
     if(group && group.registerBars) {
       group.registerBars(this);
     }

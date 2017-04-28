@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
 
@@ -18,16 +17,21 @@ import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
   @namespace components
   @class nf-gg
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-require-scale-source
   @uses mixins.graph-selecteble-graphic
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, SelectableGraphic, {
+export default Ember.Component.extend(RequireScaleSource, SelectableGraphic, {
   tagName: 'g',
-  
+
   classNameBindings: [':nf-gg', 'selectable', 'selected'],
 
-  isScaleSource: true,
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   click: function() {
     if(this.get('selectable')) {

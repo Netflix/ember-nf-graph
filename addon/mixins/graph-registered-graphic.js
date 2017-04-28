@@ -6,11 +6,11 @@ import Ember from 'ember';
   @extends Ember.Mixin
 */
 export default Ember.Mixin.create({
-
   init() {
     this._super(...arguments);
     let graph = this.get('graph');
-    if(graph) {
+
+    if (graph) {
       graph.registerGraphic(this);
     }
   },
@@ -23,7 +23,8 @@ export default Ember.Mixin.create({
   */
   _unregisterGraphic: Ember.on('willDestroyElement', function(){
     let graph = this.get('graph');
-    if(graph) {
+
+    if (graph) {
       graph.unregisterGraphic(this);
     }
   })

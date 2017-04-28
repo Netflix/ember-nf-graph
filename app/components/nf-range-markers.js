@@ -1,26 +1,23 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 
 /**
   A container and manager for `nf-range-marker` components.
-  Used to draw an association between `nf-range-marker` components so they 
+  Used to draw an association between `nf-range-marker` components so they
   can be laid out in a manner in which they don't collide.
   @namespace components
   @class nf-range-markers
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend({
   tagName: 'g',
-  
+
   /**
-    Used by `nf-range-marker` to identify the `nf-range-markers` container
-    @property isRangeMarkerContainer
-    @type Boolean
-    @default true
-    @readonly
-  */
-  isRangeMarkerContainer: true,
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     Sets the orientation of the range markers.
@@ -60,13 +57,15 @@ export default Ember.Component.extend(HasGraphParent, {
   registerMarker: function(marker) {
     let markers = this.get('markers');
     let prevMarker = markers[markers.length - 1];
-    
-    if(prevMarker) {
-      marker.set('prevMarker', prevMarker);
-      prevMarker.set('nextMarker', marker);
-    }
 
-    markers.pushObject(marker);
+    Ember.run.schedule('afterRender', () => {
+      if(prevMarker) {
+        marker.set('prevMarker', prevMarker);
+        prevMarker.set('nextMarker', marker);
+      }
+
+      markers.pushObject(marker);
+    });
   },
 
   /**
@@ -77,15 +76,17 @@ export default Ember.Component.extend(HasGraphParent, {
   */
   unregisterMarker: function(marker) {
     if(marker) {
-      let next = marker.nextMarker;
-      let prev = marker.prevMarker;
-      if(prev) {
-        prev.set('nextMarker', next);
-      }
-      if(next) {
-        next.set('prevMarker', prev);
-      }
-      this.get('markers').removeObject(marker);
+      Ember.run.schedule('afterRender', () => {
+        let next = marker.nextMarker;
+        let prev = marker.prevMarker;
+        if(prev) {
+          prev.set('nextMarker', next);
+        }
+        if(next) {
+          next.set('prevMarker', prev);
+        }
+        this.get('markers').removeObject(marker);
+      });
     }
   },
 });

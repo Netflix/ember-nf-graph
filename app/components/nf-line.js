@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import LineUtils from 'ember-nf-graph/mixins/graph-line-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
@@ -13,18 +12,25 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @class nf-line
   @extends Ember.Component
   @uses mixins.graph-line-utils
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-selectable-graphic
   @uses mixins.graph-registered-graphic
   @uses mixins.graph-data-graphic
   @uses mixins.graph-graphic-with-tracking-dot
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGraphic, 
+export default Ember.Component.extend(DataGraphic, SelectableGraphic,
   LineUtils, RegisteredGraphic, GraphicWithTrackingDot, RequireScaleSource, {
-    
+
   tagName: 'g',
-  
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
+
   /**
     The type of D3 interpolator to use to create the line.
     @property interpolator
@@ -32,7 +38,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @default 'linear'
   */
   interpolator: 'linear',
-  
+
   classNameBindings: ['selected', 'selectable'],
 
   classNames: ['nf-line'],
@@ -44,7 +50,7 @@ export default Ember.Component.extend(HasGraphParent, DataGraphic, SelectableGra
     @private
     @return {String} an SVG path data string
   */
-  lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
+  lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function() {
     let xScale = this.get('xScale');
     let yScale = this.get('yScale');
     let interpolator = this.get('interpolator');

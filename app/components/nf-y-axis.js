@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent  from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import computed from 'ember-new-computed';
 import layout from '../templates/components/nf-y-axis';
@@ -34,13 +33,19 @@ import layout from '../templates/components/nf-y-axis';
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'g',
 
   layout: layout,
   template: null,
 
-  useTemplate: computed.and('hasBlock', 'hasBlockParams'),
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The number of ticks to display
@@ -110,14 +115,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
 
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
-  tickFilter: computed({
-    get() {
-      return this._tickFilter;
-    },
-    set(name, value) {
-      return this._tickFilter = value;
-    }
-  }),
+  tickFilter: computed.alias('_tickFilter'),
 
   /**
     computed property. returns true if `orient` is equal to `'right'`.
@@ -175,7 +173,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     @type Number
     @readonly
   */
-  height: computed.alias('graph.height'),
+  height: computed.alias('graph.graphHeight'),
 
   init() {
     this._super(...arguments);
@@ -205,7 +203,7 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   tickFactory: null,
 
-  tickData: computed('graph.yScaleType', 'uniqueYData', 'yScale', 'tickCount', function(){
+  tickData: computed('graph.yScaleType', 'uniqueYData', 'yScale', 'tickCount', 'tickFactory', function(){
     let tickFactory = this.get('tickFactory');
     let scale = this.get('yScale');
     let uniqueData = this.get('uniqueYData');
@@ -251,7 +249,9 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     'tickLength',
     'isOrientRight',
     'tickFilter',
-    function(){
+    'tickData.[]',
+    function() {
+      console.log('HERE');
       let yScale = this.get('yScale');
       let tickPadding = this.get('tickPadding');
       let axisLineX = this.get('axisLineX');

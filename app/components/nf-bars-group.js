@@ -1,11 +1,16 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
-export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
+export default Ember.Component.extend(RequiresScaleSource, {
   tagName: 'g',
 
-  isBarsGroup: true,
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   groupPadding: 0.1,
 
@@ -17,17 +22,21 @@ export default Ember.Component.extend(HasGraphParent, RequiresScaleSource, {
   }),
 
   registerBars: function(bars) {
-    let barses = this.get('barses');
-    barses.pushObject(bars);
-    bars.set('group', this);
-    bars.set('groupIndex', barses.length - 1);
+    Ember.run.schedule('afterRender', () => {
+      let barses = this.get('barses');
+      barses.pushObject(bars);
+      bars.set('group', this);
+      bars.set('groupIndex', barses.length - 1);
+    });
   },
 
   unregisterBars: function(bars) {
     if(bars) {
-      bars.set('group', undefined);
-      bars.set('groupIndex', undefined);
-      this.get('barses').removeObject(bars);
+      Ember.run.schedule('afterRender', () => {
+        bars.set('group', undefined);
+        bars.set('groupIndex', undefined);
+        this.get('barses').removeObject(bars);
+      });
     }
   },
 

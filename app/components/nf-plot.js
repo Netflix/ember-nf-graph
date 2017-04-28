@@ -1,5 +1,4 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import GraphEvent from 'ember-nf-graph/utils/nf/graph-event';
 
@@ -8,15 +7,22 @@ import GraphEvent from 'ember-nf-graph/utils/nf/graph-event';
   @namespace components
   @class nf-plot
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'g',
 
   attributeBindings: ['transform'],
 
   classNames: ['nf-plot'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The x domain value to set the plot at
@@ -108,12 +114,3 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
     this.sendAction('action', context);
   },
 });
-
-
-
-
-
-
-
-
-

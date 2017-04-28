@@ -1,7 +1,5 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
-import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
 
 /**
   Draws a rectangular strip with a templated label on an `nf-graph`.
@@ -9,15 +7,22 @@ import nearestWithProperty from 'ember-nf-graph/shims/nearest-with-property';
   @namespace components
   @class nf-range-marker
   @extends Ember.Component
-  @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
+export default Ember.Component.extend(RequireScaleSource, {
   tagName: 'g',
 
   attributeBindings: ['transform'],
 
   classNames: ['nf-range-marker'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The parent `nf-range-markers` component.
@@ -176,9 +181,8 @@ export default Ember.Component.extend(HasGraphParent, RequireScaleSource, {
   */
   init() {
     this._super(...arguments);
-    let container = nearestWithProperty('isRangeMarkerContainer',this);
+    let container = this.get('container');
     container.registerMarker(this);
-    this.set('container', container);
   },
 
   /**

@@ -1,5 +1,9 @@
 import Ember from 'ember';
-import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
+
+const {
+  on,
+  observer
+} = Ember;
 
 /**
   A component that adds a "crosshair" to an `nf-graph` that follows the mouse
@@ -9,10 +13,18 @@ import HasGraphParent from 'ember-nf-graph/mixins/graph-has-graph-parent';
   @extends Ember.Component
   @uses mixins.graph-has-graph-parent
 */
-export default Ember.Component.extend(HasGraphParent, {
+export default Ember.Component.extend({
   tagName: 'g',
 
   classNames: ['nf-crosshair'],
+
+  /**
+    The parent graph for a component.
+    @property graph
+    @type components.nf-graph
+    @default null
+    */
+  graph: null,
 
   /**
     The height of the crosshair in pixels
@@ -64,11 +76,11 @@ export default Ember.Component.extend(HasGraphParent, {
     this.set('isVisible', false);
   },
 
-  _setupBindings: Ember.observer('graph.content', function() {
+  _setupBindings: on('init', observer('graph.content', function() {
     let content = this.get('graph.content');
     if(content) {
       content.on('didHoverChange', this, this.didContentHoverChange);
       content.on('didHoverEnd', this, this.didContentHoverEnd);
     }
-  }),
+  })),
 });
