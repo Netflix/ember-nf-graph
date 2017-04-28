@@ -113,39 +113,41 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  renderedData: computed(
-    'mappedData.[]',
-    'graph.xScaleType',
-    'graph.xMin',
-    'graph.xMax',
-    {
-      get() {
-        let mappedData = this.get('mappedData');
-        let graph = this.get('graph');
-        let xScaleType = graph.get('xScaleType');
-        let xMin = graph.get('xMin');
-        let xMax = graph.get('xMax');
+  renderedData: Ember.computed(function() {
+    return this._computeRenderedData();
+  }),
 
-        if(!mappedData || mappedData.length === 0) {
-          return [];
-        }
+  _scheduleComputeRenderedData: observer('mappedData.[]', 'graph.xScaleType', 'graph.xMin', 'graph.xMax', function() {
+    Ember.run.schedule('afterRender', () => {
+      this.set('renderedData', this._computeRenderedData());
+    });
+  }),
 
-        if(xScaleType === 'ordinal') {
-          return mappedData;
-        }
+  _computeRenderedData() {
+    let mappedData = this.get('mappedData');
+    let graph = this.get('graph');
+    let xScaleType = graph.get('xScaleType');
+    let xMin = graph.get('xMin');
+    let xMax = graph.get('xMax');
 
-        return mappedData.filter(function(d, i) {
-          let x = d[0];
-          let prev = mappedData[i-1];
-          let next = mappedData[i+1];
-          let prevX = prev ? prev[0] : null;
-          let nextX = next ? next[0] : null;
-
-          return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
-        });
-      }
+    if(!mappedData || mappedData.length === 0) {
+      return [];
     }
-  ),
+
+    if(xScaleType === 'ordinal') {
+      return mappedData;
+    }
+
+    return mappedData.filter(function(d, i) {
+      let x = d[0];
+      let prev = mappedData[i-1];
+      let next = mappedData[i+1];
+      let prevX = prev ? prev[0] : null;
+      let nextX = next ? next[0] : null;
+
+      return between(x, xMin, xMax) || between(prevX, xMin, xMax) || between(nextX, xMin, xMax);
+    });
+  },
 
   /**
     The first element from {{#crossLink "mixins.graph-data-graphic/renderedData:property"}}{{/crossLink}}

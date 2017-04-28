@@ -4,25 +4,25 @@
     height=150
     showFrets=true
     paddingTop=10
-    paddingRight=10}}
+    paddingRight=10 as |nf|}}
 
-  {{#nf-x-axis tickCount=5}}
+  {{#nf.x-axis tickCount=5 as |tick|}}
     <text>{{format-hour-minute tick.value}}</text>
-  {{/nf-x-axis}}
+  {{/nf.x-axis}}
 
-  {{#nf-y-axis}}
+  {{#nf.y-axis as |tick|}}
     <text>{{tick.value}}</text>
-  {{/nf-y-axis}}
+  {{/nf.y-axis}}
 
 
-  {{#nf-graph-content}}
-{{!--     {{nf-vertical-line x=selectedLine.hoverData.x}}
-    {{nf-horizontal-line y=selectedLine.hoverData.y}} --}}
+  {{#nf.graph as |graph|}}
+    {{graph.vertical-line x=selectedLine.hoverData.x}}
+    {{graph.horizontal-line y=selectedLine.hoverData.y}}
 
-    {{nf-line data=graphData xprop="date" yprop="low" trackingMode="snap-last" selectable=true interpolator="monotone"}}
-    {{nf-line data=graphData xprop="date" yprop="medium" trackingMode="snap-last" selectable=true selected=true interpolator="monotone"}}
-    {{nf-line data=graphData xprop="date" yprop="high" trackingMode="snap-last" selectable=true interpolator="monotone"}}
-  {{/nf-graph-content}}
+    {{graph.line data=graphData xprop="date" yprop="low" trackingMode="snap-last" selectable=true interpolator="monotone"}}
+    {{graph.line data=graphData xprop="date" yprop="medium" trackingMode="snap-last" selectable=true selected=true interpolator="monotone"}}
+    {{graph.line data=graphData xprop="date" yprop="high" trackingMode="snap-last" selectable=true interpolator="monotone"}}
+  {{/nf.graph}}
 
 {{/nf-graph}}
 

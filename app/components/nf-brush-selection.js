@@ -173,6 +173,6 @@ export default Ember.Component.extend(RequiresScaleSource, {
   graphHeight: Ember.computed.alias('graph.graphHeight'),
 
   rightWidth: Ember.computed('rightX', 'graphWidth', function() {
-    return (this.get('graphWidth') - this.get('rightX')) || 0;
+    return Math.max(this.get('graphWidth') - this.get('rightX'), 0);
   }),
 });

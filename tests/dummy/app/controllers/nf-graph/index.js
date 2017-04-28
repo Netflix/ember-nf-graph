@@ -28,7 +28,7 @@ export default Ember.Controller.extend({
   graphWidth: 400,
   graphHeight: 300,
 
-  queryParams: Ember.A(['graphWidth']),
+  queryParams: Ember.A(['graphWidth' , 'graphHeight']),
 
   xTickFilter: function() {
     return true;

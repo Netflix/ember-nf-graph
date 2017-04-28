@@ -10,6 +10,14 @@
 <output>{{graphWidth}}px</output>
 
 <style>
+	.nf-area-line {
+		stroke: black;
+	}
+
+	.nf-line-tracking-dot,
+	.nf-area-tracking-dot {
+		fill: orange;
+	}
 	.area3 .nf-area-area {
 		fill: blue;
 	}
@@ -19,30 +27,34 @@
 	.area1 .nf-area-area {
 		fill: red;
 	}
+
+	.line1 .nf-line-line {
+		stroke: purple;
+	}
 </style>
 
 {{#nf-graph
 	yMaxMode="push-tick"
 	yMax=1
 	xLink=groupX
-	selectMultiple=1
+	selectMultiple=true
 	brushStartAction="brushStart"
 	brushAction="brush"
 	brushEndAction="brushEnd"
 	width=graphWidth height=graphHeight showFrets=true showLanes=true paddingTop=50 paddingLeft=20 as |nf|}}
 
 	{{#nf.graph as |graph|}}
-		{{graph.line data=model.area3 trackingMode="snap-last" trackedData=tracked2}}
-
 		{{#graph.area-stack aggregate=1 as |stack|}}
 			{{stack.area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=model.area3  trackingMode="snap-last"}}
 			{{stack.area class="area2" selectable=1 interpolator="linear" data=model.area2  trackingMode="snap-last"}}
 			{{stack.area class="area1" selectable=1 interpolator="linear" data=model.area1  trackingMode="snap-last"}}
 		{{/graph.area-stack}}
 
-		{{graph.brush-selection left=brushLeft right=brushRight}}
-		{{graph.crosshair}}
+		{{#graph.group scaleZoomX="2" scaleZoomY="2" as |group|}}
+			{{group.line data=model.area1 class="line1" trackingMode="snap-last" trackedData=tracked2}}
+		{{/graph.group}}
 
+		{{graph.brush-selection left=brushLeft right=brushRight}}
 	{{/nf.graph}}
 
 	{{#nf.x-axis as |tick|}}

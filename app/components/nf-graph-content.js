@@ -100,7 +100,7 @@ export default Ember.Component.extend({
     let lanes = sorted.reduce(function(lanes, tick, i) {
       let y = tick.y;
       let next = sorted[i+1] || { y: height };
-      let h = next.y - tick.y;
+      let h = Math.max(next.y - tick.y, 0);
       lanes.push({
         x: 0,
         y: y,

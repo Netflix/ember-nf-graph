@@ -18,8 +18,7 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
 
   classNameBindings: [':nf-svg-image', 'selectable', 'selected'],
 
-  //HACK: for now xlink:href needs to be bound elsewhere.
-  attributeBindings: ['svgX:x', 'svgY:y', 'svgWidth:width', 'svgHeight:height'],
+  attributeBindings: ['svgX:x', 'svgY:y', 'svgWidth:width', 'svgHeight:height', 'src:href'],
 
   click: function(){
     if(this.get('selectable')) {
@@ -90,16 +89,7 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property src
     @type String
   */
-  src: computed({
-    // HACK: because attributeBindings doesn't currently work with namespaced attributes.
-    get() {
-      return this.$().attr('xlink:href');
-    },
-    set(key, value) {
-      this.$().attr('xlink:href', value);
-      return value;
-    }
-  }),
+  src: '',
 
   x0: computed('x', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x'));

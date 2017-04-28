@@ -4,23 +4,23 @@
     showLanes=true
     showFrets=true
     paddingTop=10
-    paddingRight=10}}
+    paddingRight=10 as |nf|}}
 
-  {{#nf-x-axis tickCount=5}}
+  {{#nf.x-axis tickCount=5 as |tick|}}
     <text>{{format-hour-minute tick.value}}</text>
-  {{/nf-x-axis}}
+  {{/nf.x-axis}}
 
-  {{#nf-y-axis}}
+  {{#nf.y-axis as |tick|}}
     <text>{{tick.value}}</text>
-  {{/nf-y-axis}}
+  {{/nf.y-axis}}
 
-  {{#nf-graph-content}}
-    {{nf-line
+  {{#nf.graph as |graph|}}
+    {{graph.line
         data=graphData
         xprop="x"
         yprop="y"
         interpolator="monotone"}}
-  {{/nf-graph-content}}
+  {{/nf.graph}}
 
 {{/nf-graph}}
 
@@ -128,4 +128,3 @@
 
 </span><span title="Operator">})</span><span title="Operator">;</span></pre></td>
 </tr></tbody></table>
-

@@ -1,16 +1,16 @@
 {{#nf-graph
     yMinMode="fixed"
-    yMin=0}}
+    yMin=0 as |nf|}}
 
-  {{#nf-graph-content}}
+  {{#nf.graph as |graph|}}
 
-    {{#nf-area-stack}}
-      {{nf-area data=graphData xprop="date" yprop="high" class="high" interpolator="monotone"}}
-      {{nf-area data=graphData xprop="date" yprop="medium" class="medium" interpolator="monotone"}}
-      {{nf-area data=graphData xprop="date" yprop="low" class="low" interpolator="monotone"}}
-    {{/nf-area-stack}}
+    {{#graph.area-stack}}
+      {{graph.area data=graphData xprop="date" yprop="high" class="high" interpolator="monotone"}}
+      {{graph.area data=graphData xprop="date" yprop="medium" class="medium" interpolator="monotone"}}
+      {{graph.area data=graphData xprop="date" yprop="low" class="low" interpolator="monotone"}}
+    {{/graph.area-stack}}
 
-  {{/nf-graph-content}}
+  {{/nf.graph}}
 {{/nf-graph}}
 
 

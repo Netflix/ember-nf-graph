@@ -23,7 +23,7 @@ import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
 export default Ember.Component.extend(RequireScaleSource, SelectableGraphic, {
   tagName: 'g',
 
-  classNameBindings: [':nf-gg', 'selectable', 'selected'],
+  classNameBindings: [':nf-group', 'selectable', 'selected'],
 
   /**
     The parent graph for a component.

@@ -8,122 +8,10 @@ let Observable = Rx.Observable;
 
 let computedBool = computed.bool;
 
-let scaleFactoryProperty = function(axis) {
-  let scaleTypeKey = axis + 'ScaleType';
-  let powExponentKey = axis + 'PowerExponent';
-
-  return computed(scaleTypeKey, powExponentKey, function(){
-    let type = this.get(scaleTypeKey);
-    let powExp = this.get(powExponentKey);
-
-    type = typeof type === 'string' ? type.toLowerCase() : '';
-
-    if(type === 'linear') {
-      return d3.scale.linear;
-    }
-
-    else if(type === 'ordinal') {
-      return function(){
-        let scale = d3.scale.ordinal();
-        // ordinal scales don't have an invert function, so we need to add one
-        scale.invert = function(rv) {
-          let [min, max] = d3.extent(scale.range());
-          let domain = scale.domain();
-          let i = Math.round((domain.length - 1) * (rv - min) / (max - min));
-          return domain[i];
-        };
-        return scale;
-      };
-    }
-
-    else if(type === 'power' || type === 'pow') {
-      return function(){
-        return d3.scale.pow().exponent(powExp);
-      };
-    }
-
-    else if(type === 'log') {
-      return d3.scale.log;
-    }
-
-    else {
-      Ember.warn('unknown scale type: ' + type);
-      return d3.scale.linear;
-    }
-  });
-};
-
-let domainProperty = function(axis) {
-  let dataKey = axis + 'UniqueData';
-  let minKey = axis + 'Min';
-  let maxKey = axis + 'Max';
-  let scaleTypeKey = axis + 'ScaleType';
-  let logMinKey = axis + 'LogMin';
-
-  return computed(dataKey + '.[]', minKey, maxKey, scaleTypeKey, logMinKey, function(){
-    let data = this.get(dataKey);
-    let min = this.get(minKey);
-    let max = this.get(maxKey);
-    let scaleType = this.get(scaleTypeKey);
-    let logMin = this.get(logMinKey);
-    let domain = null;
-
-    if(scaleType === 'ordinal') {
-      domain = data;
-    } else {
-      let extent = [min, max];
-
-      if(scaleType === 'log') {
-        if (extent[0] <= 0) {
-          extent[0] = logMin;
-        }
-        if (extent[1] <= 0) {
-          extent[1] = logMin;
-        }
-      }
-
-      domain = extent;
-    }
-
-    return domain;
-  });
-};
-
-let scaleProperty = function(axis) {
-  let scaleFactoryKey = axis + 'ScaleFactory';
-  let rangeKey = axis + 'Range';
-  let domainKey = axis + 'Domain';
-  let scaleTypeKey = axis + 'ScaleType';
-  let ordinalPaddingKey = axis + 'OrdinalPadding';
-  let ordinalOuterPaddingKey = axis + 'OrdinalOuterPadding';
-
-  return computed(
-    scaleFactoryKey,
-    rangeKey,
-    scaleTypeKey,
-    ordinalPaddingKey,
-    domainKey,
-    ordinalOuterPaddingKey,
-    function() {
-      let scaleFactory = this.get(scaleFactoryKey);
-      let range = this.get(rangeKey);
-      let domain = this.get(domainKey);
-      let scaleType = this.get(scaleTypeKey);
-      let ordinalPadding = this.get(ordinalPaddingKey);
-      let ordinalOuterPadding = this.get(ordinalOuterPaddingKey);
-
-      let scale = scaleFactory();
-
-      if(scaleType === 'ordinal') {
-        scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
-      } else {
-        scale = scale.domain(domain).range(range).clamp(true);
-      }
-
-      return scale;
-    }
-  );
-};
+const {
+  isPresent,
+  observer
+} = Ember;
 
 let minProperty = function(axis, defaultTickCount){
   let _DataExtent_ = axis + 'DataExtent';
@@ -139,6 +27,8 @@ let minProperty = function(axis, defaultTickCount){
     _DataExtent_,
     _Axis_tickCount_,
     _ScaleFactory_,
+    'graphHeight',
+    'graphWidth',
     {
       get() {
         let mode = this.get(_MinMode_);
@@ -174,7 +64,7 @@ let minProperty = function(axis, defaultTickCount){
         return this[__Min_];
       },
       set(key, value) {
-        if (value !== undefined) {
+        if (isPresent(value) && !isNaN(value)) {
           this[__Min_] = value;
         }
         return this[__Min_];
@@ -234,7 +124,7 @@ let maxProperty = function(axis, defaultTickCount) {
         return this[__Max_];
       },
       set(key, value) {
-        if (value !== undefined) {
+        if (isPresent(value) && !isNaN(value)) {
           this[__Max_] = value;
         }
         return this[__Max_];
@@ -784,7 +674,9 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  selected: null,
+  selected: Ember.computed(function() {
+    return this.get('selectMultiple') ? Ember.A() : null;
+  }),
 
   /**
     Computed property to show yAxis. Returns `true` if a yAxis is present.
@@ -807,14 +699,70 @@ export default Ember.Component.extend({
     @property xScaleFactory
     @readonly
    */
-  xScaleFactory: scaleFactoryProperty('x'),
+  // xScaleFactory: scaleFactoryProperty('x'),
+  xScaleFactory: Ember.computed(function() {
+    return this._scaleFactoryFor('x');
+  }),
+  _scheduleXScaleFactory: observer('xScaleType', 'xPowerExponent', function() {
+    Ember.run.schedule('afterRender', () => {
+      this.set('xScaleFactory', this._scaleFactoryFor('x'));
+    });
+  }),
 
   /**
     Gets a function to create the yScale
     @property yScaleFactory
     @readonly
    */
-  yScaleFactory: scaleFactoryProperty('y'),
+  // yScaleFactory: scaleFactoryProperty('y'),
+  yScaleFactory: Ember.computed(function() {
+    return this._scaleFactoryFor('y');
+  }),
+  _scheduleYScaleFactory: observer('yScaleType', 'yPowerExponent', function() {
+    Ember.run.schedule('afterRender', () => {
+      this.set('yScaleFactory', this._scaleFactoryFor('y'));
+    });
+  }),
+
+  _scaleFactoryFor(axis) {
+    let type = this.get(`${axis}ScaleType`);
+    let powExp = this.get(`${axis}PowerExponent`);
+
+    type = typeof type === 'string' ? type.toLowerCase() : '';
+
+    if(type === 'linear') {
+      return d3.scale.linear;
+    }
+
+    else if(type === 'ordinal') {
+      return function(){
+        let scale = d3.scale.ordinal();
+        // ordinal scales don't have an invert function, so we need to add one
+        scale.invert = function(rv) {
+          let [min, max] = d3.extent(scale.range());
+          let domain = scale.domain();
+          let i = Math.round((domain.length - 1) * (rv - min) / (max - min));
+          return domain[i];
+        };
+        return scale;
+      };
+    }
+
+    else if(type === 'power' || type === 'pow') {
+      return function(){
+        return d3.scale.pow().exponent(powExp);
+      };
+    }
+
+    else if(type === 'log') {
+      return d3.scale.log;
+    }
+
+    else {
+      Ember.warn('unknown scale type: ' + type);
+      return d3.scale.linear;
+    }
+  },
 
   /**
     Gets the domain of x values.
@@ -822,7 +770,21 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  xDomain: domainProperty('x'),
+  xDomain: Ember.computed(function() {
+    return this._domainFor('x');
+  }),
+  _scheduleXDomain: observer(
+    'xUniqueData.[]',
+    'xMin',
+    'xMax',
+    'xScaleType',
+    'xLogMin',
+    function() {
+      Ember.run.schedule('afterRender', () => {
+        this.set('xDomain', this._domainFor('x'));
+      });
+    }
+  ),
 
   /**
     Gets the domain of y values.
@@ -830,7 +792,49 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  yDomain: domainProperty('y'),
+  yDomain: Ember.computed(function() {
+    return this._domainFor('y');
+  }),
+  _scheduleYDomain: observer(
+    'yUniqueData.[]',
+    'yMin',
+    'yMax',
+    'yScaleType',
+    'yLogMin',
+    function() {
+      Ember.run.schedule('afterRender', () => {
+        this.set('yDomain', this._domainFor('y'));
+      });
+    }
+  ),
+
+  _domainFor(axis) {
+    let data = this.get(`${axis}UniqueData`);
+    let min = this.get(`${axis}Min`);
+    let max = this.get(`${axis}Max`);
+    let scaleType = this.get(`${axis}ScaleType`);
+    let logMin = this.get(`${axis}LogMin`);
+    let domain = null;
+
+    if(scaleType === 'ordinal') {
+      domain = data;
+    } else {
+      let extent = [min, max];
+
+      if(scaleType === 'log') {
+        if (extent[0] <= 0) {
+          extent[0] = logMin;
+        }
+        if (extent[1] <= 0) {
+          extent[1] = logMin;
+        }
+      }
+
+      domain = extent;
+    }
+
+    return domain;
+  },
 
   /**
     Gets the current xScale used to draw the graph.
@@ -838,7 +842,22 @@ export default Ember.Component.extend({
     @type Function
     @readonly
    */
-  xScale: scaleProperty('x'),
+  xScale: Ember.computed(function() {
+    return this._scaleFor('x');
+  }),
+  _scheduleXScale: observer(
+    'xScaleFactory',
+    'xRange',
+    'xDomain',
+    'xScaleType',
+    'xOrdinalPadding',
+    'xOrdinalOuterPadding',
+    function() {
+      Ember.run.schedule('afterRender', () => {
+        this.set('xScale', this._scaleFor('x'));
+      });
+    }
+  ),
 
   /**
     Gets the current yScale used to draw the graph.
@@ -846,7 +865,41 @@ export default Ember.Component.extend({
     @type Function
     @readonly
    */
-  yScale: scaleProperty('y'),
+  yScale: Ember.computed(function() {
+    return this._scaleFor('y');
+  }),
+  _scheduleYScale: observer(
+    'yScaleFactory',
+    'yRange',
+    'yDomain',
+    'yScaleType',
+    'yOrdinalPadding',
+    'yOrdinalOuterPadding',
+    function() {
+      Ember.run.schedule('afterRender', () => {
+        this.set('yScale', this._scaleFor('y'));
+      });
+    }
+  ),
+
+  _scaleFor(axis) {
+    let scaleFactory = this.get(`${axis}ScaleFactory`);
+    let range = this.get(`${axis}Range`);
+    let domain = this.get(`${axis}Domain`);
+    let scaleType = this.get(`${axis}ScaleType`);
+    let ordinalPadding = this.get(`${axis}OrdinalPadding`);
+    let ordinalOuterPadding = this.get(`${axis}OrdinalOuterPadding`);
+
+    let scale = scaleFactory();
+
+    if(scaleType === 'ordinal') {
+      scale = scale.domain(domain).rangeBands(range, ordinalPadding, ordinalOuterPadding);
+    } else {
+      scale = scale.domain(domain).range(range).clamp(true);
+    }
+
+    return scale;
+  },
 
   /**
     Registers a graphic such as `nf-line` or `nf-area` components with the graph.
@@ -989,7 +1042,9 @@ export default Ember.Component.extend({
     @private
   */
   _notifyHasRendered: Ember.on('willInsertElement', function () {
-    this.set('hasRendered', true);
+    Ember.run.schedule('afterRender', () => {
+      this.set('hasRendered', true);
+    });
   }),
 
   /**
@@ -1048,16 +1103,6 @@ export default Ember.Component.extend({
         this.set('selected', null);
       }
     }
-  },
-
-  /**
-    The initialization method. Fired on `init`.
-    @method _setup
-    @private
-  */
-  init() {
-    this._super(...arguments);
-    this.set('selected', this.selectMultiple ? Ember.A() : null);
   },
 
   /**
@@ -1218,6 +1263,8 @@ export default Ember.Component.extend({
   },
 
   willDestroyElement: function(){
+    this._super(...arguments);
+
     if(this._brushDisposable) {
       this._brushDisposable.dispose();
     }
