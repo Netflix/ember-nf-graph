@@ -854,9 +854,11 @@ export default Ember.Component.extend({
     @param graphic {Ember.Component} The component object to register
    */
   registerGraphic: function (graphic) {
-    let graphics = this.get('graphics');
-    graphic.on('hasData', this, this.updateExtents);
-    Ember.run.schedule('afterRender', () => graphics.pushObject(graphic));
+    Ember.run.schedule('afterRender', () => {
+      let graphics = this.get('graphics');
+      graphic.on('hasData', this, this.updateExtents);
+      graphics.pushObject(graphic);
+    });
   },
 
   /**
@@ -865,9 +867,11 @@ export default Ember.Component.extend({
     @param graphic {Ember.Component} The component to unregister
    */
   unregisterGraphic: function(graphic) {
-    let graphics = this.get('graphics');
-    graphic.off('hasData', this, this.updateExtents);
-    Ember.run.schedule('afterRender', () => graphics.removeObject(graphic));
+    Ember.run.schedule('afterRender', () => {
+      let graphics = this.get('graphics');
+      graphic.off('hasData', this, this.updateExtents);
+      graphics.removeObject(graphic);
+    });
   },
 
   updateExtents() {

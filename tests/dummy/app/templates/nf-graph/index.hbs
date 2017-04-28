@@ -10,13 +10,13 @@
 <output>{{graphWidth}}px</output>
 
 <style>
-	.area3 .area {
+	.area3 .nf-area-area {
 		fill: blue;
 	}
-	.area2 .area {
+	.area2 .nf-area-area {
 		fill: lime;
 	}
-	.area1 .area {
+	.area1 .nf-area-area {
 		fill: red;
 	}
 </style>
@@ -34,14 +34,14 @@
 	{{#nf.graph as |graph|}}
 		{{graph.line data=model.area3 trackingMode="snap-last" trackedData=tracked2}}
 
-		{{!-- {{#graph.area-stack aggregate=1 as |stack|}}
+		{{#graph.area-stack aggregate=1 as |stack|}}
 			{{stack.area class="area3" selectable=1 selected=fooSelected interpolator="linear" data=model.area3  trackingMode="snap-last"}}
 			{{stack.area class="area2" selectable=1 interpolator="linear" data=model.area2  trackingMode="snap-last"}}
 			{{stack.area class="area1" selectable=1 interpolator="linear" data=model.area1  trackingMode="snap-last"}}
-		{{/graph.area-stack}} --}}
+		{{/graph.area-stack}}
 
-		{{!-- {{graph.brush-selection left=brushLeft right=brushRight}}
-		{{graph.crosshair}} --}}
+		{{graph.brush-selection left=brushLeft right=brushRight}}
+		{{graph.crosshair}}
 
 	{{/nf.graph}}
 

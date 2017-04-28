@@ -1,14 +1,14 @@
 {{#nf-graph
     xScaleType="ordinal"
     yMinMode="fixed"
-    yMin=0}}
+    yMin=0 as |nf|}}
 
-   {{#nf-graph-content}}
+   {{#nf.graph as |graph|}}
 
-     {{nf-bars data=barData}}
-     {{nf-line data=lineData class="dashed"}}
+     {{graph.bars data=barData}}
+     {{graph.line data=lineData class="dashed"}}
 
-   {{/nf-graph-content}}
+   {{/nf.graph}}
 {{/nf-graph}}
 
 

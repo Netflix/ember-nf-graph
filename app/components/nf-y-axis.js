@@ -133,8 +133,8 @@ export default Ember.Component.extend(RequireScaleSource, {
     @readonly
   */
   transform: computed('x', 'y', function(){
-    let x = this.get('x');
-    let y = this.get('y');
+    let x = this.get('x') || 0;
+    let y = this.get('y') || 0;
     return `translate(${x} ${y})`;
   }),
 
@@ -249,9 +249,8 @@ export default Ember.Component.extend(RequireScaleSource, {
     'tickLength',
     'isOrientRight',
     'tickFilter',
-    'tickData.[]',
+    'tickData',
     function() {
-      console.log('HERE');
       let yScale = this.get('yScale');
       let tickPadding = this.get('tickPadding');
       let axisLineX = this.get('axisLineX');

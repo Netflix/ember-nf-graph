@@ -166,6 +166,9 @@ export default Ember.Component.extend({
 
   init(){
     this._super(...arguments);
-    this.set('graph.content', this);
+
+    Ember.run.schedule('afterRender', () => {
+      this.set('graph.content', this);
+    });
   },
 });

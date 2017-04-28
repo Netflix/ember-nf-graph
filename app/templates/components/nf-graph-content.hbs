@@ -2,8 +2,6 @@
   {{#if graph.hasData}}
     {{#if graph.showLanes}}
       <g class="nf-grid-lanes">
-        {{log gridLanes}}
-
         {{#each gridLanes as |lane|}}
           <rect class="nf-grid-lane" x="{{lane.x}}" y="{{lane.y}}" width="{{width}}" height="{{lane.height}}"></rect>
         {{/each}}

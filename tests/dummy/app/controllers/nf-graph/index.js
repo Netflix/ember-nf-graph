@@ -29,7 +29,7 @@ export default Ember.Controller.extend({
   graphHeight: 300,
 
   queryParams: Ember.A(['graphWidth']),
-  
+
   xTickFilter: function() {
     return true;
   },
@@ -61,7 +61,7 @@ export default Ember.Controller.extend({
       this.set('brushLeft', e.left.get('x'));
       this.set('brushRight', e.right.get('x'));
     },
-    
+
     brush: function(e) {
       console.debug('brush ', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', e.left.get('x'));

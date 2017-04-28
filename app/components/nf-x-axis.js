@@ -296,9 +296,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @readonly
   */
   axisLineY: computed('orient', 'height', function(){
-    let orient = this.get('orient');
-    let height = this.get('height');
-    return orient === 'top' ? height : 0;
+    return this.get('orient') === 'top' ? this.get('height') : 0;
   })
 
 });

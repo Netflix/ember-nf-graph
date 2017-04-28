@@ -32,11 +32,11 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
         source.forEach(function(d, i) {
           let key = keyFn(d, i);
           sourceKeys.pushObject(key);
-          
+
           let found = array.find(function(x, i) {
             return keyFn(x, i) === key;
           });
-          
+
           Ember.set(d, '__meta__trackedKey', key);
 
           if(found) {
@@ -62,7 +62,7 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
       }
 
       this.set(backingField, array);
-      
+
       return array;
     }
   });
