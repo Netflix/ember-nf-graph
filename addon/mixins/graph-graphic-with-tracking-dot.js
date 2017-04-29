@@ -260,7 +260,7 @@ export default Ember.Mixin.create({
   },
 
   _trackingModeChanged: on('init', observer('trackingMode', 'selected', function() {
-    Ember.run.once(this, this._updateTrackingHandling);
+    Ember.run.scheduleOnce('afterRender', this, this._updateTrackingHandling);
   })),
 
   _getEventObject(e) {

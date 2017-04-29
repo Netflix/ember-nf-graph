@@ -1,7 +1,13 @@
 /* globals getComputedStyle, Image, Blob, URL */
+import Ember from 'ember';
+
 /**
   @module utils/nf/svg-dom
 */
+
+const {
+  isPresent
+} = Ember;
 
 /**
   Traverses an element and all of its descendants, setting their
@@ -83,7 +89,7 @@ export function downloadSvg(svg) {
 export function getMousePoint(container, e) {
   let x, y;
 
-  if(e && e.hasOwnProperty('clientX') && e.hasOwnProperty('clientY')) {
+  if(e && isPresent(e.clientX) && isPresent(e.clientY)) {
     let svg = container.ownerSVGElement || container;
     if (svg.createSVGPoint) {
       let point = svg.createSVGPoint();

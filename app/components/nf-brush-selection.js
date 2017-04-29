@@ -48,7 +48,7 @@ export default Ember.Component.extend(RequiresScaleSource, {
   },
 
   _autoWireUpChanged: Ember.on('didInsertElement', Ember.observer('autoWireUp', function(){
-    Ember.run.once(this, this._wireToGraph);
+    Ember.run.scheduleOnce('afterRender', this, this._wireToGraph);
   })),
 
   _updateLeftText: function(){
@@ -90,7 +90,7 @@ export default Ember.Component.extend(RequiresScaleSource, {
   _onLeftChange: Ember.on(
     'didInsertElement',
     Ember.observer('left', 'graphHeight', 'textPadding', function(){
-      Ember.run.once(this, this._updateLeftText);
+      Ember.run.scheduleOnce('afterRender', this, this._updateLeftText);
     })
   ),
 
@@ -134,7 +134,7 @@ export default Ember.Component.extend(RequiresScaleSource, {
   _onRightChange: Ember.on(
     'didInsertElement',
     Ember.observer('right', 'graphHeight', 'graphWidth', 'textPadding', function(){
-      Ember.run.once(this, this._updateRightText);
+      Ember.run.scheduleOnce('afterRender', this, this._updateRightText);
     })
   ),
 
