@@ -1,5 +1,10 @@
 import Ember from 'ember';
 
+const {
+  $,
+  Logger
+} = Ember;
+
 export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
   var p = yStart || 0;
   return Ember.A(
@@ -57,25 +62,25 @@ export default Ember.Controller.extend({
     },
 
     brushStart: function(e) {
-      console.debug('brush start', e.left.get('x'), e.right.get('x'));
+      Logger.debug('brush start', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', e.left.get('x'));
       this.set('brushRight', e.right.get('x'));
     },
 
     brush: function(e) {
-      console.debug('brush ', e.left.get('x'), e.right.get('x'));
+      Logger.debug('brush ', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', e.left.get('x'));
       this.set('brushRight', e.right.get('x'));
     },
 
     brushEnd: function(e) {
-      console.debug('brush end', e.left.get('x'), e.right.get('x'));
+      Logger.debug('brush end', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', undefined);
       this.set('brushRight', undefined);
     },
 
     test: function(){
-      console.log('test!');
+      Logger.log('test!');
     },
 
     appendAreaData: function(area) {
@@ -101,7 +106,7 @@ export default Ember.Controller.extend({
 
       testDiv.appendTo('body');
 
-      console.log('showData', e);
+      Logger.log('showData', e);
     },
   }
 });

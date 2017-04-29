@@ -18,7 +18,7 @@ function identity(x) {
   @method nearestIndexTo
   @param arr {Array} the *sorted* array to search.
   @param val {Number} the value to find the nearest index to.
-  @param mappingFn {Function} an optional function for pulling values out of the 
+  @param mappingFn {Function} an optional function for pulling values out of the
   array items.
 */
 export function nearestIndexTo(arr, val, mappingFn) {
@@ -68,7 +68,7 @@ function naturalTokenize(item) {
   NATURAL_SORT_REGEXP.lastIndex = 0;
   let matches;
   let tokens = [];
-  while(matches = NATURAL_SORT_REGEXP.exec(item)) {
+  while(matches === NATURAL_SORT_REGEXP.exec(item)) {
     tokens.push(matches[0]);
   }
   return tokens;
@@ -90,7 +90,7 @@ export function naturalCompare(a, b) {
   while((ax = aTokens[i]) && (bx = bTokens[i++])) {
     na = +ax;
     nb = +bx;
-  
+
     if(nb === nb && na === na) {
       if(na !== nb) {
          return na > nb ? 1 : -1;
@@ -100,7 +100,7 @@ export function naturalCompare(a, b) {
         }
       }
     }
-  
+
     if(ax !== bx) {
       return ax > bx ? 1 : -1;
     }
