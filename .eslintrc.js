@@ -10,7 +10,7 @@ module.exports = {
   },
   globals: {
     d3: true,
-    rx: true
+    Rx: true
   },
   rules: {
   }

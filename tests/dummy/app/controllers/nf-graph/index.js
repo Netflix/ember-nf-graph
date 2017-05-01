@@ -32,8 +32,15 @@ function range(count) {
 export default Ember.Controller.extend({
   graphWidth: 400,
   graphHeight: 300,
+  diffA: 100,
+  diffB: 200,
 
   queryParams: Ember.A(['graphWidth' , 'graphHeight']),
+
+  init(){
+    this._super(...arguments);
+    this.send('updateLine');
+  },
 
   xTickFilter: function() {
     return true;
@@ -45,20 +52,15 @@ export default Ember.Controller.extend({
     return ticks;
   },
 
-  diffA: 100,
-  diffB: 200,
-
-  fooData: null,
-
   actions: {
     updateAreas() {
       this.set('model.area1', generateLineData(0, 0, 50, 20, 10));
-      this.set('model.area2', generateLineData(0, 51, 100, 20, 11));
+      this.set('model.area2', generateLineData(0, 51, 100, 20, 10));
       this.set('model.area3', generateLineData(0, 101, 150, 20, 10));
     },
 
-    loadNewData: function(){
-      this.set('lineData', generateLineData(0, 0, 2000, 200, 240, 500));
+    updateLine: function(){
+      this.set('lineData', generateLineData(0, 0, 200, 50, 10, 10));
     },
 
     brushStart: function(e) {

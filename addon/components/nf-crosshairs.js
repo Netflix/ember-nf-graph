@@ -1,4 +1,5 @@
 import Ember from 'ember';
+import layout from 'ember-nf-graph/templates/components/nf-crosshairs';
 
 const {
   on,
@@ -6,7 +7,7 @@ const {
 } = Ember;
 
 /**
-  A component that adds a "crosshair" to an `nf-graph` that follows the mouse
+  A component that adds "crosshairs" to an `nf-graph` that follows the mouse
   while it's hovering over the graph content.
   @namespace components
   @class nf-crosshair
@@ -14,9 +15,10 @@ const {
   @uses mixins.graph-has-graph-parent
 */
 export default Ember.Component.extend({
+  layout,
   tagName: 'g',
 
-  classNames: ['nf-crosshair'],
+  classNames: ['nf-crosshairs'],
 
   /**
     The parent graph for a component.
@@ -59,6 +61,22 @@ export default Ember.Component.extend({
   y: 0,
 
   /**
+    Whether to show the vertical line in the corsshairs
+    @property vertical
+    @type Boolean
+    @default true
+  */
+  vertical: true,
+
+  /**
+    Whether to show the horizontal line in the corsshairs
+    @property horizontal
+    @type Boolean
+    @default true
+  */
+  horizontal: true,
+
+  /**
     The visibility of the component
     @property isVisible
     @type Boolean
@@ -76,11 +94,13 @@ export default Ember.Component.extend({
     this.set('isVisible', false);
   },
 
-  _setupBindings: on('init', observer('graph.content', function() {
+  _setupBindings: on('didInsertElement', observer('graph.content', function() {
     let content = this.get('graph.content');
     if(content) {
-      content.on('didHoverChange', this, this.didContentHoverChange);
-      content.on('didHoverEnd', this, this.didContentHoverEnd);
+      Ember.run.schedule('afterRender', () => {
+        content.on('didHoverChange', this, this.didContentHoverChange);
+        content.on('didHoverEnd', this, this.didContentHoverEnd);
+      });
     }
   })),
 });
