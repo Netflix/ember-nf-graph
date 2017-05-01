@@ -1,7 +1,7 @@
 {
   "name": "ember-nf-graph",
   "dependencies": {
-    "d3": "~3.5.5",
-    "rxjs": "~2.3.24"
+    "d3": "~3.5.17",
+    "rxjs": "~4.1.0"
   }
 }
