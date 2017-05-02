@@ -32,6 +32,17 @@ let scaleProperty = function(scaleKey, zoomKey, offsetKey){
   @class graph-requires-scale-source
 */
 export default Ember.Mixin.create({
+
+  /**
+    The scale source
+    @property scaleSource
+    @type d3.nf-graph
+    @default graph
+  */
+  scaleSource: Ember.computed(function() {
+    return this.get('graph');
+  }),
+
   /**
     The x scale used by this component
     @property xScale
@@ -114,13 +125,5 @@ export default Ember.Mixin.create({
     set(key, value) {
       return this._scaleOffsetY = +value || 0;
     }
-  }),
-
-  init() {
-    this._super(...arguments);
-
-    if (!this.get('scaleSource')) {
-      this.set('scaleSource', this.get('graph'));
-    }
-  }
+  })
 });
