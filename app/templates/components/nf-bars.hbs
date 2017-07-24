@@ -1,7 +1,0 @@
-{{#each bar in bars}}
-	<path d="{{bar.path}}" class="{{bar.className}}" {{action 'nfBarClickBar' bar.data bar.index}}></path>
-{{/each}}
-
-{{#if showTrackingDot}}
-  {{nf-dot x=trackedData.renderX y=trackedData.renderY r=trackingDotRadius}}
-{{/if}}

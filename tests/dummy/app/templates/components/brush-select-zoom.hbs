@@ -1,14 +1,13 @@
 {{#nf-graph
     yMaxMode="push-tick"
-    brushEndAction="brushEnd"}}
+    brushEndAction="brushEnd" as |nf|}}
 
-   {{#nf-graph-content}}
+   {{#nf.graph as |graph|}}
 
-     {{nf-line data=zoomData interpolator="monotone"}}
-     {{nf-brush-selection right=selectRight left=selectLeft formatter=selectionDisplayFormatter}}
+     {{graph.line data=zoomData interpolator="monotone"}}
+     {{graph.brush-selection right=selectRight left=selectLeft formatter=selectionDisplayFormatter}}
 
-   {{/nf-graph-content}}
-
+   {{/nf.graph}}
 {{/nf-graph}}
 
 <button {{action "reset"}}>Reset Zoom</button>
@@ -217,5 +216,3 @@
 
 </span><span title="Operator">})</span><span title="Operator">;</span></pre></td>
 </tr></tbody></table>
-
-

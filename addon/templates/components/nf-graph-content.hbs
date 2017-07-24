@@ -1,0 +1,27 @@
+<rect x=0 y=0 class="nf-graph-content-background" width="{{width}}" height="{{height}}"></rect>
+  {{#if graph.hasData}}
+    {{#if graph.showLanes}}
+      <g class="nf-grid-lanes">
+        {{#each gridLanes as |lane|}}
+          <rect class="nf-grid-lane" x="{{lane.x}}" y="{{lane.y}}" width="{{width}}" height="{{lane.height}}"></rect>
+        {{/each}}
+      </g>
+    {{/if}}
+
+    {{#if graph.showFrets}}
+      <g class="nf-grid-frets">
+        {{#each frets as |fret|}}
+          <line class="nf-grid-fret" x1="{{fret.x}}" y1="0" x2="{{fret.x}}" y2="{{height}}"></line>
+        {{/each}}
+      </g>
+    {{/if}}
+  {{/if}}
+
+  {{#unless graph.hasData}}
+    <text x=0 y=0>No data</text>
+  {{/unless}}
+
+
+{{#nf-graph-yieldables graph=graph scaleSource=graph as |yieldables|}}
+  {{yield yieldables}}
+{{/nf-graph-yieldables}}

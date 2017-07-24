@@ -1,12 +1,12 @@
-{{#nf-graph}}
+{{#nf-graph as |nf|}}
 
-  {{#nf-graph-content}}
+  {{#nf.graph as |graph|}}
 
-    {{nf-line data=graphData}}
+    {{graph.line data=graphData}}
 
-    {{#each item in graphData}}
-{{!--       {{nf-svg-image src="/images/star.png" x=item.x y=item.y}} --}}
+    {{#each graphData as |item|}}
+      {{graph.svg-image src="images/star.svg" x=item.x y=item.y svgWidth=20 svgHeight=20}}
     {{/each}}
 
-  {{/nf-graph-content}}
+  {{/nf.graph}}
 {{/nf-graph}}

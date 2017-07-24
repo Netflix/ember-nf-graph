@@ -30,9 +30,9 @@ export default Ember.Object.extend({
   */
   graphX: computed('x', 'xScale', {
     get() {
-      var scale = this.get('xScale');
+      let scale = this.get('xScale');
       if(scale) {
-        var x = this.get('x');
+        let x = this.get('x');
         this._graphX = scale(x);
       }
       return this._graphX || NaN;
@@ -49,9 +49,9 @@ export default Ember.Object.extend({
   */
   graphY: computed('y', 'yScale', {
     get() {
-      var scale = this.get('yScale');
+      let scale = this.get('yScale');
       if(scale) {
-        var y = this.get('y');
+        let y = this.get('y');
         this._graphY = scale(y);
       }
       return this._graphY || NaN;
@@ -68,9 +68,9 @@ export default Ember.Object.extend({
   */
   x: computed('graphX', 'xScale', {
     get() {
-      var scale = this.get('xScale');
+      let scale = this.get('xScale');
       if (scale && scale.invert){
-        var graphX = this.get('graphX');
+        let graphX = this.get('graphX');
         this._x = scale.invert(graphX);
       }
       return this._x || 0;
@@ -87,9 +87,9 @@ export default Ember.Object.extend({
   */
   y: computed('graphY', 'yScale', {
     get() {
-      var scale = this.get('yScale');
+      let scale = this.get('yScale');
       if (scale && scale.invert){
-        var graphY = this.get('graphY');
+        let graphY = this.get('graphY');
         this._y = scale.invert(graphY);
       }
       return this._y || 0;
@@ -106,10 +106,10 @@ export default Ember.Object.extend({
   */
   pageX: computed('graphX', 'graphOffset', 'graphContentX', {
     get() {
-      var offset = this.get('graphOffset');
+      let offset = this.get('graphOffset');
       if(offset) {
-        var graphX = this.get('graphX') || 0;
-        var graphContentX = this.get('graphContentX') || 0;
+        let graphX = this.get('graphX') || 0;
+        let graphContentX = this.get('graphContentX') || 0;
         return offset.left + graphX + graphContentX;
       }
     }
@@ -122,10 +122,10 @@ export default Ember.Object.extend({
   */
   pageY: computed('graphY', 'graphOffset', 'graphContentY', {
     get() {
-      var offset = this.get('graphOffset');
+      let offset = this.get('graphOffset');
       if(offset) {
-        var graphY = this.get('graphY') || 0;
-        var graphContentY = this.get('graphContentY') || 0;
+        let graphY = this.get('graphY') || 0;
+        let graphContentY = this.get('graphContentY') || 0;
         return offset.top + graphY + graphContentY;
       }
     }
@@ -163,9 +163,9 @@ export default Ember.Object.extend({
   */
   graphOffset: computed('graph', {
     get() {
-      var graph = this.get('graph');
+      let graph = this.get('graph');
       if(graph) {
-        var content = graph.$('.nf-graph-content');
+        let content = graph.$('.nf-graph-content');
         return content ? content.offset() : undefined;
       }
     }
@@ -179,10 +179,10 @@ export default Ember.Object.extend({
   */
   centerX: computed('xScale', 'graphX', {
     get() {
-      var scale = this.get('xScale');
-      var graphX = this.get('graphX');
+      let scale = this.get('xScale');
+      let graphX = this.get('graphX');
       if(scale && scale.rangeBand) {
-        var rangeBand = scale.rangeBand();
+        let rangeBand = scale.rangeBand();
         return graphX + (rangeBand / 2);
       }
       return graphX;
@@ -197,10 +197,10 @@ export default Ember.Object.extend({
   */
   centerY: computed('yScale', 'graphY', {
     get() {
-      var scale = this.get('yScale');
-      var graphY = this.get('graphY');
+      let scale = this.get('yScale');
+      let graphY = this.get('graphY');
       if(scale && scale.rangeBand) {
-        var rangeBand = scale.rangeBand();
+        let rangeBand = scale.rangeBand();
         return graphY + (rangeBand / 2);
       }
       return graphY;

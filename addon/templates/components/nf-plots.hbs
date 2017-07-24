@@ -1,0 +1,5 @@
+{{#each plotData as |item|}}
+	{{#nf-plot graph=graph scaleSource=scaleSource x=item.x y=item.y action='itemClicked' data=item.data multiplierY=multiplierY multiplierX=multiplierX}}
+		{{yield}}
+	{{/nf-plot}}
+{{/each}}

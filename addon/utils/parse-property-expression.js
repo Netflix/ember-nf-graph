@@ -6,9 +6,9 @@
         
         import parsePropertyExpr from 'utils/parse-property-expr';
 
-        var test = { foo: { bar: ['apple', 'banana'] } };
-        var getFooBar1 = parsePropertyExpr('foo.bar[1]');
-        var result = getFooBar1(test);
+        let test = { foo: { bar: ['apple', 'banana'] } };
+        let getFooBar1 = parsePropertyExpr('foo.bar[1]');
+        let result = getFooBar1(test);
         console.log(result); // "banana"
 
   ### Notes
@@ -28,11 +28,11 @@
   will locate the value at the end of the expressed path.
 */
 export default function parsePropertyExpression(expr) {
-  var c, i;
-  var isIndex = false;
-  var token = '';
-  var tokens = [];
-  var addToken = function(){
+  let c, i;
+  let isIndex = false;
+  let token = '';
+  let tokens = [];
+  let addToken = function(){
     if(token === '') {
       return;
     }
@@ -56,8 +56,8 @@ export default function parsePropertyExpression(expr) {
   addToken();
   
   return function(obj){
-    var i, next;
-    var result = obj[tokens[0]];
+    let i, next;
+    let result = obj[tokens[0]];
     if(result) {
       for(i = 1; i < tokens.length; i++) {
         next = result[tokens[i]];

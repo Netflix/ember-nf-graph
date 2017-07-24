@@ -1,9 +1,9 @@
-{{#nf-graph}}
-   {{#nf-graph-content}}
+{{#nf-graph as |nf|}}
+   {{#nf.graph as |graph|}}
 
-     {{nf-line data=graphData}}
+     {{graph.line data=graphData}}
 
-   {{/nf-graph-content}}
+   {{/nf.graph}}
 {{/nf-graph}}
 
 

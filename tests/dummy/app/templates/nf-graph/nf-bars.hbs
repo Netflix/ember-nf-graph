@@ -1,28 +1,29 @@
-{{#nf-graph width=500 
-           height=300 
-           paddingRight=10 
-           paddingTop=10 
-            xScaleType="ordinal" 
-            yMinMode="fixed" 
+{{#nf-graph width=500
+           height=300
+           paddingRight=10
+           paddingTop=10
+            xScaleType="ordinal"
+            yMinMode="fixed"
             yMin=0
             showLanes=true
             showFrets=true
+            as |nf|
             }}
-  {{#nf-graph-content}}
+  {{#nf.graph as |graph|}}
 
-    {{nf-bars data=model.menuItemStockCount
+    {{graph.bars data=model.menuItemStockCount
                 trackingMode="snap-last"
-        trackedData=tracked}}    
+        trackedData=tracked}}
 
-  {{/nf-graph-content}}
+  {{/nf.graph}}
 
-  {{#nf-y-axis as |tick|}}
+  {{#nf.y-axis as |tick|}}
     <text>{{tick.value}}</text>
-  {{/nf-y-axis}}
+  {{/nf.y-axis}}
 
-  {{#nf-x-axis as |tick|}}
+  {{#nf.x-axis as |tick|}}
     <text>{{tick.value}}</text>
-  {{/nf-x-axis}}
+  {{/nf.x-axis}}
 
  {{/nf-graph}}
 

@@ -1,13 +1,13 @@
 {{#nf-graph
     xScaleType="ordinal"
     yMinMode="fixed"
-    yMin=0}}
+    yMin=0 as |nf|}}
 
-   {{#nf-graph-content}}
+   {{#nf.graph as |graph|}}
 
-     {{nf-bars data=graphData}}
+     {{graph.bars data=graphData}}
 
-   {{/nf-graph-content}}
+   {{/nf.graph}}
 {{/nf-graph}}
 
 
@@ -83,6 +83,3 @@
 </span></pre></td>
 </tr></tbody></table>
 </div>
-
-
-

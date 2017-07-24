@@ -2,9 +2,12 @@
 
 import Ember from 'ember';
 
-var format = function(ms) {
+const {
+  isPresent
+} = Ember;
 
-  if(isNaN(ms) || ms === null || typeof ms === 'undefined') {
+export function format([ ms ]) {
+  if(isNaN(ms) || !isPresent(ms)) {
     return "";
   }
 
@@ -21,10 +24,6 @@ var format = function(ms) {
   }
 
   return h + ":" + m;
-};
+}
 
-export default Ember.Handlebars.makeBoundHelper(function(ms) {
-  return format(ms);
-});
-
-export { format };
+export default Ember.Helper.helper(format);

@@ -1,15 +1,15 @@
-{{#nf-graph selected=selectedLine}}
+{{#nf-graph selected=selectedLine as |nf|}}
 
-  {{#nf-graph-content}}
+  {{#nf.graph as |graph|}}
 
-    {{nf-vertical-line x=selectedLine.hoverData.x}}
-    {{nf-horizontal-line y=selectedLine.hoverData.y}}
+    {{graph.vertical-line x=selectedLine.hoverData.x}}
+    {{graph.horizontal-line y=selectedLine.hoverData.y}}
 
-    {{nf-line data=graphData xprop="date" yprop="low" trackingMode="hover" selectable=true interpolator="monotone"}}
-    {{nf-line data=graphData xprop="date" yprop="medium" trackingMode="hover" selectable=true selected=true interpolator="monotone"}}
-    {{nf-line data=graphData xprop="date" yprop="high" trackingMode="hover" selectable=true interpolator="monotone"}}
+    {{graph.line data=graphData xprop="date" yprop="low" trackingMode="hover" selectable=true interpolator="monotone"}}
+    {{graph.line data=graphData xprop="date" yprop="medium" trackingMode="hover" selectable=true selected=true interpolator="monotone"}}
+    {{graph.line data=graphData xprop="date" yprop="high" trackingMode="hover" selectable=true interpolator="monotone"}}
 
-   {{/nf-graph-content}}
+   {{/nf.graph}}
 {{/nf-graph}}
 
 

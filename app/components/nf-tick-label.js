@@ -1,15 +1,1 @@
-import Ember from 'ember';
-
-export default Ember.Component.extend({
-  tagName: 'g',
-
-  attributeBindings: ['transform'],
-
-  transform: Ember.computed('x', 'y', function(){
-    var x = this.get('x');
-    var y = this.get('y');
-    return `translate(${x} ${y})`;
-  }),
-
-  className: 'nf-tick-label'
-});
+export { default } from 'ember-nf-graph/components/nf-tick-label';

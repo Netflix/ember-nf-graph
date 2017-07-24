@@ -2,7 +2,7 @@ import Ember from 'ember';
 import { getMousePoint } from '../utils/nf/svg-dom';
 import computed from 'ember-new-computed';
 
-var { on, observer } = Ember;
+let { on, observer } = Ember;
 
 export default Ember.Mixin.create({
   /**
@@ -14,11 +14,11 @@ export default Ember.Mixin.create({
     - 'hover': only track while mouse hover
     - 'snap-last': track while mouse hover, but snap to the last data element when not hovering
     - 'snap-first': track while mouse hover, but snap to the first data element when not hovering
-    - 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is 
+    - 'selected-hover': The same as `'hover'` tracking mode, but only when the compononent is
     {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
-    - 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is 
+    - 'selected-snap-last': The same as `'snap-last'` tracking mode, but only when the compononent is
     {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
-    - 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is 
+    - 'selected-snap-first': The same as `'snap-first'` tracking mode, but only when the compononent is
     {{#crossLink "mixins.graph-selectable-graphic/selected:property"}}{{/crossLink}}
 
     @property trackingMode
@@ -46,7 +46,7 @@ export default Ember.Mixin.create({
   /**
     The value of the data that is being tracked by the component.
     @property trackedData
-    @type {Object} an object with the following values:  
+    @type {Object} an object with the following values:
       - point: an { x, y } pair for the exact px coordinates inside the graph-content
       - graphX: domain x value at mouse position
       - graphY: domain y value at mouse position
@@ -62,10 +62,10 @@ export default Ember.Mixin.create({
   trackedData: null,
 
   /**
-    The value of the data that is being tracked by the component, ONLY if the 
+    The value of the data that is being tracked by the component, ONLY if the
     graph-content is currently being hovered.
     @property hoverData
-    @type {Object} an object with the following values:  
+    @type {Object} an object with the following values:
       - point: an { x, y } pair for the exact px coordinates inside the graph-content
       - graphX: domain x value at mouse position
       - graphY: domain y value at mouse position
@@ -105,7 +105,7 @@ export default Ember.Mixin.create({
     @private
   */
   _trackedDataChanged: Ember.observer('trackedData', function(){
-    var trackedData = this.get('trackedData');
+    let trackedData = this.get('trackedData');
     this.set('hoverData', this._hovered ? trackedData : null);
 
     if(this.get('didTrack') && trackedData) {
@@ -129,7 +129,7 @@ export default Ember.Mixin.create({
   },
 
   _updateTrackingHandling() {
-    var { trackingMode, selected } = this.getProperties('trackingMode', 'selected');
+    let { trackingMode, selected } = this.getProperties('trackingMode', 'selected');
 
     this._cleanup();
 
@@ -168,12 +168,14 @@ export default Ember.Mixin.create({
   },
 
   _onHoverTrack() {
-    var content = this._content;
+    let content = this._content;
 
-    var mousemoveHandler = e => {
-      this._hovered = true;
-      var evt = this._getEventObject(e);
-      this.set('trackedData', evt);
+    let mousemoveHandler = e => {
+      Ember.run.schedule('afterRender', () => {
+        this._hovered = true;
+        let evt = this._getEventObject(e);
+        this.set('trackedData', evt);
+      });
     };
 
     content.on('mousemove', mousemoveHandler);
@@ -186,9 +188,9 @@ export default Ember.Mixin.create({
   _hovered: false,
 
   _onEndUntrack() {
-    var content = this._content;
+    let content = this._content;
 
-    var mouseoutHandler = () => {
+    let mouseoutHandler = () => {
       this.set('trackedData', null);
     };
 
@@ -204,16 +206,20 @@ export default Ember.Mixin.create({
   },
 
   _onEndSnapLast() {
-    var content = this._content;
+    let content = this._content;
 
-    var mouseoutHandler = () => {
-      this._hovered = false;
-      this.set('trackedData', this.get('lastVisibleData'));
+    let mouseoutHandler = () => {
+      Ember.run.schedule('afterRender', () => {
+        this._hovered = false;
+        this.set('trackedData', this.get('lastVisibleData'));
+      });
     };
 
-    var changeHandler = () => {
+    let changeHandler = () => {
       if(!this._hovered) {
-        this.set('trackedData', this.get('lastVisibleData'));
+        Ember.run.schedule('afterRender', () => {
+          this.set('trackedData', this.get('lastVisibleData'));
+        });
       }
     };
 
@@ -229,14 +235,14 @@ export default Ember.Mixin.create({
   },
 
   _onEndSnapFirst() {
-    var content = this._content;
+    let content = this._content;
 
-    var mouseoutHandler = () => {
+    let mouseoutHandler = () => {
       this._hovered = false;
       this.set('trackedData', this.get('firstVisibleData'));
     };
 
-    var changeHandler = () => {
+    let changeHandler = () => {
       if(!this._hovered) {
         this.set('trackedData', this.get('firstVisibleData'));
       }
@@ -254,16 +260,16 @@ export default Ember.Mixin.create({
   },
 
   _trackingModeChanged: on('init', observer('trackingMode', 'selected', function() {
-    Ember.run.once(this, this._updateTrackingHandling);
+    Ember.run.scheduleOnce('afterRender', this, this._updateTrackingHandling);
   })),
 
   _getEventObject(e) {
-    var { xScale, yScale } = this.getProperties('xScale', 'yScale');
-    var content = this._content;
-    var point = getMousePoint(content[0], e);
-    var graphX = xScale.invert(point.x);
-    var graphY = yScale.invert(point.y);
-    var near = this.getDataNearXRange(point.x);
+    let { xScale, yScale } = this.getProperties('xScale', 'yScale');
+    let content = this._content;
+    let point = getMousePoint(content[0], e);
+    let graphX = xScale.invert(point.x);
+    let graphY = yScale.invert(point.y);
+    let near = this.getDataNearXRange(point.x);
 
     if(!near) {
       return {
@@ -275,7 +281,7 @@ export default Ember.Mixin.create({
       };
     }
 
-    var { x, y, data, renderX, renderY } = near;
+    let { x, y, data, renderX, renderY } = near;
     return {
       point,
       graphX,

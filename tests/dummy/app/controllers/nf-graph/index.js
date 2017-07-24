@@ -1,5 +1,10 @@
 import Ember from 'ember';
 
+const {
+  $,
+  Logger
+} = Ember;
+
 export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
   var p = yStart || 0;
   return Ember.A(
@@ -27,9 +32,16 @@ function range(count) {
 export default Ember.Controller.extend({
   graphWidth: 400,
   graphHeight: 300,
+  diffA: 100,
+  diffB: 200,
 
-  queryParams: Ember.A(['graphWidth']),
-  
+  queryParams: Ember.A(['graphWidth' , 'graphHeight']),
+
+  init(){
+    this._super(...arguments);
+    this.send('updateLine');
+  },
+
   xTickFilter: function() {
     return true;
   },
@@ -40,42 +52,37 @@ export default Ember.Controller.extend({
     return ticks;
   },
 
-  diffA: 100,
-  diffB: 200,
-
-  fooData: null,
-
   actions: {
     updateAreas() {
       this.set('model.area1', generateLineData(0, 0, 50, 20, 10));
-      this.set('model.area2', generateLineData(0, 51, 100, 20, 11));
+      this.set('model.area2', generateLineData(0, 51, 100, 20, 10));
       this.set('model.area3', generateLineData(0, 101, 150, 20, 10));
     },
 
-    loadNewData: function(){
-      this.set('lineData', generateLineData(0, 0, 2000, 200, 240, 500));
+    updateLine: function(){
+      this.set('lineData', generateLineData(0, 0, 200, 50, 10, 10));
     },
 
     brushStart: function(e) {
-      console.debug('brush start', e.left.get('x'), e.right.get('x'));
+      Logger.debug('brush start', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', e.left.get('x'));
       this.set('brushRight', e.right.get('x'));
     },
-    
+
     brush: function(e) {
-      console.debug('brush ', e.left.get('x'), e.right.get('x'));
+      Logger.debug('brush ', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', e.left.get('x'));
       this.set('brushRight', e.right.get('x'));
     },
 
     brushEnd: function(e) {
-      console.debug('brush end', e.left.get('x'), e.right.get('x'));
+      Logger.debug('brush end', e.left.get('x'), e.right.get('x'));
       this.set('brushLeft', undefined);
       this.set('brushRight', undefined);
     },
 
     test: function(){
-      console.log('test!');
+      Logger.log('test!');
     },
 
     appendAreaData: function(area) {
@@ -101,7 +108,7 @@ export default Ember.Controller.extend({
 
       testDiv.appendTo('body');
 
-      console.log('showData', e);
+      Logger.log('showData', e);
     },
   }
 });

@@ -1,0 +1,27 @@
+<svg class="nf-graph" width="{{width}}" height="{{height}}">
+	<defs>
+		<clipPath id="{{contentClipPathId}}">
+			<rect x=0 y=0 width="{{graphWidth}}" height="{{graphHeight}}"></rect>
+		</clipPath>
+	</defs>
+
+	<rect class="nf-graph-background" x=0 y=0 width="{{width}}" height="{{height}}"></rect>
+
+  {{yield (hash
+			x-axis=(component 'nf-x-axis' graph=this scaleSource=this)
+			y-axis=(component 'nf-y-axis' graph=this scaleSource=this)
+			graph=(component 'nf-graph-content' graph=this)
+			right-tick=(component 'nf-right-tick' graph=this scaleSource=this)
+			y-diff=(component 'nf-right-tick' graph=this scaleSource=this)
+			component=(component 'nf-component' graph=this scaleSource=this)
+		)
+	}}
+
+
+</svg>
+
+{{#if debug}}
+<div style="position:relative">
+	<pre style="position:absolute; z-index:1000">{{debugInfo}}</pre>
+</div>
+{{/if}}

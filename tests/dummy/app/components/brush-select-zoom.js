@@ -39,7 +39,7 @@ export default Component.extend({
   // Formats the text shown on the brush selection markers.
   // This is using the format code imported from helper:format-hour-minute
   selectionDisplayFormatter: function(ms) {
-    return format(ms);
+    return format([ ms ]);
   },
 
 

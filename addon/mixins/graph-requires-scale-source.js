@@ -1,22 +1,23 @@
 import Ember from 'ember';
 import computed from 'ember-new-computed';
 
-var scaleProperty = function(scaleKey, zoomKey, offsetKey){
+let scaleProperty = function(scaleKey, zoomKey, offsetKey){
   return computed(scaleKey, zoomKey, offsetKey, {
     get() {
-      var scale = this.get(scaleKey);
-      var zoom = this.get(zoomKey);
+      // console.log('HERE');
+      let scale = this.get(scaleKey);
+      let zoom = this.get(zoomKey);
+      let offset = this.get(offsetKey);
 
-      var offset = this.get(offsetKey);
       if(zoom === 1 && offset === 0) {
         return scale;
       }
 
-      var copy = scale.copy();
-      var domain = copy.domain();
+      let copy = scale.copy();
+      let domain = copy.domain();
       copy.domain([domain[0] / zoom, domain[1] / zoom]);
 
-      var range = copy.range();
+      let range = copy.range();
       copy.range([range[0] - offset, range[1] - offset]);
 
       return copy;
@@ -31,6 +32,17 @@ var scaleProperty = function(scaleKey, zoomKey, offsetKey){
   @class graph-requires-scale-source
 */
 export default Ember.Mixin.create({
+
+  /**
+    The scale source
+    @property scaleSource
+    @type d3.nf-graph
+    @default graph
+  */
+  scaleSource: Ember.computed(function() {
+    return this.get('graph');
+  }),
+
   /**
     The x scale used by this component
     @property xScale
@@ -38,7 +50,7 @@ export default Ember.Mixin.create({
     @readonly
   */
   xScale: scaleProperty('scaleSource.xScale', 'scaleZoomX', 'scaleOffsetX'),
-  
+
   /**
     The y scale used by this component
     @property yScale
@@ -113,11 +125,5 @@ export default Ember.Mixin.create({
     set(key, value) {
       return this._scaleOffsetY = +value || 0;
     }
-  }),
-
-  init() {
-    this._super(...arguments);
-    var scaleSource = this.nearestWithProperty('isScaleSource');
-    this.set('scaleSource', scaleSource);
-  }
+  })
 });

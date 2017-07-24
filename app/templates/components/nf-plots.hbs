@@ -1,5 +1,0 @@
-{{#each item in plotData}}
-	{{#nf-plot x=item.x y=item.y action='itemClicked' data=item.data multiplierY=multiplierY multiplierX=multiplierX}}
-		{{yield}}
-	{{/nf-plot}}
-{{/each}}

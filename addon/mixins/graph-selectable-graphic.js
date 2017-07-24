@@ -44,8 +44,8 @@ export default Ember.Mixin.create({
   */
   _updateGraphSelected: Ember.on('didInsertElement', Ember.observer('selected', function() {
     Ember.run.once(this, function(){
-      var selected = this.get('selected');
-      var graph = this.get('graph');
+      let selected = this.get('selected');
+      let graph = this.get('graph');
       if(selected) {
         graph.selectGraphic(this);
       } else {

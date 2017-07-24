@@ -1,49 +1,56 @@
 {
   "name": "ember-nf-graph",
-  "version": "1.0.0-beta.32",
+  "version": "2.0.0",
   "description": "A graphing/charting DSL for Ember.js",
   "files": [
+    "LICENSE.md",
+    "README.md",
     "addon/",
     "app/",
     "blueprints/",
-    "vendor/",
-    "LICENSE.md",
-    "README.md",
-    "index.js"
+    "index.js",
+    "vendor/"
   ],
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
   "scripts": {
-    "start": "ember server",
     "build": "ember build",
-    "test": "ember test"
+    "start": "ember server",
+    "test": "ember try:each"
   },
   "repository": "https://github.com/netflix/ember-nf-graph.git",
   "engines": {
-    "node": ">= 0.10.0"
+    "node": ">= 4"
   },
   "author": "Ben Lesh <blesh@netflix.com> and contributors",
   "license": "Apache-2.0",
   "dependencies": {
-    "ember-cli-babel": "^5.0.0",
+    "ember-cli-babel": "^5.1.7",
+    "ember-cli-htmlbars": "^1.1.1",
     "ember-new-computed": "^1.0.3"
   },
   "devDependencies": {
     "benchpress": "^2.0.0-alpha.16",
-    "broccoli-asset-rev": "^2.0.0",
-    "ember-cli": "^0.2.3",
-    "ember-cli-app-version": "0.3.2",
-    "ember-cli-dependency-checker": "0.0.8",
-    "ember-cli-htmlbars": "^0.7.6",
-    "ember-cli-ic-ajax": "^0.1.2",
-    "ember-cli-inject-live-reload": "^1.3.1",
-    "ember-cli-qunit": "^0.3.14",
-    "ember-cli-uglify": "^1.0.1",
-    "ember-disable-prototype-extensions": "^1.0.1",
-    "ember-export-application-global": "^1.0.2",
-    "ember-try": "0.0.5"
+    "broccoli-asset-rev": "^2.4.5",
+    "ember-cli": "^2.12.2",
+    "ember-cli-app-version": "^1.0.0",
+    "ember-cli-dependency-checker": "^1.3.0",
+    "ember-cli-eslint": "^3.0.3",
+    "ember-cli-htmlbars-inline-precompile": "^0.3.6",
+    "ember-cli-inject-live-reload": "^1.4.1",
+    "ember-cli-qunit": "^3.1.2",
+    "ember-cli-release": "0.2.8",
+    "ember-cli-shims": "^1.0.2",
+    "ember-cli-sri": "^2.1.0",
+    "ember-cli-uglify": "^1.2.0",
+    "ember-disable-prototype-extensions": "^1.1.0",
+    "ember-export-application-global": "^1.0.5",
+    "ember-load-initializers": "^0.6.0",
+    "ember-resolver": "^2.0.3",
+    "ember-source": "~2.12.0",
+    "loader.js": "^4.2.3"
   },
   "keywords": [
     "ember-addon"

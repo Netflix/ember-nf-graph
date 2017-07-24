@@ -18,23 +18,23 @@ function identity(x) {
   @method nearestIndexTo
   @param arr {Array} the *sorted* array to search.
   @param val {Number} the value to find the nearest index to.
-  @param mappingFn {Function} an optional function for pulling values out of the 
+  @param mappingFn {Function} an optional function for pulling values out of the
   array items.
 */
 export function nearestIndexTo(arr, val, mappingFn) {
   mappingFn = mappingFn || identity;
-  var startIndex  = 0;
-  var stopIndex = arr.length - 1;
-  var middle = (stopIndex + startIndex) / 2;
-  var a = Math.floor(middle);
-  var b = Math.floor(middle + 1);
+  let startIndex  = 0;
+  let stopIndex = arr.length - 1;
+  let middle = (stopIndex + startIndex) / 2;
+  let a = Math.floor(middle);
+  let b = Math.floor(middle + 1);
 
-  var getItem = function(i){
+  let getItem = function(i){
     return mappingFn(arr[i]);
   };
 
-  var av = getItem(a);
-  var bv = getItem(b);
+  let av = getItem(a);
+  let bv = getItem(b);
 
   while(!(av <= val && val <= bv) && startIndex < stopIndex){
 
@@ -54,7 +54,7 @@ export function nearestIndexTo(arr, val, mappingFn) {
   return (Math.abs(val - av) < Math.abs(val - bv)) ? a : b;
 }
 
-var NATURAL_SORT_REGEXP = /[+-]?\d+\.?\d*|\S+/g;
+let NATURAL_SORT_REGEXP = /[+-]?\d+\.?\d*|\S+/g;
 
 /**
   breaks a string into an array of tokens in preparation for natural
@@ -66,9 +66,9 @@ var NATURAL_SORT_REGEXP = /[+-]?\d+\.?\d*|\S+/g;
 */
 function naturalTokenize(item) {
   NATURAL_SORT_REGEXP.lastIndex = 0;
-  var matches;
-  var tokens = [];
-  while(matches = NATURAL_SORT_REGEXP.exec(item)) {
+  let matches;
+  let tokens = [];
+  while(matches === NATURAL_SORT_REGEXP.exec(item)) {
     tokens.push(matches[0]);
   }
   return tokens;
@@ -83,14 +83,14 @@ function naturalTokenize(item) {
     greater than b, respectively.
 */
 export function naturalCompare(a, b) {
-  var aTokens = naturalTokenize(a);
-  var bTokens = naturalTokenize(b);
-  var i = 0, bx, ax, na, nb;
+  let aTokens = naturalTokenize(a);
+  let bTokens = naturalTokenize(b);
+  let i = 0, bx, ax, na, nb;
 
   while((ax = aTokens[i]) && (bx = bTokens[i++])) {
     na = +ax;
     nb = +bx;
-  
+
     if(nb === nb && na === na) {
       if(na !== nb) {
          return na > nb ? 1 : -1;
@@ -100,7 +100,7 @@ export function naturalCompare(a, b) {
         }
       }
     }
-  
+
     if(ax !== bx) {
       return ax > bx ? 1 : -1;
     }
