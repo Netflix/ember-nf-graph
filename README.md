@@ -37,16 +37,16 @@ export default Ember.Route.extend({
 
 ```hbs
 {{#nf-graph width=500 height=300 as |nf|}}
-  {{#nf.graph-content}}
+  {{#nf.graph as |graph|}}
     <!-- add a line -->
-    {{nf.line data=model.myLineData}}
+    {{graph.line data=model.myLineData}}
 
     <!-- add an area -->
-    {{nf.area data=model.myAreaData}}
+    {{graph.area data=model.myAreaData}}
 
     <!-- mix in any SVG element you want -->
     <circle cx="40" cy="40" r="10"></circle>
-  {{/nf.graph-content}}
+  {{/nf.graph}}
 
 	<!-- axis ticks are templateable as well -->
   {{#nf.y-axis as |tick|}}
