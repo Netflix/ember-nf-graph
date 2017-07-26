@@ -1,10 +1,6 @@
 [![Build Status](https://travis-ci.org/Netflix/ember-nf-graph.svg?branch=master)](https://travis-ci.org/Netflix/ember-nf-graph)
 [![npm version](https://badge.fury.io/js/ember-nf-graph.svg)](http://badge.fury.io/js/ember-nf-graph)
 
-## NOTICE: This add-on was built to support Ember < 1.12 and cannot support Ember 1.13 and higher
-
-Due to this addon being used in large Ember 1.11 and 1.12 apps in production that have enumerable deprecation warnings on the path to Ember 2, and in light of the fact that some public APIs this addon relied on were removed in 1.13, we are unable to update this add-on to a higher version of Ember at this time.
-
 # ember-nf-graph
 
 A Component-based DSL for creating graphs in your Ember app. The goal of the library is to 
@@ -40,27 +36,27 @@ export default Ember.Route.extend({
 ```
 
 ```hbs
-{{#nf-graph width=500 height=300}}
-  {{#nf-graph-content}}
+{{#nf-graph width=500 height=300 as |nf|}}
+  {{#nf.graph-content}}
     <!-- add a line -->
-    {{nf-line data=model.myLineData}}
+    {{nf.line data=model.myLineData}}
 
     <!-- add an area -->
-    {{nf-area data=model.myAreaData}}
+    {{nf.area data=model.myAreaData}}
 
     <!-- mix in any SVG element you want -->
     <circle cx="40" cy="40" r="10"></circle>
-  {{/nf-graph-content}}
+  {{/nf.graph-content}}
 
 	<!-- axis ticks are templateable as well -->
-  {{#nf-y-axis as |tick|}}
+  {{#nf.y-axis as |tick|}}
     <text>{{tick.value}}</text>
-  {{/nf-y-axis}}
+  {{/nf.y-axis}}
 
 
-  {{#nf-x-axis as |tick|}}
+  {{#nf.x-axis as |tick|}}
     <text>{{tick.value}}</text>
-  {{/nf-x-axis}}
+  {{/nf.x-axis}}
 {{/nf-graph}}
 ```
 
