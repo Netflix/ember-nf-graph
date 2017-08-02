@@ -56,6 +56,7 @@
     "ember-addon"
   ],
   "ember-addon": {
-    "configPath": "tests/dummy/config"
+    "configPath": "tests/dummy/config",
+    "demoURL": "https://netflix.github.io/ember-nf-graph-examples/dist/"
   }
 }
