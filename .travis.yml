@@ -35,17 +35,11 @@ matrix:
   allow_failures:
     - env: EMBER_TRY_SCENARIO=ember-canary
 
-before_install:
-  - npm config set spin false
-  - npm install -g npm@4 bower
-  - npm --version
-
 install:
   - yarn install
-  - bower install
 
 script:
-  - npm run lint:js
+  - yarn run lint:js
   # Usually, it's ok to finish the test scenario without reverting
   #  to the addon's original dependency state, skipping "cleanup".
   - node_modules/.bin/ember try:one $EMBER_TRY_SCENARIO --skip-cleanup

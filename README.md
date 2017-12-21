@@ -3,7 +3,7 @@
 
 # ember-nf-graph
 
-A Component-based DSL for creating graphs in your Ember app. The goal of the library is to 
+A Component-based DSL for creating graphs in your Ember app. The goal of the library is to
 create a set of components that allows application or component authors to build graphs in a
 compositional way. This includes components for templated axes, graph lines, areas, stacked areas, bar graphs, and much more. Check the [documentation](//netflix.github.io/ember-nf-graph/docs) for more information.
 
@@ -66,7 +66,7 @@ export default Ember.Route.extend({
 This set of Ember components requires [Ember-CLI](http://ember-cli.com) 0.2.0 or higher and
 [Ember](http://emberjs.com) 1.10.0 or higher.
 
-To install, simply run `ember install ember-nf-graph`, or `npm install -D ember-nf-graph` 
+To install, simply run `ember install ember-nf-graph`, or `npm install -D ember-nf-graph`
 
 ## Documentation
 
@@ -101,7 +101,7 @@ For more information on using ember-cli, visit [http://www.ember-cli.com/](http:
 This project uses YUIDoc to generate documentation. Once YUIDoc is installed run:
 
 ```sh
-yuidoc -c yuidoc.json 
+yuidoc -c yuidoc.json
 ```
 
 The documentation is located in `docs/`.
