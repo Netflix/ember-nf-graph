@@ -1,6 +1,5 @@
 import EmberObject, { computed } from '@ember/object';
 import { run } from '@ember/runloop';
-
 import {
   moduleForComponent,
   test
@@ -21,7 +20,7 @@ test('nf-x-axis tickData should call tickFactory if available', function(assert)
     var axis = this.factory().extend({
       uniqueXData: [1,2,3,4,5],
       xScale: 'xScale',
-      graph: computed((key, value) => ({
+      graph: computed(() => ({
         xScaleType: 'xScaleType'
       })),
       tickCount: 42,
@@ -40,7 +39,7 @@ test('nf-x-axis tickData should call tickFactory if available', function(assert)
 test('nf-x-axis hasBlock if template.blockParams', function(assert) {
   run(() => {
     var axis = this.factory().extend({
-      graph: computed((key, value) => ({
+      graph: computed(() => ({
         xScaleType: 'xScaleType'
       }))
     }).create();
@@ -57,7 +56,7 @@ test('nf-x-axis hasBlock if template.blockParams', function(assert) {
 test('nf-x-axis hasBlock if template is undefined', function(assert) {
   run(() => {
     var axis = this.factory().extend({
-      graph: computed((key, value) => ({
+      graph: computed(() => ({
         xScaleType: 'xScaleType'
       })),
 

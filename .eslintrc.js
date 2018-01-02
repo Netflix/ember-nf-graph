@@ -32,7 +32,8 @@ module.exports = {
       ],
       excludedFiles: [
         'app/**',
-        'addon/**'
+        'addon/**',
+        'tests/dummy/app/**'
       ],
       parserOptions: {
         sourceType: 'script',
@@ -54,6 +55,23 @@ module.exports = {
       excludedFiles: ['tests/dummy/**/*.js'],
       env: {
         embertest: true
+      },
+      rules: {
+        'ember/avoid-leaking-state-in-ember-objects': 'off'
+      }
+    },
+    {
+      files: ['protractor.conf.js', 'tests/perf/**/*.js'],
+      env: {
+        mocha: true,
+        node: true
+      },
+      globals: {
+        '$': true,
+        browser: true
+      },
+      rules: {
+        'ember/no-global-jquery': 'off'
       }
     }
   ]

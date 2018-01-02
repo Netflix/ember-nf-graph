@@ -989,7 +989,7 @@ export default Component.extend({
     @type Number
     @readonly
    */
-  graphX: computed('paddingLeft', 'yAxis.width', 'yAxis.orient', function() {
+  graphX: computed('paddingLeft', 'yAxis.{orient,width}', function() {
     let paddingLeft = this.get('paddingLeft');
     let yAxisWidth = this.get('yAxis.width') || 0;
     let yAxisOrient = this.get('yAxis.orient');
@@ -1005,7 +1005,7 @@ export default Component.extend({
     @type Number
     @readonly
    */
-  graphY: computed('paddingTop', 'xAxis.orient', 'xAxis.height', function(){
+  graphY: computed('paddingTop', 'xAxis.{orient,height}', function(){
     let paddingTop = this.get('paddingTop');
     let xAxisOrient = this.get('xAxis.orient');
     if(xAxisOrient === 'top') {

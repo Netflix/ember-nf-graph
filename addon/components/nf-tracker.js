@@ -29,7 +29,7 @@ export default Component.extend(DataGraphic, RequiresScaleSource, GraphicWithTra
     */
   graph: null,
 
-  transform: computed('trackedData.x', 'trackedData.y', 'xScale', 'yScale', {
+  transform: computed('trackedData.{x,y}', 'xScale', 'yScale', {
     get() {
       let xScale = this.get('xScale');
       let yScale = this.get('yScale');

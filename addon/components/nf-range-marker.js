@@ -107,8 +107,7 @@ export default Component.extend(RequireScaleSource, {
   */
   y: computed(
     'container.orient',
-    'prevMarker.bottom',
-    'prevMarker.y',
+    'prevMarker.{bottom,y}',
     'graph.graphHeight',
     'totalHeight',
     function() {

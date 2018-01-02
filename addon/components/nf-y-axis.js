@@ -147,10 +147,8 @@ export default Component.extend(RequireScaleSource, {
   */
   x: computed(
     'orient',
-    'graph.width',
     'width',
-    'graph.paddingLeft',
-    'graph.paddingRight',
+    'graph.{paddingLeft,paddingRight,width}',
     function(){
       let orient = this.get('orient');
       if(orient !== 'left') {

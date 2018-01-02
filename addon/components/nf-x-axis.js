@@ -150,9 +150,7 @@ export default Component.extend(RequireScaleSource, {
   */
   y: computed(
     'orient',
-    'graph.paddingTop',
-    'graph.paddingBottom',
-    'graph.height',
+    'graph.{paddingTop,paddingBottom,height}',
     'height',
     function(){
       let orient = this.get('orient');

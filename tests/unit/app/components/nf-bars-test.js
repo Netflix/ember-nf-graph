@@ -1,11 +1,8 @@
 import { run } from '@ember/runloop';
-
 import {
   moduleForComponent,
   test
 } from 'ember-qunit';
-
-import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
 
 moduleForComponent('nf-bars', {
   // specify the other units that are required for this test
@@ -17,7 +14,7 @@ test('bars layout', function(assert) {
 
   run(() => {
     var nfBars = this.subject({
-        xScale: x => { 
+        xScale: x => {
           switch(x) {
             case 'a':
               return 0;
@@ -38,7 +35,7 @@ test('bars layout', function(assert) {
 
       bars = nfBars.get('bars');
   });
-  
+
   assert.deepEqual(bars, [{
     path: [30, 10, 10, 0],
     className: 'nf-bars-bar testClass',

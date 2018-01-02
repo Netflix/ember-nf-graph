@@ -13,7 +13,6 @@ var runner = new benchpress.Runner([
 
 describe('deep tree baseline', function() {
   it('should be fast!', function(done) {
-    var depth = 11;
     //Tells protractor this isn't an Angular 1 application
     browser.ignoreSynchronization = true;
     //Load the benchmark, with a tree depth of 9
@@ -21,7 +20,7 @@ describe('deep tree baseline', function() {
     browser.get('http://localhost:4200/nf-graph?graphWidth=900').then(function(){
       // browser.get('http://localhost:8080/tree.html?depth='+depth);
       /*
-       * Tell benchpress to click the buttons to destroy and re-create the tree for each sample. 
+       * Tell benchpress to click the buttons to destroy and re-create the tree for each sample.
        * Benchpress will log the collected metrics after each sample is collected, and will stop
        * sampling as soon as the calculated regression slope for last 20 samples is stable.
        */
@@ -32,11 +31,10 @@ describe('deep tree baseline', function() {
         id: 'deep-tree',
         execute: function() {
           /*
-           * Will call querySelector in the browser, but benchpress is smart enough to ignore injected 
+           * Will call querySelector in the browser, but benchpress is smart enough to ignore injected
            * script.
            */
            $('#loadNewData').click();
-
         },
         bindings: [
           // benchpress.bind(benchpress.Options.SAMPLE_DESCRIPTION).toValue({

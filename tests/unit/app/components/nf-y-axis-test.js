@@ -19,7 +19,7 @@ test('nf-y-axis tickData should call tickFactory if available', function(assert)
     var axis = this.factory().extend({
       uniqueYData: [1,2,3,4,5],
       yScale: 'yScale',
-      graph: computed((key, value) => ({
+      graph: computed(() => ({
         yScaleType: 'yScaleType'
       })),
       tickCount: 42,
@@ -39,7 +39,7 @@ test('nf-y-axis tickData should call tickFactory if available', function(assert)
 test('nf-y-axis useTemplate if template.blockParams', function(assert) {
   run(() => {
     var axis = this.factory().extend({
-      graph: computed((key, value) => ({
+      graph: computed(() => ({
         yScaleType: 'yScaleType'
       }))
     }).create();
@@ -56,7 +56,7 @@ test('nf-y-axis useTemplate if template.blockParams', function(assert) {
 test('nf-y-axis useTemplate if hasBlock AND hasBlockParams', function(assert) {
   run(() => {
     var axis = this.factory().extend({
-      graph: computed((key, value) => ({
+      graph: computed(() => ({
         yScaleType: 'yScaleType'
       })),
       hasBlock: true,
