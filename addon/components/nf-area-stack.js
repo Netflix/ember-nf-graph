@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { schedule } from '@ember/runloop';
+import { A } from '@ember/array';
+import { warn } from '@ember/debug';
+import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-area-stack';
 
@@ -24,7 +27,7 @@ import layout from 'ember-nf-graph/templates/components/nf-area-stack';
   @namespace components
   @class nf-area-stack
 */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'g',
 
@@ -44,7 +47,7 @@ export default Ember.Component.extend({
   */
   aggregate: computed({
     get() {
-      Ember.warn('nf-area-stack.aggregate must be set. Currently defaulting to `false` but will default to `true` in the future.');
+      warn('nf-area-stack.aggregate must be set. Currently defaulting to `false` but will default to `true` in the future.');
       return this._aggregate = false;
     },
     set(key, value) {
@@ -59,7 +62,7 @@ export default Ember.Component.extend({
     @readonly
   */
   areas: computed(function(){
-    return Ember.A();
+    return A();
   }),
 
   /**
@@ -72,7 +75,7 @@ export default Ember.Component.extend({
     let areas = this.get('areas');
     let prev = areas[areas.length - 1];
 
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       if(prev) {
         prev.set('nextArea', area);
         area.set('prevArea', prev);
@@ -92,7 +95,7 @@ export default Ember.Component.extend({
     let prev = area.get('prevArea');
     let next = area.get('nextArea');
 
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       if(next) {
         next.set('prevArea', prev);
       }

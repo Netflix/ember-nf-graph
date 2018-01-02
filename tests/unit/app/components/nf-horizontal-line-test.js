@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 import {
   moduleForComponent,
@@ -25,7 +25,7 @@ test('it renders', function(assert) {
 test('lineY pins to zero', function(assert) {
   var component = this.subject();
 
-  Ember.run(() => {
+  run(() => {
     component.set('yScale', function() { return -99; });
     component.set('y', 0);
   });

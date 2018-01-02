@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { isArray } from '@ember/array';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-svg-path';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
@@ -12,7 +14,7 @@ import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
+export default Component.extend(RequiresScaleSource, SelectableGraphic, {
   layout,
   type: 'path',
 
@@ -53,11 +55,11 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property svgPoints
     @type Array
   */
-  svgPoints: Ember.computed('points.[]', 'xScale', 'yScale', function(){
+  svgPoints: computed('points.[]', 'xScale', 'yScale', function(){
     let points = this.get('points');
     let xScale = this.get('xScale');
     let yScale = this.get('yScale');
-    if(Ember.isArray(points) && points.length > 0) {
+    if(isArray(points) && points.length > 0) {
       return points.map(function(v) {
         let dx = normalizeScale(xScale, v[0]);
         let dy = normalizeScale(yScale, v[1]);
@@ -78,9 +80,9 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property d
     @type String
   */
-  d: Ember.computed('svgPoints', function(){
+  d: computed('svgPoints', function(){
     let svgPoints = this.get('svgPoints');
-    if(Ember.isArray(svgPoints) && svgPoints.length > 0) {
+    if(isArray(svgPoints) && svgPoints.length > 0) {
       return svgPoints.reduce(function(d, pt, i) {
         if(i === 0) {
           d += 'M' + pt[0] + ',' + pt[1];

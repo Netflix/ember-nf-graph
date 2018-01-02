@@ -1,7 +1,5 @@
-import Ember from 'ember';
-import { computed } from '@ember/object';
-
-const { reads } = Ember.computed;
+import { reads } from '@ember/object/computed';
+import EmberObject, { computed } from '@ember/object';
 
 /**
   Position calculation class for nf-graph related events
@@ -9,7 +7,7 @@ const { reads } = Ember.computed;
   @class graph-position
   @extends Ember.Object
 */
-export default Ember.Object.extend({
+export default EmberObject.extend({
   /**
     @property graph
     @type component.nf-graph

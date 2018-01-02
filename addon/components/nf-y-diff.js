@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import { once } from '@ember/runloop';
+import { alias, gte, equal } from '@ember/object/computed';
+import { computed, observer } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-y-diff';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
@@ -20,7 +24,7 @@ import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -74,7 +78,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  yCenter: Ember.computed('yA', 'yB', function(){
+  yCenter: computed('yA', 'yB', function(){
     let yA = +this.get('yA') || 0;
     let yB = +this.get('yB') || 0;
     return (yA + yB) / 2;
@@ -85,7 +89,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property yB
     @type Number
   */
-  yB: Ember.computed('yScale', 'b', function(){
+  yB: computed('yScale', 'b', function(){
     return normalizeScale(this.get('yScale'), this.get('b'));
   }),
 
@@ -94,7 +98,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property yA
     @type Number
   */
-  yA: Ember.computed('yScale', 'a', function() {
+  yA: computed('yScale', 'a', function() {
     return normalizeScale(this.get('yScale'), this.get('a'));
   }),
 
@@ -105,7 +109,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  transform: Ember.computed.alias('graph.yAxis.transform'),
+  transform: alias('graph.yAxis.transform'),
 
   /**
     The calculated difference between `a` and `b`.
@@ -113,7 +117,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  diff: Ember.computed('a', 'b', function(){
+  diff: computed('a', 'b', function(){
     return +this.get('b') - this.get('a');
   }),
 
@@ -123,7 +127,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  isPositive: Ember.computed.gte('diff', 0),
+  isPositive: gte('diff', 0),
 
   /**
     Returns `true` if the graph's y-axis component is configured to orient right.
@@ -131,7 +135,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  isOrientRight: Ember.computed.equal('graph.yAxis.orient', 'right'),
+  isOrientRight: equal('graph.yAxis.orient', 'right'),
 
   /**
     The width of the difference box
@@ -139,7 +143,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  width: Ember.computed.alias('graph.yAxis.width'),
+  width: alias('graph.yAxis.width'),
 
   /**
     The x pixel coordinate of the content container.
@@ -147,13 +151,13 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  contentX: Ember.computed('isOrientRight', 'width', 'contentPadding', function(){
+  contentX: computed('isOrientRight', 'width', 'contentPadding', function(){
     let contentPadding = this.get('contentPadding');
     let width = this.get('width');
     return this.get('isOrientRight') ? width - contentPadding : contentPadding;
   }),
 
-  rectPath: Ember.computed('yA', 'yB', 'width', function(){
+  rectPath: computed('yA', 'yB', 'width', function(){
     let x = 0;
     let w = +this.get('width') || 0;
     let x2 = x + w;
@@ -169,7 +173,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  contentTransform: Ember.computed('contentX', 'yCenter', function(){
+  contentTransform: computed('contentX', 'yCenter', function(){
     let contentX = this.get('contentX');
     let yCenter = this.get('yCenter');
     return `translate(${contentX} ${yCenter})`;
@@ -221,8 +225,8 @@ export default Ember.Component.extend(RequireScaleSource, {
     Schedules a transition once at afterRender.
     @method transition
   */
-  transition: Ember.observer('a', 'b', function(){
-    Ember.run.once(this, this.doTransition);
+  transition: observer('a', 'b', function(){
+    once(this, this.doTransition);
   }),
 
   /**
@@ -238,7 +242,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     }
   },
 
-  adjustGraphHeight: Ember.on('didInsertElement', Ember.observer('graph.graphHeight', function(){
+  adjustGraphHeight: on('didInsertElement', observer('graph.graphHeight', function(){
     let rectElement = this.get('rectElement');
     let contentElement = this.get('contentElement');
 
@@ -255,10 +259,10 @@ export default Ember.Component.extend(RequireScaleSource, {
     Schedules a call to `doAdjustWidth` on afterRender
     @method adjustWidth
   */
-  adjustWidth: Ember.on(
+  adjustWidth: on(
     'didInsertElement',
-    Ember.observer('isOrientRight', 'width', 'contentPadding', function(){
-      Ember.run.once(this, this.doAdjustWidth);
+    observer('isOrientRight', 'width', 'contentPadding', function(){
+      once(this, this.doAdjustWidth);
     })
   ),
 });

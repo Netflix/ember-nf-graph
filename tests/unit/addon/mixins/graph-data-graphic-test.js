@@ -1,15 +1,18 @@
-import Ember from 'ember';
+import EmberObject from '@ember/object';
+import { run } from '@ember/runloop';
+import Evented from '@ember/object/evented';
+import Component from '@ember/component';
 import GraphDataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import { module, test } from 'qunit';
 
 module('addon/mixins/graph-data-graphic');
 
 test('renderedData should narrow sortedData down to only what is between xMin and xMax if non-ordinal xScaleType, PLUS one point to either side', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic, Ember.Evented);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic, Evented);
+  run(() => {
     var foo = Foo.create({
       mappedData: [[1,1], [75, 2], [100, 3], [101, 4], [150, 5], [199, 6], [200, 7], [225, 8], [300, 9]],
-      graph: Ember.Object.create({
+      graph: EmberObject.create({
         xScaleType: 'linear',
         xMin: 100,
         xMax: 200
@@ -22,11 +25,11 @@ test('renderedData should narrow sortedData down to only what is between xMin an
 });
 
 test('renderedData should return the whole sortedData array if xScaleType is "ordinal"', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var foo = Foo.create({
       mappedData: [[1,1], [75, 2], [100, 3], [101, 4], [150, 5], [199, 6], [200, 7], [225, 8], [300, 9]],
-      graph: Ember.Object.create({
+      graph: EmberObject.create({
         xScaleType: 'ordinal',
         xMin: 100,
         xMax: 200
@@ -39,10 +42,10 @@ test('renderedData should return the whole sortedData array if xScaleType is "or
 });
 
 test('firstVisibleData returns the first item of renderedData that is actually visible if renderedData includes a value off-graph', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
+  var Foo = Component.extend(GraphDataGraphic);
   var first = [2,2];
   first.data = [111, 222];
-  Ember.run(() => {
+  run(() => {
     var foo = Foo.create({
       renderedData: [[1,1],first,[3,3],[4,4],[5,5]],
       xMin: 1.4,
@@ -56,8 +59,8 @@ test('firstVisibleData returns the first item of renderedData that is actually v
 });
 
 test('firstVisibleData returns the first item of renderedData if it is at the xMin exactly', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var first = [1,1];
     first.data = [111,222];
     var foo = Foo.create({
@@ -73,10 +76,10 @@ test('firstVisibleData returns the first item of renderedData if it is at the xM
 });
 
 test('lastVisibleData returns the last item of renderedData that is actually visible if renderedData includes a value off-graph', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
+  var Foo = Component.extend(GraphDataGraphic);
   var last = [4,4];
   last.data = [111,222];
-  Ember.run(() => {
+  run(() => {
     var foo = Foo.create({
       renderedData: [[1,1],[2,2],[3,3],last,[5,5]],
       xMax: 4.4,
@@ -90,10 +93,10 @@ test('lastVisibleData returns the last item of renderedData that is actually vis
 });
 
 test('lastVisibleData returns the last item of renderedData if it is at the xMax exactly', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
+  var Foo = Component.extend(GraphDataGraphic);
   var last = [5,5];
   last.data = [111,222];
-  Ember.run(() => {
+  run(() => {
     var foo = Foo.create({
       renderedData: [[1,1],[2,2],[3,3],[4,4],last],
       xMax: 5,
@@ -107,8 +110,8 @@ test('lastVisibleData returns the last item of renderedData if it is at the xMax
 });
 
 test('getDataNearX() should return the data point closest to the x domain value passed', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var foo = Foo.create({
       renderedData: [[1,1],[2,2],[3,3],[4,4],[5,5]]
     });
@@ -122,8 +125,8 @@ test('getDataNearX() should return the data point closest to the x domain value 
 });
 
 test('xPropFn should be a function that gets the value specified by xprop', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var foo = Foo.create({
       xprop: 'foo.bar'
     });
@@ -134,8 +137,8 @@ test('xPropFn should be a function that gets the value specified by xprop', asse
 });
 
 test('xPropFn should work if xprop uses an array index like so: foo[2]', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var foo = Foo.create({
       xprop: 'foo[2]'
     });
@@ -146,8 +149,8 @@ test('xPropFn should work if xprop uses an array index like so: foo[2]', assert 
 });
 
 test('yPropFn should be a function that gets the value specified by yprop', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var foo = Foo.create({
       yprop: 'foo.bar'
     });
@@ -159,8 +162,8 @@ test('yPropFn should be a function that gets the value specified by yprop', asse
 
 
 test('yPropFn should work if yprop uses an array index like so: foo[2]', assert => {
-  var Foo = Ember.Component.extend(GraphDataGraphic);
-  Ember.run(() => {
+  var Foo = Component.extend(GraphDataGraphic);
+  run(() => {
     var foo = Foo.create({
       yprop: 'foo[2]'
     });

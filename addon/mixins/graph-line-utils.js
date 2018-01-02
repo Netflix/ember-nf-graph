@@ -1,11 +1,11 @@
-  import Ember from 'ember';
+  import Mixin from '@ember/object/mixin';
 
   /**
     @namespace mixins
     @class graph-line-utils
     @extends Ember.Mixin
     */
-  export default Ember.Mixin.create({
+  export default Mixin.create({
 
     /**
       Create a d3 line function from a given scales and interpolation

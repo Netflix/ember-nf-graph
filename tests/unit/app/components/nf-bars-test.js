@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 import {
   moduleForComponent,
@@ -15,7 +15,7 @@ moduleForComponent('nf-bars', {
 test('bars layout', function(assert) {
   var bars;
 
-  Ember.run(() => {
+  run(() => {
     var nfBars = this.subject({
         xScale: x => { 
           switch(x) {

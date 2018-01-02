@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-line';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import LineUtils from 'ember-nf-graph/mixins/graph-line-utils';
@@ -19,7 +21,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @uses mixins.graph-graphic-with-tracking-dot
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(DataGraphic, SelectableGraphic, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, RequireScaleSource, {
+export default Component.extend(DataGraphic, SelectableGraphic, LineUtils, RegisteredGraphic, GraphicWithTrackingDot, RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -50,7 +52,7 @@ export default Ember.Component.extend(DataGraphic, SelectableGraphic, LineUtils,
     @private
     @return {String} an SVG path data string
   */
-  lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function() {
+  lineFn: computed('xScale', 'yScale', 'interpolator', function() {
     let xScale = this.get('xScale');
     let yScale = this.get('yScale');
     let interpolator = this.get('interpolator');
@@ -64,7 +66,7 @@ export default Ember.Component.extend(DataGraphic, SelectableGraphic, LineUtils,
     @private
     @readonly
   */
-  d: Ember.computed('renderedData.[]', 'lineFn', function(){
+  d: computed('renderedData.[]', 'lineFn', function(){
     let renderedData = this.get('renderedData');
     let lineFn = this.get('lineFn');
     return lineFn(renderedData);
@@ -75,7 +77,7 @@ export default Ember.Component.extend(DataGraphic, SelectableGraphic, LineUtils,
     @method _toggleSelected
     @private
   */
-  _toggleSelected: Ember.on('click', function(){
+  _toggleSelected: on('click', function(){
     if(this.get('selectable')) {
       this.toggleProperty('selected');
     }

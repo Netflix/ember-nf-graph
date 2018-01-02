@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { alias, equal, uniq } from '@ember/object/computed';
+import { A } from '@ember/array';
+import { schedule } from '@ember/runloop';
+import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-y-axis';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
@@ -33,7 +36,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -113,7 +116,7 @@ export default Ember.Component.extend(RequireScaleSource, {
 
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
-  tickFilter: computed.alias('_tickFilter'),
+  tickFilter: alias('_tickFilter'),
 
   /**
     computed property. returns true if `orient` is equal to `'right'`.
@@ -121,7 +124,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  isOrientRight: computed.equal('orient', 'right'),
+  isOrientRight: equal('orient', 'right'),
 
 
   /**
@@ -163,7 +166,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: computed.alias('graph.graphY'),
+  y: alias('graph.graphY'),
 
   /**
     the height of the component
@@ -171,12 +174,12 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  height: computed.alias('graph.graphHeight'),
+  height: alias('graph.graphHeight'),
 
   init() {
     this._super(...arguments);
 
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.set('graph.yAxis', this);
     });
   },
@@ -232,7 +235,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueYData: computed.uniq('graph.yData'),
+  uniqueYData: uniq('graph.yData'),
 
   /**
     The ticks to be displayed.
@@ -274,7 +277,7 @@ export default Ember.Component.extend(RequireScaleSource, {
         result = result.filter(tickFilter);
       }
 
-      return Ember.A(result);
+      return A(result);
     }
   ),
 

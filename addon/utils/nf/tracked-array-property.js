@@ -1,7 +1,6 @@
-import Ember from 'ember';
-import { computed } from '@ember/object';
-
-let get = Ember.get;
+import { keys } from '@ember/polyfills';
+import { isArray, A } from '@ember/array';
+import { computed, get, set } from '@ember/object';
 
 function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
   let arraySourceDependency = arraySourceProp + '.[]';
@@ -12,8 +11,8 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
     get() {
       let array = this.get(backingField);
 
-      if(!Ember.isArray(array)){
-        array = Ember.A();
+      if(!isArray(array)){
+        array = A();
       }
 
       let trackBy = trackByProp ? this.get(trackByProp) : null;
@@ -25,8 +24,8 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
 
       let source = this.get(arraySourceProp);
 
-      if(!Ember.isArray(source) || source.length === 0) {
-        array = Ember.A();
+      if(!isArray(source) || source.length === 0) {
+        array = A();
       } else {
         let sourceKeys = [];
         source.forEach(function(d, i) {
@@ -37,13 +36,13 @@ function trackedArrayProperty(arraySourceProp, trackByProp, backingField) {
             return keyFn(x, i) === key;
           });
 
-          Ember.set(d, '__meta__trackedKey', key);
+          set(d, '__meta__trackedKey', key);
 
           if(found) {
-            Ember.keys(d).forEach(function(k) {
+            keys(d).forEach(function(k) {
               let v = get(d, k);
               if(get(found, k) !== v) {
-                Ember.set(found, k, v);
+                set(found, k, v);
               }
             });
           } else {

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-tracker';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
@@ -13,7 +13,7 @@ import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tra
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-graphic-with-tracking-dot
   */
-export default Ember.Component.extend(DataGraphic, RequiresScaleSource, GraphicWithTrackingDot, {
+export default Component.extend(DataGraphic, RequiresScaleSource, GraphicWithTrackingDot, {
   layout,
   tagName: 'g',
 

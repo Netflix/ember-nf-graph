@@ -1,10 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { assert } from '@ember/debug';
+import { isPresent } from '@ember/utils';
 import layout from '../templates/components/nf-component';
-
-const {
-  assert,
-  isPresent
-} = Ember;
 
 /**
   Renders a custom component with the given component name.
@@ -21,7 +18,7 @@ const {
   @class nf-component
   @extends Ember.Component
 */
-const NfComponent = Ember.Component.extend({
+const NfComponent = Component.extend({
   layout,
   tagName: '',
 

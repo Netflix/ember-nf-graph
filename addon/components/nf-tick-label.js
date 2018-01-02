@@ -1,13 +1,14 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-tick-label';
 
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'g',
 
   attributeBindings: ['transform'],
 
-  transform: Ember.computed('x', 'y', function(){
+  transform: computed('x', 'y', function(){
     let x = this.get('x');
     let y = this.get('y');
     return `translate(${x} ${y})`;

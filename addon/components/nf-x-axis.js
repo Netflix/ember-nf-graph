@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { alias, uniq } from '@ember/object/computed';
+import { A } from '@ember/array';
+import { schedule } from '@ember/runloop';
+import Component from '@ember/component';
 import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-x-axis';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
@@ -34,7 +37,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @uses mixins.graph-has-graph-parent
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -115,7 +118,7 @@ export default Ember.Component.extend(RequireScaleSource, {
 
     The above example will filter down the set of ticks to only those that are less than 1000.
   */
-  tickFilter: computed.alias('_tickFilter'),
+  tickFilter: alias('_tickFilter'),
 
   /**
     The class applied due to orientation (e.g. `'orient-top'`)
@@ -182,7 +185,7 @@ export default Ember.Component.extend(RequireScaleSource, {
   init() {
     this._super(...arguments);
 
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.set('graph.xAxis', this);
     });
   },
@@ -193,7 +196,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  width: computed.alias('graph.graphWidth'),
+  width: alias('graph.graphWidth'),
 
   /**
     A method to call to override the default behavior of how ticks are created.
@@ -239,7 +242,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Array
     @readonly
   */
-  uniqueXData: computed.uniq('graph.xData'),
+  uniqueXData: uniq('graph.xData'),
 
   /**
     The models for the ticks to display on the axis.
@@ -283,7 +286,7 @@ export default Ember.Component.extend(RequireScaleSource, {
         result = result.filter(tickFilter);
       }
 
-      return Ember.A(result);
+      return A(result);
     }
   ),
 

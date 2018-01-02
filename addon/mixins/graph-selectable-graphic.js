@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import { once } from '@ember/runloop';
+import { observer } from '@ember/object';
+import { on } from '@ember/object/evented';
+import { alias } from '@ember/object/computed';
+import Mixin from '@ember/object/mixin';
 
 /**
   Adds functionality to a component to make it a selectable graphic
@@ -7,7 +11,7 @@ import Ember from 'ember';
   @class graph-selectable-graphic
   @extends Ember.Mixin
 */
-export default Ember.Mixin.create({
+export default Mixin.create({
   _selected: false,
 
   /**
@@ -33,7 +37,7 @@ export default Ember.Mixin.create({
     @property isSelected
     @deprecated use `selected`
   */
-  isSelected: Ember.computed.alias('selected'),
+  isSelected: alias('selected'),
 
   /**
     Makes calls to the parent nf-graph to update it's
@@ -42,8 +46,8 @@ export default Ember.Mixin.create({
     @method _updateGraphSelected
     @private
   */
-  _updateGraphSelected: Ember.on('didInsertElement', Ember.observer('selected', function() {
-    Ember.run.once(this, function(){
+  _updateGraphSelected: on('didInsertElement', observer('selected', function() {
+    once(this, function(){
       let selected = this.get('selected');
       let graph = this.get('graph');
       if(selected) {

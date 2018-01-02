@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import { run } from '@ember/runloop';
 
 import {
   moduleForComponent,
@@ -20,7 +20,7 @@ moduleForComponent('nf-graph', {});
       }
     });
 
-    Ember.run(() => {
+    run(() => {
       graph.set('xDataExtent', [-1, 100]);
       graph.get('xMin');
     });
@@ -39,7 +39,7 @@ test('changing xDataExtent[0] with xMinMode = "fixed" should NOT trigger didAuto
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     graph.set('xDataExtent', [-1, 100]);
     graph.get('xMin');
   });
@@ -59,7 +59,7 @@ test('changing xDataExtent[0] with xMinMode = "fixed" should NOT trigger didAuto
       }
     });
 
-    Ember.run(() => {
+    run(() => {
       graph.set('xDataExtent', [0, 101]);
       graph.get('xMax');
     });
@@ -79,7 +79,7 @@ test('changing xDataExtent[0] with xMaxMode = "fixed" should trigger NOT didAuto
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     graph.set('xDataExtent', [0, 101]);
     graph.get('xMax');
   });
@@ -97,7 +97,7 @@ test('calling didAutoUpdateMaxX() should send the graph instance over autoScaleX
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     graph.didAutoUpdateMaxX();
   });
 
@@ -116,7 +116,7 @@ test('calling didAutoUpdateMinX() should send the graph instance over autoScaleX
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     graph.didAutoUpdateMinX();
   });
 
@@ -138,7 +138,7 @@ test('calling didAutoUpdateMinY() should send the graph instance over autoScaleY
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     graph.didAutoUpdateMinY();
   });
 
@@ -157,7 +157,7 @@ test('calling didAutoUpdateMaxY() should send yDataExtent over autoScaleYAction'
     }
   });
 
-  Ember.run(() => {
+  run(() => {
     graph.didAutoUpdateMaxY();
   });
 

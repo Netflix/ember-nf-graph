@@ -1,8 +1,12 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import { scheduleOnce } from '@ember/runloop';
+import { on } from '@ember/object/evented';
+import { get, observer, computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-brush-selection';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
-export default Ember.Component.extend(RequiresScaleSource, {
+export default Component.extend(RequiresScaleSource, {
   layout,
   tagName: 'g',
 
@@ -25,8 +29,8 @@ export default Ember.Component.extend(RequiresScaleSource, {
   autoWireUp: true,
 
   _autoBrushHandler: function(e) {
-    this.set('left', Ember.get(e, 'left.x'));
-    this.set('right', Ember.get(e, 'right.x'));
+    this.set('left', get(e, 'left.x'));
+    this.set('right', get(e, 'right.x'));
   },
 
   _autoBrushEndHandler: function() {
@@ -49,8 +53,8 @@ export default Ember.Component.extend(RequiresScaleSource, {
     }
   },
 
-  _autoWireUpChanged: Ember.on('didInsertElement', Ember.observer('autoWireUp', function(){
-    Ember.run.scheduleOnce('afterRender', this, this._wireToGraph);
+  _autoWireUpChanged: on('didInsertElement', observer('autoWireUp', function(){
+    scheduleOnce('afterRender', this, this._wireToGraph);
   })),
 
   _updateLeftText: function(){
@@ -89,10 +93,10 @@ export default Ember.Component.extend(RequiresScaleSource, {
       attr('height', height);
   },
 
-  _onLeftChange: Ember.on(
+  _onLeftChange: on(
     'didInsertElement',
-    Ember.observer('left', 'graphHeight', 'textPadding', function(){
-      Ember.run.scheduleOnce('afterRender', this, this._updateLeftText);
+    observer('left', 'graphHeight', 'textPadding', function(){
+      scheduleOnce('afterRender', this, this._updateLeftText);
     })
   ),
 
@@ -133,48 +137,48 @@ export default Ember.Component.extend(RequiresScaleSource, {
       attr('height', height);
   },
 
-  _onRightChange: Ember.on(
+  _onRightChange: on(
     'didInsertElement',
-    Ember.observer('right', 'graphHeight', 'graphWidth', 'textPadding', function(){
-      Ember.run.scheduleOnce('afterRender', this, this._updateRightText);
+    observer('right', 'graphHeight', 'graphWidth', 'textPadding', function(){
+      scheduleOnce('afterRender', this, this._updateRightText);
     })
   ),
 
-  leftDisplay: Ember.computed('left', 'formatter', function(){
+  leftDisplay: computed('left', 'formatter', function(){
     let formatter = this.get('formatter');
     let left = this.get('left');
     return formatter ? formatter(left) : left;
   }),
 
-  rightDisplay: Ember.computed('right', 'formatter', function(){
+  rightDisplay: computed('right', 'formatter', function(){
     let formatter = this.get('formatter');
     let right = this.get('right');
     return formatter ? formatter(right) : right;
   }),
 
-  isVisible: Ember.computed('left', 'right', function(){
+  isVisible: computed('left', 'right', function(){
     let left = +this.get('left');
     let right = +this.get('right');
     return left === left && right === right;
   }),
 
-  leftX: Ember.computed('xScale', 'left', function() {
+  leftX: computed('xScale', 'left', function() {
     let left = this.get('left') || 0;
     let scale = this.get('xScale');
     return scale ? scale(left) : 0;
   }),
 
-  rightX: Ember.computed('xScale', 'right', function() {
+  rightX: computed('xScale', 'right', function() {
     let right = this.get('right') || 0;
     let scale = this.get('xScale');
     return scale ? scale(right) : 0;
   }),
 
-  graphWidth: Ember.computed.alias('graph.graphWidth'),
+  graphWidth: alias('graph.graphWidth'),
 
-  graphHeight: Ember.computed.alias('graph.graphHeight'),
+  graphHeight: alias('graph.graphHeight'),
 
-  rightWidth: Ember.computed('rightX', 'graphWidth', function() {
+  rightWidth: computed('rightX', 'graphWidth', function() {
     return Math.max(this.get('graphWidth') - this.get('rightX'), 0);
   }),
 });

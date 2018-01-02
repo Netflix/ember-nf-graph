@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { on } from '@ember/object/evented';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-area';
 import Selectable from 'ember-nf-graph/mixins/graph-selectable-graphic';
 import RegisteredGraphic from 'ember-nf-graph/mixins/graph-registered-graphic';
@@ -23,7 +25,7 @@ import LineUtils from 'ember-nf-graph/mixins/graph-line-utils';
   @uses mixins.graph-graphic-with-tracking-dot
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RegisteredGraphic, DataGraphic, Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, LineUtils, {
+export default Component.extend(RegisteredGraphic, DataGraphic, Selectable, AreaUtils, GraphicWithTrackingDot, RequireScaleSource, LineUtils, {
   layout,
   tagName: 'g',
 
@@ -83,7 +85,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, Selectable
     };
   },
 
-  _unregisterArea: Ember.on('willDestroyElement', function(){
+  _unregisterArea: on('willDestroyElement', function(){
     let stack = this.get('stack');
     if(stack) {
       stack.unregisterArea(this);
@@ -98,7 +100,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, Selectable
     @type Array
     @readonly
   */
-  nextYData: Ember.computed('data.length', 'nextArea.data.[]', function(){
+  nextYData: computed('data.length', 'nextArea.data.[]', function(){
     let data = this.get('data');
     if(!Array.isArray(data)) {
       return [];
@@ -113,7 +115,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, Selectable
     @type Array
     @readonly
   */
-  mappedData: Ember.computed('data.[]', 'xPropFn', 'yPropFn', 'nextYData.[]', 'stack.aggregate', function() {
+  mappedData: computed('data.[]', 'xPropFn', 'yPropFn', 'nextYData.[]', 'stack.aggregate', function() {
     let { data, xPropFn, yPropFn, nextYData } = this.getProperties('data', 'xPropFn', 'yPropFn', 'nextYData');
     let aggregate = this.get('stack.aggregate');
     if(Array.isArray(data)) {
@@ -129,22 +131,22 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, Selectable
     }
   }),
 
-  areaFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
+  areaFn: computed('xScale', 'yScale', 'interpolator', function(){
     let { xScale, yScale, interpolator } = this.getProperties('xScale', 'yScale', 'interpolator');
     return this.createAreaFn(xScale, yScale, interpolator);
   }),
 
-  lineFn: Ember.computed('xScale', 'yScale', 'interpolator', function(){
+  lineFn: computed('xScale', 'yScale', 'interpolator', function(){
     let { xScale, yScale, interpolator } = this.getProperties('xScale', 'yScale', 'interpolator');
     return this.createLineFn(xScale, yScale, interpolator);
   }),
 
-  d: Ember.computed('renderedData', 'areaFn', function(){
+  d: computed('renderedData', 'areaFn', function(){
     let renderedData = this.get('renderedData');
     return this.get('areaFn')(renderedData);
   }),
 
-  dLine: Ember.computed('renderedData', 'lineFn', function(){
+  dLine: computed('renderedData', 'lineFn', function(){
     let renderedData = this.get('renderedData');
     return this.get('lineFn')(renderedData);
   }),

@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 
 /**
   Utility functions for drawing an area.
@@ -7,7 +7,7 @@ import Ember from 'ember';
   @class graph-area-utils
   @extends Ember.Mixin
 */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
     Creates a d3 area function from a given set of scales and an interpolator

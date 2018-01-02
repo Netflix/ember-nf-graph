@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { isArray, A } from '@ember/array';
+import { oneWay } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-bars';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RegisteredGraphic from 'ember-nf-graph/mixins/graph-registered-graphic';
@@ -23,7 +26,7 @@ import { getRectPath } from 'ember-nf-graph/utils/nf/svg-dom';
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-graphic-with-tracking-dot
 */
-export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
+export default Component.extend(RegisteredGraphic, DataGraphic, RequireScaleSource, GraphicWithTrackingDot, {
   layout,
   tagName: 'g',
 
@@ -53,7 +56,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
     @readonly
     @private
   */
-  getBarClass: Ember.computed('classprop', function() {
+  getBarClass: computed('classprop', function() {
     let classprop = this.get('classprop');
     return classprop ? parsePropExpr(classprop) : null;
   }),
@@ -80,7 +83,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
     @type Number
     @readonly
   */
-  graphHeight: Ember.computed.oneWay('graph.graphHeight'),
+  graphHeight: oneWay('graph.graphHeight'),
 
   /**
     A scale provided by nf-bars-group to offset the bar rectangle output
@@ -88,7 +91,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
     @type d3.scale
     @readonly
   */
-  barScale: Ember.computed.oneWay('group.barScale'),
+  barScale: oneWay('group.barScale'),
 
   /**
     The width of each bar.
@@ -96,7 +99,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
     @type Number
     @readonly
   */
-  barWidth: Ember.computed('xScale', 'barScale', function(){
+  barWidth: computed('xScale', 'barScale', function(){
     let barScale = this.get('barScale');
     if(barScale) {
       return barScale.rangeBand();
@@ -105,7 +108,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
     return xScale && xScale.rangeBand ? xScale.rangeBand() : 0;
   }),
 
-  groupOffsetX: Ember.computed('barScale', 'groupIndex', function(){
+  groupOffsetX: computed('barScale', 'groupIndex', function(){
     let barScale = this.get('barScale');
     let groupIndex = this.get('groupIndex');
     return normalizeScale(barScale, groupIndex);
@@ -116,7 +119,7 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
     @property bars
     @readonly
   */
-  bars: Ember.computed(
+  bars: computed(
     'xScale',
     'yScale',
     'renderedData.[]',
@@ -130,13 +133,13 @@ export default Ember.Component.extend(RegisteredGraphic, DataGraphic, RequireSca
 
       let getRectPath = this._getRectPath;
 
-      if(!xScale || !yScale || !Ember.isArray(renderedData)) {
+      if(!xScale || !yScale || !isArray(renderedData)) {
         return null;
       }
 
       let w = barWidth;
 
-      return Ember.A(renderedData.map(function(data) {
+      return A(renderedData.map(function(data) {
         let className = 'nf-bars-bar' + (getBarClass ? ' ' + getBarClass(data.data) : '');
         let x = normalizeScale(xScale, data[0]) + groupOffsetX;
         let y = normalizeScale(yScale, data[1]);

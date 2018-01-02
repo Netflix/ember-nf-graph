@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import EmberObject, { computed } from '@ember/object';
+import { run } from '@ember/runloop';
 
 import {
   moduleForComponent,
@@ -14,13 +15,13 @@ moduleForComponent('nf-x-axis', {
 test('nf-x-axis tickData should call tickFactory if available', function(assert) {
   var args;
 
-  Ember.run(() => {
+  run(() => {
     //HACK: couldn't find a great, documented way of mocking readonly and aliased propertied
     // so I override them here.
     var axis = this.factory().extend({
       uniqueXData: [1,2,3,4,5],
       xScale: 'xScale',
-      graph: Ember.computed((key, value) => ({
+      graph: computed((key, value) => ({
         xScaleType: 'xScaleType'
       })),
       tickCount: 42,
@@ -37,14 +38,14 @@ test('nf-x-axis tickData should call tickFactory if available', function(assert)
 });
 
 test('nf-x-axis hasBlock if template.blockParams', function(assert) {
-  Ember.run(() => {
+  run(() => {
     var axis = this.factory().extend({
-      graph: Ember.computed((key, value) => ({
+      graph: computed((key, value) => ({
         xScaleType: 'xScaleType'
       }))
     }).create();
 
-    axis.set('template', Ember.Object.create({
+    axis.set('template', EmberObject.create({
       blockParams: true
     }));
 
@@ -54,9 +55,9 @@ test('nf-x-axis hasBlock if template.blockParams', function(assert) {
 
 
 test('nf-x-axis hasBlock if template is undefined', function(assert) {
-  Ember.run(() => {
+  run(() => {
     var axis = this.factory().extend({
-      graph: Ember.computed((key, value) => ({
+      graph: computed((key, value) => ({
         xScaleType: 'xScaleType'
       })),
 

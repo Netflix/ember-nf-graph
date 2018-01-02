@@ -1,9 +1,7 @@
-import Ember from 'ember';
+import { reads } from '@ember/object/computed';
 import { computed } from '@ember/object';
 import GraphPosition from './graph-position';
 import { getMousePoint } from './svg-dom';
-
-const { reads } = Ember.computed;
 
 /**
   An event context object generally returned by tracking events. Also used as

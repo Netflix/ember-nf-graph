@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import { dataGenerator } from '../services/data-generator';
 
-
-var { Component, computed } = Ember;
 
 export default Component.extend({
 

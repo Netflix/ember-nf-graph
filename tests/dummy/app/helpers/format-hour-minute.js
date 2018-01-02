@@ -1,10 +1,8 @@
 /* exported format */
 
-import Ember from 'ember';
+import { helper } from '@ember/component/helper';
 
-const {
-  isPresent
-} = Ember;
+import { isPresent } from '@ember/utils';
 
 export function format([ ms ]) {
   if(isNaN(ms) || !isPresent(ms)) {
@@ -26,4 +24,4 @@ export function format([ ms ]) {
   return h + ":" + m;
 }
 
-export default Ember.Helper.helper(format);
+export default helper(format);

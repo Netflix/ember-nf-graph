@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { notEmpty, and } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-plot';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import GraphEvent from 'ember-nf-graph/utils/nf/graph-event';
@@ -10,7 +12,7 @@ import GraphEvent from 'ember-nf-graph/utils/nf/graph-event';
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -46,7 +48,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  hasX: Ember.computed.notEmpty('x'),
+  hasX: notEmpty('x'),
 
   /**
     True if an `y` value is present (defined, not null and non-empty)
@@ -54,7 +56,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  hasY: Ember.computed.notEmpty('y'),
+  hasY: notEmpty('y'),
 
   /**
     The calculated visibility of the component
@@ -62,7 +64,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Boolean
     @readonly
   */
-  isVisible: Ember.computed.and('hasX', 'hasY'),
+  isVisible: and('hasX', 'hasY'),
 
   /**
     The calculated x coordinate
@@ -70,7 +72,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  rangeX: Ember.computed('x', 'xScale', function(){
+  rangeX: computed('x', 'xScale', function(){
     let xScale = this.get('xScale');
     let x = this.get('x');
     let hasX = this.get('hasX');
@@ -83,7 +85,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  rangeY: Ember.computed('y', 'yScale', function(){
+  rangeY: computed('y', 'yScale', function(){
     let yScale = this.get('yScale');
     let y = this.get('y');
     let hasY = this.get('hasY');
@@ -96,7 +98,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: Ember.computed('rangeX', 'rangeY', function(){
+  transform: computed('rangeX', 'rangeY', function(){
     let rangeX = this.get('rangeX');
     let rangeY = this.get('rangeY');
     return `translate(${rangeX} ${rangeY})`;

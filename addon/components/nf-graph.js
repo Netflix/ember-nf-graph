@@ -1,5 +1,12 @@
-import Ember from 'ember';
-import { computed } from '@ember/object';
+import { bool, notEmpty } from '@ember/object/computed';
+import $ from 'jquery';
+import { on } from '@ember/object/evented';
+import { warn } from '@ember/debug';
+import { A } from '@ember/array';
+import { scheduleOnce, schedule, run } from '@ember/runloop';
+import Component from '@ember/component';
+import { isPresent } from '@ember/utils';
+import { computed, observer } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-graph';
 import GraphPosition from 'ember-nf-graph/utils/nf/graph-position';
 import { getMousePoint } from 'ember-nf-graph/utils/nf/svg-dom';
@@ -7,12 +14,7 @@ import { toArray } from 'ember-nf-graph/utils/nf/array-helpers';
 
 const Observable = Rx.Observable;
 
-const computedBool = computed.bool;
-
-const {
-  isPresent,
-  observer
-} = Ember;
+const computedBool = bool;
 
 let minProperty = function(axis, defaultTickCount){
   let _DataExtent_ = axis + 'DataExtent';
@@ -173,7 +175,7 @@ let maxProperty = function(axis, defaultTickCount) {
   @class nf-graph
   @extends Ember.Component
 */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'div',
 
@@ -550,7 +552,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMaxX
   */
   didAutoUpdateMaxX() {
-    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateXAction);
+    scheduleOnce('afterRender', this, this._sendAutoUpdateXAction);
   },
 
   /**
@@ -558,7 +560,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMinX
   */
   didAutoUpdateMinX() {
-    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateXAction);
+    scheduleOnce('afterRender', this, this._sendAutoUpdateXAction);
   },
 
   /**
@@ -566,7 +568,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMaxY
   */
   didAutoUpdateMaxY() {
-    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateYAction);
+    scheduleOnce('afterRender', this, this._sendAutoUpdateYAction);
   },
 
   /**
@@ -574,7 +576,7 @@ export default Ember.Component.extend({
     @method didAutoUpdateMinY
   */
   didAutoUpdateMinY() {
-    Ember.run.scheduleOnce('afterRender', this, this._sendAutoUpdateYAction);
+    scheduleOnce('afterRender', this, this._sendAutoUpdateYAction);
   },
 
   /**
@@ -626,7 +628,7 @@ export default Ember.Component.extend({
         return uniq;
       }, uniq);
     }, []);
-    return Ember.A(uniq);
+    return A(uniq);
   }),
 
 
@@ -645,7 +647,7 @@ export default Ember.Component.extend({
         return uniq;
       }, uniq);
     }, []);
-    return Ember.A(uniq);
+    return A(uniq);
   }),
 
   /**
@@ -667,7 +669,7 @@ export default Ember.Component.extend({
     @readonly
    */
   graphics: computed(function(){
-    return Ember.A();
+    return A();
   }),
 
   /**
@@ -676,8 +678,8 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  selected: Ember.computed(function() {
-    return this.get('selectMultiple') ? Ember.A() : null;
+  selected: computed(function() {
+    return this.get('selectMultiple') ? A() : null;
   }),
 
   /**
@@ -702,11 +704,11 @@ export default Ember.Component.extend({
     @readonly
    */
   // xScaleFactory: scaleFactoryProperty('x'),
-  xScaleFactory: Ember.computed(function() {
+  xScaleFactory: computed(function() {
     return this._scaleFactoryFor('x');
   }),
   _scheduleXScaleFactory: observer('xScaleType', 'xPowerExponent', function() {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.set('xScaleFactory', this._scaleFactoryFor('x'));
     });
   }),
@@ -717,11 +719,11 @@ export default Ember.Component.extend({
     @readonly
    */
   // yScaleFactory: scaleFactoryProperty('y'),
-  yScaleFactory: Ember.computed(function() {
+  yScaleFactory: computed(function() {
     return this._scaleFactoryFor('y');
   }),
   _scheduleYScaleFactory: observer('yScaleType', 'yPowerExponent', function() {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.set('yScaleFactory', this._scaleFactoryFor('y'));
     });
   }),
@@ -761,7 +763,7 @@ export default Ember.Component.extend({
     }
 
     else {
-      Ember.warn('unknown scale type: ' + type);
+      warn('unknown scale type: ' + type);
       return d3.scale.linear;
     }
   },
@@ -772,7 +774,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  xDomain: Ember.computed(function() {
+  xDomain: computed(function() {
     return this._domainFor('x');
   }),
   _scheduleXDomain: observer(
@@ -782,7 +784,7 @@ export default Ember.Component.extend({
     'xScaleType',
     'xLogMin',
     function() {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         this.set('xDomain', this._domainFor('x'));
       });
     }
@@ -794,7 +796,7 @@ export default Ember.Component.extend({
     @type Array
     @readonly
    */
-  yDomain: Ember.computed(function() {
+  yDomain: computed(function() {
     return this._domainFor('y');
   }),
 
@@ -809,7 +811,7 @@ export default Ember.Component.extend({
     'yScaleType',
     'yLogMin',
     function() {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         this.set('yDomain', this._domainFor('y'));
       });
     }
@@ -849,7 +851,7 @@ export default Ember.Component.extend({
     @type Function
     @readonly
    */
-  xScale: Ember.computed(function() {
+  xScale: computed(function() {
     return this._scaleFor('x');
   }),
 
@@ -865,7 +867,7 @@ export default Ember.Component.extend({
     'xOrdinalPadding',
     'xOrdinalOuterPadding',
     function() {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         this.set('xScale', this._scaleFor('x'));
       });
     }
@@ -877,7 +879,7 @@ export default Ember.Component.extend({
     @type Function
     @readonly
    */
-  yScale: Ember.computed(function() {
+  yScale: computed(function() {
     return this._scaleFor('y');
   }),
 
@@ -893,7 +895,7 @@ export default Ember.Component.extend({
     'yOrdinalPadding',
     'yOrdinalOuterPadding',
     function() {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         this.set('yScale', this._scaleFor('y'));
       });
     }
@@ -924,7 +926,7 @@ export default Ember.Component.extend({
     @param graphic {Ember.Component} The component object to register
    */
   registerGraphic: function (graphic) {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       let graphics = this.get('graphics');
       graphic.on('hasData', this, this.updateExtents);
       graphics.pushObject(graphic);
@@ -937,7 +939,7 @@ export default Ember.Component.extend({
     @param graphic {Ember.Component} The component to unregister
    */
   unregisterGraphic: function(graphic) {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       let graphics = this.get('graphics');
       graphic.off('hasData', this, this.updateExtents);
       graphics.removeObject(graphic);
@@ -979,7 +981,7 @@ export default Ember.Component.extend({
     @default false
     @readonly
    */
-  hasData: computed.notEmpty('graphics'),
+  hasData: notEmpty('graphics'),
 
   /**
     The x coordinate position of the graph content
@@ -1058,8 +1060,8 @@ export default Ember.Component.extend({
     @method _notifyHasRendered
     @private
   */
-  _notifyHasRendered: Ember.on('willInsertElement', function () {
-    Ember.run.schedule('afterRender', () => {
+  _notifyHasRendered: on('willInsertElement', function () {
+    schedule('afterRender', () => {
       this.set('hasRendered', true);
     });
   }),
@@ -1154,12 +1156,12 @@ export default Ember.Component.extend({
   */
   brushEndAction: null,
 
-  _setupBrushAction: Ember.on('didInsertElement', function(){
+  _setupBrushAction: on('didInsertElement', function(){
     let content = this.$('.nf-graph-content');
 
     let mouseMoves = Observable.fromEvent(content, 'mousemove');
     let mouseDowns = Observable.fromEvent(content, 'mousedown');
-    let mouseUps = Observable.fromEvent(Ember.$(document), 'mouseup');
+    let mouseUps = Observable.fromEvent($(document), 'mouseup');
     let mouseLeaves = Observable.fromEvent(content, 'mouseleave');
 
     this._brushDisposable = Observable.merge(mouseDowns, mouseMoves, mouseLeaves).
@@ -1174,7 +1176,7 @@ export default Ember.Component.extend({
       retry().
       // subscribe and send the brush actions via Ember
       subscribe(x => {
-        Ember.run(this, () => this._triggerComponentEvent(x));
+        run(this, () => this._triggerComponentEvent(x));
       });
   }),
 

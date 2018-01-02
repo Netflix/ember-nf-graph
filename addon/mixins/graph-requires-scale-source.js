@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
 import { computed } from '@ember/object';
 
 let scaleProperty = function(scaleKey, zoomKey, offsetKey){
@@ -31,7 +31,7 @@ let scaleProperty = function(scaleKey, zoomKey, offsetKey){
   @namespace mixins
   @class graph-requires-scale-source
 */
-export default Ember.Mixin.create({
+export default Mixin.create({
 
   /**
     The scale source
@@ -39,7 +39,7 @@ export default Ember.Mixin.create({
     @type d3.nf-graph
     @default graph
   */
-  scaleSource: Ember.computed(function() {
+  scaleSource: computed(function() {
     return this.get('graph');
   }),
 

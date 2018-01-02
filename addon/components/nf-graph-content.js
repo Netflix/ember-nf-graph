@@ -1,4 +1,8 @@
-import Ember from 'ember';
+import { schedule } from '@ember/runloop';
+import { A } from '@ember/array';
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-graph-content';
 import GraphMouseEvent from 'ember-nf-graph/utils/nf/graph-mouse-event';
 
@@ -10,7 +14,7 @@ import GraphMouseEvent from 'ember-nf-graph/utils/nf/graph-mouse-event';
   @namespace components
   @class nf-graph-content
 */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'g',
 
@@ -18,7 +22,7 @@ export default Ember.Component.extend({
 
   attributeBindings: ['transform', 'clip-path'],
 
-  'clip-path': Ember.computed('graph.contentClipPathId', function(){
+  'clip-path': computed('graph.contentClipPathId', function(){
     let clipPathId = this.get('graph.contentClipPathId');
     return  `url('#${clipPathId}')`;
   }),
@@ -37,7 +41,7 @@ export default Ember.Component.extend({
     @type String
     @readonly
   */
-  transform: Ember.computed('x', 'y', function(){
+  transform: computed('x', 'y', function(){
     let x = this.get('x');
     let y = this.get('y');
     return `translate(${x} ${y})`;
@@ -49,7 +53,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
   */
-  x: Ember.computed.alias('graph.graphX'),
+  x: alias('graph.graphX'),
 
   /**
     The calculated y position of the graph content
@@ -57,7 +61,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
   */
-  y: Ember.computed.alias('graph.graphY'),
+  y: alias('graph.graphY'),
 
   /**
     The calculated width of the graph content
@@ -65,7 +69,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
   */
-  width: Ember.computed.alias('graph.graphWidth'),
+  width: alias('graph.graphWidth'),
 
   /**
     The calculated height of the graph content.
@@ -73,7 +77,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
   */
-  height: Ember.computed.alias('graph.graphHeight'),
+  height: alias('graph.graphHeight'),
 
 
   /**
@@ -82,13 +86,13 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  gridLanes: Ember.computed('graph.yAxis.ticks', 'width', 'height', function () {
+  gridLanes: computed('graph.yAxis.ticks', 'width', 'height', function () {
     let ticks = this.get('graph.yAxis.ticks');
     let width = this.get('width');
     let height = this.get('height');
 
     if(!ticks || ticks.length === 0) {
-      return Ember.A();
+      return A();
     }
 
     let sorted = ticks.slice().sort(function(a, b) {
@@ -112,7 +116,7 @@ export default Ember.Component.extend({
       return lanes;
     }, []);
 
-    return Ember.A(lanes);
+    return A(lanes);
   }),
 
   /**
@@ -164,12 +168,12 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  frets: Ember.computed.alias('graph.xAxis.ticks'),
+  frets: alias('graph.xAxis.ticks'),
 
   init(){
     this._super(...arguments);
 
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.set('graph.content', this);
     });
   },
