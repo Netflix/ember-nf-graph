@@ -12,6 +12,7 @@ addons:
   chrome: stable
 
 cache:
+  yarn: true
   directories:
     - $HOME/.npm
 
@@ -36,8 +37,12 @@ matrix:
 
 before_install:
   - npm config set spin false
-  - npm install -g npm@4
+  - npm install -g npm@4 bower
   - npm --version
+
+install:
+  - yarn install
+  - bower install
 
 script:
   - npm run lint:js
