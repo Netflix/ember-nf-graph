@@ -1,9 +1,9 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-graph';
 import GraphPosition from 'ember-nf-graph/utils/nf/graph-position';
 import { getMousePoint } from 'ember-nf-graph/utils/nf/svg-dom';
 import { toArray } from 'ember-nf-graph/utils/nf/array-helpers';
-import computed from 'ember-new-computed';
 
 const Observable = Rx.Observable;
 

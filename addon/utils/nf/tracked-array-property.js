@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import computed from 'ember-new-computed';
+import { computed } from '@ember/object';
 
 let get = Ember.get;
 

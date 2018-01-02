@@ -1,14 +1,14 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import GraphPosition from './graph-position';
 import { getMousePoint } from './svg-dom';
-import computed from 'ember-new-computed';
 
 const { reads } = Ember.computed;
 
 /**
   An event context object generally returned by tracking events. Also used as
   `trackedData` in components such as `nf-line`, `nf-area` and `nf-bars`.
-  
+
   @namespace utils.nf
   @class graph-mouse-event
   @extends graph-position

@@ -1,6 +1,6 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import { getMousePoint } from '../utils/nf/svg-dom';
-import computed from 'ember-new-computed';
 
 let { on, observer } = Ember;
 

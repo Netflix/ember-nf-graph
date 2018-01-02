@@ -30,8 +30,7 @@
   "dependencies": {
     "ember-cli-babel": "^6.6.0",
     "ember-cli-htmlbars": "^1.1.1",
-    "ember-cli-update": "^0.13.2",
-    "ember-new-computed": "^1.0.3"
+    "ember-cli-update": "^0.13.2"
   },
   "devDependencies": {
     "benchpress": "^2.0.0-alpha.16",

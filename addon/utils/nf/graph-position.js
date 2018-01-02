@@ -1,5 +1,5 @@
 import Ember from 'ember';
-import computed from 'ember-new-computed';
+import { computed } from '@ember/object';
 
 const { reads } = Ember.computed;
 
@@ -172,7 +172,7 @@ export default Ember.Object.extend({
   }),
 
   /**
-    The center point at x. Use in case of requiring a center point 
+    The center point at x. Use in case of requiring a center point
     and using ordinal scale.
     @property centerX
     @type Number
@@ -190,7 +190,7 @@ export default Ember.Object.extend({
   }),
 
   /**
-    The center point at y. Use in case of requiring a center point 
+    The center point at y. Use in case of requiring a center point
     and using ordinal scale.
     @property centerY
     @type Number

@@ -1,7 +1,7 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import parsePropertyExpr from '../utils/parse-property-expression';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
-import computed from 'ember-new-computed';
 
 let { on, observer } = Ember;
 

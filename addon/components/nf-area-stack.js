@@ -1,6 +1,6 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-area-stack';
-import computed from 'ember-new-computed';
 
 /**
   A component for grouping and stacking `nf-area` components in an `nf-graph`.

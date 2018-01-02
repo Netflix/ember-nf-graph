@@ -1,9 +1,9 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-tracker';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
-import computed from 'ember-new-computed';
 
 /**
   A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.

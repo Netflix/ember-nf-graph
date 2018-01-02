@@ -1,7 +1,7 @@
 import Ember from 'ember';
+import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-x-axis';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
-import computed from 'ember-new-computed';
 
 /**
   A component for adding a templated x axis to an `nf-graph` component.

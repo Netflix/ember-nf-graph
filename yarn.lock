@@ -2553,7 +2553,7 @@ ember-cli-app-version@^1.0.0:
     ember-cli-htmlbars "^1.0.0"
     git-repo-version "0.3.0"
 
-ember-cli-babel@^5.1.5, ember-cli-babel@^5.1.6:
+ember-cli-babel@^5.1.6:
   version "5.2.4"
   resolved "https://registry.yarnpkg.com/ember-cli-babel/-/ember-cli-babel-5.2.4.tgz#5ce4f46b08ed6f6d21e878619fb689719d6e8e13"
   dependencies:
@@ -2918,12 +2918,6 @@ ember-modules-codemod@^0.2.11:
     execa "~0.8.0"
     glob "^7.1.1"
     jscodeshift "^0.3.29"
-
-ember-new-computed@^1.0.3:
-  version "1.0.3"
-  resolved "https://registry.yarnpkg.com/ember-new-computed/-/ember-new-computed-1.0.3.tgz#592af8a778e0260ce7e812687c3aedface1622bf"
-  dependencies:
-    ember-cli-babel "^5.1.5"
 
 ember-qunit@^3.2.2:
   version "3.2.2"
