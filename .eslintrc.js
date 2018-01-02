@@ -19,6 +19,8 @@ module.exports = {
     Rx: true
   },
   rules: {
+    'ember/no-on-calls-in-components': 'off',
+    'ember/closure-actions': 'off'
   },
   overrides: [
     // node files
