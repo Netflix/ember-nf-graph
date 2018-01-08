@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import { once } from '@ember/runloop';
+import { computed, observer } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-selection-box';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
@@ -10,7 +13,7 @@ import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -65,7 +68,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property x0
     @type Number
   */
-  x0: Ember.computed('xMin', 'xScale', function(){
+  x0: computed('xMin', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('xMin'));
   }),
 
@@ -74,7 +77,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property x1
     @type Number
   */
-  x1: Ember.computed('xMax', 'xScale', function(){
+  x1: computed('xMax', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('xMax'));
   }),
 
@@ -83,7 +86,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property y0
     @type Number
   */
-  y0: Ember.computed('yMin', 'yScale', function(){
+  y0: computed('yMin', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('yMin'));
   }),
 
@@ -92,7 +95,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property y1
     @type Number
   */
-  y1: Ember.computed('yMax', 'yScale', function(){
+  y1: computed('yMax', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('yMax'));
   }),
 
@@ -101,7 +104,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @property rectPath
     @type String
   */
-  rectPath: Ember.computed('x0', 'x1', 'y0', 'y1', function(){
+  rectPath: computed('x0', 'x1', 'y0', 'y1', function(){
     let x0 = this.get('x0');
     let x1 = this.get('x1');
     let y0 = this.get('y0');
@@ -134,12 +137,12 @@ export default Ember.Component.extend(RequireScaleSource, {
     @method updatePosition
     @private
   */
-  updatePosition: Ember.observer('xMin', 'xMax', 'yMin', 'yMax', function(){
-    Ember.run.once(this, this.doUpdatePosition);
+  updatePosition: observer('xMin', 'xMax', 'yMin', 'yMax', function(){
+    once(this, this.doUpdatePosition);
   }),
 
-  staticPositionChange: Ember.on('didInsertElement', Ember.observer('xScale', 'yScale', function(){
-    Ember.run.once(this, this.doUpdatePositionStatic);
+  staticPositionChange: on('didInsertElement', observer('xScale', 'yScale', function(){
+    once(this, this.doUpdatePositionStatic);
   })),
 
   /**

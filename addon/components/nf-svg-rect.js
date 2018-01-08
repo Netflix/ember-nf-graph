@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-svg-rect';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
-import computed from 'ember-new-computed';
 
 /**
   A rectangle that plots using domain values from the graph. Uses an SVGPathElement
@@ -14,7 +14,7 @@ import computed from 'ember-new-computed';
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
+export default Component.extend(RequiresScaleSource, SelectableGraphic, {
   layout,
   tagName: 'path',
 

@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { scheduleOnce } from '@ember/runloop';
+import { on } from '@ember/object/evented';
+import { computed, observer } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-right-tick';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
@@ -15,7 +18,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -52,7 +55,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  isVisible: Ember.computed('y', function(){
+  isVisible: computed('y', function(){
     return !isNaN(this.get('y'));
   }),
 
@@ -62,7 +65,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: Ember.computed('value', 'yScale', 'graph.paddingTop', function() {
+  y: computed('value', 'yScale', 'graph.paddingTop', function() {
     let value = this.get('value');
     let yScale = this.get('yScale');
     let paddingTop = this.get('graph.paddingTop');
@@ -80,7 +83,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  transform: Ember.computed('y', 'graph.width', function(){
+  transform: computed('y', 'graph.width', function(){
     let y = this.get('y');
     let graphWidth = this.get('graph.width');
     let x0 = graphWidth - 6;
@@ -106,8 +109,8 @@ export default Ember.Component.extend(RequireScaleSource, {
     @method _triggerTransition
     @private
   */
-  _triggerTransition: Ember.on('init', Ember.observer('value', function(){
-    Ember.run.scheduleOnce('afterRender', this, this._transitionalUpdate);
+  _triggerTransition: on('init', observer('value', function(){
+    scheduleOnce('afterRender', this, this._transitionalUpdate);
   })),
 
   /**
@@ -126,8 +129,8 @@ export default Ember.Component.extend(RequireScaleSource, {
     @method _triggerNonTransitionalUpdate
     @private
   */
-  _triggerNonTransitionalUpdate: Ember.observer('graph.width', function(){
-    Ember.run.scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
+  _triggerNonTransitionalUpdate: observer('graph.width', function(){
+    scheduleOnce('afterRender', this, this._nonTransitionalUpdate);
   }),
 
   /**
@@ -135,7 +138,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @method _getElements
     @private
   */
-  _getElements: Ember.on('didInsertElement', function(){
+  _getElements: on('didInsertElement', function(){
     let g = d3.select(this.$()[0]);
     let path = g.selectAll('path').data([0]);
     this.set('path', path);

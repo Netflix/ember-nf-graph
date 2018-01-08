@@ -79,7 +79,6 @@ To install, simply run `ember install ember-nf-graph`, or `npm install -D ember-
 
 * `git clone` this repository
 * `npm install`
-* `bower install`
 
 ### Running
 

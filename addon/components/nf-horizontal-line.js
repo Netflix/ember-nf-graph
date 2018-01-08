@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { alias } from '@ember/object/computed';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-horizontal-line';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
@@ -9,7 +11,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'line',
 
@@ -40,7 +42,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  lineY: Ember.computed('y', 'yScale', function(){
+  lineY: computed('y', 'yScale', function(){
     let y = this.get('y');
     let yScale = this.get('yScale');
     let py = yScale ? yScale(y) : -1;
@@ -63,5 +65,5 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  x2: Ember.computed.alias('graph.graphWidth'),
+  x2: alias('graph.graphWidth'),
 });

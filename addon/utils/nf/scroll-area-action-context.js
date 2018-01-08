@@ -1,12 +1,11 @@
-import Ember from 'ember';
-import computed from 'ember-new-computed';
+import EmberObject, { computed } from '@ember/object';
 
 /**
   Action context event object for an nf-scroll-area scroll event.
   @namespace utils.nf
   @class scroll-area-action-context
 */
-export default Ember.Object.extend({
+export default EmberObject.extend({
   /**
     The scroll top in pixels.
     @property scrollTop
@@ -78,7 +77,7 @@ export default Ember.Object.extend({
       return this.get('scrollTop') / this.get('scrollTopMax');
     }
   }),
-  
+
   /**
     The calculated maximum value for scrollTop in pixels.
     @property scrollLeftMax

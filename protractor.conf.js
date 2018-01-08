@@ -1,8 +1,3 @@
-var child_process = require('child_process');
-
-var emberProcess;
-// var httpServer = require('http-server');
-
 exports.config = {
   directConnect: true,
 
@@ -23,15 +18,6 @@ exports.config = {
   specs: ['tests/perf/**/*.spec.js'],
 
   framework: 'jasmine2',
-
-  beforeLaunch: function () {
-    
-    // emberProcess = child_process.exec('ember s');
-
-    // httpServer.createServer({
-    //   showDir: false
-    // }).listen('8080', 'localhost');
-  },
 
   // onCleanUp: function() {
   //   console.log("KILLED");

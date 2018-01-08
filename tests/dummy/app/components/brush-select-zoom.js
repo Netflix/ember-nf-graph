@@ -1,8 +1,7 @@
-import Ember from 'ember';
+import { computed, get } from '@ember/object';
+import Component from '@ember/component';
 import { dataGenerator } from '../services/data-generator';
 import { format } from '../helpers/format-hour-minute';
-
-var { get, computed, Component } = Ember;
 
 export default Component.extend({
 

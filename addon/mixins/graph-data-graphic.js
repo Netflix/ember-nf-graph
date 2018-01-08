@@ -1,9 +1,10 @@
-import Ember from 'ember';
+import { scheduleOnce, schedule } from '@ember/runloop';
+import { isArray } from '@ember/array';
+import Mixin from '@ember/object/mixin';
+import { on } from '@ember/object/evented';
+import { computed, observer } from '@ember/object';
 import parsePropertyExpr from '../utils/parse-property-expression';
 import { nearestIndexTo } from '../utils/nf/array-helpers';
-import computed from 'ember-new-computed';
-
-let { on, observer } = Ember;
 
 let noop = function(){};
 
@@ -19,7 +20,7 @@ let noop = function(){};
   @class graph-data-graphic
   @extends Ember.Mixin
 */
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
     Gets or sets the data used by the component to plot itself.
 
@@ -34,7 +35,7 @@ export default Ember.Mixin.create({
       let yPropFn = this.get('yPropFn');
       let xPropFn = this.get('xPropFn');
       let data = this.get('data');
-      if(Ember.isArray(data)) {
+      if(isArray(data)) {
         return data.map(function(d, i) {
           let item = [xPropFn(d), yPropFn(d)];
           item.data = d;
@@ -47,7 +48,7 @@ export default Ember.Mixin.create({
   }),
 
   _triggerHasData: on('init', observer('data.[]', function(){
-    Ember.run.scheduleOnce('afterRender', this, this._sendTriggerHasData);
+    scheduleOnce('afterRender', this, this._sendTriggerHasData);
   })),
 
   _sendTriggerHasData() {
@@ -113,12 +114,12 @@ export default Ember.Mixin.create({
     @type Array
     @readonly
   */
-  renderedData: Ember.computed(function() {
+  renderedData: computed(function() {
     return this._computeRenderedData();
   }),
 
   _scheduleComputeRenderedData: observer('mappedData.[]', 'graph.xScaleType', 'graph.xMin', 'graph.xMax', function() {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       this.set('renderedData', this._computeRenderedData());
     });
   }),

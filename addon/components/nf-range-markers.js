@@ -1,4 +1,7 @@
-import Ember from 'ember';
+import { schedule } from '@ember/runloop';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-range-markers';
 
 /**
@@ -9,7 +12,7 @@ import layout from 'ember-nf-graph/templates/components/nf-range-markers';
   @class nf-range-markers
   @extends Ember.Component
 */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'g',
 
@@ -46,8 +49,8 @@ export default Ember.Component.extend({
     @type Array
     @readonly
   */
-  markers: Ember.computed(function() {
-    return Ember.A();
+  markers: computed(function() {
+    return A();
   }),
 
   /**
@@ -60,7 +63,7 @@ export default Ember.Component.extend({
     let markers = this.get('markers');
     let prevMarker = markers[markers.length - 1];
 
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       if(prevMarker) {
         marker.set('prevMarker', prevMarker);
         prevMarker.set('nextMarker', marker);
@@ -78,7 +81,7 @@ export default Ember.Component.extend({
   */
   unregisterMarker: function(marker) {
     if(marker) {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         let next = marker.nextMarker;
         let prev = marker.prevMarker;
         if(prev) {

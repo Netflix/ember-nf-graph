@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { alias } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-vertical-line';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
@@ -9,7 +11,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'line',
 
@@ -41,7 +43,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  y2: Ember.computed.alias('graph.graphHeight'),
+  y2: alias('graph.graphHeight'),
 
   /**
     The x domain value at which to draw the vertical line on the graph
@@ -58,7 +60,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  lineX: Ember.computed('xScale', 'x', function(){
+  lineX: computed('xScale', 'x', function(){
     let xScale = this.get('xScale');
     let x = this.get('x');
     let px = xScale ? xScale(x) : -1;

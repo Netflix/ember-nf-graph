@@ -1,11 +1,12 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import Mixin from '@ember/object/mixin';
 
 /**
   @namespace mixins
   @class graph-registered-graphic
   @extends Ember.Mixin
 */
-export default Ember.Mixin.create({
+export default Mixin.create({
   init() {
     this._super(...arguments);
     let graph = this.get('graph');
@@ -21,7 +22,7 @@ export default Ember.Mixin.create({
     @method _unregisterGraphic
     @private
   */
-  _unregisterGraphic: Ember.on('willDestroyElement', function(){
+  _unregisterGraphic: on('willDestroyElement', function(){
     let graph = this.get('graph');
 
     if (graph) {

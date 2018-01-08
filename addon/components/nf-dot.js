@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import { notEmpty, and } from '@ember/object/computed';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-dot';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
@@ -10,7 +12,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'circle',
 
@@ -48,9 +50,9 @@ export default Ember.Component.extend(RequireScaleSource, {
   */
   r: 2.5,
 
-  hasX: Ember.computed.notEmpty('x'),
+  hasX: notEmpty('x'),
 
-  hasY: Ember.computed.notEmpty('y'),
+  hasY: notEmpty('y'),
 
   /**
     The computed center x coordinate of the circle
@@ -59,7 +61,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  cx: Ember.computed('x', 'xScale', 'hasX', function(){
+  cx: computed('x', 'xScale', 'hasX', function(){
     let x = this.get('x');
     let xScale = this.get('xScale');
     let hasX = this.get('hasX');
@@ -73,7 +75,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  cy: Ember.computed('y', 'yScale', 'hasY', function() {
+  cy: computed('y', 'yScale', 'hasY', function() {
     let y = this.get('y');
     let yScale = this.get('yScale');
     let hasY = this.get('hasY');
@@ -87,5 +89,5 @@ export default Ember.Component.extend(RequireScaleSource, {
     @private
     @readonly
   */
-  isVisible: Ember.computed.and('hasX', 'hasY'),
+  isVisible: and('hasX', 'hasY'),
 });

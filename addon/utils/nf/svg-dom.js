@@ -1,13 +1,5 @@
 /* globals getComputedStyle, Image, Blob, URL */
-import Ember from 'ember';
-
-/**
-  @module utils/nf/svg-dom
-*/
-
-const {
-  isPresent
-} = Ember;
+import { isPresent } from '@ember/utils';
 
 /**
   Traverses an element and all of its descendants, setting their

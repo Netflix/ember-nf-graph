@@ -1,8 +1,11 @@
-import Ember from 'ember';
+import { schedule } from '@ember/runloop';
+import { A } from '@ember/array';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-bars-group';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
-export default Ember.Component.extend(RequiresScaleSource, {
+export default Component.extend(RequiresScaleSource, {
   layout,
   tagName: 'g',
 
@@ -19,12 +22,12 @@ export default Ember.Component.extend(RequiresScaleSource, {
   groupOuterPadding: 0,
 
   // either b-arses or fat, stupid hobbitses
-  barses: Ember.computed(function(){
-    return Ember.A();
+  barses: computed(function(){
+    return A();
   }),
 
   registerBars: function(bars) {
-    Ember.run.schedule('afterRender', () => {
+    schedule('afterRender', () => {
       let barses = this.get('barses');
       barses.pushObject(bars);
       bars.set('group', this);
@@ -34,7 +37,7 @@ export default Ember.Component.extend(RequiresScaleSource, {
 
   unregisterBars: function(bars) {
     if(bars) {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         bars.set('group', undefined);
         bars.set('groupIndex', undefined);
         this.get('barses').removeObject(bars);
@@ -42,17 +45,17 @@ export default Ember.Component.extend(RequiresScaleSource, {
     }
   },
 
-  groupWidth: Ember.computed('xScale', function(){
+  groupWidth: computed('xScale', function(){
     let xScale = this.get('xScale');
     return xScale && xScale.rangeBand ? xScale.rangeBand() : NaN;
   }),
 
-  barsDomain: Ember.computed('barses.[]', function(){
+  barsDomain: computed('barses.[]', function(){
     let len = this.get('barses.length') || 0;
     return d3.range(len);
   }),
 
-  barScale: Ember.computed(
+  barScale: computed(
     'groupWidth',
     'barsDomain.[]',
     'groupPadding',

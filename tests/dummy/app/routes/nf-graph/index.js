@@ -1,6 +1,7 @@
-import Ember from 'ember';
+import { A } from '@ember/array';
+import Route from '@ember/routing/route';
 
-export default Ember.Route.extend({
+export default Route.extend({
   model: function() {
     return {
       lineData: generateLineData(0, 0, 2000, 200, 240, 500),
@@ -14,7 +15,7 @@ export default Ember.Route.extend({
 
 export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
   var p = yStart || 0;
-  return Ember.A(
+  return A(
     range(count).map(function(d, i) {
       var y = p + (Math.random() * variance) - (variance / 2);
       y = Math.min(yMax, Math.max(yMin, y));
@@ -28,7 +29,7 @@ export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 }
 
 function range(count) {
-  var output = Ember.A();
+  var output = A();
   var i = 0;
   while(i < count) {
     output.push(i++);

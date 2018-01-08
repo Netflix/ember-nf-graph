@@ -1,7 +1,5 @@
-import Ember from 'ember';
-import computed from 'ember-new-computed';
-
-const { reads } = Ember.computed;
+import { reads } from '@ember/object/computed';
+import EmberObject, { computed } from '@ember/object';
 
 /**
   Position calculation class for nf-graph related events
@@ -9,7 +7,7 @@ const { reads } = Ember.computed;
   @class graph-position
   @extends Ember.Object
 */
-export default Ember.Object.extend({
+export default EmberObject.extend({
   /**
     @property graph
     @type component.nf-graph
@@ -172,7 +170,7 @@ export default Ember.Object.extend({
   }),
 
   /**
-    The center point at x. Use in case of requiring a center point 
+    The center point at x. Use in case of requiring a center point
     and using ordinal scale.
     @property centerX
     @type Number
@@ -190,7 +188,7 @@ export default Ember.Object.extend({
   }),
 
   /**
-    The center point at y. Use in case of requiring a center point 
+    The center point at y. Use in case of requiring a center point
     and using ordinal scale.
     @property centerY
     @type Number

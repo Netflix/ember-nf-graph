@@ -1,9 +1,11 @@
-import Ember from 'ember';
+import { isArray, A } from '@ember/array';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-plots';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
-export default Ember.Component.extend(DataGraphic, RequireScaleSource, {
+export default Component.extend(DataGraphic, RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -23,10 +25,10 @@ export default Ember.Component.extend(DataGraphic, RequireScaleSource, {
     @readonly
     @private
   */
-  plotData: Ember.computed('renderedData.[]', function(){
+  plotData: computed('renderedData.[]', function(){
     let renderedData = this.get('renderedData');
-    if(renderedData && Ember.isArray(renderedData)) {
-      return Ember.A(renderedData.map(function(d) {
+    if(renderedData && isArray(renderedData)) {
+      return A(renderedData.map(function(d) {
         return {
           x: d[0],
           y: d[1],

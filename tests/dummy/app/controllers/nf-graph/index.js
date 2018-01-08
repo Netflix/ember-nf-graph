@@ -1,13 +1,15 @@
+import Controller from '@ember/controller';
+import { A } from '@ember/array';
+import $ from 'jquery';
 import Ember from 'ember';
 
 const {
-  $,
   Logger
 } = Ember;
 
 export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
   var p = yStart || 0;
-  return Ember.A(
+  return A(
     range(count).map(function(d, i) {
       var y = p + (Math.random() * variance) - (variance / 2);
       y = Math.min(yMax, Math.max(yMin, y));
@@ -21,7 +23,7 @@ export function generateLineData(xStart, yMin, yMax, variance, count, yStart){
 }
 
 function range(count) {
-  var output = Ember.A();
+  var output = A();
   var i = 0;
   while(i < count) {
     output.push(i++);
@@ -29,13 +31,13 @@ function range(count) {
   return output;
 }
 
-export default Ember.Controller.extend({
+export default Controller.extend({
   graphWidth: 400,
   graphHeight: 300,
   diffA: 100,
   diffB: 200,
 
-  queryParams: Ember.A(['graphWidth' , 'graphHeight']),
+  queryParams: A(['graphWidth' , 'graphHeight']),
 
   init(){
     this._super(...arguments);
@@ -47,7 +49,7 @@ export default Ember.Controller.extend({
   },
 
   xTickFactory: function() {
-    var ticks = Ember.A([1, 10, 30, 50, 80, 99]);
+    var ticks = A([1, 10, 30, 50, 80, 99]);
 
     return ticks;
   },

@@ -1,9 +1,9 @@
-import Ember from 'ember';
+import Component from '@ember/component';
+import { computed } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-tracker';
 import DataGraphic from 'ember-nf-graph/mixins/graph-data-graphic';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import GraphicWithTrackingDot from 'ember-nf-graph/mixins/graph-graphic-with-tracking-dot';
-import computed from 'ember-new-computed';
 
 /**
   A tracking graphic component used to do things like create tracking dots for nf-area or nf-line.
@@ -13,7 +13,7 @@ import computed from 'ember-new-computed';
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-graphic-with-tracking-dot
   */
-export default Ember.Component.extend(DataGraphic, RequiresScaleSource, GraphicWithTrackingDot, {
+export default Component.extend(DataGraphic, RequiresScaleSource, GraphicWithTrackingDot, {
   layout,
   tagName: 'g',
 
@@ -29,7 +29,7 @@ export default Ember.Component.extend(DataGraphic, RequiresScaleSource, GraphicW
     */
   graph: null,
 
-  transform: computed('trackedData.x', 'trackedData.y', 'xScale', 'yScale', {
+  transform: computed('trackedData.{x,y}', 'xScale', 'yScale', {
     get() {
       let xScale = this.get('xScale');
       let yScale = this.get('yScale');

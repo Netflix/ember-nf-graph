@@ -1,4 +1,4 @@
-import Ember from 'ember';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-group';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
@@ -21,7 +21,7 @@ import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
   @uses mixins.graph-require-scale-source
   @uses mixins.graph-selecteble-graphic
 */
-export default Ember.Component.extend(RequireScaleSource, SelectableGraphic, {
+export default Component.extend(RequireScaleSource, SelectableGraphic, {
   layout,
   tagName: 'g',
 

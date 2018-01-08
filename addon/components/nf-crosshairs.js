@@ -1,10 +1,9 @@
-import Ember from 'ember';
+import { schedule } from '@ember/runloop';
+import { alias } from '@ember/object/computed';
+import Component from '@ember/component';
+import { on } from '@ember/object/evented';
+import { observer } from '@ember/object';
 import layout from 'ember-nf-graph/templates/components/nf-crosshairs';
-
-const {
-  on,
-  observer
-} = Ember;
 
 /**
   A component that adds "crosshairs" to an `nf-graph` that follows the mouse
@@ -14,7 +13,7 @@ const {
   @extends Ember.Component
   @uses mixins.graph-has-graph-parent
 */
-export default Ember.Component.extend({
+export default Component.extend({
   layout,
   tagName: 'g',
 
@@ -34,7 +33,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
   */
-  height: Ember.computed.alias('graph.graphHeight'),
+  height: alias('graph.graphHeight'),
 
   /**
     The width of the crosshair in pixels
@@ -42,7 +41,7 @@ export default Ember.Component.extend({
     @type Number
     @readonly
   */
-  width: Ember.computed.alias('graph.graphWidth'),
+  width: alias('graph.graphWidth'),
 
   /**
     The x position of the crosshairs
@@ -97,7 +96,7 @@ export default Ember.Component.extend({
   _setupBindings: on('didInsertElement', observer('graph.content', function() {
     let content = this.get('graph.content');
     if(content) {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         content.on('didHoverChange', this, this.didContentHoverChange);
         content.on('didHoverEnd', this, this.didContentHoverEnd);
       });

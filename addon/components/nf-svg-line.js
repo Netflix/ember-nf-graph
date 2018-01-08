@@ -1,4 +1,5 @@
-import Ember from 'ember';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-svg-line';
 import RequiresScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 import { normalizeScale } from 'ember-nf-graph/utils/nf/scale-utils';
@@ -12,7 +13,7 @@ import SelectableGraphic from 'ember-nf-graph/mixins/graph-selectable-graphic';
   @uses mixins.graph-requires-scale-source
   @uses mixins.graph-selectable-graphic
 */
-export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
+export default Component.extend(RequiresScaleSource, SelectableGraphic, {
   layout,
   tagName: 'line',
 
@@ -67,7 +68,7 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property svgX1
     @type Number
   */
-  svgX1: Ember.computed('x1', 'xScale', function(){
+  svgX1: computed('x1', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x1'));
   }),
 
@@ -76,7 +77,7 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property svgX2
     @type Number
   */
-  svgX2: Ember.computed('x2', 'xScale', function(){
+  svgX2: computed('x2', 'xScale', function(){
     return normalizeScale(this.get('xScale'), this.get('x2'));
   }),
 
@@ -85,7 +86,7 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property svgY1
     @type Number
   */
-  svgY1: Ember.computed('y1', 'yScale', function(){
+  svgY1: computed('y1', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('y1'));
   }),
 
@@ -94,7 +95,7 @@ export default Ember.Component.extend(RequiresScaleSource, SelectableGraphic, {
     @property svgY2
     @type Number
   */
-  svgY2: Ember.computed('y2', 'yScale', function(){
+  svgY2: computed('y2', 'yScale', function(){
     return normalizeScale(this.get('yScale'), this.get('y2'));
   }),
 });

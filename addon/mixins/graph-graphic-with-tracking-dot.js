@@ -1,10 +1,10 @@
-import Ember from 'ember';
+import { schedule, scheduleOnce } from '@ember/runloop';
+import Mixin from '@ember/object/mixin';
+import { on } from '@ember/object/evented';
+import { computed, observer } from '@ember/object';
 import { getMousePoint } from '../utils/nf/svg-dom';
-import computed from 'ember-new-computed';
 
-let { on, observer } = Ember;
-
-export default Ember.Mixin.create({
+export default Mixin.create({
   /**
     Gets or sets the tracking mode of the component.
 
@@ -104,7 +104,7 @@ export default Ember.Mixin.create({
     @method _trackedDataChanged
     @private
   */
-  _trackedDataChanged: Ember.observer('trackedData', function(){
+  _trackedDataChanged: observer('trackedData', function(){
     let trackedData = this.get('trackedData');
     this.set('hoverData', this._hovered ? trackedData : null);
 
@@ -171,7 +171,7 @@ export default Ember.Mixin.create({
     let content = this._content;
 
     let mousemoveHandler = e => {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         this._hovered = true;
         let evt = this._getEventObject(e);
         this.set('trackedData', evt);
@@ -209,7 +209,7 @@ export default Ember.Mixin.create({
     let content = this._content;
 
     let mouseoutHandler = () => {
-      Ember.run.schedule('afterRender', () => {
+      schedule('afterRender', () => {
         this._hovered = false;
         this.set('trackedData', this.get('lastVisibleData'));
       });
@@ -217,7 +217,7 @@ export default Ember.Mixin.create({
 
     let changeHandler = () => {
       if(!this._hovered) {
-        Ember.run.schedule('afterRender', () => {
+        schedule('afterRender', () => {
           this.set('trackedData', this.get('lastVisibleData'));
         });
       }
@@ -260,7 +260,7 @@ export default Ember.Mixin.create({
   },
 
   _trackingModeChanged: on('init', observer('trackingMode', 'selected', function() {
-    Ember.run.scheduleOnce('afterRender', this, this._updateTrackingHandling);
+    scheduleOnce('afterRender', this, this._updateTrackingHandling);
   })),
 
   _getEventObject(e) {

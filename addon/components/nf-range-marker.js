@@ -1,4 +1,6 @@
-import Ember from 'ember';
+import { on } from '@ember/object/evented';
+import { computed } from '@ember/object';
+import Component from '@ember/component';
 import layout from 'ember-nf-graph/templates/components/nf-range-marker';
 import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-source';
 
@@ -10,7 +12,7 @@ import RequireScaleSource from 'ember-nf-graph/mixins/graph-requires-scale-sourc
   @extends Ember.Component
   @uses mixins.graph-requires-scale-source
 */
-export default Ember.Component.extend(RequireScaleSource, {
+export default Component.extend(RequireScaleSource, {
   layout,
   tagName: 'g',
 
@@ -78,7 +80,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  x: Ember.computed('xMin', 'xScale', function(){
+  x: computed('xMin', 'xScale', function(){
     let xScale = this.get('xScale');
     let xMin = this.get('xMin');
     return xScale(xMin);
@@ -90,7 +92,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  width: Ember.computed('xScale', 'xMin', 'xMax', function() {
+  width: computed('xScale', 'xMin', 'xMax', function() {
     let xScale = this.get('xScale');
     let xMax = this.get('xMax');
     let xMin = this.get('xMin');
@@ -103,10 +105,9 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  y: Ember.computed(
+  y: computed(
     'container.orient',
-    'prevMarker.bottom',
-    'prevMarker.y',
+    'prevMarker.{bottom,y}',
     'graph.graphHeight',
     'totalHeight',
     function() {
@@ -134,7 +135,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  totalHeight: Ember.computed('height', 'marginTop', 'marginBottom', function() {
+  totalHeight: computed('height', 'marginTop', 'marginBottom', function() {
     let height = this.get('height');
     let marginTop = this.get('marginTop');
     let marginBottom = this.get('marginBottom');
@@ -147,7 +148,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type Number
     @readonly
   */
-  bottom: Ember.computed('y', 'totalHeight', function(){
+  bottom: computed('y', 'totalHeight', function(){
     let y = this.get('y');
     let totalHeight = this.get('totalHeight');
     return y + totalHeight;
@@ -159,7 +160,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type String
     @readonly
   */
-  transform: Ember.computed('y', function(){
+  transform: computed('y', function(){
     let y = this.get('y') || 0;
     return `translate(0 ${y})`;
   }),
@@ -170,7 +171,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @type String
     @readonly
   */
-  labelTransform: Ember.computed('x', function(){
+  labelTransform: computed('x', function(){
     let x = this.get('x') || 0;
     return `translate(${x} 0)`;
   }),
@@ -192,7 +193,7 @@ export default Ember.Component.extend(RequireScaleSource, {
     @method _unregister
     @private
   */
-  _unregisterMarker: Ember.on('willDestroyElement', function() {
+  _unregisterMarker: on('willDestroyElement', function() {
     this.get('container').unregisterMarker(this);
   })
 });
