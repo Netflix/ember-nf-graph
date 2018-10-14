@@ -96,7 +96,7 @@ To install, simply run `ember install ember-nf-graph`, or `npm install -D ember-
 
 For more information on using ember-cli, visit [http://www.ember-cli.com/](http://www.ember-cli.com/).
 
-### Generating Documenation
+### Generating Documentation
 
 This project uses YUIDoc to generate documentation. Once YUIDoc is installed run:
 
